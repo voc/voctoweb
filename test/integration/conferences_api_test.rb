@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ConferencesTest < ActionDispatch::IntegrationTest
+class ConferencesApiTest < ActionDispatch::IntegrationTest
 
   setup do
     @key = api_keys(:one)

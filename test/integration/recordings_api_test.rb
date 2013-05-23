@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RecordingsTest < ActionDispatch::IntegrationTest
+class RecordingsApiTest < ActionDispatch::IntegrationTest
 
   setup do
     @key = api_keys(:one)
