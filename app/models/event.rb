@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   include Recent
+  include FahrplanParser
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -12,7 +13,11 @@ class Event < ActiveRecord::Base
 
   def fill_event_info
     if self.conference.downloaded?
-      # FIXME find in XML and create event.event_info
+      fahrplan = FahrplanParser.new(self.conference.schedule_xml)
+      info = fahrplan.events_by_guid[self.guid]
+
+      self.title = info.delete(:title)
+      self.event_info = EventInfo.new(info)
     end
   end
 
