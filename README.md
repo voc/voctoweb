@@ -11,6 +11,9 @@ Things you may want to cover:
 
 * Configuration
 
+    cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
+    rake secret
+
 * Database creation
 
 * Database initialization
