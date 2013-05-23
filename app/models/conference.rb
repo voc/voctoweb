@@ -1,5 +1,6 @@
 class Conference < ActiveRecord::Base
   include Recent
+  include Download
 
   has_many :events, dependent: :destroy
 
@@ -7,14 +8,16 @@ class Conference < ActiveRecord::Base
 
   state_machine :schedule_state, :initial => :not_present do
 
-    after_transition on: :downloading, do: :download!
+    after_transition any => :downloading do |conference, transition|
+      conference.download!
+    end
 
     state :not_present
     state :new
     state :downloading
     state :downloaded
 
-    event :entered do
+    event :url_changed do
       transition all => :new
     end
 
@@ -29,7 +32,14 @@ class Conference < ActiveRecord::Base
   end
 
   def download!
+    self.schedule_xml = download(self.schedule_url)
+    if self.schedule_xml.nil?
+      self.schedule_state = :new
+    else
+      self.finish_download
+    end
   end
+  handle_asynchronously :download!
 
   def display_name
     self.acronym || self.id
