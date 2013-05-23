@@ -1,9 +1,10 @@
 class Recording < ActiveRecord::Base
+  include Recent
 
   belongs_to :event
 
   validates_presence_of :event
-  validates_presence_of :path
+  validates_presence_of :filename
 
   state_machine :state, :initial => :new do
 

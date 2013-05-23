@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  path: 'audio.mp3'
+  filename: 'audio.mp3'
   size: 512
   length: 45
   mime_type: audio/mp3
   event_id: 1
 
 two:
-  path: 'video.mp4'
+  filename: 'video.mp4'
   size: 256
   length: 30
   mime_type: video/mp4

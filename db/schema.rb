@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821124234) do
+ActiveRecord::Schema.define(version: 20130822181227) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -120,13 +120,14 @@ ActiveRecord::Schema.define(version: 20130821124234) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "path"
+    t.string   "filename"
+    t.string   "original_url"
     t.string   "state",        default: "new", null: false
   end
 
   add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"
+  add_index "recordings", ["filename"], name: "index_recordings_on_filename"
   add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type"
-  add_index "recordings", ["path"], name: "index_recordings_on_path"
   add_index "recordings", ["state"], name: "index_recordings_on_state"
 
 end
