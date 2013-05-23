@@ -11,6 +11,7 @@ MediaBackend::Application.routes.draw do
   namespace :api do
     resources :conferences, :defaults => { :format => 'json' }
     resources :events, :defaults => { :format => 'json' }
+    resources :recordings, :defaults => { :format => 'json' }
   end
 
   # Example resource route with options:
