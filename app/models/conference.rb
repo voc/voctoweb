@@ -5,6 +5,7 @@ class Conference < ActiveRecord::Base
   has_many :events, dependent: :destroy
 
   validates_presence_of :acronym
+  validates_uniqueness_of :acronym
 
   state_machine :schedule_state, :initial => :not_present do
 
