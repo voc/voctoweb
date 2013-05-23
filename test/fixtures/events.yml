@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  guid: MyString
-  gif_filename: MyString
-  poster_filename: MyString
+  guid: 123abc_
+  gif_filename: frabcon123.gif
+  poster_filename: frabcon123_logo.jpg
   conference_id: 
 
 two:
-  guid: MyString
-  gif_filename: MyString
-  poster_filename: MyString
+  guid: 234def_
+  gif_filename: frabcon234.gif
+  poster_filename: frabcon234_logo.jpg
   conference_id: 

@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  acronym: MyString
-  recordings_path: MyString
-  images_path: MyString
-  webgen_location: MyString
-  aspect_ratio: MyString
+  acronym: frabcon123
+  recordings_path: events/frabcon123
+  images_path: frabcon123
+  webgen_location: conference/frabcon123
+  aspect_ratio: 16:9
 
 two:
-  acronym: MyString
-  recordings_path: MyString
-  images_path: MyString
-  webgen_location: MyString
-  aspect_ratio: MyString
+  acronym: frabcon234
+  recordings_path: events/frabcon234
+  images_path: frabcon234
+  webgen_location: conference/frabcon234
+  aspect_ratio: 4:3
