@@ -1,4 +1,4 @@
 class Conference < ActiveRecord::Base
+  include Recent
 
-  scope :recent, lambda { |n| order('created_at desc').limit(n) }
 end
