@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  size: 1
+  length: 1
+  mime_type: MyString
+  event_id: 
+
+two:
+  size: 1
+  length: 1
+  mime_type: MyString
+  event_id: 
