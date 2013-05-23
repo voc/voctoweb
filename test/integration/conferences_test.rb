@@ -20,7 +20,7 @@ class ConferencesTest < ActionDispatch::IntegrationTest
 
     assert JSON.parse(json)
     assert_difference('Conference.count') do
-      post '/api/conferences.json', json, "CONTENT_TYPE" => "application/json"
+      post_json '/api/conferences.json', json
     end
   end
 

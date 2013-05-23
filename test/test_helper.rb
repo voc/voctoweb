@@ -19,4 +19,8 @@ class ActiveSupport::TestCase
     Delayed::Worker.delay_jobs = delay_jobs
   end
 
+  def post_json(action, json)
+    post action, json, "CONTENT_TYPE" => "application/json"
+  end
+
 end
