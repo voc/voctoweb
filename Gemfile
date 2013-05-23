@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
