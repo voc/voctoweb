@@ -2,14 +2,15 @@
 
 one:
   filename: 'audio.mp3'
+  original_url: 'http://vhost2.hansenet.de/1_mb_file.bin'
   size: 512
   length: 45
-  mime_type: audio/mp3
+  mime_type: 'audio/mp3'
   event_id: 1
 
 two:
   filename: 'video.mp4'
   size: 256
   length: 30
-  mime_type: video/mp4
+  mime_type: 'video/mp4'
   event_id: 1
