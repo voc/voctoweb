@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  acronym: MyString
+  recordings_path: MyString
+  images_path: MyString
+  webgen_location: MyString
+  aspect_ratio: MyString
+
+two:
+  acronym: MyString
+  recordings_path: MyString
+  images_path: MyString
+  webgen_location: MyString
+  aspect_ratio: MyString
