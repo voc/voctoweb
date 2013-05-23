@@ -85,6 +85,20 @@ ActiveRecord::Schema.define(version: 20130821124234) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "event_infos", force: true do |t|
+    t.integer  "event_id"
+    t.string   "subtitle"
+    t.string   "link"
+    t.text     "description"
+    t.text     "persons"
+    t.text     "tags"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "event_infos", ["event_id"], name: "index_event_infos_on_event_id"
+
   create_table "events", force: true do |t|
     t.string   "guid"
     t.string   "gif_filename"

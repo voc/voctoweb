@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
+  has_one :event_info, dependent: :destroy
 
   validates_presence_of :conference
   validates_presence_of :guid

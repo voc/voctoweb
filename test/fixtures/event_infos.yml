@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  subtitle: MyString
+  link: MyString
+  description: MyText
+  persons: MyText
+  tags: MyText
+  date: 2013-08-21
+  event_id: 
+
+two:
+  subtitle: MyString
+  link: MyString
+  description: MyText
+  persons: MyText
+  tags: MyText
+  date: 2013-08-21
+  event_id: 
