@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820233237) do
+ActiveRecord::Schema.define(version: 20130820233759) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -55,39 +55,43 @@ ActiveRecord::Schema.define(version: 20130820233237) do
 
   create_table "conferences", force: true do |t|
     t.string   "acronym"
-    t.string   "title"
     t.string   "recordings_path"
     t.string   "images_path"
     t.string   "webgen_location"
     t.string   "aspect_ratio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
 
   create_table "events", force: true do |t|
     t.string   "guid"
-    t.string   "title"
     t.string   "gif_filename"
     t.string   "poster_filename"
     t.integer  "conference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
+  add_index "events", ["guid"], name: "index_events_on_guid"
+  add_index "events", ["title"], name: "index_events_on_title"
 
   create_table "recordings", force: true do |t|
-    t.string   "path"
     t.integer  "size"
     t.integer  "length"
     t.string   "mime_type"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "path"
   end
 
   add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"
+  add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type"
+  add_index "recordings", ["path"], name: "index_recordings_on_path"
 
 end
