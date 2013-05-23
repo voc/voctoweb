@@ -5,7 +5,8 @@ ActiveAdmin.register Recording do
     column :mime_type
     column :size
     column :length
-    column :created_at
+    column :state
+    column :updated_at
     default_actions
   end
 
@@ -22,7 +23,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit api_key: [:path, :mime_type, :size, :length, :event]
+      params.permit recording: [:path, :mime_type, :size, :length, :event_id]
     end
   end
 

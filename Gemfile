@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
+gem 'state_machine'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -48,5 +49,6 @@ end
 
 group :development do
   gem 'pry-rails'
+  gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 end
 
