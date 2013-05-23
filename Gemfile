@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
 gem 'state_machine'
+gem 'delayed_job_active_record'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
