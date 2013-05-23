@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820210349) do
+ActiveRecord::Schema.define(version: 20130820221709) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -62,5 +62,7 @@ ActiveRecord::Schema.define(version: 20130820210349) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
 
 end
