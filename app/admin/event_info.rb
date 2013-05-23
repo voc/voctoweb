@@ -1,5 +1,7 @@
 ActiveAdmin.register EventInfo do
 
+  menu false
+
   index do
     column :subtitle
     column :link
@@ -10,7 +12,7 @@ ActiveAdmin.register EventInfo do
   end
 
   form do |f|
-    f.inputs "Recording Details" do
+    f.inputs "Event Data Details" do
       f.input :subtitle
       f.input :link
       f.input :description

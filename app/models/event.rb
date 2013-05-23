@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   has_many :recordings, dependent: :destroy
   has_one :event_info, dependent: :destroy
 
+  accepts_nested_attributes_for :event_info
+
   validates_presence_of :conference
   validates_presence_of :guid
 
