@@ -4,11 +4,10 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
 
   setup do
     @key = api_keys(:one)
+    @json = get_json
   end
 
-  test "should create conference" do
-    # curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"375cc0a5c6947b586800404b6921942e","conference":{"acronym":"test"}}' "http://localhost:3000/api/conferences"
-    
+  def get_json
     json = '{'
     json += '"api_key":"'
     json += @key.key
@@ -17,10 +16,15 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
     d = '{"acronym":"frab666","recordings_path":"conference/frab123","images_path":"events/frab","webgen_location":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":null}'
     json += d
     json+= '}'
+    json
+  end
 
-    assert JSON.parse(json)
+  test "should create conference" do
+    # curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"375cc0a5c6947b586800404b6921942e","conference":{"acronym":"test"}}' "http://localhost:3000/api/conferences"
+    
+    assert JSON.parse(@json)
     assert_difference('Conference.count') do
-      post_json '/api/conferences.json', json
+      post_json '/api/conferences.json', @json
     end
   end
 

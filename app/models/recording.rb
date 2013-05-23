@@ -14,7 +14,7 @@ class Recording < ActiveRecord::Base
     end
 
     after_transition any => :downloaded do |recording, transition|
-      recording.move_file!
+      recording.move_files!
     end
 
     after_transition any => :releasing do |recording, transition|
@@ -46,24 +46,24 @@ class Recording < ActiveRecord::Base
   end
 
   def download!
-    path = File.join(MediaBackend::Application.config.folders.tmp_dir, SecureRandom.hex(16))
-    File.open(path, 'wb') do |f|
-      download_file(f, self.original_url)
-    end
-    if not File.readable? file
-      self.state = :new
-    else
+    path = get_tmp_path
+    result = download_to_file(self.original_url, path)
+    if result and File.readable? path and File.size(path) > 0
       self.finish_download
+    else
+      self.state = :new
     end
   end
   handle_asynchronously :download!
 
-  def move_file!
-    # move
-    p self
+  def move_files!
+    tmp_path = get_tmp_path
+    new_path = get_recordings_path
+    FileUtils.move tmp_path, new_path
+
     self.start_release
   end
-  handle_asynchronously :move_file!
+  handle_asynchronously :move_files!
 
   def release!
     # webgen
@@ -71,5 +71,19 @@ class Recording < ActiveRecord::Base
     self.finish_release
   end
   handle_asynchronously :release!
+
+  private
+
+  def get_tmp_path
+    File.join(MediaBackend::Application.config.folders[:tmp_dir], 
+              Digest::MD5.hexdigest(self.filename))
+  end
+
+  def get_recordings_path
+    path = File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.event.conference.recordings_path
+    path = File.join path, MediaBackend::Application.config.mime_type_folder_mappings[self.mime_type]
+    FileUtils.mkdir_p path
+    File.join path, self.filename
+  end
 
 end

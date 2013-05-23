@@ -31,11 +31,12 @@ class RecordingTest < ActiveSupport::TestCase
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save!  }
   end
 
-  test "should download file" do
+  test "should download and release file" do
+    MediaBackend::Application.config.folders[:recordings_base_dir] = '/tmp'
     run_background_jobs_immediately do
       @recording.start_download
     end
-    assert @recording.downloaded?
+    assert @recording.released?
   end
 
 end
