@@ -4,10 +4,10 @@ one:
   guid: 123abc_
   gif_filename: frabcon123.gif
   poster_filename: frabcon123_logo.jpg
-  conference_id: 
+  conference_id: one
 
 two:
   guid: 234def_
   gif_filename: frabcon234.gif
   poster_filename: frabcon234_logo.jpg
-  conference_id: 
+  conference_id: two

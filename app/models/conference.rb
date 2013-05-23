@@ -5,7 +5,10 @@ class Conference < ActiveRecord::Base
 
   validates_presence_of :acronym
 
-  state_machine :initial => :not_present do
+  state_machine :schedule_state, :initial => :not_present do
+
+    after_transition on: :downloading, do: :download!
+
     state :not_present
     state :new
     state :downloading
@@ -23,6 +26,9 @@ class Conference < ActiveRecord::Base
       transition [:downloading] => :downloaded
     end
 
+  end
+
+  def download!
   end
 
   def display_name
