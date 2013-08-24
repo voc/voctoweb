@@ -4,15 +4,13 @@ class Conference < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
 
-  validates_presence_of :acronym
+  validates_presence_of :acronym, :schedule_url
   validates_uniqueness_of :acronym
-
-  after_update :update_state_after_url_change
 
   state_machine :schedule_state, :initial => :not_present do
 
     after_transition any => :new do |conference, transition|
-      start_download
+      conference.start_download
     end
 
     after_transition any => :downloading do |conference, transition|
@@ -36,12 +34,6 @@ class Conference < ActiveRecord::Base
       transition [:downloading] => :downloaded
     end
 
-  end
-
-  def update_state_after_url_change
-    if self.schedule_url_changed?
-      self.url_changed
-    end
   end
 
   def download!

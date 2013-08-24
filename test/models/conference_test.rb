@@ -18,8 +18,10 @@ class ConferenceTest < ActiveSupport::TestCase
     assert_raises (ActiveRecord::RecordInvalid) { c.save!  }
   end
 
-  def set_schedule_url(conference)
-    conference
+  test "should create conference" do
+    conference = Conference.create(acronym: "123", schedule_url: SCHEDULE_URL)
+    conference.save
+    assert conference
   end
 
   test "should download xml" do

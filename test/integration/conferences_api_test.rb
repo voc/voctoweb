@@ -13,7 +13,7 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
     json += @key.key
     json += '",'
     json += '"conference":'
-    d = '{"acronym":"frab666","recordings_path":"conference/frab123","images_path":"events/frab","webgen_location":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":null}'
+    d = '{"acronym":"frab666","recordings_path":"conference/frab123","images_path":"events/frab","webgen_location":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":"http://programm.froscon.org/2013/schedule.xml"}'
     json += d
     json+= '}'
     json
