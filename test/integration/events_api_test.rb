@@ -13,21 +13,18 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += '"api_key":"'
     json += @key.key
     json += '",'
+    json += '"guid":"12345",'
     json += '"acronym":"'
     json += @conference.acronym
     json += '",'
     json += '"poster_url":"http://koeln.ccc.de/images/chaosknoten.gif",'
-    json += '"gif_url":"http://koeln.ccc.de/images/chaosknoten.gif",'
-    json += '"guid":"12345"'
+    json += '"gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"'
     json+= '}'
     json
   end
 
   test "should create event" do
-    # curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"375cc0a5c6947b586800404b6921942e","acronym":"frab123","guid":"123"}' "http://localhost:3000/api/events"
-    
     assert JSON.parse(@json)
-
     assert_difference('Event.count') do
       post_json '/api/events.json', @json
     end
