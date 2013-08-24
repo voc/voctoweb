@@ -81,9 +81,14 @@ class Recording < ActiveRecord::Base
 
   def get_recordings_path
     path = File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.event.conference.recordings_path
-    path = File.join path, MediaBackend::Application.config.mime_type_folder_mappings[self.mime_type]
+    path = File.join path, get_mime_type_path
     FileUtils.mkdir_p path
     File.join path, self.filename
+  end
+
+  def get_mime_type_path
+    path = MediaBackend::Application.config.mime_type_folder_mappings[self.mime_type]
+    path || ""
   end
 
 end
