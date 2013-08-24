@@ -22,24 +22,21 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def set_image_filenames(gif_url, poster_url)
+  def set_image_filenames(thumb_url, gif_url, poster_url)
+    self.thumb_filename = File.basename URI(thumb_url).path
     self.gif_filename = File.basename URI(gif_url).path
     self.poster_filename = File.basename URI(poster_url).path
   end
 
-  def download_images(gif_url, poster_url)
+  def download_images(thumb_url, gif_url, poster_url)
     FileUtils.mkdir_p get_images_path
-    self.delay.download_gif(gif_url)
-    self.delay.download_poster(poster_url)
+    self.delay.download_image(thumb_url, thumb_filename)
+    self.delay.download_image(gif_url, gif_filename)
+    self.delay.download_image(poster_url, poster_filename)
   end
 
-  def download_gif(url)
-    path = get_images_path, self.gif_filename
-    download_to_file(url, path)
-  end
-
-  def download_poster(url)
-    path = File.join get_images_path, self.poster_filename
+  def download_image(url, filename)
+    path = File.join get_images_path, filename
     download_to_file(url, path)
   end
 

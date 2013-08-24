@@ -3,6 +3,7 @@
 one:
   id: 1
   guid: testGUID
+  thumb_filename: frabcon123.jpg
   gif_filename: frabcon123.gif
   poster_filename: frabcon123_logo.jpg
   conference_id: 1
@@ -10,6 +11,7 @@ one:
 two:
   id: 2
   guid: noGUID
+  thumb_filename: frabcon234.jpg
   gif_filename: frabcon234.gif
   poster_filename: frabcon234_logo.jpg
   conference_id: 1
@@ -17,6 +19,7 @@ two:
 three:
   id: 3
   guid: noGUID2
+  thumb_filename: frabcon234.jpg
   gif_filename: frabcon234.gif
   poster_filename: frabcon234_logo.jpg
   conference_id: 1

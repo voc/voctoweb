@@ -2,6 +2,7 @@ ActiveAdmin.register Event do
 
   index do
     column :guid
+    column :thumb_filename
     column :gif_filename
     column :poster_filename
     column :conference
@@ -12,6 +13,7 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs "Event Details" do
       f.input :guid
+      f.input :thumb_filename
       f.input :gif_filename
       f.input :poster_filename
       f.input :conference
@@ -35,7 +37,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :gif_filename, :poster_filename, :conference_id]
+      params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id]
     end
   end
 

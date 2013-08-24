@@ -23,7 +23,7 @@ class Api::EventsController < InheritedResources::Base
 
     respond_to do |format|
       if create_event(params)
-        @event.delay.download_images(params[:gif_url], params[:poster_url])
+        @event.delay.download_images(params[:thumb_url],params[:gif_url], params[:poster_url])
         format.json { render json: @event, status: :created }
       else
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -36,7 +36,7 @@ class Api::EventsController < InheritedResources::Base
   def create_event(params)
     return false if @event.conference.nil?  
     @event.transaction do
-      @event.set_image_filenames(params[:gif_url], params[:poster_url])
+      @event.set_image_filenames(params[:thumb_url],params[:gif_url], params[:poster_url])
       @event.fill_event_info 
       @event.save 
       return true
@@ -45,6 +45,6 @@ class Api::EventsController < InheritedResources::Base
   end
 
   def permitted_params
-    {:event => params.require(:event).permit(:guid, :gif_filename, :poster_filename)}
+    {:event => params.require(:event).permit(:guid, :thumb_filename, :gif_filename, :poster_filename)}
   end
 end
