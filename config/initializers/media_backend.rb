@@ -7,7 +7,14 @@ MediaBackend::Application.configure do
     }
 
     config.mime_type_folder_mappings = {
-      'audio/mp3' => 'mp3',
-      'video/mp4' => 'mp4',
+      'application/ogg'   => 'ogg',
+      'application/vnd.rn-realmedia' => 'realmedia',
+      'audio/mpeg'        => 'mp3',
+      'audio/x-wav'       => 'wav',
+      'video/mp4'         => 'mp4',
+      'video/quicktime'   => 'qt',
+      'video/webm'        => 'webm',
+      'video/x-matroska'  => 'mkv',
+      'video/x-msvideo'   => 'avi',
     }
 end
