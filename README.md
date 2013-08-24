@@ -51,4 +51,17 @@ To get the backend up and running:
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
 
+# API
+
+You can use the API to register a new conference. The conference `acronym` and the URL of the `schedule.xml` are required.
+
+    curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"4","acronym":"frab123","recordings_path":"conference/frab123","images_path":"events/frab","webgen_location":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":"http://progam/schedule.xml"}' "http://localhost:3000/api/conferences"
+
+You can add images to an event, like the animated gif thumb and the poster image. The event is identified by its `guid` and the conference `acronym`.
+
+    curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"4","acronym":"frab123","guid":"123","poster_url":"http://koeln.ccc.de/images/chaosknoten.gif","gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"}' "http://localhost:3000/api/events"
+
+Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
+
+    curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"4","guid":"123","recording":{"original_url":"file:///tmp/123","filename":"some.mp4","mime_type":"video/mp4","size":"12","length":"30"}}' "http://localhost:3000/api/recordings"
 
