@@ -7,7 +7,13 @@ class Conference < ActiveRecord::Base
   validates_presence_of :acronym
   validates_uniqueness_of :acronym
 
+  after_update :update_state_after_url_change
+
   state_machine :schedule_state, :initial => :not_present do
+
+    after_transition any => :new do |conference, transition|
+      start_download
+    end
 
     after_transition any => :downloading do |conference, transition|
       conference.download!
@@ -32,6 +38,12 @@ class Conference < ActiveRecord::Base
 
   end
 
+  def update_state_after_url_change
+    if self.schedule_url_changed?
+      self.url_changed
+    end
+  end
+
   def download!
     self.schedule_xml = download(self.schedule_url)
     if self.schedule_xml.nil?
@@ -39,6 +51,7 @@ class Conference < ActiveRecord::Base
     else
       self.finish_download
     end
+    self.save
   end
   handle_asynchronously :download!
 
