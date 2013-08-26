@@ -1,6 +1,7 @@
 class Recording < ActiveRecord::Base
   include Recent
   include Download
+  include VideopageBuilder
 
   belongs_to :event
 
@@ -58,7 +59,7 @@ class Recording < ActiveRecord::Base
 
   def move_files!
     tmp_path = get_tmp_path
-    new_path = get_recordings_path
+    new_path = get_recording_path
     FileUtils.move tmp_path, new_path
 
     self.start_release
@@ -66,24 +67,27 @@ class Recording < ActiveRecord::Base
   handle_asynchronously :move_files!
 
   def release!
-    # webgen
-    p self
-    self.finish_release
+    # create yaml in webgen root
+    page = save_videopage(self.event.conference, self.event)
+    unless page.nil?
+      # touch rebuild.txt
+      # create cron job to rebuild.txt
+      self.finish_release
+    end
   end
   handle_asynchronously :release!
+
+  def get_recording_path
+    path = File.join self.event.conference.get_recordings_path, get_mime_type_path
+    FileUtils.mkdir_p path
+    File.join path, self.filename
+  end
 
   private
 
   def get_tmp_path
-    File.join(MediaBackend::Application.config.folders[:tmp_dir], 
-              Digest::MD5.hexdigest(self.filename))
-  end
-
-  def get_recordings_path
-    path = File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.event.conference.recordings_path
-    path = File.join path, get_mime_type_path
-    FileUtils.mkdir_p path
-    File.join path, self.filename
+    File.join(MediaBackend::Application.config.folders[:tmp_dir],
+    Digest::MD5.hexdigest(self.filename))
   end
 
   def get_mime_type_path

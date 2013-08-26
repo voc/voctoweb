@@ -47,6 +47,14 @@ class Conference < ActiveRecord::Base
   end
   handle_asynchronously :download!
 
+  def get_images_path
+    File.join MediaBackend::Application.config.folders[:images_base_dir], self.images_path
+  end
+
+  def get_recordings_path
+    File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.recordings_path
+  end
+
   def display_name
     self.acronym || self.id
   end

@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   def fill_event_info
     if self.conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
-      info = fahrplan.events_by_guid[self.guid]
+      info = fahrplan.event_info_by_guid[self.guid]
 
       self.title = info.delete(:title)
       self.event_info = EventInfo.new(info)
@@ -29,25 +29,19 @@ class Event < ActiveRecord::Base
   end
 
   def download_images(thumb_url, gif_url, poster_url)
-    FileUtils.mkdir_p get_images_path
+    FileUtils.mkdir_p self.conference.get_images_path
     self.delay.download_image(thumb_url, thumb_filename)
     self.delay.download_image(gif_url, gif_filename)
     self.delay.download_image(poster_url, poster_filename)
   end
 
   def download_image(url, filename)
-    path = File.join get_images_path, filename
+    path = File.join self.conference.get_images_path, filename
     download_to_file(url, path)
   end
 
   def display_name
     self.guid.nil? ? self.id : self.guid
-  end
-
-  private
-
-  def get_images_path
-    File.join MediaBackend::Application.config.folders[:images_base_dir], self.conference.images_path
   end
 
 end

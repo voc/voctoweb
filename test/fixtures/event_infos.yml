@@ -2,18 +2,20 @@
 
 one:
   subtitle: MyString
+  slug: one
   link: MyString
   description: MyText
-  persons: MyText
-  tags: MyText
+  persons: [Person]
+  tags: [tag]
   date: 2013-08-21
   event_id: 2
 
 two:
   subtitle: MyString
+  slug: two
   link: MyString
   description: MyText
-  persons: MyText
-  tags: MyText
+  persons: [Person]
+  tags: [tag]
   date: 2013-08-21
   event_id: 3

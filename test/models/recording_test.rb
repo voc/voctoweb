@@ -39,4 +39,23 @@ class RecordingTest < ActiveSupport::TestCase
     assert @recording.released?
   end
 
+  test "should save page file" do
+    MediaBackend::Application.config.folders[:recordings_base_dir] = '/tmp'
+    MediaBackend::Application.config.folders[:images_base_dir] = '/tmp'
+    MediaBackend::Application.config.folders[:webgen_base_dir] = '/tmp'
+    @event = events(:one)
+    @event_info = event_infos(:one)
+
+    @event_info.event = @event
+    @recording.event = @event
+    @event.event_info = @event_info
+    @event.recordings << @recording
+
+    p @event.event_info
+    p @event.recordings
+
+    @recording.release!
+    assert @recording.released?
+  end
+
 end

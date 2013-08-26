@@ -18,11 +18,12 @@ ActiveAdmin.register Event do
       f.input :poster_filename
       f.input :conference
 
-      if not [:downloading, :new].include? f.object.conference.schedule_state 
+      unless [:downloading, :new].include? f.object.conference.schedule_state
         f.inputs "Info" do
           f.inputs :for => [:event_info, f.object.event_info || EventInfo.new] do |e|
             e.input :subtitle 
-            e.input :link 
+            e.input :link
+            e.input :slug
             e.input :description
             e.input :persons
             e.input :tags

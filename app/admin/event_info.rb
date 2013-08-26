@@ -5,6 +5,7 @@ ActiveAdmin.register EventInfo do
   index do
     column :subtitle
     column :link
+    column :slug
     column :tags
     column :date
     column :updated_at
@@ -15,6 +16,7 @@ ActiveAdmin.register EventInfo do
     f.inputs "Event Data Details" do
       f.input :subtitle
       f.input :link
+      f.input :slug
       f.input :description
       f.input :persons
       f.input :tags
@@ -26,7 +28,7 @@ ActiveAdmin.register EventInfo do
 
   controller do
     def permitted_params
-      params.permit event_info: [:subtitle, :link, :description, :persons, :tags, :date, :event_id]
+      params.permit event_info: [:subtitle, :link, :slug, :description, :persons, :tags, :date, :event_id]
     end
   end
 
