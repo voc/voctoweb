@@ -7,13 +7,19 @@ class Api::EventsControllerTest < ActionController::TestCase
   end
 
   test "should list recent events" do
+    create(:event)
     get 'index', format: :json, api_key: @key.key
     assert_response :success
     assert JSON.parse(response.body)
   end
 
   test "should list events of conference" do
-    get 'index', format: :json, api_key: @key.key, acronym: 'frabcon123'
+    ACRONYM = 'frabcon123'
+    conference = create(:conference, acronym: ACRONYM)
+    create(:event, conference: conference)
+    create(:event, conference: conference)
+    create(:event, conference: conference)
+    get 'index', format: :json, api_key: @key.key, acronym: ACRONYM
     events = JSON.parse(response.body)
     assert events.size > 2
   end

@@ -5,11 +5,13 @@ class Api::EventsController < InheritedResources::Base
 
   def index
     acronym = params['acronym']
-    if acronym.nil?
-      @events = Event.recent(25)
-    else
+    unless acronym.nil?
       conference = Conference.find_by acronym: acronym
+    end
+    unless conference.nil?
       @events = Event.find_by conference: conference
+    else
+      @events = Event.recent(25)
     end
     index!
   end

@@ -29,6 +29,7 @@ class ConferenceTest < ActiveSupport::TestCase
       @conference.schedule_url = SCHEDULE_URL
     end
     assert @conference.downloaded?
+    assert_not_nil @conference.schedule_xml
     assert @conference.schedule_xml.size > 0
   end
   

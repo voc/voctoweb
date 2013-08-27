@@ -6,6 +6,13 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
   ActiveRecord::Migration.check_pending!
 
+  TMP_DIR = 'tmp/tests'
+
+  def set_config_folders_to_tmp
+    MediaBackend::Application.config.folders[:recordings_base_dir] = TMP_DIR
+    MediaBackend::Application.config.folders[:images_base_dir] = TMP_DIR
+    MediaBackend::Application.config.folders[:webgen_base_dir] = TMP_DIR
+  end
 
   # Add more helper methods to be used by all tests here...
   def run_background_jobs_immediately

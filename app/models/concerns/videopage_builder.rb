@@ -24,8 +24,9 @@ module VideopageBuilder
       blocks = page[:blocks]
       page_file = File.join(path, page[:filename])
 
+      FileUtils.mkdir_p path
       File.open(page_file, "w") do |f|
-        f.puts data.sort.to_yaml, '---'
+        f.puts data.to_yaml, '---'
         f.puts blocks.join("\n---\n") if blocks
       end
     end
@@ -94,9 +95,9 @@ module VideopageBuilder
         # obsolete:'filePath' =>  File.join(@evmeta.video_path, file) + '.'+@evmeta.video_extension,
       }
 
-      filename = File.join event_info.slug, '.page'
+      filename = event_info.slug + '.page'
       filename.gsub!(/ /, '_')
-      {filename: filename, data: data, blocks: [ ev[:description] ]}
+      {filename: filename, data: data, blocks: [ event_info.description ]}
     end
 
   end
