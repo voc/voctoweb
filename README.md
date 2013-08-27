@@ -47,6 +47,15 @@ To get the backend up and running:
     gem install passenger
     passenger start -p 8023
 
+
+## Trigger media-webgen    
+
+Webgen generation is triggered via sudo
+
+    Cmnd_Alias WEBGEN = /srv/www/media-webgen/media-webgen/bin/webgen-wrapper
+    media-backend ALL = (media-webgen) NOPASSWD: BACKUP
+
+
 # First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.

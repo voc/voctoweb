@@ -70,8 +70,7 @@ class Recording < ActiveRecord::Base
     # create yaml in webgen root
     page = save_videopage(self.event.conference, self.event)
     unless page.nil?
-      # touch rebuild.txt
-      # create cron job to rebuild.txt
+      `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper`
       self.finish_release
     end
   end
