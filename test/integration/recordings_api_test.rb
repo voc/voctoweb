@@ -4,6 +4,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
 
   setup do
     @key = create(:api_key)
+    @event = create(:event)
     @json = get_json
   end
 
@@ -12,7 +13,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '"api_key":"'
     json += @key.key
     json += '",'
-    json += '"guid":"testGUID",'
+    json += '"guid":"' + @event.guid + '",'
     json += '"recording":'
     d = '{"original_url":"file:///tmp/1","filename":"some.mp4","mime_type":"audio/mp4","size":"12","length":"30"}'
     json += d
@@ -20,7 +21,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json
   end
 
-  test "should create recording" do
+  test "should create recording via json" do
     assert JSON.parse(@json)
     assert_difference('Recording.count') do
       post_json '/api/recordings.json', @json
