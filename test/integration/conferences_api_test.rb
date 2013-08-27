@@ -3,7 +3,7 @@ require 'test_helper'
 class ConferencesApiTest < ActionDispatch::IntegrationTest
 
   setup do
-    @key = api_keys(:one)
+    @key = create(:api_key)
     @json = get_json
   end
 

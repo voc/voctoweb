@@ -3,7 +3,7 @@ require 'test_helper'
 class Api::RecordingsControllerTest < ActionController::TestCase
 
   setup do
-    @key = api_keys(:one)
+    @key = create(:api_key)
   end
 
   test "should list recent recordings" do

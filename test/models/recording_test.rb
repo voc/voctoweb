@@ -3,8 +3,9 @@ require 'test_helper'
 class RecordingTest < ActiveSupport::TestCase
 
   setup do
-    @event = Event.new(guid: '123')
-    @recording = recordings(:one)
+    @recording = create(:recording)
+    @event = @recording.event
+    @event_info = create(:event_info, event: @event)
   end
 
   test "should set initial state" do
@@ -43,8 +44,8 @@ class RecordingTest < ActiveSupport::TestCase
     MediaBackend::Application.config.folders[:recordings_base_dir] = '/tmp'
     MediaBackend::Application.config.folders[:images_base_dir] = '/tmp'
     MediaBackend::Application.config.folders[:webgen_base_dir] = '/tmp'
-    @event = events(:one)
-    @event_info = event_infos(:one)
+    @event = create(:event)
+    @event_info = create(:event_info)
 
     @event_info.event = @event
     @recording.event = @event

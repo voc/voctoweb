@@ -3,7 +3,7 @@ require 'test_helper'
 class Api::EventsControllerTest < ActionController::TestCase
 
   setup do
-    @key = api_keys(:one)
+    @key = create(:api_key)
   end
 
   test "should list recent events" do

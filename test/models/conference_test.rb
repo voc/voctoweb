@@ -5,7 +5,7 @@ class ConferenceTest < ActiveSupport::TestCase
   SCHEDULE_URL = 'http://sigint.ccc.de/schedule/schedule.xml'
 
   setup do
-    @conference = conferences(:one)
+    @conference = create(:conference)
   end
 
   test "should set initial state" do

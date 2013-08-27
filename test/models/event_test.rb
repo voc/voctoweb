@@ -3,7 +3,7 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
 
   setup do
-    @event = events(:one)
+    @event = create(:event)
   end
 
   test "should not save without a conference" do
