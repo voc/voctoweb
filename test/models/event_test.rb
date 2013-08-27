@@ -13,8 +13,9 @@ class EventTest < ActiveSupport::TestCase
 
   test "should fill info from xml" do
     assert_difference('EventInfo.count') do
-      @event.fill_event_info
-      @event.save!
+      event = build(:event)
+      event.fill_event_info
+      event.save!
     end
   end
 end

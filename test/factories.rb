@@ -30,6 +30,41 @@ FactoryGirl.define do
     aspect_ratio "16:9"
     schedule_url "schedule.xml"
     schedule_state "downloaded"
+    schedule_xml %{
+    <?xml version="1.0" encoding="utf-8"?>
+    <schedule>
+        <version>1.3final</version>
+        <conference>
+            <title>SIGINT 2013</title>
+            <start>2013-07-05</start>
+            <end>2013-07-07</end>
+            <days>1</days>
+            <timeslot_duration>00:15</timeslot_duration>
+        </conference>
+        <day date="2013-07-05" index="1">
+            <room name="Saal (MP7 OG)">
+                <event guid="testGUID" id="5060">
+                    <start>11:00</start>
+                    <duration>01:00</duration>
+                    <room>Saal (MP7 OG)</room>
+                    <slug>saal_mp7_og_-_2013-07-05_11:00_-_side_effect_-_mlp_-_5060</slug>
+                    <title>Nearly Everything That Matters is a Side Effect</title>
+                    <subtitle/>
+                    <track>Hacking</track>
+                    <type>lecture</type>
+                    <language>en</language>
+                    <abstract>TBD</abstract>
+                    <description>TBD</description>
+                    <persons>
+                        <person id="1234">mlp</person>
+                    </persons>
+                    <links>
+                    </links>
+                </event>
+            </room>
+        </day>
+    </schedule>    
+    }
   end
 
   factory :event do
