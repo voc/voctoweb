@@ -34,6 +34,7 @@ class RecordingTest < ActiveSupport::TestCase
   end
 
   test "should download and release file" do
+    recording = create(:recording, state: :new)
     run_background_jobs_immediately do
       @recording.start_download
     end
@@ -41,10 +42,11 @@ class RecordingTest < ActiveSupport::TestCase
   end
 
   test "should save page file" do
+    recording = create(:recording, state: :releasing)
     run_background_jobs_immediately do
-      @recording.release!
+      recording.release!
     end
-    assert @recording.released?
+    assert recording.released?
   end
 
 end

@@ -29,6 +29,7 @@ module VideopageBuilder
         f.puts data.to_yaml, '---'
         f.puts blocks.join("\n---\n") if blocks
       end
+      page_file
     end
 
     private
