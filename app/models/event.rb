@@ -23,9 +23,9 @@ class Event < ActiveRecord::Base
   end
 
   def set_image_filenames(thumb_url, gif_url, poster_url)
-    self.thumb_filename = File.basename URI(thumb_url).path
-    self.gif_filename = File.basename URI(gif_url).path
-    self.poster_filename = File.basename URI(poster_url).path
+    self.thumb_filename = get_image_filename thumb_url if thumb_url
+    self.gif_filename = get_image_filename gif_url if gif_url
+    self.poster_filename = get_image_filename poster_url if poster_url
   end
 
   def download_images(thumb_url, gif_url, poster_url)
@@ -36,12 +36,23 @@ class Event < ActiveRecord::Base
   end
 
   def download_image(url, filename)
+    return if url.nil? or filename.nil?
     path = File.join self.conference.get_images_path, filename
     download_to_file(url, path)
   end
 
   def display_name
     self.guid.nil? ? self.id : self.guid
+  end
+
+  private
+
+  def get_image_filename(url)
+    if url
+      File.basename URI(url).path
+    else
+      ""
+    end
   end
 
 end
