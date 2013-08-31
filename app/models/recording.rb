@@ -69,8 +69,8 @@ class Recording < ActiveRecord::Base
   def release!
     # create yaml in webgen root
     page = save_videopage(self.event.conference, self.event)
-    unless page.nil?
-      `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper`
+    unless page.nil? 
+      `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
       self.finish_release
     end
   end
