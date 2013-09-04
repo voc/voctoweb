@@ -1,6 +1,7 @@
 class Conference < ActiveRecord::Base
   include Recent
   include Download
+  include VideopageBuilder
 
   has_many :events, dependent: :destroy
 
@@ -47,12 +48,30 @@ class Conference < ActiveRecord::Base
   end
   handle_asynchronously :download!
 
+  def create_videogallery!
+    save_index_vgallery(self)
+  end
+
   def get_images_path
     File.join MediaBackend::Application.config.folders[:images_base_dir], self.images_path
   end
 
   def get_recordings_path
     File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.recordings_path
+  end
+
+  def get_webgen_location
+    File.join MediaBackend::Application.config.folders[:webgen_base_dir], self.webgen_location
+  end
+
+  def get_images_url(path="")
+    url = MediaBackend::Application.config.folders[:images_webroot] + '/' + self.images_path
+    url += '/' + path unless path.empty?
+  end
+
+  def get_recordings_url(path="")
+    url = MediaBackend::Application.config.folders[:recordings_webroot] + '/' + self.recordings_path
+    url += '/' + path unless path.empty?
   end
 
   def display_name

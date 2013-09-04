@@ -22,6 +22,16 @@ ActiveAdmin.register Conference do
     f.actions
   end
 
+  member_action :create_vgallery, :method => :put do
+    conference = Conference.find(params[:id])
+    conference.create_videogallery!
+    redirect_to :action => :show
+  end
+
+  action_item only: :show do
+    link_to 'Create VGallery', create_vgallery_admin_conference_path(conference), method: :put
+  end
+
   controller do
     def permitted_params
       params.permit conference: [ :acronym,

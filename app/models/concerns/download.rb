@@ -16,6 +16,7 @@ module Download
       File.open(path, 'wb') do |f|
         result = download_io(f, url)
       end
+      Rails.logger.info "Downloaded to #{path}"
       result
     end
 

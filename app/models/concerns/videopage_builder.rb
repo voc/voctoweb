@@ -6,17 +6,19 @@ module VideopageBuilder
   included do
 
     def save_index_vgallery(conference)
-      path = File.join MediaBackend::Application.config.folders[:webgen_base_dir], conference.webgen_location
+      path = conference.get_webgen_location
+      FileUtils.mkdir_p path
+
       index_file = File.join(path, "index.vgallery")
       data = build_index_vgallery(conference)
       File.open(index_file, "w") do |f|
-        f.puts data.sort.to_yaml, '---'
+        f.puts data.to_yaml, '---'
       end
+      Rails.logger.info "Built videopage index file #{index_file}"
     end
 
     def save_videopage(conference, event)
-      path = File.join MediaBackend::Application.config.folders[:webgen_base_dir], conference.webgen_location
-
+      path = conference.get_webgen_location
       page = build_videopage(conference, event)
       return if page.nil?
 
@@ -29,6 +31,7 @@ module VideopageBuilder
         f.puts data.to_yaml, '---'
         f.puts blocks.join("\n---\n") if blocks
       end
+      Rails.logger.info "Built videopage file #{page_file}"
       page_file
     end
 
@@ -38,22 +41,13 @@ module VideopageBuilder
       data = {
         'title'  => conference.title || conference.acronym,
         'folder' => conference.webgen_location,
-        'inMenu' => 'false'
+        'inMenu' => false
       }
       # if conference.logo
       #   data['thumbPath'] = conference.logo
       # end
       data
     end
-
-    MAPPINGS = {
-        'application/ogg' => :audioPath,
-        'audio/mpeg'      => :audioPath,
-        'audio/x-wav'     => :audioPath,
-        'video/mp4'       => :h264Path,
-        'video/webm'      => :webmPath,
-        'video/ogg'       => :ogvPath
-    }
 
     # see /README.videopage
     def build_videopage(conference, event)
@@ -70,28 +64,40 @@ module VideopageBuilder
 
       data['title'] = event.title
       data['folder'] =  conference.webgen_location
-      data['thumbPath'] =  File.join(conference.get_images_path, event.gif_filename)
-      data['splashPath'] =  File.join(conference.get_images_path, event.poster_filename)
+      data['thumbPath'] = conference.get_images_url(event.gif_filename)
+      data['splashPath'] =  conference.get_images_url(event.poster_filename)
       data['date'] = event_info.date
       data['persons'] = event_info.persons if event_info.persons.size > 0
       data['subtitle'] = event_info.subtitle if event_info.subtitle
       data['link'] = event_info.link
       data['tags'] += event_info.tags
+      data['tags'] = data['tags'].join(',')
 
       # obsolete?
       #'orgPath' => sprintf(@evmeta.original_video_url_format, file)
 
       # TODO parse aspect_ratio
       if conference.aspect_ratio and conference.aspect_ratio == '16:9'
-        data['flvWidth'] = '640'
-        data['flvHeight'] = '360'
+        data['flvWidth'] = 640
+        data['flvHeight'] = 360
       end
 
       # find recordings
+      mappings = {
+          'application/ogg' => 'audioPath',
+          'audio/mpeg'      => 'audioPath',
+          'audio/x-wav'     => 'audioPath',
+          'video/mp4'       => 'h264Path',
+          'video/webm'      => 'webmPath',
+          'video/ogg'       => 'ogvPath'
+      }
+
       event.recordings.each { |r|
-        if MAPPINGS.include? r.mime_type
-          key = MAPPINGS[r.mime_type]
-          data[key] = r.get_recording_path
+        if mappings.include? r.mime_type
+          key = mappings[r.mime_type]
+          data[key] = conference.get_recordings_url(r.get_recording_webpath)
+          # FIXME still required by webgen
+          data['orgPath'] = data[key]
         end
         # obsolete:'filePath' =>  File.join(@evmeta.video_path, file) + '.'+@evmeta.video_extension,
       }

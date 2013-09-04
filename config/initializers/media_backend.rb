@@ -1,9 +1,11 @@
 MediaBackend::Application.configure do
     config.folders = { 
       recordings_base_dir: '/srv/recordings/cdn',
+      recordings_webroot: 'http://example.com',
       images_base_dir: '/srv/www/cdn',
+      images_webroot: '/media',
       webgen_base_dir: '/srv/www/webgen/src/browse',
-      tmp_dir: '/tmp'
+      tmp_dir: '/tmp',
     }
 
     config.mime_type_folder_mappings = {

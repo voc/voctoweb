@@ -60,6 +60,7 @@ class Recording < ActiveRecord::Base
   def move_files!
     tmp_path = get_tmp_path
     new_path = get_recording_path
+    FileUtils.mkdir_p new_path
     FileUtils.move tmp_path, new_path
 
     self.start_release
@@ -69,7 +70,11 @@ class Recording < ActiveRecord::Base
   def release!
     # create yaml in webgen root
     page = save_videopage(self.event.conference, self.event)
-    unless page.nil? 
+    if page.nil?
+      Rails.logger.info "Failed to build videopage for #{self.conference.acronym} / #{self.event.guid}"
+    else
+      Rails.logger.info "Running webgen for #{self.event.guid}"
+      # FIXME check return status
       `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
       self.finish_release
     end
@@ -78,8 +83,12 @@ class Recording < ActiveRecord::Base
 
   def get_recording_path
     path = File.join self.event.conference.get_recordings_path, get_mime_type_path
-    FileUtils.mkdir_p path
     File.join path, self.filename
+  end
+
+  def get_recording_webpath
+    path = get_mime_type_path + '/' + self.filename
+    path
   end
 
   private
