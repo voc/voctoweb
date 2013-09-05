@@ -71,10 +71,8 @@ module VideopageBuilder
     # obsolete?
     #'orgPath' => sprintf(@evmeta.original_video_url_format, file)
 
-    # TODO parse aspect_ratio
-    if conference.aspect_ratio and conference.aspect_ratio == '16:9'
-      data['flvWidth'] = 640
-      data['flvHeight'] = 360
+    if conference.aspect_ratio
+      parse_aspect_ratio(conference.aspect_ratio, data)
     end
 
     # find recordings
@@ -100,6 +98,16 @@ module VideopageBuilder
     filename = event_info.slug + '.page'
     filename.gsub!(/ /, '_')
     {filename: filename, data: data, blocks: [ event_info.description ]}
+  end
+
+  def parse_aspect_ratio(aspect_ratio, data)
+    if aspect_ratio == '16:9'
+      data['flvWidth'] = 640
+      data['flvHeight'] = 360
+    else
+      data['flvWidth'] = 400
+      data['flvHeight'] = 300
+    end
   end
 
 end
