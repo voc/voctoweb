@@ -1,7 +1,7 @@
 class Recording < ActiveRecord::Base
   include Recent
   include Download
-  include VideopageBuilder
+  require 'videopage_builder'
 
   belongs_to :event
 
@@ -69,7 +69,7 @@ class Recording < ActiveRecord::Base
 
   def release!
     # create yaml in webgen root
-    page = save_videopage(self.event.conference, self.event)
+    page = VideopageBuilder.save_videopage(self.event.conference, self.event)
     if page.nil?
       Rails.logger.info "Failed to build videopage for #{self.conference.acronym} / #{self.event.guid}"
     else

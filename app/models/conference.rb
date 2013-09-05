@@ -1,7 +1,7 @@
 class Conference < ActiveRecord::Base
   include Recent
   include Download
-  include VideopageBuilder
+  require 'videopage_builder'
 
   has_many :events, dependent: :destroy
 
@@ -56,7 +56,7 @@ class Conference < ActiveRecord::Base
   end
 
   def create_videogallery!
-    save_index_vgallery(self)
+    VideopageBuilder.save_index_vgallery(self)
   end
 
   def get_images_path
