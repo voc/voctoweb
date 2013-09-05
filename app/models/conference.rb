@@ -48,6 +48,13 @@ class Conference < ActiveRecord::Base
   end
   handle_asynchronously :download!
 
+  def self.run_webgen_job
+    Rails.logger.info "Running webgen"
+    # FIXME don't run for every recording?
+    # FIXME check return status
+    `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
+  end
+
   def create_videogallery!
     save_index_vgallery(self)
   end

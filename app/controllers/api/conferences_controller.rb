@@ -17,6 +17,12 @@ class Api::ConferencesController < InheritedResources::Base
     end
   end
 
+  def run_webgen
+    Conference.delay.run_webgen_job
+    respond_to do |format|
+      format.json { render json: { running: true }, status: :running }
+    end
+  end
 
   private
 

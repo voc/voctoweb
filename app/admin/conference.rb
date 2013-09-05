@@ -28,8 +28,17 @@ ActiveAdmin.register Conference do
     redirect_to :action => :show
   end
 
+  collection_action :run_webgen, :method => :get do
+    Conference.delay.run_webgen_job
+    redirect_to :action => :index
+  end
+
   action_item only: :show do
-    link_to 'Create VGallery', create_vgallery_admin_conference_path(conference), method: :put
+    link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :put
+  end
+
+  action_item do
+    link_to 'Run Webgen', run_webgen_admin_conferences_path, method: :get
   end
 
   controller do

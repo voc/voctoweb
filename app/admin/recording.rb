@@ -32,7 +32,7 @@ ActiveAdmin.register Recording do
 
   action_item only: :show do
     if File.readable? recording.get_recording_path
-      link_to 'Release', release_admin_recording_path(recording), method: :put
+      link_to 'Create Pagefile', release_admin_recording_path(recording), method: :put
     end
   end
 

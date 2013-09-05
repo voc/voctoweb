@@ -9,7 +9,11 @@ MediaBackend::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   namespace :api do
-    resources :conferences, :defaults => { :format => 'json' }
+    resources :conferences, :defaults => { :format => 'json' } do
+      collection do
+        post 'run_webgen'
+      end
+    end
     resources :events, :defaults => { :format => 'json' }
     resources :recordings, :defaults => { :format => 'json' }
   end

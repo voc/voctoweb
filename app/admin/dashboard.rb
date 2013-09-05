@@ -25,6 +25,9 @@ ActiveAdmin.register_page "Dashboard" do
 
           para "Recordings are added by specifiying the parent events `guid`, an URL and a `filename`."
           pre I18n.t("media-backend.recording-api-curl")
+
+          para "Run webgen after uploads are finished."
+          pre I18n.t("media-backend.webgen-api-curl")
         end
       end
     end # columns

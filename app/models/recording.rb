@@ -73,9 +73,6 @@ class Recording < ActiveRecord::Base
     if page.nil?
       Rails.logger.info "Failed to build videopage for #{self.conference.acronym} / #{self.event.guid}"
     else
-      Rails.logger.info "Running webgen for #{self.event.guid}"
-      # FIXME check return status
-      `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
       self.finish_release
     end
   end
