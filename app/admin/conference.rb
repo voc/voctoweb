@@ -28,6 +28,14 @@ ActiveAdmin.register Conference do
     redirect_to :action => :show
   end
 
+  member_action :download_schedule, :method => :put do
+    conference = Conference.find(params[:id])
+    unless conference.schedule_url.empty?
+      conference.download!
+    end
+    redirect_to :action => :show
+  end
+
   collection_action :run_webgen, :method => :get do
     Conference.delay.run_webgen_job
     redirect_to :action => :index
@@ -35,6 +43,7 @@ ActiveAdmin.register Conference do
 
   action_item only: :show do
     link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :put
+    link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :put
   end
 
   action_item do
