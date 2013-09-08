@@ -61,9 +61,8 @@ class Recording < ActiveRecord::Base
 
   def move_files!
     tmp_path = get_tmp_path
-    new_path = get_recording_path
-    FileUtils.mkdir_p new_path
-    FileUtils.move tmp_path, new_path
+    create_recording_dir
+    FileUtils.move tmp_path, get_recording_path
 
     self.start_release
   end
@@ -80,9 +79,16 @@ class Recording < ActiveRecord::Base
   end
   handle_asynchronously :release!
 
+  def create_recording_dir
+    FileUtils.mkdir_p get_recording_dir
+  end
+
   def get_recording_path
-    path = File.join self.event.conference.get_recordings_path, get_mime_type_path
-    File.join path, self.filename
+    File.join get_recording_dir, self.filename
+  end
+
+  def get_recording_dir
+    File.join self.event.conference.get_recordings_path, get_mime_type_path
   end
 
   def get_recording_webpath
