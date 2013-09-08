@@ -40,8 +40,7 @@ class Api::EventsController < InheritedResources::Base
     @event.transaction do
       @event.set_image_filenames(params[:thumb_url],params[:gif_url], params[:poster_url])
       @event.fill_event_info 
-      @event.save 
-      return true
+      return true if @event.save 
     end
     return false
   end

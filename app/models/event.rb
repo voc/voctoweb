@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :conference
   validates_presence_of :guid
+  validates_uniqueness_of :guid
+
 
   def fill_event_info
     if self.conference.downloaded?
