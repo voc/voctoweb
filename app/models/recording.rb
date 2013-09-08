@@ -3,6 +3,8 @@ class Recording < ActiveRecord::Base
   include Download
   require 'videopage_builder'
 
+  before_destroy :delete_video
+
   belongs_to :event
 
   validates_presence_of :event
@@ -89,6 +91,14 @@ class Recording < ActiveRecord::Base
   end
 
   private
+
+  def delete_video
+    file = get_recording_path
+    if File.readable? file
+      File.remove_file file
+    end
+    FileUtils.remove_dir get_recording_dir
+  end
 
   def get_tmp_path
     File.join(MediaBackend::Application.config.folders[:tmp_dir],
