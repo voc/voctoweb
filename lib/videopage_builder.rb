@@ -100,7 +100,7 @@ module VideopageBuilder
     {filename: filename, data: data, blocks: [ event_info.description ]}
   end
 
-  def parse_aspect_ratio(aspect_ratio, data)
+  def self.parse_aspect_ratio(aspect_ratio, data)
     if aspect_ratio == '16:9'
       data['flvWidth'] = 640
       data['flvHeight'] = 360
