@@ -7,6 +7,12 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
 
+        panel "Running Jobs" do
+          ul do
+            para Delayed::Job.all.count
+          end
+        end
+
         panel "Recent Conferences" do
           ul do
             Conference.recent(5).map do |conference|
