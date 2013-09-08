@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :guid
   validates_uniqueness_of :guid
 
+  before_destroy :delete_page_file
 
   def fill_event_info
     if self.conference.downloaded?
@@ -48,6 +49,10 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+  def delete_page_file
+    VideopageBuilder.remove_videopage(self.event.conference, self.event)
+  end
 
   def get_image_filename(url)
     if url

@@ -12,16 +12,24 @@ module VideopageBuilder
     Rails.logger.info "Built videopage index file #{index_file}"
   end
 
+  def self.remove_videopage(conference, event)
+    raise "missing event info" if event.event_info.nil?
+    path = conference.get_webgen_location
+    page_file = get_page_filename(path, event.event_info)
+    FileUtils.remove_file page_file
+  end
+
   def self.save_videopage(conference, event)
+    raise "missing event info" if event.event_info.nil?
     path = conference.get_webgen_location
     page = build_videopage(conference, event)
     return if page.nil?
 
     data = page[:data] 
     blocks = page[:blocks]
-    page_file = File.join(path, page[:filename])
 
     FileUtils.mkdir_p path
+    page_file = get_page_filename(path, event.event_info)
     File.open(page_file, "w") do |f|
       f.puts data.to_yaml, '---'
       f.puts blocks.join("\n---\n") if blocks
@@ -44,13 +52,16 @@ module VideopageBuilder
     data
   end
 
+  def self.get_page_filename(path, event_info)
+    filename = event_info.slug + '.page'
+    filename.gsub!(/ /, '_')
+    page_file = File.join(path, filename)
+    page_file
+  end
+
   # see /README.videopage
   def self.build_videopage(conference, event)
     event_info = event.event_info
-    if event_info.nil?
-      raise "missing event info"
-      return
-    end
 
     data = {
       'tags' => [conference.acronym],
@@ -95,9 +106,7 @@ module VideopageBuilder
       # obsolete:'filePath' =>  File.join(@evmeta.video_path, file) + '.'+@evmeta.video_extension,
     }
 
-    filename = event_info.slug + '.page'
-    filename.gsub!(/ /, '_')
-    {filename: filename, data: data, blocks: [ event_info.description ]}
+    {data: data, blocks: [ event_info.description ]}
   end
 
   def self.parse_aspect_ratio(aspect_ratio, data)
