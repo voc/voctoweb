@@ -44,7 +44,6 @@ module VideopageBuilder
     data = {
       'title'  => conference.title || conference.acronym,
       'folder' => conference.webgen_location,
-      'inMenu' => false
     }
     # if conference.logo
     #   data['thumbPath'] = conference.logo
