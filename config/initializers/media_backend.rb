@@ -11,6 +11,8 @@ MediaBackend::Application.configure do
     config.mime_type_folder_mappings = {
       'application/ogg'   => 'ogg',
       'application/vnd.rn-realmedia' => 'realmedia',
+      'audio/ogg'         => 'ogg',
+      'audio/opus'        => 'opus',
       'audio/mpeg'        => 'mp3',
       'audio/x-wav'       => 'wav',
       'video/mp4'         => 'mp4',
