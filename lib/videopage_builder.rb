@@ -88,6 +88,7 @@ module VideopageBuilder
     # find recordings
     mappings = {
       'application/ogg' => 'audioPath',
+      'audio/ogg'       => 'audioPath',
       'audio/mpeg'      => 'audioPath',
       'audio/x-wav'     => 'audioPath',
       'video/mp4'       => 'h264Path',
