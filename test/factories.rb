@@ -8,6 +8,10 @@ FactoryGirl.define do
     "frabcon#{n}"
   end
 
+  sequence :event_guid do |n|
+    SecureRandom.hex(16)
+  end
+
   sequence :event_title do |n|
     "some event#{n}"
   end
@@ -70,7 +74,7 @@ FactoryGirl.define do
   factory :event do
     conference
     event_info
-    guid "testGUID"
+    guid { generate(:event_guid) }
     title { generate(:event_title) }
     thumb_filename "frabcon123.jpg"
     gif_filename "frabcon123.gif"
