@@ -22,13 +22,13 @@ ActiveAdmin.register Conference do
     f.actions
   end
 
-  member_action :create_vgallery, :method => :put do
+  member_action :create_vgallery, :method => :post do
     conference = Conference.find(params[:id])
     conference.create_videogallery!
     redirect_to :action => :show
   end
 
-  member_action :download_schedule, :method => :put do
+  member_action :download_schedule, :method => :post do
     conference = Conference.find(params[:id])
     unless conference.schedule_url.empty?
       conference.download!
@@ -36,18 +36,26 @@ ActiveAdmin.register Conference do
     redirect_to :action => :show
   end
 
-  collection_action :run_webgen, :method => :get do
+  member_action :create_podcast, :method => :post do
+    conference = Conference.find(params[:id])
+    conference.create_podcast
+    redirect_to :action => :show
+  end
+
+
+  collection_action :run_webgen, :method => :post do
     Conference.delay.run_webgen_job
     redirect_to :action => :index
   end
 
   action_item only: :show do
-    link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :put
-    link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :put
+    link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :post
+    link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+    link_to 'Create Podcast', create_podcast_admin_conferences_path(conference), method: :post
   end
 
   action_item do
-    link_to 'Run Webgen', run_webgen_admin_conferences_path, method: :get
+    link_to 'Run Webgen', run_webgen_admin_conferences_path, method: :post
   end
 
   controller do
