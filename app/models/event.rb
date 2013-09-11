@@ -15,6 +15,16 @@ class Event < ActiveRecord::Base
 
   before_destroy :delete_page_file
 
+  scope :recordings_by_mime_type, lambda { |type| joins(:recordings).where(recordings: {mime_type: type}) }
+
+  def get_recording_by_mime_type(type)
+    self.recordings.where(mime_type: type)
+  end
+
+  def recordings_by_mime_type
+    Hash[self.recordings.map { |r| [r.mime_type, r] }]
+  end
+
   def fill_event_info
     if self.conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
@@ -42,6 +52,17 @@ class Event < ActiveRecord::Base
     return if url.nil? or filename.nil?
     path = File.join self.conference.get_images_path, filename
     download_to_file(url, path)
+  end
+
+  def get_videopage_filename
+    if self.event_info and not self.event_info.slug.nil?
+      filename = self.event_info.slug + '.page'
+    else
+      filename = self.guid + '.page'
+    end
+    filename.gsub!(/ /, '_')
+    page_file = File.join(self.conference.get_webgen_location, filename)
+    page_file
   end
 
   def display_name

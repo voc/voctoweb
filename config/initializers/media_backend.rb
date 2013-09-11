@@ -14,6 +14,7 @@ MediaBackend::Application.configure do
       'audio/mpeg'        => 'mp3',
       'audio/x-wav'       => 'wav',
       'video/mp4'         => 'mp4',
+      'video/ogg'         => 'ogg',
       'video/quicktime'   => 'qt',
       'video/webm'        => 'webm',
       'video/x-matroska'  => 'mkv',
