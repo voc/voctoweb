@@ -6,7 +6,7 @@ require 'time'
 module PodcastGenerator
 
   def self.generate(conference)
-    rss = Feed::UpdatesITS.new
+    rss = PodcastGenerator::UpdatesITS.new
     rss.load_config
     rss.config['output_file'] = File.join(conference.get_webgen_location, 'podcast.xml')
     rss.config['channel_title'] = "Chaos Computer Club - #{conference.title}"
@@ -32,12 +32,12 @@ module PodcastGenerator
       @config = YAML.load File.open filename
     end
 
-    def generate_conference( conference )
+    def generate_conference(conference)
       if File.readable?(@config['output_file'])
         File.delete(@config['output_file'])
       end
 
-      rss = create_rss conference
+      rss = create_rss(conference)
 
       begin
         f = File.open(@config['output_file'], 'w')
@@ -56,7 +56,7 @@ module PodcastGenerator
         create_channel(maker)
 
         conference.events.each { |event|
-          next unless File.exists?(event.get_videopage_filename)
+          next unless File.exists?(event.get_videopage_path)
           next if seen.has_key?(event.guid)
           seen[event.guid] = 1
 
@@ -80,12 +80,12 @@ module PodcastGenerator
           item.description = description
           item.itunes_summary = description
           item.itunes_explicit = "No"
-          item.pubDate = event.created_at
+          item.pubDate = event.created_at.to_s
 
           if event.event_info
             item.itunes_subtitle = event.event_info.subtitle
             item.itunes_author = event.event_info.persons.join(', ')
-            item.pubDate = Time.parse(event.event_info.date) if event.event_info.date
+            item.pubDate = event.event_info.date.to_s if event.event_info.date
           end
 
           # TODO video image possible? ( data['thumbPath'] )
@@ -103,7 +103,7 @@ module PodcastGenerator
       order.each { |mt|
         return recordings[mt] if recordings.has_key?(mt)
       }
-      recordings.first
+      recordings.first[1]
     end
 
     def create_channel(maker)
@@ -135,7 +135,7 @@ module PodcastGenerator
       maker.channel.itunes_explicit = "No"
     end
 
-    def get_item_description(event, url)
+    def get_item_description(event)
       description = ""
       unless event.event_info.nil?
         description = event.event_info.description or event.event_info.subtitle
@@ -143,7 +143,7 @@ module PodcastGenerator
         description += "about this event: #{link}\n" if link
       end
       # file = 'src/browse/bla.page'
-      url = @config['base_url'] + filepath[4..-1]
+      url = @config['base_url'] + event.get_videopage_filename
       url.gsub!(/page$/, 'html')
       description += "event on media: #{url}\n"
     end
@@ -151,8 +151,8 @@ module PodcastGenerator
     def get_item_title(conference, event)
       title = conference.title or conference.acronym
       title += ": "
-      if event.event_info and event.event_info.title
-        title += event.event_info.title
+      if event.title
+        title += event.title
       else
         title += event.get_videopage_filename[0..-6]
       end

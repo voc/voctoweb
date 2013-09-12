@@ -54,6 +54,11 @@ class Event < ActiveRecord::Base
     download_to_file(url, path)
   end
 
+  def get_videopage_path
+    page_file = File.join(self.conference.get_webgen_location, get_videopage_filename)
+    page_file
+  end
+
   def get_videopage_filename
     if self.event_info and not self.event_info.slug.nil?
       filename = self.event_info.slug + '.page'
@@ -61,8 +66,7 @@ class Event < ActiveRecord::Base
       filename = self.guid + '.page'
     end
     filename.gsub!(/ /, '_')
-    page_file = File.join(self.conference.get_webgen_location, filename)
-    page_file
+    filename
   end
 
   def display_name

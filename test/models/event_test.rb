@@ -18,4 +18,5 @@ class EventTest < ActiveSupport::TestCase
       event.save!
     end
   end
+
 end

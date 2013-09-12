@@ -14,7 +14,7 @@ module VideopageBuilder
 
   def self.remove_videopage(conference, event)
     path = conference.get_webgen_location
-    page_file = event.get_videopage_filename
+    page_file = event.get_videopage_path
     FileUtils.remove_file page_file
   end
 
@@ -26,7 +26,7 @@ module VideopageBuilder
     blocks = page[:blocks]
 
     FileUtils.mkdir_p conference.get_webgen_location
-    page_file = event.get_videopage_filename
+    page_file = event.get_videopage_path
     File.open(page_file, "w") do |f|
       f.puts data.to_yaml, '---'
       f.puts blocks.join("\n---\n") if blocks

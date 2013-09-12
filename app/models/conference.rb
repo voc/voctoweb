@@ -6,7 +6,7 @@ class Conference < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
 
-  validates_presence_of :acronym, :schedule_url
+  validates_presence_of :acronym
   validates_uniqueness_of :acronym
 
   state_machine :schedule_state, :initial => :not_present do
@@ -39,6 +39,7 @@ class Conference < ActiveRecord::Base
   end
 
   def download!
+    return unless self.schedule_url
     self.schedule_xml = download(self.schedule_url)
     if self.schedule_xml.nil?
       self.schedule_state = :new

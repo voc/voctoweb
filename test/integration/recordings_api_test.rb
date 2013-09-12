@@ -2,6 +2,8 @@ require 'test_helper'
 
 class RecordingsApiTest < ActionDispatch::IntegrationTest
 
+  FILE = 'test.mp3'
+
   setup do
     @key = create(:api_key)
     @event = create(:event)
@@ -15,7 +17,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"guid":"' + @event.guid + '",'
     json += '"recording":'
-    d = '{"original_url":"file:///tmp/1","filename":"some.mp4","mime_type":"audio/mp4","size":"12","length":"30"}'
+    d = '{"original_url":"file://' + FILE + '","filename":"some.mp4","mime_type":"audio/mp4","size":"12","length":"30"}'
     json += d
     json+= '}'
     json
@@ -23,14 +25,16 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
 
   test "should create recording via json" do
     assert JSON.parse(@json)
+    create_test_file FILE
     assert_difference('Recording.count') do
       post_json '/api/recordings.json', @json
     end
+    FileUtils.remove_file FILE
   end
 
   test "should call start_download after create" do
     post_json '/api/recordings.json', @json
-    event = Event.find_by guid: "testGUID"
+    event = Event.find_by guid: @event.guid
     assert_not_nil event
     assert event.recordings.last.downloading?
   end

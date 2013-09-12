@@ -12,6 +12,10 @@ FactoryGirl.define do
     SecureRandom.hex(16)
   end
 
+  sequence :event_info_slug do |n|
+    SecureRandom.hex(4)
+  end
+
   sequence :event_title do |n|
     "some event#{n}"
   end
@@ -32,6 +36,25 @@ FactoryGirl.define do
     images_path "frabcon123"
     webgen_location "conference/frabcon123"
     aspect_ratio "16:9"
+
+    factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
+  end
+
+  trait :conference_recordings do
+    after(:create) do |conference|
+      conference.events << FactoryGirl.create(:event_with_recordings)
+      conference.events << FactoryGirl.create(:event_with_recordings)
+    end
+  end
+
+  trait :event_recordings do
+    after(:create) do |event|
+      event.recordings << FactoryGirl.create(:recording)
+      event.recordings << FactoryGirl.create(:recording)
+    end
+  end
+
+  trait :has_schedule do
     schedule_url "schedule.xml"
     schedule_state "downloaded"
     schedule_xml %{
@@ -79,11 +102,13 @@ FactoryGirl.define do
     thumb_filename "frabcon123.jpg"
     gif_filename "frabcon123.gif"
     poster_filename "frabcon123_logo.jpg"
+
+    factory :event_with_recordings, traits: [:event_recordings]
   end
 
   factory :event_info do
     subtitle "subtitle"
-    slug "slug"
+    slug { generate(:event_info_slug) }
     link "http://localhost"
     description "description"
     persons ["Name"]
@@ -95,7 +120,7 @@ FactoryGirl.define do
     event
     filename "audio.mp3"
     mime_type "audio/mpeg"
-    original_url "http://vhost2.hansenet.de/1_mb_file.bin"
+    original_url "file:///fixtures/test.mp3"
     size "12"
     length "5"
     state "new"

@@ -7,24 +7,29 @@ module Download
 
   included do
     def download(url)
-      # TODO may need to use a buffer and a tmp file if running out of memory?
+      # without using a buffer
       open(url).read
     end
 
     def download_to_file(url, path)
       result = false
-      File.open(path, 'wb') do |f|
-        result = download_io(f, url)
+
+      uri = URI(url)
+      if uri.scheme == 'file'
+        result = FileUtils.mv uri.path, path
+        Rails.logger.info "Moved to #{path}" if result == 0
+      else
+        File.open(path, 'wb') do |f|
+          result = download_io(f, uri)
+        end
+        Rails.logger.info "Downloaded to #{path}" if result
       end
-      Rails.logger.info "Downloaded to #{path}"
       result
     end
 
     private
 
-    def download_io(fileio, url)
-      uri = URI(url)
-
+    def download_io(fileio, uri)
       request = Net::HTTP::Get.new uri
 
       result = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
