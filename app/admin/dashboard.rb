@@ -8,8 +8,25 @@ ActiveAdmin.register_page "Dashboard" do
       column do
 
         panel "Running Jobs" do
+          table_for Delayed::Job.order("created_at desc").each do |job|
+            column(:resource) {|job| 
+              status_tag(YAML.load(job.handler).object.class.to_s)
+            }
+            column(:method) {|job| 
+              status_tag(YAML.load(job.handler).method_name.to_s)
+            }
+            column(:created_at) {|job| job.created_at.to_s }
+            column(:run_at) {|job| job.run_at.to_s }
+            column(:last_error) {|job| 
+              div class: "scrollable_error" do 
+                simple_format(job.last_error.to_s.truncate(1500)).html_safe
+              end
+            }
+            column(:attempts) {|job| job.attempts.to_s }
+          end
+
           ul do
-            para Delayed::Job.all.count
+            para "total job count: " + Delayed::Job.all.count.to_s
           end
         end
 
@@ -23,17 +40,24 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "API Examples" do
           para "You can use the API to register a new conference. The conference `acronym` and the URL of the `schedule.xml` are required."
-
-          pre I18n.t("media-backend.conference-api-curl")
+          pre class: "scrollable" do
+            I18n.t("media-backend.conference-api-curl") 
+          end
 
           para "You can add images to an event, like the animated gif thumb and the poster image. The event is identified by its `guid` and the conference `acronym`."
-          pre I18n.t("media-backend.event-api-curl")
+          pre class: "scrollable" do
+            I18n.t("media-backend.event-api-curl")
+          end
 
           para "Recordings are added by specifiying the parent events `guid`, an URL and a `filename`."
-          pre I18n.t("media-backend.recording-api-curl")
+          pre class: "scrollable" do
+            I18n.t("media-backend.recording-api-curl")
+          end
 
           para "Run webgen after uploads are finished."
-          pre I18n.t("media-backend.webgen-api-curl")
+          pre class: "scrollable" do
+            I18n.t("media-backend.webgen-api-curl")
+          end
         end
       end
     end # columns

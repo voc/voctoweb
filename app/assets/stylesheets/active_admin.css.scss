@@ -26,3 +26,6 @@ $error-color: #932419 !default;
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+.scrollable { overflow:auto; width:800px; height:50px; } 
+.scrollable_error { overflow:auto; width:300px; height:50px; } 
