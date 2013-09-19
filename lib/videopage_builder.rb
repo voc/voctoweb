@@ -77,7 +77,12 @@ module VideopageBuilder
       parse_aspect_ratio(conference.aspect_ratio, data)
     end
 
-    # find recordings
+    find_recordings(conference, event.recordings, data)
+
+    {data: data, blocks: [ description ]}
+  end
+
+  def self.find_recordings(conference, recordings, data)
     mappings = {
       'application/ogg' => 'audioPath',
       'audio/ogg'       => 'audioPath',
@@ -88,17 +93,15 @@ module VideopageBuilder
       'video/ogg'       => 'ogvPath'
     }
 
-    event.recordings.each { |r|
+    recordings.each { |r|
       if mappings.include? r.mime_type
         key = mappings[r.mime_type]
         data[key] = conference.get_recordings_url(r.get_recording_webpath)
-        # FIXME still required by webgen - link below video
-        data['orgPath'] = data[key]
+        # FIXME still required by webgen - use last video
+        data['orgPath'] = data[key] if r.mime_type.match(/video/)
       end
-      # obsolete:'filePath' =>  File.join(@evmeta.video_path, file) + '.'+@evmeta.video_extension,
     }
 
-    {data: data, blocks: [ description ]}
   end
 
   def self.parse_aspect_ratio(aspect_ratio, data)
