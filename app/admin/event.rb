@@ -25,8 +25,8 @@ ActiveAdmin.register Event do
             e.input :link
             e.input :slug
             e.input :description
-            e.input :persons
-            e.input :tags
+            e.input :persons_raw, as: :text
+            e.input :tags_raw, as: :text
             e.input :date
           end
         end
@@ -38,7 +38,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id]
+      params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id, event_info_attributes: [:subtitle, :link, :slug, :description, :persons_raw, :tags_raw, :date, :event_id]]
     end
   end
 
