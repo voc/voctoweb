@@ -2,12 +2,16 @@ ActiveAdmin.register Recording do
 
   index do
     column :original_url
-    column :filename
+    column :filename do |recording|
+      line_break_filename recording.filename
+    end
     column :mime_type
     column :size
     column :length
     column :state
-    column :updated_at
+    column :updated_at do |recording|
+      l(recording.updated_at, format: :pretty_datetime)
+    end
     default_actions
   end
 

@@ -6,7 +6,9 @@ ActiveAdmin.register Conference do
     column :schedule_state
     column :recordings_path
     column :webgen_location
-    column :created_at
+    column :created_at do |conference|
+      l(conference.created_at, format: :pretty_datetime)
+    end
     default_actions
   end
 

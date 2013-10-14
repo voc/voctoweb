@@ -2,11 +2,19 @@ ActiveAdmin.register Event do
 
   index do
     column :guid
-    column :thumb_filename
-    column :gif_filename
-    column :poster_filename
+    column :thumb_filename do |event|
+      line_break_filename event.thumb_filename
+    end
+    column :gif_filename do |event| 
+      line_break_filename event.gif_filename
+    end
+    column :poster_filename do |event|
+      line_break_filename event.poster_filename
+    end
     column :conference
-    column :created_at
+    column :created_at do |event|
+      l(event.created_at, format: :pretty_datetime)
+    end
     default_actions
   end
 
@@ -44,8 +52,18 @@ ActiveAdmin.register Event do
     redirect_to :action => :show
   end
 
+  member_action :write_videopage_file, :method => :post do
+    event = Event.find(params[:id])
+    VideopageBuilder.save_videopage(event.conference, event)
+    redirect_to :action => :show
+  end
+
   action_item only: [:show, :edit] do
     link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
+  end
+
+  action_item only: :show do
+    link_to 'Write Videopage file', write_videopage_file_admin_event_path(event), method: :post
   end
 
   controller do
