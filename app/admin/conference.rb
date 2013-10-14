@@ -10,6 +10,24 @@ ActiveAdmin.register Conference do
     default_actions
   end
 
+  show do |c|
+    attributes_table do
+      row :acronym
+      row :recordings_path
+      row :images_path
+      row :webgen_location
+      row :aspect_ratio
+      row :created_at
+      row :updated_at
+      row :title
+      row :schedule_url
+      row :schedule_xml do
+        div c.schedule_xml.truncate(200)
+      end
+      row :schedule_state
+    end
+  end
+
   form do |f|
     f.inputs "Conference Details" do
       f.input :acronym
@@ -42,7 +60,6 @@ ActiveAdmin.register Conference do
     redirect_to :action => :show
   end
 
-
   collection_action :run_webgen, :method => :post do
     Conference.delay.run_webgen_job
     redirect_to :action => :index
@@ -50,7 +67,13 @@ ActiveAdmin.register Conference do
 
   action_item only: :show do
     link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :post
+  end
+
+  action_item only: :show do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+  end
+
+  action_item only: :show do
     link_to 'Create Podcast', create_podcast_admin_conference_path(conference), method: :post
   end
 
