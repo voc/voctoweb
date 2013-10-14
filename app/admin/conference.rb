@@ -51,7 +51,7 @@ ActiveAdmin.register Conference do
   action_item only: :show do
     link_to 'Create Gallery Index', create_vgallery_admin_conference_path(conference), method: :post
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
-    link_to 'Create Podcast', create_podcast_admin_conferences_path(conference), method: :post
+    link_to 'Create Podcast', create_podcast_admin_conference_path(conference), method: :post
   end
 
   action_item do
