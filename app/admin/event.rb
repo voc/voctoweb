@@ -36,6 +36,18 @@ ActiveAdmin.register Event do
     f.actions
   end
 
+  member_action :update_event_info, :method => :post do
+    event = Event.find(params[:id])
+    event.event_info.destroy unless event.event_info.nil?
+    event.fill_event_info
+    event.event_info.save
+    redirect_to :action => :show
+  end
+
+  action_item only: [:show, :edit] do
+    link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
+  end
+
   controller do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id, event_info_attributes: [:subtitle, :link, :slug, :description, :persons_raw, :tags_raw, :date, :event_id]]
