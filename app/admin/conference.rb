@@ -24,7 +24,7 @@ ActiveAdmin.register Conference do
       row :title
       row :schedule_url
       row :schedule_xml do
-        div c.schedule_xml.truncate(200)
+        div c.schedule_xml.try(:truncate,200)
       end
       row :schedule_state
     end
