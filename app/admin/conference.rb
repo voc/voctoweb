@@ -51,7 +51,7 @@ ActiveAdmin.register Conference do
   member_action :download_schedule, :method => :post do
     conference = Conference.find(params[:id])
     unless conference.schedule_url.empty?
-      conference.download!
+      conference.url_changed
     end
     redirect_to :action => :show
   end
