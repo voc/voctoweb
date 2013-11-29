@@ -1,7 +1,11 @@
 module ApplicationHelper
 
   def line_break_filename(filename)
-    filename.gsub(/_/, "_\n")
+    if filename.present?
+      filename.gsub(/_/, "_\n")
+    else
+      ""
+    end
   end
 
 end

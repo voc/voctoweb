@@ -126,4 +126,9 @@ FactoryGirl.define do
     state "new"
   end
 
+  factory :admin_user do
+    email  { generate :email }
+    password "admin123"
+  end
+
 end
