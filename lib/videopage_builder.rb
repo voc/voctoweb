@@ -65,7 +65,7 @@ module VideopageBuilder
     data['thumbPath'] = conference.get_images_url(event.gif_filename)
     data['splashPath'] =  conference.get_images_url(event.poster_filename)
     data['podcastXML'] =  File.join conference.webgen_location, 'podcast.xml'
-    data['cdnURL'] =  MediaBackend::Application.config.cdnURL
+    data['cdnURL'] =  File.join MediaBackend::Application.config.cdnURL, conference.recordings_path
 
     description = ""
     event_info = event.event_info
