@@ -149,7 +149,12 @@ module PodcastGenerator
     end
 
     def get_item_title(conference, event)
-      title = conference.title or conference.acronym
+      title = ''
+      if conference.title.present? 
+        title = conference.title
+      elsif conference.acronym.present?
+        title = conference.acronym
+      end
       title += ": "
       if event.title
         title += event.title

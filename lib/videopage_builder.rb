@@ -64,8 +64,6 @@ module VideopageBuilder
     data['folder'] =  conference.webgen_location
     data['thumbPath'] = conference.get_images_url(event.gif_filename)
     data['splashPath'] =  conference.get_images_url(event.poster_filename)
-
-    # FIXME 30C3 override
     data['podcastXML'] =  File.join conference.webgen_location, 'podcast.xml'
     data['cdnURL'] =  MediaBackend::Application.config.cdnURL
 

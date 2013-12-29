@@ -33,6 +33,7 @@ ActiveAdmin.register Conference do
   form do |f|
     f.inputs "Conference Details" do
       f.input :acronym
+      f.input :title
       f.input :recordings_path
       f.input :images_path
       f.input :webgen_location
