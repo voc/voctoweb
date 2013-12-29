@@ -1,4 +1,6 @@
 MediaBackend::Application.configure do
+    config.cdnURL = 'http://cdn.media.ccc.de'
+
     config.folders = { 
       recordings_base_dir: '/srv/recordings/cdn',
       recordings_webroot: 'http://example.com',
