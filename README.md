@@ -40,6 +40,11 @@ You need to create a secret token for sessions:
     cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
     rake secret
 
+And for devise:    
+
+    cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
+    rake secret
+
 To get the backend up and running:
 
     export RAILS_ENV=production
