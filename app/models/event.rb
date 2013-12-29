@@ -76,7 +76,7 @@ class Event < ActiveRecord::Base
   private
 
   def delete_page_file
-    VideopageBuilder.remove_videopage(self.event.conference, self.event)
+    VideopageBuilder.remove_videopage(self.conference, self)
   end
 
   def get_image_filename(url)

@@ -15,7 +15,9 @@ module VideopageBuilder
   def self.remove_videopage(conference, event)
     path = conference.get_webgen_location
     page_file = event.get_videopage_path
-    FileUtils.remove_file page_file
+    if File.readable? page_file
+      FileUtils.remove_file page_file
+    end
   end
 
   def self.save_videopage(conference, event)
