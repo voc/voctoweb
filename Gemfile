@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
