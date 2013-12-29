@@ -30,6 +30,10 @@ class Recording < ActiveRecord::Base
     state :releasing
     state :released
 
+    event :download_failed do
+      transition all => :new
+    end
+
     event :start_download do
       transition [:new] => :downloading
     end
@@ -54,7 +58,7 @@ class Recording < ActiveRecord::Base
     if result and File.readable? path and File.size(path) > 0
       self.finish_download
     else
-      self.state = :new
+      self.download_failed
     end
   end
   handle_asynchronously :download!
@@ -100,7 +104,7 @@ class Recording < ActiveRecord::Base
 
   def delete_video
     file = get_recording_path
-    File.remove_file file if File.readable? file
+    FileUtils.remove_file file if File.readable? file
     dir = get_recording_dir
     FileUtils.remove_dir dir if File.directory? dir
 

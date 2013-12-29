@@ -27,7 +27,9 @@ module VideopageBuilder
     data = page[:data] 
     blocks = page[:blocks]
 
-    FileUtils.mkdir_p conference.get_webgen_location
+    if not File.directory? conference.get_webgen_location
+      FileUtils.mkdir_p conference.get_webgen_location
+    end
     page_file = event.get_videopage_path
     File.open(page_file, "w") do |f|
       f.puts data.to_yaml, '---'
