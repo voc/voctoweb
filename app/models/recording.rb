@@ -105,8 +105,6 @@ class Recording < ActiveRecord::Base
   def delete_video
     file = get_recording_path
     FileUtils.remove_file file if File.readable? file
-    dir = get_recording_dir
-    FileUtils.remove_dir dir if File.directory? dir
 
     VideopageBuilder.remove_videopage(self.event.conference, self.event)
     if self.event.recordings.count > 1
