@@ -17,6 +17,34 @@ class Event < ActiveRecord::Base
 
   scope :recordings_by_mime_type, lambda { |type| joins(:recordings).where(recordings: {mime_type: type}) }
 
+  serialize :persons, Array
+  serialize :tags, Array
+
+  # active admin and serialized fields workaround:
+  attr_accessor   :persons_raw, :tags_raw
+
+  # active admin and serialized fields workaround:
+  def persons_raw
+    self.persons.join("\n") unless self.persons.nil?
+  end
+
+  # active admin and serialized fields workaround:
+  def persons_raw=(values)
+    self.persons = []
+    self.persons = values.split("\n")
+  end
+
+  # active admin and serialized fields workaround:
+  def tags_raw
+    self.tags.join("\n") unless self.tags.nil?
+  end
+
+  # active admin and serialized fields workaround:
+  def tags_raw=(values)
+    self.tags = []
+    self.tags= values.split("\n")
+  end
+
   def self.bulk_update_events(selection)
     Rails.logger.info "Bulk updating events from XML"
     # TODO fix this mess
