@@ -5,7 +5,6 @@ class RecordingTest < ActiveSupport::TestCase
   setup do
     @recording = create(:recording)
     @event = @recording.event
-    @event_info = create(:event_info, event: @event)
     set_config_folders_to_tmp
   end
 

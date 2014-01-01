@@ -70,7 +70,7 @@ module PodcastGenerator
           item.title = get_item_title(conference, event)
 
           item.link = link
-          item.itunes_keywords = event.event_info.try(:tags)
+          item.itunes_keywords = event.try(:tags)
           item.guid.content = link
           item.guid.isPermaLink = true
           item.dc_identifier = event.guid
@@ -82,11 +82,9 @@ module PodcastGenerator
           item.itunes_explicit = "No"
           item.pubDate = event.created_at.to_s
 
-          if event.event_info
-            item.itunes_subtitle = event.event_info.subtitle
-            item.itunes_author = event.event_info.persons.join(', ')
-            item.pubDate = event.event_info.date.to_s if event.event_info.date
-          end
+          item.itunes_subtitle = event.subtitle if event.subtitle.present?
+          item.itunes_author = event.persons.join(', ') if event.persons.present?
+          item.pubDate = event.date.to_s if event.date.present?
 
           # TODO video image possible? ( data['thumbPath'] )
           item.enclosure.url = link
@@ -136,18 +134,18 @@ module PodcastGenerator
     end
 
     def get_item_description(event)
-      description = ""
-      unless event.event_info.nil?
-        description = event.event_info.description or event.event_info.subtitle or ""
-        link = event.event_info.link
-        description ||= ""
-        description += "about this event: #{link}\n" if link
-      end
+      description = []
+      description << event.description or event.subtitle
+
+      link = event.link
+      description << "about this event: #{link}\n" if link
+
       # file = 'src/browse/bla.page'
       url = @config['base_url'] + event.get_videopage_filename
       url.gsub!(/page$/, 'html')
-      description ||= ""
-      description += "event on media: #{url}\n"
+      description << "event on media: #{url}\n"
+
+      description.join
     end
 
     def get_item_title(conference, event)

@@ -5,9 +5,6 @@ class Event < ActiveRecord::Base
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
-  has_one :event_info, dependent: :destroy
-
-  accepts_nested_attributes_for :event_info
 
   validates_presence_of :conference
   validates_presence_of :guid
@@ -79,9 +76,9 @@ class Event < ActiveRecord::Base
 
       self.title = info.delete(:title)
       id = info.delete(:id)
+      self.link = self.conference.get_event_url(id)
 
-      self.event_info = EventInfo.new(info)
-      self.event_info.link = self.conference.get_event_url(id)
+      self.update_attributes info
     end
   end
 
@@ -110,8 +107,8 @@ class Event < ActiveRecord::Base
   end
 
   def get_videopage_filename
-    if self.event_info and not self.event_info.slug.nil?
-      filename = self.event_info.slug + '.page'
+    if self.slug.present?
+      filename = self.slug + '.page'
     else
       filename = self.guid + '.page'
     end

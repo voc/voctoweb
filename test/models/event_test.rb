@@ -12,11 +12,31 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "should fill info from xml" do
-    assert_difference('EventInfo.count') do
+    assert_difference('Event.count') do
       event = build(:event)
       event.fill_event_info
       event.save!
     end
+  end
+
+  test "should save event with persons" do
+    e = build(:event)
+    e.subtitle = "subtitle"
+    e.persons << "name1"
+    e.persons << "name2"
+
+    assert_difference 'Event.count' do
+      e.save!
+    end
+  end
+
+  test "should fill event link from xml" do
+    conference = create(:conference_with_recordings)
+    event = conference.events.first
+    event.guid = 'testGUID'
+    event.conference.schedule_state = 'downloaded'
+    event.fill_event_info
+    assert_equal event.link, 'http://localhost/events/5060.html'
   end
 
 end

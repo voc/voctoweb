@@ -12,7 +12,7 @@ FactoryGirl.define do
     SecureRandom.hex(16)
   end
 
-  sequence :event_info_slug do |n|
+  sequence :event_slug do |n|
     SecureRandom.hex(4)
   end
 
@@ -96,24 +96,21 @@ FactoryGirl.define do
 
   factory :event do
     conference
-    event_info
     guid { generate(:event_guid) }
     title { generate(:event_title) }
     thumb_filename "frabcon123.jpg"
     gif_filename "frabcon123.gif"
     poster_filename "frabcon123_logo.jpg"
-
-    factory :event_with_recordings, traits: [:event_recordings]
-  end
-
-  factory :event_info do
     subtitle "subtitle"
-    slug { generate(:event_info_slug) }
+
+    slug { generate(:event_slug) }
     link "http://localhost/ev_info"
     description "description"
     persons ["Name"]
     tags ["tag"]
     date "2013-08-21"
+
+    factory :event_with_recordings, traits: [:event_recordings]
   end
 
   factory :recording do

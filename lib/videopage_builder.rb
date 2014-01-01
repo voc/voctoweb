@@ -67,16 +67,12 @@ module VideopageBuilder
     data['podcastXML'] =  File.join conference.webgen_location, 'podcast.xml'
     data['cdnURL'] =  File.join MediaBackend::Application.config.cdnURL, conference.recordings_path
 
-    description = ""
-    event_info = event.event_info
-    unless event_info.nil?
-      description = event_info.description
-      data['date'] = event_info.date
-      data['persons'] = event_info.persons if event_info.persons.size > 0
-      data['subtitle'] = event_info.subtitle if event_info.subtitle
-      data['link'] = event_info.link
-      data['tags'] += event_info.tags
-    end
+    description = event.description or ""
+    data['date'] = event.date if event.date
+    data['persons'] = event.persons if event.persons.size > 0
+    data['subtitle'] = event.subtitle if event.subtitle
+    data['link'] = event.link if event.link.present?
+    data['tags'] += event.tags
     data['tags'] = data['tags'].join(',')
 
     if conference.aspect_ratio
