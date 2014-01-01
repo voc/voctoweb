@@ -35,6 +35,10 @@ Setup your database in config/database.yml needed.
 
 # Deployment instructions
 
+Copy and edit the configuration file
+
+  config/initializers/media_backend.rb.example
+
 You need to create a secret token for sessions:
 
     cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
