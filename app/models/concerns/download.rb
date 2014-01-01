@@ -28,14 +28,16 @@ module Download
     private
 
     def download_url_to_file(uri, path)
+      result = nil
+
       File.open(path, 'wb') do |f|
         result = download_io(f, uri)
       end
       Rails.logger.info "Downloaded to #{path}" if result
       result
-    rescue
-      Rails.logger.error "Failed download of #{uri} to #{path}: #{$!}"
-      return
+    #rescue
+    #  Rails.logger.error "Failed download of #{uri} to #{path}: #{$!}"
+    #  return
     end
 
     def download_io(fileio, uri)
