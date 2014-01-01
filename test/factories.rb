@@ -55,7 +55,7 @@ FactoryGirl.define do
   end
 
   trait :has_schedule do
-    schedule_url "schedule.xml"
+    schedule_url "http://localhost/schedule.xml"
     schedule_state "downloaded"
     schedule_xml %{
     <?xml version="1.0" encoding="utf-8"?>
@@ -109,7 +109,7 @@ FactoryGirl.define do
   factory :event_info do
     subtitle "subtitle"
     slug { generate(:event_info_slug) }
-    link "http://localhost"
+    link "http://localhost/ev_info"
     description "description"
     persons ["Name"]
     tags ["tag"]

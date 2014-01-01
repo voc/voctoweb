@@ -12,6 +12,7 @@ module FahrplanParser
       @doc.elements.each("schedule/day/room/event") { |ev|
         guid = ev.attributes['guid']
         @events[guid] = {
+          id:          ev.attributes['id'],
           title:       ev.elements['title'].text,
           description: ev.elements['abstract'].text || ev.elements['description'].text,
           tags:        [ev.elements['track'].text],

@@ -31,7 +31,10 @@ class Event < ActiveRecord::Base
       info = fahrplan.event_info_by_guid[self.guid]
 
       self.title = info.delete(:title)
+      id = info.delete(:id)
+
       self.event_info = EventInfo.new(info)
+      self.event_info.link = self.conference.get_event_url(id)
     end
   end
 

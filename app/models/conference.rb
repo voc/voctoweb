@@ -87,6 +87,12 @@ class Conference < ActiveRecord::Base
     url += '/' + path unless path.empty?
   end
 
+  def get_event_url(id)
+    if self.schedule_url.present?
+      return self.schedule_url.sub('schedule.xml', "events/#{id}.html")
+    end
+  end
+
   def display_name
     self.acronym || self.id
   end
