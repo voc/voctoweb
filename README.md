@@ -49,6 +49,10 @@ And for devise:
     cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
     rake secret
 
+For podcast.xml add a podcast template:    
+ 
+    cp config/podcast_template.yml.example config/podcast_template.yml
+
 To get the backend up and running:
 
     export RAILS_ENV=production
