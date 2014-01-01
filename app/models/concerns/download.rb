@@ -20,6 +20,7 @@ module Download
         Rails.logger.info "Moved to #{path}" if result == 0
       else
         result = download_url_to_file uri, path
+        # system('wget', uri, '-O', path)
       end
       result
     end
