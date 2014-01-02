@@ -77,12 +77,12 @@ class Conference < ActiveRecord::Base
     File.join MediaBackend::Application.config.folders[:webgen_base_dir], self.webgen_location
   end
 
-  def get_images_url(path="")
+  def get_images_url(path='')
     url = MediaBackend::Application.config.folders[:images_webroot] + '/' + self.images_path
     url += '/' + path unless path.empty?
   end
 
-  def get_recordings_url(path="")
+  def get_recordings_url(path='')
     url = MediaBackend::Application.config.folders[:recordings_webroot] + '/' + self.recordings_path
     url += '/' + path unless path.empty?
   end
