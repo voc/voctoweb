@@ -107,6 +107,14 @@ module VideopageBuilder
         data['orgPath'] = data[key] if r.mime_type.match(/video/)
       end
     }
+    # 30c3 quick fix
+    unless data.has_key? 'h264Path' 
+      available = recordings.select { |r| r.mime_type.include? 'vnd.voc' }
+      unless available.empty?
+        data['h264Path'] = conference.get_recordings_url(available.first.get_recording_webpath)
+        data['orgPath'] = data['h264Path']
+      end
+    end
 
   end
 
