@@ -54,7 +54,9 @@ ActiveAdmin.register Event do
   end
 
   action_item only: [:show, :edit] do
-    link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
+    if event.conference.downloaded?
+      link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
+    end
   end
 
   action_item only: :show do
