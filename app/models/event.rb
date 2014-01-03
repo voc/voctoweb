@@ -117,8 +117,13 @@ class Event < ActiveRecord::Base
   end
 
   def display_name
-    self.guid.nil? ? self.id : self.guid
+    if self.title.present?
+      self.conference.acronym + ": " + self.title 
+    else
+      self.guid || self.id
+    end
   end
+
 
   private
 
