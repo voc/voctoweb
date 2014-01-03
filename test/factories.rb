@@ -116,6 +116,7 @@ FactoryGirl.define do
   factory :recording do
     event
     filename "audio.mp3"
+    folder ""
     mime_type "audio/mpeg"
     original_url "file:///fixtures/test.mp3"
     size "12"

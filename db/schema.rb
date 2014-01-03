@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102031811) do
+ActiveRecord::Schema.define(version: 20140103000127) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20140102031811) do
     t.string   "filename"
     t.string   "original_url"
     t.string   "state",        default: "new", null: false
+    t.string   "folder"
   end
 
   add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"

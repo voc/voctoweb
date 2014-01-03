@@ -58,6 +58,10 @@ class Api::EventsController < InheritedResources::Base
   end
 
   def permitted_params
-    {:event => params.require(:event).permit(:guid, :thumb_filename, :gif_filename, :poster_filename)}
+    {:event => params.require(:event).permit(:guid, 
+                                             :thumb_filename, :gif_filename, :poster_filename,
+                                             :conference_id, :subtitle, :link, :slug, :description,
+                                             :persons_raw, :tags_raw, :date, :event_id
+                                            )}
   end
 end

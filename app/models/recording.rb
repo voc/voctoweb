@@ -92,12 +92,13 @@ class Recording < ActiveRecord::Base
   end
 
   def get_recording_dir
-    File.join self.event.conference.get_recordings_path, get_mime_type_path
+    self.folder ||= ""
+    File.join self.event.conference.get_recordings_path, self.folder
   end
 
   def get_recording_webpath
-    path = get_mime_type_path + '/' + self.filename
-    path
+    self.folder ||= ""
+    File.join(self.folder, self.filename)
   end
 
   private
@@ -115,11 +116,6 @@ class Recording < ActiveRecord::Base
   def get_tmp_path
     File.join(MediaBackend::Application.config.folders[:tmp_dir],
     Digest::MD5.hexdigest(self.filename))
-  end
-
-  def get_mime_type_path
-    path = MediaBackend::Application.config.mime_type_folder_mappings[self.mime_type]
-    path || ""
   end
 
 end

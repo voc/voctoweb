@@ -18,8 +18,6 @@ Application configuration is found in `config/initializers/media_backend.rb`
     webgen_base_dir: '/srv/www/webgen/src/browse',
     tmp_dir: '/tmp'
 
-Configure folder names for mime type with `config.mime_type_folder_mappings`. The values of this hash will be used as actual folder names in the filesystem.
-
 The podcast feed template is in `config/podcast_template.yml` and needs to copied to 'podcast.yml'
 
 ## Database creation
@@ -115,7 +113,7 @@ Recordings are added by specifiying the parent events `guid`, an URL and a `file
         "recording":{
           "original_url":"file:///tmp/123",
           "filename":"some.mp4",
-          "mime_type":"video/mp4",
+          "folder":"mp4",
           "size":"12",
           "length":"30"
           }

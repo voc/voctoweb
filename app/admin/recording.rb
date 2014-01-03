@@ -6,6 +6,7 @@ ActiveAdmin.register Recording do
     column :filename do |recording|
       line_break_filename recording.filename
     end
+    column :folder
     column :mime_type
     column :size
     column :length
@@ -19,6 +20,7 @@ ActiveAdmin.register Recording do
   form do |f|
     f.inputs "Recording Details" do
       f.input :original_url
+      f.input :folder
       f.input :filename
       f.input :mime_type
       f.input :size
@@ -43,7 +45,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:original_url, :filename, :mime_type, :size, :length, :event_id]
+      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :event_id]
     end
   end
 
