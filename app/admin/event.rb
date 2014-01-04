@@ -67,6 +67,20 @@ ActiveAdmin.register Event do
     link_to 'Write Videopage file', write_videopage_file_admin_event_path(event), method: :post
   end
 
+  batch_action :update_event_infos do |selection|
+    Event.find(selection).each do |event|
+      event.event_info.destroy unless event.event_info.nil?
+      event.fill_event_info
+      event.event_info.save
+    end
+  end
+
+  batch_action :update_videopages do |selection|
+    Event.find(selection).each do |event|
+      VideopageBuilder.save_videopage(event.conference, event)
+    end
+  end
+
   controller do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id, event_info_attributes: [:subtitle, :link, :slug, :description, :persons_raw, :tags_raw, :date, :event_id]]
