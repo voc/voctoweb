@@ -84,6 +84,12 @@ ActiveAdmin.register Conference do
     link_to 'Run Webgen', run_webgen_admin_conferences_path, method: :post
   end
 
+  batch_action :update_podcasts do |selection|
+    Conference.find(selection).each do |conference|
+      conference.create_podcast
+    end
+  end
+
   controller do
     def permitted_params
       params.permit conference: [ :acronym,
