@@ -15,7 +15,10 @@
 /log/*.log
 /tmp
 
-# Ignore secret token
+# Ignore assets
+public/assets
+
+# Ignore secret tokens and configs
 config/initializers/secret_token.rb
 config/initializers/devise_secret_token.rb
 config/initializers/media_backend.rb
