@@ -138,13 +138,15 @@ module PodcastGenerator
     def get_item_description(event)
       description = ""
       unless event.event_info.nil?
-        description = event.event_info.description or event.event_info.subtitle
+        description = event.event_info.description or event.event_info.subtitle or ""
         link = event.event_info.link
+        description ||= ""
         description += "about this event: #{link}\n" if link
       end
       # file = 'src/browse/bla.page'
       url = @config['base_url'] + event.get_videopage_filename
       url.gsub!(/page$/, 'html')
+      description ||= ""
       description += "event on media: #{url}\n"
     end
 
