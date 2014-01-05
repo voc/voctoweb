@@ -1,6 +1,7 @@
 ActiveAdmin.register Event do
 
   index do
+    selectable_column
     column :guid
     column :thumb_filename do |event|
       line_break_filename event.thumb_filename

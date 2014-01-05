@@ -1,6 +1,7 @@
 ActiveAdmin.register Recording do
 
   index do
+    selectable_column
     column :original_url
     column :filename do |recording|
       line_break_filename recording.filename

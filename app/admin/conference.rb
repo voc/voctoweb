@@ -1,6 +1,7 @@
 ActiveAdmin.register Conference do
 
   index do
+    selectable_column
     column :acronym
     column :schedule_url
     column :schedule_state
