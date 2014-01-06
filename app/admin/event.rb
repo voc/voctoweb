@@ -3,6 +3,7 @@ ActiveAdmin.register Event do
   index do
     selectable_column
     column :guid
+    column :title
     column :thumb_filename do |event|
       line_break_filename event.thumb_filename
     end
@@ -22,6 +23,7 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs "Event Details" do
       f.input :guid
+      f.input :title
       f.input :thumb_filename
       f.input :gif_filename
       f.input :poster_filename
@@ -80,7 +82,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, :conference_id, event_info_attributes: [:subtitle, :link, :slug, :description, :persons_raw, :tags_raw, :date, :event_id]]
+      params.permit event: [:guid, :title, :thumb_filename, :gif_filename, :poster_filename, :conference_id, event_info_attributes: [:subtitle, :link, :slug, :description, :persons_raw, :tags_raw, :date, :event_id]]
     end
   end
 
