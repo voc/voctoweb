@@ -89,6 +89,7 @@ ActiveAdmin.register Conference do
     Conference.find(selection).each do |conference|
       conference.create_podcast
     end
+    redirect_to :action => :index
   end
 
   controller do

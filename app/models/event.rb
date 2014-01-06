@@ -17,6 +17,25 @@ class Event < ActiveRecord::Base
 
   scope :recordings_by_mime_type, lambda { |type| joins(:recordings).where(recordings: {mime_type: type}) }
 
+  def self.bulk_update_events(selection)
+    Rails.logger.info "Bulk updating events from XML"
+    # TODO fix this mess
+    ActiveRecord::Base.transaction do
+      Event.find(selection).each do |event|
+        event.event_info.destroy unless event.event_info.nil?
+        event.fill_event_info
+        event.event_info.save
+      end
+    end
+  end
+
+  def self.bulk_update_videopages(selection)
+    Rails.logger.info "Bulk update videopages"
+    Event.find(selection).each do |event|
+      VideopageBuilder.save_videopage(event.conference, event)
+    end
+  end
+
   def get_recording_by_mime_type(type)
     self.recordings.where(mime_type: type)
   end

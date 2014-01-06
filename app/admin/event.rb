@@ -69,17 +69,13 @@ ActiveAdmin.register Event do
   end
 
   batch_action :update_event_infos do |selection|
-    Event.find(selection).each do |event|
-      event.event_info.destroy unless event.event_info.nil?
-      event.fill_event_info
-      event.event_info.save
-    end
+    Event.delay.bulk_update_events(selection)
+    redirect_to :action => :index
   end
 
   batch_action :update_videopages do |selection|
-    Event.find(selection).each do |event|
-      VideopageBuilder.save_videopage(event.conference, event)
-    end
+    Event.delay.bulk_update_videopages(selection)
+    redirect_to :action => :index
   end
 
   controller do
