@@ -141,8 +141,7 @@ module PodcastGenerator
       description << "about this event: #{link}\n" if link
 
       # file = 'src/browse/bla.page'
-      url = @config['base_url'] + event.get_videopage_filename
-      url.gsub!(/page$/, 'html')
+      url = @config['base_url'] + event.get_filename + '.html'
       description << "event on media: #{url}\n"
 
       description.join
@@ -159,7 +158,7 @@ module PodcastGenerator
       if event.title
         title += event.title
       else
-        title += event.get_videopage_filename[0..-6]
+        title += event.get_filename
       end
       title
     end

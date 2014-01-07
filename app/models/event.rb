@@ -106,11 +106,22 @@ class Event < ActiveRecord::Base
     page_file
   end
 
+  # OBOSOLETE
   def get_videopage_filename
     if self.slug.present?
       filename = self.slug + '.page'
     else
       filename = self.guid + '.page'
+    end
+    filename.gsub!(/ /, '_')
+    filename
+  end
+
+  def get_filename
+    if self.slug.present?
+      filename = self.slug
+    else
+      filename = self.guid
     end
     filename.gsub!(/ /, '_')
     filename

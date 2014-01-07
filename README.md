@@ -100,6 +100,7 @@ You can add images to an event, like the animated gif thumb and the poster image
         "api_key":"4",
         "acronym":"frab123",
         "guid":"123",
+        "slug":"123",
         "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
         "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
         "gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"

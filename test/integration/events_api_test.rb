@@ -14,6 +14,7 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += @key.key
     json += '",'
     json += '"guid":"12345",'
+    json += '"slug":"12345",'
     json += '"acronym":"'
     json += @conference.acronym
     json += '",'
