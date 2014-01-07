@@ -45,11 +45,18 @@ class Event < ActiveRecord::Base
   def self.bulk_update_events(selection)
     Rails.logger.info "Bulk updating events from XML"
     # TODO fix this mess
+    fahrplans = {}
     ActiveRecord::Base.transaction do
       Event.find(selection).each do |event|
-        event.event_info.destroy unless event.event_info.nil?
-        event.fill_event_info
-        event.event_info.save
+        if fahrplans[conference.acronym]
+          fahrplan = fahrplans[conference.acronym]
+        else
+          fahrplan = FahrplanParser.new(event.conference.schedule_xml)
+          fahrplans[conference.acronym] = fahrplan
+        end
+
+        info = fahrplan.event_info_by_guid[event.guid]
+        update_event_info(event, info)
       end
     end
   end
@@ -73,12 +80,7 @@ class Event < ActiveRecord::Base
     if self.conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
       info = fahrplan.event_info_by_guid[self.guid]
-
-      self.title = info.delete(:title)
-      id = info.delete(:id)
-      self.link = self.conference.get_event_url(id)
-
-      self.update_attributes info
+      update_event_info(self, info)
     end
   end
 
@@ -137,6 +139,14 @@ class Event < ActiveRecord::Base
 
 
   private
+
+  # update event attributes from schedule XML
+  def update_event_info(event, info)
+      event.title = info.delete(:title)
+      id = info.delete(:id)
+      event.link = event.conference.get_event_url(id)
+      event.update_attributes info
+  end
 
   def delete_page_file
     VideopageBuilder.remove_videopage(self.conference, self)
