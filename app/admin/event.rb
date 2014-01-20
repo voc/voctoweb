@@ -36,6 +36,7 @@ ActiveAdmin.register Event do
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
       f.input :date
+      f.input :release_date
     end
     f.actions
   end

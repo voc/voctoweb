@@ -112,6 +112,7 @@ FactoryGirl.define do
     persons ["Name"]
     tags ["tag"]
     date "2013-08-21"
+    release_date "2013-08-21"
 
     factory :event_with_recordings, traits: [:event_recordings]
   end

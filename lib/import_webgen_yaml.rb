@@ -89,7 +89,9 @@ module Import
     def initialize(dir)
       @dir = dir
       @conference_cache = {}
+      # skip list
       @external_videos = File.open('videos.lst').readlines.map { |line| line.chomp!  }
+      @release_dates = load_release_dates('videos_release_dates.txt')
     end
 
     def import
@@ -103,15 +105,42 @@ module Import
 
     private
 
+    # Load release dates of event pages from git dump
+    #   git log --date=iso --format="%ad" --name-status --diff-filter='A' src/browse/
+    def load_release_dates(file)
+      file_regex = /^A.*page$/
+      date_regex = /^\d{4}-\d{2}-\d{2}/
+      time = nil
+      files = {}
+
+      # we need to use the author date to find video dates
+      File.open(file).readlines.map { |line| 
+        line.chomp!
+        next if line.empty?
+        if line.match(file_regex)
+          next unless time
+          filename = line.split[-1]
+          files[filename] = time
+        elsif line.match(date_regex)
+          begin
+            time = Date.parse line[0..9]
+          rescue
+            STDERR.puts "ERROR parsing: " + line
+            time = nil
+          end
+        end
+      }
+      files
+    end
+
     def import_conferences
       CONFERENCE_DATA.each do |acronym, folder|
         conference_folder = File.join @dir, folder
-        conference = get_conference(acronym, conference_folder)
+        conference = create_conference(acronym, conference_folder)
 
         images_path_finder = BasePathFinder.new
         Dir[File.join conference_folder, '**/*.page'].each do |path|
           page = YAML.load_file( path )
-
           images_path_finder << File.dirname(page['thumbPath'])
         end
         conference.recordings_path = CONFERENCE_VIDEOS[conference.acronym.to_sym]
@@ -129,10 +158,16 @@ module Import
         conference_folder = File.join @dir, folder
         Dir[File.join conference_folder, '**/*.page'].each do |path|
           docs = load_videopage(path)
-          event = import_event(conference, path, docs.page, docs.description)
+          date = get_release_date(path)
+          event = import_event(conference, path, docs.page, docs.description, date)
           import_recordings(conference, event, docs.page)
         end
       end
+    end
+
+    def get_release_date(path)
+      p = path.sub(@dir)
+      @release_dates[p] if @release_dates.has_key?(p)
     end
 
     def load_videopage(file)
@@ -157,8 +192,7 @@ module Import
       t
     end
 
-
-    def import_event(conference, path, page, description)
+    def import_event(conference, path, page, description, date)
       test = Event.where(gif_filename: File.basename(page['thumbPath']))
       if test.count > 0
         #STDERR.puts "updating existing event in db: #{page['thumbPath']}"
@@ -170,6 +204,7 @@ module Import
       event.poster_filename = get_image(conference.images_path, page['splashPath'])
       event.subtitle = page['subtitle']
       event.persons = get_arr(page['persons'])
+      event.release_date = date if date.present?
       event.date = page['date']
       event.link = page['link']
       event.tags = get_arr(page['tags'])
@@ -240,11 +275,6 @@ module Import
         mp3: 'audio/mpeg'
       }
       types[path[-3..-1].to_sym]
-    end
-
-    def get_conference(acronym, path)
-      conference = create_conference(acronym, path)
-      conference
     end
 
     def create_conference(acronym, path)
