@@ -16,9 +16,15 @@ ActiveAdmin.register Conference do
   show do |c|
     attributes_table do
       row :acronym
-      row :recordings_path
-      row :images_path
-      row :webgen_location
+      row :recordings_path do
+        div conference_folder label: c.recordings_path, path: c.get_recordings_path
+      end
+      row :images_path do
+        div conference_folder label: c.images_path, path: c.get_images_path
+      end
+      row :webgen_location do
+        div conference_folder label: c.webgen_location, path: c.get_webgen_location
+      end
       row :aspect_ratio
       row :created_at
       row :updated_at
