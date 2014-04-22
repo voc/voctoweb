@@ -215,4 +215,5 @@ end
 
 module ActiveAdmin::ViewHelpers
   include ApplicationHelper
+  include ViewHelper
 end

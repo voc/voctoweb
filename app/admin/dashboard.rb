@@ -10,10 +10,10 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Running Jobs" do
           table_for Delayed::Job.order("created_at desc").each do |job|
             column(:resource) {|job| 
-              status_tag(YAML.load(job.handler).object.class.to_s)
+              status_tag(job_object(job))
             }
             column(:method) {|job| 
-              status_tag(YAML.load(job.handler).method_name.to_s)
+              status_tag(job_method(job))
             }
             column(:created_at) {|job| job.created_at.to_s }
             column(:run_at) {|job| job.run_at.to_s }
