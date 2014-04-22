@@ -123,4 +123,20 @@ Run webgen after uploads are finished.
     curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"4"}' "http://localhost:3000/api/conferences/run_webgen"
 
 
+Download event images again, after event was created.
+
+    curl -H "CONTENT-TYPE: application/json" -d '{
+        "api_key":"4",
+        "guid":"123",
+        "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
+        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
+        "gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"
+      }' "http://localhost:3000/api/events/download"
+
+Download recordings again, after recording was created.
+
+    curl -H "CONTENT-TYPE: application/json" -d '{
+        "api_key":"4",
+        "guid":"123"
+      }' "http://localhost:3000/api/recordings/download"
 

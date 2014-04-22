@@ -33,6 +33,18 @@ class Api::EventsController < InheritedResources::Base
     end
   end
 
+  def download
+    event = Event.find_by guid: params[:guid]
+    respond_to do |format|
+      if event.present?
+        event.delay.download_images(params[:thumb_url],params[:gif_url], params[:poster_url])
+        format.json { render json: event, status: :downloading }
+      else
+        format.json { render json: event, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def create_event(params)

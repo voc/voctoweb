@@ -58,6 +58,16 @@ ActiveAdmin.register_page "Dashboard" do
           pre class: "scrollable" do
             I18n.t("media-backend.webgen-api-curl")
           end
+
+          para "Download event images again, after event was created."
+          pre class: "scrollable" do
+            I18n.t("media-backend.event-download-api-curl")
+          end
+
+          para "Download recordings again, after recording was created."
+          pre class: "scrollable" do
+            I18n.t("media-backend.recording-download-api-curl")
+          end
         end
       end
     end # columns

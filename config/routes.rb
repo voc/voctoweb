@@ -14,8 +14,16 @@ MediaBackend::Application.routes.draw do
         post 'run_webgen'
       end
     end
-    resources :events, :defaults => { :format => 'json' }
-    resources :recordings, :defaults => { :format => 'json' }
+    resources :events, :defaults => { :format => 'json' } do
+      collection do
+        get 'download'
+      end
+    end
+    resources :recordings, :defaults => { :format => 'json' } do
+      collection do
+        get 'download'
+      end
+    end
   end
 
   # Example resource route with options:
