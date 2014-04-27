@@ -1,12 +1,15 @@
-# Ruby version
+# media-backend 
 
-ruby 2.0.0
+media.ccc.de webfrontend meta data editor and API.
 
-# System dependencies
+[![Build Status](https://travis-ci.org/cccc/media-backend.svg?branch=master)](https://travis-ci.org/cccc/media-backend)
+[![Code Climate](https://codeclimate.com/github/cccc/media-backend.png)](https://codeclimate.com/github/cccc/media-backend)
 
-Ubuntu
+## Ruby version
 
-# Configuration
+ruby 2.0.0, 2.1.1
+
+## Configuration
 
 Application configuration is found in `config/initializers/media_backend.rb`
 
@@ -19,21 +22,21 @@ Configure folder names for mime type with `config.mime_type_folder_mappings`. Th
 
 The podcast feed template is in `config/podcast_template.yml` and needs to copied to 'podcast.yml'
 
-# Database creation
+## Database creation
 
 Setup your database in config/database.yml needed.
 
     rake db:setup
 
-# How to run the test suite
+## How to run the test suite
 
     rake test
 
-# Services (job queues, cache servers, search engines, etc.)
+## Services (job queues, cache servers, search engines, etc.)
 
     bin/delayed_job start
 
-# Deployment instructions
+## Deployment instructions
 
 Copy and edit the configuration file
 
@@ -63,7 +66,7 @@ To get the backend up and running:
     passenger start -p 8023
 
 
-## Trigger media-webgen
+### Trigger media-webgen
 
 Webgen generation is triggered via sudo
 
@@ -71,11 +74,11 @@ Webgen generation is triggered via sudo
     media-backend ALL = (media-webgen) NOPASSWD: BACKUP
 
 
-# First Login
+## First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
 
-# REST - API
+## REST - API
 
 All API calls need to use the JSON format.
 
