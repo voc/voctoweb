@@ -19,8 +19,10 @@
 public/assets
 
 # Ignore secret tokens and configs
+config/secrets.yml
 config/initializers/secret_token.rb
 config/initializers/devise_secret_token.rb
 config/initializers/media_backend.rb
 config/podcast_template.yml
+config/database.yml
 
