@@ -167,7 +167,9 @@ module Import
 
     def get_release_date(path)
       p = path.sub(@dir, '')
-      @release_dates[p] if @release_dates.has_key?(p)
+      if key = @release_dates.keys.find { |path| path.end_with? p }
+        @release_dates[key] 
+      end
     end
 
     def import_event(conference, path, page, description, date)
@@ -178,7 +180,7 @@ module Import
       else
         event = Event.new
       end
-      # TODO missing sometimes?
+      # TODO missing poster images for 24c3
       event.poster_filename = get_image(conference.images_path, page['splashPath'])
       event.subtitle = page['subtitle']
       event.persons = get_arr(page['persons'])
@@ -206,9 +208,11 @@ module Import
       end
     end
 
-    def get_arr(p)
-      if p.present?
-        p.split(/,/)
+    def get_arr(obj)
+      if obj.is_a? Array
+        obj
+      elsif obj.present?
+        obj.split(/,/)
       else
         []
       end
@@ -332,7 +336,7 @@ module Import
       # parse blocks
       t = OpenStruct.new
       t.page = load_sick_yaml(filedata[0].join)
-      t.text = filedata[1..-1].join
+      t.description = filedata[1..-1].join
       t
     end
 

@@ -12,8 +12,6 @@ class Event < ActiveRecord::Base
 
   before_destroy :delete_page_file
 
-  scope :recordings_by_mime_type, lambda { |type| joins(:recordings).where(recordings: {mime_type: type}) }
-
   serialize :persons, Array
   serialize :tags, Array
 
