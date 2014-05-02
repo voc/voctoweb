@@ -2,8 +2,8 @@ require 'yaml'
 require 'ostruct'
 
 module Import
-  class WebgenYAML
 
+  class WebgenImporter
     CONFERENCE_DATA = {
       blinkenlights: 'blinkenlights',
       camp2003:      'conferences/camp2003',
@@ -140,7 +140,7 @@ module Import
 
         images_path_finder = BasePathFinder.new
         Dir[File.join conference_folder, '**/*.page'].each do |path|
-          page = YAML.load_file( path )
+          page = WebgenYAML.load_sick_yaml(File.open(path).read)
           images_path_finder << File.dirname(page['thumbPath'])
         end
         conference.recordings_path = CONFERENCE_VIDEOS[conference.acronym.to_sym]
@@ -157,7 +157,7 @@ module Import
         conference = @conference_cache[acronym]
         conference_folder = File.join @dir, folder
         Dir[File.join conference_folder, '**/*.page'].each do |path|
-          docs = load_videopage(path)
+          docs = WebgenYAML.load_videopage(path)
           date = get_release_date(path)
           event = import_event(conference, path, docs.page, docs.description, date)
           import_recordings(conference, event, docs.page)
@@ -166,30 +166,8 @@ module Import
     end
 
     def get_release_date(path)
-      p = path.sub(@dir)
+      p = path.sub(@dir, '')
       @release_dates[p] if @release_dates.has_key?(p)
-    end
-
-    def load_videopage(file)
-      lines = File.open(file, 'r:UTF-8' ).readlines
-      # extract blocks
-      filedata = []
-      block = []
-      lines.each { |l|
-        if l.match(/^---\s*$/)
-          filedata << block unless block.empty?
-          block = []
-        else
-          block << l
-        end
-      }
-      filedata << block unless block.empty?
-
-      # parse blocks
-      t = OpenStruct.new
-      t.page = YAML.load(filedata[0].join)
-      t.text = filedata[1..-1].join
-      t
     end
 
     def import_event(conference, path, page, description, date)
@@ -239,6 +217,7 @@ module Import
     def import_recordings(conference, event, page)
       paths =  get_recordings(page)
       #p paths
+      fail "missing recordings path for #{conference.acronym}" unless conference.recordings_path
 
       paths.each { |path|
         path = path.sub(%r{^#{Regexp.quote conference.recordings_path}}, '').sub(/^\//, '')
@@ -282,20 +261,11 @@ module Import
       unless conference.present?
         conference = Conference.new
         conference.acronym = acronym.to_s
-        import_vgallery(conference, path)
+        vgallery = WebgenYAML.load_vgallery(path)
+        conference.title = vgallery.title
+        conference.logo = vgallery.logo
       end
       conference
-    end
-
-    def import_vgallery(conference, path)
-      index = File.join(path, 'index.vgallery')
-      if File.readable? index
-        index_data = YAML.load_file index
-        conference.title = index_data['title']
-        conference.logo = index_data['thumbPath']
-      else
-        raise "Vgallery not found: #{path}"
-      end
     end
 
     def get_recordings(page)
@@ -333,6 +303,55 @@ module Import
 
 
   end
+
+  module WebgenYAML
+
+    # repairs ruby 1.8 utf-8 encodings
+    def self.load_sick_yaml(yaml='')
+      if yaml =~ /\\x[0-9A-F]{2}/
+        yaml = yaml.gsub(/(\\x[0-9A-F]{2})+/){|m| eval "\"#{m}\""}.force_encoding("UTF-8")
+      end
+      YAML.load yaml
+    end
+
+    def self.load_videopage(file)
+      lines = File.open(file, 'r:UTF-8' ).readlines
+      # extract blocks
+      filedata = []
+      block = []
+      lines.each { |l|
+        if l.match(/^---\s*$/)
+          filedata << block unless block.empty?
+          block = []
+        else
+          block << l
+        end
+      }
+      filedata << block unless block.empty?
+
+      # parse blocks
+      t = OpenStruct.new
+      t.page = load_sick_yaml(filedata[0].join)
+      t.text = filedata[1..-1].join
+      t
+    end
+
+    def self.load_vgallery(path)
+      index = File.join(path, 'index.vgallery')
+      if File.readable? index
+        index_data = WebgenYAML.load_sick_yaml(File.open(index).read)
+        t = OpenStruct.new
+        t.title = index_data['title']
+        t.logo = index_data['thumbPath']
+        t
+      else
+        raise "Vgallery not found: #{path}"
+      end
+    end
+
+
+  end
+
 end
 
 =begin

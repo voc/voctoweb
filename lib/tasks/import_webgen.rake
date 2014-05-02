@@ -18,7 +18,7 @@ namespace :media do
       dir = webgen_dir
     end
     require "import_webgen_yaml.rb"
-    importer = Import::WebgenYAML.new(dir)
+    importer = Import::WebgenImporter.new(dir)
     importer.import
   end
 
