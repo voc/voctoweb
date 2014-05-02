@@ -25,6 +25,8 @@ ActiveAdmin.register Recording do
       f.input :mime_type
       f.input :size
       f.input :length
+      f.input :width
+      f.input :height
       f.input :event
     end
     f.actions
@@ -45,7 +47,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :event_id]
+      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height, :event_id]
     end
   end
 

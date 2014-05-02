@@ -160,6 +160,7 @@ module Import
           docs = WebgenYAML.load_videopage(path)
           date = get_release_date(path)
           event = import_event(conference, path, docs.page, docs.description, date)
+          fill_aspect_ratio(conference, docs.page) if conference.aspect_ratio.nil?
           import_recordings(conference, event, docs.page)
         end
       end
@@ -169,6 +170,13 @@ module Import
       p = path.sub(@dir, '')
       if key = @release_dates.keys.find { |path| path.end_with? p }
         @release_dates[key] 
+      end
+    end
+
+    def fill_aspect_ratio(conference, page)
+      if page['aspectRatio']
+        conference.aspect_ratio = page['aspectRatio']
+        conference.save
       end
     end
 
@@ -238,6 +246,8 @@ module Import
           recording.folder = folder
           recording.mime_type = get_mime_type path
           recording.length = page['videoLength']
+          recording.width = page['videoWidth'] || page['flvWidth']
+          recording.height = page['videoHeight'] || page['flvHeight']
           recording.size = page['videoSize']
           # TODO not needed?
           #recording.original_url = page['orgPath']

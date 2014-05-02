@@ -39,7 +39,7 @@ class Api::RecordingsController < InheritedResources::Base
   private
 
   def permitted_params
-    {:event => params.require(:event).permit(:original_url, :folder, :filename, :mime_type, :size, :length)}
+    {:event => params.require(:event).permit(:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height)}
   end
 
 end
