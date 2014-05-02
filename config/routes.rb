@@ -24,6 +24,7 @@ MediaBackend::Application.routes.draw do
         get 'download'
       end
     end
+    resources :news, :defaults => { :format => 'json' }
   end
 
   # Example resource route with options:

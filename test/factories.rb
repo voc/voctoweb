@@ -133,4 +133,10 @@ FactoryGirl.define do
     password "admin123"
   end
 
+  factory :news do
+    title "MyString"
+    body "MyText <b>bold</b> most html allowed."
+    date "2014-05-03"
+  end
+
 end
