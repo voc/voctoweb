@@ -14,6 +14,7 @@ ActiveAdmin.register Event do
       line_break_filename event.poster_filename
     end
     column :conference
+    column :promoted
     column :created_at do |event|
       l(event.created_at, format: :pretty_datetime)
     end
@@ -28,7 +29,7 @@ ActiveAdmin.register Event do
       f.input :gif_filename
       f.input :poster_filename
       f.input :conference
-
+      f.input :promoted
       f.input :subtitle 
       f.input :link
       f.input :slug
@@ -77,8 +78,8 @@ ActiveAdmin.register Event do
   controller do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, 
-                            :conference_id, :title, :subtitle, :link, :slug, :description, 
-                            :persons_raw, :tags_raw, :date, :event_id]
+                            :conference_id, :promoted, :title, :subtitle, :link, :slug,
+                            :description, :persons_raw, :tags_raw, :date, :event_id]
     end
   end
 

@@ -62,7 +62,7 @@ class Api::EventsController < InheritedResources::Base
                                              :thumb_filename, :gif_filename, :poster_filename,
                                              :conference_id, :title, :subtitle, :link, :slug,
                                              :description, :persons_raw, :tags_raw, :date,
-                                             :release_date, :event_id
+                                             :promoted, :release_date, :event_id
                                             )}
   end
 end
