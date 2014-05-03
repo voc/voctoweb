@@ -1,7 +1,6 @@
 class Recording < ActiveRecord::Base
   include Recent
   include Download
-  require 'videopage_builder'
 
   before_destroy :delete_video
 
@@ -73,13 +72,8 @@ class Recording < ActiveRecord::Base
   handle_asynchronously :move_files!
 
   def release!
-    # create yaml in webgen root
-    page = VideopageBuilder.save_videopage(self.event.conference, self.event)
-    if page.nil?
-      Rails.logger.info "Failed to build videopage for #{self.conference.acronym} / #{self.event.guid}"
-    else
-      self.finish_release
-    end
+    # nothing left to do here
+    self.finish_release
   end
   handle_asynchronously :release!
 
@@ -106,11 +100,6 @@ class Recording < ActiveRecord::Base
   def delete_video
     file = get_recording_path
     FileUtils.remove_file file if File.readable? file
-
-    VideopageBuilder.remove_videopage(self.event.conference, self.event)
-    if self.event.recordings.count > 1
-      VideopageBuilder.save_videopage(self.event.conference, self.event)
-    end
   end
 
   def get_tmp_path

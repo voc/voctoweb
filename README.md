@@ -57,15 +57,6 @@ To get the backend up and running:
     gem install passenger
     passenger start -p 8023
 
-
-### Trigger media-webgen
-
-Webgen generation is triggered via sudo
-
-    Cmnd_Alias WEBGEN = /srv/www/media-webgen/media-webgen/bin/webgen-wrapper
-    media-backend ALL = (media-webgen) NOPASSWD: BACKUP
-
-
 ## First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
@@ -113,10 +104,6 @@ Recordings are added by specifiying the parent events `guid`, an URL and a `file
           "length":"30"
           }
       }' "http://localhost:3000/api/recordings"
-
-Run webgen after uploads are finished.
-
-    curl -H "CONTENT-TYPE: application/json" -d '{"api_key":"4"}' "http://localhost:3000/api/conferences/run_webgen"
 
 
 Download event images again, after event was created.

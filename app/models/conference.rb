@@ -1,7 +1,6 @@
 class Conference < ActiveRecord::Base
   include Recent
   include Download
-  require 'videopage_builder'
 
   has_many :events, dependent: :destroy
 
@@ -50,17 +49,6 @@ class Conference < ActiveRecord::Base
     self.save
   end
   handle_asynchronously :download!
-
-  def self.run_webgen_job
-    Rails.logger.info "Running webgen"
-    # FIXME don't run for every recording?
-    # FIXME check return status
-    `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
-  end
-
-  def create_videogallery!
-    VideopageBuilder.save_index_vgallery(self)
-  end
 
   def get_images_path
     File.join MediaBackend::Application.config.folders[:images_base_dir], self.images_path

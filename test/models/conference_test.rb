@@ -35,11 +35,4 @@ class ConferenceTest < ActiveSupport::TestCase
     assert @conference.schedule_xml.size > 0
   end
 
-  test "should create videopage" do
-    @conference = create(:conference_with_recordings)
-    event = @conference.events.first
-    VideopageBuilder.save_videopage(@conference, event)
-    assert File.readable? event.get_videopage_path
-  end
-
 end

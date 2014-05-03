@@ -54,11 +54,6 @@ ActiveAdmin.register_page "Dashboard" do
             I18n.t("media-backend.recording-api-curl")
           end
 
-          para "Run webgen after uploads are finished."
-          pre class: "scrollable" do
-            I18n.t("media-backend.webgen-api-curl")
-          end
-
           para "Download event images again, after event was created."
           pre class: "scrollable" do
             I18n.t("media-backend.event-download-api-curl")

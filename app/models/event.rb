@@ -10,8 +10,6 @@ class Event < ActiveRecord::Base
   validates_presence_of :guid
   validates_uniqueness_of :guid
 
-  before_destroy :delete_page_file
-
   serialize :persons, Array
   serialize :tags, Array
 
@@ -59,13 +57,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.bulk_update_videopages(selection)
-    Rails.logger.info "Bulk update videopages"
-    Event.find(selection).each do |event|
-      VideopageBuilder.save_videopage(event.conference, event)
-    end
-  end
-
   def get_recording_by_mime_type(type)
     self.recordings.where(mime_type: type)
   end
@@ -101,22 +92,6 @@ class Event < ActiveRecord::Base
     download_to_file(url, path)
   end
 
-  def get_videopage_path
-    page_file = File.join(self.conference.get_webgen_location, get_videopage_filename)
-    page_file
-  end
-
-  # OBOSOLETE
-  def get_videopage_filename
-    if self.slug.present?
-      filename = self.slug + '.page'
-    else
-      filename = self.guid + '.page'
-    end
-    filename.gsub!(/ /, '_')
-    filename
-  end
-
   def get_filename
     if self.slug.present?
       filename = self.slug
@@ -144,10 +119,6 @@ class Event < ActiveRecord::Base
       id = info.delete(:id)
       event.link = event.conference.get_event_url(id)
       event.update_attributes info
-  end
-
-  def delete_page_file
-    VideopageBuilder.remove_videopage(self.conference, self)
   end
 
   def get_image_filename(url)

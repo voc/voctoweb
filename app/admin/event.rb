@@ -75,29 +75,14 @@ ActiveAdmin.register Event do
     redirect_to :action => :show
   end
 
-  member_action :write_videopage_file, :method => :post do
-    event = Event.find(params[:id])
-    VideopageBuilder.save_videopage(event.conference, event)
-    redirect_to :action => :show
-  end
-
   action_item only: [:show, :edit] do
     if event.conference.downloaded?
       link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
     end
   end
 
-  action_item only: :show do
-    link_to 'Write Videopage file', write_videopage_file_admin_event_path(event), method: :post
-  end
-
   batch_action :update_event_infos do |selection|
     Event.delay.bulk_update_events(selection)
-    redirect_to :action => :index
-  end
-
-  batch_action :update_videopages do |selection|
-    Event.delay.bulk_update_videopages(selection)
     redirect_to :action => :index
   end
 
