@@ -51,6 +51,8 @@ end
 # gem 'debugger', group: [:development, :test]
 
 group :development do
+  # dump data to seeds
+  gem 'seed_dump'
   gem 'quiet_assets'
   gem 'pry-rails'
   gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
