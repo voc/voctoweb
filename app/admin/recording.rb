@@ -17,6 +17,24 @@ ActiveAdmin.register Recording do
     default_actions
   end
 
+  show do |r|
+    attributes_table do
+      row :filename do
+        div show_recording_path r
+        div show_recording_url r
+      end
+      row :folder
+      row :event
+      row :original_url
+      row :state
+      row :mime_type
+      row :size
+      row :length
+      row :width
+      row :height
+    end
+  end
+
   form do |f|
     f.inputs "Recording Details" do
       f.input :original_url

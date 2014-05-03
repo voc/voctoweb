@@ -21,6 +21,32 @@ ActiveAdmin.register Event do
     default_actions
   end
 
+  show do |e|
+    attributes_table do
+      row :guid
+      row :title
+      row :thumb_filename do
+        div show_event_folder e, :thumb_filename
+      end
+      row :gif_filename do
+        div show_event_folder e, :gif_filename
+      end
+      row :poster_filename do
+        div show_event_folder e, :poster_filename
+      end
+      row :conference
+      row :promoted
+      row :subtitle 
+      row :link
+      row :slug
+      row :description
+      row :persons
+      row :tags
+      row :date
+      row :release_date
+    end
+  end
+
   form do |f|
     f.inputs "Event Details" do
       f.input :guid

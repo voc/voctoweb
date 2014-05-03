@@ -16,24 +16,27 @@ ActiveAdmin.register Conference do
   show do |c|
     attributes_table do
       row :acronym
+      row :title
       row :recordings_path do
-        div conference_folder label: c.recordings_path, path: c.get_recordings_path
+        div show_folder label: c.recordings_path, path: c.get_recordings_path
       end
       row :images_path do
-        div conference_folder label: c.images_path, path: c.get_images_path
+        div show_folder label: c.images_path, path: c.get_images_path
       end
       row :webgen_location do
-        div conference_folder label: c.webgen_location, path: c.get_webgen_location
+        div show_folder label: c.webgen_location, path: c.get_webgen_location
+      end
+      row :logo do
+        div show_logo_url c.logo
       end
       row :aspect_ratio
-      row :created_at
-      row :updated_at
-      row :title
       row :schedule_url
       row :schedule_xml do
         div c.schedule_xml.try(:truncate,200)
       end
       row :schedule_state
+      row :created_at
+      row :updated_at
     end
   end
 

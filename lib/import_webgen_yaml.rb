@@ -238,6 +238,7 @@ module Import
         path = remove_conference_part(conference, path)
         filename = File.basename path
         folder = File.dirname path
+        folder = '' if folder == '.'
 
         test = Recording.where filename: filename, folder: folder
         if test.count > 0
