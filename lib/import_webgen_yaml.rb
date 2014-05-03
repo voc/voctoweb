@@ -4,12 +4,14 @@ require 'ostruct'
 module Import
 
   class WebgenImporter
+
     CONFERENCE_DATA = {
       blinkenlights: 'blinkenlights',
       camp2003:      'conferences/camp2003',
       camp2007:      'conferences/camp2007',
       camp2011:      'conferences/camp2011',
       eh2010:        'conferences/eh2010',
+       eh2014:        'conferences/eh2014',
       froscon2010:   'conferences/froscon/2010',
       froscon2011:   'conferences/froscon/2011',
       froscon2013:   'conferences/froscon/2013',
@@ -28,7 +30,7 @@ module Import
       :'19c3' =>      'congress/2002',
       :'20c3' =>      'congress/2003',
       :'21c3' =>      'congress/2004',
-      :'22c3' =>      'congress/2005',
+       :'22c3' =>      'congress/2005',
       :'23c3' =>      'congress/2006',
       :'24c3' =>      'congress/2007',
       :'25c3' =>      'congress/2008',
@@ -36,7 +38,7 @@ module Import
       :'27c3' =>      'congress/2010',
       :'28c3' =>      'congress/2011',
       :'29c3' =>      'congress/2012',
-      :'30c3' =>      'congress/2013',
+       :'30c3' =>      'congress/2013',
       :'Freiheit_statt_Angst_Demo' => 'events/Freiheit_statt_Angst_Demo',
       :'Netzzensur_Demo' => 'events/Netzzensur_Demo',
       :'Panoptische_Prinzip' => 'events/Panoptische_Prinzip',
@@ -54,6 +56,7 @@ module Import
       camp2007:      'events/camp2007',
       camp2011:      'events/camp2011',
       eh2010:        'events/eh2010',
+      eh2014:        'events/eh2014',
       froscon2010:   'events/froscon/2010',
       froscon2011:   'events/froscon/2011',
       froscon2013:   'events/froscon/2013',
@@ -90,7 +93,7 @@ module Import
       @dir = dir
       @conference_cache = {}
       # skip list
-      @external_videos = File.open('videos.lst').readlines.map { |line| line.chomp!  }
+      @external_videos = File.open('videos_external.lst').readlines.map { |line| line.chomp!  }
       @release_dates = load_release_dates('videos_release_dates.txt')
     end
 
@@ -232,29 +235,29 @@ module Import
       fail "missing recordings path for #{conference.acronym}" unless conference.recordings_path
 
       paths.each { |path|
-        path = path.sub(%r{^#{Regexp.quote conference.recordings_path}}, '').sub(/^\//, '')
+        path = remove_conference_part(conference, path)
         filename = File.basename path
         folder = File.dirname path
+
         test = Recording.where filename: filename, folder: folder
         if test.count > 0
-          #STDERR.puts "recording exists for #{folder} / #{filename}!?"
-          # skip
+          recording = test.first
         else
           recording = Recording.new
-          recording.event_id = event.id
-          recording.filename = filename
-          recording.folder = folder
-          recording.mime_type = get_mime_type path
-          recording.length = page['videoLength']
-          recording.width = page['videoWidth'] || page['flvWidth']
-          recording.height = page['videoHeight'] || page['flvHeight']
-          recording.size = page['videoSize']
-          # TODO not needed?
-          #recording.original_url = page['orgPath']
-          recording.state = :downloaded
-          raise "invalid recording #{recording.errors.messages}" unless recording.valid?
-          recording.save
         end
+        recording.event_id = event.id
+        recording.filename = filename
+        recording.folder = folder
+        recording.mime_type = get_mime_type path
+        recording.length = page['videoLength']
+        recording.width = page['videoWidth'] || page['flvWidth']
+        recording.height = page['videoHeight'] || page['flvHeight']
+        recording.size = page['videoSize']
+        # TODO not needed?
+        #recording.original_url = page['orgPath']
+        recording.state = :downloaded
+        raise "invalid recording #{recording.errors.messages}" unless recording.valid?
+        recording.save
 
       }
     end
@@ -282,12 +285,26 @@ module Import
       conference
     end
 
+    def remove_conference_part(conference, path)        
+      path.sub!(/^\//, '')
+      path.sub!(%r{^congress/21C3}, 'congress/2004')
+      path.sub!(%r{^congress/22C3}, 'congress/2005')
+      path.sub!(%r{^congress/23C3}, 'congress/2006')
+      path.sub!(%r{^congress/25c3}, 'congress/2008')
+      path.sub!(%r{^congress/26c3}, 'congress/2009')
+      path.sub!(%r{^#{Regexp.quote conference.recordings_path}}, '')
+      path.sub!(/^\//, '')
+      STDERR.puts "possibly unrecognized video: #{path}" if path =~ /^(?:congress|event|confere)/
+      path
+    end
+
     def get_recordings(page)
       result = []
       recordings = %w{webmPath h264Path ogvPath flvPath audioPath} & page.keys
       recordings.each { |key|
-        path = page[key].sub(%r{^/media/}, '').sub(%r{^http://cdn.media.ccc.de/}, '')
-        # TODO skip potentially external videos for now (import from videos_linked_event.lst later)
+        path = page[key].sub(%r{^/media/}, '')
+        path = path.sub(%r{^http://cdn.media.ccc.de/}, '').sub(%r{^ftp://ftp.ccc.de/}, '').sub(%r{^http://koeln.media.ccc.de/}, '')
+        # TODO skip potentially external videos for now (import manually from videos_linked_event.lst later)
         result << path unless @external_videos.include? path
       }
       result

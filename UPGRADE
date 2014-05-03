@@ -1,0 +1,33 @@
+Database won't be migrated.
+
+Upgrade from seeds_live.rb and webgen page files
+
+## Import
+
+### seed data from live
+
+    rake db:reset
+    rails c <<-EOF
+    AdminUser.all.delete_all
+    load 'db/seeds_live.rb'
+    EOF
+
+### webgen dates from git
+
+    git log --date=iso --format="%ad" --name-status --diff-filter='A' src/browse > ../media-backend/videos_release_dates.txt 
+
+### webgen data
+
+    rake media:import_webgen dir=src/browse
+
+## encoding
+
+    W='../media-webgen/'
+    def fix_persons(f='src/browse/congress/2010/27c3-4073-de-logikschaltungen_ohne_elektronik.page')
+      file = File.open(File.join(W,f))  
+      e = YAML.load file  
+      e['persons'] = e['persons'].map { |p| p.gsub(/(\\x[0-9A-F]{2})+/){|m| eval "\"#{m}\""}.force_encoding("UTF-8") }  
+      file.close  
+      File.open(File.join(W,f), 'w') { |file| file.puts e.to_yaml }  
+    end  
+
