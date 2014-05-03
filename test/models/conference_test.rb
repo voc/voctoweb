@@ -42,15 +42,4 @@ class ConferenceTest < ActiveSupport::TestCase
     assert File.readable? event.get_videopage_path
   end
 
-  test "should save podcast" do
-    @conference = create(:conference_with_recordings)
-    FileUtils.mkdir_p @conference.get_webgen_location
-
-    @conference.events.each { |e|
-      VideopageBuilder.save_videopage(@conference, e)
-    }
-    @conference.create_podcast
-    assert File.readable? File.join(@conference.get_webgen_location, 'podcast.xml')
-  end
-  
 end

@@ -2,7 +2,6 @@ class Conference < ActiveRecord::Base
   include Recent
   include Download
   require 'videopage_builder'
-  require 'podcast_generator'
 
   has_many :events, dependent: :destroy
 
@@ -57,10 +56,6 @@ class Conference < ActiveRecord::Base
     # FIXME don't run for every recording?
     # FIXME check return status
     `sudo -u media-webgen /srv/www/media-webgen/media-webgen/bin/webgen-wrapper` unless Rails.env.test?
-  end
-
-  def create_podcast
-    PodcastGenerator.generate(self)
   end
 
   def create_videogallery!

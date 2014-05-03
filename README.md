@@ -18,8 +18,6 @@ Application configuration is found in `config/initializers/media_backend.rb`
     webgen_base_dir: '/srv/www/webgen/src/browse',
     tmp_dir: '/tmp'
 
-The podcast feed template is in `config/podcast_template.yml` and needs to copied to 'podcast.yml'
-
 ## Database creation
 
 Setup your database in config/database.yml needed.
@@ -49,10 +47,6 @@ And for devise:
 
     cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
     rake secret
-
-For podcast.xml add a podcast template:    
- 
-    cp config/podcast_template.yml.example config/podcast_template.yml
 
 To get the backend up and running:
 

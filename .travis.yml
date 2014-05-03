@@ -6,7 +6,6 @@ before_install:
   - cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
   - cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
   - cp config/initializers/media_backend.rb.example config/initializers/media_backend.rb
-  - cp config/podcast_template.yml.example config/podcast_template.yml
   - cp config/database.yml.template config/database.yml
 script:
   - bundle exec rake db:setup
