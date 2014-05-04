@@ -1,9 +1,13 @@
 module ViewHelper
 
-  # TODO move logos to c.get_images_path, fix c.logo and use c.get_images_url here
-  def show_logo_url(path)
-    return nil if path.nil?
-    "#{path} (#{File.join(MediaBackend::Application.config.staticURL, path)})"
+  def show_logo_url(conference)
+    return nil if conference.logo.nil?
+    "(#{File.join(MediaBackend::Application.config.staticURL, conference.get_images_url, conference.logo)})"
+  end
+
+  def show_logo_path(conference)
+    return nil if conference.logo.nil?
+    "#{conference.logo} (#{File.join(conference.get_images_path, conference.logo)})"
   end
 
   def show_folder(label: 'Path', path: '/')
@@ -27,7 +31,7 @@ module ViewHelper
 
   def show_recording_url(recording)
     "(#{File.join(MediaBackend::Application.config.cdnURL, 
-        recording.event.conference.recordings_path, recording.get_recording_webpath)})"
+        recording.event.conference.get_recordings_url, recording.get_recording_webpath)})"
   end
 
   def job_object(job)

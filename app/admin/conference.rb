@@ -27,7 +27,8 @@ ActiveAdmin.register Conference do
         div show_folder label: c.webgen_location, path: c.get_webgen_location
       end
       row :logo do
-        div show_logo_url c.logo
+        div show_logo_path c
+        div show_logo_url c
       end
       row :aspect_ratio
       row :schedule_url
