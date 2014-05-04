@@ -311,29 +311,33 @@ module Import
       result
     end
 
-    class BasePathFinder
-      def initialize
-        @paths = []
-      end
-      attr_reader :paths
+  end
 
-      def <<(a)
-        @paths << a
-      end
+  class BasePathFinder
+    def initialize
+      @paths = []
+    end
+    attr_reader :paths
 
-      def base
-        paths = @paths.sort.uniq
-        path = paths.min
-        r = ""
-        path.split('').each_with_index { |c,i|
-          r += c if paths.all? { |p| p[i] == c }
-        }
-        r.sub(/\/$/, '')
-      end
-
+    def <<(a)
+      @paths << a
     end
 
+    def base
+      paths = @paths.sort.uniq.map { |p| p.split(%r{/}) }
+      path = paths.min
 
+      parts = []
+      path.each_with_index do |part, i|
+        if paths.all? { |p| p[i] == part }
+          parts << part
+        else
+          break
+        end
+      end
+
+      parts.join('/')
+    end
   end
 
   module WebgenYAML
@@ -374,7 +378,7 @@ module Import
         index_data = WebgenYAML.load_sick_yaml(File.open(index).read)
         t = OpenStruct.new
         t.title = index_data['title']
-        t.logo = index_data['thumbPath']
+        t.logo = File.basename(index_data['thumbPath']) if index_data['thumbPath']
         t
       else
         raise "Vgallery not found: #{path}"
