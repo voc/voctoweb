@@ -5,6 +5,8 @@ module Import
 
   class WebgenImporter
 
+    # Import these conferences
+    # acronym => webgen = media/ folder
     CONFERENCE_DATA = {
       blinkenlights: 'blinkenlights',
       camp2003:      'conferences/camp2003',
@@ -43,13 +45,15 @@ module Import
       :'Netzzensur_Demo' => 'events/Netzzensur_Demo',
       :'Panoptische_Prinzip' => 'events/Panoptische_Prinzip',
 
-      # external:
+      # pure external:
       #:'Fingerabdruck_Hack' => 'events/Fingerabdruck_Hack',
       #:'Trusted_Computing' => 'events/Trusted_Computing',
       #c4: 'regional/c4',
       #cccmz: 'regional/cccmz',
     }
 
+    # video folder differs from videopage folder
+    # acronym => storage_folder
     CONFERENCE_VIDEOS = {
       blinkenlights: 'blinkenlights',
       camp2003:      'events/camp2003',
@@ -161,8 +165,7 @@ module Import
         conference_folder = File.join @dir, folder
         Dir[File.join conference_folder, '**/*.page'].each do |path|
           docs = WebgenYAML.load_videopage(path)
-          date = get_release_date(path)
-          event = import_event(conference, path, docs.page, docs.description, date)
+          event = import_event(conference, path, docs.page, docs.description)
           fill_aspect_ratio(conference, docs.page) if conference.aspect_ratio.nil?
           import_recordings(conference, event, docs.page)
         end
@@ -183,7 +186,8 @@ module Import
       end
     end
 
-    def import_event(conference, path, page, description, date)
+    def import_event(conference, path, page, description)
+      date = get_release_date(path)
       test = Event.where(gif_filename: File.basename(page['thumbPath']))
       if test.count > 0
         #STDERR.puts "updating existing event in db: #{page['thumbPath']}"
@@ -234,7 +238,7 @@ module Import
       #p paths
       fail "missing recordings path for #{conference.acronym}" unless conference.recordings_path
 
-      paths.each { |path|
+      paths.each do |path|
         path = remove_conference_part(conference, path)
         filename = File.basename path
         folder = File.dirname path
@@ -260,7 +264,7 @@ module Import
         raise "invalid recording #{recording.errors.messages}" unless recording.valid?
         recording.save
 
-      }
+      end
     end
 
     def get_mime_type(path)
