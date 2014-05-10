@@ -12,7 +12,7 @@ namespace :media do
       exit
     end
 
-    if File.readable? ENV['dir']
+    if ENV['dir'] and File.readable? ENV['dir']
       dir = ENV['dir']
     else
       dir = webgen_dir
