@@ -72,7 +72,7 @@ ActiveAdmin.register Conference do
   end
 
   action_item do
-    link_to 'Releasing', run_compile_admin_conferences_path, method: :post
+    link_to 'Compile', run_compile_admin_conferences_path, method: :post
   end
 
   controller do
