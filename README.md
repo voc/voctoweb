@@ -57,6 +57,13 @@ To get the backend up and running:
     gem install passenger
     passenger start -p 8023
 
+### Trigger nanoc
+
+Nanoc is triggered via sudo
+
+    Cmnd_Alias FRONTED = /srv/www/media-frontend/media-frontend/bin/frontend-wrapper
+    media-backend ALL = (media-frontend) NOPASSWD: FRONTEND
+
 ## First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.

@@ -11,7 +11,7 @@ MediaBackend::Application.routes.draw do
   namespace :api do
     resources :conferences, :defaults => { :format => 'json' } do
       collection do
-        post 'run_webgen'
+        post 'run_compile'
       end
     end
     resources :events, :defaults => { :format => 'json' } do

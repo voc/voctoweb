@@ -54,17 +54,27 @@ ActiveAdmin.register Conference do
     f.actions
   end
 
-  member_action :download_schedule, :method => :post do
+  member_action :download_schedule, method: :post do
     conference = Conference.find(params[:id])
     unless conference.schedule_url.empty?
       conference.url_changed
     end
-    redirect_to :action => :show
+    redirect_to action: :show
+  end
+
+  collection_action :run_compile, method: :post do
+    Conference.delay.run_compile_job
+    redirect_to action: :index
   end
 
   action_item only: :show do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
   end
+
+  action_item do
+    link_to 'Releasing', run_compile_admin_conferences_path, method: :post
+  end
+
   controller do
     def permitted_params
       params.permit conference: [ :acronym,

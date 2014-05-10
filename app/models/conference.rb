@@ -50,6 +50,11 @@ class Conference < ActiveRecord::Base
   end
   handle_asynchronously :download!
 
+  def self.run_compile_job
+    Rails.logger.info "Compiling static website"
+    `sudo -u media-frontend /srv/www/media-frontend/media-frontend/bin/nanoc-wrapper` unless Rails.env.test?
+  end
+
   def get_images_path
     File.join MediaBackend::Application.config.folders[:images_base_dir], self.images_path
   end
