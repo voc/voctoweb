@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   # active admin and serialized fields workaround:
   def persons_raw=(values)
     self.persons = []
-    self.persons = values.split("\n")
+    self.persons = values.split("\n").map { |w| w.strip }
   end
 
   # active admin and serialized fields workaround:
@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   # active admin and serialized fields workaround:
   def tags_raw=(values)
     self.tags = []
-    self.tags= values.split("\n")
+    self.tags= values.split("\n").map { |w| w.strip }
   end
 
   def self.bulk_update_events(selection)

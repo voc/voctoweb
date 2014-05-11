@@ -41,7 +41,7 @@ ActiveAdmin.register Conference do
     end
     table_for c.events.order('slug ASC') do
       column "Events" do |event|
-        link_to event.title, [ :admin, event ]
+        link_to "#{event.slug} (#{event.title})", [ :admin, event ]
       end
     end
   end
