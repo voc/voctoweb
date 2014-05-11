@@ -39,6 +39,11 @@ ActiveAdmin.register Conference do
       row :created_at
       row :updated_at
     end
+    table_for c.events.order('slug ASC') do
+      column "Events" do |event|
+        link_to event.title, [ :admin, event ]
+      end
+    end
   end
 
   form do |f|

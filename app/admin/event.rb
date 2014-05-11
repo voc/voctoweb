@@ -45,6 +45,11 @@ ActiveAdmin.register Event do
       row :date
       row :release_date
     end
+    table_for e.recordings.order('filename ASC') do
+      column "Recordings" do |recording|
+        link_to recording.filename, [ :admin, recording ]
+      end
+    end
   end
 
   form do |f|
