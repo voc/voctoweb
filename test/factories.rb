@@ -121,11 +121,11 @@ FactoryGirl.define do
     event
     filename "audio.mp3"
     folder ""
-    mime_type "audio/mpeg"
-    original_url "file:///fixtures/test.mp3"
+    mime_type "video/webm"
+    original_url "file:///fixtures/test.webm"
     size "12"
     length "5"
-    state "new"
+    state "downloaded"
   end
 
   factory :admin_user do

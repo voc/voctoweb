@@ -14,6 +14,12 @@ class Event < ActiveRecord::Base
   serialize :persons, Array
   serialize :tags, Array
 
+  scope :recorded_at, ->(conference) {
+    joins(:recordings, :conference)
+    .where(conferences: { id: conference })
+    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
+    .group(:"events.id")
+                        }
   has_attached_file :gif, via: :gif_filename, belongs_into: :images, on: :conference
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference

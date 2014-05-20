@@ -7,7 +7,6 @@ MediaBackend::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'admin/dashboard#index'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
   namespace :api do
     resources :conferences, :defaults => { :format => 'json' } do
       collection do
@@ -25,6 +24,12 @@ MediaBackend::Application.routes.draw do
       end
     end
     resources :news, :defaults => { :format => 'json' }
+  end
+
+  namespace :public do
+    resources :conferences, only: [:index, :show], defaults: { format: 'json' }
+    resources :events, only: [:index, :show], defaults: { format: 'json' }
+    resources :recordings, only: [:index, :show], defaults: { format: 'json' }
   end
 
   # Example resource route with options:

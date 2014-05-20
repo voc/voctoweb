@@ -3,6 +3,8 @@ class Recording < ActiveRecord::Base
   include Download
   include Storage
 
+  HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm']
+
   before_destroy :delete_video
 
   belongs_to :event
@@ -12,6 +14,8 @@ class Recording < ActiveRecord::Base
   validates_presence_of :filename
 
   scope :downloaded, -> { where(state: 'downloaded') }
+
+  scope :recorded_at, ->(conference) { joins(event: :conference).where(events: {'conference_id' => conference} ) }
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 

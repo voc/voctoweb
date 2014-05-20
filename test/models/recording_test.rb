@@ -32,8 +32,9 @@ class RecordingTest < ActiveSupport::TestCase
   end
 
   test "should download and release file" do
-    create_test_file 'test.mp3'
-    @recording.original_url = "file://" + File.join(Rails.root, 'test.mp3')
+    create_test_file 'test.webm'
+    @recording.original_url = "file://" + File.join(Rails.root, 'test.webm')
+    @recording.state = 'new'
     @recording.save
 
     run_background_jobs_immediately do
