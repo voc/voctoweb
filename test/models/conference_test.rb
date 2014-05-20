@@ -4,10 +4,6 @@ class ConferenceTest < ActiveSupport::TestCase
 
   SCHEDULE_URL = 'http://sigint.ccc.de/schedule/schedule.xml'
 
-  setup do
-    set_config_folders_to_tmp
-  end
-
   test "should set initial state" do
     c = Conference.new
     assert c.not_present?
@@ -33,6 +29,16 @@ class ConferenceTest < ActiveSupport::TestCase
     assert @conference.downloaded?
     assert_not_nil @conference.schedule_xml
     assert @conference.schedule_xml.size > 0
+  end
+
+  test "should get images path" do
+    @conference = create(:conference_with_recordings)
+    assert_equal File.join(MediaBackend::Application.config.folders[:images_base_dir], @conference.images_path), @conference.get_images_path
+  end
+
+  test "should get images url" do
+    @conference = create(:conference_with_recordings)
+    assert_equal "#{MediaBackend::Application.config.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path 
   end
 
 end

@@ -1,13 +1,19 @@
 class Recording < ActiveRecord::Base
   include Recent
   include Download
+  include Storage
 
   before_destroy :delete_video
 
   belongs_to :event
+  delegate :conference, to: :event
 
   validates_presence_of :event
   validates_presence_of :filename
+
+  scope :downloaded, -> { where(state: 'downloaded') }
+
+  has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
   state_machine :state, :initial => :new do
 
@@ -80,21 +86,6 @@ class Recording < ActiveRecord::Base
   def create_recording_dir
     FileUtils.mkdir_p get_recording_dir
   end
-
-  def get_recording_path
-    File.join get_recording_dir, self.filename
-  end
-
-  def get_recording_dir
-    self.folder ||= ""
-    File.join self.event.conference.get_recordings_path, self.folder
-  end
-
-  def get_recording_webpath
-    self.folder ||= ""
-    File.join(self.folder, self.filename)
-  end
-
   private
 
   def delete_video

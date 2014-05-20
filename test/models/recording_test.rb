@@ -5,7 +5,6 @@ class RecordingTest < ActiveSupport::TestCase
   setup do
     @recording = create(:recording)
     @event = @recording.event
-    set_config_folders_to_tmp
   end
 
   test "should set initial state" do

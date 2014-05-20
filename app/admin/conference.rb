@@ -23,9 +23,7 @@ ActiveAdmin.register Conference do
       row :images_path do
         div show_folder label: c.images_path, path: c.get_images_path
       end
-      row :webgen_location do
-        div show_folder label: c.webgen_location, path: c.get_webgen_location
-      end
+      row :webgen_location
       row :logo do
         div show_logo_path c
         div show_logo_url c

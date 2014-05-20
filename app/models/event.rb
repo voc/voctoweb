@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   include Recent
   include FahrplanParser
   include Download
+  include Storage
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -12,6 +13,12 @@ class Event < ActiveRecord::Base
 
   serialize :persons, Array
   serialize :tags, Array
+
+  has_attached_file :gif, via: :gif_filename, belongs_into: :images, on: :conference
+
+  has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
+
+  has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
   # active admin and serialized fields workaround:
   attr_accessor   :persons_raw, :tags_raw
@@ -38,9 +45,9 @@ class Event < ActiveRecord::Base
     self.tags= values.split("\n").map { |w| w.strip }
   end
 
+  # bulk update several events using the saved schedule.xml files
   def self.bulk_update_events(selection)
     Rails.logger.info "Bulk updating events from XML"
-    # TODO fix this mess
     fahrplans = {}
     ActiveRecord::Base.transaction do
       Event.find(selection).each do |event|
@@ -109,7 +116,6 @@ class Event < ActiveRecord::Base
       self.guid || self.id
     end
   end
-
 
   private
 

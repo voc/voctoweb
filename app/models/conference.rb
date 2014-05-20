@@ -1,6 +1,7 @@
 class Conference < ActiveRecord::Base
   include Recent
   include Download
+  include Storage
 
   has_many :events, dependent: :destroy
 
@@ -8,6 +9,20 @@ class Conference < ActiveRecord::Base
   validates_presence_of :webgen_location
   validates_uniqueness_of :acronym
   validates_uniqueness_of :webgen_location
+
+  has_attached_directory :images, 
+    via: :images_path,
+    prefix: MediaBackend::Application.config.folders[:images_base_dir],
+    url: MediaBackend::Application.config.staticURL,
+    url_path: MediaBackend::Application.config.folders[:images_webroot]
+
+  has_attached_directory :recordings, 
+    via: :recordings_path,
+    prefix: MediaBackend::Application.config.folders[:recordings_base_dir],
+    url: MediaBackend::Application.config.cdnURL,
+    url_path: MediaBackend::Application.config.folders[:recordings_webroot]
+
+  has_attached_file :logo, via: :logo, belongs_into: :images
 
   state_machine :schedule_state, :initial => :not_present do
 
@@ -53,26 +68,6 @@ class Conference < ActiveRecord::Base
   def self.run_compile_job
     Rails.logger.info "Compiling static website"
     `sudo -u media-frontend /srv/www/media-frontend/media-frontend/bin/nanoc-wrapper` unless Rails.env.test?
-  end
-
-  def get_images_path
-    File.join MediaBackend::Application.config.folders[:images_base_dir], self.images_path
-  end
-
-  def get_recordings_path
-    File.join MediaBackend::Application.config.folders[:recordings_base_dir], self.recordings_path
-  end
-
-  def get_webgen_location
-    File.join MediaBackend::Application.config.folders[:webgen_base_dir], self.webgen_location
-  end
-
-  def get_images_url
-    MediaBackend::Application.config.folders[:images_webroot] + '/' + self.images_path
-  end
-
-  def get_recordings_url
-    MediaBackend::Application.config.folders[:recordings_webroot] + '/' + self.recordings_path
   end
 
   def get_event_url(id)

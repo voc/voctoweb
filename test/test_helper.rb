@@ -12,12 +12,6 @@ class ActiveSupport::TestCase
 
   TMP_DIR = 'tmp/tests'
 
-  def set_config_folders_to_tmp
-    MediaBackend::Application.config.folders[:recordings_base_dir] = File.join(TMP_DIR, 'rec')
-    MediaBackend::Application.config.folders[:images_base_dir] = File.join(TMP_DIR, 'img')
-    MediaBackend::Application.config.folders[:webgen_base_dir] = File.join(TMP_DIR, 'src')
-  end
-
   # Add more helper methods to be used by all tests here...
   def run_background_jobs_immediately
     delay_jobs = Delayed::Worker.delay_jobs
