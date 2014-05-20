@@ -1,0 +1,12 @@
+<% @mirrors.select { |m| m.enabled }.each do |mirror| %>
+
+  <div class="border">
+  <% if mirror.status_baseurl %>
+  <% end %>
+
+  <a href="<%= mirror.baseurl %>"><%= mirror.identifier %></a>
+  <%= "#{mirror.region}/#{mirror.country}" %>
+  <%= l(mirror.last_scan, format: :pretty_datetime) %>
+
+  </div>
+<% end %>
