@@ -10,4 +10,5 @@ before_install:
   - psql -c 'create database mirrorbrain;' -U postgres
 script:
   - bundle exec rake db:setup
+  - bundle exec rake db:create_mirrorbrain
   - bundle exec rake
