@@ -38,37 +38,6 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
 
-        panel "API Examples" do
-          para "You can use the API to register a new conference. The conference `acronym` and the URL of the `schedule.xml` are required."
-          pre class: "scrollable" do
-            I18n.t("media-backend.conference-api-curl") 
-          end
-
-          para "You can add images to an event, like the animated gif thumb and the poster image. The event is identified by its `guid` and the conference `acronym`."
-          pre class: "scrollable" do
-            I18n.t("media-backend.event-api-curl")
-          end
-
-          para "Recordings are added by specifiying the parent events `guid`, an URL and a `filename`."
-          pre class: "scrollable" do
-            I18n.t("media-backend.recording-api-curl")
-          end
-
-          para "Compile static website."
-          pre class: "scrollable" do
-            I18n.t("media-backend.compile-api-curl")
-          end
-
-          para "Download event images again, after event was created."
-          pre class: "scrollable" do
-            I18n.t("media-backend.event-download-api-curl")
-          end
-
-          para "Download recordings again, after recording was created."
-          pre class: "scrollable" do
-            I18n.t("media-backend.recording-download-api-curl")
-          end
-        end
       end
     end # columns
 
