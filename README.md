@@ -5,48 +5,42 @@ media.ccc.de webfrontend meta data editor and API.
 [![Build Status](https://travis-ci.org/cccc/media-backend.svg?branch=master)](https://travis-ci.org/cccc/media-backend)
 [![Code Climate](https://codeclimate.com/github/cccc/media-backend.png)](https://codeclimate.com/github/cccc/media-backend)
 
-## Ruby version
+## Install
+
+### Ruby Version
 
 ruby 2.0.0, 2.1.1
 
-## Configuration
+### Deployment Instructions
 
-Application configuration is found in `config/initializers/media_backend.rb`
+Copy and edit the configuration file `config/initializers/media_backend.rb.example` to `config/initializers/media_backend.rb`.
 
     recordings_base_dir: '/srv/recordings/cdn',
     images_base_dir: '/srv/www/cdn',
     webgen_base_dir: '/srv/www/webgen/src/browse',
     tmp_dir: '/tmp'
 
-## Database creation
-
-Setup your database in config/database.yml needed.
-
-    rake db:setup
-
-## How to run the test suite
-
-    rake test
-
-## Services (job queues, cache servers, search engines, etc.)
-
-    bin/delayed_job start
-
-## Deployment instructions
-
-Copy and edit the configuration file
-
-  config/initializers/media_backend.rb.example
-
 You need to create a secret token for sessions:
 
     cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
     rake secret
 
-And for devise:    
+And another one for devise:    
 
     cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
     rake secret
+
+### Database Creation
+
+Setup your database in config/database.yml needed.
+
+    rake db:setup
+
+### Services (job queues, cache servers, search engines, etc.)
+
+    bin/delayed_job start
+
+### Start a Server
 
 To get the backend up and running:
 
@@ -75,6 +69,7 @@ All API calls need to use the JSON format.
 Most REST operations work as expected. Examples for resource creation are listed on the applications dashboard page.
 
 You can use the API to register a new conference. The conference `acronym` and the URL of the `schedule.xml` are required.
+However folders and access rights need to be setup manually, before you can upload images and videos.
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4","acronym":"frab123",
@@ -130,3 +125,25 @@ Download recordings again, after recording was created.
         "guid":"123"
       }' "http://localhost:3000/api/recordings/download"
 
+
+Create news items
+      
+    /api/news
+
+Generate the site      
+
+    /api/conferences/run_compile
+
+## Public JSON API
+
+    /public/conferences
+    /public/conferences/:id
+    /public/events
+    /public/events/:id
+    /public/recordings
+    /public/recordings/:id
+
+
+Example:
+
+    curl -H "CONTENT-TYPE: application/json" http://localhost:3000/public/conferences
