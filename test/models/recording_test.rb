@@ -15,20 +15,20 @@ class RecordingTest < ActiveSupport::TestCase
   test "should not save without event" do
     r = Recording.new
     r.filename = "some.avi"
-    assert_raises(ActiveRecord::RecordInvalid) { r.save!  }
+    assert_raises(ActiveRecord::RecordInvalid) { r.save! }
   end
 
   test "should not save without filename" do
     r = Recording.new
     r.event = @event
-    assert_raises(ActiveRecord::RecordInvalid) { r.save!  }
+    assert_raises(ActiveRecord::RecordInvalid) { r.save! }
   end
 
   test "should save" do
     r = Recording.new
     r.event = @event
     r.filename = "some.avi"
-    assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save!  }
+    assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end
 
   test "should download and release file" do
