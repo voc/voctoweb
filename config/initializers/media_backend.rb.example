@@ -10,6 +10,11 @@ MediaBackend::Application.configure do
       tmp_dir: '/tmp',
     }
 
+    if Rails.env.test?
+      config.folders[:recordings_base_dir] = File.join('tmp', 'tests', 'rec')
+      config.folders[:images_base_dir] = File.join('tmp', 'tests', 'img')
+    end
+
     config.mime_type_folder_mappings = {
       'application/ogg'   => 'ogg',
       'application/vnd.rn-realmedia' => 'realmedia',

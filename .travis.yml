@@ -7,6 +7,8 @@ before_install:
   - cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
   - cp config/initializers/media_backend.rb.example config/initializers/media_backend.rb
   - cp config/database.yml.template config/database.yml
+  - psql -c 'create database mirrorbrain;' -U postgres
 script:
   - bundle exec rake db:setup
+  - bundle exec rake db:create_mirrorbrain
   - bundle exec rake
