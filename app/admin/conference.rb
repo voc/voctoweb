@@ -48,11 +48,16 @@ ActiveAdmin.register Conference do
     f.inputs "Conference Details" do
       f.input :acronym
       f.input :title
-      f.input :recordings_path
-      f.input :images_path
-      f.input :webgen_location
       f.input :schedule_url
-      f.input :aspect_ratio
+      f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
+      f.input :webgen_location
+    end
+    f.inputs "Paths" do
+      f.input :recordings_path, hint: conference.get_recordings_path
+      f.input :images_path, hint: conference.get_images_path
+    end
+    f.inputs "Files" do
+      f.input :logo, hint: conference.get_logo_dir
     end
     f.actions
   end
@@ -72,6 +77,10 @@ ActiveAdmin.register Conference do
 
   action_item only: :show do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+  end
+
+  action_item only: [:show, :edit] do
+    link_to 'Add Event', new_admin_event_path(event: {conference_id: conference.id}), method: :get
   end
 
   action_item do

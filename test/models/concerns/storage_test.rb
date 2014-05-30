@@ -46,6 +46,27 @@ class StorageTest < ActiveSupport::TestCase
     assert_equal '/srv/prefix/basedir1/', test.get_file_dir
   end
 
+  test "should handle nil values in annotations" do
+    class SomeModel < BaseModel
+      has_attached_directory :dir, 
+        via: :dir1, 
+        prefix: '/srv/prefix', 
+        url: 'http://example.com', 
+        url_path: 'web'
+      has_attached_file :file, via: :file1, belongs_into: :dir
+    end
+
+    test = SomeModel.new
+
+    assert_equal 'http://example.com/web', test.get_dir_url
+    assert_equal '/web', test.get_dir_url_path
+    assert_equal '/srv/prefix/', test.get_dir_path
+    assert_equal 'http://example.com/web', test.get_file_url
+    assert_equal '/web', test.get_file_url_path
+    assert_equal '/srv/prefix/', test.get_file_path
+    assert_equal '/srv/prefix/', test.get_file_dir
+  end
+
   test "should find file in other class directory" do
     class DirModel < BaseModel
       has_attached_directory :dir, 

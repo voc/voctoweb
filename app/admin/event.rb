@@ -55,20 +55,22 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs "Event Details" do
       f.input :guid
-      f.input :title
-      f.input :thumb_filename
-      f.input :gif_filename
-      f.input :poster_filename
       f.input :conference
-      f.input :promoted
+      f.input :title
       f.input :subtitle 
-      f.input :link
-      f.input :slug
       f.input :description
+      f.input :link
+      f.input :promoted
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
       f.input :date
       f.input :release_date
+    end
+    f.inputs "Files" do
+      f.input :slug
+      f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
+      f.input :gif_filename, hint: event.try(:conference)..try(:get_images_path)
+      f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
     end
     f.actions
   end
@@ -84,6 +86,7 @@ ActiveAdmin.register Event do
     if event.conference.downloaded?
       link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
     end
+    link_to 'Add Recording', new_admin_recording_path(recording: {event_id: event.id}), method: :get
   end
 
   batch_action :update_event_infos do |selection|

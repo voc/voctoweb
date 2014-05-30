@@ -105,16 +105,6 @@ class Event < ActiveRecord::Base
     download_to_file(url, path)
   end
 
-  def get_filename
-    if self.slug.present?
-      filename = self.slug
-    else
-      filename = self.guid
-    end
-    filename.gsub!(/ /, '_')
-    filename
-  end
-
   def display_name
     if self.title.present?
       self.conference.acronym + ": " + self.title 

@@ -8,7 +8,7 @@ class Recording < ActiveRecord::Base
   before_destroy :delete_video
 
   belongs_to :event
-  delegate :conference, to: :event
+  delegate :conference, to: :event, allow_nil: true
 
   validates_presence_of :event
   validates_presence_of :filename
@@ -90,6 +90,18 @@ class Recording < ActiveRecord::Base
   def create_recording_dir
     FileUtils.mkdir_p get_recording_dir
   end
+
+  def display_name
+    if self.event.present?
+      str = self.event.display_name
+    else
+     str = self.filename
+    end
+
+    return self.id if str.empty?
+    str
+  end
+
   private
 
   def delete_video

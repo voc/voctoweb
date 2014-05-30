@@ -37,15 +37,15 @@ ActiveAdmin.register Recording do
 
   form do |f|
     f.inputs "Recording Details" do
-      f.input :original_url
-      f.input :folder
-      f.input :filename
-      f.input :mime_type
+      f.input :event
+      f.input :folder, hint: recording.try(:conference).try(:get_recordings_path)
+      f.input :filename, hint: recording.try(:get_recording_dir)
+      f.input :mime_type, collection: Recording::HTML5
       f.input :size
       f.input :length
       f.input :width
       f.input :height
-      f.input :event
+      f.input :original_url
     end
     f.actions
   end

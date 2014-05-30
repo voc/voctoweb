@@ -3,6 +3,8 @@ class Conference < ActiveRecord::Base
   include Download
   include Storage
 
+  ASPECT_RATIO = [ '4:3', '16:9' ]
+
   has_many :events, dependent: :destroy
 
   validates_presence_of :acronym
