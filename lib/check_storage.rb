@@ -4,6 +4,7 @@ module CheckStorage
 
     # check if all recordings from the database exist in the filesystem
     def check_videos_exist_on_disk
+      missing = Recording.all.select { |r| not File.readable? r.get_recording_path }
     end
 
     # check if all recordings in the filesystem are represented in the db
@@ -12,12 +13,24 @@ module CheckStorage
 
     # check if database is linking to removed files
     def check_media_exists_on_disk
+      missing_logos = Conference.all.select { |c| not File.readable? c.get_logo_path }
+      missing_images = Event.all.select { |e| 
+        not File.readable? e.get_gif_path or
+        not File.readable? e.get_poster_path or
+        not File.readable? e.get_thumb_path
+      }
     end
 
     # check if files were not imported to db
     def check_media_exists_in_db
     end
 
+  end
+
+  def check_webm_exists
+    Event.where(<<-SQL)
+      not exists (SELECT null from recordings where events.id = recordings.event_id and recordings.mime_type='video/webm')
+    SQL
   end
 
   def check_recording_dupes
@@ -30,5 +43,5 @@ module CheckStorage
     }
   end
 
-  module_function :check_recording_dupes
+  module_function :check_recording_dupes, :check_webm_exists, :check_media_exists_on_disk, :check_videos_exist_on_disk
 end
