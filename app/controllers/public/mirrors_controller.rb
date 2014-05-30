@@ -1,8 +1,4 @@
-class Public::MirrorsController < ApplicationController
-  def index
-    # connect to other db
-    # build array
-    # render
-    @mirrors = Mirror.all
-  end
+class Public::MirrorsController < InheritedResources::Base
+  respond_to :json
+  actions :index
 end
