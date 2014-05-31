@@ -142,6 +142,7 @@ Generate the site
     /public/events/:id
     /public/recordings
     /public/recordings/:id
+    /public/mirrors
 
 
 Example:

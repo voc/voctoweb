@@ -1,4 +1,5 @@
-json.array!(@mirrors.select { |m| m.enabled }) do |mirror|
+json.mirrors(@mirrors.select { |m| m.enabled }) do |mirror|
+  json.code :success
   json.identifier mirror.identifier
   json.baseurl mirror.baseurl
   json.status_baseurl mirror.status_baseurl
