@@ -42,21 +42,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 group :development do
-  # dump data to seeds
-  gem 'seed_dump'
   gem 'quiet_assets'
   gem 'pry-rails'
   gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing

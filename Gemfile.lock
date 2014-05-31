@@ -157,9 +157,6 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    seed_dump (3.1.0)
-      activerecord
-      activesupport
     slop (3.4.6)
     sprockets (2.10.0)
       hike (~> 1.2)
@@ -207,7 +204,6 @@ DEPENDENCIES
   ruby-graphviz
   sass-rails (~> 4.0.0)
   sdoc
-  seed_dump
   sqlite3
   state_machine
   turbolinks
