@@ -43,7 +43,7 @@ class StorageTest < ActiveSupport::TestCase
     assert_equal 'http://example.com/web/basedir1/testfile', test.get_file_url
     assert_equal '/web/basedir1/testfile', test.get_file_url_path
     assert_equal '/srv/prefix/basedir1/testfile', test.get_file_path
-    assert_equal '/srv/prefix/basedir1/', test.get_file_dir
+    assert_equal '/srv/prefix/basedir1', test.get_file_dir
   end
 
   test "should handle nil values in annotations" do
@@ -60,11 +60,11 @@ class StorageTest < ActiveSupport::TestCase
 
     assert_equal 'http://example.com/web', test.get_dir_url
     assert_equal '/web', test.get_dir_url_path
-    assert_equal '/srv/prefix/', test.get_dir_path
+    assert_equal '/srv/prefix', test.get_dir_path
     assert_equal 'http://example.com/web', test.get_file_url
     assert_equal '/web', test.get_file_url_path
-    assert_equal '/srv/prefix/', test.get_file_path
-    assert_equal '/srv/prefix/', test.get_file_dir
+    assert_equal '/srv/prefix', test.get_file_path
+    assert_equal '/srv/prefix', test.get_file_dir
   end
 
   test "should find file in other class directory" do

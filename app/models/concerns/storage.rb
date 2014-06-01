@@ -30,7 +30,7 @@ module Storage
       end
 
       klass.send :define_method, "get_#{symbol}_path" do
-        File.join(prefix, self.send(instance_var)||'')
+        Storage.file_join prefix, self.send(instance_var)
       end
     end
   end
@@ -57,16 +57,20 @@ module Storage
         parts << target.send("get_#{dir_symbol}_path")
         parts << self.send(ivar_folder) if ivar_folder
         parts << self.send(via)
-        File.join parts.select { |p| p.present? }
+        Storage.file_join parts
       end
 
       klass.send :define_method, "get_#{symbol}_dir" do
         target = on ? self.send(on) : self
         return if target.nil?
         folder = ivar_folder ? self.send(ivar_folder) : ''
-        File.join target.send("get_#{dir_symbol}_path"), folder
+        Storage.file_join target.send("get_#{dir_symbol}_path"), folder
       end
     end
+  end
+
+  def self.file_join(*args)
+    File.join args.flatten.select { |w| w.present? }
   end
 
   class URL
