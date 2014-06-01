@@ -69,7 +69,7 @@ ActiveAdmin.register Event do
     f.inputs "Files" do
       f.input :slug
       f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
-      f.input :gif_filename, hint: event.try(:conference)..try(:get_images_path)
+      f.input :gif_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
     end
     f.actions
