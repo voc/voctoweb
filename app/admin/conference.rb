@@ -10,7 +10,7 @@ ActiveAdmin.register Conference do
     column :created_at do |conference|
       l(conference.created_at, format: :pretty_datetime)
     end
-    default_actions
+    actions
   end
 
   show do |c|

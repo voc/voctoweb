@@ -2,12 +2,14 @@ require 'test_helper'
 
 class RecordingsApiTest < ActionDispatch::IntegrationTest
 
-  FILE = 'test.mp3'
+  FILE = '/tmp/test.mp3'
 
   setup do
     @key = create(:api_key)
     @event = create(:event)
     @json = get_json
+    Delayed::Worker.delay_jobs = false
+    create_test_file FILE
   end
 
   def get_json
@@ -25,18 +27,16 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
 
   test "should create recording via json" do
     assert JSON.parse(@json)
-    create_test_file FILE
     assert_difference('Recording.count') do
       post_json '/api/recordings.json', @json
     end
-    FileUtils.remove_file FILE
   end
 
   test "should call start_download after create" do
     post_json '/api/recordings.json', @json
     event = Event.find_by guid: @event.guid
     assert_not_nil event
-    assert event.recordings.last.downloading?
+    assert event.recordings.last.released?
   end
 
 end

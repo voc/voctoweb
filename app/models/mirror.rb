@@ -1,10 +1,10 @@
 class MirrorBrain < ActiveRecord::Base
     self.abstract_class = true
-    self.establish_connection 'mirrorbrain'
+    self.establish_connection :mirrorbrain
 end
 
 class Mirror < MirrorBrain
-  self.table_name = 'server'
+  self.table_name = :server
 
   def to_json
     Jbuilder.encode do |json|

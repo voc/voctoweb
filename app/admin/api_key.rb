@@ -4,7 +4,7 @@ ActiveAdmin.register ApiKey do
     column :key
     column :description
     column :created_at
-    default_actions
+    actions
   end
 
   form do |f|

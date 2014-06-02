@@ -18,7 +18,7 @@ ActiveAdmin.register Event do
     column :created_at do |event|
       l(event.created_at, format: :pretty_datetime)
     end
-    default_actions
+    actions
   end
 
   show do |e|

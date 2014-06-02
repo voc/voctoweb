@@ -8,7 +8,6 @@ end
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
-  ActiveRecord::Migration.check_pending!
 
   TMP_DIR = 'tmp/tests'
 

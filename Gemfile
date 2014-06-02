@@ -1,26 +1,28 @@
 source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'state_machine'
+gem 'devise'
+# act as state machine
+gem 'state_machine', github: 'manno/state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem "factory_girl_rails", "~> 4.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.1.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
