@@ -15,6 +15,14 @@
 /log/*.log
 /tmp
 
+# Ignore dev files
+.gemrc
+.ruby-version
+.vagrant/
+tags
+*.patch
+vendor/gems/
+
 # Ignore assets
 public/assets
 
