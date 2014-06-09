@@ -1,6 +1,6 @@
 class CreateImportTemplates < ActiveRecord::Migration
   def change
-    create_table :import_template do |t|
+    create_table :import_templates do |t|
 
       #conference
 
