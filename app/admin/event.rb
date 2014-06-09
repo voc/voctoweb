@@ -63,8 +63,8 @@ ActiveAdmin.register Event do
       f.input :promoted
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
-      f.input :date
-      f.input :release_date
+      f.input :date, hint: 'Actual date of the event'
+      f.input :release_date, hint: 'Release date for the video recordings'
     end
     f.inputs "Files" do
       f.input :slug
