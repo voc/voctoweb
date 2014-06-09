@@ -139,4 +139,19 @@ FactoryGirl.define do
     date "2014-05-03"
   end
 
+  factory :import_template do
+    acronym { generate(:conference_acronym) }
+    title "FrabCon"
+    recordings_path "events/frabcon123"
+    images_path "frabcon123"
+    webgen_location { generate(:webgen_location) }
+    aspect_ratio "16:9"
+    logo "logo.jpg"
+    date "2013-08-21"
+    release_date "2013-08-21"
+    promoted true
+    folder "webm"
+    mime_type "video/webm"
+  end
+
 end
