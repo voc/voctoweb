@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      pretty: "%Y-%m-%d %H:%M"
   time:
     formats:
       pretty_datetime: "%Y-%m-%d %H:%M"
