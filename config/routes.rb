@@ -7,6 +7,10 @@ MediaBackend::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'admin/dashboard#index'
 
+  # Custom
+  post 'storage/import_conference'
+
+  # JSON API
   namespace :api do
     resources :conferences, :defaults => { :format => 'json' } do
       collection do

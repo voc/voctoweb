@@ -6,6 +6,7 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     @key = create(:api_key)
     @conference = create(:conference)
     @json = get_json
+    Delayed::Worker.delay_jobs = false
   end
 
   def get_json
