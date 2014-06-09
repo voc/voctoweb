@@ -6,7 +6,7 @@ ActiveAdmin.register News do
     column :body
     column :updated_at
     column :created_at
-    default_actions
+    actions
   end
 
   form do |f|

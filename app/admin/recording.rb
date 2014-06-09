@@ -14,7 +14,7 @@ ActiveAdmin.register Recording do
     column :updated_at do |recording|
       l(recording.updated_at, format: :pretty_datetime)
     end
-    default_actions
+    actions
   end
 
   show do |r|
