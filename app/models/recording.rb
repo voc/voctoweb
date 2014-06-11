@@ -5,8 +5,6 @@ class Recording < ActiveRecord::Base
 
   HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm']
 
-  before_destroy :delete_video
-
   belongs_to :event
   delegate :conference, to: :event, allow_nil: true
 
@@ -103,11 +101,6 @@ class Recording < ActiveRecord::Base
   end
 
   private
-
-  def delete_video
-    file = get_recording_path
-    FileUtils.remove_file file if File.readable? file
-  end
 
   def get_tmp_path
     File.join(MediaBackend::Application.config.folders[:tmp_dir],
