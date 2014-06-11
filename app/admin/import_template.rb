@@ -19,7 +19,7 @@ ActiveAdmin.register ImportTemplate do
       l(it.date, format: :pretty)
     end
     column :release_date do |it|
-      l(it.release_date, format: :pretty_datetime)
+      l(it.release_date, format: :pretty)
     end
 
     # recordings
@@ -53,7 +53,7 @@ ActiveAdmin.register ImportTemplate do
         l(it.date, format: :pretty)
       end
       row :release_date do |it|
-        l(it.release_date, format: :pretty_datetime)
+        l(it.release_date, format: :pretty)
       end
 
       # recordings
