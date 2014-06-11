@@ -21,7 +21,6 @@ ActiveAdmin.register ImportTemplate do
     column :release_date do |it|
       l(it.release_date, format: :pretty_datetime)
     end
-    column :promoted
 
     # recordings
     column :mime_type
@@ -56,7 +55,6 @@ ActiveAdmin.register ImportTemplate do
       row :release_date do |it|
         l(it.release_date, format: :pretty_datetime)
       end
-      row :promoted
 
       # recordings
       row :folder
@@ -95,7 +93,6 @@ ActiveAdmin.register ImportTemplate do
     f.inputs "Events" do
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
-      f.input :promoted
     end
 
     f.inputs "Recordings" do

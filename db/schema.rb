@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609012419) do
+ActiveRecord::Schema.define(version: 20140611215347) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(version: 20140609012419) do
     t.string   "images_path"
     t.date     "date"
     t.datetime "release_date"
-    t.boolean  "promoted"
     t.string   "mime_type"
     t.string   "folder"
     t.integer  "width"

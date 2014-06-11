@@ -149,7 +149,6 @@ FactoryGirl.define do
     logo "logo.jpg"
     date "2013-08-21"
     release_date "2013-08-21"
-    promoted true
     folder "webm"
     mime_type "video/webm"
   end
