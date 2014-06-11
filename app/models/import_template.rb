@@ -23,7 +23,7 @@ class ImportTemplate < ActiveRecord::Base
 
   def recordings
     images = Dir[File.join(get_images_path, '*')]
-    Dir[File.join(get_recordings_path, '*')].map { |path|
+    Dir[File.join(get_recordings_path, folder, '*')].map { |path|
 
       slug = File.basename path, '.*'
       search_gif_by_slug = /#{slug}.*\.gif/
