@@ -115,6 +115,7 @@ ActiveAdmin.register ImportTemplate do
     link_to 'Import Conference', import_conference_admin_import_template_path(import_template), method: :post
   end
 
-  permit_params :acronym
+  permit_params :acronym, :title, :aspect_ratio, :webgen_location, :recordings_path, :images_path, :logo, :date, :release_date, :folder, :mime_type, :width, :height
+
 
 end
