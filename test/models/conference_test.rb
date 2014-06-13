@@ -41,4 +41,22 @@ class ConferenceTest < ActiveSupport::TestCase
     assert_equal "#{MediaBackend::Application.config.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path 
   end
 
+
+  test "should deny validation with invalid path" do
+    @conference = create(:conference_with_recordings)
+
+    @conference.recordings_path = '../../etc/passwd'
+    refute @conference.save
+
+    @conference.recordings_path = "\0/etc/passwd"
+    assert_raises ArgumentError do
+      @conference.save
+    end
+
+    @conference = create(:conference_with_recordings)
+    @conference.logo = "../etc/passwd"
+    refute @conference.save
+  end
+
+
 end

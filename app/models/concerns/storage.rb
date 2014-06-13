@@ -17,9 +17,20 @@ module Storage
 
   private 
 
+  class PathValidator  < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      return if value.nil?
+      if File.join('/test', value) != File.absolute_path(value, '/test')
+        record.errors.add(attribute, "not a valid path")
+      end
+    end
+  end
+
   class AttachedDirectory
 
     def self.define_on(klass, symbol, instance_var, prefix, url, url_path)
+ 
+      klass.send :validates, instance_var, path: true
 
       klass.send :define_method, "get_#{symbol}_url" do
         URL.join url, url_path, self.send(instance_var)
@@ -37,18 +48,20 @@ module Storage
 
   class AttachedFile
 
-    def self.define_on(klass, symbol, via, ivar_folder, dir_symbol, on)
+    def self.define_on(klass, symbol, ivar_via, ivar_folder, dir_symbol, on)
+
+      klass.send :validates, ivar_via, path: true
 
       klass.send :define_method, "get_#{symbol}_url" do
         target = on ? self.send(on) : self
         folder = ivar_folder ? self.send(ivar_folder) : ''
-        URL.join target.send("get_#{dir_symbol}_url"), folder, self.send(via)
+        URL.join target.send("get_#{dir_symbol}_url"), folder, self.send(ivar_via)
       end
 
       klass.send :define_method, "get_#{symbol}_url_path" do
         target = on ? self.send(on) : self
         folder = ivar_folder ? self.send(ivar_folder) : ''
-        '/' + URL.join(target.send("get_#{dir_symbol}_url_path"), folder, self.send(via))
+        '/' + URL.join(target.send("get_#{dir_symbol}_url_path"), folder, self.send(ivar_via))
       end
 
       klass.send :define_method, "get_#{symbol}_path" do
@@ -56,7 +69,7 @@ module Storage
         parts = []
         parts << target.send("get_#{dir_symbol}_path")
         parts << self.send(ivar_folder) if ivar_folder
-        parts << self.send(via)
+        parts << self.send(ivar_via)
         Storage.file_join parts
       end
 

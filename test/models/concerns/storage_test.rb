@@ -4,6 +4,8 @@ class StorageTest < ActiveSupport::TestCase
 
   setup do 
     class BaseModel
+      def self.validates(*args)
+      end
       extend Storage::ClassMethods
       attr_accessor :dir1, :file1
     end
