@@ -1,0 +1,3201 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<schedule>
+<conference>
+<acronym>froscon2013</acronym>
+<title>FrOSCon</title>
+<start>2013-08-24</start>
+<end>2013-08-25</end>
+<days>2</days>
+<timeslot_duration>00:05</timeslot_duration>
+</conference>
+<day date='2013-08-24' index='1'>
+<room name='HS1/2'>
+<event guid='fiY1iSGUjvq3YcgI6dYBwA' id='1237'>
+<start>09:30</start>
+<duration>00:30</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_09:30_-_init_-_andreas_kupfer_-_boernd_-_1237</slug>
+<title>init</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='343'>Andreas Kupfer</person>
+<person id='735'>Boernd</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='8tXkx-Ci8nmdmvZneMp93g' id='1212'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_10:00_-_verkehrte_welt_-_holger_gantikow_-_1212</slug>
+<title>Verkehrte Welt</title>
+<subtitle>Linux im High Performance Computing</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Der Vortrag gibt einen Einblick in die Welt der Supercomputer, die fast alle eines gemeinsam haben: Sie werden durch Linux zum Fliegen gebracht.
+
+Den Schwerpunkt des Vortrags bilden die Fragen, wie es dazu kommen konnte und welche dort eingesetzten Technologien und Werkzeuge auch den normalen IT-Alltag &quot;beflügeln&quot; können.
+
+Darüber hinaus wird beleuchtet, ob sich ein Ausflug in die Cloud in einem solchen Umfeld &quot;rechnen&quot; kann. </abstract>
+<description>Im Unterschied zur Desktop-Welt hat Linux im Supercomputing fest die Pole-Position inne, was sich auch in nächster Zeit nicht ändern dürfte.
+
+Wie sich die Welt des Supercomputings entwickelt hat, wie Linux zu seiner Rolle dort kommt, welchen Stellenwert Open Source Software dort hat und welche Herausforderungen aus dem Bereich des High Performance Computings (HPC) auch für die normale IT relevant sind stehen im Fokus des Vortrags.</description>
+<persons>
+<person id='805'>Holger Gantikow</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='yFEJDQ5WlbBl5Y5cd3TCrw' id='1131'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_11:15_-_persona_a_federated_and_privacy-protecting_login_system_for_the_whole_web_-_francois_marier_-_1131</slug>
+<title>Persona: a federated and privacy-protecting login system for the whole Web</title>
+<subtitle></subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Websites that need to identify their users commonly use one of two methods: a  username &amp; password scheme that's hard to secure and creates a lot of pain for users, or a centralized proprietary service on which many of their users already have accounts.
+
+There must a better way. A cross-browser solution for authenticating users which feels like the Web and preserves the decentralized architecture necessary for an open network. We present Mozilla Persona.</abstract>
+<description>Passwords are a big problem online and a lot of websites have turned to centralized services to handle logins for them. It's a disturbing trend from a privacy/surveillance point of view, but from a software freedom point of view, it's also turning these proprietary services into core dependencies and expanding the walled gardens.
+
+That's why Mozilla is building Persona, a new federated and cross-browser system which makes identity a standard part of the browser. It's simple, privacy-sensitive and entirely Open Source.
+
+This talk will explore the challenges of the existing Web identity solutions and introduce the  choices that were made during the development of Persona.
+
+It will cover:
+
+- a quick overview of current identity systems on the Web
+- a discussion of the complexities and privacy-related concerns that existing identity solutions have
+- how crypto is used to provide both authentication and privacy, even from your identity provider
+- the Persona federation approach: fully distributed with fallbacks
+- the importance of building a cross-browser system that works on all your devices
+- demos and actual code from sites that have implemented Persona
+- the basics of the Persona API so that attendees can go out and support this technology on their own sites
+
+Identity is a very significant piece of Internet infrastructure and so it's critical that the solution that gets widely adopted be free-as-in-freedom, decentralized and ruthlessly focused on making it easy for developers and end-users.</description>
+<persons>
+<person id='771'>François Marier</person>
+</persons>
+<links>
+<link href='https://login.persona.org/about'>About Mozilla Persona</link>
+<link href='https://github.com/mozilla/browserid/'>Source code</link>
+<link href='https://developer.mozilla.org/docs/persona'>Documentation</link>
+</links>
+</event>
+<event guid='vgYwrk0z5tiV0dDsBLueKA' id='1278'>
+<start>12:45</start>
+<duration>00:45</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_12:45_-_how_to_make_money_from_open_source_today_-_michael_monty_widenius_-_1278</slug>
+<title>How to make money from Open Source today</title>
+<subtitle></subtitle>
+<track>Keynote</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Time has changed since the start of Open Source. Companies has now 
+started to understand that they can use open source without having to 
+pay for it. How can one today create a viable business around open 
+source software?</abstract>
+<description></description>
+<persons>
+<person id='587'>Michael &quot;Monty&quot; Widenius</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='eAk8q8pCwOzYj_hMyg8Zmw' id='1130'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_14:00_-_ganeti_-_helga_velroyen_-_klaus_aehlig_-_1130</slug>
+<title>Ganeti</title>
+<subtitle>The Cluster-based Virtualization Management Software</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Ganeti is a system for managing clusters of virtual machines. In this talk, we give an introduction to Ganeti, and describe its architecture and interfaces to other open source software components. We give an overview about how to use and customize Ganeti along with examples of how we use Ganeti inside Google. We conclude with an update on recent developments and releases, and on our participation in the Google Summer of Code 2013.</abstract>
+<description>Ganeti is a management software for clusters of virtual machines based on Xen, KVM or LXC. It is an open source project funded by Google which has been around 6 years now. It has grown to the size of ~60,000 lines of Python and ~6,000 lines of Haskell code. Besides being used in Google’s internal infrastructure, the project has a lively open source community. Among our biggest users and contributors are OSUOSL and GRNet.
+
+In our talk, we will present Ganeti’s architecture and subcomponents, as well as interfaces to the utilized open source components. We give examples of how to use and customize Ganeti to build a virtualized cluster.
+
+We conclude with some overview on how we use Ganeti inside Google. For those who have been following our development for a while already, we will give updates about the recently developed and upcoming features. This includes the results of our projects in the scope of the Google Summer of Code 2013.</description>
+<persons>
+<person id='765'>Helga Velroyen</person>
+<person id='766'>Klaus Aehlig</person>
+</persons>
+<links>
+<link href='https://code.google.com/p/ganeti/'>Ganeti - Cluster-based Virtualization Management Software</link>
+</links>
+</event>
+<event guid='HNkrqxZhSqfP1yR7aFFAAA' id='1148'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_15:15_-_cache_cash_-_stefan_wintermeyer_-_1148</slug>
+<title>Cache = Cash</title>
+<subtitle>Geld beim Server sparen und neue User gewinnen.</subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Einen schnellen Webshop kann man entweder durch den massiven Einsatz von Hardware oder durch intelligente Programmierung erreichen. Die größte Performance-Optimierung kann dabei mit Fragement-Caching, HTTP-Caching und Page-Caching erzielt werden. Stefan Wintermeyer zeigt dies auf einem Raspberry Pi mit Nginx, Ruby on Rails, MySQL und Memcached.</abstract>
+<description>Die meisten Entwickler beschäftigen sich mit Caching, wenn sich in der Web-Applikation ein Nadelöhr entwickelt. Faktisch ist es dann aber viel zu spät, um ein optimales Caching zu realisieren. Die verschiedenen Caching-Methoden (z.B. Fragment-Caching, HTTP-Caching und Page-Caching) bekommen erst dann Flügel, wenn man sie vom ersten Tag der Entwicklung an bei der Datenbankstruktur berücksichtigt. 
+
+Stefan Wintermeyer wird anhand eines Beispielwebshops mit Nginx, Ruby on Rails, MySQL und Memcached zeigen wie weit strukturiertes Caching Geld bei der Hardware sparen kann. Eine Hand voll LOC sparen mal eben mal 50% der Serverhardware. Wer mehr sparen will, muss ein wenig mehr Entwicklungszeit investieren. Dabei setzt er als Beispielplattform den Raspberry Pi ein. Das Ziel ist dabei nicht nur die Einsparung von teurer Hardware, sondern auch eine möglichst schnelle Auslieferung der Webseite an den Endkunden. Im Zweifelsfall wird der schneller Webshop mehr Umsatz generieren. Cache = Cash!</description>
+<persons>
+<person id='780'>Stefan Wintermeyer</person>
+</persons>
+<links>
+<link href='http://ruby-auf-schienen.de/3.2/caching.html'>Caching Kapitel im Ruby on Rails Buch.</link>
+<link href='https://speakerdeck.com/wintermeyer/cache-equals-cash-1'>Folien zum Vortrag</link>
+</links>
+</event>
+<event guid='V1IhzecBhgn4ITI9OUFZcw' id='1191'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_16:30_-_introduction_to_the_hadoop_ecosystem_-_uwe_seiler_-_1191</slug>
+<title>Introduction to the Hadoop ecosystem</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Apache Hadoop is one of the most popular solutions for today’s Big Data challenges. Hadoop offers a reliable and scalable platform for fail-safe storage of large amounts of data as well as the tools to process this data. This presentation will give an overview of the architecture of Hadoop and explain the possibilities for integration within existing enterprise systems. Finally, the main tools for processing data will be introduced which includes the scripting language layer Pig, the SQL-like query layer Hive as well as the column-based NoSQL layer HBase.</abstract>
+<description></description>
+<persons>
+<person id='802'>Uwe Seiler</person>
+</persons>
+<links>
+<link href='http://de.slideshare.net/uweseiler/introduction-to-the-hadoop-ecosystem-21595695'>Slideshare</link>
+</links>
+</event>
+<event guid='kbitjMMNIgIadCt8ypaRvQ' id='1184'>
+<start>17:45</start>
+<duration>01:30</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-24_17:45_-_the_state_of_the_union_-_michael_kleinhenz_-_oliver_zendel_-_1184</slug>
+<title>The State of the Union</title>
+<subtitle>Das FOSS-Jahr 2013</subtitle>
+<track>Community</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Viel ist passiert im Jahr 2013 in der Open Source Szene. Oliver Zendel und Michael Kleinhenz, die beide täglich mit und für FOSS arbeiten, werfen einen augenzwinkernden Blick in die Vergangenheit aber auch die Zukunft. Wie hat sich das FOSS-Business verändert? Was bedeuten die mobilen Plattformen für Freie Software? Welche Konsequenzen haben die aktuellen Mega-Merger im IT-Business? Wie hat das Tauziehen um das Urheberrecht Einfluss auf die Open Source Szene? Diese und andere Fragen und Themen streift das Gespräch und bindet dabei das Publikum direkt in die Diskussion ein.</abstract>
+<description>Viel ist passiert im Jahr 2013 in der Open Source Szene. Oliver Zendel und Michael Kleinhenz, die beide täglich mit und für FOSS arbeiten, werfen einen augenzwinkernden Blick in die Vergangenheit aber auch die Zukunft. Wie hat sich das FOSS-Business verändert? Was bedeuten die mobilen Plattformen für Freie Software? Welche Konsequenzen haben die aktuellen Mega-Merger im IT-Business? Wie hat das Tauziehen um das Urheberrecht Einfluss auf die Open Source Szene? Diese und andere Fragen und Themen streift das Gespräch und bindet dabei das Publikum direkt in die Diskussion ein.</description>
+<persons>
+<person id='526'>Michael Kleinhenz</person>
+<person id='20'>Oliver Zendel</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='HS3'>
+<event guid='RNNW1_noAgu2x6w7bndBSA' id='1183'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_10:00_-_raspberry_pi_meets_asterisk_and_php_-_jan_kammerath_-_1183</slug>
+<title>Raspberry Pi meets Asterisk and PHP</title>
+<subtitle>Professional phone services for everybody!</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Learn how to use Raspberry Pi with Asterisk and program your own web telephone applications interacting with Asterisk - not just on the Raspberry Pi, but also on your web server. Functions like web conference, click to call in PHP and call-back services are covered.</abstract>
+<description>The presentation will include the following points. I will focus very much on the practical configuration and programming. It will also cover live presentation of the system and their features.
+
+1. Asterisk and Raspberry Pi for call-based automation
+1.1. What's a Raspberry Pi with an Asterisk?
+1.2. Basic Asterisk config for your home (just a quick overview)
+1.3. How to save - not just - on international calls
+1.4. Scripting: Why use SSH when you can use DTMF?
+
+2. Professional use of Asterisk with PHP
+2.1. Why every (PHP-driven) website needs Asterisk
+2.2. Click to call: connecting two phone lines with a click
+2.3. Web-based phone conferencing system: this is how it works  
+2.4. Dynamic voice: web content over the phone
+
+3. Talking security
+3.1. Things you could (maybe) do, but maybe should not
+3.2. anonymous GSM Gateways
+3.3. anonymous call-routing
+3.4. fake-number calling</description>
+<persons>
+<person id='800'>Jan Kammerath</person>
+</persons>
+<links>
+<link href='http://www.kammerath.net/asterisk-virtuelle-telefonanlage.html'>Asterisk als Telefonanlage auf dem Raspberry Pi</link>
+<link href='http://www.kammerath.net/click-to-call.html'>Click to Call mit Asterisk und PHP</link>
+<link href='http://www.kammerath.net/asterisk-voicemail.html'>Asterisk Voicemail made easy</link>
+</links>
+</event>
+<event guid='eXkE5UsXMDgr18LdWMpsPA' id='1194'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_11:15_-_smartsarah_-_florian_schweikert_-_1194</slug>
+<title>SmartSarah</title>
+<subtitle>Mit freien Standards zum Smarthome</subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>IPv6 basiert Messen und Steuern mit offenen Standards.
+Der Raspberry Pi als Beispiel für einen kleinen günstigen Automatisierungsserver.</abstract>
+<description>Der Forschungsverein OpenSourceDomotics entwickelt mit SmartSarah eine Automatisierungsplattform basierend auf freien Standards wie unter anderen 6LoWPAN und CoAP.
+Wie könnte ein komplett freies Smarthomesystem aussehen? Eine Reise durch die OSI-Schichten und Präsentation des aktuellen Status mit Hilfe eines RaspberryPi.
+Durch das Einbinden vorhandener (propritärer) Systeme kann kontinuierliche Migration zu offenen Standards erzielt werden.</description>
+<persons>
+<person id='797'>Florian Schweikert</person>
+</persons>
+<links>
+<link href='http://www.osdomotics.com/'>OpenSourceDomotics</link>
+<link href='http://kelvan.ist-total.org/recordings.php'>Mitschnitte ähnlicher Talks</link>
+</links>
+</event>
+<event guid='OV2_IFucpz2SCtnHhTLtMw' id='1156'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_14:00_-_arduino_grundlagen_-_uwe_ziegenhagen_-_1156</slug>
+<title>Arduino Grundlagen</title>
+<subtitle>Spaß mit LEDs</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Meine Vorträge von 2011 und 2012 ergänzend und erweiternd zeige ich, wie man mit Arduinos interessante Projekte, insbesondere mit LEDs, durchführen kann. Der Vortrag richtet sich an Neueinsteiger.</abstract>
+<description>Die Arduino-Plattform bietet eine einfache und kostengünstige Möglichkeit, elektronische Basteleien durchzuführen. Man muss kein E-Technik Studium absolviert haben, um erste Erfolgserlebnisse zu haben, ein klein wenig Menschenverstand und kleinste Programmierkenntnisse reichen schon aus. 
+
+In meinem Vortrag gehe ich auf die Geschichte des Arduino ein, zeige erste Beispiele im Geiste von &quot;Wie lasse ich eine LED blinken&quot; oder &quot;Wie steuere ich ein LC-Display an&quot; bevor ich dann weitergehende LED Basteleien vorstelle.
+
+</description>
+<persons>
+<person id='470'>Uwe Ziegenhagen</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='YdPulJE7-RRYbDokZNPO4w' id='1155'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_15:15_-_tiki_wiki_cms_groupware_-_frank_guthausen_-_1155</slug>
+<title>Tiki Wiki CMS Groupware</title>
+<subtitle>die eierlegende Wollmilchsau</subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Ein Überblick über Tiki Wiki CMS Groupware (Tiki): Software, Community, Entwicklungsmodell, Administration, Infrastruktur</abstract>
+<description>Tiki ist eine integrierte Softwarelösung für Kollaboration. Dabei werden sehr viele Funktionalitäten vereinigt, die man wahlweise aktivieren kann: Wiki, Blog, Forum, Tracker, Spreadsheets, Filegalleries, Kalender... die Liste ist extrem lang.
+
+Tiki ist die Webanwendung mit den meisten integrierten Funktionen überhaupt.
+
+Tiki zeichnet sich durch eine aktive, freundliche und kollaborative Community aus, wobei Kollaboration weit über Kooperation hinausgeht.
+
+Tiki hat ein für die Welt der Freien Software ungewöhnliches und extrem offenes Entwicklungsmodell. Das Prinzip eines Wikis, in dem Informationen und Inhalt von vielen Personen zusammengetragen und erstellt werden, wurde auf den Softwareentwicklungsprozess selbst übertragen.</description>
+<persons>
+<person id='786'>Frank Guthausen</person>
+</persons>
+<links>
+<link href='https://info.tiki.org/'>Tiki Wiki CMS Groupware</link>
+</links>
+</event>
+<event guid='ncQ4f90cq-s-G3eEDnH7Zg' id='1233'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_16:30_-_testing_a_livecd_igor_is_doing_it_-_fabian_deutsch_-_1233</slug>
+<title>Testing a LiveCD? Igor is doing it.</title>
+<subtitle>or: How to make testing a distribution fun.</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language></language>
+<abstract>You will be facing different challenges when you try to test a distribution, compared to testing a single software component. This talk is about what challenges appear when testing a distribution, and how to address them.</abstract>
+<description>The trouble with testing a LiveCD (like oVirt Node) or any other distribution is, that a host is needed before it can be tested. Normally it should not only be tested on one, but on several different hosts (bare-metal or virtual, with SAN or local storage, ...).
+Testing is a boring, time consuming, and an error prone part of the development process, which would profit from any kind of test automation.
+Igor is a tool which was made for  this prupose, for testing an OS.
+We'll take a look at how Igor integrates into an existing continuous integration pipeline, consisting of Gerrit and Jenkins.
+More light will also be shed on how Igor takes care of your host's lifecycle, how it runs or installs the LiveCD, and initiates tests.
+
+Tags: continous integration, gerrit, jenkins, igor, distribution, development, fedora, ovirt-node</description>
+<persons>
+<person id='817'>Fabian Deutsch</person>
+</persons>
+<links>
+<link href='http://dummdida.blogspot.de/2013/04/testing-ovirt-node-in-4min.html'>Testing oVirt Node in 4min (video)</link>
+</links>
+</event>
+<event guid='WchK-TWX7a1SkYMH6u_HFw' id='1177'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-24_17:45_-_container_basierte_multiseat-systeme_-_axel_schoner_-_1177</slug>
+<title>Container basierte MultiSeat-Systeme</title>
+<subtitle>pamlxc</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Moderne Computersysteme sind in der Regel leistungsfähiger, als dass ein einzelner Benutzer diese beim Arbeiten permanent auslasten könnte.
+Dennoch ist es gängig jedem Benutzer an seinem Arbeitsplatz einen eigenen Rechner zur Verfügung zu stellen.
+Dies bringt einige Vorteile aber auch viele Nachteile mit sich.
+Um diese Herauszustellen und einen geeigneten Ansatz zu finden, um eine effizientere Ausnutzung vorhandener Ressourcen zu erreichen wird das Konzept von MultiSeat-Systemen untersucht und mittels Container-Virtualisierung optimiert.
+Es folgt eine Demonstration einer entsprechenden Konfiguration.</abstract>
+<description>Titel: Container basierte MultiSeat-Systeme.
+Autor: Axel Schöner
+
+
+Einleitung:
+
+Moderne Computersysteme sind in der Regel leistungsfähiger, als dass ein 
+einzelner Benutzer diese beim Arbeiten permanent auslasten könnte. Dennoch ist 
+es gängig jedem Benutzer an seinem Arbeitsplatz einen eigenen Rechner zur 
+Verfügung zu stellen. Dies bringt einige Vorteile aber auch viele Nachteile mit 
+sich. Um diese Herauszustellen und einen geeigneten Ansatz zu finden, um eine 
+effizientere Ausnutzung vorhandener Ressourcen zu erreichen wird das Konzept von 
+MultiSeat-Systemen untersucht und mittels Container-Virtualisierung optimiert.
+
+
+Grundlagen:
+
+Linux Containers:
+Bei Linux Containers handelt es sich um eine leichtgewichtige 
+Virtualisierungslösung, die vielmehr eine Isolation vorhandener Ressourcen und 
+Prozessen darstellt. Als Grundlage hierzu dient der Einsatz von 
+Kernel-Namespaces, Cgroups und Capabilities, womit ein einzelner Kernel die 
+Limitierung und Isolation der Ressourcen sicherstellen kann. Die dazu 
+notwendigen Voraussetzungen sind seit einiger Zeit im Kernel integriert, zum 
+Betrieb wird lediglich das im userspace laufende Paket LXC benötigt. 
+So entfällt die Emulation kompletter oder teilweiser Hardware wie bei QEMU(E), 
+VMware(E), VirtualBox(E), KVM(V), XEN(VP) oder anderen Emulatoren(E), 
+Vollvirtualisierern(V), Paravirtualierern(P). Dies minimiert den sonst üblichen 
+Performance Overhead beim Einsatz von Virtualisierungslösungen.
+
+Kernel Namespaces:
+Mit dem Kernelrelease 2.6.19 begann die Integration von Namensräumen im Kernel.
+Diese Namensräume dienen dazu, Prozesse von anderen in Hinblick auf bestimmte 
+Eigenschaften zu isolieren. Jeder dieser Namensräume isoliert Prozesse innerhalb 
+dieses Namensraums gegenüber Prozessen die sich außerhalb von diesem befinden. 
+
+Network namespaces:
+Namensräume für das Netzwerk ermöglichen die gezielte Bereitstellung von 
+Netzwerkressourcen für einzelne Prozesse. Diese Ressourcen ( Netzwerkgeräte, 
+IP-Konfiguration, Sockets ... ) sind nur für die ausgewählten Prozesse 
+zugreifbar und sichtbar. Dies ermöglicht das Virtualisieren von 
+Netzwerkressourcen und isoliert diese gegenüber anderer Prozesse. Weiterhin 
+lassen sich Parameter wie Datendurchsatz dieser Namensräume gezielt über cgroups 
+limitieren. Um Container zwischen physischen Systemen migrieren zu können, 
+lassen sich diese Namensräume über das Netzwerk verschieben
+(Quelle: http://lxc.sourceforge.net/index.php/about/kernel-namespaces/network/).
+
+PID namespaces:
+Durch Verwendung eines eigenen PID(Process ID) Namensraums, besitzen die 
+Prozesse innerhalb eines Namensraums eigene PID's. Diese sind unabhängig von den 
+realen PID's des physischen Hosts. Prozesse dieses Namensraums können nur die 
+zum Namensraum zugehörigen Prozesse sehen und verwenden. Dies ermöglicht es, 
+innerhalb verschiedener Namensräume die gleichen PID's zu verwenden, ohne mit 
+denen der anderen Namensräume zu kollidieren. Dies ist zum Beispiel wichtig, da 
+der init-Prozess innerhalb eines Systems per Definition die PID 1 verwendet.
+Grund für die Entwicklung dieses Namensraums, welche vom OpenVZ Team mit Hilfe 
+von IBM vorangetrieben wurde, war es die Migration von Containern zwischen 
+unterschiedlichen physischen Hosts zu ermöglichen. Dies setzt jedoch voraus, 
+dass alle bestehenden PID's kollisionsfrei auf dem Zielrechner weiterverwendet 
+werden können (Quelle: http://lwn.net/Articles/259217/). 
+
+UTS namespaces:
+Innerhalb eines eigenen UTS Namensraums können Hostname, Domainname... speziell 
+für diesen Namensraums gesetzt werden. Diese Eigenschaften gelten nur innerhalb 
+dieses bestimmten Namensraums und sind nach außen hin nicht relevant. Dies ist 
+wichtig um innerhalb einer virtuellen Umgebung wie Linux-VServer/openVZ oder 
+eines Containers eigene Hosteigenschaften zu betreiben 
+(Quelle: http://lwn.net/Articles/179345/).
+''Der Patch wurde von Kirill Korotaev am 24. März 2006 initiiert und von James 
+Morris und Eric Biederman kommentiert und umgesetzt``.
+
+User namespaces:
+Mit Hilfe eines eigenen User Namensraums besteht die Möglichkeit für den 
+betreffenden Namensraum eine eigene Benutzerverwaltung unabhängig der des 
+physischen Hosts zu betreiben. Die Repräsentation der UIDs (Userids) ist davon 
+vollkommen unabhängig gegenüber anderer Namensräume. Dies ermöglicht die 
+gleichen UIDs innerhalb unterschiedlicher Namensräume ohne Kollision zu 
+verwenden. Dieser Namensraum basiert auf einem Patch von Cedric Le Goater 
+welcher am 08 Juni 2007 auf der Linux Kernel Mailing List veröffentlicht wurde
+(Quelle: http://lwn.net/Articles/237662/).
+
+IPC namespaces:
+IPC (Inter-process communication) ermöglicht die Kommunikation mehrerer Prozesse 
+untereinander. Dazu stehen mehrere Möglichkeiten zur Verfügung, für Einzelheiten 
+siehe: (Quelle: http://tldp.org/LDP/lpg/node8.html#SECTION00710000000000000000).
+Dieser Namensraum basiert auf einem Patch von Kirill Korotaev welcher am 09 Juni 
+2006 auf der Linux Kernel Mailing List veröffentlicht wurde:
+(Quelle:http://lwn.net/Articles/187274/).
+
+Cgroups:
+Cgroups (Control Groups) bieten die Möglichkeit Prozesse in einer hierarchischen 
+Struktur zusammenzufassen, für die spezifische Eigenschaften, basierend auf 
+subsystems definiert werden können. Die Zugehörigkeit zu cgroups gelten 
+ebenfalls für deren Kindprozesse. Die Zugehörigkeit eines Prozesses wird über 
+die tasklist, innerhalb des entsprechenden Verzeichnisses zur cgroup festgelegt.
+Prozesse können in eine andere cgroup migriert werden durch Hinzufügen der 
+zugehörigen PID' zur tasklist der Ziel cgroup. Subsystems sind Module, welche 
+bestehende Ressourcen verwalten. Diese Ressourcen lassen sich basierend auf 
+cgroups einschränken um deren Zugriff zu unterbinden oder um die Nutzung dieser 
+Ressourcen zu limitieren. Typische Ressourcen sind Prozessoren, Arbeitsspeicher, 
+Netzwerkressourcen oder ''Kernel Namespaces``. Die Verwendung einer 
+hierarchischen Struktur ermöglicht es Eigenschaften, von Subsystemen auf 
+mehreren Ebenen zu unterteilen. Zu jeder dieser Ebenen lassen sich die 
+Verwendung der möglichen Ressourcen weiter einschränken. Je nach gewünschten 
+Einschränkungen lassen sich Prozesse gezielt in die tasklist der betreffenden 
+cgroup aufnehmen, ohne zu jedem Prozess einzeln die Eigenschaften zu setzen. 
+Cgroups werden auf Dateisystemebene durch ein eigenes Dateisystem(cgroup) 
+verwaltet und abgebildet. Die bereits erwähnte Hierarchie basiert auf der 
+Ordnerstruktur innerhalb dieses Verzeichnisses. Das Anlegen einer neuen cgroup 
+wird durch das Erstellen eines Ordners innerhalb dieser Ordnerstruktur 
+realisiert. Beim Einbinden eines solchen Filesystems kann gezielt angegeben 
+werden welche subsystems in diesem zur Verfügung stehen sollen. Wird auf diese 
+Angabe verzichtet, werden alle verfügbaren subsystems eingebunden. Es gilt zu 
+beachten, dass beim Ausbinden dieses Filesystems die bestehenden Eigenschaften, 
+auf bereits zugewiesene Prozesse weiter gelten, nicht jedoch für neue Prozesse. 
+Grund dafür ist, wie bereits vorab erwähnt, dass die Verwaltung dieser cgroups 
+rein über dessen Filesystem realisiert werden kann. Informationen zur 
+Implementierung der cgroups befinden sich in der Kerneldokumentation. Quelle: 
+Kerneldokumentation 3.0.4 übereinstimmende ältere Version online verfügbar 
+unter: http://www.mjmwired.net/kernel/Documentation/cgroups/cgroups.txt.
+Die Verwaltung der cgroups eines Containers, kann über dessen 
+Konfigurationsdatei erfolgen, über den Befehl: lxc-cgroup sowie auf manuellem 
+Weg über das Filesystem.
+
+Capabilities:
+Capabilities teilen die Rechte des privilegierten Benutzers (root) in bestimmte 
+Teilbereiche auf. Diese Capabilities können für unterschiedliche Prozesse 
+individuell gesetzt werden. Somit lässt sich die Gefahr von Rechtemissbräuchen 
+minimieren. In Bezug auf den Betrieb von Linux-Containern schafft dies die 
+Möglichkeit, bestimmte Rechte innerhalb eines Containers einzuräumen und
+nicht gewollte Rechte zu verwehren. Weiterhin können ungewollte 
+Wechselwirkungen, wie zum Beispiel dem ''read only`` mounten des 
+root-Dateisystems beim Herunterfahren eines Containers verhindert werden.
+Eine Übersicht über alle möglichen Capabilities finden sich unter:  
+http://kernel.org/doc/man-pages/online/pages/man7/capabilities.7.html. 
+
+PAM:
+Die Abkürzung PAM steht für ``Pluggable Authentication Modules'' und ist ein 
+gängiges Authentifizierungsverfahren welches auf fast allen Unix basierenden 
+Betriebssystemen zur Verfügung steht. Entwickelt wurde es 1995 von Vipin Samar 
+und Charlie Lai bei Sun Microsystems. Durch Verwendung der PAM-API kann auf eine 
+Vielzahl von Authentifizierungsverfahren zurückgegriffen werden, ohne diese 
+konkret in eigenen Anwendungen zu integrieren
+(Quelle: http://de.wikipedia.org/wiki/Pluggable_Authentication_Modules).
+Der Funktionsumfang von PAM geht weit über die eigentliche Authentifizierung 
+hinaus, so bietet es die Möglichkeit Account- und Passwortrichtlinien zu 
+verifizieren als auch für die Benutzersitzung notwendige Vor- und Nach- 
+bereitungen zu tätigen. Zu diesem Zweck ist es in 4 Sektionen unterteilt: 
+``auth'', ``account'', ``password'' und ``session''. Für jede dieser Sektionen 
+existieren eine Vielzahl von Modulen, welche wahlweise einzeln oder kombiniert 
+mit anderen verwendet werden können. Die Kombination verschiedener Module lässt 
+sich durch Angabe von Richtlinien noch weiter verfeinern.
+
+
+Vor- und Nachteile:
+
+Vorteile:
+- Der Ausfall eines Computers betrifft dies nur einen einzelnen Benutzer.
+- Arbeitsplätze können räumlich getrennt voneinander sein.
+- Individuelle Betriebssystemkonfiguration pro Benutzer.
+- Uneingeschränkte Leistungsfähigkeit(Ressourcen sind nicht geteilt).
+- Erhöhte Sicherheit(Prozesse und Netzwerkverbindungen können von anderen nicht 
+   gesehen sowie manipuliert werden).
+
+Nachteile:
+- Anschaffungskosten der Hardware steigen linear.
+- Erhöhter Strombedarf.
+- Mehrfache Lizenskosten für installierte Software.
+- Erhöhter Wartungsaufwand der installierten Software.
+
+
+Konzept:
+
+MultiSeat mit Linux Containers:
+Durch den Einsatz moderner Virtualierungstechnik sowie geeigneter Hardware 
+lassen sich MultiSeat-Systeme erstellen, welche ebenbürdig zu seperaten 
+Computersystemen sind und deren Nachteile in vielen Bereichen 
+minimieren/beseitigen können.
+
+Adhoc Generierung von Containern beim Login:
+Möglich wird dies durch den Einsatz eines Authentifizierungsmoduls auf Basis von 
+PAM, welches mittels LXC (Linux Containers) adhoc für jeden neu anzumeldenden 
+Benutzer eine virtuelle Umgebung bereitstellt. Diese Umgebungen sind von 
+einander isoliert. Dies bedeutet, jeder Benutzer kann nur seine eigenen Prozesse 
+sehen und kommuniziert über einen seperaten Netzwerkstack. Zusätzlich lassen 
+sich für jeden Container Limits setzen (CPU, RAM, IO und Netzwerk), um 
+Auslastung durch einzelne Benutzer zu beseitigen.
+
+Durch diesen Ansatz können beim Einsatz geeigneter Hardware mehrere 
+Arbeitsplätze durch einen Computer ohne gegenseitige Behinderung versorgt 
+werden. Dies steigert die Wirtschaftlichkeit durch Senkung der Anschaffungs- und 
+Stromkosten. Beim Einsatz mehrere solcher Systeme ist auch das Vorbehalten von 
+Ersatzhardware kein finanzielles Problem. Der Wartungsaufwand der Software kann 
+gesenkt werden, da die Softwareumgebung auf einem solchen Computer sämtlichen 
+Benutzern zur Verfügung steht. Kombiniert mit einer PXE-Infrastruktur kann sogar 
+die lokale Installation eines solchen Systems entfallen, wobei eine geeignete 
+Replikation der zu virtualisierenden Betriebssysteme auf lokale Massenspeicher 
+bei großer Benutzeranzahl sicher sinvoll ist. Ein weiterer Vorteil ergibt sich 
+aus der adhoc-Erzeugung der virtuellen Umgebungen, bei jedem Anmelden bekommt 
+der Benutzer eine saubere Umgebung zur Verfügung gestellt, da diese von einem 
+zuvor erstellten System abgeleitet wird.
+
+Alternativ: Statische Configuration von Containern:
+Alternativ zum Einsatz von pamlxc, können Container so vorkonfiguriert werden, 
+dass diese beim Starten des Computers automatisch starten. Innerhalb der 
+Konfigurationsdateien der Container können virtuelle Terminals sowie Zugriff auf 
+Ein- und Ausgabegeräte zugewiesen werden, um dem Benutzer entsprechende 
+Zugriffsmöglichkeit einzuräumen.
+
+
+Anforderungen:
+
+Hardware:
+Benötigt wird ein Computer, der den Einsatz mehrere Grafikkarten(einige können 
+dabei mehrere Ausgänge getrennt ansteuern) erlaubt und ausreichend 
+Schnittstellen (zb. USB) für Peripherie bereitstellt. Neuere Prozessoren bringen 
+in vielen Fällen bereits eine Grafikeinheit mit, zusätzlich besteht die 
+Möglichkeit externe USB-Grafikkarten einzusetzen. Um die Anzahl der 
+USB-Schnittstellen zu erhöhen, sowie den Konfigurationsaufwand zu verringern 
+bietet es sich an USB-Hubs einzusetzen. Sollen die Arbeitsplätze räumlich 
+getrennt voneinander betrieben werden, kann auf USB-LAN-USB Umsetzer 
+zurückgegriffen werden. Die Leistungsfähigkeit der sonstigen Komponenten wie 
+Prozessor, Größe des Arbeits- und Festplattenspeicher sind je nach 
+Anwendungszweck auszuwählen.
+
+Betriebssystem:
+Es wird ein Linuxsystem mit einem Kernel ab 3.8 benötigt, damit das Setup ohne 
+Patches funktioniert. Der Einsatz eines Snapshot-fähigem Filesystems wird 
+empfohlen, um den Platzbedarf zu senken und die Reaktionsgeschwindigkeit bei der 
+Bereitstellung zu minimieren. 
+
+Beispiel Konfiguration:
+- Installation von Ubuntu 13.04 auf einem Rechnersystem.
+- Installation von LXC und pamlxc.
+- Eigene Partition mittels BTRFS für das virtuelle Betriebssystem erstellen.
+- Mittels lxc-create gewünschtes Betriebssystem installieren.
+- Nachinstallieren weiterer Software.
+- Konfigurationsdatei: /etc/security/pamlxc.conf anpassen.
+- Konfiguration des XServers sowie des DisplayManagers(zb. XDM).
+- Benutzer im Hauptsystem erstellen.
+
+Windows basierte Software:
+Um Anwendungen zu betreiben welche nur unter Windows lauffähig sind, kann auf 
+Wine oder Virtualierungssoftware wie VirtualBox, QEMU, VmWare oder ähnliches 
+zurückgegriffen werden.
+
+
+Entwicklungsstand und Ziele:
+
+Aktueller Entwicklungsstand:
+Die Funktion des PAM-Moduls gewährleistet bisher Anmeldung auf Terminal-Ebene 
+als auch über den DisplayManager XDM. GDM funktionierte zum Zeitpunkt der 
+Erstentwicklung(Oktober 2011), bereitet aktuell jedoch Probleme.
+
+Ziele für die Zukunft:
+Geplant ist die Unterstützung eines moderneren DisplayManagers, zum Beispiel: 
+GDM, KDM oder LightDM. Unterstützung von Anmeldungen per SSH, dadurch könnten 
+adhoc virtuelle Server erstellt werden, welche entweder bis zur Abmeldung oder 
+darüber hinaus bestehen.</description>
+<persons>
+<person id='666'>Axel Schöner</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='HS4'>
+<event guid='YRxUaWwu_samrqB4GctD5A' id='1231'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_10:00_-_how_to_optimize_kvm_using_libvirt_-_toshaan_bharvani_-_1231</slug>
+<title>How to optimize KVM using libvirt</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language></language>
+<abstract>Using libvirt and related tools to optimize a virtual machine to perform better than the default libvirt configuration, such optimizations can lead to an increase in performance.</abstract>
+<description>KVM is the new default virtualization technology used in most Linux
+based Linux distributions. A short overview on how to technology works.
+An explanation on how to implement virtual systems, using the default
+command line tools included in most Linux distributions. How to build
+server or desktop images. How to implement the networking connections
+and how to secure the connections. Some optimizations and dynamic
+allocation possibilities. A short overview of the benefits of these
+implementation and some drawbacks. The portability of these systems and
+how to migrate the systems amongst physical machines. This takes us more
+into how this implementation can grow to the next step and create a
+private cloud infrastructure for workstations.</description>
+<persons>
+<person id='670'>Toshaan Bharvani</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='jAulJJFvwiX7cN5njexv5Q' id='1180'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_11:15_-_samba4_-_fabrizio_manfredi_-_1180</slug>
+<title>Samba4</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>As the culmination of ten years' work, the Samba Team has created the first compatible Free Software implementation of Microsoft’s Active Directory protocols.
+LDAP, Kerberos, DNS, and all other essential services that are required for Active Directory are natively supported by Samba4.
+Samba4 doesn't have only Active Directory functions, but it has also many other incredible features like smb3 protocol implementation, ctdb (cluster) functionality and much more.
+The presentation will describe the supported scenarios of Samba 4 as an Active Directory DC and  also, discusses the developments in the File Server, in particular the components of  SMB2, SMB3 and CTDB.</abstract>
+<description></description>
+<persons>
+<person id='148'>Fabrizio Manfredi</person>
+</persons>
+<links>
+<link href='www.samba.org'>Samba</link>
+</links>
+</event>
+<event guid='9Sit0xUudEatbXWY8ydmFQ' id='1141'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_14:00_-_openattic_-_david_breitung_-_1141</slug>
+<title>openATTIC</title>
+<subtitle>Open Source Storage Management</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>openAttic ist ein Open Source-Projekt für Storagemanagement. Seit Mai liegt die freie Community Edition in der ersten stable Version 1.0 vor. openATTIC beschränkt sich auf Funktionen, die für den Storage-Betrieb in einem hochverfügbaren Rechenzentrum wirklich wichtig sind: es bietet ein hoch flexibles zentrales Framework, das unter einer grafischen Oberfläche verschiedene Open Source-Tools in sich vereint. Dadurch ist die Verwaltung von Speicherplatz einfach, intuitiv und gleichzeitig hochskalierbar.</abstract>
+<description>openATTIC ist ein hoch flexibles zentrales Framework für Storage-Management, das unter einer grafischen Oberfläche verschiedene Open Source-Tools in sich vereint. Entwickelt wurde openATTIC als kostenoptimierte Alternative zu proprietären Storage-Systemen, die häufig schon bei Basis-Anforderungen hohe Lizenzkosten mit sich bringen. Das Projekt wurde Anfang 2012 veröffentlicht. Die Entwickler von openATTIC legen großen Wert auf den durchgängig modulbasierten Aufbau, so dass neue Technologien und Produkte anderer Hersteller nahtlos in das System integriert werden können. Durch diesen Aufbau ist die Verwaltung von Speicherplatz einfach und flexibel und gleichzeitig hochskalierbar. Eine offene Schnittstelle verbindet openATTIC beispielsweise mit Provisioning-, Monitoring- und Backup-Systemen, sowie Cloud-Lösungen.</description>
+<persons>
+<person id='411'>David Breitung</person>
+</persons>
+<links>
+<link href='http://www.open-attic.org/de/'>openATTIC Community-Seite</link>
+</links>
+</event>
+<event guid='qI9UqR0CzP9Nbhxgo9bZLA' id='1146'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_15:15_-_restfs_the_next_generation_cloud_storage_-_fabrizio_manfredi_-_1146</slug>
+<title>RestFS the next generation Cloud Storage </title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>The RestFS is an experimental project to develop an open-source distributed filesystem for large environments. It is designed to scale up from a single server to thousand of nodes and delivering a high availability storage system with special features for high i/o performance and network optimization for work better in WAN environment.  The implementation of a common name space simplifies sharing of data and collaboration.  The indipendence from the operating system and the compatibilty with Amazon S3 interface permits to have data wherever you are.
+This talk describes the architecture, internals of RestFS and comparison among different free software solutions. The session will discuss our experience in this development and detailed information on performance and scalability 
+
+</abstract>
+<description></description>
+<persons>
+<person id='148'>Fabrizio Manfredi</person>
+</persons>
+<links>
+<link href='www.beolink.org/restfs'>RestFS</link>
+</links>
+</event>
+<event guid='KSY6w8yghG21yIcYUv8F_A' id='1218'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_16:30_-_inspecting_a_multi-everything_linux_machine_-_aurimas_mikalauskas_-_1218</slug>
+<title>Inspecting a multi-everything Linux machine</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Come to this talk if you want to understand better how a multi-core multi-disk Linux system operates and how you can inspect its operation in order to measure utilisation for capacity planning, or just for fun.</abstract>
+<description>Long gone the days when a commodity server had one single-core CPU, one disk and understanding system utilisation was as easy as checking that load average is below 1. Yet some still think of system as highly utilised if not saturated when the system load average goes above and beyond 2-3.
+
+What does load average really mean on a multi-core multi-disk server? Why are my tasks still slow if CPU is never more than 15% utilised? How much more disk resources do I have? Why can't my application read data any faster even though we have 50 disk array now? Answers to these and many similar questions you will be able to answer after this talk.
+
+I will begin this talk by looking at the broad picture of how the key elements of the system all come into play - how a multi-component system operates on the high level and what does that mean to the system user (and system administrator of course). Then I will discuss what tools we can use to understand better what is our system really doing at any given moment and what does that have to say about system utilisation.</description>
+<persons>
+<person id='801'>Aurimas Mikalauskas</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='OKlMrHGuEXL7mixWo0cLqw' id='1208'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_17:45_-_talking_people_into_creating_patches_-_isabel_drost-fromm_-_1208</slug>
+<title>Talking people into creating patches</title>
+<subtitle>... and submitting them ...</subtitle>
+<track>Community</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>&quot;Contributing to open source projects is trivial: Make a change, create a patch, get a review and revise, have it accepted.&quot; When heavily involved with open source projects it's easy to forget what developers interested in contributing have to learn before even making the smallest first change.
+
+</abstract>
+<description>&quot;Contributing to open source projects is trivial: Make a change, create a patch, get a review and revise, have it accepted.&quot; When heavily involved with open source projects it's easy to forget what developers interested in contributing have to learn before even making the smallest first change.
+
+The talk summarises some of the issues and questions students, long time developers, researchers have when faced with free software development. The talk touches some of the technical issues, but focuses on cultural differences of open development communities vs. corporate or even research environments.
+
+Instead of providing pre-baked solutions to filling this gap the goal of the talk is to initiate a discussion on how to best talk your friends and colleagues into creating patches: Which strategies did work for you, which failed? Which resources do you generally use when mentoring interested peers? Where do you see most problems?
+
+Please note that this talk heavily relies on the the audience getting active and providing their experiences as input to the session. The goal is to generate a set of recommendations of what worked and what didn't work.</description>
+<persons>
+<person id='404'>Isabel Drost-Fromm</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='1r5aA5lpJV9J2KzEgGs-NQ' id='1253'>
+<start>19:00</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-24_19:00_-_keysigning_party_-_alexander_wirt_-_1253</slug>
+<title>Keysigning Party</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>other</type>
+<language>en</language>
+<abstract>A key signing party is a get-together of people who use the PGP encryption system with the purpose of allowing those people to sign each others keys. Key signing parties serve to extend the web of trust to a great degree. Key signing parties also serve as great opportunities to discuss the political and social issues surrounding strong cryptography, individual liberties, individual sovereignty, and even implementing encryption technologies or perhaps future work on free encryption software.</abstract>
+<description>For details and a description how to participate, please see http://ksp.froscon.org/.</description>
+<persons>
+<person id='116'>Alexander Wirt</person>
+</persons>
+<links>
+<link href='http://ksp.froscon.org'>Keysigning Website</link>
+</links>
+</event>
+</room>
+<room name='HS5'>
+<event guid='0qz0EUWSe6bMhlR7Pwk8ew' id='1220'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_10:00_-_beyond_lamp_-_daniel_hepper_-_1220</slug>
+<title>Beyond LAMP</title>
+<subtitle>Components of a Real-World Web Applikation</subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Real-World Web Applications run on more than code, a webserver and a database. This language-agnostic talk gives you an overview of the  moving parts of a typical web app, like task queues, fulltext search engines, log services and automated deployment. </abstract>
+<description>Shortly after your web application becomes more complex than a Hello World example, you realize that some problems are not meant to be solved with a simple LAMP stack. Sending emails blocks your webserver. Those LIKE queries on your search page slow down your database server and return abysmal results anyway. Your production code is littered with print statements and you still can't find the cause of that 500. And once you have a handful of servers, FTPing code to production gets old, too.
+
+This talk will show you solutions to problems you will probably encounter at some point as your web application matures. You will learn about task queues like Sidekiq and Celery, full text search engines like Solr and Elastic Search, log services like Sentry and various deployment mechanisms. While examples will be in Python, Ruby and PHP, the concepts presented in this talk can be applied to web applications written in any language.</description>
+<persons>
+<person id='811'>Daniel Hepper</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='oN5LSr0p7Wa90j0ZV9veiw' id='1174'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_11:15_-_arangodb_-_lucas_dohmen_-_1174</slug>
+<title>ArangoDB</title>
+<subtitle>A different approach to NoSQL</subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>ArangoDB is an open source NoSQL database which is not narrow-mindedly focused on horizontal scalability. Instead, ArangoDB aims to offer developers great flexibility and ease-of-use. The database is suitable for use cases which are difficult to implement with most traditional relational databases and also many of the other NoSQL databases.
+Foxx is a JavaScript framework built-into ArangoDB that allows to develop REST APIs rapidly. I will show how ArangoDB and Foxx can help you build Single Page Web Applications faster.</abstract>
+<description>Data in ArangoDB is stored in documents, so the database is schema-free and allows flexible storage. Still, the database can exploit the similarity of documents and thus save lots of storage space. ArangoDB can also store relationships between documents, allowing the modelling of graph data structures as well. It also offers a variety of index types that the user can pick from when indexing data.
+For data retrieval, ArangoDB offers a few easy to use REST interfaces plus a a descriptive query language that allows complex data retrieval queries with joins, subqueries etc.
+User-specific code also be embedded into ArangoDB, allowing it to be operated as an application server as well. User's own business logic can be implemented in Javascript, a language which is already used in most web applications. Thus ArangoDB makes it possible to use one language throughout the entire stack.
+I created ArangoDB Foxx to address the needs of modern Single Page Web Applications in mind. I'll talk about my motivation for the project and how it can help you when you need a simple API to store, receive and query data.</description>
+<persons>
+<person id='769'>Lucas Dohmen</person>
+</persons>
+<links>
+<link href='http://arangodb.org'>ArangoDB</link>
+<link href='http://foxx.arangodb.org'>ArangoDB Foxx (and a talk by me)</link>
+</links>
+</event>
+<event guid='AHtbsyp-XyCxcVOSR71-qw' id='1137'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_14:00_-_query_mechanisms_for_nosql_databases_-_jan_steemann_-_1137</slug>
+<title>Query mechanisms for NoSQL databases</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>We'll go through the different query mechanisms provided by several NoSQL databases, showing the usage scenarios and limitations by examples.</abstract>
+<description>SQL is the standard and established way to query relational databases. It is present everywhere and supported by a wide range of tools.
+
+In the NoSQL ecosystem, there aren't too many standards yet. Furthermore, the different NoSQL databases address very heterogenous usage scenarios and provide distinct feature sets. Consequently, they have come up with different solutions and mechanisms to access data.
+The query mechanisms range from very limited access-by-key only to full-featured query and even programming languages.
+The talk will give an overview of which query facilities are provided by selected key/value stores, document, and graph databases.</description>
+<persons>
+<person id='643'>Jan Steemann</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='e2yAwfFgLsMMoT8wkETYsw' id='1207'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_15:15_-_graph_upward_-_automating_web_performance_optimization_-_tobias_baldauf_-_1207</slug>
+<title>Graph Upward - Automating Web Performance Optimization</title>
+<subtitle></subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Optimal load times are essential for a great user experience and thus your site's success. Yet optimizing web performance itself can become very time consuming. Learn how to automate web performance monitoring and optimization to keep your site fast and resilient.</abstract>
+<description>Users can only interact swiftly with sites if they load in less than 1.3 seconds. If a site takes more than 3.5 seconds to load, its bounce rate rises above 50%. After 6.5 seconds of load time, more than half of all users abandon the site forever.
+
+These key timings, aggregated by analyzing the Alexa Top 2000 websites over time, clearly show the need to continuously deliver exceptional performance to all users. Yet developers struggle to maintain load times as a site matures.
+
+We will explore ways to measure and continiously monitor website load times to enhance the user experience and conversions. Then we will explore web performance optimization best practices and learn how to automate them, starting with areas of optimization yielding the highest ROI.
+
+Measuring as much as possible with properly defined metrics and making development decisions based on actual data will change your DevOps culture as well as the entire company's culture over time, leading to a greatly enhanced user experience.
+
+By the end of the talk you will know:
+- which tools and metrics to use to measure and analyze page load time
+- what you can do to improve the overall web performance of a website
+- how to automate the web performance monitoring and optimization process</description>
+<persons>
+<person id='809'>Tobias Baldauf</person>
+</persons>
+<links>
+<link href='https://speakerdeck.com/tbaldauf/automating-web-performance-optimization'>Slides from AtmosphereConf 2013</link>
+<link href='https://github.com/technopagan/adept-jpg-compressor'>Adept - the adaptive JPG compressor (BSD licence)</link>
+</links>
+</event>
+<event guid='S-_GCMyNy9lDxq7ez_EdTA' id='1222'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_16:30_-_rest_fur_ruhelose_-_christian_schmitz_-_1222</slug>
+<title>REST für Ruhelose</title>
+<subtitle>APIs für mobile Endgeräte</subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Dieser Vortrag behandelt die Konzeption und Optimierung von REST APIs unter Berücksichtigung der Anforderungen und Beschränkungen mobiler Endgeräte.</abstract>
+<description>Währen sich einige Designmuster bei der Gestaltung von RESTful APIs für den stationären Einsatz bewährt haben führen Andere zu Problemen im mobilen Umfeld. Wann und Wo ist es also sinnvoll einige der REST-Paradigmen aufzuweichen bzw. über Bord zu werfen?</description>
+<persons>
+<person id='812'>Christian Schmitz</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='hXOgILdc7YMEMFHk25eF0Q' id='1182'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-24_17:45_-_offline_strategies_for_html5_web_applications_-_stephan_hochdorfer_-_1182</slug>
+<title>Offline strategies for HTML5 web applications</title>
+<subtitle></subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>There has been a strong connection between the terms &quot;web&quot; and &quot;online&quot; for years. The rise of HTML5 and the support of offline mode in most modern browsers changed the play of the game. This session will introduce different ways of storing data on the client as well as highlighting the limitations.</abstract>
+<description></description>
+<persons>
+<person id='615'>Stephan Hochdörfer</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C119/Hauptkonferenz'>
+</room>
+<room name='HS6'>
+<event guid='Tq80od69j4TiANWYRTiLvA' id='1261'>
+<start>10:30</start>
+<duration>00:30</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_10:30_-_weck_den_geek_in_dir_-_bodo_tasche_-_1261</slug>
+<title>Weck den Geek in Dir</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>Was ist ein Geek? Oder Nerd? Und wo trifft man mehr davon? Warum sollte man die überhaupt treffen wollen? Reicht es nicht, wenn man schon tagsüber im Büro mit denen zu tun hat? Hilfe ich bin das erste mal hier auf einer Konferenz… und nu? Und wieso sind hier so viele Fragen? Hoffentlich beantwortet die da mal jemand in dem Talk!!1! Kann nicht jemand mal an die Nerds denken hier?!</description>
+<persons>
+<person id='853'>Bodo Tasche</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='UyyccyiVfhYEJoEuHEBMZw' id='1263'>
+<start>11:15</start>
+<duration>00:30</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_11:15_-_can_we_write_perfect_tests_-_maybe_-_markus_schirp_-_1263</slug>
+<title>Can we write perfect tests? - Maybe!</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description>The pros of a solid unit test suite are well understood and accepted in the ruby community. The problem: How to define solid? Traditional metrics like line-coverage, branch-coverage and even statement-coverage can be misleading. Having a statement executed once does not mean all edge cases are specified and bug-free! Automated tools can be used to identify uncovered edge cases that will introduce bugs into your program. Mutation testing brings fuzzing to the implementation level. Unlike input fuzzing it modifies the implementation to check if the test suite can detect a huge set of automatically introduced behaviour changes. This talk will elaborate the history of testing and the metrics that are used to define coverage. And how such metrics can and have misguided development direction. It will also show examples of projects that heavily adopted mutation testing. Especially the long term effects and how the (mutation)-metrics driven approach improved developer happiness and code stability. Showing what kind of actual bugs where caught and how code became naturally streamlined. Lastly the current and future limits of existing mutation testing tools will be presented.</description>
+<persons>
+<person id='856'>Markus Schirp</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='N4NlB-8pBB08U14GDQJqhQ' id='1264'>
+<start>11:45</start>
+<duration>00:30</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_11:45_-_sample_architecture_of_a_rails_b2b_platform_-_benedikt_voigt_-_1264</slug>
+<title>Sample architecture of a Rails B2B platform</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description>During the session the sample B2B SaaS application maschinendirigent.de will be presented and the main challenges will be discussed. Maschinendirigent.de is a software for farmers and the funny thing is, that both founders don’t have any agriculture background. They argue, that the abilitiy of building good and working software is much more worth then being an expert in a specific field. Therefore Ruby on Rails was the perfect choice.</description>
+<persons>
+<person id='857'>Benedikt Voigt</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='hqb_bgQ92_Z_z680PdnP7Q' id='1265'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_14:00_-_agile_von_kopf_bis_fuss_-_daniel_lehmann_-_1265</slug>
+<title>Agile von Kopf bis Fuss</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>In den letzten Monaten ist mir etwas klar geworden: Sich körperlich fit halten und gute Software zu entwickeln haben viel miteinander gemeinsam. Denn die Gründe und Prozesse, warum man wichtige Bereiche vernachlässigt, sind sich sehr ähnlich: Jeder weiß, dass Sport gut für den Körper ist. Doch trotzdem können wir nicht immer den inneren Schweinehund überwinden - genauso vernachlässigen wir oft wichtige Prozesse beim Software-Development, wie z.B. Tests, obwohl wir eigentlich wissen, wie wichtig sie sind. In diesem Vortrag möchte ich zeigen, wie ich - und wie andere Entwickler - von dieser Erkenntnis profitieren können.</description>
+<persons>
+<person id='97'>Daniel Lehmann</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='g_2_lcqS7r6U7O-HWwbwqQ' id='1266'>
+<start>15:15</start>
+<duration>01:10</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_15:15_-_deployment_ohne_ziepen_-_sebastian_schulze_-_1266</slug>
+<title>Deployment ohne Ziepen</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>Trotz push-to-deploy und CI via travis.yaml werden unsere Projekte schnell zu groß für »einfache« Deployment-Lösungen. Sobald die eigene App aus den Heroku-Schuhen wächst, beginnen sich die technischen Schulden zu häufen. Lasst uns versuchen, den Spaß zurück ins Deployment zu bringen. Egal ob ihr Chef, Puppet oder die gute alte Doppelläufige verwendet: Mit wenigen Handgriffen und den richtigen Ruby Werkzeugen könnt ihr euch eine Deployment-Pipeline zurechtbiegen, auf die sogar Fowler stolz wäre.</description>
+<persons>
+<person id='858'>Sebastian Schulze</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='E7I5st2cK-npf4Uin5JQdg' id='1267'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_16:30_-_building_awesome_ruby_command_line_apps_-_christian_vervoorts_-_1267</slug>
+<title>Building awesome Ruby command line apps</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>In Zeiten von Webapps, Android- und iPhone-Apps werden CLI-Apps vernachlässigt. Viele denken sie sind zu komplex oder passen nicht für die Aufgabe, aber die Macht der Konsole ist ungebrochen und wartet drauf genutzt zu werden. Sie kann einem viel Spaß bereiten und das Leben vereinfachen, wenn man Ruby als seinen Partner hat. &quot;Building Awesome Ruby Command Line Apps&quot; ist das Ziel dieses Vortrags und am Ende werden auch alle verstehen wieso es das ist.</description>
+<persons>
+<person id='859'>Christian Vervoorts</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='5dFNdKHRGGOw5ezddlAtZg' id='1268'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-24_17:45_-_true_false_cats_dogs_designer_entwickler_-_liane_thonnes_-_tim_schneider_-_1268</slug>
+<title>True &amp; False. Cats &amp; Dogs. Designer &amp; Entwickler?</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>Die Kommunikation zwischen Designern und Entwicklern ist nicht immer einfach. Sie produktiv und effizient zusammenarbeiten zu lassen, ist noch schwieriger. In unserem Talk zeigen wir, warum es in unserem Team funktioniert und wie uns auf diese Weise die besten Produkte gelingen.</description>
+<persons>
+<person id='860'>Liane Thönnes</person>
+<person id='861'>Tim Schneider</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C115/Workshops'>
+<event guid='yn6zwjdbCXT8nzKY0wjY8A' id='1147'>
+<start>10:00</start>
+<duration>02:30</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-24_10:00_-_latex_einsteigerworkshop_-_doris_behrendt_-_1147</slug>
+<title>LaTeX Einsteigerworkshop</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Ziel: Erwerb von LaTeX-Grundkenntnissen.
+Voraussetzungen: Eigener Laptop mit bereits installierter TeX-Arbeitsumgebung.
+Vorgehen: Live-Demo, langsam und Schritt für Schritt zum Mitprogrammieren.</abstract>
+<description>LaTeX ist eine kostenlose Software, mit der man beliebige
+(i.a. PDF-) Dokumente in
+Buchdruckqualität erstellen kann.
+
+Teil 1: Erste Schritte (Live-Demo):
+Erstellung eines Minimaldokumentes und darauf aufbauend einiger einfacher Dokumente.
+
+Teil 2: Themen nach Wunsch, z.B.
+Präsentationen, Mathematiksatz, Tabellen,
+Graphikeinbindung, Umgehen mit Literaturdatenbanken, Zitaten,
+Querverweisen ..., Layout (Schriftarten, Seitenränder,
+Kopf- und Fußzeilen), Plotten von Funktionsgraphen etc. 
+
+Für Teilnehmer, die noch keine TeX-Installation auf ihrem Rechner haben, besteht die Möglichkeit, sich am Stand von Dante e.V. bei der Installation beraten und/oder helfen zu lassen (ca. eine Stunde Zeit mitbringen).</description>
+<persons>
+<person id='778'>Doris Behrendt</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='1wuNiiCIGne2Ov9jNZN9iw' id='1159'>
+<start>12:45</start>
+<duration>02:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-24_12:45_-_presenting_for_geeks_-_dirk_haun_-_1159</slug>
+<title>Presenting for Geeks</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Du bist also ein Geek und willst eine Präsentation über ein Thema geben, das Dir sehr am Herzen liegt. Du bist folglich sehr enthusiastisch. Du möchtest Deinem Publikum am liebsten alles über Dein Thema erzählen. Aber aus irgend einem Grund, obwohl Deine Präsentation doch alle Aspekte behandelt, zeigt sich das Publikum weit weniger enthusiastisch als erhofft. Woran liegt das? Kommt Dir diese Situation bekannt vor?</abstract>
+<description>Presenting for Geeks richtet sich an all diejenigen, die einen eher technisch orientierten Vortrag halten wollen, aber das Gefühl haben, dass sie mit der üblichen Herangehensweise ihr Zielpublikum nicht wirklich erreichen.
+
+In diesem Workshop wirst Du lernen, warum textlastige Folien nicht wirklich funktionieren und warum die Alternative, nämlich eine visuelle und auf das Publikum fokusierende Herangehensweise, auch für Vorträge mit technischen Inhalten funktioniert.
+
+Der Workshop besteht aus drei Abschnitten, in denen wir auf die Vorbereitung, Foliengestaltung, sowie Tipps zum eigentlichen Vortrag eingehen werden. U.a. werden wir behandeln:
+
+Vorbereitung
+- Das Publikum steht im Mittelpunkt
+- Der Fluch des Wissens
+- Weg vom Computer
+- Mit SUCCESs gegen das Vergessen
+
+Folien
+- Die wichtigen und die unwichtigen Folien
+- Wie man die Bullet Points los wird
+- Bilder und Visualisierungen
+- 3 einfache Designregeln
+
+Vortrag
+- Früh ankommen
+- The Show must go on
+- Mit Fragen und Diskussionen umgehen
+- Nicht überziehen
+
+Der Workshop enthält Theorie- und Praxisteile, mit Einzel- und Gruppenübungen. Mitzubringen ist lediglich etwas zum Schreiben und Zeichnen (Notizblock und/oder lose Seiten) - ein Laptop wird nicht benötigt.
+
+Ein Jahr und ein E-Book später ist dies die überarbeitete Version des Workshops, der seine Premiere auf der FrOSCon 2012 hatte. Die Ziele und die Herangehensweise sind die gleichen. Basierend auf dem Feedback aus diversen Veranstaltungen im Verlauf des letzten Jahres wurde der Workshop in vielen Details noch besser an die Zielgruppe und ihre spezifischen Nöte und Bedürfnisse angepasst.</description>
+<persons>
+<person id='33'>Dirk Haun</person>
+</persons>
+<links>
+<link href='http://www.themobilepresenter.com/article.php/presenting-for-geeks-on-the-road'>Mehr über den Workshop</link>
+</links>
+</event>
+<event guid='FqDlhfNaacyUOwuKq2qxsg' id='1213'>
+<start>14:45</start>
+<duration>02:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-24_14:45_-_websocket-workshop_-_ws_2_-_hoai_viet_nguyen_-_luigi_lo_iacono_-_1213</slug>
+<title>WebSocket-Workshop - WS^2</title>
+<subtitle></subtitle>
+<track>Web Development</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Webanwendungen drängen mehr und mehr dazu echzeitfähig zu werden. Das aktuelle HTTP schränkt jedoch diese Fähigkeit ein. Echzeitkommunikationen sind nur mit Umwegen und mit einem Effizientsverlust zu realisieren.  
+Dieser Workshop soll eine Einführung in WebSockets anbieten, worauf Entwickler aufbauen können und ihre eigenen Echtzeitanwendungen einfacher und effizienter realisieren können. Dabei soll nicht nur auf die theoretischen Grundlagen eingegangen werden, sondern auch auf Praxis  bezogene Anwendungsgebiete von WebSockets. Der Workshop soll den Teilnehmern die vielfältigen Einsatzmöglichkeiten dieser neuen Technologie, anhand von ausgesuchten Beispielanwendungen, zeigen. Es wird nicht nur auf konventionelle Anwendungen, wie Live-Ticker oder Chats, eingegangen, sondern auch auf Anwendungsgebiete, die durch eine Echtzeit-Technologie, wie WebSockets, profitieren und sogar bereichert werden können. Die Teilnehmer können lernen, wie man z.B. eine Fernsteuerung von Webanwendung mittels WebSockets realisiert. Oder auch Usability-Tests durch WebSockets vereinfacht und visuell ansprechender gestalten kann. Ausserdem soll auf die Sicherheit von WebSockets eingegangen werden. Den Teilnehmern des Workshop sollen Möglichkeiten präsentiert werden, wie Sie ihre WebSocket-Verbindungen vor unerlaubten Zugriffen schützen können.</abstract>
+<description></description>
+<persons>
+<person id='789'>Hoai Viet Nguyen</person>
+<person id='875'>Luigi Lo Iacono</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='RjomhDGyBysEbJ7DDn5cJQ' id='1152'>
+<start>17:00</start>
+<duration>02:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-24_17:00_-_ergebnisreiche_spannende_retrospektiven_-_judith_andresen_-_1152</slug>
+<title>Ergebnisreiche &amp; spannende Retrospektiven</title>
+<subtitle>Auf die Moderation kommt's an!</subtitle>
+<track>Development</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Schlechte Retrospektiven sind häufig anzutreffen. &quot;Kuschel-Retros&quot; oder &quot;regelmäßige Auskotzrunden ohne Ergebnis&quot; lösen das agile Versprechen einer ständigen Optimierung nicht an. 
+ 
+In dem Workshop stellt die Referentin den Ablauf der Retrospektiven (mit Intro und fünf Phasen) sowie wichtige Team- und Projektfragen vor, die bei der Auswahl geeigneter Moderationsmethoden reflektiert werden.
+
+Die Teilnehmer erarbeiten mögliche Moderationsmethoden, stellen sich diese vor und bewerten diese.</abstract>
+<description></description>
+<persons>
+<person id='478'>Judith Andresen</person>
+</persons>
+<links>
+<link href='http://www.judithandresen.com/2013/08/25/froscon-ergebnisse-des-workshops-und-des-vortrags/'>Präsentation / Workshop-Unterlagen</link>
+</links>
+</event>
+</room>
+<room name='C116/Lisp'>
+<event guid='RhEZueMIWGVdQMY3rKN_Sw' id='1280'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-24_11:15_-_the_world_as_s-expressions_-_moritz_heidkamp_-_1280</slug>
+<title>The world as S-expressions</title>
+<subtitle>Seeing things through the LISPer's eyes</subtitle>
+<track>Lisp</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>LISPers prefer to stay in their environment as much as possible. To that end they conceive all kinds of S-expression based interfaces to the outside world, making it appear as if everything they interact with is, well, nothing but lists. In this talk I will explore the possibilities and advantages enabled by this approach.</abstract>
+<description></description>
+<persons>
+<person id='638'>Moritz Heidkamp</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='4Shjn_H64Jhqhdw5BZ9n1Q' id='1291'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-24_12:45_-_introducing_edgebsd_-_pierre_pronchery_-_1291</slug>
+<title>Introducing EdgeBSD</title>
+<subtitle>Working on NetBSD with Git</subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>EdgeBSD is a new member of the family of BSD-based Operating Systems, starting development with the current NetBSD codebase with Git for Source Code Management. Package management is based on pkgsrc.</abstract>
+<description>The primary goal of EdgeBSD is to provide an ambitious environment for working as a bigger community together on the NetBSD Project. This will be achieved thanks to a more modern development infrastructure, while taking a more aggressive stance on integrating and enabling features.
+
+Ultimately, EdgeBSD should be just as fun and attractive as a Research &amp; Development platform while delivering a modern, robust, and industrial-grade system for all ranges of computer devices.</description>
+<persons>
+<person id='876'>Pierre Pronchery</person>
+</persons>
+<links>
+<link href='http://www.edgebsd.org/'>EdgeBSD</link>
+<link href='http://git.edgebsd.org/'>EdgeBSD Git repositories</link>
+</links>
+</event>
+<event guid='CHZVOPA9zMiucRNkwnenVA' id='1251'>
+<start>14:00</start>
+<duration>02:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-24_14:00_-_clojure_introduction_workshop_-_waldemar_schwan_-_1251</slug>
+<title>Clojure Introduction Workshop</title>
+<subtitle>Build the Game of Live with Clojure</subtitle>
+<track>Lisp</track>
+<type>workshop</type>
+<language>en</language>
+<abstract>This will be a very pragmatic — hands on — workshop. We will start with a short introduction (~30 minutes) to syntax and basic usage patterns, giving you the chance to ask questions.
+
+After that, we will encourage people to pair up and start working on our example project. We will go around and help as much as we can.
+
+https://github.com/adcloud/clojure-intro-workshop/</abstract>
+<description>What you will learn
+
+This will be a very pragmatic — hands on — workshop. We will start with a short introduction (~30 minutes) to syntax and basic usage patterns, giving you the chance to ask questions.
+
+After that, we will encourage people to pair up and start working on our example project. We will go around and help as much as we can.
+
+https://github.com/adcloud/clojure-intro-workshop/
+
+In the last 30 minutes, you will be encouraged to present your solution.
+
+
+What you will NOT learn
+
+Given the limited amount of time and zero-prior-knowledge assumption, we can’t explain philosophies, concepts and inner workings. After the workshop, you will be able to write code in Clojure, but still lack a deeper understanding.
+
+If you’d like to dive deeper into Clojure’s world, here’s some resources:
+
+Try Clojure - try Clojure in the browser
+Clojure for Java Programmers - by Rich Hickey (the inventor of Clojure)
+ClojureTV - videos of talks
+Clojure Documentation - up-to-date community driven documentation
+The Clojure Toolbox - a list of projects by use-case
+ClojureDocs - API references and examples
+Clojure Homepage
+Clojure Programming - book
+The Joy of Clojure (2nd edition) - book
+Programming Clojure (2nd edition) - book
+Please come prepared
+
+Please make sure that you have the basic project forked and checked out on your machine. (The README has more details.)
+
+About Clojure
+
+Clojure is a dynamic programming language that targets the Java Virtual Machine (and the CLR, and JavaScript). It is designed to be a general-purpose language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming. Clojure is a compiled language - it compiles directly to JVM bytecode, yet remains completely dynamic. Every feature supported by Clojure is supported at runtime. Clojure provides easy access to the Java frameworks, with optional type hints and type inference, to ensure that calls to Java can avoid reflection.
+
+Clojure is a dialect of Lisp, and shares with Lisp the code-as-data philosophy and a powerful macro system. Clojure is predominantly a functional programming language, and features a rich set of immutable, persistent data structures. When mutable state is needed, Clojure offers a software transactional memory system and reactive Agent system that ensure clean, correct, multithreaded designs.
+
+— clojure.org</description>
+<persons>
+<person id='773'>Waldemar Schwan</person>
+</persons>
+<links>
+<link href='https://github.com/adcloud/clojure-intro-workshop/'>Example Project</link>
+</links>
+</event>
+<event guid='fCGNKePXTdFwM44goT3OtA' id='1258'>
+<start>16:30</start>
+<duration>02:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-24_16:30_-_scheme_implementation_techniques_-_felix_-_1258</slug>
+<title>Scheme implementation techniques</title>
+<subtitle>An overview over Scheme implementation strategies and compilation issues</subtitle>
+<track>Lisp</track>
+<type>lecture</type>
+<language>en</language>
+<abstract> A tour through Scheme implementation issues, convering a large amount of information.</abstract>
+<description>Topics will include: interpreters, compilers, history, optimizations, runtime issues, garbage collection, tagging schemes, syntax-expansion, code-generation, translation to low- and high-level languages, weird ideas and the basics steps required to compile Scheme.
+</description>
+<persons>
+<person id='850'>felix</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C117/Java'>
+<event guid='eAjaJhhhPi1gmDsW2Hqikg' id='1260'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_10:00_-_fokussiertes_arbeiten_mit_mylyn_-_ralf_bommersbach_-_1260</slug>
+<title>Fokussiertes Arbeiten mit Mylyn</title>
+<subtitle>Effectively use the integrated Task-focused UI in Eclipse</subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Mylyn ist ein Eclipse-Plugin, das eine „aufgabenfokussierte Benutzeroberfläche“ (task-focused UI) anbietet. Damit ist gemeint, dass einzelnen Entwicklungsdokumenten (Dateien, Klassen usw.) Aufgaben zugeordnet und daraus automatisch aufgabenspezifische Sichten (ein sog. Kontext) erzeugt werden, die nur diese Dokumente enthalten.</abstract>
+<description>Der Workshop stellt das Eclipse-Plugin Mylyn vor und demonstriert anhand einiger Beispiele die Mächtigkeit des Werkzeuges und inwiefern Mylyn innerhalb eines Projektes effektiv eingesetzt werden kann um sowohl den Arbeitsfluss des einzelnen Entwicklers, als auch die Zusammenarbeit im Entwickler-Teams im Projekt zu verbessern.
+
+Schwerpunkte sind u.a., der task-abhängige automatische Kontext, die Task-UI mit fokussierten Sichten (z.B. Navigor Sicht) und die Integration mit Bugtrackern (z.B. Bugzilla).
+
+Die Idee ist insbesondere, dass Softwareentwicklern die Arbeit mit sehr großen Projekten erleichtert wird, indem sie durch diese fokussierten Sichten nur noch den jeweiligen Task betreffenden Teil eines Projektes sehen und sich damit auf die wesentlichen Aspekte der Arbeit konzentrieren können.
+
+Die Teilnehmer können sich im Rahmen des Workshops gerne mit einer eigenen Eclipse Installation mit den Möglichkeiten dieses Werkzeuges vertraut machen und sind eingeladen zusammen mit dem Vortragenden zu experimentieren und diskutieren.</description>
+<persons>
+<person id='852'>Ralf Bommersbach</person>
+</persons>
+<links>
+<link href='http://www.eclipse.org/mylyn/'>Mylyn Projekt site</link>
+</links>
+</event>
+<event guid='aFzaS1-N188wFRgn-BOh4w' id='1252'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_11:15_-_praktischer_einstieg_in_die_android-entwicklung_-_mag_hoehme_-_1252</slug>
+<title>Praktischer Einstieg in die Android-Entwicklung</title>
+<subtitle></subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Am Beispiel einer einfachen GUI-Anwendung wird ein Einstieg in die Android-Programmierung vermittelt. Der Workshop richtet sich an interessierte Personen. Programmierkenntnisse in Java werden vorausgesetzt.</abstract>
+<description>Zunächst werfen wir einen Blick auf die Software, die für Android-Programmierung benötigt wird.
+
+Dann sehen wir uns die &quot;Psycho-Test&quot;-App an. Schwerpunkt ist, wie man eine grafische Benutzeroberfläche für Android entwickelt und gestaltet. Dabei sehen wir uns auch an, wie man Bedienelemente gestalten kann, um der eigenen App ein unverwechselbares Aussehen zu geben.
+
+Ich freue mich auf Euer Erscheinen!
+
+Wer beim Workshop mit dem eigenen Rechner codieren möchte, kann im Vorfeld folgende Software installien:
+(1) JDK (ab Version 1.6)
+(2) Android SDK (http://developer.android.com/sdk/index.html), mit den Packages für Gingerbread (Android 2.3.3)
+(3) IDE, z.B. Eclipse mit dem ADT-Plugin, oder Idea</description>
+<persons>
+<person id='838'>Mag Hoehme</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='El6NWIrHnrUrq3OPRHS01A' id='1240'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_14:00_-_back_to_basics_-_christian_robert_-_1240</slug>
+<title>Back to basics</title>
+<subtitle>Wissenswertes aus java.lang.*</subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Im Package java.lang.* finden sich die grundlegendsten Bestandteile der Java API. Hier wartet so manche oftmals vergessene nützliche Perle.</abstract>
+<description>Im Package java.lang.* finden sich die grundlegendsten Bestandteile der Java API. Auch wenn die Java Plattform einen Entwickler weitestgehend von den Internas des Betriebssystems und der Hardware abschirmt, ist es bei vielen Problemstellungen dennoch hilfreich grundlegende Funktionsweisen der VM zu verstehen unter die Haube blicken zu können. Gerade über die Klassen in java.lang.* ist die Schnittstelle zur Virtual Machine besonders greifbar. Oftmals existieren hier aber noch Wissenslücken sowie kleinere und größere Fragezeichen über die genaue Funktionsweise bestimmter API-Bestandteile.
+
+Der Vortrag greift Beispiele aus der Praxis heraus, die zeigen wie mit ein wenig (mehr) Hintergrundwissen reale Probleme einfacher bzw. besser angegangen werden und effizienter gelöst werden können und wo potentielle Stolperfallen lauern. Auch etablierte Java-Entwickler werden manches Aha-Erlebnis mit nach Hause nehmen können.</description>
+<persons>
+<person id='699'>Christian Robert</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='zf2l54a7XG1KaiHH5sJoOA' id='1254'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_15:15_-_openmrs_-_open_medical_record_system_-_wolf_schlegel_-_1254</slug>
+<title>OpenMRS - Open Medical Record System</title>
+<subtitle>Freie Software für eine bessere Welt</subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>&lt;a href=&quot;http://openmrs.org/&quot;&gt;OpenMRS&lt;/a&gt; ist ein Softwaresystem zur Patientendatenerfassung, das als Open Source Software entwickelt wird. Neben fachlichen und technischen Aspekten des Systems befasst sich der Vortrag vor allem mit der Möglichkeit, sich an der Weiterentwicklung von OpenMRS aktiv zu beteiligen und so einen Beitrag zu einer besseren Welt zu leisten.</abstract>
+<description>&lt;a href=&quot;http://openmrs.org/&quot;&gt;OpenMRS&lt;/a&gt; ist ein Softwaresystem zur Patientendatenerfassung, das seit 2004 von einer internationalen Entwicklergemeinde als Open Source Software entwickelt wird. Das System ermöglicht Kliniken und Programmen zur Gesundheitsvorsorge ein effizientes und effektives Informationsmanagement. Ein typisches Szenario für die Verwendung von OpenMRS ist die Ablösung der Patientendatenerfassung mittels Papier, Tabellenkalkulation oder selbst entwickelter Datenbanksysteme in der südlichen Hemisphäre. 
+
+&lt;a href=&quot;http://www.xing.com/profile/Wolf_Schlegel&quot;&gt;Wolf Schlegel&lt;/a&gt; betrachtet in seiner Session das System aus unterschiedlichen Blickwinkeln. Nach einer kurzen fachlichen Einführung werden Architektur, Datenmodell, Erweiterbarkeit durch externe Module und verwendete Technologien vorgestellt. Abschließend behandelt der Vortrag Möglichkeiten zur aktiven Mitarbeit und Erfahrungen aus Code Jams und der Arbeit an einzelnen Tickets.
+
+Die Session verfolgt zwei Ziele: Teilnehmer lernen OpenMRS kennen und interessieren sich dafür, sich an der Weiterentwicklung der Software aktiv zu beteiligen. In der besten aller Welten findet sich im Anschluss an die FrOSCon eine Gruppe Interessierter im Kölner Raum, die regelmässig Coding Jams veranstalten.
+</description>
+<persons>
+<person id='847'>Wolf Schlegel</person>
+</persons>
+<links>
+<link href='http://openmrs.org/'>OpenMRS</link>
+<link href='https://wiki.openmrs.org/display/docs/Home'>OpenMRS Wiki</link>
+</links>
+</event>
+<event guid='8Ps8P40JYo-bZ7hcwkTj2Q' id='1250'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_16:30_-_mongomvcc_versionsverwaltung_fur_die_datenbank_-_andreas_thurn_-_1250</slug>
+<title>MongoMVCC: Versionsverwaltung für die Datenbank</title>
+<subtitle></subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract></abstract>
+<description>Wenn Begriffe wie &quot;Committen&quot; und &quot;Branchen&quot; fallen, denkt man meist instinktiv an Vorgänge in einer Versionsverwaltung wie Git und Konsorten. 
+In der Tat ist es häufig so, dass der Quelltext von Anwendungen wie ein Augapfel behütet, versioniert und archiviert wird. 
+Die Anwendungsdaten hingegen fristen ein stiefmütterliches Dasein in der Datenbank. Die Differenz zwischen dem Erstellungszeitpunkt und dem letzten Änderungsdatum sind die einzigen Hinweise auf eine bewegte Historie der Datensätze. Aber warum eigentlich?
+
+MongoMVCC ist eine Bibliothek des Frauenhofer IGD, das die Konzepte aus der Versionsverwaltung aufgreift und für die Endanwendung abstrahiert.
+Hierzu zählen unter Anderem:
+&lt;ul&gt;
+&lt;li&gt;Eine durchgängige Versionsgeschichte&lt;/li&gt;
+&lt;li&gt;Die Möglichkeit einen Datenstand zum Zeitpunkt X auszuchecken&lt;/li&gt;
+&lt;li&gt;Mehreren Datenbankständen (Branches) parallel zu verwenden&lt;/li&gt;
+&lt;/ul&gt;
+
+In diesem Talk werden wir einen Blick auf das MVCC-Konzept werfen. Anschließend werden wir das Gelernte in einer Live-Coding-Session vertiefen.
+Zum Mitprogrammieren ist eine Java-Entwicklungsumgebung, ein Git-Client und ein lokaler MongoDB-Server von Vorteil.
+</description>
+<persons>
+<person id='842'>Andreas Thurn</person>
+</persons>
+<links>
+<link href='https://github.com/igd-geo/mongomvcc'>mongomvcc Git-Repository</link>
+</links>
+</event>
+<event guid='XaDqDuUxKaTAYiEcn4ig0Q' id='1144'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>C117/Java</room>
+<slug>c117_java_-_2013-08-24_17:45_-_polyglot_java_-_programmieren_mit_xtend_-_andre_arnold_-_1144</slug>
+<title>Polyglot Java - Programmieren mit Xtend</title>
+<subtitle></subtitle>
+<track>Java</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Die Java Virtual Machine ist längst nicht mehr nur eine Umgebung, auf der Java läuft. Leider lassen Java8 und Features wie Closures noch weiter auf sich warten. In diesem Umfeld stellt sich Xtend als interessante OpenSource-Alternative heraus, die sich nahtlos in die Java-Umgebung integriert, da der Compiler selbst wiederum Javacode erzeugt. Die Sprache wartet mit interessanten Features wie Closures, Extension Methods und &quot;Active Annotations&quot; auf. Zudem bringt Xtend leistungsfähige Werkzeuge mit, die sich nahtlos in die Eclipse Java Entwicklungsumgebung integrieren. Was man damit alles anstellen kann, wird in dieser Session mit Livecoding gezeigt.</abstract>
+<description></description>
+<persons>
+<person id='701'>André Arnold</person>
+</persons>
+<links>
+<link href='http://www.eclipse.org/xtend/'>Xtend</link>
+</links>
+</event>
+</room>
+<room name='C018/Certifications'>
+</room>
+<room name='C118/PHP'>
+<event guid='rYNPSYu3nDqDjh90Gr-FhQ' id='1175'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-24_10:00_-_arduino_mit_php_steuern_-_thomas_weinert_-_1175</slug>
+<title>Arduino mit PHP steuern</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Mit dem Firmata-Protokoll können Arduinos und kompatible Systeme gesteuert werden. PHP kann so als Schnittstelle zu Datenbanken oder anderen externen Resourcen dienen.  </abstract>
+<description>Firmata ist ein von MIDI abgeleitetes Protokoll, welches den generischen Zugriff auf die Pins des Arduino-Boards erlaubt. 
+
+In PHP werden Implementationen der Patterns für Non-Blocking I/O benötigt, um dies effizient zu nutzen.
+
+Der Vortrag ist eine Einführung in Carica I/O und verwendente Patterns. Er zeigt, wie man mit PHP über Firmata und Arduino seine digitalen Daten in die physische Welt bringen kann.</description>
+<persons>
+<person id='173'>Thomas Weinert</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='s58JmvKwu8WcWBHEMyK3CQ' id='1241'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-24_11:15_-_fixing_legacy_code_-_kore_nordmann_-_benjamin_eberlei_-_1241</slug>
+<title>Fixing legacy code</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Most of the time developers do not write new code, but adapt existing code. In grown environments even small adaptions to existing code tend to have side effects on the full system without anyone knowing. We identify the most important issues when working with legacy code and show strategies to refactor them out without breaking the application. After this session you will be more comfortable working with legacy code and make your project turn around to the better.</abstract>
+<description>Most of the time developers do not write new code, but adapt existing code. In grown environments even small adaptions to existing code tend to have side effects on the full system without anyone knowing. We identify the most important issues when working with legacy code and show strategies to refactor them out without breaking the application. After this session you will be more comfortable working with legacy code and make your project turn around to the better.</description>
+<persons>
+<person id='108'>Kore Nordmann</person>
+<person id='299'>Benjamin Eberlei</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='xkbf-GTgUFFN8-n348xTuw' id='1242'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-24_14:00_-_finding_a_pub_with_mongodb_and_openstreetmap_-_derick_rethans_-_1242</slug>
+<title>Finding a pub with MongoDB and OpenStreetMap</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>&quot;Pubs and OpenStreetMap are both a hobby. In this talk, I will be explaining MongoDB's geospatial features to help you (and me) to find the closest pub. The talk covers how the OpenStreetMap data works, how to store this in MongoDB and what types of different queries we can run to find the closest pub. We will be looking at some theory (no scary maths!) and some practical examples.&quot;</abstract>
+<description>&quot;Pubs and OpenStreetMap are both a hobby. In this talk, I will be explaining MongoDB's geospatial features to help you (and me) to find the closest pub. The talk covers how the OpenStreetMap data works, how to store this in MongoDB and what types of different queries we can run to find the closest pub. We will be looking at some theory (no scary maths!) and some practical examples.&quot;</description>
+<persons>
+<person id='186'>Derick Rethans</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='IhYeZicweKKzfQNP1dHPuQ' id='1243'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-24_15:15_-_unbreakable_domain_models_-_mathias_verraes_-_1243</slug>
+<title>Unbreakable Domain Models</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>&quot;Data Mappers (like Doctrine2) help us a lot to persist data. Yet many projects are still struggling with tough questions:
+- Where to put business logic?
+- How to protect our code from abuse?
+- Where to put queries, and how test them?
+
+Let’s look beyond the old Gang of Four design patterns, and take some clues from tactical Domain Driven Design. At the heart of our models, we can use Value Objects and Entities, with tightly defined consistency boundaries. Repositories abstract away the persistence.  Encapsulated Operations helps us to protect invariants. And if we need to manage a lot of complexity, the Specification pattern helps us express business rules in the language of the business.
+
+These patterns help us evolve from structural data models, to rich behavioral models. They capture not just state and relationships, but true meaning.
+
+The presentation is a fast paced introduction to some patterns and ideas that will make your Domain Model expressive, unbreakable, and beautiful.&quot;</abstract>
+<description>&quot;Data Mappers (like Doctrine2) help us a lot to persist data. Yet many projects are still struggling with tough questions:
+- Where to put business logic?
+- How to protect our code from abuse?
+- Where to put queries, and how test them?
+
+Let’s look beyond the old Gang of Four design patterns, and take some clues from tactical Domain Driven Design. At the heart of our models, we can use Value Objects and Entities, with tightly defined consistency boundaries. Repositories abstract away the persistence.  Encapsulated Operations helps us to protect invariants. And if we need to manage a lot of complexity, the Specification pattern helps us express business rules in the language of the business.
+
+These patterns help us evolve from structural data models, to rich behavioral models. They capture not just state and relationships, but true meaning.
+
+The presentation is a fast paced introduction to some patterns and ideas that will make your Domain Model expressive, unbreakable, and beautiful.&quot;</description>
+<persons>
+<person id='843'>Mathias Verraes</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='A42DYvIflO5Qihu--QWJ0A' id='1244'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-24_16:30_-_marrying_front_with_back_end_-_volker_dusch_-_bastian_hofmann_-_1244</slug>
+<title>Marrying front with back end</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Most web frameworks are broken. They either just address the server side part of a web application (Rails, Symfony, Spring, Sinatra, ...) or the client side (ext.js, YUI, Backbone.JS, amber.js,…) resulting in duplicated code, inefficient implementations and lots of boilerplate code. Recent node.js based solutions like Yahoo's Mojito or Meteor are trying to change this, but what if you don't start development from scratch because of a large legacy codebase or not wanting to use 0.x versions?
+
+This talk will feature and overview of an architecture that enables heavy reuse of even the smallest components by showing the details of the researchgate.net implementation. This approach enables developers to take page elements, like a single &quot;&quot;follow&quot;&quot; button, and place it everywhere on the site without having to duplicate any PHP, JS, HTML, CSS or AJAX endpoints in the process. Moreover it enables huge scalability, performance and UX improvements and should provide you with a couple of new ideas that are usually not explored in a classic (H)MVC approach.</abstract>
+<description>Most web frameworks are broken. They either just address the server side part of a web application (Rails, Symfony, Spring, Sinatra, ...) or the client side (ext.js, YUI, Backbone.JS, amber.js,…) resulting in duplicated code, inefficient implementations and lots of boilerplate code. Recent node.js based solutions like Yahoo's Mojito or Meteor are trying to change this, but what if you don't start development from scratch because of a large legacy codebase or not wanting to use 0.x versions?
+
+This talk will feature and overview of an architecture that enables heavy reuse of even the smallest components by showing the details of the researchgate.net implementation. This approach enables developers to take page elements, like a single &quot;&quot;follow&quot;&quot; button, and place it everywhere on the site without having to duplicate any PHP, JS, HTML, CSS or AJAX endpoints in the process. Moreover it enables huge scalability, performance and UX improvements and should provide you with a couple of new ideas that are usually not explored in a classic (H)MVC approach.</description>
+<persons>
+<person id='575'>Volker Dusch</person>
+<person id='455'>Bastian Hofmann</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C120/Django'>
+<event guid='AdclKWysoz1FApA4kbqfRg' id='1256'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C120/Django</room>
+<slug>c120_django_-_2013-08-24_11:15_-_django_--_eine_einfuhrung_-_markus_holtermann_-_1256</slug>
+<title>Django -- Eine Einführung</title>
+<subtitle>Schnell performante Web-Applikationen entwickeln</subtitle>
+<track>Django</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Dieser Vortrag gibt einen Einblick in Django, ein in Python geschriebenes Framework, das die schnelle Entwicklung von Web-Applikationen ermöglicht.</abstract>
+<description>Trotz der schnellen Entwicklung von Web-Applikationen wird hoher Wert auf sauberen Code und die Wiederverwendbarkeit einzelner Komponenten gelegt.
+
+In dem Vortrag wird erklärt, was Django ist und wofür es genutzt wird. Weiterhin wird auf die Architektur von Django und Django-Projekten eingegangen. Dabei erfolgt auch eine Beschreibung von Komponenten, die Django direkt mitliefert.</description>
+<persons>
+<person id='849'>Markus Holtermann</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='ZaOufRzWG50CGIKvN7HAPA' id='1257'>
+<start>14:00</start>
+<duration>04:00</duration>
+<room>C120/Django</room>
+<slug>c120_django_-_2013-08-24_14:00_-_django-einsteiger-workshop_-_markus_holtermann_-_1257</slug>
+<title>Django-Einsteiger-Workshop</title>
+<subtitle>django-marcador -- a Django tutorial</subtitle>
+<track>Django</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Dieser Workshop zeigt Django-Neulingen wie ein neues Projekt begonnen werden kann. Dabei werden nacheinander die einzelnen Komponenten der Web-Applikation programmiert.</abstract>
+<description>Der Workshop beginnt mit einer kurzen Einführung in die Grundlagen von Django und dem Model-Template-View-Prinzip. Nach dem Erstellen des Django-Projektes beginnt die Arbeit an der Webanwendung. Dabei werden zunächst die Models angelegt; im weiteren Verlauf werden dann die Views und Templates erstellt.
+
+Darüber hinaus wird die in Django bereits enthaltene Admin-Oberfläche vorgestellt, welche auch zum Anlegen und Bearbeiten der Datensätze genutzt wird.
+
+Falls genügend Zeit bleibt, können auch Themen wie Formulare oder das Schreiben von Tests erörtert werden.</description>
+<persons>
+<person id='849'>Markus Holtermann</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C219 (Sa Tine 2.0 / So Fedora)'>
+</room>
+<room name='A147/Lumiera'>
+</room>
+<room name='A125/Instant Messaging'>
+</room>
+<room name='C175/FrogLabs 1'>
+<event guid='LmP4vgHmMgkqY3l0vlyUcQ' id='1284'>
+<start>10:00</start>
+<duration>00:30</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-24_10:00_-_begrussung_zu_den_froglabs_-_dominik_george_-_sarah_stoffels_-_1284</slug>
+<title>Begrüßung zu den FrogLabs</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>meeting</type>
+<language>de</language>
+<abstract>Willkommen bei den FrogLabs! Wir freuen uns, dass ihr bei uns seid und ein interessantes Wochenende mit viel Spaß mit uns verbringen wollt. Bei der Begrüßung erfahrt ihr alles, was ihr für das gesamte Wochenende wissen müsst. Bitte versucht daher, pünktlich bei uns zu sein! </abstract>
+<description></description>
+<persons>
+<person id='736'>Dominik George</person>
+<person id='871'>Sarah Stoffels</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='wfezjhMyBCMkaE26paS1RQ' id='1274'>
+<start>10:30</start>
+<duration>00:45</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-24_10:30_-_entwicklung_eines_eigenen_spiels_-_einfuhrung_-_eike_tim_jesinghaus_-_1274</slug>
+<title>Entwicklung eines eigenen Spiels - Einführung</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Nun geht es los mit unserem Projekt-Workshop!</abstract>
+<description>Während der zwei FrogLabs-Tage wollen wir alle zusammen ein richtiges Spiel entwickeln. Dabei ist es egal, ob du schon Erfahrung mit dem Programmieren hast oder einfach nur neugierig bist. Zur Herstellung eines Spieles gehören viele verschiedene Dinge:
+
+    Bilder und Grafiken
+    Sounds und Musik
+    Story-Ideen
+    Entwurf von Maps
+    Programmierung 
+
+
+Bei der Einführung beginnen wir damit, unser Spiel zu planen, Ideen zu sammeln und uns zu überlegen, wie wir den Plan in den beiden Projekttagen umsetzen können. Hier ist Kreativität von allen gefragt!
+
+Nach der Einführung beginnt die Arbeit am Projekt nebenan in Raum C177.</description>
+<persons>
+<person id='865'>Eike Tim Jesinghaus</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='N8DbPY3HZ9M39oSuh1UL5w' id='1275'>
+<start>11:15</start>
+<duration>01:30</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-24_11:15_-_einfuhrung_in_die_programmierung_mit_python_-_eike_tim_jesinghaus_-_1275</slug>
+<title>Einführung in die Programmierung mit Python</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Wenn du noch keine Erfahrung im Programmieren mit Python hast, kansnt du es hier lernen! In einem ausführlichen Crash-Kurs lernst du alle Grundlagen der Sprache und wie man sie benutzt.</abstract>
+<description>Bitte beachte, dass dieser Workshop wirklich nur ein Crashkurs ist - alles Weitere lernst du während des Projekt-Workshops beim gemeinsamen Erstellen unseres Spiels! Während der zwei Projekt-Tage werden Eike und die Anderen jederzeit für deine Fragen da sein.
+
+Wenn du dich selber schon einmal mit dem Programmieren beschäftigen möchtest, empfehlen wir dir:
+
+Hello World!: Programmieren für Kids und andere Anfänger
+Warren D. Sande, Carter Sande
+ISBN: 978-3446421448</description>
+<persons>
+<person id='865'>Eike Tim Jesinghaus</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='F1sB_IFf4v4HV-q1CdkV3Q' id='1276'>
+<start>17:00</start>
+<duration>01:00</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-24_17:00_-_wem_vertraust_du_-_dominik_george_-_fabian_huppertz_-_tim_huppertz_-_1276</slug>
+<title>Wem vertraust du?</title>
+<subtitle>Warum Skype &amp; Co. dein Leben verändern</subtitle>
+<track>Kids</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>*** Dieser Workshop ist ausdrücklich auch für Eltern gedacht ***
+
+Viele Kinder und Jugendliche benutzen ihre Computer und Smartphones, um mit ihren Freunden zu chatten, Fotos auszutauschen und Spiele zu spielen. Doch leider fällt die Wahl dabei immer wieder auf bekannte und gut beworbene Produkte wie Skype, Facebook oder WhatsApp.
+
+Spätestens nun nach den jüngsten Nachrichten zum Stichwort Prism und das Bekanntwerden, dass große Firmen im Geheimen Spionage-Code in ihre Software einbauen, ist es sehr wichtig, darüber nachzudenken, wie man seine eigenen Nachrichten und die seiner Freunde vor Angriffen und Mitlesen schützen kann.</abstract>
+<description>*** Dieser Workshop ist ausdrücklich auch für Eltern gedacht ***
+
+Viele Kinder und Jugendliche benutzen ihre Computer und Smartphones, um mit ihren Freunden zu chatten, Fotos auszutauschen und Spiele zu spielen. Doch leider fällt die Wahl dabei immer wieder auf bekannte und gut beworbene Produkte wie Skype, Facebook oder WhatsApp.
+
+Spätestens nun nach den jüngsten Nachrichten zum Stichwort Prism und das Bekanntwerden, dass große Firmen im Geheimen Spionage-Code in ihre Software einbauen, ist es sehr wichtig, darüber nachzudenken, wie man seine eigenen Nachrichten und die seiner Freunde vor Angriffen und Mitlesen schützen kann.
+
+Die beste Lösung für dieses Problem sind freie Software und freie Dienste wie Linux, Jabber und CyanogenMod. In diesem Workshop geht es darum, wie du dich mit deinen Freunden unterhalten kannst und vieles mehr tun kannst, ohne dabei die gewohnten Funktionen und Spaß zu verlieren.
+
+Jede deiner Bewegungen im Internet kann dein Leben verändern!</description>
+<persons>
+<person id='736'>Dominik George</person>
+<person id='868'>Fabian Huppertz</person>
+<person id='867'>Tim Huppertz</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C177/FrogLabs 2'>
+<event guid='Pt-2Y2F1s84HNDUUTwvxbA' id='1273'>
+<start>11:00</start>
+<duration>05:00</duration>
+<room>C177/FrogLabs 2</room>
+<slug>c177_froglabs_2_-_2013-08-24_11:00_-_programmierung_eines_eigenen_spiels_-_eike_tim_jesinghaus_-_tim_huppertz_-_1273</slug>
+<title>Programmierung eines eigenen Spiels</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>* Samstag und Sonntag durchgehend! *
+
+Dieses Jahr gibt es zusätzlich zu den &quot;kleinen&quot; Workshops ein durchgehendes Projekt, bei dem jeder mitmachen kann!</abstract>
+<description>Während der zwei FrogLabs-Tage wollen wir alle zusammen ein richtiges Spiel entwickeln. Dabei ist es egal, ob du schon Erfahrung mit dem Programmieren hast oder einfach nur neugierig bist. Zur Herstellung eines Spieles gehören viele verschiedene Dinge:
+
+    Bilder und Grafiken
+    Sounds und Musik
+    Story-Ideen
+    Entwurf von Maps
+    Programmierung
+
+Natürlich kann jeder, der Interesse hat, bei diesem Workshop auch lernen, wie ein Spiel programmiert wird, aber auch wenn du gut zeichnen kannst oder dabei helfen möchtest, Ideen für ein Spiel zu finden, kannst du einiges beitragen.
+
+Der Workshop findet an beiden Tagen (Samstag und Sonntag) durchgehend statt und du kannst jederzeit vorbeischauen. Nebenbei kannst du natürlich auch an den anderen Workshops teilnehmen.
+
+Wenn du an beiden Tagen voll dabei sein möchtest, laden wir dich besonders herzlich zu unserer Ferienfreizeit ein!
+
+Am Ende der beiden Tage soll ein richtiges, vollständiges Spiel fertig geworden sein, das du allen deinen Freunden zeigen kannst! </description>
+<persons>
+<person id='865'>Eike Tim Jesinghaus</person>
+<person id='867'>Tim Huppertz</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+</day>
+<day date='2013-08-25' index='2'>
+<room name='HS1/2'>
+<event guid='78GkTY3Yd34axZIiHn06Hg' id='1188'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_10:00_-_crowdgovernance_-_sebastian_mancke_-_1188</slug>
+<title>crowdgovernance</title>
+<subtitle>Agile Teams im driver seat!</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>IT-Governance und agiles Arbeiten in der Software-Entwicklung passen nicht zusammen - Da sind sich zumindest die Vertreter der agilen Welt recht einig. 
+Crowdgovernance vereint praktische Ideen von Scrum, liquid democracy und community-prozessen miteinander. Damit unterstützt es Teams den roten Faden zu sehen und das Handeln an einer gemeinsamen Strategie auszurichten.</abstract>
+<description>Während agiles Arbeiten möglichst alle Entscheidungen in die Verantwortung der Teams verlagert, hat IT-Governance meist einen sehr zentralistischen Ansatz, bei dem Expertengruppen Rahmenbedingungen definieren, die dann für alle gelten sollen.
+Eine zu starke IT-Governance erstickt Innovation und Eigenverantwortung schon im Keim. Das Gegenteil, also eine unkontrollierte Verlagerung aller Verantwortung in die Teams, führt häufig zu Wildwuchs und Überforderung. Meist wird versucht einen trade-off zwischen den beiden Extremen zu finden, was leider zu ähnlichen Ergebnissen führt, wie agiles Arbeiten im Wasserfall ;-)
+
+Crowdgovernance ist ein Ansatz, der verspricht nicht in dieser Sackgasse zu enden. Die Grundlage bildet eine lateral geführte Zusammenarbeit von Teams und Entwicklern. Anstatt diese jedoch mit ihrer Verantwortung alleine zu lassen beschreibt Crowdgovernance eine Menge von Kommunikationsmaßnahmen, Vorgehensmustern und Tools die unterstützen um den roten Faden in der Software-Entwicklung zu sehen. Dabei werden viele praktische Ideen von Scrum, liquid democracy und community-prozessen miteinander vereint. 
+
+In dem Vortrag werden eine Menge dos und don'ts vermittelt, die der Autor in seinem eigenen Unternehmen und in diversen Großprojekten erlebt hat. Ebenso lassen sich die praktischen Vorschläge in größeren open source Projekten einsetzen um diesen eine fokussiertere Ausrichtung zu geben. Der Vortrag richtet sich an IT-Leiter, Architekten vor allem aber an Entwickler - denn bei denen liegt ja die Verantwortung. </description>
+<persons>
+<person id='21'>Sebastian Mancke</person>
+</persons>
+<links>
+<link href='https://github.com/smancke/tech-rating'>techrating python application</link>
+</links>
+</event>
+<event guid='6X-K67EtD4t5DM37cd-XaQ' id='1204'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_11:15_-_dynamic_service_configuration_in_the_opensource_cern_cloud_-_daniela_dorneanu_-_1204</slug>
+<title>Dynamic Service Configuration in the Opensource CERN Cloud</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Automatic cloud management is one of the most popular topic in computer science today. In the latest years Openstack technology has imposed itself as a standard cloud infrastructure. Due to the heavy demands of the LHC experiments, CERN IT department is continuously expanding its infrastructure and the in-house developed tools are not sufficient any more. Therefore, CERN IT service team has started the Agile Infrastructure project, which aims to update the IT infrastructure to be managed through Openstack. In this presentation we will submit a possible procedure to integrate a CERN service into the Agile Infrastructure. As CERN has many services that need to be integrated with this new infrastructure, our goal is to build a process which could be used as a generic procedure for other similar services. The main challenges are regarding the communication with other services, the complexity of the tool itself, but also in the goal to have the process generic enough to scale automatically for next releases and different services. The service we integrate in the Agile infrastructure is the license server infrastructure. </abstract>
+<description>The license server infrastructure manages over 60 different commercial licenses products used by 4000 users. Although most computing applications used by physicists at CERN are open source Linux based software, a range of users from engineering and administrative units rely on commercially licensed software.  The management and distribution of these commercial software packages is done centrally, using the license server software supplied by each vendor. An integration of this environment with the Agile Infrastructure poses challenges both in terms of reliability requirements, as well as constraints for the implementation by the supplied license software. Other challenges are due to the continuous change process in the Agile Infrastructure project which is still in early stage adoption at CERN. The main technologies we will work with, are Puppet – a declarative language for managing Linux services and Openstack, an IaaS open-source cloud infrastructure. 
+
+The first main topic we will treat in the presentation is a short description of the Openstack adoption at CERN. Secondly, we will present a detailed description of the process to integrate a service in the cloud. This part will describe the procedure for machine creation, hostgroups management, packaging, secrets passing, integration with ldap, updating the service, starting the service. Then we will go through the challenges to have a closed source application integrated into the Openstack cloud infrastructure. In the last part we will approach the future development opportunities for integrating a process into the cloud.
+
+For this project I am working at CERN, Geneva in the IT-PES-IS (Platform and Engineering Services - Infrastructure Services) and my supervisors are Nils Hoimyr and Alvaro Gonzalez.</description>
+<persons>
+<person id='804'>Daniela Dorneanu</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='eE3Bwo04W6naLXUvO1v3TQ' id='1165'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_12:45_-_owncloud_-_bjorn_schiessle_-_1165</slug>
+<title>ownCloud</title>
+<subtitle>Meine Daten gehören mir!</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Hatte man früher noch einen zentralen Computer auf dem alle Daten und Programme gespeichert waren, so wird dieser heute vermehrt durch viele kleinere Geräte wie Tablets, Smartphones oder Netbook ersetzt oder zumindest ergänzt. Damit einher geht der Wunsch von überall aus und jederzeit auf seine Daten zugreifen zu wollen. Viele Anwender überlassen dafür sogenannten &quot;Cloud-Diensten&quot; ihre Daten. Doch neben den Annehmlichkeiten wirft dies auch viele neue Fragen auf: Sind meine Daten in der Cloud noch sicher? Wer hat alles Zugriff darauf? Welche Rechte muss ich dafür an den Anbieter abgeben?  Diese Entwicklung stellt auch die Freie Software Gemeinschaft vor völlig neue Herausforderungen. Wie können wir unsere Freiheit erhalten und trotzdem von den neuen Möglichkeiten profitieren? Der Vortrag wird sich diesen Fragen widmen und mit ownCloud eine konkrete Lösung vorstellen. ownCloud ermöglicht es von überall aus auf seine Daten zuzugreifen, diese mit anderen zu teilen und vieles mehr. Dadurch kann man als Anwender all die Vorteile der Cloud nutzen ohne dabei die Kontrolle über seine Daten abzugeben.</abstract>
+<description></description>
+<persons>
+<person id='787'>Björn Schießle</person>
+</persons>
+<links>
+<link href='www.owncloud.org'>ownCloud</link>
+</links>
+</event>
+<event guid='d7nPt-RU56uQUFuWMrn1Dg' id='1299'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_14:00_-_produktiv-_und_entwicklungsumgebung_mit_puppet_verwalten_-_hans-christian_otto_-_1299</slug>
+<title>Produktiv- und Entwicklungsumgebung mit Puppet verwalten</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Ein Ersatz für den Vortrag für die Puppenspieler.</abstract>
+<description>Als ein wachsender Betreiber von Web-Applikationen müssen Sie mit einer wachsenden Menge an Servern umgehen. Einen neuen Datenbankserver aufzusetzen dauert Tage? Für das aufsetzen eines neuen Entwicklerarbeitsplatzes benötigen Sie einen Senior-Developer, der weiß, in welcher Reihenfolge welche Dienste installiert und konfiguriert werden müssen? Ihre Produktivumgebung läuft unter Debian 7.0, die Entwickler setzen der Einfachheit halber lieber auf Ubuntu 13.04? Klarer Fall mangelnder Automatisierung! Diese Session führt Sie in Puppet ein, einem Konfigurationsmanagement-Tool, welches Ihnen hilft, Ihre Systeme ohne Aufwand aufzusetzen. Außerdem wird die Kopplung mit Vagrant thematisiert, welches das Aufsetzen virtueller Maschinen mit Puppet in der Entwicklungsumgebung vereinfacht.</description>
+<persons>
+<person id='394'>Hans-Christian Otto</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='9jbddj2uaAgudbW61o86CA' id='1139'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_15:15_-_kerberos_und_otp_-_cornelius_kolbel_-_1139</slug>
+<title>Kerberos und OTP</title>
+<subtitle>Nur einmal authentisiert - aber stark!</subtitle>
+<track>Security</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Authentisierung an Computersystemen ist für Benutzer oft ein lästiges Übel. Abhilfe schaffen hier Single Sign On Systeme, indem sie dem Benutzer das Leben derart erleichtern, dass er sich nur einmal anmelden muss und danach an allen Systemen arbeiten kann.
+Hier gibt es unterschiedliche Ansätze, um dieses Appliance-basiert oder speziell für Webanwendungen umzusetzen. So wird zur Authentisierung an verschiedenen Diensten im Unternehmensumfeld gerne das bereits in den 1980er Jahren am MIT entwickelte Kerberos eingesetzt. Die Authentisierung an einem Single Sign On System öffnet einem Benutzer das Tor zu allen verfügbaren Diensten, es liegt daher nahe, den Authentisierungsvorgang so sicher wie möglich zu gestalten. Dazu bietet sich die Nutzung von Mehrfaktorauthentisierung an.
+In diesem Vortrag wird aufgezeigt, wie Kerberos mit der Nutzung von Einmalpasswort-Token (OTP) kombiniert werden kann.</abstract>
+<description>Dieser Vortrag beschreibt die Authentisierung mit Kerberos und die damit verbundenen Herausforderungen bei Nutzung von OTP-Token.
+Die Authentisierung mit Einmalpasswörtern war im Kerberos-Protokoll nie vorgesehen und daher technisch nicht ohne weiteres möglich.
+Mit dem von RSA geschriebenen RFC6560 liegt zwar nach Jahren nun ein Standard vor, wie OTP bei der Authentisierung mit Kerberos verwendet werden kann, jedoch erweist sich dies scheinbar in vielen Fällen als wenig praktikabel.
+Weiterhin wird betrachtet, wie die verschiedenen Implementierungen Heimdahl, MIT Kerberos, Samba4 oder Microsoft Active Directory dieses Thema angehen, um schließlich eine Lösungsmöglichkeit aus MIT Kerberos und dem freien Token-Authentisierungssystem LinOTP näher zu beschreiben.</description>
+<persons>
+<person id='622'>Cornelius Kölbel</person>
+</persons>
+<links>
+<link href='http://www.linotp.org'>LinOTP</link>
+<link href='http://web.mit.edu/kerberos/'>MIT Kerberos</link>
+<link href='http://www.ietf.org/rfc/rfc4120.txt'>Kerberos V5</link>
+<link href='http://www.ietf.org/rfc/rfc6560.txt'>One-Time Password Pre-Authentication</link>
+<link href='http://linotp.org/kerberos-otp'>Online Präsentation</link>
+</links>
+</event>
+<event guid='raOEecvrwAc4mfXtUCafLA' id='1153'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_16:30_-_unternehmenskulturen_unter_druck_-_judith_andresen_-_1153</slug>
+<title>Unternehmenskulturen unter Druck</title>
+<subtitle>Was Wachstum mit uns macht</subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language></language>
+<abstract>Zum Anfang ist alles ganz einfach: flache (weil nicht existente) Hierarchie, offene Türen und Teamarbeit. Mit dem Wachstum kommt die &quot;Professionalisierung&quot;. Rollen und Hierarchien werden gefunden, dabei erstarrt das Unternehmen. An Stelle von Spaß gibt es Politik. Muss das sein? Wie erhält man sich Beweglichkeit, Leichtigkeit und Spaß im Wachstum? Und ist dabei erfolgreich?</abstract>
+<description></description>
+<persons>
+<person id='478'>Judith Andresen</person>
+</persons>
+<links>
+<link href='http://www.judithandresen.com/2013/08/25/froscon-ergebnisse-des-workshops-und-des-vortrags/'>Präsentation (Slideshare)</link>
+</links>
+</event>
+<event guid='3bhohK74EJ7ZrMK2_hlodA' id='1143'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_17:45_-_devops_-_das_neue_schwarz_-_markus_bionix_rekkenbeil_-_1143</slug>
+<title>DevOps - Das neue Schwarz!</title>
+<subtitle></subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>In diesem Vortrag soll gezeigt werden, welche Begriffe, Bereiche, Methoden, Werkzeuge und Möglichkeiten hinter dem Begriff &quot;DevOps&quot; sich verbergen.</abstract>
+<description>Der Vortrag wird folgende Bereiche genauer erläutern:
+
+* Konflikte zwischen Development, QA und Operations
+
+* Welche Kultur und Bewegung steht hinter DevOps?
+
+* Die verschiedenen Arten der Automatisierung: Deployment Management, Configuration Management und Build Management
+
+* Wieso Monitoring und Messungen extrem wichtig sind? Welche Tools man benutzen kann?
+
+* Wissensaustausch (Sharing): Wo? Wie?
+
+* Verschiedene Einsatzszenarien vorstellen:  
+     - Einsatz einer lokalen Vagrant-Instanz zum Puppetcode testen
+     - Einsatz von Jenkins beim Grml -Projekt
+
+* Feedback und Fragen zum Thema DevOps</description>
+<persons>
+<person id='770'>Markus &quot;bionix&quot; Rekkenbeil</person>
+</persons>
+<links>
+<link href='https://twitter.com/bionixit'>Twitter @bionixit</link>
+<link href='http://www.xing.com/profile/Markus_Rekkenbeil'>Xing-Profil</link>
+<link href='https://speakerdeck.com/bionix/devops-das-neue-schwarz'>Vortragsfolien (speakerdeck.com)</link>
+</links>
+</event>
+<event guid='FNs-Wp-B8G4Sx1hZMSMS7A' id='1238'>
+<start>19:00</start>
+<duration>00:30</duration>
+<room>HS1/2</room>
+<slug>hs1_2_-_2013-08-25_19:00_-_shutdown_-_boernd_-_andreas_kupfer_-_1238</slug>
+<title>shutdown</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language></language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='735'>Boernd</person>
+<person id='343'>Andreas Kupfer</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='HS3'>
+<event guid='gaCpJ9BHa6GoctjGFtgxvQ' id='1128'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_10:00_-_the_renaissance_of_perl_-_renee_backer_-_1128</slug>
+<title>The Renaissance of Perl</title>
+<subtitle>Was sich in den letzten Jahren bei Perl5 getan hat</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Perl ist alt und riecht schon leicht modrig. Das denken auf jeden Fall die Personen, die sich schon länger nicht mehr mit Perl beschäftigt haben. Dabei hat sich in den letzten Jahren einiges -- auch innerhalb der Perl-Community -- getan. Dieser Vortrag stellt einige dieser Neuerungen vor.</abstract>
+<description>Perl ist unleserlich! Das kann man machen, (muss|sollte) man aber nicht. 
+Perl ist bei Perl 5 stehen geblieben. Die Sprache heißt Perl5 und ist in der Version 18.x veröffentlicht (Perl5 18.x kommt im Mai 2013 heraus). 
+Perl5 + Web = CGI.pm. Ja, vor über 10 Jahren. Heute benutzt man andere Techniken.
+Das Objektsystem in Perl5 ist so umständlich. Ein Elch und sein Gefolge kann helfen!
+Das Bauen und Ausliefern von Perl5-Paketen ist umständlich. Nicht wenn man seine Tools kennt.
+
+Diese fünf Punkte zeigen, dass sich in den letzten Jahren einiges getan hat. Ich möchte den Zuhörern diese Änderungen zeigen und zum Einsatz der Features und Pakete ermuntern.</description>
+<persons>
+<person id='301'>Renee Bäcker</person>
+</persons>
+<links>
+<link href='http://speakerdeck.com/reneeb_perl/the-renaissance-of-perl'>Slides</link>
+</links>
+</event>
+<event guid='4DPy_rTjcx8v3-qpU0VcmQ' id='1140'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_11:15_-_database_devops_mit_flyway_git_maven_mysql_und_jenkins_-_michael_huttermann_-_1140</slug>
+<title>Database DevOps, mit Flyway, Git, Maven, MySQL und Jenkins</title>
+<subtitle></subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>DevOps beschreibt die optimierte Zusammenarbeit von Entwicklung und Betrieb. Auch beim Umgang mit Datenbank hilft DevOps Änderungen systematisch in Produktion zu bringen.</abstract>
+<description>Im ersten Teil dieses Vortrags erläutere ich was DevOps ist. DevOps, ein Kofferwort aus Development und Operations, beschreibt zwischen Entwicklung und Betrieb geteilte Anreize, Prozesse und Werkzeuge. In Projekten liegen Datenbankänderungen häufig auf einem kritischen Pfad. Im zweiten Teil dieses Vortrags zeige ich anhand einer Demo Funktionsweise und Integration der Build-Engine Jenkins und dem Datenbankmigrationstool Flyway, um Daten- und Strukturänderungen auf einer MySQL-Datenbank reproduzierbar und in hoher Qualität bereitzustellen. Das Ganze wird eingebettet in Maven, angestoßen in Jenkins und versioniert mit Git. </description>
+<persons>
+<person id='158'>Michael Hüttermann</person>
+</persons>
+<links>
+<link href='http://www.apress.com/9781430245698'>DevOps for Developers</link>
+</links>
+</event>
+<event guid='W1dhQgORkOUPLJ-hD3Nn1Q' id='1219'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_12:45_-_apps_fur_alle_plattformen_entwickeln_-_andreas_schreiber_-_1219</slug>
+<title>Apps für alle Plattformen entwickeln!</title>
+<subtitle>Plattformübergreifende App-Entwicklung mit Python und Kivy</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Plattformübergreifende App-Entwicklung für Android, iOS, Mac OSX, Linux, Windows, ... das geht auch Nicht-Webbasiert! Im Vortrag wird das Python-Framework Kivy vorgestellt und gezeigt wie einfach sich Apps für die genannten Plattformen entwickeln, paketieren und verteilen lassen.</abstract>
+<description>Kivy ist plattformübergreifendes Python-Framework für Natural User Interfaces (NUI), das auf Android, iOS, Mac OSX, Linux und Windows läuft. Eine Portierung auf Raspberry Pi ist auch bald verfügbar. Mit Kivy lassen sich einfach grafikbasierte und multi-touch-fähige Apps entwickeln, die auf all diesen Plattformen direkt lauffähig sind. Da das Entwickeln mit Kivy und Python sehr schnell geht, lassen sich damit schnell Prototypen oder auch richtige Produkte entwickeln. Kivy ist frei als Open-Source-Software verfügbar. 
+
+Im Vortrag werden die Grundlagen des Kivy-Frameworks und viele Beispiele für Kivy-basierte Apps vorgestellt. Dabei wird alles live auf Laptop bzw. Smartphones demonstriert. Es wird auch erläutert wie man fertige Packages zum Installieren auf den verschiedenen Betriebssystemen erstellt, um seine App auch über App-Markets verteilen zu können.</description>
+<persons>
+<person id='346'>Andreas Schreiber</person>
+</persons>
+<links>
+<link href='http://kivy.org'>Kivy</link>
+<link href='http://bit.ly/1dj6mnh'>Apps für alle Plattformen entwickeln! // Speaker Deck</link>
+</links>
+</event>
+<event guid='xZDYmNfEBhbxkeeH1UN0tg' id='1149'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_14:00_-_ember_js_-_stefan_wintermeyer_-_1149</slug>
+<title>Ember.js</title>
+<subtitle>A framework for creating ambitious web applications.</subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Ember.js wurde von Yahuda Katz (jQuery und Ruby on Rails Core-Team Mitglied) als MVC basierendes neues JavaScript Framework als bessere Alternative zu Backbone und Angular erfunden. Anhand der Version 1.0 zeigt Stefan Wintermeyer wie gut und schnell man mit Ember moderne Web Applikationen erstellen kann.</abstract>
+<description>Ember.js ist der Traum eines jeden Ruby on Rails und Django Entwicklers. Man bekommt mit Convention over Configuration sauber programmierbares JavaScript Framework, das Kreise um Backbone und Angular läuft. Mit Ember-Data bekommt man zusätzlich noch eine Datenbank-Abstraktions-Bibliothek, die zum Abgleich u.a. auf RESTful Servern mit Transaktionen arbeiten kann. So bekommt ein Entwickler die optimalen Tools, um z.B. Web Applikationen für mobile User zu schreiben, die teilweise auch einmal offline sind. Die Ember Applikation merkt sich dann die Daten und synct sie später mit dem Server.
+
+Stefan Wintermeyer zeigt an einem leicht verständlichem Beispiel wie man mit Ember.js auf der Client-Seite und Ruby on Rails auf der Server-Seite eine schnell bedienbare Web Applikation erstellen kann.
+
+Happiness follows snappiness!</description>
+<persons>
+<person id='780'>Stefan Wintermeyer</person>
+</persons>
+<links>
+<link href='http://emberjs.com/'>Ember.js Homepage</link>
+</links>
+</event>
+<event guid='l0to2ELszuY9er8y9Gs7pA' id='1185'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_15:15_-_game_development_mit_open_source_fur_ouya_web_und_mobile_-_michael_kleinhenz_-_1185</slug>
+<title>Game Development mit Open Source für Ouya, Web und Mobile</title>
+<subtitle>Wie man mit Open Source Tools 2D-Spiele entwickelt</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Am Beispiel des Open-Source-Frameworks libGDX zeigt der Vortrag, wie Spiele entwickelt werden können und welche Open-Source-Technologien dazu aktuell verfügbar sind. Die Integration von Social-Media-Funktionen wie Achievements und Leaderboards zeigt der Vortrag dabei ebenso, wie die praktische Umsetzung auf Basis der Ouya-Konsole.</abstract>
+<description>Linux boomt in seiner neuen Rolle als Plattform für Spiele. Durch die Verfügbarkeit von Steam für Linux und die große Verbreitung von Android im Consumerbereich nimmt die Popularität sowohl bei Endkunden als auch Entwicklern ständig zu. Die Ouya-Plattform ist dabei ein Beispiel für eine offene Infrastruktur für Entwicklung und Vermarktung von Spielesoftware.
+
+Am Beispiel des Open-Source-Frameworks libGDX zeigt der Vortrag, wie Spiele entwickelt werden können und welche Open-Source-Technologien dazu aktuell verfügbar sind. Die Integration von Social-Media-Funktionen wie Achievements und Leaderboards zeigt der Vortrag dabei ebenso, wie die praktische Umsetzung auf Basis der Ouya-Konsole.
+
+Während des Vortrags wird live ein kleines Spiel auf Basis von LibGDX, der Physikengine Box2D und der LibGDX-Partikelengine entwickelt.</description>
+<persons>
+<person id='526'>Michael Kleinhenz</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='7RWGLIjaZfC9mtqRFUH8SQ' id='1201'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS3</room>
+<slug>hs3_-_2013-08-25_16:30_-_log_analyse_-_jens_kuhnel_-_1201</slug>
+<title>Log Analyse</title>
+<subtitle>Schau mal ins Logfile von 1000 Servern</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Die Logdateien in /var/log/ sind für jeden Admin die zentrale Anlaufstelle wenn es Probleme gibt. Was auf ein, zwei Maschinen noch gut funktioniert wird bei 100 oder 1000 Servern nicht mehr skalieren. Also müssen die Logs eingesammelt und verarbeitet werden.
+
+Dieser Vortrag stellt verschiedene Lösungen zur Sammlung, Verarbeitung und Analyse von Logdateien vor.</abstract>
+<description></description>
+<persons>
+<person id='807'>Jens Kühnel</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='HS4'>
+<event guid='-mqQ0tHlPGLs9mrshVT2jA' id='1216'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_10:00_-_systemtap_-_skripten_im_kernelspace_-_stefan_seyfried_-_1216</slug>
+<title>SystemTap - Skripten im Kernelspace</title>
+<subtitle>SystemTap für Administratoren</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>SystemTap erlaubt, mit einer relativ einfachen Skriptsprache Parameter und Zustände im Kernel zu erfassen. Dieser Vortrag gibt eine kurze Einführung in die Möglichkeiten die durch SystemTap geboten werden.</abstract>
+<description>SystemTap (stap) ist eine Skriptsprache und ein Werkzeug um laufende Linuxsysteme dynamisch zu instrumentieren. Systemadministratoren können mit SystemTap Daten aus dem Kernel extrahieren, filtern und ausgeben, und dadurch komplexe Funktionale oder Performanceprobleme untersuchen.
+
+SystemTap-Skripten werdem mit dem &quot;stap&quot;-Befehl gestartet welcher das Skript in ein Kernelmodul üersetzt, welches geladen wird. Wenn das Skript beendet wird, wird das Modul automatisch wieder entladen.
+Während der Laufzeit kann das Kernelmodul über den laufenden &quot;stap&quot;-Befehl Meldungen im Terminal ausgeben, so dass damit z.B. &quot;top&quot;-ähnliche Ausgaben statistischer Werte erzeugt werden können.</description>
+<persons>
+<person id='507'>Stefan Seyfried</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='1W5U2Vj60Kz28828BOUm_A' id='1167'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_11:15_-_hochverfugbare_firewalls_mit_keepalived_und_conntrackd_-_alexander_wirt_-_1167</slug>
+<title>Hochverfügbare Firewalls mit Keepalived und Conntrackd</title>
+<subtitle>Übernahme von Verbindungsverlust</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Dieser Talk soll Einsteigern in die Materie erklären wie man mit Keepalived und Conntrackd hochverfügbare Firewalls mit zwei oder mehr Knoten aufbauen kann die im ihre conntrack Informationen synchronisieren. Dies ermöglicht es auf einen anderen Knoten zu wechseln ohne Verbindungen zu verlieren.</abstract>
+<description>Im Zusammenspiel von Keepalived und Conntrackd ist es möglich mit Linux Firewalls zu betreiben die im Failoverfall die Verbindungensinformationen mit übernehmen so das bestehende Verbindungen unterbrechungsfrei erhalten bleiben. 
+
+Keepalived kann mittels VRRP zwei oder mehr Knoten verwenden um IPs hochverfügbar zu machen, während Conntrackd Verbindungsinformationen zwischen Knoten Synchronisieren kann. Richtig zusammen eingesetzt kann man hochverfügbare, stateful Firewalls betreiben die auch im Übernahmefall den State übernehmen. 
+
+In diesem Vortrag werden die Grundlagen von Conntrack, VRRP und Keepalived erklärt, sowie am praktischen Beispiel gezeigt wie eine solche Firewall funktioniert.
+</description>
+<persons>
+<person id='116'>Alexander Wirt</person>
+</persons>
+<links>
+<link href='http://www.keepalived.org'>Keepalived Website</link>
+<link href='http://conntrack-tools.netfilter.org/conntrackd.html'>Conntrackd Website</link>
+<link href='http://formorer.github.io/froscon2013-talk/'>Slides</link>
+</links>
+</event>
+<event guid='CXUA0JwX0NqXeAeyf8-VQg' id='1190'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_12:45_-_mysql_performance_schema_mysql_5_6_-_thalheimerc_-_1190</slug>
+<title>MySQL Performance Schema (MySQL 5.6)</title>
+<subtitle>Best Practices</subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Wird mein Index verwendet, was macht mein MySQL gerade, welche Files verwendet MySQL, wer stellt welche Abfragen? 
+Wer P_S kennt, kennt die Antwort!</abstract>
+<description>Das Performance Schema wurde bereits in der Version MySQL 5.5 eingeführt. Mit MySQL 5.6 wurde das Performance_Schema erheblich verbessert und das Anwendungsspektrum erheblich erweitert.
+Analysen können nun auch auf Anwendungsebene gefahren werden. Damit rückt das Performance_Schema sehr stark in die tägliche Administration von DBAs.
+In diesem Vortrag wird eine Einführung in das P_S dargestellt und anhand von Anwendungsbeispielen und dem P_S Helper (-tools) vertieft.</description>
+<persons>
+<person id='803'>ThalheimerC</person>
+</persons>
+<links>
+<link href='https://www.mysql.com'>MySQL</link>
+</links>
+</event>
+<event guid='RSBoICor2mUrzW8X80FH6g' id='1160'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_14:00_-_systemadminstration_in_einer_agilen_welt_-_ralph_angenendt_-_1160</slug>
+<title>Systemadminstration in einer agilen Welt</title>
+<subtitle>Ein Erfahrungsbericht</subtitle>
+<track>System Administration</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Dauerte früher die Entwicklung einer Applikation mehrere Monate bis Jahre, bevor sie in Betrieb gehen konnte, befinden wir uns heute in einer agilen Welt.
+
+Selbständige Entwicklerteams entwickeln Software in kurzen Zyklen und stellen diese Änderungen dann direkt &quot;Live&quot;. Daran muss sich Systemadministration - Applikationsmanagement, Betrieb bzw. System Engineering) messen lassen: Sie muss Strategien entwickeln, um diese immer kürzer werdenden Fristen zu unterstützen.
+
+Dieser Vortrag zeigt, wie Systemadministratoren in dieser Welt &quot;überleben&quot; können, indem sie ebenfalls agil agieren.
+</abstract>
+<description>Systemadministration in einer agilen Welt
+
+Früher wurde eine Applikation in einem Pflichtenheft bis ins letzte Detailspezifiziert. Nach diesem Pflichtenheft wurde diese Applikation dann entwickelt, bis sie so funktionierte, wie in diesem Pflichtenheft beschrieben. Das konnte dann schon mal Monate bis Jahre dauern - und erst danach wurde der Betrieb dieser Software geplant und umgesetzt. Nicht sehr flexibel.
+
+Heute befinden wir uns in einer agilen Welt: Kleine, selbständige Entwicklerteams entwickeln ein minimal funktionsfähiges Produkt und fügen diesem in kurzen Zyklen neue Features hinzu. Diese Features werden dann in Betrieb genommen, wenn sie fertig sind: Nach zwei Wochen, zwei Tagen oder auch kontinuierlich. 
+
+Systemadministratoren - Applikationsmanagement, Betrieb, System Engineering - müssen sich diesen geänderten Umständen anpassen, wenn sie &quot;überleben&quot; wollen. Sie müssen Strategien entwickeln, um diese immer kürzer werdenden Entwicklungszykeln zu unterstützen.
+
+Die einfachste Lösung ist es, ebenfalls agil zu agieren. Und natürlich die Kommunikation zwischen Entwicklern und Administratoren zu verbessern.
+
+Kanban oder Scrum, eigenes Storytellung, Devops und Änderung der
+Organisation - dieser Vortrag zeigt Beispielhaft, was Administratoren und Management machen können, um diesem Ziel näher zu kommen. Erfolgsstories werden genauso erwähnt wie Fallstricke. 
+</description>
+<persons>
+<person id='166'>Ralph Angenendt</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='ufo3aAZTQyag0mflhk5Edw' id='1198'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_15:15_-_introduction_to_twitter_storm_-_uwe_seiler_-_1198</slug>
+<title>Introduction to Twitter Storm</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Storm is a free and open source distributed realtime computation system. Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing. The talk aims to give an overview of Twitter Storm, compares it to Apache Hadoop and shows how it can be part of enterprise architectures using the Lamba architecture pattern.</abstract>
+<description></description>
+<persons>
+<person id='802'>Uwe Seiler</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='7HNUxJ8WE4Z75VEtQuejtA' id='1224'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_16:30_-_der_mensch_in_artgerechter_haltung_-_christoph_baudson_-_1224</slug>
+<title>Der Mensch in artgerechter Haltung</title>
+<subtitle></subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Es ist kein Geheimnis, dass Menschen verschieden sind und behandelt werden sollen - Individuals and interactions over processes and tools, wie es die Autoren des Agilen Manifests nannten. Sie verschwiegen aber wie schwierig dieses Unterfangen ist, insbesondere in Umgebungen mit vielen &quot;processes and tools&quot;. Im Vortrag wird in Anlehnung an Gunther Duecks &quot;Omnisophie&quot; ein Modell vorgestellt, was dieses komplexe Unterfangen vereinfachen soll. Ein Plädoyer für artgerechte Haltung - auch für Menschen.</abstract>
+<description></description>
+<persons>
+<person id='813'>Christoph Baudson</person>
+</persons>
+<links>
+<link href='http://artgerecht.sustainablepace.net'>Der Mensch in artgerechter Haltung - Slides</link>
+</links>
+</event>
+<event guid='VceNvQPo8uJP8MZMG6FwSw' id='1178'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS4</room>
+<slug>hs4_-_2013-08-25_17:45_-_building_a_software_appliance_from_open_and_closed_components_-_basil_crow_-_1178</slug>
+<title>Building a Software Appliance from Open and Closed Components</title>
+<subtitle>How Delphix combines an open source operating system with a closed source management application to create a self-contained software appliance</subtitle>
+<track>Community</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>In this talk, we discuss the challenges and mechanics of assembling a self-contained software appliance (from operating system to web application) from disparate open and closed source repositories, touching on issues of choosing open source components with appropriate licenses, managing a large number of different licenses during the build process, providing visibility into the licenses of the various components that form our stack, and keeping open and closed code separate. We also discuss the process of collaborating on an open source operating system with other contributors, both corporate and community.</abstract>
+<description>Delphix abstracts DBMS data files and log files to provide virtual databases that allow for rapid snapshotting, cloning, and rollback. The Delphix product is a self-contained software appliance consisting of a proprietary virtual database management application built atop a derivative of the open source Illumos operating system (formerly called OpenSolaris), and engineers at Delphix regularly work on both proprietary application components as well as open source operating system components. 
+
+Alongside such corporations as DEY Storage Systems, Joyent, Nexenta, and OmniTI, Delphix plays a leading role in the development of Illumos by contributing a significant amount of code (Delphix contributes more code to ZFS than all other organizations combined), mentoring community contributors, and providing engineering and organizational resources (e.g., code reviews, build infrastructure, and QA). In this talk, we also discuss the mechanics of pushing and pulling changes to and from the broader Illumos and ZFS communities alongside the aforementioned corporations.</description>
+<persons>
+<person id='798'>Basil Crow</person>
+</persons>
+<links>
+<link href='http://blog.delphix.com/'>Delphix engineering blogs</link>
+</links>
+</event>
+</room>
+<room name='HS5'>
+<event guid='_S2Lh5ZQio6XJvrApTb1Rg' id='1136'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_10:00_-_working_with_massively_distributed_database_systems_-_martin_schoenert_-_1136</slug>
+<title>Working with massively distributed database systems</title>
+<subtitle>The CAP Theorem and Architectual Consequences</subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>The blunt formulation of the CAP theorem states that any database system can achieve only 2 of the 3 properties: consistency, availability and partition-tolerance. We look at it more closely and see that this
+formulation is misleading, because there is not a single big design decision but several smaller ones for the design of a database system. We then concentrate on the architectural consequences for massively
+distributed database systems and argue that such systems must place restrictions on consistency and functionality.</abstract>
+<description></description>
+<persons>
+<person id='775'>Martin Schoenert</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='HDFBkTbXZ5xFC1wWVuveUw' id='1169'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_11:15_-_new_replication_features_in_mysql_5_6_-_stephane_combaudon_-_1169</slug>
+<title>New replication features in MySQL 5.6</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Global transaction identifiers, multi-threaded slaves, crash-safe replication are some of the interesting replication-related features of MySQL 5.6. They promise a lot of improvements regarding flexibility, performance and robustness. Is the reality so nice? Learn in this session how to use these features and where the limitations are.</abstract>
+<description>MySQL 5.6 has been out for a few months and it provides a lot of enhancements, specifically regarding replication. Global transaction identifiers offer an efficient way to deal with the hassles of maintaining a replication topology when a master crashes, multi-threaded replication is a nice solution to overcome the performance limitations of the regular single-threaded replication, crash-safe replication provides new configuration to make replication more resilient in case of a crash, and the new MySQL utilities are new tools alleviating some tedious tasks of the DBAs.
+
+This session aims at exploring these new features. You will learn which problems they are likely to solve and how they can improve the performance or the resilience of your application. We will also discuss their limitations and the challenges you may face while trying to implement them. Demos will be shown to illustrate both the strengths and weaknesses of all features.</description>
+<persons>
+<person id='291'>Stephane Combaudon</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='LkTDNVzQ3TdMIKgNclPauQ' id='1227'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_12:45_-_gamifying_map_improvements_with_mongodb_-_derick_rethans_-_1227</slug>
+<title>Gamifying Map Improvements with MongoDB</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>In this talk we will see how PHP and MongoDB power &quot;3angle&quot; - a tool that makes a game out of improving OpenStreetMap (OSM) data.</abstract>
+<description>In this talk we will see how PHP and MongoDB power &quot;3angle&quot; - a tool that makes
+a game out of improving OpenStreetMap (OSM) data. First we see how we import
+the huge data set that makes up OSM into MongoDB. This is not such an easy task
+that the data set is massive. We explore different ways of storing the data and
+which indexes to use. During the second part, we will look at displaying the
+OSM data by rendering the vector data over the OSM base tiles with Leaflet.
+Leaflet is also used for the display of the map. In the final part we will look
+at storing contributed data efficiently with MongoDB again.
+
+From this talk you will learn: optimising the storage of large amounts of data
+in, and effective schema design with, MongoDB; and how to OSM as a base layer
+to draw your own data on top of with Leaflet.
+</description>
+<persons>
+<person id='500'>Derick Rethans</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='7ShWuCCcnY5mm6vfbwyzVw' id='1168'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_14:00_-_mysql_security_past_and_present_-_georgi_joro_kodinov_-_1168</slug>
+<title>MySQL Security : Past and Present</title>
+<subtitle>Oddities, problems, solutions. What's new in 5.6 ?</subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>MySQL implements somewhat unorthodox security model. This session aims to explain the principles behind it and give practical examples on how authenticating and authorizing users works in MySQL. The new MySQL 5.6 functionality is highlighted and explained.</abstract>
+<description>The session starts with an introduction on what the MySQL security model is on logical and physical level. Principles behind how authentication and authorization work and how they can be tailored to suit your needs are covered in great detail. Some common gotchas are highlighted and explained. 
+Then we enumerate the recent functionality additions in this area and try to get a holistic view on how they all contribute towards a more secure MySQL.</description>
+<persons>
+<person id='795'>Georgi &quot;Joro&quot; Kodinov</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='zn5LRuLBoF8hSyoJVGeNzQ' id='1206'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_15:15_-_facettensuche_mit_lucene_und_solr_-_thomas_koch_-_1206</slug>
+<title>Facettensuche mit Lucene und Solr</title>
+<subtitle>Praktische Umsetzung der Facettensuche</subtitle>
+<track>Development</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Die Facettensuche ist inzwischen zu einem wichtigen Hilfsmittel für die benutzerfreundliche Erschließung von großen Datenmengen geworden. Doch wie kann man eine Facettensuche realisieren und worauf ist dabei zu achten? Ziel des Vortrages ist es, diese Fragen zu beantworten und praktische Hinweise zu geben.</abstract>
+<description>Das Apache Lucene Projekt beinhaltet mit  Lucene Core - dem Java-basierten Index- und Such-Framework - und mit Solr - dem hochperformanten und konfigurierbaren Such-Server - zwei mächtige Werkzeuge, die zur Implementierung von Suchmaschinen als Open Source Software zur Verfügung stehen.
+
+Der Vortrag wird beide Ansätze vorstellen und zeigen, wie sich damit eine Facettensuche realisieren lässt. Dabei wird sowohl die Möglichkeit der konfigurationsbasierten Facettensuche in Solr als auch die komplexere Herangehensweise über das Lucene Framework vorgestellt und beide Methoden miteinander verglichen. 
+
+Neben dem Thema der technischen Vorgehensweise werden dabei auch allgemeine Punkte der Facettensuche betrachtet, etwa Fragen zur Struktur der zu durchsuchenden Daten und der Auswahl von Facetten bis zu Hinweisen zur Darstellung an der Benutzerschnittstelle.</description>
+<persons>
+<person id='722'>Thomas Koch</person>
+</persons>
+<links>
+<link href='http://lucene.apache.org'>Lucene Project </link>
+</links>
+</event>
+<event guid='2xRJKwjPBXQ0kTkBKgcNCg' id='1215'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_16:30_-_high_performance_mysql_for_developers_-_aurimas_mikalauskas_-_1215</slug>
+<title>High Performance MySQL for Developers</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>In this talk, I will focus on key things that a developer should know or learn if they want to write High Performance MySQL-backed applications. The talk will cover the following topics:
+
+- MySQL strengths &amp; weaknesses
+- MySQL indexing
+- Query execution plans
+- Basic things to know about MySQL configuration
+- Solving some common application performance traips</abstract>
+<description>This talk is for developers with some experience with MySQL as a backend or considering it. I will start by looking at MySQL's strengths and weaknesses to see where MySQL fits and when one should consider other solutions - that should serve as a nice introduction. Later I will talk about how queries are executed and that'll lead us to indexing. I will try to answer questions like why should we add indexes, what indexes are best for different queries and how can you test if a given query is executing well.
+
+Later I will talk briefly about some of the things a developer should know about MySQL configuration, some session variables that could help them make certain queries more efficient and we will look at some common performance traps and how to avoid them.
+</description>
+<persons>
+<person id='801'>Aurimas Mikalauskas</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='Q14z2jga0sNRDG9A2mMCQw' id='1172'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>HS5</room>
+<slug>hs5_-_2013-08-25_17:45_-_real-time_fulltext_search_using_sphinx_-_adrian_nuta_-_1172</slug>
+<title>Real-time fulltext search using Sphinx</title>
+<subtitle></subtitle>
+<track>Web Development</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>A brief overview of realtime fulltext searching, discussing the current status of realtime indexing and how to build a live search using Sphinx.</abstract>
+<description>RealTime indexes in Sphinx have not, until recently, been up to par with traditional indexes. This session explores RT indexing features and provides a walkthrough on how to create live search using Sphinx.</description>
+<persons>
+<person id='784'>Adrian Nuta</person>
+</persons>
+<links>
+<link href='http://sphinxsearch.com/'>Sphinx search homepage</link>
+</links>
+</event>
+</room>
+<room name='C119/Hauptkonferenz'>
+<event guid='wDp_oFAUjSJdWjJrVSFPCg' id='1187'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_10:00_-_dokumenten-management_mit_alfresco_-_eine_einfuhrung_-_jan_buren_-_1187</slug>
+<title>Dokumenten-Management mit Alfresco - eine Einführung</title>
+<subtitle>Versionierung, Metadaten, Einsatzgebiete und Technik</subtitle>
+<track>Other</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Wozu benötigt man ein DMS (Dokumenten-Management-System)?
+Vorstellung der Kernfunktionen von Alfresco, sowie der darunter liegenden technischen Architektur</abstract>
+<description></description>
+<persons>
+<person id='767'>Jan Büren</person>
+</persons>
+<links>
+<link href='http://www.alfresco.com/de'>Alfresco Projektseite</link>
+</links>
+</event>
+<event guid='4l3BhVwrrNfltbqkjtamxw' id='1135'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_11:15_-_pdf-kungfoo_mit_ghostscript_co_-_kurt_pfeifle_-_1135</slug>
+<title>PDF-KungFoo mit Ghostscript &amp; Co.</title>
+<subtitle>PDF-Debugging (vorwiegend) auf der Kommandozeile</subtitle>
+<track>Doc</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Der Vortrag demonstriert einige der Top-10-Probleme (Reihung nach der subjektiven Erfahrung des Autors), die bei der Verarbeitung oder Erstellung von PDF-Dateien in der Praxis auftreten können.</abstract>
+<description>Zu den behandelten Problemkreisen gehören unter anderem:
+
+* Darstellung von Schriften auf dem Bildschirm oder im Druckbild
+* Darstellung von transparenten Grafik-Elementen im Druckbild
+* Extraktion von Text-Stellen oder ganzen Texten
+* Konvertierung von RGB- oder CMYK-Schwarz oder Grau nach „echtem“ Schwarz/Grau
+* Extraktion von Bildern
+* Reduzierung der Dateigröße
+* Erkennung gescannter Seiten
+* Skalierung von PDF-Seiten
+* Ungewollte Änderungen bei eingebetteten Bildern (Farbraum, Auflösung)
+* Linearisierung („Web-Optimierung“) von PDFs
+
+Er führt außerdem einige mehr und auch weniger bekannte Kommandozeilen-Tools vor, die man zum Analysieren und Reparieren dieser Problembereiche verwenden kann:
+
+- qpdf
+- pdftk
+- pdfinfo
+- pdffonts
+- pdfimages
+- pdfunite
+- pdfwalker
+- pdf-parser.py
+- pdfid.py
+- diverse 'podofo'-Tools
+- mubusy
+- origami
+- Ghostscript (mit wenig bekannten, aber sehr nützlichen Kommandozeilen-Parametern)
+
+Dieser Vortrag wird nicht viele Folien zeigen – stattdessen wird er gelingen (oder scheitern) wegen seines großen Anteils an live vorgeführten Beispielen.
+</description>
+<persons>
+<person id='774'>Kurt Pfeifle</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='lX4PQcLLVWJdWFzM8olwew' id='1157'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_12:45_-_python_und_latex_vereint_-_uwe_ziegenhagen_-_1157</slug>
+<title>Python und LaTeX vereint</title>
+<subtitle>Textsatz++</subtitle>
+<track>Hardware</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Obwohl die gängigen Textverarbeitungsprogramme wie Word, Libre &amp; OpenOffice kräftig aufgeholt haben ist LaTeX noch immer ungeschlagen, wenn es um hochqualitativen Satz von Dokumenten geht. In diesem Vortrag zeige ich LaTeX Grundlagen und erkläre dann, wie man Python und LaTeX kombinieren kann, um dynamische Dokumente zu erzeugen.</abstract>
+<description>Seit über 30 Jahren steht TeX/LaTeX für hochqualitativen Textsatz, dem kein anderes frei verfügbares Tool auch nur nahe kommt. Für Abschlussarbeiten wie Bachelor-, Master- oder Promotionsarbeiten ist auch heute noch LaTeX das Mittel der Wahl.
+
+Besonders spannend wird die Arbeit mit LaTeX, wenn man es dynamisiert, d.h. über eine Programmiersprache wie Python ansteuert. 
+
+In meinem Vortrag gehe ich zuerst auf die Grundlagen von LaTeX ein, bevor ich vorführe, wie man mit Python Datenbanken abfragt oder umfangreiche Berechnungen durchführt, deren Ergebnisse dann direkt in LaTeX ausgegeben werden.</description>
+<persons>
+<person id='470'>Uwe Ziegenhagen</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='mEkNEwOKWY0JVYaF72KQ1g' id='1295'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_14:00_-_persistenz_-_why_nosql_can_t_write_-_kristian_kohntopp_-_1295</slug>
+<title>Persistenz - &quot;Why NoSQL can't write&quot;</title>
+<subtitle>Wie Datenbanken und sogenannte Datenbanken Daten auf die Platte kriegen oder auch nicht</subtitle>
+<track>Database</track>
+<type>lecture</type>
+<language></language>
+<abstract>Jemand hatte mich gebeten, mal einen Überblick über Skalierungsprobleme beim Schreiben von Daten und bei verteilten Datenbanken generell zu geben.
+
+Ich kann was zu Persistenz erzählen, also wie Daten eigentlich auf die Platte kommen und was das für Skalierungsprobleme nach sich zieht. Man kann dann erkennen, wie kompliziert dieser Prozeß bei regulären Datenbanken ist, wie sich das *wegen* dieser Dinge skaliert und welchen Preis in Skalierbarkeit zahlt, wenn man hier Abkürzungen nimmt.
+
+Beispiele: MongoDB, CouchDB, Redis, Postgresql und MySQL.</abstract>
+<description></description>
+<persons>
+<person id='476'>Kristian Köhntopp</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='6p05xo2ZFBHwJB27QGtxeQ' id='1158'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_15:15_-_automatisierte_darstellung_von_modell-_und_mess-daten_im_wiki_-_reimar_bauer_-_1158</slug>
+<title>Automatisierte Darstellung von Modell- und Mess-Daten im Wiki</title>
+<subtitle></subtitle>
+<track>Doc</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Der Vortrag zeigt eine einfache technische Möglichkeit um wissenschaftliche Daten automatisch in ein Wiki einzustellen um diese zu diskutieren.  Zum Einsatz kommt die in Python geschriebene Wiki Software MoinMoin (http://moinmo.in).
+</abstract>
+<description>Ein Wiki wird häufig von sehr vielen Leuten als Informationsquelle verwendet. Inhalte werden in der Regel manuell eingegeben und dann visuell abgerufen.
+Die API einer Wiki-Software wie MoinMoin ermöglicht es jedoch Daten auch per Commandline oder über das Netzwerk (xmlrpc) einzustellen oder wieder 
+herunterzuladen.
+
+Dadurch kann eine bereits bekannte Platform sehr schnell mit Daten und Inhalten bespielt werden, dieser Vorgang ist in einem sehr hohen Maße automatisierbar.
+
+Für Planungen von Flugprofilen nutzen wir Modelle deren Daten an verschiedenen Standorten in Europa, Amerika und Asien erzeugt und visualisiert werden müssen. Diese Daten werden dann von Nutzern an anderen Standorten abgerufen.
+
+Wiki ist eine ideale Platform die Inhalte zu beschreiben und zu diskutieren.
+
+Mittels eines Rechte Managements kann geregelt werden, wer auf die Inhalte Zugriff hat. Somit ist das Wiki für den Austausch von Daten geeignet.
+
+Der Vortrag gibt einen Einblick darin, wie die Kommunikation mit einem Wiki über das Netzwerk 
+erfolgt, welche Hilfsmittel wir einsetzen damit ein Wiki automatisch von Messgeräten oder 
+Auswerteprogrammen mit Daten befüllt wird. 
+</description>
+<persons>
+<person id='717'>Reimar Bauer</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='JV22srwgnoHKsWkupdzM5Q' id='1150'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_16:30_-_das_textsatzssystem_latex_-_interessante_pakete_-_wolfgang_dautermann_-_1150</slug>
+<title>Das Textsatzssystem Latex - interessante Pakete</title>
+<subtitle>Latex für Fortgeschrittene</subtitle>
+<track>Doc</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Wolfgang Dautermann stellt einige interessante Pakete des Textsatzsystems LaTeX vor - wer wissen will welche, muss sich den Vortrag ansehen.</abstract>
+<description>Einige interessante Pakete und Möglichkeiten des Textsatzsystems Latex werden vorgestellt.
+
+Grundkenntnisse des Textsatzsystems LaTeX sind erforderlich, das ist kein Einführungsvortrag.
+
+</description>
+<persons>
+<person id='530'>Wolfgang Dautermann</person>
+</persons>
+<links>
+<link href='http://www.latex-project.org/'>LaTeX – A document preparation system</link>
+</links>
+</event>
+<event guid='f9w8ZQuohXDC25716EKFOQ' id='1164'>
+<start>17:45</start>
+<duration>01:00</duration>
+<room>C119/Hauptkonferenz</room>
+<slug>c119_hauptkonferenz_-_2013-08-25_17:45_-_osiam_-_sichere_identitatsverwaltung_auf_basis_von_scimv2_und_oauth2_-_andreas_grau_-_jochen_todea_-_1164</slug>
+<title>OSIAM - Sichere Identitätsverwaltung auf Basis von SCIMv2 und OAuth2</title>
+<subtitle></subtitle>
+<track>Security</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Mit OSIAM ( https://github.com/osiam-dev ) besteht die Möglichkeit auf Basis einer unter MIT Lizenz zur Verfügung gestellten Lösung, Identitätsdaten sicher zu verwalten. Die Benutzerauthentifizierung und der Zugriff auf die Daten wird dabei über DIE Marktstandards (OAuth2 und SCIMv2) geregelt.</abstract>
+<description>In dem Vortrag wird OSIAM kurz vorgestellt, die dringende Notwendigkeit für die Absicherung von Identitätsdaten und warum wir auf die genannten Standards setzen. Wie diese einzusetzen sind (generell und speziell) und welche Sicherheitsmerkmale OSIAM bietet und bieten wird, damit Anwendungsentwickler die Idenitätsdaten verwalten nachts wieder ruhig schlafen können.</description>
+<persons>
+<person id='833'>Andreas Grau</person>
+<person id='835'>Jochen Todea</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='HS6'>
+<event guid='oTmhmJAGamA4yFt27rzJxQ' id='1262'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_10:00_-_ruby_is_magic_-_dirk_breuer_-_sebastian_cohnen_-_1262</slug>
+<title>Ruby is magic</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>n den vergangen Jahren ist Ruby als Programmiersprache immer populärer geworden. Mittlerweile ist Rails allerdings nicht länger das alleinige Zugpferd für diesen Erfolg. Ruby erfreut sich als Sprache selbst großer Beliebtheit. Diese Beliebtheit ist vor allem auf die unendlichen Möglichkeiten zurückzuführen, die die dynamischen Eigenschaften der Sprache bieten. Wir wollen in diesem Talk eine Tour durch diese Möglichkeiten geben. Was geht alles? Was sollte man tun? Was könnte man tun? Was vermeidet man besser? Wo finden sich diese Dinge im alltäglichen Gebrauch wieder? Wie immer wird es eine bunte und unterhaltsame Darbietung werden.</description>
+<persons>
+<person id='854'>Dirk Breuer</person>
+<person id='855'>Sebastian Cohnen</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='s_Z0XQKUUbCKusjMJSFDPg' id='1269'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_11:15_-_concurrency_matters_-_mateus_armando_-_1269</slug>
+<title>Concurrency Matters</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description>Why Concurrency matters
+
+- Difference between Concurrency and Parallelism
+- Design Approaches for Concurrent Systems
+- Shared Mutability
+- Isolated Mutability
+- Pure immutability (e.g.: Functional programming, &lt;Haskel&gt;)
+- Ruby and Concurrency
+- MRI
+- JRUBY
+- Rubinius
+- Rubymotion
+- Embrace Concurrence
+- Embrace Immutability</description>
+<persons>
+<person id='862'>Mateus Armando</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='9XHnPqWq0__b8-TGlmPG8A' id='1298'>
+<start>12:30</start>
+<duration>00:30</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_12:30_-_ponytime_-_dirk_breuer_-_1298</slug>
+<title>Ponytime</title>
+<subtitle>Rubys und Ponies</subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='854'>Dirk Breuer</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='rlMD_xVQE8rqbCR8IPtFHg' id='1297'>
+<start>13:00</start>
+<duration>00:30</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_13:00_-_loadtesting_-_sebastian_cohnen_-_1297</slug>
+<title>Loadtesting</title>
+<subtitle>Ruby Loadtesting</subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='855'>Sebastian Cohnen</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='XPLlI3foWtk-MIQ_iztTEA' id='1271'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_15:15_-_oo_ohne_vererbung_-_lucas_dohmen_-_1271</slug>
+<title>OO ohne Vererbung</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description>In so gut wie jeder Definition von Objektorientierung findet sich ein Wort: Vererbung! In diesem Vortrag möchte ich auf die Probleme von Vererbung eingehen mit einem starken Fokus auf die Testbarkeit von Klassen. Danach werde ich Lösungen zeigen, wie man Vererbung umgehen kann und Fälle, in denen man wohl nicht um sie herumkommt.</description>
+<persons>
+<person id='769'>Lucas Dohmen</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='CO4m-q3xkz-cdq5zFKmmPw' id='1272'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>HS6</room>
+<slug>hs6_-_2013-08-25_16:30_-_the_fancy_programming_language_-_christoph_bertels_-_1272</slug>
+<title>The Fancy Programming Language</title>
+<subtitle></subtitle>
+<track>RedFrogConf</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description>Fancy is a new dynamic, pure object-oriented programming language that runs on Rubinius, the Ruby VM. It compiles to Rubinius bytecode &amp; provides first-class integration with Ruby and any Ruby C-extensions that work on Rubinius. Fancy is inspired by Smalltalk, Ruby &amp; Io, has a simple &amp; consistent syntax, is easy to learn &amp; self-hosted. Its keyword-message syntax allows creating custom domain specific languages &amp; control structures easily. We'll cover several examples and explain their implementation.</description>
+<persons>
+<person id='864'>Christoph Bertels</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C115/Workshops'>
+<event guid='UP5x5hw1OWDc2GgAF10Gaw' id='1192'>
+<start>10:00</start>
+<duration>04:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-25_10:00_-_hadoop_essentials_-_uwe_seiler_-_1192</slug>
+<title>Hadoop Essentials</title>
+<subtitle></subtitle>
+<track>Database</track>
+<type>workshop</type>
+<language>en</language>
+<abstract>This half-day introduction workshop provides a technical overview of the Apache Hadoop ecosystem. You will be introduced to the core of Hadoop – HDFS for data storage and MapReduce for data processing. Additionally we will cover important components of the Hadoop ecosystem – Apache Pig as a scripting language and Apache Hive as an additional dataware-house layer, both build on top of HDFS and MapReduce.</abstract>
+<description>Prior programming skills (in any language) are a plus, but not necessarily needed as the hands-on labs with step-by-step instructions will give even novice users a deeper understanding of Apache Hadoop.
+
+This beginners workshop will have a 50/50 mix of hands-on technical labs and lectures/discussions which in overall provides a good overview of the Hadoop ecosystem.
+
+Participants must provide their own laptop with a minimum of 8 GB of RAM, a minimum of 50 GB available disk space. We will be using the Hortonworks Sandbox running in a VirtualBox. All required software will be provided via USB flash drive during the workshop, but please note that  there may be no dedicated broadband for this workshop.</description>
+<persons>
+<person id='802'>Uwe Seiler</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='ejEdKqcbD_cs1H6vr7y_CQ' id='1296'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-25_15:15_-_flames_-_kristian_kohntopp_-_1296</slug>
+<title>Flames</title>
+<subtitle>Kommunikationszusammenbrüche im Netz</subtitle>
+<track>Community</track>
+<type>lecture</type>
+<language>de</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='476'>Kristian Köhntopp</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='r9uI4ScuVQjd63ApC-GrQw' id='1145'>
+<start>16:30</start>
+<duration>02:00</duration>
+<room>C115/Workshops</room>
+<slug>c115_workshops_-_2013-08-25_16:30_-_mehrfaktor-authentisierung_an_openvpn_mittels_linotp_-_cornelius_kolbel_-_kay_winkler_-_1145</slug>
+<title>Mehrfaktor-Authentisierung an OpenVPN mittels LinOTP</title>
+<subtitle></subtitle>
+<track>Security</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>Sensible Daten werden immer mehr zur Handelsware des Cybercrime. Remote-Zugriffe auf diese Daten sind daher heute schützenswerter
+denn je, da die Gefahr des Identitätsraubes und Passwort-Diebstahls in den vergangenen Jahren immer weiter zugenommen hat. Schon
+lange sind verschiedene System am Markt verfügbar, die durch eine Zweifaktorauthentisierung in der Lage sind Sniffing, Brute-Force-
+und Replay-Angriffe abzuwehren. In diesem Workshop soll eine solche Lösung basierend auf den Opensource-Komponenten OpenVPN und
+LinOTP eingerichtet werden.</abstract>
+<description>Ausgangspunkt ist eine OpenVPN Installation mit einfacher Passwort-Authentisierung. Im Workshop erweitern wir diese Installation um eine Zweifaktorauthentisierung, wobei als Hardwaremerkmal verschiedene OTP-Token wie beispielsweise ein Yubikey, ein Smartphone, ein OTP-Keyfob und eine OTP-Scheckkarte zum Einsatz kommen. Hierzu wird auf dem bestehendem System ein LinOTP-Server installiert, der in der Lage ist, verschiedenste Token-Typen für alle Benutzer zu verwalten. Für die verschiedenen Benutzer werden nun unterschiedliche Authentisierungsgeräte ausgerollt. Über das entsprechende PAM-Modul wird beispielsweise die einfache Passwort-Authentisierung durch eine Authentisierung gegen den LinOTP Server mit einer OTP-PIN und dem, von dem jeweiligen Hardwaregerät erzeugten, OTP-Wert ersetzt. Zusammen mit einem ebenfalls auf dem VPN Client installierten X509-Zertifikat ergibt sich somit wahlweise sogar eine 3-Faktor-Authentisierung aus dem Notebook-gebundenen X509-Zertifikat, dem Wissen um die OTP-PIN und dem am Hardwaregerät erzeugten OTP-Wert.
+
+Der Workshop stellt alle einzelnen Konfigurationsschritte an einem Live-System dar und soll Raum für Fragen, Alternativen und Diskussionen lassen.</description>
+<persons>
+<person id='622'>Cornelius Kölbel</person>
+<person id='848'>Kay Winkler</person>
+</persons>
+<links>
+<link href='http://www.linotp.org'>LinOTP</link>
+</links>
+</event>
+</room>
+<room name='C116/Lisp'>
+<event guid='SDDiLkcwubGVRjSycgVyDw' id='1281'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-25_11:15_-_building_knodium_com_with_scheme_-_andy_bennett_-_1281</slug>
+<title>Building knodium.com with Scheme</title>
+<subtitle>First-hand experience report of a business application founded on Scheme</subtitle>
+<track>Lisp</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='870'>Andy Bennett</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='-uoyPf1Ri7UsVKmm2OktdQ' id='1292'>
+<start>12:45</start>
+<duration>01:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-25_12:45_-_securing_froscon_-_sander_bos_-_1292</slug>
+<title>Securing FrOSCon</title>
+<subtitle>How one conference's talk proposal led to securing conferences across the globe</subtitle>
+<track>Security</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>The vulnerable nature of the Web was found out to apply even to security and FOSS conferences, including FrOSCon.</abstract>
+<description>(Note: this talk is not a Lisp talk, but being added to the program late, could not be placed elsewhere.)
+
+After finding a basic yet very severe security issue in an OHM2013 conference organizing Web system, it was discovered that the issue in fact wasn't local to that conference: others were affected as well, including but not limited to FrOSCon. Moreover, while investigating the issue, other security issues were found, being a mix of Ruby programming choices/errors, insecure application defaults, and server configuration issues.
+
+What followed was a journey into the world of Web security: HTTP sessions and its management, cookies, cookie sniffing possibilities, cookie manipulation and replaying, HTTPS failures, session hijacking and fixation scenarios, and the combined knowledge of the above: the potential of abusing lack of security, up to the point of trivially easy becoming admin, in several FOSS and even security conferences' Web systems.
+
+This talk covers the aspects above, includes a practical demonstration of how anyone could've become admin, and elaborates on how things were fixed.
+
+In addition, the talk includes some thoughts on security by design, source code forking and risks involved with it, and why the main vulnerability discussed in this talk might actually still survive on the Web.
+
+This talk is a revised version of Sander's &quot;Web security 101 (or: how to hack security conferences)&quot; talk at the Chaos Computer Club SIGINT 2013 conference, which was later also shown at FOSSCON 2013 (USA).
+
+The speaker kindly requests the audience not to make any recordings or pictures of the talk.</description>
+<persons>
+<person id='877'>Sander Bos</person>
+</persons>
+<links>
+<link href='https://github.com/frab/frab/commit/6e9fb231a1132ea893fd6566a6266483f17a409f'>Upstream default secret token removal commit (fix)</link>
+<link href='http://librelist.com/browser/frab/2013/6/3/security-problem-in-default-frab-installations/'>frab mailing list notice of fix</link>
+</links>
+</event>
+<event guid='MbZ9sHPuh8Baz_z_62I9Dg' id='1279'>
+<start>14:00</start>
+<duration>02:30</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-25_14:00_-_hands_on_lisp_-_moritz_heidkamp_-_florian_over_-_1279</slug>
+<title>Hands On LISP </title>
+<subtitle>Hack or learn about LISP with support by experienced LISPers</subtitle>
+<track>Lisp</track>
+<type>workshop</type>
+<language>en</language>
+<abstract>In this workshop everyone form novice to expert can come around and discuss or hack on all things LISP. Bring your favorite REPL and get support by experienced LISPers. Or just bring your notebook and we'll set you up with some REPLs to get you started! This is an open workshop, join anytime.</abstract>
+<description></description>
+<persons>
+<person id='638'>Moritz Heidkamp</person>
+<person id='683'>Florian Over</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='0nCiPeNjkEbBUMW7-56WRA' id='1282'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C116/Lisp</room>
+<slug>c116_lisp_-_2013-08-25_16:30_-_a_tour_of_wat_-_1282</slug>
+<title>A tour of Wat</title>
+<subtitle>A LISPy language with powerful concurrency and metaprogramming features for embedding in JavaScript programs.</subtitle>
+<track>Lisp</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C117/Java'>
+</room>
+<room name='C018/Certifications'>
+</room>
+<room name='C118/PHP'>
+<event guid='BiWdmXr9L-bz47xP72SCsg' id='1245'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-25_10:00_-_symfony_2_rest_edition_-_lukas_kahwe_smith_-_1245</slug>
+<title>Symfony 2 Rest Edition</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='844'>Lukas Kahwe Smith</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='m3ZQ_-z2DjfUieOuvpc2HQ' id='1246'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-25_11:15_-_stone_masons_vs_3d_printer_in_the_cms_world_-_lukas_kahwe_smith_-_1246</slug>
+<title>Stone Masons vs. 3D printer in the CMS world</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>Content management systems are no doubt a pillar for the internet, empowering non programmers to build websites. However by their nature such CMS solutions tend to bring a ton of features that are not going to be used. Worse these features sometimes are even a hinderance when one needs to build something a bit more unique and custom. As such building a custom website with a CMS is a bit like being a stone mason working from a gigantic hunk of rock. The Symfony CMF proposes a different approach for such use cases. By providing essentially a framework of use at will tools its more like using a 3D printer to precisely put together exactly the pieces needed for the project. This talk will introduce the philosophy of Symfony CMF and the tools it provides.</abstract>
+<description>Content management systems are no doubt a pillar for the internet, empowering non programmers to build websites. However by their nature such CMS solutions tend to bring a ton of features that are not going to be used. Worse these features sometimes are even a hinderance when one needs to build something a bit more unique and custom. As such building a custom website with a CMS is a bit like being a stone mason working from a gigantic hunk of rock. The Symfony CMF proposes a different approach for such use cases. By providing essentially a framework of use at will tools its more like using a 3D printer to precisely put together exactly the pieces needed for the project. This talk will introduce the philosophy of Symfony CMF and the tools it provides.</description>
+<persons>
+<person id='844'>Lukas Kahwe Smith</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='hDyRPJsnseu7YYGn-5SO3A' id='1247'>
+<start>14:00</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-25_14:00_-_phing_for_power_users_-_stephan_hochdorfer_-_1247</slug>
+<title>Phing for power users</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>&quot;So you are already using Phing and looking for ways to get more out of your build setup? Let a Phing power user show you how to effectively structure your build files. Learn how to write your own Phing tasks and how to distribute them.
+Get introduced how to use Phing in a Composer setup and what is needed to let Jenkins run your Phing build without pain.&quot;</abstract>
+<description>&quot;So you are already using Phing and looking for ways to get more out of your build setup? Let a Phing power user show you how to effectively structure your build files. Learn how to write your own Phing tasks and how to distribute them.
+Get introduced how to use Phing in a Composer setup and what is needed to let Jenkins run your Phing build without pain.&quot;</description>
+<persons>
+<person id='615'>Stephan Hochdörfer</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='lTeJkfzlx1dA6XfLDnkKeA' id='1248'>
+<start>15:15</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-25_15:15_-_test_proxies_oder_wie_aus_problemen_features_werden_-_sebastian_bergmann_-_arne_blankerts_-_1248</slug>
+<title>Test Proxies, oder: Wie aus Problemen Features werden</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Integrationstests schließen die Lücke zwischen Unit Tests und Systemtests, indem sie auf die Schnittstellen zwischen Komponenten fokussieren und sicherstellen, dass ihr Zusammenspiel wie erwartet funktioniert. In diesem Vortrag machen Arne Blankerts und Sebastian Bergmann anschaulich, wie aus einem konkreten Problem bei der Arbeit an Integrationstests in einem Kundenprojekt das Feature &quot;Test Proxies&quot; für PHPUnit entstand. Sie diskutieren das Problem, stellen die Lösung vor, erklären die Implementierung von Mock-Objekten in PHPUnit und zeigen, wie das Feature umgesetzt wurde.</abstract>
+<description>Integrationstests schließen die Lücke zwischen Unit Tests und Systemtests, indem sie auf die Schnittstellen zwischen Komponenten fokussieren und sicherstellen, dass ihr Zusammenspiel wie erwartet funktioniert. In diesem Vortrag machen Arne Blankerts und Sebastian Bergmann anschaulich, wie aus einem konkreten Problem bei der Arbeit an Integrationstests in einem Kundenprojekt das Feature &quot;Test Proxies&quot; für PHPUnit entstand. Sie diskutieren das Problem, stellen die Lösung vor, erklären die Implementierung von Mock-Objekten in PHPUnit und zeigen, wie das Feature umgesetzt wurde.</description>
+<persons>
+<person id='126'>Sebastian Bergmann</person>
+<person id='159'>Arne Blankerts</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='_BI8qg9VXrLR6cPg9_XGTw' id='1249'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C118/PHP</room>
+<slug>c118_php_-_2013-08-25_16:30_-_specification_by_example_-_nikolas_martens_-_1249</slug>
+<title>Specification by Example</title>
+<subtitle></subtitle>
+<track>PHP</track>
+<type>lecture</type>
+<language>en</language>
+<abstract>&quot;Some call it Behavior-Driven Development, some Agile acceptance testing or Story testing - Specification by Example is a powerful software development technique that can maximize your productivity and minimize your frustration by enabling a truly collaborative way of development. Yet the multitude of names is already a symptom of how scattered the community is about its main concepts.
+
+Also, many developers are kept from experimenting with it because of the amount of frameworks and tools it seems to require, resulting in a considerable cognitive and technological initial investment. But this is not necessary.
+
+In this talk, I introduce Specification by Example and how it can be implemented both management- and technology-wise in green- as well as brown-field projects so you can start taking full advantage of its benefits in your work, with your tools, right now.&quot;</abstract>
+<description>&quot;Some call it Behavior-Driven Development, some Agile acceptance testing or Story testing - Specification by Example is a powerful software development technique that can maximize your productivity and minimize your frustration by enabling a truly collaborative way of development. Yet the multitude of names is already a symptom of how scattered the community is about its main concepts.
+
+Also, many developers are kept from experimenting with it because of the amount of frameworks and tools it seems to require, resulting in a considerable cognitive and technological initial investment. But this is not necessary.
+
+In this talk, I introduce Specification by Example and how it can be implemented both management- and technology-wise in green- as well as brown-field projects so you can start taking full advantage of its benefits in your work, with your tools, right now.&quot;</description>
+<persons>
+<person id='845'>Nikolas Martens</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C120/Django'>
+<event guid='-6pzJOIQGza-SVkRFYG4Rg' id='1293'>
+<start>09:00</start>
+<duration>03:00</duration>
+<room>C120/Django</room>
+<slug>c120_django_-_2013-08-25_09:00_-_django_--_sprint_-_markus_holtermann_-_1293</slug>
+<title>Django -- Sprint</title>
+<subtitle></subtitle>
+<track>Django</track>
+<type>other</type>
+<language>de</language>
+<abstract>We are going to work on Django code itself or on Django related projects.</abstract>
+<description></description>
+<persons>
+<person id='849'>Markus Holtermann</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='ifvG1jXWmlSyJgVl9sp9JQ' id='1294'>
+<start>14:00</start>
+<duration>04:00</duration>
+<room>C120/Django</room>
+<slug>c120_django_-_2013-08-25_14:00_-_django_--_sprint_-_markus_holtermann_-_1294</slug>
+<title>Django -- Sprint</title>
+<subtitle></subtitle>
+<track>Django</track>
+<type>other</type>
+<language>de</language>
+<abstract>We are going to work on Django code itself or on Django related projects.</abstract>
+<description></description>
+<persons>
+<person id='849'>Markus Holtermann</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C219 (Sa Tine 2.0 / So Fedora)'>
+<event guid='E-g8Ojv7zNNbUsRHszd6RA' id='1286'>
+<start>10:00</start>
+<duration>01:00</duration>
+<room>C219 (Sa Tine 2.0 / So Fedora)</room>
+<slug>c219_sa_tine_2_0_so_fedora_-_2013-08-25_10:00_-_the_cat_is_alive_and_running_out_of_the_box_-_felix_kaechele_-_1286</slug>
+<title>The Cat Is Alive And Running Out Of The Box</title>
+<subtitle>An overview of Fedora 19</subtitle>
+<track>Fedora</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='869'>Felix Kaechele</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='4kXapvzY9xxe6fL8Yw7yKA' id='1287'>
+<start>11:15</start>
+<duration>01:00</duration>
+<room>C219 (Sa Tine 2.0 / So Fedora)</room>
+<slug>c219_sa_tine_2_0_so_fedora_-_2013-08-25_11:15_-_fedora_19_and_3d_printing_-_miro_hroncok_-_1287</slug>
+<title>Fedora 19 and 3D printing</title>
+<subtitle></subtitle>
+<track>Fedora</track>
+<type>workshop</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='872'>Miro Hrončok</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='1-llVg_BNx4RUP521dwpEQ' id='1288'>
+<start>14:00</start>
+<duration>02:00</duration>
+<room>C219 (Sa Tine 2.0 / So Fedora)</room>
+<slug>c219_sa_tine_2_0_so_fedora_-_2013-08-25_14:00_-_openscad_code_your_3d_models_-_miro_hroncok_-_1288</slug>
+<title>OpenSCAD: Code your 3D models</title>
+<subtitle></subtitle>
+<track>Fedora</track>
+<type>workshop</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='872'>Miro Hrončok</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='Zv7M6af5kvrVkBZYsF1ScA' id='1289'>
+<start>16:30</start>
+<duration>01:00</duration>
+<room>C219 (Sa Tine 2.0 / So Fedora)</room>
+<slug>c219_sa_tine_2_0_so_fedora_-_2013-08-25_16:30_-_a_look_into_the_glass_ball_-_features_of_upcoming_fedora_20_-_aleksandra_fedorova_-_1289</slug>
+<title>A Look Into The Glass Ball - Features Of Upcoming Fedora 20</title>
+<subtitle></subtitle>
+<track>Fedora</track>
+<type>lecture</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='873'>Aleksandra Fedorova</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='a4yZW37J1g3OVpINs-z_ag' id='1290'>
+<start>17:30</start>
+<duration>00:30</duration>
+<room>C219 (Sa Tine 2.0 / So Fedora)</room>
+<slug>c219_sa_tine_2_0_so_fedora_-_2013-08-25_17:30_-_free_your_slides_-_use_svg_and_inkscape_for_presenting_-_s_kemter_-_1290</slug>
+<title>Free Your Slides - Use SVG and Inkscape For Presenting</title>
+<subtitle></subtitle>
+<track>Fedora</track>
+<type>workshop</type>
+<language>en</language>
+<abstract></abstract>
+<description></description>
+<persons>
+<person id='481'>S.Kemter</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='A147/Lumiera'>
+</room>
+<room name='A125/Instant Messaging'>
+</room>
+<room name='C175/FrogLabs 1'>
+<event guid='dqqN4vNqZCZpzVkadpHyWg' id='1277'>
+<start>16:00</start>
+<duration>01:00</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-25_16:00_-_linux_fur_kinder_und_fur_spiele_-_dominik_george_-_tim_huppertz_-_1277</slug>
+<title>Linux für Kinder und für Spiele</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>lecture</type>
+<language>de</language>
+<abstract>Für Gamer ist eins klar: Nur Windows macht Spaß!
+
+Doch diese Einstellung ist sehr gefährlich und heute gar nicht mehr ganz richtig. Mit freier Software kann man denselben Spaß haben und kann sich gleichzeitig sicher sein, dass keine Informationen vom privaten Computer mitgelesen werden.
+</abstract>
+<description>Für Gamer ist eins klar: Nur Windows macht Spaß!
+
+Doch diese Einstellung ist sehr gefährlich und heute gar nicht mehr ganz richtig. Mit freier Software kann man denselben Spaß haben und kann sich gleichzeitig sicher sein, dass keine Informationen vom privaten Computer mitgelesen werden.
+
+Eine wichtige Vorraussetzung ist die Bereitschaft, sich ein wenig mit dem Thema zu beschäftigen. Den Einstieg hierfür möchten wir dir in diesem Workshop bieten.</description>
+<persons>
+<person id='736'>Dominik George</person>
+<person id='867'>Tim Huppertz</person>
+</persons>
+<links>
+</links>
+</event>
+<event guid='xLTlC23pESAGCw6W2crorg' id='1285'>
+<start>17:30</start>
+<duration>00:30</duration>
+<room>C175/FrogLabs 1</room>
+<slug>c175_froglabs_1_-_2013-08-25_17:30_-_froglabs-abschluss_-_dominik_george_-_sarah_stoffels_-_1285</slug>
+<title>FrogLabs-Abschluss</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>meeting</type>
+<language>de</language>
+<abstract>Unsere FrogLabs-Tage gehen dem Ende zu. Wir hoffen, dass ihr alle viel Spaß hattet und auch etwas gelernt habt.
+
+Wir würden uns freuen, wenn ihr als Gemeinschaft weiter in Kontakt bleiben würdet, denn voneinander lernt man am Besten. Deshalb bitten wir alle Teilnehmer der FrogLabs zur gemeinsamen Abschlussveranstaltung!</abstract>
+<description>Unsere FrogLabs-Tage gehen dem Ende zu. Wir hoffen, dass ihr alle viel Spaß hattet und auch etwas gelernt habt.
+
+Wir würden uns freuen, wenn ihr als Gemeinschaft weiter in Kontakt bleiben würdet, denn voneinander lernt man am Besten. Deshalb bitten wir alle Teilnehmer der FrogLabs zur gemeinsamen Abschlussveranstaltung!</description>
+<persons>
+<person id='736'>Dominik George</person>
+<person id='871'>Sarah Stoffels</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+<room name='C177/FrogLabs 2'>
+<event guid='eiUlRX0cOS2sw4UKXqLTWQ' id='1283'>
+<start>11:00</start>
+<duration>05:00</duration>
+<room>C177/FrogLabs 2</room>
+<slug>c177_froglabs_2_-_2013-08-25_11:00_-_programmierung_eines_eigenen_spiels_-_eike_tim_jesinghaus_-_tim_huppertz_-_1283</slug>
+<title>Programmierung eines eigenen Spiels</title>
+<subtitle></subtitle>
+<track>Kids</track>
+<type>workshop</type>
+<language>de</language>
+<abstract>* Samstag und Sonntag durchgehend! *
+
+Dieses Jahr gibt es zusätzlich zu den &quot;kleinen&quot; Workshops ein durchgehendes Projekt, bei dem jeder mitmachen kann!</abstract>
+<description>Während der zwei FrogLabs-Tage wollen wir alle zusammen ein richtiges Spiel entwickeln. Dabei ist es egal, ob du schon Erfahrung mit dem Programmieren hast oder einfach nur neugierig bist. Zur Herstellung eines Spieles gehören viele verschiedene Dinge:
+
+Bilder und Grafiken
+Sounds und Musik
+Story-Ideen
+Entwurf von Maps
+Programmierung
+
+Natürlich kann jeder, der Interesse hat, bei diesem Workshop auch lernen, wie ein Spiel programmiert wird, aber auch wenn du gut zeichnen kannst oder dabei helfen möchtest, Ideen für ein Spiel zu finden, kannst du einiges beitragen.
+
+Der Workshop findet an beiden Tagen (Samstag und Sonntag) durchgehend statt und du kannst jederzeit vorbeischauen. Nebenbei kannst du natürlich auch an den anderen Workshops teilnehmen.
+
+Wenn du an beiden Tagen voll dabei sein möchtest, laden wir dich besonders herzlich zu unserer Ferienfreizeit ein!
+
+Am Ende der beiden Tage soll ein richtiges, vollständiges Spiel fertig geworden sein, das du allen deinen Freunden zeigen kannst!</description>
+<persons>
+<person id='865'>Eike Tim Jesinghaus</person>
+<person id='867'>Tim Huppertz</person>
+</persons>
+<links>
+</links>
+</event>
+</room>
+</day>
+</schedule>
