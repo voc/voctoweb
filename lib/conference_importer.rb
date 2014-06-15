@@ -24,6 +24,7 @@ class ConferenceImporter
       
       event.recordings.create filename: r.filename,
         folder: import_template.folder,
+        state: 'downloaded',
         mime_type: import_template.mime_type,
         width: import_template.width,
         height: import_template.height
