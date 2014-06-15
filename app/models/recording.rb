@@ -9,6 +9,7 @@ class Recording < ActiveRecord::Base
   delegate :conference, to: :event, allow_nil: true
 
   validates_presence_of :event
+  validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates_presence_of :filename
 
   scope :downloaded, -> { where(state: 'downloaded') }

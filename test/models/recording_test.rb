@@ -28,6 +28,7 @@ class RecordingTest < ActiveSupport::TestCase
     r = Recording.new
     r.event = @event
     r.filename = "some.avi"
+    r.folder = ''
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end
 
