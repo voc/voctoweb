@@ -43,9 +43,9 @@ class ImportTemplate < ActiveRecord::Base
     paths = images.select { |i| i[regexp] }
     if paths.present?
       images.delete paths.first
-      return true
+      return OpenStruct.new found: true, filename: File.basename(paths.first)
     end
-    return false
+    return OpenStruct.new found: false
   end
 
 end

@@ -65,9 +65,15 @@ ActiveAdmin.register ImportTemplate do
 
     table_for c.recordings do
       column :filename
-      column :gif
-      column :poster
-      column :thumb
+      column :gif do |r|
+        r.gif.found
+      end
+      column :poster do |r|
+        r.poster.found
+      end
+      column :thumb do |r|
+        r.thumb.found
+      end
     end
 
     # TODO list left-over media files?
@@ -107,7 +113,9 @@ ActiveAdmin.register ImportTemplate do
 
   member_action :import_conference, method: :post do
     import_template = ImportTemplate.find(params[:id])
-    ConferenceImporter.import(import_template)
+    ActiveRecord::Base.transaction do
+      ConferenceImporter.import(import_template)
+    end
     redirect_to action: :show
   end
 
