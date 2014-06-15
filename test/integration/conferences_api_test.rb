@@ -22,8 +22,10 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
 
   test "should create conference" do
     assert JSON.parse(@json)
-    assert_difference('Conference.count') do
-      post_json '/api/conferences.json', @json
+    run_background_jobs_immediately do
+      assert_difference('Conference.count') do
+        post_json '/api/conferences.json', @json
+      end
     end
   end
 

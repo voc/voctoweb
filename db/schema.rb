@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611215723) do
+ActiveRecord::Schema.define(version: 20140615151738) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 20140611215723) do
     t.datetime "updated_at"
     t.string   "title"
     t.string   "schedule_url"
-    t.binary   "schedule_xml"
-    t.string   "schedule_state",  default: "not_present", null: false
+    t.text     "schedule_xml",    limit: 4294967295
+    t.string   "schedule_state",                     default: "not_present", null: false
     t.string   "logo"
   end
 
