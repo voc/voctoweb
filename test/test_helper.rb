@@ -26,6 +26,8 @@ class ActiveSupport::TestCase
   def create_test_file(target, source="audio.mp3")
     source = File.join(Rails.root, 'test', 'fixtures', source)
     FileUtils.copy source, target
+
+    File.join(Rails.root, target)
   end
 
 end

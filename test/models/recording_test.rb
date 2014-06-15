@@ -32,8 +32,8 @@ class RecordingTest < ActiveSupport::TestCase
   end
 
   test "should download and release file" do
-    create_test_file 'test.webm'
-    @recording.original_url = "file://" + File.join(Rails.root, 'test.webm')
+    path = create_test_file 'test.webm'
+    @recording.original_url = "file://" + path
     @recording.state = 'new'
     @recording.save
 
