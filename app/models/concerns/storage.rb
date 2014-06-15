@@ -19,7 +19,7 @@ module Storage
 
   class PathValidator  < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
-      return if value.nil?
+      return if value.nil? or value.blank?
       if File.join('/test', value) != File.absolute_path(value, '/test')
         record.errors.add(attribute, "not a valid path")
       end
