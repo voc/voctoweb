@@ -116,7 +116,7 @@ ActiveAdmin.register ImportTemplate do
     ActiveRecord::Base.transaction do
       ConferenceImporter.import(import_template)
     end
-    redirect_to action: :show
+    redirect_to action: :index
   end
 
   action_item only: :show do
