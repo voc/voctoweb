@@ -6,11 +6,27 @@ module Download
   extend ActiveSupport::Concern
 
   included do
+
+    # Download url without using a buffer.
+    #
+    # @param url [String] source url
+    # return [String] content of the url
     def download(url)
-      # without using a buffer
-      open(url).read
+      content = ''
+      uri = URI(url)
+      if uri.scheme == 'file'
+        File.open(uri.path, 'r:UTF-8') { |f| content = f.read }
+      else
+        content = open(url).read
+      end
+      return content.to_s
     end
 
+    # Buffered download of URL to path, moves file if url scheme is file.
+    #
+    # @param url [String] source url
+    # @param path [String] target path
+    # return [Boolean] if the operation was successful
     def download_to_file(url, path)
       result = false
 
@@ -20,7 +36,6 @@ module Download
         Rails.logger.info "Moved to #{path}" if result == 0
       else
         result = download_url_to_file uri, path
-        # system('wget', uri, '-O', path)
       end
       result
     end
@@ -40,6 +55,7 @@ module Download
     #  return
     end
 
+    # Buffered HTTP download
     def download_io(fileio, uri)
       request = Net::HTTP::Get.new uri
 
