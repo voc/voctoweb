@@ -19,9 +19,7 @@ class Api::EventsController < InheritedResources::Base
   def create
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym
-    @event = Event.new
-    @event.guid = params[:guid]
-    @event.conference = conference
+    @event = Event.new conference: conference, guid: params[:guid]
 
     respond_to do |format|
       if create_event(params)
@@ -50,6 +48,7 @@ class Api::EventsController < InheritedResources::Base
   def create_event(params)
     return false if @event.conference.nil?  
     @event.transaction do
+      @event.release_date = Time.now unless @event.release_date
       @event.set_image_filenames(params[:thumb_url],params[:gif_url], params[:poster_url])
       @event.fill_event_info 
       return true if @event.save 

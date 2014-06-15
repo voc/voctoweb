@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :recordings, dependent: :destroy
 
   validates_presence_of :conference
+  validates_presence_of :release_date
   validates_presence_of :guid
   validates_uniqueness_of :guid
 
