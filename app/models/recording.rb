@@ -10,7 +10,7 @@ class Recording < ActiveRecord::Base
 
   validates_presence_of :event
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
-  validates_presence_of :filename
+  validates_presence_of :filename, :mime_type
 
   scope :downloaded, -> { where(state: 'downloaded') }
 

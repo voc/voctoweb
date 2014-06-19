@@ -28,12 +28,14 @@ class RecordingTest < ActiveSupport::TestCase
     r = Recording.new
     r.event = @event
     r.filename = "some.avi"
+    r.mime_type = 'video/webm'
     r.folder = ''
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end
 
   test "should download and release file" do
     path = create_test_file 'test.webm'
+    @recording.mime_type = 'video/webm'
     @recording.original_url = "file://" + path
     @recording.state = 'new'
     @recording.save
