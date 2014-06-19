@@ -94,6 +94,7 @@ You can add images to an event, like the animated gif thumb and the poster image
       }' "http://localhost:3000/api/events"
 
 Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
+The recording length is specified in seconds.
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4",
@@ -103,7 +104,7 @@ Recordings are added by specifiying the parent events `guid`, an URL and a `file
           "filename":"some.mp4",
           "folder":"mp4",
           "size":"12",
-          "length":"30"
+          "length":"3600"
           }
       }' "http://localhost:3000/api/recordings"
 
