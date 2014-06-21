@@ -103,6 +103,7 @@ The recording length is specified in seconds.
           "original_url":"file:///tmp/123",
           "filename":"some.mp4",
           "folder":"mp4",
+          "folder":"video/mp4",
           "size":"12",
           "length":"3600"
           }
