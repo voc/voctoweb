@@ -1,6 +1,7 @@
 class Public::EventsController < InheritedResources::Base
   respond_to :json
   actions :index, :show
+  skip_before_filter :verify_authenticity_token, only: :count
 
   def count
     @event = Event.find params[:id]
