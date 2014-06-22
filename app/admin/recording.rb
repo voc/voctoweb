@@ -26,20 +26,16 @@ ActiveAdmin.register Recording do
       row :folder
       row :event
       row :original_url
-      row :state
       row :mime_type
       row :size
       row :length
-      row :width
-      row :height
+      row :state
     end
   end
 
   form do |f|
     f.inputs "Recording Details" do
       f.input :event
-      f.input :folder, hint: recording.try(:conference).try(:get_recordings_path)
-      f.input :filename, hint: recording.try(:get_recording_dir)
       f.input :mime_type, collection: Recording::HTML5
       f.input :size
       f.input :length
@@ -47,12 +43,17 @@ ActiveAdmin.register Recording do
       f.input :height
       f.input :original_url
     end
+    f.inputs "Storage" do
+      f.input :folder, hint: recording.try(:conference).try(:get_recordings_path)
+      f.input :filename, hint: recording.try(:get_recording_dir)
+      f.input :state, collection: Recording.state_machines[:state].states.map(&:name)
+    end
     f.actions
   end
 
   controller do
     def permitted_params
-      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height, :event_id]
+      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height, :state, :event_id]
     end
   end
 
