@@ -28,15 +28,9 @@ class Recording < ActiveRecord::Base
       recording.move_files!
     end
 
-    after_transition any => :releasing do |recording, transition|
-      recording.release!
-    end
-
     state :new
     state :downloading
     state :downloaded
-    state :releasing
-    state :released
 
     event :download_failed do
       transition all => :new
@@ -48,14 +42,6 @@ class Recording < ActiveRecord::Base
 
     event :finish_download do
       transition [:downloading] => :downloaded
-    end
-
-    event :start_release do
-      transition [:downloaded] => :releasing
-    end
-
-    event :finish_release do
-      transition [:releasing] => :released
     end
 
   end
@@ -75,16 +61,8 @@ class Recording < ActiveRecord::Base
     tmp_path = get_tmp_path
     create_recording_dir
     FileUtils.move tmp_path, get_recording_path
-
-    self.start_release
   end
   handle_asynchronously :move_files!
-
-  def release!
-    # nothing left to do here
-    self.finish_release
-  end
-  handle_asynchronously :release!
 
   def create_recording_dir
     FileUtils.mkdir_p get_recording_dir

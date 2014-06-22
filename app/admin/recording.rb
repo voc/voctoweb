@@ -50,19 +50,6 @@ ActiveAdmin.register Recording do
     f.actions
   end
 
-  member_action :release, :method => :put do
-    recording = Recording.find(params[:id])
-    #Delayed::Worker.delay_jobs = false
-    recording.release!
-    redirect_to :action => :show
-  end
-
-  action_item only: :show do
-    if File.readable? recording.get_recording_path
-      link_to 'Create Pagefile', release_admin_recording_path(recording), method: :put
-    end
-  end
-
   controller do
     def permitted_params
       params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height, :event_id]

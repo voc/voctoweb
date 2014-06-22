@@ -36,7 +36,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     post_json '/api/recordings.json', @json
     event = Event.find_by guid: @event.guid
     assert_not_nil event
-    assert event.recordings.last.released?
+    assert event.recordings.last.downloaded?
   end
 
 end

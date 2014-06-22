@@ -33,7 +33,7 @@ class RecordingTest < ActiveSupport::TestCase
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end
 
-  test "should download and release file" do
+  test "should download file" do
     path = create_test_file 'test.webm'
     @recording.mime_type = 'video/webm'
     @recording.original_url = "file://" + path
@@ -43,15 +43,7 @@ class RecordingTest < ActiveSupport::TestCase
     run_background_jobs_immediately do
       @recording.start_download
     end
-    assert @recording.released?
-  end
-
-  test "should save page file" do
-    recording = create(:recording, state: :releasing)
-    run_background_jobs_immediately do
-      recording.release!
-    end
-    assert recording.released?
+    assert @recording.downloaded?
   end
 
 end
