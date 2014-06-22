@@ -9,6 +9,8 @@ class Event < ActiveRecord::Base
   belongs_to :conference
   has_many :recordings, dependent: :destroy
 
+  after_initialize :generate_guid
+
   validates_presence_of :conference
   validates_presence_of :release_date
   validates_presence_of :guid
@@ -31,6 +33,10 @@ class Event < ActiveRecord::Base
 
   # active admin and serialized fields workaround:
   attr_accessor   :persons_raw, :tags_raw
+
+  def generate_guid
+    self.guid ||= SecureRandom.hex(8)
+  end
 
   # bulk update several events using the saved schedule.xml files
   def self.bulk_update_events(selection)
