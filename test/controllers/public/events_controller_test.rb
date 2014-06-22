@@ -22,7 +22,7 @@ class Public::EventsControllerTest < ActionController::TestCase
     post :count, id: 1, format: :json
     assert_response :success
     refute_empty JSON.parse(response.body)
-    puts JSON.pretty_generate JSON.parse(response.body)
+    assert_equal 'ok', JSON.parse(response.body)['status']
   end
 
 end

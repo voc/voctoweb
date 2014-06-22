@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   include Download
   include Storage
 
+  MAX_PROMOTED = 4
+
   belongs_to :conference
   has_many :recordings, dependent: :destroy
 
@@ -30,6 +32,34 @@ class Event < ActiveRecord::Base
   # active admin and serialized fields workaround:
   attr_accessor   :persons_raw, :tags_raw
 
+  # bulk update several events using the saved schedule.xml files
+  def self.bulk_update_events(selection)
+    Rails.logger.info "Bulk updating events from XML"
+    fahrplans = {}
+    ActiveRecord::Base.transaction do
+      Event.find(selection).each do |event|
+        if fahrplans[conference.acronym]
+          fahrplan = fahrplans[conference.acronym]
+        else
+          fahrplan = FahrplanParser.new(event.conference.schedule_xml)
+          fahrplans[conference.acronym] = fahrplan
+        end
+
+        info = fahrplan.event_info_by_guid[event.guid]
+        update_event_info(event, info)
+      end
+    end
+  end
+
+  def self.update_promoted_from_view_count
+    self.connection.execute %{ UPDATE events SET promoted = 'false' }
+    popular_events = self.order('view_count DESC', 'release_date DESC').limit(MAX_PROMOTED)
+    popular_events.each do |event|
+      event.promoted = true 
+      event.save
+    end
+  end
+
   # active admin and serialized fields workaround:
   def persons_raw
     self.persons.join("\n") unless self.persons.nil?
@@ -50,25 +80,6 @@ class Event < ActiveRecord::Base
   def tags_raw=(values)
     self.tags = []
     self.tags= values.split("\n").map { |w| w.strip }
-  end
-
-  # bulk update several events using the saved schedule.xml files
-  def self.bulk_update_events(selection)
-    Rails.logger.info "Bulk updating events from XML"
-    fahrplans = {}
-    ActiveRecord::Base.transaction do
-      Event.find(selection).each do |event|
-        if fahrplans[conference.acronym]
-          fahrplan = fahrplans[conference.acronym]
-        else
-          fahrplan = FahrplanParser.new(event.conference.schedule_xml)
-          fahrplans[conference.acronym] = fahrplan
-        end
-
-        info = fahrplan.event_info_by_guid[event.guid]
-        update_event_info(event, info)
-      end
-    end
   end
 
   def get_recording_by_mime_type(type)
