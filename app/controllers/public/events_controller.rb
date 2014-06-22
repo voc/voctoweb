@@ -21,7 +21,7 @@ class Public::EventsController < InheritedResources::Base
   private
 
   def cache_key
-    [@event, Digest::MD5.hexdigest(remote_ip)]
+    [@event.guid, Digest::MD5.hexdigest(remote_ip)]
   end
 
   def remote_ip
