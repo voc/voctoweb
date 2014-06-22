@@ -107,7 +107,7 @@ ActiveAdmin.register Event do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, 
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
-                            :description, :persons_raw, :tags_raw, :date, :event_id]
+                            :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end
 
