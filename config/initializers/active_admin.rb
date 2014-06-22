@@ -123,6 +123,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   # config.before_filter :do_something_awesome
+  config.before_filter :deny_request, if: :ssl_configured?
   
   
   # == Setting a Favicon
