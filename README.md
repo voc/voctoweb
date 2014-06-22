@@ -136,6 +136,10 @@ Generate the site
 
     /api/conferences/run_compile
 
+Update promoted flag of events by view count    
+
+    /api/events/update_promoted
+
 ## Public JSON API
 
     /public/conferences

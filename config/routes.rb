@@ -17,6 +17,7 @@ MediaBackend::Application.routes.draw do
     resources :events, :defaults => { :format => 'json' } do
       collection do
         get 'download'
+        post 'update_promoted'
       end
     end
     resources :recordings, :defaults => { :format => 'json' } do

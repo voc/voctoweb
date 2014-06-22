@@ -44,6 +44,11 @@ class Api::EventsController < InheritedResources::Base
     end
   end
 
+  def update_promoted
+    Event.update_promoted_from_view_count
+    render json: { status: 'ok' }
+  end
+
   private
 
   def create_event(params)
