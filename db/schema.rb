@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615151738) do
+ActiveRecord::Schema.define(version: 20140622020440) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140615151738) do
     t.text     "tags"
     t.date     "release_date"
     t.boolean  "promoted"
+    t.integer  "view_count",      default: 0
   end
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
