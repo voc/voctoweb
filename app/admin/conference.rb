@@ -90,6 +90,7 @@ ActiveAdmin.register Conference do
   controller do
     def permitted_params
       params.permit conference: [ :acronym,
+                                  :title,
                                   :schedule_url,
                                   :recordings_path,
                                   :images_path,
