@@ -47,12 +47,6 @@ class Recording < ActiveRecord::Base
 
   end
 
-  def self.from_url(url)
-    # TODO find best match amongst matching recordings
-    filename = File.basename(url)
-    where(filename: filename).to_a.select { |recording| recording.get_url == url }
-  end
-
   def download!
     path = get_tmp_path
     result = download_to_file(self.original_url, path)

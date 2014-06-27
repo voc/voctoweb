@@ -27,9 +27,12 @@ class Api::EventsControllerTest < ActionController::TestCase
   test "should update promoted flag according to view count of events" do
     conference = create(:conference)
     events = []
-    events << create(:event, conference: conference, view_count: 1)
-    events << create(:event, conference: conference, view_count: 2)
-    events << create(:event, conference: conference, view_count: 3)
+    events << create(:event_with_recordings, conference: conference, view_count: 1)
+    events.last.recordings.first.recording_views.create
+    events << create(:event_with_recordings, conference: conference, view_count: 2)
+    events.last.recordings.first.recording_views.create
+    events << create(:event_with_recordings, conference: conference, view_count: 3)
+    events.last.recordings.first.recording_views.create
 
     get 'update_promoted', format: :json, api_key: @key.key
     events.each { |event| assert Event.find(event.id).promoted }

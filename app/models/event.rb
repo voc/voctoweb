@@ -59,8 +59,19 @@ class Event < ActiveRecord::Base
 
   def self.update_promoted_from_view_count
     self.connection.execute %{ UPDATE events SET promoted = 'false' }
-    popular_events = self.order('view_count DESC', 'release_date DESC').limit(MAX_PROMOTED)
-    popular_events.each do |event|
+    popular_event_ids = self.connection.execute %{
+      SELECT events.id
+        FROM events
+        JOIN recordings
+          ON recordings.event_id          = events.id
+        JOIN recording_views
+          ON recording_views.recording_id = recordings.id
+      WHERE recording_views.created_at    > '#{Time.now.ago 1.week}'
+      GROUP BY events.id
+      ORDER BY count(recording_views.id) DESC LIMIT #{MAX_PROMOTED}
+    }
+    popular_event_ids.each do |event_id|
+      event = Event.find event_id['id']
       event.promoted = true 
       event.save
     end
