@@ -15,9 +15,7 @@ class Public::RecordingsController < InheritedResources::Base
       return render json: { status: :unprocessable_entity }
     end
 
-    rv = @recording.recording_views.create
-    @recording.view_count += 1
-    if rv and @recording.save
+    if @recording.recording_views.create
       add_throttling(@recording.filename)
       render json: { status: :ok }
     else

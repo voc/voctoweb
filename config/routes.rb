@@ -31,11 +31,7 @@ MediaBackend::Application.routes.draw do
   namespace :public do
     resources :mirrors, only: [:index], defaults: { format: 'json' }
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
-    resources :events, only: [:index, :show], defaults: { format: 'json' } do
-      member do
-        post 'count'
-      end
-    end
+    resources :events, only: [:index, :show], defaults: { format: 'json' }
     resources :recordings, only: [:index, :show], defaults: { format: 'json' } do
       collection do
         post 'count'

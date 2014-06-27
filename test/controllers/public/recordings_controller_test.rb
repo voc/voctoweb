@@ -25,5 +25,7 @@ class Public::RecordingsControllerTest < ActionController::TestCase
     assert_response :success
     refute_empty JSON.parse(response.body)
     assert_equal 'ok', JSON.parse(response.body)['status']
+    assert RecordingView.count > 0
+    assert Event.first.view_count > 0
   end
 end
