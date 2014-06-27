@@ -9,7 +9,7 @@ class AddViewCountToEvents < ActiveRecord::Migration
   end
 
   def down
-    remove_column :events, :view_count, :integer
+    remove_column :events, :view_count
   end
 
 end

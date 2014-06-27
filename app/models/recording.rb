@@ -6,6 +6,7 @@ class Recording < ActiveRecord::Base
   HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm']
 
   belongs_to :event
+  has_many :recording_views, dependent: :destroy
   delegate :conference, to: :event, allow_nil: true
 
   validates_presence_of :event
@@ -44,6 +45,12 @@ class Recording < ActiveRecord::Base
       transition [:downloading] => :downloaded
     end
 
+  end
+
+  def self.from_url(url)
+    # TODO find best match amongst matching recordings
+    filename = File.basename(url)
+    where(filename: filename).to_a.select { |recording| recording.get_url == url }
   end
 
   def download!

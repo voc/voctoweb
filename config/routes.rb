@@ -36,7 +36,11 @@ MediaBackend::Application.routes.draw do
         post 'count'
       end
     end
-    resources :recordings, only: [:index, :show], defaults: { format: 'json' }
+    resources :recordings, only: [:index, :show], defaults: { format: 'json' } do
+      collection do
+        post 'count'
+      end
+    end
   end
 
   # Example resource route with options:
