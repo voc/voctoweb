@@ -33,3 +33,7 @@ config/initializers/devise_secret_token.rb
 config/initializers/media_backend.rb
 config/database.yml
 db/seeds_live.rb
+
+# Ignore fixtures with sensitive data as a precaution
+test/fixtures/admin_users.yml
+test/fixtures/api_keys.yml
