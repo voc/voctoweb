@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
   after_initialize :generate_guid
 
   validates_presence_of :conference
-  validates_presence_of :release_date, :slug
+  validates_presence_of :release_date, :slug, :title
   validates_presence_of :guid
   validates_uniqueness_of :guid
 

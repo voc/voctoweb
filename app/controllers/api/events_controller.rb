@@ -20,9 +20,11 @@ class Api::EventsController < InheritedResources::Base
   def create
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym
-    @event = conference.events.build params[:event].permit([:guid, :title, :subtitle, :link, :slug,
-                                             :description, :persons_raw, :tags_raw, :date,
-                                             :promoted, :release_date])
+    @event = conference.events.build params[:event].permit([:guid, :link, :slug,
+                                                            :title, :subtitle,
+                                                            :description, :date,
+                                                            {persons: []}, {tags: []},
+                                                            :promoted, :release_date])
 
     respond_to do |format|
       if create_event(params)

@@ -17,6 +17,8 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += '"guid":"12345",'
     json += '"slug":"12345",'
     json += '"link":"http://link.to",'
+    json += '"title":"title1",'
+    json += '"persons":["a","b","c"],'
     json += '"acronym":"'
     json += @conference.acronym
     json += '",'
@@ -34,8 +36,9 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     end
 
     event = Event.where(guid: '12345').first
-    assert_equal event.link, 'http://link.to'
-    assert_equal event.thumb_filename, 'chaosknoten.jpg'
+    assert_equal 'http://link.to', event.link
+    assert_equal 'chaosknoten.jpg', event.thumb_filename
+    assert_equal %w[a b c], event.persons
   end
 
 end
