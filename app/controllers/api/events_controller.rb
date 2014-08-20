@@ -20,11 +20,13 @@ class Api::EventsController < InheritedResources::Base
   def create
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym
-    @event = Event.new conference: conference, guid: params[:guid], slug: params[:slug]
+    @event = conference.events.build params[:event].permit([:guid, :title, :subtitle, :link, :slug,
+                                             :description, :persons_raw, :tags_raw, :date,
+                                             :promoted, :release_date])
 
     respond_to do |format|
       if create_event(params)
-        @event.delay.download_images(params[:thumb_url],params[:gif_url], params[:poster_url])
+        @event.delay.download_images(params[:thumb_url], params[:gif_url], params[:poster_url])
         format.json { render json: @event, status: :created }
       else
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -36,7 +38,7 @@ class Api::EventsController < InheritedResources::Base
     event = Event.find_by guid: params[:guid]
     respond_to do |format|
       if event.present?
-        event.delay.download_images(params[:thumb_url],params[:gif_url], params[:poster_url])
+        event.delay.download_images(params[:thumb_url], params[:gif_url], params[:poster_url])
         format.json { render json: event, status: :downloading }
       else
         format.json { render json: event, status: :unprocessable_entity }
@@ -55,8 +57,8 @@ class Api::EventsController < InheritedResources::Base
     return false if @event.conference.nil?  
     @event.transaction do
       @event.release_date = Time.now unless @event.release_date
-      @event.set_image_filenames(params[:thumb_url],params[:gif_url], params[:poster_url])
-      @event.fill_event_info 
+      @event.set_image_filenames(params[:thumb_url], params[:gif_url], params[:poster_url])
+      @event.fill_event_info
       return true if @event.save 
     end
     return false

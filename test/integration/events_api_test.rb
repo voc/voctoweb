@@ -16,6 +16,7 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"guid":"12345",'
     json += '"slug":"12345",'
+    json += '"link":"http://link.to",'
     json += '"acronym":"'
     json += @conference.acronym
     json += '",'
@@ -31,6 +32,10 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     assert_difference('Event.count') do
       post_json '/api/events.json', @json
     end
+
+    event = Event.where(guid: '12345').first
+    assert_equal event.link, 'http://link.to'
+    assert_equal event.thumb_filename, 'chaosknoten.jpg'
   end
 
 end
