@@ -20,7 +20,7 @@ class Api::EventsController < InheritedResources::Base
   def create
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym
-    @event = Event.new conference: conference, guid: params[:guid]
+    @event = Event.new conference: conference, guid: params[:guid], slug: params[:slug]
 
     respond_to do |format|
       if create_event(params)
