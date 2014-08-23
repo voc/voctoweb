@@ -20,7 +20,7 @@ class ConferenceImporter
         thumb_filename: r.thumb.try(:filename),
         title:  slug,
         slug: slug,
-        guid: SecureRandom.hex(8)
+        guid: SecureRandom.uuid
       
       event.recordings.create filename: r.filename,
         folder: import_template.folder,

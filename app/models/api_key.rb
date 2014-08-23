@@ -3,7 +3,7 @@ class ApiKey < ActiveRecord::Base
   before_create :generate_guid
 
   def generate_guid
-    self.key = SecureRandom.hex(16)
+    self.key = SecureRandom.uuid
   end
 
 end

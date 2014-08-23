@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   attr_accessor   :persons_raw, :tags_raw
 
   def generate_guid
-    self.guid ||= SecureRandom.hex(8)
+    self.guid ||= SecureRandom.uuid
   end
 
   # bulk update several events using the saved schedule.xml files
