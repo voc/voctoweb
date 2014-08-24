@@ -12,6 +12,7 @@ class Recording < ActiveRecord::Base
   validates_presence_of :event
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates_presence_of :filename, :mime_type
+  validate :unique_recording
 
   scope :downloaded, -> { where(state: 'downloaded') }
 
@@ -84,6 +85,17 @@ class Recording < ActiveRecord::Base
     self.errors.add(:folder, 'recording folderi not writable') unless File.writable? self.get_recording_path
     self.errors.add(:original_url, 'missing original_url') if self.original_url.nil? 
     not self.errors.any?
+  end
+
+  def unique_recording
+    unless self.event.present?
+      self.errors.add :event, 'missing event on recording'
+      return
+    end
+    dupe = self.event.recordings.any? { |recording|
+      recording.filename == self.filename && recording.folder == self.filename
+    }
+    self.errors.add :event, 'recording already exist on event' if dupe
   end
 
   private
