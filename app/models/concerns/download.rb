@@ -48,6 +48,9 @@ module Download
       File.open(path, 'wb') do |f|
         result = download_io(f, uri)
       end
+      unless result
+        File.unlink path
+      end
       Rails.logger.info "Downloaded to #{path}" if result
       result
     #rescue
