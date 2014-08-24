@@ -82,4 +82,9 @@ class Conference < ActiveRecord::Base
     self.acronym || self.id
   end
 
+  def validate_for_api
+    self.errors.add :images_path, "images path #{self.get_images_path} not writable" unless File.writable? self.get_images_path
+    self.errors.add :recordings_path, "recordings path #{self.get_recordings_path} not writable" unless File.writable? self.get_recordings_path
+    not self.errors.any?
+  end
 end

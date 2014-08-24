@@ -12,11 +12,11 @@ class Api::RecordingsController < InheritedResources::Base
   def create
     event = Event.find_by guid: params['guid']
     @recording = Recording.new
-    @recording.update_attributes(params[:recording].permit([:original_url, :folder, :filename, :mime_type, :size, :length]))
+    @recording.assign_attributes(params[:recording].permit([:original_url, :folder, :filename, :mime_type, :size, :length]))
     @recording.event = event
 
     respond_to do |format|
-      if not @recording.original_url.nil? and @recording.save
+      if @recording.validate_for_api and @recording.save
         @recording.start_download
         format.json { render json: @recording, status: :created }
       else

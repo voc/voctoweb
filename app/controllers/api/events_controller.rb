@@ -57,6 +57,8 @@ class Api::EventsController < InheritedResources::Base
 
   def create_event(params)
     return false if @event.conference.nil?  
+    return false unless @event.conference.validate_for_api
+
     @event.transaction do
       @event.release_date = Time.now unless @event.release_date
       @event.set_image_filenames(params[:thumb_url], params[:gif_url], params[:poster_url])

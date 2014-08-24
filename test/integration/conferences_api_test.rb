@@ -21,6 +21,8 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
   end
 
   test "should create conference" do
+    FileUtils.mkdir_p 'tmp/tests/rec/conference/frab123'
+    FileUtils.mkdir_p 'tmp/tests/img/events/frab'
     assert JSON.parse(@json)
     run_background_jobs_immediately do
       assert_difference('Conference.count') do
