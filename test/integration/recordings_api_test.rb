@@ -2,14 +2,14 @@ require 'test_helper'
 
 class RecordingsApiTest < ActionDispatch::IntegrationTest
 
-  FILE = '/tmp/test.mp3'
+  FILE = 'test.mp3'
 
   setup do
     @key = create(:api_key)
     @event = create(:event)
-    @json = get_json
     Delayed::Worker.delay_jobs = false
-    create_test_file FILE
+    @file = create_test_file FILE
+    @json = get_json
   end
 
   def get_json
@@ -19,7 +19,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"guid":"' + @event.guid + '",'
     json += '"recording":'
-    d = '{"original_url":"file://' + FILE + '","filename":"some.mp4","folder":"","mime_type":"audio/mp4","size":"12","length":"30"}'
+    d = '{"original_url":"file://' + @file + '","filename":"some.mp4","folder":"","mime_type":"audio/mp4","size":"12","length":"30"}'
     json += d
     json+= '}'
     json
