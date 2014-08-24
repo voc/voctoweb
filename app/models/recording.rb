@@ -82,7 +82,7 @@ class Recording < ActiveRecord::Base
   end
 
   def validate_for_api
-    self.errors.add(:folder, 'recording folderi not writable') unless File.writable? self.get_recording_path
+    self.errors.add(:folder, "recording folder #{self.get_recording_dir} not writable") unless File.writable? self.get_recording_dir
     self.errors.add(:original_url, 'missing original_url') if self.original_url.nil? 
     not self.errors.any?
   end
