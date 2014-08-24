@@ -107,6 +107,10 @@ class Event < ActiveRecord::Base
     Hash[self.recordings.map { |r| [r.mime_type, r] }]
   end
 
+  def length
+    self.recordings.max { |e| e.length }.try(:length)
+  end
+
   def fill_event_info
     if self.conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
