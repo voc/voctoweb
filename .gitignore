@@ -27,13 +27,17 @@ vendor/gems/
 public/assets
 
 # Ignore secret tokens and configs
-config/secrets.yml
-config/initializers/secret_token.rb
-config/initializers/devise_secret_token.rb
 config/initializers/media_backend.rb
 config/database.yml
 db/seeds_live.rb
+.env.production
+.env
 
 # Ignore fixtures with sensitive data as a precaution
 test/fixtures/admin_users.yml
 test/fixtures/api_keys.yml
+test/fixtures/*.jpg
+test/fixtures/*.gif
+test/fixtures/*.yml
+test/fixtures/*.png
+test/fixtures/*.avi
