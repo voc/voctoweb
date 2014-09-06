@@ -1,4 +1,5 @@
 MediaBackend::Application.configure do
+    config.frontendURL = 'http://media.ccc.de'
     config.cdnURL = 'http://cdn.media.ccc.de'
     config.staticURL = 'http://static.media.ccc.de'
 
