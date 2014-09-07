@@ -11,8 +11,7 @@ class Api::RecordingsController < InheritedResources::Base
 
   def create
     event = Event.find_by guid: params['guid']
-    @recording = Recording.new
-    @recording.assign_attributes(params[:recording].permit([:original_url, :folder, :filename, :mime_type, :size, :length]))
+    @recording = Recording.build(params[:recording].permit([:original_url, :folder, :filename, :mime_type, :size, :width, :height, :length]))
     @recording.event = event
 
     respond_to do |format|
