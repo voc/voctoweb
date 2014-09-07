@@ -93,7 +93,7 @@ class Recording < ActiveRecord::Base
       return
     end
     dupe = self.event.recordings.any? { |recording|
-      recording.filename == self.filename && recording.folder == self.filename
+      recording.filename == self.filename && recording.folder == self.folder
     }
     self.errors.add :event, 'recording already exist on event' if dupe
   end

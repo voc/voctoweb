@@ -5,8 +5,7 @@ class Api::ConferencesController < InheritedResources::Base
   respond_to :json
 
   def create
-    @conference = Conference.new
-    @conference.assign_attributes(params[:conference].permit([:acronym, :schedule_url, :recordings_path, :images_path, :webgen_location, :aspect_ratio]))
+    @conference = Conference.new(params[:conference].permit([:acronym, :schedule_url, :recordings_path, :images_path, :webgen_location, :aspect_ratio]))
 
     respond_to do |format|
       if not @conference.schedule_url.nil? and @conference.validate_for_api and @conference.save
