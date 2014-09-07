@@ -65,9 +65,6 @@ ActiveAdmin.register ImportTemplate do
 
     table_for c.recordings do
       column :filename
-      column :gif do |r|
-        r.gif.found
-      end
       column :poster do |r|
         r.poster.found
       end

@@ -19,8 +19,7 @@ module CheckStorage
   def check_media_exists_on_disk
     missing_logos = Conference.all.select { |c| not File.readable? c.get_logo_path }
     missing_images = Event.all.select { |e| 
-      not File.readable? e.get_gif_path or
-        not File.readable? e.get_poster_path or
+      not File.readable? e.get_poster_path or
         not File.readable? e.get_thumb_path
     }
     missing_logos & missing_images

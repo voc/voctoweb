@@ -81,7 +81,7 @@ However folders and access rights need to be setup manually, before you can uplo
         "schedule_url":"http://progam/schedule.xml"
       }' "http://localhost:3000/api/conferences"
 
-You can add images to an event, like the animated gif thumb and the poster image. The event is identified by its `guid` and the conference `acronym`.
+You can add images to an event, like the poster image. The event is identified by its `guid` and the conference `acronym`.
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4",
@@ -89,8 +89,7 @@ You can add images to an event, like the animated gif thumb and the poster image
         "guid":"123",
         "slug":"123",
         "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
-        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
-        "gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"
+        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg"
       }' "http://localhost:3000/api/events"
 
 Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
@@ -116,8 +115,7 @@ Download event images again, after event was created.
         "api_key":"4",
         "guid":"123",
         "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
-        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
-        "gif_url":"http://koeln.ccc.de/images/chaosknoten.gif"
+        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg"
       }' "http://localhost:3000/api/events/download"
 
 Download recordings again, after recording was created.

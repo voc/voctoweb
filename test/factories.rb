@@ -102,7 +102,6 @@ FactoryGirl.define do
     guid { generate(:event_guid) }
     title { generate(:event_title) }
     thumb_filename "frabcon123.jpg"
-    gif_filename "frabcon123.gif"
     poster_filename "frabcon123_logo.jpg"
     subtitle "subtitle"
 

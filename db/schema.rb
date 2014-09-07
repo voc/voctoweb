@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627185401) do
+ActiveRecord::Schema.define(version: 20140907121133) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 20140627185401) do
     t.datetime "updated_at"
     t.string   "title"
     t.string   "schedule_url"
-    t.text     "schedule_xml",    limit: 4294967295
-    t.string   "schedule_state",                     default: "not_present", null: false
+    t.text     "schedule_xml",    limit: 10485760
+    t.string   "schedule_state",                   default: "not_present", null: false
     t.string   "logo"
   end
 
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20140627185401) do
 
   create_table "events", force: true do |t|
     t.string   "guid"
-    t.string   "gif_filename"
     t.string   "poster_filename"
     t.integer  "conference_id"
     t.datetime "created_at"

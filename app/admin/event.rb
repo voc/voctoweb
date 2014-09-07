@@ -7,9 +7,6 @@ ActiveAdmin.register Event do
     column :thumb_filename do |event|
       line_break_filename event.thumb_filename
     end
-    column :gif_filename do |event| 
-      line_break_filename event.gif_filename
-    end
     column :poster_filename do |event|
       line_break_filename event.poster_filename
     end
@@ -27,9 +24,6 @@ ActiveAdmin.register Event do
       row :title
       row :thumb_filename do
         div show_event_folder e, :thumb_filename
-      end
-      row :gif_filename do
-        div show_event_folder e, :gif_filename
       end
       row :poster_filename do
         div show_event_folder e, :poster_filename
@@ -69,7 +63,6 @@ ActiveAdmin.register Event do
     f.inputs "Files" do
       f.input :slug
       f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
-      f.input :gif_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
     end
     f.actions
@@ -105,7 +98,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :thumb_filename, :gif_filename, :poster_filename, 
+      params.permit event: [:guid, :thumb_filename, :poster_filename, 
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end

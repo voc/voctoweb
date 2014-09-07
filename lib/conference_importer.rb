@@ -15,7 +15,6 @@ class ConferenceImporter
 
       event = conference.events.create date: import_template.date,
         release_date: import_template.release_date,
-        gif_filename: r.gif.try(:filename),
         poster_filename: r.poster.try(:filename),
         thumb_filename: r.thumb.try(:filename),
         title:  slug,

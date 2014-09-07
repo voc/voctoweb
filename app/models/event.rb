@@ -25,8 +25,6 @@ class Event < ActiveRecord::Base
     .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
     .group(:"events.id")
                         }
-  has_attached_file :gif, via: :gif_filename, belongs_into: :images, on: :conference
-
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
@@ -72,7 +70,7 @@ class Event < ActiveRecord::Base
     }
     popular_event_ids.each do |event_id|
       event = Event.find event_id['id']
-      event.promoted = true 
+      event.promoted = true
       event.save
     end
   end
@@ -119,16 +117,14 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def set_image_filenames(thumb_url, gif_url, poster_url)
+  def set_image_filenames(thumb_url, poster_url)
     self.thumb_filename = get_image_filename thumb_url if thumb_url
-    self.gif_filename = get_image_filename gif_url if gif_url
     self.poster_filename = get_image_filename poster_url if poster_url
   end
 
-  def download_images(thumb_url, gif_url, poster_url)
+  def download_images(thumb_url, poster_url)
     FileUtils.mkdir_p self.conference.get_images_path
     self.delay.download_image(thumb_url, thumb_filename)
-    self.delay.download_image(gif_url, gif_filename)
     self.delay.download_image(poster_url, poster_filename)
   end
 
@@ -140,7 +136,7 @@ class Event < ActiveRecord::Base
 
   def display_name
     if self.title.present?
-      self.conference.acronym + ": " + self.title 
+      self.conference.acronym + ": " + self.title
     else
       self.guid || self.id
     end

@@ -28,7 +28,7 @@ class ConferenceImporterTest < ActiveSupport::TestCase
     assert_difference('Recording.count') do
       ConferenceImporter.import(it)
     end
-    assert_equal 'testevent.gif', Event.last.gif_filename
+    assert_equal 'testevent.gif', Event.last.thumb_filename
     assert_equal 'testevent.mp4', Recording.last.filename
   end
 

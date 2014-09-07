@@ -27,12 +27,10 @@ class ImportTemplate < ActiveRecord::Base
     Dir[File.join(get_recordings_path, folder, '*')].map { |path|
 
       slug = File.basename path, '.*'
-      search_gif_by_slug = /#{slug}.*\.gif/
       search_poster_by_slug = /#{slug}.*_preview\.jpg/
       search_thumb_by_slug = /#{slug}.*?\.jpg/
 
       OpenStruct.new filename: File.basename(path),
-        gif: match_and_delete(images, search_gif_by_slug),
         poster: match_and_delete(images, search_poster_by_slug),
         thumb: match_and_delete(images, search_thumb_by_slug)
     }
