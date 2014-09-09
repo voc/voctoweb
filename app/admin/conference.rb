@@ -93,6 +93,7 @@ ActiveAdmin.register Conference do
                                   :schedule_url,
                                   :recordings_path,
                                   :images_path,
+                                  :logo,
                                   :webgen_location,
                                   :aspect_ratio ]
     end
