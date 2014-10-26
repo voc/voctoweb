@@ -1,7 +1,7 @@
 class Api::RecordingsController < InheritedResources::Base
   before_filter :deny_json_request, if: :ssl_configured?
   before_filter :authenticate_api_key!
-  protect_from_forgery :except => :create
+  protect_from_forgery except: %i[create download]
   respond_to :json
 
   def index
