@@ -27,9 +27,10 @@ class Api::RecordingsController < InheritedResources::Base
   def download
     event = Event.find_by guid: params['guid']
     respond_to do |format|
+      p event
       if event.present? and event.recordings.any?
         event.recordings.each { |r| r.start_download }
-        format.json { render json: event.recordings, status: :downloading }
+        format.json { render json: event.recordings, status: :ok }
       else
         format.json { render json: event, status: :unprocessable_entity }
       end

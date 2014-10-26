@@ -41,7 +41,7 @@ class Api::EventsController < InheritedResources::Base
     respond_to do |format|
       if event.present?
         event.delay.download_images(params[:thumb_url], params[:poster_url])
-        format.json { render json: event, status: :downloading }
+        format.json { render json: event, status: :ok }
       else
         format.json { render json: 'not found event', status: :unprocessable_entity }
       end

@@ -20,7 +20,7 @@ class Api::ConferencesController < InheritedResources::Base
   def run_compile
     Conference.delay.run_compile_job
     respond_to do |format|
-      format.json { render json: { running: true }, status: :running }
+      format.json { render json: { running: true }, status: :ok }
     end
   end
 
