@@ -39,7 +39,7 @@ class Recording < ActiveRecord::Base
     end
 
     event :start_download do
-      transition [:new] => :downloading
+      transition all => :downloading
     end
 
     event :finish_download do
