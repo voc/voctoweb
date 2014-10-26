@@ -3,7 +3,6 @@ ActiveAdmin.register Conference do
   index do
     selectable_column
     column :acronym
-    column :schedule_url
     column :schedule_state
     column :recordings_path
     column :webgen_location
