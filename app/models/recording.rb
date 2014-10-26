@@ -83,7 +83,7 @@ class Recording < ActiveRecord::Base
 
   def validate_for_api
     self.errors.add(:folder, "recording folder #{self.get_recording_dir} not writable") unless File.writable? self.get_recording_dir
-    self.errors.add(:original_url, 'missing original_url') if self.original_url.nil? 
+    self.errors.add(:original_url, 'missing original_url') if self.original_url.nil?
     not self.errors.any?
   end
 
@@ -92,10 +92,10 @@ class Recording < ActiveRecord::Base
       self.errors.add :event, 'missing event on recording'
       return
     end
-    dupe = self.event.recordings.any? { |recording|
+    dupe = self.event.recordings.select { |recording|
       recording.filename == self.filename && recording.folder == self.folder
-    }
-    self.errors.add :event, 'recording already exist on event' if dupe
+    }.delete_if { |dupe| dupe == self }
+    self.errors.add :event, 'recording already exist on event' if dupe.present?
   end
 
   private
