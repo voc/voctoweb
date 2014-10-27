@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   include Recent
-  include FahrplanParser
+  include FahrplanUpdater
   include Download
   include Storage
 
@@ -34,26 +34,6 @@ class Event < ActiveRecord::Base
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
-  end
-
-  # bulk update several events using the saved schedule.xml files
-  def self.bulk_update_events(selection)
-    Rails.logger.info "Bulk updating events from XML"
-    fahrplans = {}
-    ActiveRecord::Base.transaction do
-      Event.find(selection).each do |event|
-        conference = event.conference
-        if fahrplans[conference.acronym]
-          fahrplan = fahrplans[conference.acronym]
-        else
-          fahrplan = FahrplanParser.new(conference.schedule_xml)
-          fahrplans[conference.acronym] = fahrplan
-        end
-
-        info = fahrplan.event_info_by_guid[event.guid]
-        update_event_info(event, info)
-      end
-    end
   end
 
   def self.update_promoted_from_view_count
@@ -110,14 +90,6 @@ class Event < ActiveRecord::Base
     self.recordings.max { |e| e.length }.try(:length)
   end
 
-  def fill_event_info
-    if self.conference.downloaded?
-      fahrplan = FahrplanParser.new(self.conference.schedule_xml)
-      info = fahrplan.event_info_by_guid[self.guid]
-      update_event_info(self, info)
-    end
-  end
-
   def set_image_filenames(thumb_url, poster_url)
     self.thumb_filename = get_image_filename thumb_url if thumb_url
     self.poster_filename = get_image_filename poster_url if poster_url
@@ -144,14 +116,6 @@ class Event < ActiveRecord::Base
   end
 
   private
-
-  # update event attributes from schedule XML
-  def update_event_info(event, info)
-    event.title = info.delete(:title)
-    id = info.delete(:id)
-    event.link = event.conference.get_event_url(id)
-    event.update_attributes info
-  end
 
   def get_image_filename(url)
     if url

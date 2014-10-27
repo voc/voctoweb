@@ -30,7 +30,7 @@ ActiveAdmin.register Event do
       end
       row :conference
       row :promoted
-      row :subtitle 
+      row :subtitle
       row :link
       row :slug
       row :description
@@ -51,7 +51,7 @@ ActiveAdmin.register Event do
       f.input :guid
       f.input :conference
       f.input :title
-      f.input :subtitle 
+      f.input :subtitle
       f.input :description
       f.input :link
       f.input :promoted
@@ -84,6 +84,9 @@ ActiveAdmin.register Event do
     if event.conference.downloaded?
       link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
     end
+  end
+
+  action_item only: [:show, :edit] do
     link_to 'Add Recording', new_admin_recording_path(recording: {event_id: event.id}), method: :get
   end
 
@@ -98,7 +101,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :thumb_filename, :poster_filename, 
+      params.permit event: [:guid, :thumb_filename, :poster_filename,
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
