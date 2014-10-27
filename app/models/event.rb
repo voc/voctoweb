@@ -95,7 +95,7 @@ class Event < ActiveRecord::Base
   # active admin and serialized fields workaround:
   def tags_raw=(values)
     self.tags = []
-    self.tags= values.split("\n").map { |w| w.strip }
+    self.tags = values.split("\n").map { |w| w.strip }
   end
 
   def get_recording_by_mime_type(type)

@@ -15,7 +15,7 @@ module FahrplanParser
           id:          ev.attributes['id'],
           title:       ev.elements['title'].text,
           description: ev.elements['abstract'].text || ev.elements['description'].text,
-          tags:        [ev.elements['track'].text],
+          tags:        [ev.elements['track'].text].compact,
           date:        ev.parent.parent.attributes['date'],
           subtitle:    ev.elements['subtitle'].text,
           slug:        ev.elements['slug'].text,
