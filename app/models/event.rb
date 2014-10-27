@@ -21,10 +21,10 @@ class Event < ActiveRecord::Base
 
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
-    .where(conferences: { id: conference })
-    .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
-    .group(:"events.id")
-                        }
+      .where(conferences: { id: conference })
+      .where(recordings: { state: 'downloaded', mime_type: Recording::HTML5 })
+      .group(:"events.id")
+  }
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
@@ -42,10 +42,11 @@ class Event < ActiveRecord::Base
     fahrplans = {}
     ActiveRecord::Base.transaction do
       Event.find(selection).each do |event|
+        conference = event.conference
         if fahrplans[conference.acronym]
           fahrplan = fahrplans[conference.acronym]
         else
-          fahrplan = FahrplanParser.new(event.conference.schedule_xml)
+          fahrplan = FahrplanParser.new(conference.schedule_xml)
           fahrplans[conference.acronym] = fahrplan
         end
 
@@ -146,10 +147,10 @@ class Event < ActiveRecord::Base
 
   # update event attributes from schedule XML
   def update_event_info(event, info)
-      event.title = info.delete(:title)
-      id = info.delete(:id)
-      event.link = event.conference.get_event_url(id)
-      event.update_attributes info
+    event.title = info.delete(:title)
+    id = info.delete(:id)
+    event.link = event.conference.get_event_url(id)
+    event.update_attributes info
   end
 
   def get_image_filename(url)
