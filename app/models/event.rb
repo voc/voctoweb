@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   include Download
   include Storage
 
-  MAX_PROMOTED = 4
+  MAX_PROMOTED = 10
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
