@@ -16,7 +16,7 @@ module FahrplanParser
           title:       ev.elements['title'].text,
           description: ev.elements['abstract'].text || ev.elements['description'].text,
           tags:        [ev.elements['track'].text].compact,
-          date:        ev.parent.parent.attributes['date'],
+          date:        get_event_date(ev),
           subtitle:    ev.elements['subtitle'].text,
           slug:        ev.elements['slug'].text,
           persons:     get_persons(ev)
@@ -26,6 +26,16 @@ module FahrplanParser
     end
 
     private
+
+    def get_event_date(ev)
+      if ev.elements['date']
+        # new schedule xml
+        "#{ev.elements['date'].text} #{ev.elements['start'].text}"
+      else
+        # old schedule xml: use conference date
+        ev.parent.parent.attributes['date']
+      end
+    end
 
     def get_persons(ev)
       persons = []
