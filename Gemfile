@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 # act as state machine
 gem 'state_machine', github: 'manno/state_machine'
