@@ -124,8 +124,8 @@ ActiveAdmin.setup do |config|
   #
   # config.before_filter :do_something_awesome
   config.before_filter :deny_request, if: :ssl_configured?
-  
-  
+
+
   # == Setting a Favicon
   #
   # config.favicon = '/assets/favicon.ico'
@@ -201,7 +201,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  config.default_per_page = 100
+  config.default_per_page = 20
 
 
   # == Filters
