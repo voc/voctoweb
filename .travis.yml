@@ -12,3 +12,4 @@ script:
   - bundle exec rake db:setup
   - bundle exec rake db:create_mirrorbrain
   - bundle exec rake
+after_failure: "cat log/test.log"
