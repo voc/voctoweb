@@ -12,6 +12,7 @@ MediaBackend::Application.routes.draw do
     resources :conferences, :defaults => { :format => 'json' } do
       collection do
         post 'run_compile'
+        post 'run_fast_compile'
       end
     end
     resources :events, :defaults => { :format => 'json' } do

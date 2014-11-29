@@ -81,6 +81,11 @@ ActiveAdmin.register Conference do
     redirect_to action: :index
   end
 
+  collection_action :run_fast_compile, method: :post do
+    Conference.delay.run_fast_compile_job
+    redirect_to action: :index
+  end
+
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
   end
@@ -91,6 +96,10 @@ ActiveAdmin.register Conference do
 
   action_item(:compile) do
     link_to 'Compile', run_compile_admin_conferences_path, method: :post
+  end
+
+  action_item(:fast_compile) do
+    link_to 'Fast Compile', run_fast_compile_admin_conferences_path, method: :post
   end
 
   controller do
