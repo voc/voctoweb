@@ -5,7 +5,7 @@ ActiveAdmin.register Recording do
   filter :original_url
   filter :filename
   filter :folder
-  filter :event
+  filter :event, :collection => proc { Event.includes(:conference).all }
   filter :updated_at
 
   index do
