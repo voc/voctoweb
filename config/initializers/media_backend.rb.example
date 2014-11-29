@@ -12,8 +12,8 @@ MediaBackend::Application.configure do
     }
 
     if Rails.env.test?
-      config.folders[:recordings_base_dir] = File.join('tmp', 'tests', 'rec')
-      config.folders[:images_base_dir] = File.join('tmp', 'tests', 'img')
+      config.folders[:recordings_base_dir] = File.join(Rails.root, 'tmp', 'tests', 'rec')
+      config.folders[:images_base_dir] = File.join(Rails.root, 'tmp', 'tests', 'img')
     end
 
 end
