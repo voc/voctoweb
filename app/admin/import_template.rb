@@ -116,7 +116,7 @@ ActiveAdmin.register ImportTemplate do
     redirect_to action: :index
   end
 
-  action_item only: :show do
+  action_item(:import, only: :show) do
     link_to 'Import Conference', import_conference_admin_import_template_path(import_template), method: :post
   end
 

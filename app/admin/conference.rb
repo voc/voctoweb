@@ -74,15 +74,15 @@ ActiveAdmin.register Conference do
     redirect_to action: :index
   end
 
-  action_item only: :show do
+  action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
   end
 
-  action_item only: [:show, :edit] do
+  action_item(:add_event, only: [:show, :edit]) do
     link_to 'Add Event', new_admin_event_path(event: {conference_id: conference.id}), method: :get
   end
 
-  action_item do
+  action_item(:compile) do
     link_to 'Compile', run_compile_admin_conferences_path, method: :post
   end
 

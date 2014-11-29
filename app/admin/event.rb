@@ -80,17 +80,17 @@ ActiveAdmin.register Event do
     redirect_to :action => :index
   end
 
-  action_item only: [:show, :edit] do
+  action_item(:update_event_info, only: [:show, :edit]) do
     if event.conference.downloaded?
       link_to 'Update event info from XML', update_event_info_admin_event_path(event), method: :post
     end
   end
 
-  action_item only: [:show, :edit] do
+  action_item(:add_recording, only: [:show, :edit]) do
     link_to 'Add Recording', new_admin_recording_path(recording: {event_id: event.id}), method: :get
   end
 
-  action_item do
+  action_item(:update_promoted) do
     link_to 'Update promoted', update_promoted_from_view_count_admin_events_path, method: :post
   end
 
