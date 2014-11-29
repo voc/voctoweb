@@ -1,5 +1,13 @@
 ActiveAdmin.register Recording do
 
+  filter :state
+  filter :mime_type
+  filter :original_url
+  filter :filename
+  filter :folder
+  filter :event
+  filter :updated_at
+
   index do
     selectable_column
     column :original_url

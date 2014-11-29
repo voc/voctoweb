@@ -1,5 +1,12 @@
 ActiveAdmin.register Conference do
 
+  filter :acronym
+  filter :title
+  filter :webgen_location
+  filter :recordings_path
+  filter :images_path
+  filter :updated_at
+
   index do
     selectable_column
     column :acronym

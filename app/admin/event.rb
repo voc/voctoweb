@@ -1,5 +1,16 @@
 ActiveAdmin.register Event do
 
+  filter :guid
+  filter :title
+  filter :link
+  filter :conference
+  filter :promoted
+  filter :slug
+  filter :tags
+  filter :date
+  filter :release_date
+  filter :updated_at
+
   index do
     selectable_column
     column :guid
