@@ -9,8 +9,6 @@ end
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 
-  TMP_DIR = 'tmp/tests'
-
   # Add more helper methods to be used by all tests here...
   def run_background_jobs_immediately
     delay_jobs = Delayed::Worker.delay_jobs

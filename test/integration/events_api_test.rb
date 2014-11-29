@@ -7,6 +7,8 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     @conference = create(:conference)
     @json = get_json
     Delayed::Worker.delay_jobs = false
+    FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:images_base_dir], @conference.images_path)
+    FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:recordings_base_dir], @conference.recordings_path)
   end
 
   def get_json
@@ -30,6 +32,7 @@ class EventsApiTest < ActionDispatch::IntegrationTest
 
   test "should create event" do
     assert JSON.parse(@json)
+
     assert_difference('Event.count') do
       post_json '/api/events.json', @json
     end
