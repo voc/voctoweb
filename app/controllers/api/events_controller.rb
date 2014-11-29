@@ -31,6 +31,7 @@ class Api::EventsController < InheritedResources::Base
         @event.delay.download_images(params[:thumb_url], params[:poster_url])
         format.json { render json: @event, status: :created }
       else
+        Rails.logger.info("JSON: failed to create event: #{@event.errors.inspect}")
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -43,6 +44,7 @@ class Api::EventsController < InheritedResources::Base
         event.delay.download_images(params[:thumb_url], params[:poster_url])
         format.json { render json: event, status: :ok }
       else
+        Rails.logger.info("JSON: failed to download event: #{params.inspect}")
         format.json { render json: 'not found event', status: :unprocessable_entity }
       end
     end

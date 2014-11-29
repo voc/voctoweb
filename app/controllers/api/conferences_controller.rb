@@ -12,6 +12,7 @@ class Api::ConferencesController < InheritedResources::Base
         @conference.url_changed
         format.json { render json: @conference, status: :created }
       else
+        Rails.logger.info("JSON: failed to create conference: #{@conference.errors.inspect}")
         format.json { render json: @conference.errors, status: :unprocessable_entity }
       end
     end

@@ -19,6 +19,7 @@ class Api::RecordingsController < InheritedResources::Base
         @recording.start_download
         format.json { render json: @recording, status: :created }
       else
+        Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
         format.json { render json: @recording.errors, status: :unprocessable_entity }
       end
     end
@@ -32,6 +33,7 @@ class Api::RecordingsController < InheritedResources::Base
         event.recordings.each { |r| r.start_download }
         format.json { render json: event.recordings, status: :ok }
       else
+        Rails.logger.info("JSON: failed to download recording: #{params.inspect}")
         format.json { render json: event, status: :unprocessable_entity }
       end
     end
