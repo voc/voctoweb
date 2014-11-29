@@ -23,4 +23,9 @@ class Public::RecordingsController < InheritedResources::Base
     end
   end
 
+  protected
+
+  def collection
+    get_collection_ivar || set_collection_ivar(Recording.includes(:event).includes(event: :conference))
+  end
 end
