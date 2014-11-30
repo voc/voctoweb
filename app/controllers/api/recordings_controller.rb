@@ -15,12 +15,12 @@ class Api::RecordingsController < InheritedResources::Base
     @recording.event = event
 
     respond_to do |format|
-      if @recording.validate_for_api and @recording.save
+      if @recording.valid? and @recording.validate_for_api and @recording.save
         @recording.start_download
         format.json { render json: @recording, status: :created }
       else
         Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
-        format.json { render json: @recording.errors, status: :unprocessable_entity }
+        format.json { render json: @recording.errors.messages, status: :unprocessable_entity }
       end
     end
   end

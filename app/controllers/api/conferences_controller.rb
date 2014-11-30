@@ -8,12 +8,12 @@ class Api::ConferencesController < InheritedResources::Base
     @conference = Conference.new(params[:conference].permit([:acronym, :schedule_url, :recordings_path, :images_path, :webgen_location, :aspect_ratio]))
 
     respond_to do |format|
-      if not @conference.schedule_url.nil? and @conference.validate_for_api and @conference.save
+      if not @conference.schedule_url.nil? and @conference.valid? and @conference.validate_for_api and @conference.save
         @conference.url_changed
         format.json { render json: @conference, status: :created }
       else
         Rails.logger.info("JSON: failed to create conference: #{@conference.errors.inspect}")
-        format.json { render json: @conference.errors, status: :unprocessable_entity }
+        format.json { render json: @conference.errors.messages, status: :unprocessable_entity }
       end
     end
   end

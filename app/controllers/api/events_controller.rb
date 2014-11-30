@@ -32,7 +32,7 @@ class Api::EventsController < InheritedResources::Base
         format.json { render json: @event, status: :created }
       else
         Rails.logger.info("JSON: failed to create event: #{@event.errors.inspect}")
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @event.errors.messages, status: :unprocessable_entity }
       end
     end
   end
@@ -58,9 +58,6 @@ class Api::EventsController < InheritedResources::Base
   private
 
   def create_event(params)
-    return false if @event.conference.nil?
-    return false unless @event.conference.validate_for_api
-
     @event.transaction do
       @event.release_date = Time.now unless @event.release_date
       @event.set_image_filenames(params[:thumb_url], params[:poster_url])
