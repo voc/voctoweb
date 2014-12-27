@@ -32,6 +32,7 @@ MediaBackend::Application.routes.draw do
   namespace :public do
     get :index, defaults: { format: 'json' }, only: :index
     resources :mirrors, only: [:index], defaults: { format: 'json' }
+    resources :torrents, only: [:index], defaults: { format: 'text' }
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
     resources :events, only: [:index, :show], defaults: { format: 'json' }
     resources :recordings, only: [:index, :show], defaults: { format: 'json' } do
