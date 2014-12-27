@@ -82,10 +82,6 @@ class Event < ActiveRecord::Base
     self.recordings.where(mime_type: type)
   end
 
-  def recordings_by_mime_type
-    Hash[self.recordings.map { |r| [r.mime_type, r] }]
-  end
-
   def length
     self.recordings.max { |e| e.length }.try(:length)
   end
