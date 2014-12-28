@@ -6,8 +6,8 @@ class Recording < ActiveRecord::Base
   HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm' , 'vnd.voc/h264-lq', 'vnd.voc/h264-hd']
 
   belongs_to :event
+  has_one :conference, through: :event
   has_many :recording_views, dependent: :destroy
-  delegate :conference, to: :event, allow_nil: true
 
   validates_presence_of :event
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
