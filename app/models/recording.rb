@@ -13,6 +13,7 @@ class Recording < ActiveRecord::Base
   validate :unique_recording
 
   scope :downloaded, -> { where(state: 'downloaded') }
+  scope :video, -> { where(mime_type: %w[vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm]) }
 
   scope :recorded_at, ->(conference) { joins(event: :conference).where(events: {'conference_id' => conference} ) }
 

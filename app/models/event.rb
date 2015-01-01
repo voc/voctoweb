@@ -25,6 +25,11 @@ class Event < ActiveRecord::Base
       .where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 })
       .group(:"events.id")
   }
+
+  scope :by_identifier, ->(webgen_location, slug) {
+    joins(:conference).where(conferences: {webgen_location: webgen_location}, events: {slug: slug}).first
+  }
+
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
@@ -108,6 +113,18 @@ class Event < ActiveRecord::Base
       self.conference.acronym + ": " + self.title
     else
       self.guid || self.id
+    end
+  end
+
+  # TODO copied from frontend
+  def persons_text
+    if self.persons.length == 0
+      'n/a'
+    elsif self.persons.length == 1
+      self.persons[0]
+    else
+      persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
+      persons.join(', ')
     end
   end
 
