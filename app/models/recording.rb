@@ -3,8 +3,6 @@ class Recording < ActiveRecord::Base
   include Download
   include Storage
 
-  HTML5 = ['audio/ogg', 'audio/mpeg', 'video/mp4', 'video/ogg', 'video/webm' , 'vnd.voc/h264-lq', 'vnd.voc/h264-hd', 'vnd.voc/mp4-web', 'vnd.voc/webm-web']
-
   belongs_to :event
   has_one :conference, through: :event
   has_many :recording_views, dependent: :destroy

@@ -45,7 +45,7 @@ ActiveAdmin.register Recording do
   form do |f|
     f.inputs "Recording Details" do
       f.input :event
-      f.input :mime_type, collection: Recording::HTML5
+      f.input :mime_type, collection: MimeType::HTML5
       f.input :size
       f.input :length
       f.input :width

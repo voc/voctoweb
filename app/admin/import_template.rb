@@ -100,7 +100,7 @@ ActiveAdmin.register ImportTemplate do
 
     f.inputs "Recordings" do
       f.input :folder, hint: import_template.get_recordings_path
-      f.input :mime_type, collection: Recording::HTML5
+      f.input :mime_type, collection: MimeType::HTML5
       f.input :width
       f.input :height
     end
