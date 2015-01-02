@@ -1,5 +1,9 @@
 module ViewHelper
 
+  def oembed_url(url)
+    url.gsub(/https?:/, '').gsub(/.html$/, '/oembed.html')
+  end
+
   def frontend_link(event)
     [MediaBackend::Application.config.frontendURL, 'browse', event.conference.webgen_location, event.slug].join('/') + '.html'
   end

@@ -1,6 +1,1 @@
-<video class='video' width='<%= @width %>' height='<%= @height %>' controls>
-  <source src='<%= @recording.get_recording_url %>' type='<%= MimeType.display_mime_type(@recording.mime_type) %>'>
-  <object data='http://media.ccc.de/assets/flashmediaelement.swf' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true'>
-    <param name='flashvars' value='controls=true&amp;file=<%= @recording.get_recording_url %>'>
-  </object>
-</video>
+<iframe src="<%= oembed_url(@url) %>" width="<%= @width %>" height="<%= @height %>" frameborder="0" title="<%= @event.title %>" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
