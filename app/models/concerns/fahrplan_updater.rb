@@ -6,6 +6,7 @@ module FahrplanUpdater
     if self.conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
       info = fahrplan.event_info_by_guid[self.guid]
+      return if info.empty?
       update_event_info(info)
     end
   end
