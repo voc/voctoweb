@@ -7,14 +7,5 @@ json.cache! json_cached_key(:event_oembed, @event), expires_in: 10.minutes do
   json.height @height
   json.title @event.title
   json.author @event.persons_text
-  json.html <<-EOF
-<video class='video' width="#{@width}" height="#{@height}" controls>
-  <source src='#{@recording.get_recording_url}' type='#{MimeType.display_mime_type(@recording.mime_type)}'>
-  <object data='http://media.ccc.de/assets/flashmediaelement.swf'
-    type='application/x-shockwave-flash'>
-    allowscriptaccess="always" allowfullscreen="true">
-    <param name='flashvars' value='controls=true&amp;file=#{@recording.get_recording_url}'>
-  </object>
-</video>
-  EOF
+  json.html render(partial: 'html5player', formats: [:html], locals: { width: @width, height: @height, recording: @recording })
 end
