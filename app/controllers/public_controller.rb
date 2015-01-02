@@ -10,5 +10,10 @@ class PublicController < ActionController::Base
     return render json: { status: :error } unless m
     @event = Event.by_identifier(m[1], m[2])
     @recording = @event.recordings.downloaded.video.first
+
+    @width = @recording.width
+    @height = @recording.height
+    @width = [@width, params[:maxwidth].to_i].min if params[:maxwidth]
+    @height = [@height, params[:maxheight].to_i].min if params[:maxheight]
   end
 end
