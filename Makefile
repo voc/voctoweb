@@ -1,6 +1,7 @@
 quick:
 	git stash
 	git pull
+	rake tmp:cache:clear
 	pumactl -p tmp/pids/server.pid restart
 
 update:
@@ -9,6 +10,7 @@ update:
 	bundle install
 	RAILS_ENV=production rake db:migrate
 	RAILS_ENV=production bin/delayed_job stop
+	rake tmp:cache:clear
 	kill `cat tmp/pids/server.pid`
 	RAILS_ENV=production bin/delayed_job start
 
