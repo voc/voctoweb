@@ -3,7 +3,7 @@ namespace :db do
   task dump_fixtures: :environment do
     fixtures_dir = ENV['fixtures_dir'] || 'test/fixtures'
     sql = 'SELECT * FROM %s'
-    skip_tables = %w{schema_info schema_migrations delayed_jobs sessions}
+    skip_tables = %w{schema_info schema_migrations delayed_jobs sessions recording_views}
     ActiveRecord::Base.establish_connection(Rails.env)
     i = '000'
     (ActiveRecord::Base.connection.tables - skip_tables).each do |table|
