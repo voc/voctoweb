@@ -1,6 +1,7 @@
 class PublicController < ActionController::Base
+  respond_to :json
+
   def index
-    respond_with :json
   end
 
   def oembed
