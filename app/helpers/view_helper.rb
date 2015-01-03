@@ -8,18 +8,8 @@ module ViewHelper
     [MediaBackend::Application.config.frontendURL, 'browse', event.conference.webgen_location, event.slug].join('/') + '.html'
   end
 
-  def show_logo_url(conference)
-    return nil if conference.logo.nil?
-    "(#{conference.get_logo_url})"
-  end
-
   def show_recording_url(recording)
     "(#{recording.get_recording_url})"
-  end
-
-  def show_logo_path(conference)
-    return nil if conference.logo.nil?
-    "#{conference.logo} (#{conference.get_logo_path})"
   end
 
   def show_folder(label: 'Path', path: '/')

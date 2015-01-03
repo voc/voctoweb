@@ -30,10 +30,7 @@ ActiveAdmin.register Conference do
         div show_folder label: c.images_path, path: c.get_images_path
       end
       row :webgen_location
-      row :logo do
-        div show_logo_path c
-        div show_logo_url c
-      end
+      row :logo
       row :aspect_ratio
       row :schedule_url
       row :schedule_xml do
@@ -63,7 +60,7 @@ ActiveAdmin.register Conference do
       f.input :images_path, hint: conference.get_images_path
     end
     f.inputs "Files" do
-      f.input :logo, hint: conference.get_logo_dir
+      f.input :logo, hint: 'filename from frontend repo'
     end
     f.actions
   end

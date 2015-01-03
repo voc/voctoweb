@@ -17,7 +17,6 @@ Copy and edit the configuration file `config/initializers/media_backend.rb.examp
 
     recordings_base_dir: '/srv/recordings/cdn',
     images_base_dir: '/srv/www/cdn',
-    webgen_base_dir: '/srv/www/webgen/src/browse',
     tmp_dir: '/tmp'
 
 You need to create a secret token for sessions:

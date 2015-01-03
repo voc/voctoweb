@@ -24,8 +24,6 @@ class Conference < ActiveRecord::Base
     url: MediaBackend::Application.config.cdnURL,
     url_path: MediaBackend::Application.config.folders[:recordings_webroot]
 
-  has_attached_file :logo, via: :logo, belongs_into: :images
-
   state_machine :schedule_state, :initial => :not_present do
 
     after_transition any => :new do |conference, transition|
@@ -80,6 +78,15 @@ class Conference < ActiveRecord::Base
   def get_event_url(id)
     if self.schedule_url.present?
       return self.schedule_url.sub('schedule.xml', "events/#{id}.html")
+    end
+  end
+
+  # frontend generates logos like this:
+  def logo_url
+    if self.logo
+      File.join MediaBackend::Application.config.frontendURL, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
+    else
+      File.join MediaBackend::Application.config.frontendURL, 'images/logos/unknown.png'
     end
   end
 

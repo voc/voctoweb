@@ -43,10 +43,7 @@ ActiveAdmin.register ImportTemplate do
       row :images_path do
         div show_folder label: c.images_path, path: c.get_images_path
       end
-      row :logo do
-        div show_logo_path c
-        div show_logo_url c
-      end
+      row :logo
 
       # events
       row :date do |it|

@@ -38,9 +38,13 @@ class ConferenceTest < ActiveSupport::TestCase
 
   test "should get images url" do
     @conference = create(:conference_with_recordings)
-    assert_equal "#{MediaBackend::Application.config.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path 
+    assert_equal "#{MediaBackend::Application.config.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path
   end
 
+  test "should get logo url" do
+    @conference = create(:conference, logo: 'test.png')
+    assert_equal 'http://media.ccc.de/images/logos/frabcon123/test.png', @conference.logo_url
+  end
 
   test "should deny validation with invalid path" do
     @conference = create(:conference_with_recordings)
@@ -52,10 +56,6 @@ class ConferenceTest < ActiveSupport::TestCase
     assert_raises ArgumentError do
       @conference.save
     end
-
-    @conference = create(:conference_with_recordings)
-    @conference.logo = "../etc/passwd"
-    refute @conference.save
   end
 
 
