@@ -29,6 +29,8 @@ And another one for devise:
     cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
     rake secret
 
+This changed
+
 ### Database Creation
 
 Setup your database in config/database.yml needed.
@@ -37,7 +39,7 @@ Setup your database in config/database.yml needed.
 
 ### Services (job queues, cache servers, search engines, etc.)
 
-    bin/delayed_job start
+    sidekiq
 
 ### Start a Server
 
