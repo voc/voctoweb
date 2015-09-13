@@ -96,8 +96,8 @@ class Event < ActiveRecord::Base
   end
 
   def download_images(thumb_url, poster_url)
-    self.download_image(thumb_url, thumb_filename)
-    self.download_image(poster_url, poster_filename)
+    download_image(thumb_url, thumb_filename)
+    download_image(poster_url, poster_filename)
   end
 
   def display_name
@@ -124,7 +124,7 @@ class Event < ActiveRecord::Base
 
   def download_image(url, filename)
     return if url.nil? or filename.nil?
-    DownloadWorker.perform_later(conference.get_images_path, filename, url)
+    DownloadWorker.perform_async(conference.get_images_path, filename, url)
   end
 
   def get_image_filename(url)

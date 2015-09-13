@@ -55,7 +55,7 @@ ActiveAdmin.register Recording do
     f.inputs "Storage" do
       f.input :folder, hint: recording.try(:conference).try(:get_recordings_path)
       f.input :filename, hint: recording.try(:get_recording_dir)
-      f.input :state, collection: Recording.state_machines[:state].states.map(&:name)
+      f.input :state, collection: Recording.aasm.states.map(&:name)
     end
     f.actions
   end

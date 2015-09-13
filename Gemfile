@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'activeadmin', github: 'activeadmin'
-gem 'devise'
-# act as state machine
-gem 'state_machine', github: 'manno/state_machine'
+gem 'devise', '~> 3.4.0'
+gem 'aasm'
 gem 'sidekiq'
 
 # rails cache

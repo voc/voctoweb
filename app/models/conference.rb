@@ -1,6 +1,7 @@
 class Conference < ActiveRecord::Base
   include Recent
   include Storage
+  include AASM
 
   ASPECT_RATIO = [ '4:3', '16:9' ]
 
@@ -23,44 +24,34 @@ class Conference < ActiveRecord::Base
     url: MediaBackend::Application.config.cdnURL,
     url_path: MediaBackend::Application.config.folders[:recordings_webroot]
 
-  state_machine :schedule_state, :initial => :not_present do
-
-    after_transition any => :new do |conference, transition|
-      conference.start_download
-    end
-
-    after_transition any => :downloading do |conference, transition|
-      conference.download!
-    end
-
-    state :not_present
+  aasm column: :schedule_state do
+    state :not_present, initial: true
     state :new
     state :downloading
     state :downloaded
 
     event :url_changed do
-      transition all => :new
+      after do
+        start_download
+      end
+      transitions to: :new
     end
 
     event :start_download do
-      transition [:new] => :downloading
+      after do
+        download!
+      end
+      transitions from: :new, to: :downloading
     end
 
     event :finish_download do
-      transition [:downloading] => :downloaded
+      transitions from: :downloading, to: :downloaded
     end
-
   end
 
   def download!
     return unless self.schedule_url
-    self.schedule_xml = download(self.schedule_url)
-    if self.schedule_xml.nil?
-      self.schedule_state = :new
-    else
-      self.finish_download
-    end
-    self.save
+    ScheduleDownloadWorker.perform_async(self.id)
   end
 
   def self.run_compile_job

@@ -1,6 +1,7 @@
 class Recording < ActiveRecord::Base
   include Recent
   include Storage
+  include AASM
 
   belongs_to :event
   has_one :conference, through: :event
@@ -18,52 +19,36 @@ class Recording < ActiveRecord::Base
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
-  state_machine :state, :initial => :new do
-
-    after_transition any => :downloading do |recording, transition|
-      recording.download!
-    end
-
-    after_transition any => :downloaded do |recording, transition|
-      recording.move_files!
-    end
-
-    state :new
+  aasm column: :state do
+    state :new, initial: true
     state :downloading
     state :downloaded
 
     event :download_failed do
-      transition all => :new
+      transitions to: :new
     end
 
     event :start_download do
-      transition all => :downloading
+      after do
+        download!
+      end
+      transitions to: :downloading
     end
 
     event :finish_download do
-      transition [:downloading] => :downloaded
+      after do
+        recording.move_files!
+      end
+      transitions from: :downloading, to: :downloaded
     end
-
   end
 
   def download!
-    path = get_tmp_path
-    result = download_to_file(self.original_url, path)
-    if result and File.readable? path and File.size(path) > 0
-      self.finish_download
-    else
-      self.download_failed
-    end
+    VideoDownloadWorker.perform_async(self.id)
   end
 
   def move_files!
-    tmp_path = get_tmp_path
-    create_recording_dir
-    FileUtils.move tmp_path, get_recording_path
-  end
-
-  def create_recording_dir
-    FileUtils.mkdir_p get_recording_dir
+    VideoMoveWorker.perform_async(self.id)
   end
 
   def display_name
