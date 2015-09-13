@@ -106,7 +106,7 @@ ActiveAdmin.register Event do
   end
 
   batch_action :update_event_infos do |selection|
-    Event.delay.bulk_update_events(selection)
+    EventUpdateWorker.perform_later(selection)
     redirect_to :action => :index
   end
 

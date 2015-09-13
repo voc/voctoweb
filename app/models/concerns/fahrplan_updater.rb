@@ -19,28 +19,4 @@ module FahrplanUpdater
     self.update_attributes info
   end
 
-  module ClassMethods
-    include FahrplanParser
-
-    # bulk update several events using the saved schedule.xml files
-    def bulk_update_events(selection)
-      Rails.logger.info "Bulk updating events from XML"
-      fahrplans = {}
-      ActiveRecord::Base.transaction do
-        Event.where(id: selection).each do |event|
-          conference = event.conference
-          if fahrplans[conference.acronym]
-            fahrplan = fahrplans[conference.acronym]
-          else
-            fahrplan = FahrplanParser.new(conference.schedule_xml)
-            fahrplans[conference.acronym] = fahrplan
-          end
-
-          info = fahrplan.event_info_by_guid[event.guid]
-          event.update_event_info(info)
-        end
-      end
-    end
-
-  end
 end

@@ -28,7 +28,7 @@ class Api::EventsController < InheritedResources::Base
 
     respond_to do |format|
       if create_event(params)
-        @event.delay.download_images(params[:thumb_url], params[:poster_url])
+        @event.download_images(params[:thumb_url], params[:poster_url])
         format.json { render json: @event, status: :created }
       else
         Rails.logger.info("JSON: failed to create event: #{@event.errors.inspect}")
@@ -41,7 +41,7 @@ class Api::EventsController < InheritedResources::Base
     event = Event.find_by guid: params[:guid]
     respond_to do |format|
       if event.present?
-        event.delay.download_images(params[:thumb_url], params[:poster_url])
+        event.download_images(params[:thumb_url], params[:poster_url])
         format.json { render json: event, status: :ok }
       else
         Rails.logger.info("JSON: failed to download event: #{params.inspect}")

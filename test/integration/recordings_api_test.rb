@@ -7,7 +7,6 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
   setup do
     @key = create(:api_key)
     @event = create(:event)
-    Delayed::Worker.delay_jobs = false
     @file = create_test_file FILE
     @json = get_json
 

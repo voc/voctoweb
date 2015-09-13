@@ -1,6 +1,5 @@
 class Recording < ActiveRecord::Base
   include Recent
-  include Download
   include Storage
 
   belongs_to :event
@@ -56,14 +55,12 @@ class Recording < ActiveRecord::Base
       self.download_failed
     end
   end
-  handle_asynchronously :download!
 
   def move_files!
     tmp_path = get_tmp_path
     create_recording_dir
     FileUtils.move tmp_path, get_recording_path
   end
-  handle_asynchronously :move_files!
 
   def create_recording_dir
     FileUtils.mkdir_p get_recording_dir

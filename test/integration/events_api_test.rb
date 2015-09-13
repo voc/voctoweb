@@ -6,7 +6,6 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     @key = create(:api_key)
     @conference = create(:conference)
     @json = get_json
-    Delayed::Worker.delay_jobs = false
     FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:images_base_dir], @conference.images_path)
     FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:recordings_base_dir], @conference.recordings_path)
   end

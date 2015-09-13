@@ -1,7 +1,6 @@
 class Event < ActiveRecord::Base
   include Recent
   include FahrplanUpdater
-  include Download
   include Storage
 
   MAX_PROMOTED = 10
@@ -97,15 +96,8 @@ class Event < ActiveRecord::Base
   end
 
   def download_images(thumb_url, poster_url)
-    FileUtils.mkdir_p self.conference.get_images_path
-    self.delay.download_image(thumb_url, thumb_filename)
-    self.delay.download_image(poster_url, poster_filename)
-  end
-
-  def download_image(url, filename)
-    return if url.nil? or filename.nil?
-    path = File.join self.conference.get_images_path, filename
-    download_to_file(url, path)
+    self.download_image(thumb_url, thumb_filename)
+    self.download_image(poster_url, poster_filename)
   end
 
   def display_name
@@ -129,6 +121,11 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+  def download_image(url, filename)
+    return if url.nil? or filename.nil?
+    DownloadWorker.perform_later(conference.get_images_path, filename, url)
+  end
 
   def get_image_filename(url)
     if url

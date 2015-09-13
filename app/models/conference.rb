@@ -1,6 +1,5 @@
 class Conference < ActiveRecord::Base
   include Recent
-  include Download
   include Storage
 
   ASPECT_RATIO = [ '4:3', '16:9' ]
@@ -63,7 +62,6 @@ class Conference < ActiveRecord::Base
     end
     self.save
   end
-  handle_asynchronously :download!
 
   def self.run_compile_job
     Rails.logger.info "Compiling static website"

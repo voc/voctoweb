@@ -74,12 +74,12 @@ ActiveAdmin.register Conference do
   end
 
   collection_action :run_compile, method: :post do
-    Conference.delay.run_compile_job
+    Conference.run_compile_job
     redirect_to action: :index
   end
 
   collection_action :run_fast_compile, method: :post do
-    Conference.delay.run_fast_compile_job
+    Conference.run_fast_compile_job
     redirect_to action: :index
   end
 
