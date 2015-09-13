@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111120848) do
+ActiveRecord::Schema.define(version: 20150913230424) do
 
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace",     limit: 255
     t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
+    t.string   "resource_id",   limit: 255, null: false
+    t.string   "resource_type", limit: 255, null: false
     t.integer  "author_id"
-    t.string   "author_type"
+    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,17 +28,17 @@ ActiveRecord::Schema.define(version: 20141111120848) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
-  create_table "admin_users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,97 +46,81 @@ ActiveRecord::Schema.define(version: 20141111120848) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
-  create_table "api_keys", force: true do |t|
-    t.string   "key"
-    t.string   "description"
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "key",         limit: 255
+    t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "conferences", force: true do |t|
-    t.string   "acronym"
-    t.string   "recordings_path"
-    t.string   "images_path"
-    t.string   "webgen_location"
-    t.string   "aspect_ratio"
+  create_table "conferences", force: :cascade do |t|
+    t.string   "acronym",         limit: 255
+    t.string   "recordings_path", limit: 255
+    t.string   "images_path",     limit: 255
+    t.string   "webgen_location", limit: 255
+    t.string   "aspect_ratio",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
-    t.string   "schedule_url"
+    t.string   "title",           limit: 255
+    t.string   "schedule_url",    limit: 255
     t.text     "schedule_xml",    limit: 10485760
-    t.string   "schedule_state",                   default: "not_present", null: false
-    t.string   "logo"
+    t.string   "schedule_state",  limit: 255,      default: "not_present", null: false
+    t.string   "logo",            limit: 255
   end
 
   add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
-
-  create_table "events", force: true do |t|
-    t.string   "guid"
-    t.string   "poster_filename"
+  create_table "events", force: :cascade do |t|
+    t.string   "guid",            limit: 255
+    t.string   "poster_filename", limit: 255
     t.integer  "conference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
-    t.string   "thumb_filename"
+    t.string   "title",           limit: 255
+    t.string   "thumb_filename",  limit: 255
     t.datetime "date"
     t.text     "description"
-    t.string   "link"
+    t.string   "link",            limit: 255
     t.text     "persons"
-    t.string   "slug"
-    t.string   "subtitle"
+    t.string   "slug",            limit: 255
+    t.string   "subtitle",        limit: 255
     t.text     "tags"
     t.date     "release_date"
     t.boolean  "promoted"
-    t.integer  "view_count",      default: 0
+    t.integer  "view_count",                  default: 0
   end
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
   add_index "events", ["guid"], name: "index_events_on_guid"
   add_index "events", ["title"], name: "index_events_on_title"
 
-  create_table "import_templates", force: true do |t|
-    t.string   "acronym"
-    t.string   "title"
-    t.string   "logo"
-    t.string   "webgen_location"
-    t.string   "aspect_ratio"
-    t.string   "recordings_path"
-    t.string   "images_path"
+  create_table "import_templates", force: :cascade do |t|
+    t.string   "acronym",         limit: 255
+    t.string   "title",           limit: 255
+    t.string   "logo",            limit: 255
+    t.string   "webgen_location", limit: 255
+    t.string   "aspect_ratio",    limit: 255
+    t.string   "recordings_path", limit: 255
+    t.string   "images_path",     limit: 255
     t.date     "date"
     t.date     "release_date"
-    t.string   "mime_type"
-    t.string   "folder"
+    t.string   "mime_type",       limit: 255
+    t.string   "folder",          limit: 255
     t.integer  "width"
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "news", force: true do |t|
-    t.string   "title"
+  create_table "news", force: :cascade do |t|
+    t.string   "title",      limit: 255
     t.text     "body"
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "recording_views", force: true do |t|
+  create_table "recording_views", force: :cascade do |t|
     t.integer  "recording_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -144,17 +128,17 @@ ActiveRecord::Schema.define(version: 20141111120848) do
 
   add_index "recording_views", ["recording_id"], name: "index_recording_views_on_recording_id"
 
-  create_table "recordings", force: true do |t|
+  create_table "recordings", force: :cascade do |t|
     t.integer  "size"
     t.integer  "length"
-    t.string   "mime_type"
+    t.string   "mime_type",    limit: 255
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "filename"
-    t.string   "original_url"
-    t.string   "state",        default: "new", null: false
-    t.string   "folder"
+    t.string   "filename",     limit: 255
+    t.string   "original_url", limit: 255
+    t.string   "state",        limit: 255, default: "new", null: false
+    t.string   "folder",       limit: 255
     t.integer  "width"
     t.integer  "height"
   end
