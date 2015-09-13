@@ -4,21 +4,31 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 # act as state machine
 gem 'state_machine', github: 'manno/state_machine'
-gem 'delayed_job_active_record'
-gem 'daemons'
-gem "factory_girl_rails", "~> 4.0"
+gem 'sidekiq'
+
+# rails cache
+gem 'redis-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
 # Bundle puma application server
 gem 'puma'
 
 gem "dotenv-rails"
 
+group :development do
+  gem 'capistrano', '~> 3.4.0', group: :capistrano, require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+end
+
+
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-gem 'pg'
+gem 'sqlite3', group: :sqlite3
+gem 'pg', group: :postgresql
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -47,14 +57,14 @@ gem 'rack-cors', :require => 'rack/cors'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+  gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 end
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
-group :development do
-  gem 'quiet_assets'
-  gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
+group :test do
+  gem "factory_girl_rails", "~> 4.0"
 end
-
