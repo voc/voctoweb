@@ -7,9 +7,9 @@ class ScheduleDownloadWorker
     conference.schedule_xml = download(conference.schedule_url)
     if conference.schedule_xml.nil?
       conference.schedule_state = :new
+      conference.save
     else
-      conference.finish_download
+      conference.finish_download!
     end
-    conference.save
   end
 end

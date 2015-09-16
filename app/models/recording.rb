@@ -28,17 +28,11 @@ class Recording < ActiveRecord::Base
       transitions to: :new
     end
 
-    event :start_download do
-      after do
-        download!
-      end
+    event :start_download, after: :download! do
       transitions to: :downloading
     end
 
-    event :finish_download do
-      after do
-        recording.move_files!
-      end
+    event :finish_download, after: :move_files! do
       transitions from: :downloading, to: :downloaded
     end
   end

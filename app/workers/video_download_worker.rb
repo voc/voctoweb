@@ -8,9 +8,9 @@ class VideoDownloadWorker
     path = get_tmp_path(recording.filename)
     result = download_to_file(recording.original_url, path)
     if result and File.readable? path and File.size(path) > 0
-      recording.finish_download
+      recording.finish_download!
     else
-      recording.download_failed
+      recording.download_failed!
     end
   end
 

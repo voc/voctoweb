@@ -34,6 +34,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
   end
 
   test "should call start_download after create" do
+    Sidekiq::Testing.inline!
     post_json '/api/recordings.json', @json
     event = Event.find_by guid: @event.guid
     assert_not_nil event

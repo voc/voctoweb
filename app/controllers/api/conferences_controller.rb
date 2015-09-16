@@ -9,7 +9,7 @@ class Api::ConferencesController < InheritedResources::Base
 
     respond_to do |format|
       if not @conference.schedule_url.nil? and @conference.valid? and @conference.validate_for_api and @conference.save
-        @conference.url_changed
+        @conference.url_changed!
         format.json { render json: @conference, status: :created }
       else
         Rails.logger.info("JSON: failed to create conference: #{@conference.errors.inspect}")

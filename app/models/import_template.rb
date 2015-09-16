@@ -8,13 +8,13 @@ class ImportTemplate < ActiveRecord::Base
   validates_uniqueness_of :acronym
   validates_uniqueness_of :webgen_location
 
-  has_attached_directory :images, 
+  has_attached_directory :images,
     via: :images_path,
     prefix: MediaBackend::Application.config.folders[:images_base_dir],
     url: MediaBackend::Application.config.staticURL,
     url_path: MediaBackend::Application.config.folders[:images_webroot]
 
-  has_attached_directory :recordings, 
+  has_attached_directory :recordings,
     via: :recordings_path,
     prefix: MediaBackend::Application.config.folders[:recordings_base_dir],
     url: MediaBackend::Application.config.cdnURL,

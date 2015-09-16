@@ -6,7 +6,7 @@ class VideoMoveWorker
     recording = Recording.find(recording_id)
 
     tmp_path = get_tmp_path(recording.filename)
-    create_recording_dir
+    create_recording_dir(recording)
     FileUtils.move tmp_path, recording.get_recording_path
   end
 

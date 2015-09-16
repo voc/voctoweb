@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'sidekiq/testing'
 
 class ActionController::TestCase
   include Devise::TestHelpers
@@ -11,7 +12,9 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def run_background_jobs_immediately
-    yield
+    Sidekiq::Testing.inline! do
+      yield
+    end
   end
 
   def post_json(action, json)

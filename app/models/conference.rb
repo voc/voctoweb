@@ -30,17 +30,11 @@ class Conference < ActiveRecord::Base
     state :downloading
     state :downloaded
 
-    event :url_changed do
-      after do
-        start_download
-      end
+    event :url_changed, after: :start_download! do
       transitions to: :new
     end
 
-    event :start_download do
-      after do
-        download!
-      end
+    event :start_download, after: :download! do
       transitions from: :new, to: :downloading
     end
 
