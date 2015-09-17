@@ -1,13 +1,13 @@
 !!! 5
 %html{lang: 'en'}
   %head
-    = render '/partials/header'
+    = render 'frontend/shared/header'
     %title
       C3TV -
       = h @item[:title]
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
   %body
-    = render '/partials/navbar'
+    = render 'frontend/shared/navbar'
 
     %div.container-fluid
 
@@ -27,6 +27,6 @@
           
       .tab-content
         #download.tab-pane.active{style: 'display: block'}
-          = render '/partials/download'
+          = render 'frontend/shared/download'
 
-    = render '/partials/footer'
+    = render 'frontend/shared/footer'

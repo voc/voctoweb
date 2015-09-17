@@ -1,13 +1,13 @@
 !!! 5
 %html{lang: 'en'}
   %head
-    = render '/partials/header'
+    = render 'frontend/shared/header'
     %title
       C3TV -
       = h @item[:title]
-    = render '/partials/folder-feeds'
+    = render 'frontend/shared/folder-feeds'
   %body
-    = render '/partials/navbar'
+    = render 'frontend/shared/navbar'
 
     .container-fluid
 
@@ -47,4 +47,4 @@
 
       = yield
 
-    = render '/partials/footer'
+    = render 'frontend/shared/footer'

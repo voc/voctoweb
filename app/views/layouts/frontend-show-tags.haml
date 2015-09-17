@@ -1,12 +1,12 @@
 !!! 5
 %html{lang: 'en'}
   %head
-    = render '/partials/header'
+    = render 'frontend/shared/header'
     %title
       C3TV -
       = h @item[:title]
   %body
-    = render '/partials/navbar'
+    = render 'frontend/shared/navbar'
     
     %div.container-fluid
       %h1 Events for tag "#{@item[:title]}"
@@ -35,4 +35,4 @@
 
       = yield
 
-    = render '/partials/footer'
+    = render 'frontend/shared/footer'

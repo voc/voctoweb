@@ -7,10 +7,10 @@
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
   %body
     %div.container-fluid
-      = render '/partials/videoplayer'
+      = render 'frontend/shared/videoplayer'
 
     %script(src='/assets/js/jquery.min.js')
     %script(src='/assets/js/bootstrap.min.js')
     %script(src='/assets/js/mediaelement-and-player.min.js')
 
-    = render '/partials/videoplayer_js'
+    = render 'frontend/shared/videoplayer_js'

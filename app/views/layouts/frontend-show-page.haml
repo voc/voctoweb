@@ -1,16 +1,16 @@
 !!! 5
 %html{lang: 'en'}
   %head
-    = render '/partials/header'
+    = render 'frontend/shared/header'
     %title
       C3TV -
       = h @item[:title]
-    = render '/partials/folder-feeds'
+    = render 'frontend/shared/folder-feeds'
     %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
     != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
   %body
     %script(src='/assets/js/jquery.min.js')
-    = render '/partials/navbar'
+    = render 'frontend/shared/navbar'
 
     %div.container-fluid
       %h1
@@ -48,7 +48,7 @@
       .tab-content
         - if @item[:video_recordings].present?
           #video.tab-pane.active
-            = render '/partials/videoplayer'
+            = render 'frontend/shared/videoplayer'
 
         - if @item[:audio_recordings].present?
           #audio.tab-pane
@@ -57,10 +57,10 @@
                 %source{type: recording.display_mime_type, src: h(recording.url)}
 
         #download.tab-pane
-          = render '/partials/download'
+          = render 'frontend/shared/download'
 
         #embedshare.tab-pane
-          = render '/partials/embedshare'
+          = render 'frontend/shared/embedshare'
 
       %ul.metadata
         %li
@@ -89,12 +89,12 @@
 
 
 
-    = render '/partials/footer'
+    = render 'frontend/shared/footer'
 
     %script(src='/assets/js/bootstrap.min.js')
     %script(src='/assets/js/mediaelement-and-player.min.js')
 
-    = render '/partials/videoplayer_js'
+    = render 'frontend/shared/videoplayer_js'
 
     :javascript
 
