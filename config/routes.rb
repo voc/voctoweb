@@ -5,9 +5,9 @@ MediaBackend::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'admin/dashboard#index'
+  #root 'admin/dashboard#index'
 
-  # JSON API
+  # VOC JSON API
   namespace :api do
     resources :conferences, :defaults => { :format => 'json' } do
       collection do
@@ -29,6 +29,7 @@ MediaBackend::Application.routes.draw do
     resources :news, :defaults => { :format => 'json' }
   end
 
+  # PUBLIC JSON API
   namespace :public do
     get :index, defaults: { format: 'json' }, only: :index
     get :oembed, only: :oembed
@@ -41,6 +42,12 @@ MediaBackend::Application.routes.draw do
         post 'count'
       end
     end
+  end
+
+  # FRONTEND
+  scope module: 'frontend' do
+    root to: 'news#index'
+    resources :home, :comments
   end
 
 end

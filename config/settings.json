@@ -1,0 +1,22 @@
+{
+  "baseURL": "http://media.ccc.de",
+  "oembedURL": "http://api.media.ccc.de/public/oembed?url=http://media.ccc.de",
+  "cdnURL": "http://cdn.media.ccc.de",
+  "staticURL": "http://static.media.ccc.de",
+  "header": {
+    "description": "Video Streaming Portal des Chaos Computer Clubs",
+    "author": "CCC",
+    "google": "2ozQIr-cQ-sJzGeJT_iTkS147fs3c5R3I1i6Dk_YLwA",
+    "keywords": "Chaos Computer Club, Video, Media, Streaming, TV, Hacker"
+  },
+  "feeds": {
+    "base_url": "//media.ccc.de/",
+    "channel_title": "Chaos Computer Club",
+    "channel_subtitle": "A wide variety of video material distributed by the CCC. All content is taken from cdn.media.ccc.de and media.ccc.de",
+    "channel_description": "Der Chaos Computer Club ist die größte europäische Hackervereinigung, und seit über 25 Jahren Vermittler im Spannungsfeld technischer und sozialer Entwicklungen.",
+    "channel_summary": "A wide variety of video material distributed by the Chaos Computer Club.",
+    "channel_owner": "CCC media team",
+    "logo_image": "//media.ccc.de/images/miro-banner.png",
+    "channel_keywords": "CCC Congress Hacking Security Netzpolitik"
+  }
+}

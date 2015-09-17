@@ -1,0 +1,16 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %title
+      C3TV -
+      = h @item[:title]
+    %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+  %body
+    %div.container-fluid
+      = render '/partials/videoplayer'
+
+    %script(src='/assets/js/jquery.min.js')
+    %script(src='/assets/js/bootstrap.min.js')
+    %script(src='/assets/js/mediaelement-and-player.min.js')
+
+    = render '/partials/videoplayer_js'

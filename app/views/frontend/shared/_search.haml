@@ -1,0 +1,64 @@
+.search.container-fluid{"data-titletpl" => '"#" - Search - media.ccc.de'}
+  %form.initial{role: 'search'}
+    %h1{"data-resulttpl" => 'Search for "#"'}
+      = @title
+
+    %input.form-control.text{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
+    %span.input-group-btn
+      %button.btn.btn-default.submit{type: 'submit'}
+        %span.fa.fa-search
+
+  %section.results.initial
+    .statistics
+      Results
+      %span.start #
+
+      to
+      %span.end #
+
+      of
+      %span.total #
+
+      Results (in
+      %span.runtime #
+      ms)
+
+    %ol.event-previews-search
+      %li.no-results
+        Unfortunately your search did not return any results. Maybe you can find what you're looking for by
+        %a{href: '/tags/'} browsing the tags
+        or
+        %a{href: '/browse/'} by category.
+      %li.template
+        .event-preview
+          %a.conference-url{href: '#event.url'}
+            %img.conference-logo{src: '#event.conference.logo_url', alt: '#event.conference.title'}
+          .caption
+            %ul.metadata
+              %li.recording_length
+                %span.fa.fa-clock-o
+                %span.t= 'recording_length(event.recordings.downloaded)'
+              %li.date
+                %span.fa.fa-calendar-o
+                %span.t= 'date(event)'
+              %li.persons
+                %span.persons.fa
+                %span.t= 'event.persons_text'
+            %h3
+              %a.conference-url{href: '#event.url'}
+                %span.number
+                %span.t= 'event.title'
+
+    %ul.paging
+      %li.prev
+        %a.fa.fa-chevron-left{:href => ""}
+      %li.prefix M
+
+      %li.page.template
+        %a{:href => "#"}
+          .letter e
+          .number 1
+
+      %li.postfix dia.ccc.de
+      %li.next
+        %a.fa.fa-chevron-right{:href => ""}

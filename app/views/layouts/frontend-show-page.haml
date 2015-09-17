@@ -1,0 +1,129 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    = render '/partials/header'
+    %title
+      C3TV -
+      = h @item[:title]
+    = render '/partials/folder-feeds'
+    %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+    != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
+  %body
+    %script(src='/assets/js/jquery.min.js')
+    = render '/partials/navbar'
+
+    %div.container-fluid
+      %h1
+        =  h @item[:event].title
+      - if @item[:event].subtitle
+        %h2
+          = h @item[:event].subtitle
+
+      %p.persons
+        %span.fa{class: @item[:event].persons_icon}
+          - @item[:event].persons.to_enum.with_index(1).each do |speaker, index|
+            - if (@item[:event].persons.count - 1) == index
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+              and
+            - elsif @item[:event].persons.count == index 
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+            - else
+              %a{href: '/search/?q=' + h(speaker)}= speaker
+              \, 
+
+
+      %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
+        - if @item[:video_recordings].present?
+          %li
+            %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+        - if @item[:audio_recordings].present?
+          %li
+            %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
+        %li
+          %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+
+        %li
+          %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
+
+      .tab-content
+        - if @item[:video_recordings].present?
+          #video.tab-pane.active
+            = render '/partials/videoplayer'
+
+        - if @item[:audio_recordings].present?
+          #audio.tab-pane
+            %audio.audio{controls: 'controls'}
+              - @item[:audio_recordings].each do |recording|
+                %source{type: recording.display_mime_type, src: h(recording.url)}
+
+        #download.tab-pane
+          = render '/partials/download'
+
+        #embedshare.tab-pane
+          = render '/partials/embedshare'
+
+      %ul.metadata
+        %li
+          %span.fa.fa-clock-o
+          = recording_length(@item[:event].recordings.downloaded)
+        %li
+          %span.fa.fa-calendar-o
+          = date(@item[:event])
+        %li
+          %span.fa.fa-eye
+          = @item[:event].view_count
+        %li
+          %span.fa.fa-external-link
+          %a{href: @item[:event].link}
+            = parse_url_host(@item[:event])
+
+      - if @item[:event].description.present?
+        %h3 About
+        %p.description
+          = @item[:event].description
+
+      - if @item[:event].tags.present?
+        %h3 Tags
+        - @item[:event].tags.each do |tag|
+          = link_for(tag)
+
+
+
+    = render '/partials/footer'
+
+    %script(src='/assets/js/bootstrap.min.js')
+    %script(src='/assets/js/mediaelement-and-player.min.js')
+
+    = render '/partials/videoplayer_js'
+
+    :javascript
+
+      $('audio').mediaelementplayer();
+
+      // activate tab via hash and default to video
+      function setTabToHash() {
+        var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
+        var activeTab = $('.nav-tabs a[href=' + hash + '], .nav-tabs a[data-target=' + hash + ']')
+          .tab('show');
+
+        if (activeTab.length === 0) {
+          var hash = '#video';
+          if(window.history && window.history.replaceState) {
+            // set new hash without adding an entry into the browser history
+            window.history.replaceState(null, "", hash);
+          }
+          else {
+            // classic fallback
+            window.location.hash = hash;
+          }
+        }
+      }
+      setTabToHash();
+
+      // change hash on tab change
+      $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+      });
+
+      // adjust tabs when hash changes
+      window.onhashchange = setTabToHash;

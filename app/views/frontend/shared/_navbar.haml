@@ -1,0 +1,43 @@
+%div.navbar.navbar-default.navbar-fixed-top(role="navigation")
+  %div.container-fluid
+    %div.navbar-header
+      %a.navbar-brand(href='/index.html')
+        %img{src: '/images/tv.png', alt: 'ccc-tv logo, a tv displaying a play icon'}
+        ccc-tv
+
+    .nav.navbar-form.navbar-right.button-wrapper
+      - if @item[:conference] and Recording.recorded_at(@item[:conference]).count > 0
+        - path = '../' if @item.identifier.match %r[(?:date|duration|name)/$]
+        %a.form-control.btn.btn-default{href: "#{path}podcast-#{@item[:conference].preferred_mime_type}.xml"}
+          %span.fa.fa-rss
+        %a.form-control.btn.btn-default{href: "#{path}broadcatching-#{@item[:conference].preferred_mime_type}.rss"}
+          %span.fa.fa-magnet
+      - else
+        %a.form-control.btn.btn-default{href: '/podcast.xml'}
+          %span.fa.fa-rss
+
+          %span.fa.fa-magnet
+      %a.form-control.btn.btn-default{href: '/about.html'}
+        %span.fa.fa-info
+    %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
+      %div.form-group.input-group
+        %input.form-control{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
+        %span.input-group-btn
+          %button.btn.btn-default{type: 'submit'}
+            %span.fa.fa-search
+
+- event_page_or_folder(@item) do |trail|
+  #breadcrumb
+    %ol.container-fluid.breadcrumb
+      - trail[1..-2].each_with_index do |item, i|
+        %li
+          %a.inverted{href: item.identifier}
+            = item.identifier.sub(trail[i].identifier, '').gsub('/','').gsub(/[\-_]/,' ')
+      %li.active
+        - if @item[:sorting] == '' || @item[:sorting] == nil
+          - if trail[-1][:event].present?
+            = trail[-1][:title]
+          - else
+            = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
+        - else
+          = "sorted by #{trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')}"

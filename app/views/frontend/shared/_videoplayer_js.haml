@@ -1,0 +1,30 @@
+:javascript
+  var stamp = window.location.hash.split('&t=')[1];
+  $('video').mediaelementplayer({
+    usePluginFullScreen: true,
+
+    pluginPath: '/assets/',
+    enableAutosize: true,
+    success: function (mediaElement) {
+      mediaElement.addEventListener('canplay', function () {
+        if(stamp) {
+          mediaElement.setCurrentTime(stamp);
+          stamp = null;
+        }
+      });
+      mediaElement.addEventListener('playing', function () {
+        $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@item[:event].id},src: mediaElement.src});
+      }, false);
+      mediaElement.addEventListener('pause', function() {
+        var hash = '#video&t='+Math.round(mediaElement.currentTime);;
+        if(window.history && window.history.replaceState) {
+          // set new hash without adding an entry into the browser history
+          window.history.replaceState(null, "", hash);
+        }
+        else {
+          // classic fallback
+          window.location.hash = hash;
+        }
+      }, false);
+    }
+  });

@@ -1,0 +1,30 @@
+- if @item[:video_recordings].present?
+  %h3 Video
+  %ul
+    - video_download_sources(@item[:video_recordings]).each do |recording|
+      %li
+        %span.label.filetype= recording.filetype
+        %a{href: recording.url, download: true}
+          %span.fa.fa-download
+          http download
+        %a{href: recording.torrent_url, download: true}
+          %span.fa.fa-download
+          torrent
+
+- if @item[:audio_recordings].present?
+  %h3 Audio
+  %ul
+    - @item[:audio_recordings].each do |recording|
+      %li
+        .label.filetype= recording.filetype
+        %a{href: recording.url, download: true}
+          %span.fa.fa-download
+          http download
+        %a{href: recording.torrent_url, download: true}
+          %span.fa.fa-download
+          torrent
+
+%h3 Parent directory
+%a{href: @item[:conference].recordings_url}
+  %span.fa.fa-folder-open
+  = @item[:conference].recordings_path

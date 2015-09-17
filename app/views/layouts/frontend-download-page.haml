@@ -1,0 +1,32 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    = render '/partials/header'
+    %title
+      C3TV -
+      = h @item[:title]
+    %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+  %body
+    = render '/partials/navbar'
+
+    %div.container-fluid
+
+      %h1
+        =  h @item[:event].title
+      - if @item[:event].subtitle
+        %h2
+          = h @item[:event].subtitle
+      
+      %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+        %li
+          %a{href: @item[:event].url+'#video', role: 'tab'} Video
+        %li 
+          %a{href: @item[:event].url+'#audio', role: 'tab'} Audio
+        %li.active
+          %a{href: '#download', role: 'tab'} Download
+          
+      .tab-content
+        #download.tab-pane.active{style: 'display: block'}
+          = render '/partials/download'
+
+    = render '/partials/footer'

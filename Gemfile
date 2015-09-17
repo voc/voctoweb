@@ -24,6 +24,7 @@ group :development do
   gem 'capistrano3-puma',   require: false
 end
 
+gem 'haml'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :sqlite3

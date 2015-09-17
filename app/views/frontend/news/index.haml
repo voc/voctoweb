@@ -1,0 +1,24 @@
+- content_for :title do
+  'home'
+
+= render 'frontend/shared/_promoted'
+
+%div.container-fluid
+  .row.browse-button-bar
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/tags'}
+      %span.fa.fa-tags
+      Browse by tag
+
+    %a.btn.btn-primary.btn-lg{role: 'button', href: '/browse'}
+      %span.fa.fa-th
+      Browse by category
+
+  %h1 News
+
+  - News.recent(10).each do |news|
+    %article.news-item
+      %h2
+        %span.date= news.date_formatted
+        = news.title
+      =news.body
+
