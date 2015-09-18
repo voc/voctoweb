@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   include Recent
   include FahrplanUpdater
   include Storage
+  include EventFrontend
 
   MAX_PROMOTED = 10
 

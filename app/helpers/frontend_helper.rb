@@ -1,6 +1,10 @@
 module FrontendHelper
   require 'uri'
 
+  def breadcrumbs_trail
+    []
+  end
+
   def twitter_url(title, url)
     "http://twitter.com/home?status="+URI.encode_www_form_component(title+": "+url)
   end
