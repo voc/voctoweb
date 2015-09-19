@@ -15,7 +15,7 @@
 
   %h1 News
 
-  - News.recent(10).each do |news|
+  - @news.each do |news|
     %article.news-item
       %h2
         %span.date= news.date_formatted

@@ -46,8 +46,17 @@ MediaBackend::Application.routes.draw do
 
   # FRONTEND
   scope module: 'frontend' do
-    root to: 'news#index'
-    resources :home, :comments
+    root to: 'home#index'
+    # rss feeds
+    # search
+    # sitemap
+    # tags               # show-tags
+    # about
+    # conference#index   # index
+    # conference#show    # show-folder
+    # event#show         # show-page
+    #                      # download-page
+    #                      # oembed-page
   end
 
 end
