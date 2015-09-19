@@ -1,0 +1,21 @@
+/* font Estrangelo Edessa */
+@font-face {
+  font-family: 'Estrangelo Edessa';
+  src: url('../fonts/estre.eot');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Estrangelo Edessa';
+  src: url('../fonts/estre.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Estrangelo Edessa';
+  src: url('../fonts/estre.ttf') format('truetype'),
+       url('../fonts/estre.woff') format('woff'),
+       url('../fonts/estre.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
