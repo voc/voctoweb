@@ -1,0 +1,23 @@
+- content_for :title
+  = @event.title
+
+- content_for :head
+  %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+
+%h1
+  = h @event.title
+- if @event.subtitle
+  %h2
+    = h @event.subtitle
+
+%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+  %li
+    %a{href: @event.url+'#video', role: 'tab'} Video
+  %li
+    %a{href: @event.url+'#audio', role: 'tab'} Audio
+  %li.active
+    %a{href: '#download', role: 'tab'} Download
+
+.tab-content
+  #download.tab-pane.active{style: 'display: block'}
+    = render 'frontend/shared/download'

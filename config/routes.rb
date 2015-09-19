@@ -47,8 +47,14 @@ MediaBackend::Application.routes.draw do
   # FRONTEND
   scope module: 'frontend' do
     root to: 'home#index'
+    get '/about', to: 'home#about'
+    get '/search', to: 'home#search'
+    get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
+
     get '/browse/(:slug)', to: 'conferences#slug'
-    get '/sitemap.xml', to: 'sitemap#index'
+    get '/browse/:conference_slug/:slug', to: 'events#show'
+    get '/browse/:conference_slug/:slug/oembed', to: 'events#oembed'
+    get '/browse/:conference_slug/:slug/download', to: 'events#download'
     get '/tags', to: 'tags#index'
     get '/tags/:tag', to: 'tags#show'
 

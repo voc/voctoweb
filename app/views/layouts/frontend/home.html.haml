@@ -1,0 +1,19 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    = render 'frontend/partials/header'
+    %title
+      C3TV -
+      = yield :title
+
+    %script(src="/assets/js/jquery.min.js")
+    %script(src="/assets/js/bootstrap.min.js")
+    %script(src="/assets/js/purl.min.js")
+    %script(src="/assets/js/search.js")
+
+  %body
+    = render 'frontend/partials/navbar'
+
+    = yield
+
+    = render 'frontend/partials/footer'

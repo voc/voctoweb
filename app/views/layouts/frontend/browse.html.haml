@@ -1,0 +1,17 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    = render 'frontend/shared/header'
+    %title
+      C3TV -
+      = yield :title
+
+    = yield :head
+
+  %body
+    = render 'frontend/shared/navbar'
+
+    .container-fluid
+      = yield
+
+    = render 'frontend/shared/footer'

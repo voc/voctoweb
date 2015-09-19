@@ -4,13 +4,14 @@
     = render 'frontend/shared/header'
     %title
       C3TV -
-      = h @item[:title]
+      = yield :title
+
   %body
     = render 'frontend/shared/navbar'
-    
+
     %div.container-fluid
       %h1 Events for tag "#{@item[:title]}"
-      
+
       .event-previews-tags
         - if @item[:events].present?
           - @item[:events].each do |event|

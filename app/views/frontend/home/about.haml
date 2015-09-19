@@ -1,0 +1,114 @@
+- content_for :title do
+  about media.ccc.de
+
+%script(src="/assets/js/handlebars.min-latest.js")
+
+%div.container
+
+  %h1 About media.ccc.de
+
+  %p
+    This site offers a wide variety of video and audio material distributed by the Chaos Computer Club provided in native formats (usually MPEG and/or Vorbis families) for online viewing. Older, archived recordings might require propritary players. The media files on this site can also be downloaded for offline consumption.
+
+  %p
+    If you are anyhow related to the Chaos Computer Club and would like us to convert and publish your video material on this website, feel free to contact us.
+
+    Whilst we hope you find the provided video material interesting and informative we can give no assurances or warranty regarding its quality. The opinions expressed in the video material do not necessarily state or reflect those of the Chaos Computer Club.
+
+  %b Contact:
+  %a{href: 'mailto:media@koeln.ccc.de'} media@koeln.ccc.de
+
+  %h2 Licenses
+
+  The license displayed in the actual video file applies. If there is no license encoded in the video file we suggest you ask the
+  organizers of the recordings event.
+
+  %h2 Privacy Policy
+
+  %p
+    While browsing through the website normally we do not save any information wich could be used to identify a person. The log files are anonymized before they are saved and we do not have a de-anonymized version of the them. The anonymized log-files may be used to plot usage statistics.
+
+  The following data is collected and saved for an undefined duration:
+
+  %ul
+    %li Date and time,
+    %li the visited pages,
+    %li status codes the webserver answered with,
+    %li your browser and operating system,
+    %li and the referring URL
+
+  %p
+    If a connection to port 80 fails, an error log will be created. It contains the IP address of the host causing the error and the website containing the faulty hyperlink. This error log will only be used to fix the error and will not be used in any other way.
+
+  %p
+    Video and audio files are often provided by mirrors and are not covered by this policy.
+
+  %h2 cdn.media.ccc.de
+
+  %p
+    :markdown
+      The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
+      If you'd rather use a torrent you can append '.torrent' to any large file, this will provide a torrent with
+      http seeds appropiate for your location.
+
+  %h3 Current Mirrors
+
+  #status
+
+  %h2 Apps
+
+  %ul
+    %li
+      %a{href: 'http://addons.xbmc.org/show/plugin.video.media-ccc-de/'} Kodi/XBMC plugin
+    %li
+      %a{href: 'https://github.com/cccc/MediaCCC.bundle'} Plex plugin (not released yet)
+
+  %h2 Bug reports and feature requests
+  %p
+    Please use the
+    %a{href: 'https://github.com/voc/media-frontend/issues'} issue tracker
+    on github to let us know about errors or ideas to improve
+    %a{href: '//media.ccc.de'} media.ccc.de
+    \. The latest source code version of this platform is also hosted on
+    %a{href: 'https://github.com/voc/media-frontend'} github
+    and ready to expect your pull-requests.
+
+  %h2 Imprint
+
+  %p
+    :markdown
+      Please see [ccc.de](//ccc.de/de/imprint).
+
+  %script#status-template{type: 'text/x-handlebars-template'}
+    <table class="table table-striped table-condensed">
+    <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Last Scan</th>
+    <th>Files</th>
+    </tr>
+    {{#each mirrors}}
+    {{#if this.status_baseurl}}
+    <tr>
+    {{else}}
+    <tr class='warning'>
+    {{/if}}
+    <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
+    <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
+    <td>{{this.last_scan}}</td>
+    <td>{{this.nfiles}}</td>
+    </tr>
+    {{/each}}
+    </table>
+
+  :javascript
+    $(document).ready(function() {
+      var source = $('#status-template').html();
+      var template = Handlebars.compile(source);
+      var target = $('#status');
+      $.get("//api.media.ccc.de/public/mirrors", function(data,status,xhr){
+        var html = template(data);
+        target.html(html);
+      });
+    });
+
