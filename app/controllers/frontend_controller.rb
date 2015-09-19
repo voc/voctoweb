@@ -1,5 +1,5 @@
 class FrontendController < ActionController::Base
-  layout 'frontend/conference'
+  layout 'frontend/browse'
 
   before_action :init_item_crutch
 

@@ -1,11 +1,12 @@
 module Frontend
   class TagsController < FrontendController
-    layout 'frontend/tags'
-
     def index
+      @tag = ''
     end
 
     def show
+      @tag = ''
+      @events = []
     end
   end
 end

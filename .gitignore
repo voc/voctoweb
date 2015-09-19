@@ -19,7 +19,8 @@
 .gemrc
 .ruby-version
 .vagrant/
-tags
+/tags
+/Gemfile.lock.tags
 *.patch
 vendor/gems/
 
