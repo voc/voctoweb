@@ -1,7 +1,7 @@
 !!! 5
 %html{lang: 'en'}
   %head
-    = render 'frontend/partials/header'
+    = render 'frontend/shared/header'
     %title
       C3TV -
       = yield :title
@@ -12,8 +12,8 @@
     %script(src="/assets/js/search.js")
 
   %body
-    = render 'frontend/partials/navbar'
+    = render 'frontend/shared/navbar'
 
     = yield
 
-    = render 'frontend/partials/footer'
+    = render 'frontend/shared/footer'

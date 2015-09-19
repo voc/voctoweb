@@ -1,0 +1,39 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    = render 'frontend/shared/header'
+    %title
+      C3TV -
+      = yield :title
+
+  %body
+    = render 'frontend/shared/navbar'
+
+    %div.container-fluid
+      %h1 Events for tag "#{@tag}"
+
+      .event-previews-tags
+        - if @item[:events].present?
+          - @item[:events].each do |event|
+            - recordings = event.recordings.downloaded
+            .event-preview
+              %a{href: h(event.url)}
+                %img.conference-logo{src: h(event.conference.logo_url), alt: h(event.conference.title)}
+              .caption
+                %ul.metadata
+                  %li
+                    %span.fa.fa-clock-o
+                    = recording_length(recordings)
+                  %li
+                    %span.fa.fa-calendar-o
+                    = date(event)
+                  %li.persons
+                    %span.fa{class: event.persons_icon}
+                    = event.linked_persons_text
+                %h3
+                  %a{href: h(event.url)}
+                    = h event.title
+
+      = yield
+
+    = render 'frontend/shared/footer'
