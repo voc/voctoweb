@@ -8,9 +8,9 @@ class Conference < ActiveRecord::Base
   has_many :events, dependent: :destroy
 
   validates_presence_of :acronym
-  validates_presence_of :webgen_location
+  validates_presence_of :slug
   validates_uniqueness_of :acronym
-  validates_uniqueness_of :webgen_location
+  validates_uniqueness_of :slug
 
   has_attached_directory :images,
     via: :images_path,

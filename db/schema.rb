@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913230424) do
+ActiveRecord::Schema.define(version: 20150919124229) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150913230424) do
     t.string   "acronym",         limit: 255
     t.string   "recordings_path", limit: 255
     t.string   "images_path",     limit: 255
-    t.string   "webgen_location", limit: 255
+    t.string   "slug",            limit: 255,      default: ""
     t.string   "aspect_ratio",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20150913230424) do
     t.string   "acronym",         limit: 255
     t.string   "title",           limit: 255
     t.string   "logo",            limit: 255
-    t.string   "webgen_location", limit: 255
+    t.string   "slug",            limit: 255
     t.string   "aspect_ratio",    limit: 255
     t.string   "recordings_path", limit: 255
     t.string   "images_path",     limit: 255

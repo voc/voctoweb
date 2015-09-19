@@ -3,7 +3,7 @@ class ConferenceImporter
 
     conference = Conference.create acronym: import_template.acronym,
       title: import_template.title,
-      webgen_location: import_template.webgen_location,
+      slug: import_template.slug,
       aspect_ratio: import_template.aspect_ratio,
       recordings_path: import_template.recordings_path,
       images_path: import_template.images_path,

@@ -47,6 +47,8 @@ MediaBackend::Application.routes.draw do
   # FRONTEND
   scope module: 'frontend' do
     root to: 'home#index'
+    get '/browse/:slug', to: 'conferences#slug'
+
     # rss feeds
     # search
     # sitemap

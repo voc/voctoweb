@@ -76,7 +76,7 @@ However folders and access rights need to be setup manually, before you can uplo
         "api_key":"4","acronym":"frab123",
         "recordings_path":"conference/frab123",
         "images_path":"events/frab",
-        "webgen_location":"event/frab/frab123",
+        "slug":"event/frab/frab123",
         "aspect_ratio":"16:9",
         "title":null,
         "schedule_url":"http://progam/schedule.xml"

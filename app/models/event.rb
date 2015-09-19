@@ -26,8 +26,8 @@ class Event < ActiveRecord::Base
       .group(:"events.id")
   }
 
-  scope :by_identifier, ->(webgen_location, slug) {
-    joins(:conference).where(conferences: {webgen_location: webgen_location}, events: {slug: slug}).first
+  scope :by_identifier, ->(conference_slug, slug) {
+    joins(:conference).where(conferences: {conference_slug: conference_slug}, events: {slug: slug}).first
   }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference

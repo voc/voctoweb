@@ -2,11 +2,11 @@ class ImportTemplate < ActiveRecord::Base
   include Storage
 
   validates_presence_of :acronym
-  validates_presence_of :webgen_location, :recordings_path, :images_path, :aspect_ratio, :release_date, :mime_type
+  validates_presence_of :slug, :recordings_path, :images_path, :aspect_ratio, :release_date, :mime_type
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
 
   validates_uniqueness_of :acronym
-  validates_uniqueness_of :webgen_location
+  validates_uniqueness_of :slug
 
   has_attached_directory :images,
     via: :images_path,

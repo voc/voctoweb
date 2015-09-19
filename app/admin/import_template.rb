@@ -9,7 +9,7 @@ ActiveAdmin.register ImportTemplate do
     column :acronym
     column :title
     column :logo
-    column :webgen_location
+    column :slug
     column :aspect_ratio
     column :recordings_path
     column :images_path
@@ -35,7 +35,7 @@ ActiveAdmin.register ImportTemplate do
     attributes_table do
       row :acronym
       row :title
-      row :webgen_location
+      row :slug
       row :aspect_ratio
       row :recordings_path do
         div show_folder label: c.recordings_path, path: c.get_recordings_path
@@ -78,7 +78,7 @@ ActiveAdmin.register ImportTemplate do
       f.input :acronym
       f.input :title
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
-      f.input :webgen_location
+      f.input :slug
     end
 
     f.inputs "Paths" do
@@ -117,7 +117,7 @@ ActiveAdmin.register ImportTemplate do
     link_to 'Import Conference', import_conference_admin_import_template_path(import_template), method: :post
   end
 
-  permit_params :acronym, :title, :aspect_ratio, :webgen_location, :recordings_path, :images_path, :logo, :date, :release_date, :folder, :mime_type, :width, :height
+  permit_params :acronym, :title, :aspect_ratio, :slug, :recordings_path, :images_path, :logo, :date, :release_date, :folder, :mime_type, :width, :height
 
 
 end

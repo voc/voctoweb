@@ -2,7 +2,7 @@ ActiveAdmin.register Conference do
 
   filter :acronym
   filter :title
-  filter :webgen_location
+  filter :slug
   filter :recordings_path
   filter :images_path
   filter :updated_at
@@ -12,7 +12,7 @@ ActiveAdmin.register Conference do
     column :acronym
     column :schedule_state
     column :recordings_path
-    column :webgen_location
+    column :slug
     column :created_at do |conference|
       l(conference.created_at, format: :pretty_datetime)
     end
@@ -29,7 +29,7 @@ ActiveAdmin.register Conference do
       row :images_path do
         div show_folder label: c.images_path, path: c.get_images_path
       end
-      row :webgen_location
+      row :slug
       row :logo
       row :aspect_ratio
       row :schedule_url
@@ -53,7 +53,7 @@ ActiveAdmin.register Conference do
       f.input :title
       f.input :schedule_url
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
-      f.input :webgen_location
+      f.input :slug
     end
     f.inputs "Paths" do
       f.input :recordings_path, hint: conference.get_recordings_path
@@ -107,7 +107,7 @@ ActiveAdmin.register Conference do
                                   :recordings_path,
                                   :images_path,
                                   :logo,
-                                  :webgen_location,
+                                  :slug,
                                   :aspect_ratio ]
     end
   end

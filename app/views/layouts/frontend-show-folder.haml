@@ -21,9 +21,9 @@
         #sorting.btn-group.btn-group-sm.btn-group-justified
           - %w{name duration date}.each do |sorting|
             - if @item[:sorting] == sorting
-              %a.btn.btn-primary.active{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+              %a.btn.btn-primary.active{ href: "/browse/#{@item[:conference].slug}/#{sorting}/" }= sorting
             - else
-              %a.btn.btn-primary{ href: "/browse/#{@item[:conference].webgen_location}/#{sorting}/" }= sorting
+              %a.btn.btn-primary{ href: "/browse/#{@item[:conference].slug}/#{sorting}/" }= sorting
 
       - if @item[:events].present?
         .event-previews

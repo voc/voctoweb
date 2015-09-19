@@ -6,7 +6,7 @@ module EventFrontend
   end
 
   def url
-    "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
+    "/browse/#{self.conference.slug}/#{self.slug}.html"
   end
 
   def thumb_url
