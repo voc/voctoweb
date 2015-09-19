@@ -109,7 +109,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  # TODO copied from frontend
   def persons_text
     if self.persons.length == 0
       'n/a'
