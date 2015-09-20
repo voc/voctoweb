@@ -8,11 +8,13 @@ module Frontend
 
     def index
       @folders = []
+      render :index
     end
 
     def show
       @sorting = nil
       @conference = Conference.find_by(slug: params[:slug])
+      render :show
     end
   end
 end
