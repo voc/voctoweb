@@ -7,9 +7,11 @@ module Frontend
     end
 
     def index
+      @folders = []
     end
 
     def show
+      @sorting = nil
       @conference = Conference.find_by(slug: params[:slug])
     end
   end

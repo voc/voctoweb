@@ -13,8 +13,8 @@
       %h1 Events for tag "#{@tag}"
 
       .event-previews-tags
-        - if @item[:events].present?
-          - @item[:events].each do |event|
+        - if @events.present?
+          - @events.each do |event|
             - recordings = event.recordings.downloaded
             .event-preview
               %a{href: h(event.url)}

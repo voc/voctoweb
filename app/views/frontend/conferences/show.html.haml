@@ -2,23 +2,23 @@
     = render 'frontend/shared/folder-feeds'
 
 .events-header
-  %img{src: @item[:conference].logo_url, alt: 'conference logo'}
+  %img{src: @conference.logo_url, alt: 'conference logo'}
 
-  %h1= @item[:conference].acronym.gsub(/[\-_]/,' ')
-  - if @item[:conference].title and not item[:conference].acronym == @item[:conference].title
-    %h2= h @item[:conference].title
+  %h1= @conference.acronym.gsub(/[\-_]/,' ')
+  - if @conference.title and not item[:conference].acronym == @conference.title
+    %h2= h @conference.title
 
   #sorting.btn-group.btn-group-sm.btn-group-justified
     - %w{name duration date}.each do |sorting|
-      - if @item[:sorting] == sorting
-        %a.btn.btn-primary.active{ href: "/browse/#{@item[:conference].slug}/#{sorting}/" }= sorting
+      - if @sorting == sorting
+        %a.btn.btn-primary.active{ href: "/browse/#{@conference.slug}/#{sorting}/" }= sorting
       - else
-        %a.btn.btn-primary{ href: "/browse/#{@item[:conference].slug}/#{sorting}/" }= sorting
+        %a.btn.btn-primary{ href: "/browse/#{@conference.slug}/#{sorting}/" }= sorting
 
-- if @item[:events].present?
+- if @events.present?
   .event-previews
     -# Build event overview
-    - @item[:events].each do |event|
+    - @events.each do |event|
       - recordings = event.recordings.downloaded
       %a.event-preview{href: h(event.url)}
         %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}

@@ -9,18 +9,18 @@
 %script(src='/assets/js/jquery.min.js')
 
 %h1
-  =  h @item[:event].title
-- if @item[:event].subtitle
+  =  h @event.title
+- if @event.subtitle
   %h2
-    = h @item[:event].subtitle
+    = h @event.subtitle
 
 %p.persons
-  %span.fa{class: @item[:event].persons_icon}
-    - @item[:event].persons.to_enum.with_index(1).each do |speaker, index|
-      - if (@item[:event].persons.count - 1) == index
+  %span.fa{class: @event.persons_icon}
+    - @event.persons.to_enum.with_index(1).each do |speaker, index|
+      - if (@event.persons.count - 1) == index
         %a{href: '/search/?q=' + h(speaker)}= speaker
         and
-      - elsif @item[:event].persons.count == index
+      - elsif @event.persons.count == index
         %a{href: '/search/?q=' + h(speaker)}= speaker
       - else
         %a{href: '/search/?q=' + h(speaker)}= speaker
@@ -28,27 +28,27 @@
 
 
 %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
-  - if @item[:video_recordings].present?
+  - if @video_recordings.present?
     %li
       %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
-  - if @item[:audio_recordings].present?
+  - if @audio_recordings.present?
     %li
       %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
   %li
-    %a{href: @item[:event].download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+    %a{href: @event.download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
 
   %li
     %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
 
 .tab-content
-  - if @item[:video_recordings].present?
+  - if @video_recordings.present?
     #video.tab-pane.active
       = render 'frontend/shared/videoplayer'
 
-  - if @item[:audio_recordings].present?
+  - if @audio_recordings.present?
     #audio.tab-pane
       %audio.audio{controls: 'controls'}
-        - @item[:audio_recordings].each do |recording|
+        - @audio_recordings.each do |recording|
           %source{type: recording.display_mime_type, src: h(recording.url)}
 
   #download.tab-pane
@@ -60,26 +60,26 @@
 %ul.metadata
   %li
     %span.fa.fa-clock-o
-    = recording_length(@item[:event].recordings.downloaded)
+    = recording_length(@event.recordings.downloaded)
   %li
     %span.fa.fa-calendar-o
-    = date(@item[:event])
+    = date(@event)
   %li
     %span.fa.fa-eye
-    = @item[:event].view_count
+    = @event.view_count
   %li
     %span.fa.fa-external-link
-    %a{href: @item[:event].link}
-      = parse_url_host(@item[:event])
+    %a{href: @event.link}
+      = parse_url_host(@event)
 
-- if @item[:event].description.present?
+- if @event.description.present?
   %h3 About
   %p.description
-    = @item[:event].description
+    = @event.description
 
-- if @item[:event].tags.present?
+- if @event.tags.present?
   %h3 Tags
-  - @item[:event].tags.each do |tag|
+  - @event.tags.each do |tag|
     = link_for(tag)
 
 %script(src='/assets/js/bootstrap.min.js')

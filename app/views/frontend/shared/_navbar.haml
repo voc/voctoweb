@@ -6,11 +6,11 @@
         ccc-tv
 
     .nav.navbar-form.navbar-right.button-wrapper
-      - if @item[:conference] and Recording.recorded_at(@item[:conference]).count > 0
+      - if @conference and Recording.recorded_at(@conference).count > 0
         - path = '../' if @item.identifier.match %r[(?:date|duration|name)/$]
-        %a.form-control.btn.btn-default{href: "#{path}podcast-#{@item[:conference].preferred_mime_type}.xml"}
+        %a.form-control.btn.btn-default{href: "#{path}podcast-#{@conference.preferred_mime_type}.xml"}
           %span.fa.fa-rss
-        %a.form-control.btn.btn-default{href: "#{path}broadcatching-#{@item[:conference].preferred_mime_type}.rss"}
+        %a.form-control.btn.btn-default{href: "#{path}broadcatching-#{@conference.preferred_mime_type}.rss"}
           %span.fa.fa-magnet
       - else
         %a.form-control.btn.btn-default{href: '/podcast.xml'}

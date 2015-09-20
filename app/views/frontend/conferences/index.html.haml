@@ -1,7 +1,7 @@
 %h1 Browse by category
 
-- if @item[:folders].present?
-  - @item[:folders].each do |folder|
+- if @folders.present?
+  - @folders.each do |folder|
     - if folder.conference
       %a.thumbnail.conference{href: h(folder.url)}
         .header

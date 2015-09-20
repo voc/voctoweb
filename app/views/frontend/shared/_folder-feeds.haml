@@ -1,4 +1,4 @@
 - path = '../' if @item.identifier.match %r[(?:date|duration|name)/$]
-- @item[:conference].mime_types do |mime_type, mime_type_name|
+- @conference.mime_types do |mime_type, mime_type_name|
   %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: "#{path}podcast-#{mime_type_name}.xml"}
   %link{rel: "alternate", type: "application/rss+xml", title: "Torrent feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: "#{path}broadcatching-#{mime_type_name}.rss"}

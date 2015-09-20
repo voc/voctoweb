@@ -13,7 +13,7 @@
         }
       });
       mediaElement.addEventListener('playing', function () {
-        $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@item[:event].id},src: mediaElement.src});
+        $.post("http://api.media.ccc.de/public/recordings/count", {event_id: #{@event.id},src: mediaElement.src});
       }, false);
       mediaElement.addEventListener('pause', function() {
         var hash = '#video&t='+Math.round(mediaElement.currentTime);;
