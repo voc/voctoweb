@@ -1,7 +1,7 @@
 module Frontend
   class EventsController < FrontendController
     def show
-      @event = Event.by_identifier(params[:conference_slug], params[:slug])
+      @event = Event.by_identifier(params[:conference_slug], params[:slug]).first
       @conference = @event.conference
       @video_recordings = []
       @audio_recordings = []

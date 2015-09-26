@@ -3,7 +3,7 @@ module Frontend
     def podcast_audio
     end
 
-    def podcaste
+    def podcast
     end
 
     def podcast_archive

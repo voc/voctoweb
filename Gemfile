@@ -25,6 +25,7 @@ group :development do
 end
 
 gem 'haml'
+gem 'redcarpet'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :sqlite3

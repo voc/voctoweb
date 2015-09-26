@@ -1,18 +1,18 @@
-- content_for :title
+- content_for :title do
   = @event.title
 
-- content_for :head
-  = render 'frontend/shared/folder-feeds'
+- content_for :head do
+  = render 'frontend/shared/folder_feeds'
   %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
   != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
 %script(src='/assets/js/jquery.min.js')
 
 %h1
-  =  h @event.title
+  =  @event.title
 - if @event.subtitle
   %h2
-    = h @event.subtitle
+    = @event.subtitle
 
 %p.persons
   %span.fa{class: @event.persons_icon}

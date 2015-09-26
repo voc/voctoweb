@@ -7,7 +7,7 @@ module Frontend
     end
 
     def index
-      @folders = []
+      @folders = FolderList.new(params[:slug] || '').folders
       render :index
     end
 

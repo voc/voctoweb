@@ -252,6 +252,7 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rdoc (4.2.0)
+    redcarpet (3.3.2)
     redis (3.2.1)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -343,6 +344,7 @@ DEPENDENCIES
   puma
   rack-cors
   rails (~> 4.2.0)
+  redcarpet
   redis-rails
   ruby-graphviz
   sass-rails

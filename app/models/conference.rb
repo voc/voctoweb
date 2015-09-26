@@ -11,6 +11,7 @@ class Conference < ActiveRecord::Base
   validates_presence_of :slug
   validates_uniqueness_of :acronym
   validates_uniqueness_of :slug
+  validates :slug, format: { with: %r{\A\w+(?:/\w+)*\z} }
 
   has_attached_directory :images,
     via: :images_path,
