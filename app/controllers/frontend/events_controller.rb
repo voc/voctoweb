@@ -1,10 +1,7 @@
 module Frontend
   class EventsController < FrontendController
+    before_action :load_event
     def show
-      @event = Event.by_identifier(params[:conference_slug], params[:slug]).first
-      @conference = @event.conference
-      @video_recordings = []
-      @audio_recordings = []
     end
 
     def download
@@ -14,5 +11,13 @@ module Frontend
       # render layout: 'frontend/oembed'
     end
 
+    private
+
+    def load_event
+      @event = Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
+      @conference = @event.conference
+      @video_recordings = []
+      @audio_recordings = []
+    end
   end
 end

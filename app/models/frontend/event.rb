@@ -1,5 +1,8 @@
 module Frontend
   class Event < ::Event
+    belongs_to :conference, class_name: Frontend::Conference
+    has_many :recordings, class_name: Frontend::Recording
+
     scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
     scope :recent, ->(n) { order('release_date desc').limit(n) }
     scope :newer, ->(date) { where("release_date > ?", date).order('release_date desc') }
@@ -10,11 +13,11 @@ module Frontend
     end
 
     def url
-      "/browse/#{self.conference.webgen_location}/#{self.slug}.html"
+      "/browse/#{self.conference.slug}/#{self.slug}.html"
     end
 
     def download_url
-      "/browse/#{self.conference.webgen_location}/#{self.slug}/download.html#download"
+      "/browse/#{self.conference.slug}/#{self.slug}/download.html#download"
     end
 
     def poster_url
