@@ -32,13 +32,16 @@ module Frontend
       Settings.oembedURL + identifier[0..-2] + '.html'
     end
 
+    # TODO returns url to omebed page for recording?
     def oembed_page_url(identifier)
       id = identifier+"oembed/"
-      oembed = @items.find { |i| i.identifier == id }
+      return ''
+      oembed = @event.recordings.find { |i| i.identifier == id }
       Settings.baseURL + oembed.path
     end
 
     def page_url(identifier)
+      return ''
       Settings.baseURL + identifier.path
     end
 

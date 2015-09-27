@@ -12,7 +12,7 @@ module Frontend
       assert_equal one, folders[0].conference
       assert_equal two, folders[1].conference
       assert_equal nil, folders[2].conference
-      assert_equal 'conf/more/three', folders[2].location
+      assert_equal 'conf/more', folders[2].location
     end
 
     test "lists folders for root" do
@@ -21,7 +21,7 @@ module Frontend
       folders = FolderList.new('').folders
       assert_equal one, folders[0].conference
       assert_equal nil, folders[1].conference
-      assert_equal 'conf/two', folders[1].location
+      assert_equal 'conf', folders[1].location
     end
   end
 end

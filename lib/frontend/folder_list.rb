@@ -22,7 +22,11 @@ module Frontend
 
     def add_folder(conference)
       folder = Folder.new(location: conference.slug)
-      folder.conference = conference if reachable?(conference)
+      if reachable?(conference)
+        folder.conference = conference
+      else
+        folder.location = folder.parent
+      end
       return if folder.conference.nil? && already_known?(folder.parent)
       @folders << folder
     end
@@ -31,6 +35,10 @@ module Frontend
       return true if @seen[parent]
       @seen[parent] = 1
       false
+    end
+
+    def cut(slug, n)
+      parts(slug)[0..n]
     end
 
     def reachable?(conference)

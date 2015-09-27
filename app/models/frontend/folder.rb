@@ -12,7 +12,7 @@ module Frontend
     end
 
     def parent
-      pos = @location.rindex('/') + 1 || 0
+      pos = @location.rindex('/') || 0
       @location[0..pos-1]
     end
 
