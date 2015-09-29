@@ -20,7 +20,7 @@
               = date(event)
             %li.persons
               %span.fa{class: event.persons_icon}
-              = event.linked_persons_text
+              != event.linked_persons_text
           %h3
             %a{href: show_event_url(event)}
-              = h event.title
+              = event.title

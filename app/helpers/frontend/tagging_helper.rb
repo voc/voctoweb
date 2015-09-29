@@ -3,15 +3,15 @@ module Frontend
   module TaggingHelper
 
     # link to tag page
-    def link_for(tag, prefix: '/browse/tags/', css: '')
-      %[<a href="#{h prefix}#{h tag}.html" rel="tag" class="#{css} label label-default">#{h tag}</a>]
+    def link_for(tag, css: '')
+      %[<a href="/tags/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
     end
 
     #
-    def tag_cloud(prefix: '/browse/tags/')
-      return [] if @items.nil?
+    def tag_cloud
+      return [] if @tags.empty?
       tags_hash.map { |tag, count|
-        link_for tag, prefix: prefix, css: css_class_by_size(count)
+        link_for tag, css: css_class_by_size(count)
       }
     end
 
@@ -32,10 +32,10 @@ module Frontend
     end
 
     def tags_hash
-      tags = Hash.new { |h,k| h[k] = [] }
-      @items.each do |i|
-        next unless i[:tag]
-        tags[i[:title]] = i[:events].count
+      tags = {}
+      @tags.each do |tag, events|
+        next unless tag
+        tags[tag] = events.count
       end
       tags
     end

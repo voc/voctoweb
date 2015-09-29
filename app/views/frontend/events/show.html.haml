@@ -80,7 +80,7 @@
 - if @event.tags.present?
   %h3 Tags
   - @event.tags.each do |tag|
-    = link_for(tag)
+    != link_for(tag)
 
 %script(src='/assets/js/bootstrap.min.js')
 %script(src='/assets/js/mediaelement-and-player.min.js')
