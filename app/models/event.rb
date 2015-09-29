@@ -2,7 +2,6 @@ class Event < ActiveRecord::Base
   include Recent
   include FahrplanUpdater
   include Storage
-  include EventFrontend
 
   MAX_PROMOTED = 10
 
@@ -23,11 +22,11 @@ class Event < ActiveRecord::Base
     joins(:recordings, :conference)
       .where(conferences: { id: conference })
       .where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 })
-      .group(:"events.id")
+      .group(:id)
   }
 
-  scope :by_identifier, ->(conference_slug, slug) {
-    joins(:conference).where(conferences: {slug: conference_slug}, events: {slug: slug}).first
+  scope :by_conference_slug, ->(conference_slug, slug) {
+    joins(:conference).where(conferences: {slug: conference_slug}, events: {slug: slug})
   }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
@@ -39,6 +38,12 @@ class Event < ActiveRecord::Base
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
+  end
+
+  def self.by_identifier(conference_slug, slug)
+    event = by_conference_slug(conference_slug, slug).try(:first)
+    raise ActiveRecord::RecordNotFound, "#{conference_slug}/#{slug}" unless event
+    event
   end
 
   def self.update_promoted_from_view_count

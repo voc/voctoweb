@@ -2,8 +2,8 @@
   .titlebar
   .carousel.slide{'data-ride' => 'carousel'}
     .carousel-inner
-      - Event.promoted(10).each_with_index do |event, i|
-        %a.item{href: h(event.url), 'class' => (i == 0 and 'active')}
+      - Frontend::Event.promoted(10).each_with_index do |event, i|
+        %a.item{href: show_event_url(event), 'class' => (i == 0 and 'active')}
           %img{src: h(event.thumb_url), alt: event.title, title: event.title}
           .carousel-caption
             %h2.title= event.title

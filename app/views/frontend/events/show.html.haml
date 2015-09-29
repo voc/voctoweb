@@ -35,7 +35,7 @@
     %li
       %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
   %li
-    %a{href: @event.download_url, 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+    %a{href: download_show_event_url(@event), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
 
   %li
     %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share

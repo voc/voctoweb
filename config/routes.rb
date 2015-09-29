@@ -51,12 +51,13 @@ MediaBackend::Application.routes.draw do
     get '/search', to: 'home#search'
     get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
 
-    get '/browse/(:slug)', to: 'conferences#slug'
-    get '/browse/:conference_slug/:slug', to: 'events#show'
-    get '/browse/:conference_slug/:slug/oembed', to: 'events#oembed'
-    get '/browse/:conference_slug/:slug/download', to: 'events#download'
+    get '/browse', to: 'conferences#slug', as: :browse_start
+    get '/browse/*slug', to: 'conferences#slug', as: :browse
+    get '/event/:conference_slug/:slug', to: 'events#show', as: :event
+    get '/event/:conference_slug/:slug/oembed', to: 'events#oembed', as: :oembed_event
+    get '/event/:conference_slug/:slug/download', to: 'events#download', as: :download_event
     get '/tags', to: 'tags#index'
-    get '/tags/:tag', to: 'tags#show'
+    get '/tags/:tag', to: 'tags#show', as: :tag
 
     get '/news.atom', to: 'news#index', defaults: { format: 'xml' }
     get '/podcast-audio-only.xml', to: 'feeds#podcast_audio', defaults: { format: 'xml' }

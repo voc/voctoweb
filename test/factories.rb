@@ -43,6 +43,9 @@ FactoryGirl.define do
     factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
   end
 
+  factory :frontend_conference, parent: :conference, class: Frontend::Conference do
+  end
+
   trait :conference_recordings do
     after(:create) do |conference|
       conference.events << FactoryGirl.create(:event_with_recordings)

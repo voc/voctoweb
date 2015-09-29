@@ -3,10 +3,10 @@ require 'test_helper'
 module Frontend
   class FolderListTest < ActiveSupport::TestCase
     test "lists folders for given slug" do
-      one = create :conference, slug: 'conf/one'
-      two = create :conference, slug: 'conf/two'
-      create :conference, slug: 'conf/more/three'
-      create :conference, slug: 'conf/more/four'
+      one = create :frontend_conference, slug: 'conf/one'
+      two = create :frontend_conference, slug: 'conf/two'
+      create :frontend_conference, slug: 'conf/more/three'
+      create :frontend_conference, slug: 'conf/more/four'
       folders = FolderList.new('conf').folders
       assert_equal 3, folders.length
       assert_equal one, folders[0].conference
@@ -16,8 +16,8 @@ module Frontend
     end
 
     test "lists folders for root" do
-      one = create :conference, slug: 'one'
-      two = create :conference, slug: 'conf/two'
+      one = create :frontend_conference, slug: 'one'
+      two = create :frontend_conference, slug: 'conf/two'
       folders = FolderList.new('').folders
       assert_equal one, folders[0].conference
       assert_equal nil, folders[1].conference

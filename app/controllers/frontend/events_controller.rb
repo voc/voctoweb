@@ -14,6 +14,7 @@ module Frontend
     private
 
     def load_event
+      params[:slug] = '' if params[:slug] == 'index'
       @event = Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
       @conference = @event.conference
       @video_recordings = []

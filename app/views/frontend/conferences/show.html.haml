@@ -1,26 +1,26 @@
 - content_for :head do
-    = render 'frontend/shared/folder_feeds'
+  = render 'frontend/shared/folder_feeds'
 
 .events-header
   %img{src: @conference.logo_url, alt: 'conference logo'}
 
   %h1= @conference.acronym.gsub(/[\-_]/,' ')
-  - if @conference.title and not item[:conference].acronym == @conference.title
+  - if @conference.title and not @conference.acronym == @conference.title
     %h2= h @conference.title
 
   #sorting.btn-group.btn-group-sm.btn-group-justified
     - %w{name duration date}.each do |sorting|
       - if @sorting == sorting
-        %a.btn.btn-primary.active{ href: "/browse/#{@conference.slug}/#{sorting}/" }= sorting
+        %a.btn.btn-primary.active{ href: browse_url(slug: @conference.slug, sort: sorting) }= sorting
       - else
-        %a.btn.btn-primary{ href: "/browse/#{@conference.slug}/#{sorting}/" }= sorting
+        %a.btn.btn-primary{ href: browse_url(slug: @conference.slug, sort: sorting) }= sorting
 
 - if @events.present?
   .event-previews
     -# Build event overview
     - @events.each do |event|
       - recordings = event.recordings.downloaded
-      %a.event-preview{href: h(event.url)}
+      %a.event-preview{href: event_url(conference_slug: @conference.slug, slug: event.slug)}
         %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
         .caption
           %ul.metadata

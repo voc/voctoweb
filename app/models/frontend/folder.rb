@@ -7,7 +7,7 @@ module Frontend
     attr_accessor :location, :conference
 
     def name
-      pos = @location.rindex('/') + 1 || 0
+      pos = @location.rindex('/') || 0
       @location[pos..-1]
     end
 
@@ -17,7 +17,11 @@ module Frontend
     end
 
     def url
-      "/browse/#{@location}/index.html"
+      if @conference
+        "/browse/#{@conference.slug}/"
+      else
+        "/browse/#{@location}/"
+      end
     end
   end
 end

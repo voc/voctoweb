@@ -14,7 +14,7 @@ gem 'rails', '~> 4.2.0'
 # Bundle puma application server
 gem 'puma'
 
-gem "dotenv-rails"
+gem 'dotenv-rails'
 
 group :development do
   gem 'capistrano', '~> 3.4.0', group: :capistrano, require: false
@@ -68,5 +68,5 @@ group :development, :test do
 end
 
 group :test do
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
 end

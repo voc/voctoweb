@@ -5,38 +5,30 @@ module Frontend
 
     scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
     scope :recent, ->(n) { order('release_date desc').limit(n) }
-    scope :newer, ->(date) { where("release_date > ?", date).order('release_date desc') }
-    scope :older, ->(date) { where("release_date < ?", date).order('release_date desc') }
+    scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
+    scope :older, ->(date) { where('release_date < ?', date).order('release_date desc') }
 
     def title
-      read_attribute(:title).strip
-    end
-
-    def url
-      "/browse/#{self.conference.slug}/#{self.slug}.html"
-    end
-
-    def download_url
-      "/browse/#{self.conference.slug}/#{self.slug}/download.html#download"
+      self[:title].strip
     end
 
     def poster_url
-      File.join(Settings.staticURL, 'media', self.conference.images_path, self.poster_filename) if self.poster_filename
+      File.join(Settings.staticURL, 'media', conference.images_path, poster_filename) if poster_filename
     end
 
     def thumb_url
-      File.join Settings.staticURL, 'media', self.conference.images_path, self.thumb_filename
+      File.join Settings.staticURL, 'media', conference.images_path, thumb_filename
     end
 
     def tags
-      read_attribute(:tags).compact.collect { |x| x.strip }
+      self[:tags].compact.collect(&:strip)
     end
 
     def linked_persons_text
-      if self.persons.length == 0
+      if persons.length == 0
         'n/a'
-      elsif self.persons.length == 1
-        linkify_persons(self.persons)[0]
+      elsif persons.length == 1
+        linkify_persons(persons)[0]
       else
         persons = linkify_persons(self.persons)
         persons = persons[0..-3] + [persons[-2..-1].join(' and ')]
@@ -45,35 +37,34 @@ module Frontend
     end
 
     def linkify_persons(persons)
-      persons.map { |person| '<a href="/search/?q='+CGI.escapeHTML(CGI.escape(person))+'">'+CGI.escapeHTML(person)+'</a>' }
+      persons.map { |person| '<a href="/search/?q=' + CGI.escapeHTML(CGI.escape(person)) + '">' + CGI.escapeHTML(person) + '</a>' }
     end
 
     def persons_icon
-      if self.persons.length <= 1
+      if persons.length <= 1
         'fa-user'
       else
         'fa-group'
       end
     end
 
-    def preferred_recording(order: MimeType::PREFERRED_VIDEO, mime_type: nil)
+    def preferred_recording(order: MimeType::PREFERRED_VIDEO)
       recordings = recordings_by_mime_type
       return if recordings.empty?
-      order.each { |mt|
-        return recordings[mt] if recordings.has_key?(mt)
-      }
+      order.each do |mt|
+        return recordings[mt] if recordings.key?(mt)
+      end
       recordings.first[1]
     end
 
-    def by_mime_type(order: nil, mime_type: 'video/mp4')
-      recordings.downloaded.by_mime_type(mime_type).first
-    end
+    # def by_mime_type(order: nil, mime_type: 'video/mp4')
+    #   recordings.downloaded.by_mime_type(mime_type).first
+    # end
 
     private
 
     def recordings_by_mime_type
       Hash[recordings.downloaded.map { |r| [r.mime_type, r] }]
     end
-
   end
 end

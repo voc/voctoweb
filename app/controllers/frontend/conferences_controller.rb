@@ -1,8 +1,8 @@
 module Frontend
   class ConferencesController < FrontendController
     def slug
-      @conferences = Conference.where(slug: params[:slug])
-      return show unless @conferences
+      @conference = Frontend::Conference.find_by(slug: params[:slug])
+      return show if @conference
       index
     end
 
@@ -12,8 +12,8 @@ module Frontend
     end
 
     def show
+      @events = @conference.events
       @sorting = nil
-      @conference = Conference.find_by(slug: params[:slug])
       render :show
     end
   end
