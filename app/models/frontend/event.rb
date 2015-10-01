@@ -48,7 +48,7 @@ module Frontend
       end
     end
 
-    def preferred_recording(order: MimeType::PREFERRED_VIDEO)
+    def preferred_recording(order: MimeType::PREFERRED_VIDEO, mime_type: nil)
       recordings = recordings_by_mime_type
       return if recordings.empty?
       order.each do |mt|
@@ -57,9 +57,10 @@ module Frontend
       recordings.first[1]
     end
 
-    # def by_mime_type(order: nil, mime_type: 'video/mp4')
-    #   recordings.downloaded.by_mime_type(mime_type).first
-    # end
+    # @return [Array(Recording)]
+    def by_mime_type(mime_type: 'video/mp4')
+      recordings.downloaded.by_mime_type(mime_type).first
+    end
 
     private
 

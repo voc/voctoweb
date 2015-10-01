@@ -88,10 +88,6 @@ class Event < ActiveRecord::Base
     self.tags = values.split("\n").map { |w| w.strip }
   end
 
-  def get_recording_by_mime_type(type)
-    self.recordings.where(mime_type: type)
-  end
-
   def length
     self.recordings.max { |e| e.length }.try(:length)
   end

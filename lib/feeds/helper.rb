@@ -1,6 +1,9 @@
 module Feeds
-
   module Helper
+    def date(event)
+      date = event.release_date || event.date
+      date.strftime("%Y-%m-%d") if date
+    end
 
     def merge_config(config)
       keep = [ :title, :channel_summary ]
@@ -43,7 +46,5 @@ module Feeds
 
       description.join
     end
-
   end
-
 end

@@ -10,7 +10,7 @@ module Frontend
         icon: 'http://media.ccc.de/favicons.ico',
         logo: 'http://media.ccc.de/images/tv.png'
       })
-      render text: atom_feed
+      render xml: atom_feed
     end
   end
 end

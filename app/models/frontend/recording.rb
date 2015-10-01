@@ -33,7 +33,7 @@ module Frontend
     private
 
     def torrent_magnet_data
-      MagnetLinkProvider.instance.fetch self
+      [nil, nil]
     end
 
   end
