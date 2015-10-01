@@ -2,7 +2,7 @@ require 'rss/maker'
 
 module Feeds
   # Atom news feed generator.
-  module NewsFeedGenerator
+  class NewsFeedGenerator
 
     # Generate atom feed for given news.
     #
@@ -59,12 +59,12 @@ module Feeds
     # @param news [News] object
     def self.assign_item_options(item, news)
       item.id              = "tag:media.ccc.de,#{news.created_at.strftime('%Y-%m-%d')}:#{news.id}"
-      item.updated         = Time.now.to_s
+      item.updated         = Time.now.utc.to_s
       item.title           = news.title
       item.content.content = news.body
       item.content.type    = 'html'
-      item.published       = news.created_at
-      item.updated         = news.updated_at
+      item.published       = news.created_at.utc
+      item.updated         = news.updated_at.utc
       item.link            = 'http://media.ccc.de/'
     end
 
@@ -74,7 +74,7 @@ module Feeds
     # @param options [Hash] options
     def self.assign_feed_options(feed, options)
       feed.channel.author  = options[:author]
-      feed.channel.updated = Time.now.to_s
+      feed.channel.updated = Time.now.utc.to_s
       feed.channel.about   = options[:about]
       feed.channel.title   = options[:title]
       feed.channel.link    = options[:feed_url]
