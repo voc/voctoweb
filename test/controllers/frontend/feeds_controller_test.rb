@@ -30,10 +30,5 @@ module Frontend
       get :podcast_folder, slug: Conference.first.slug, mime_type: 'video/webm', format: :xml
       assert_response :success
     end
-
-    test "should get broadcatching" do
-      get :broadcatching, format: :xml, slug: Conference.first.slug, mime_type: 'video/webm'
-      assert_response :success
-    end
   end
 end

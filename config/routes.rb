@@ -66,7 +66,6 @@ MediaBackend::Application.routes.draw do
     get '/updates.rdf', to: 'feeds#updates', defaults: { format: 'xml' }
 
     get '/podcast/:slug/:mime_type', to: 'feeds#podcast_folder', defaults: { format: 'xml' }
-    get '/broadcatching/:slug/:mime_type', to: 'feeds#broadcatching', defaults: { format: 'xml' }
 
     # rss feeds
     # search

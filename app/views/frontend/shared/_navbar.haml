@@ -10,8 +10,6 @@
         - path = '../' if @item.identifier.match %r[(?:date|duration|name)/$]
         %a.form-control.btn.btn-default{href: "#{path}podcast-#{@conference.preferred_mime_type}.xml"}
           %span.fa.fa-rss
-        %a.form-control.btn.btn-default{href: "#{path}broadcatching-#{@conference.preferred_mime_type}.rss"}
-          %span.fa.fa-magnet
       - else
         %a.form-control.btn.btn-default{href: '/podcast.xml'}
           %span.fa.fa-rss

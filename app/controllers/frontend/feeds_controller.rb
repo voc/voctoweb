@@ -1,6 +1,6 @@
 module Frontend
   class FeedsController < FrontendController
-    before_filter :set_conference, only: %i(podcast_folder broadcatching)
+    before_filter :set_conference, only: %i(podcast_folder)
 
     # podcast_recent
     def podcast
@@ -42,18 +42,6 @@ module Frontend
                   channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}" }
       xml = feeds.generate downloaded_events, :by_mime_type
       render xml: xml
-    end
-
-    def broadcatching
-      @feed = Feeds::BroadcatchingGenerator.generate events: downloaded_events, query: :by_mime_type, config: {
-        mime_type: @mime_type,
-        title: "#{@conference.title} (#{@mime_type_name})",
-        channel_summary: "This feed contains all torrents for #{@mime_type_name} from #{@conference.acronym}"
-      }
-
-      respond_to do |format|
-        format.xml { render :broadcatching }
-      end
     end
 
     private
