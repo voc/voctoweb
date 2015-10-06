@@ -7,8 +7,7 @@
 
     .nav.navbar-form.navbar-right.button-wrapper
       - if @conference and Recording.recorded_at(@conference).count > 0
-        - path = '../' if @item.identifier.match %r[(?:date|duration|name)/$]
-        %a.form-control.btn.btn-default{href: "#{path}podcast-#{@conference.preferred_mime_type}.xml"}
+        %a.form-control.btn.btn-default{href: podcast_folder_feed_url(slug: @conference.slug, mime_type: @conference.preferred_mime_type)}
           %span.fa.fa-rss
       - else
         %a.form-control.btn.btn-default{href: '/podcast.xml'}

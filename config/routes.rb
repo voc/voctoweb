@@ -65,7 +65,7 @@ MediaBackend::Application.routes.draw do
     get '/podcast-archive.xml', to: 'feeds#podcast_archive', defaults: { format: 'xml' }
     get '/updates.rdf', to: 'feeds#updates', defaults: { format: 'xml' }
 
-    get '/podcast/:slug/:mime_type', to: 'feeds#podcast_folder', defaults: { format: 'xml' }
+    get '/podcast/:slug/:mime_type', to: 'feeds#podcast_folder', defaults: { format: 'xml' }, as: :podcast_folder_feed
 
     # rss feeds
     # search

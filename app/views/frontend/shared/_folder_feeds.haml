@@ -1,3 +1,2 @@
-- path = ''
 - @conference.mime_types do |mime_type, mime_type_name|
-  %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: "#{path}podcast-#{mime_type_name}.xml"}
+  %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: podcast_folder_feed_url(slug: @conference.slug, mime_type: mime_type_name)}
