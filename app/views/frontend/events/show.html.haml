@@ -60,7 +60,7 @@
 %ul.metadata
   %li
     %span.fa.fa-clock-o
-    = recording_length(@event.recordings.downloaded)
+    = duration_in_minutes(@event.duration)
   %li
     %span.fa.fa-calendar-o
     = date(@event)

@@ -100,6 +100,10 @@ module Frontend
       "#{recording.length / 60} min" if recording.length > 0
     end
 
+    def duration_in_minutes(duration)
+      "#{duration / 60} min" if duration > 0
+    end
+
     def video_for_flash(recordings)
       url = recordings.find { |recording| recording.display_mime_type == 'video/mp4' }.try(:url)
       if url.present?
