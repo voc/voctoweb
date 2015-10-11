@@ -23,18 +23,11 @@
           %button.btn.btn-default{type: 'submit'}
             %span.fa.fa-search
 
-- event_page_or_folder(@item) do |trail|
+- breadcrumbs_trail do |parts|
   #breadcrumb
     %ol.container-fluid.breadcrumb
-      - trail[1..-2].each_with_index do |item, i|
+      - parts.each_with_index do |part, index|
         %li
-          %a.inverted{href: item.identifier}
-            = item.identifier.sub(trail[i].identifier, '').gsub('/','').gsub(/[\-_]/,' ')
-      %li.active
-        - if @item[:sorting] == '' || @item[:sorting] == nil
-          - if trail[-1][:event].present?
-            = trail[-1][:title]
-          - else
-            = trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')
-        - else
-          = "sorted by #{trail[-1].identifier.sub(trail[-2].identifier, '').gsub('/','')}"
+          %a.inverted{href: '/browse/'+parts[0..index].join('/')}
+            = part
+

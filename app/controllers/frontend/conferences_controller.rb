@@ -8,6 +8,7 @@ module Frontend
 
     def index
       @folders = FolderList.new(params[:slug] || '').folders
+      return redirect_to browse_start_url if @folders.blank?
       render :index
     end
 

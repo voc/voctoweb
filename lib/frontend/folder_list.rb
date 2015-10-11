@@ -8,7 +8,7 @@ module Frontend
     def folders
       @seen = {}
       @folders = []
-      Conference.where('slug LIKE ?', "#{@slug}%").each do |conference|
+      Conference.where('slug LIKE ?', "#{@location}%").each do |conference|
         add_folder(conference)
       end
       @folders
@@ -35,10 +35,6 @@ module Frontend
       return true if @seen[parent]
       @seen[parent] = 1
       false
-    end
-
-    def cut(slug, n)
-      parts(slug)[0..n]
     end
 
     def reachable?(conference)

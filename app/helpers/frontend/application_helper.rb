@@ -10,10 +10,6 @@ module Frontend
       download_event_url(conference_slug: event.conference.slug, slug: event.slug)
     end
 
-    def breadcrumbs_trail
-      []
-    end
-
     def twitter_url(title, url)
       'http://twitter.com/home?status=' + URI.encode_www_form_component(title + ': ' + url)
     end
@@ -53,12 +49,15 @@ module Frontend
       Settings.baseURL + identifier.path
     end
 
-    def event_page_or_folder(item)
-      return if item.identifier.include? '/tags/'
-      trail = breadcrumbs_trail
-      return unless trail.count > 2 || item.identifier.include?('/browse/')
-      trail = trail[0..-2] if item.identifier.include? '/download/'
-      yield trail
+    def breadcrumbs_trail
+      parts = if @conference
+         @conference.slug.split('/')
+      elsif params[:slug]
+        params[:slug].split('/')[0..-1]
+      end
+      return if parts.blank?
+      parts = ['browse'] + parts
+      yield parts
     end
 
     def video_download_sources(recordings)
