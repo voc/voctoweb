@@ -1,0 +1,10 @@
+%ul.metadata
+  %li
+    %span.fa.fa-clock-o
+    = duration_in_minutes(event.duration)
+  %li
+    %span.fa.fa-calendar-o
+    = date(event)
+  %li.persons
+    %span.fa{class: event.persons_icon}
+    != event.linked_persons_text
