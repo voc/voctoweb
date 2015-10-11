@@ -19,8 +19,8 @@
   .event-previews
     -# Build event overview
     - @events.each do |event|
-      %a.event-preview{href: event_url(conference_slug: @conference.slug, slug: event.slug)}
-        %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
+      .event-preview
+        %a{href: show_event_url(event)}
+          %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
         .caption
-          = render 'frontend/shared/event_metadata', localsa: { event: event }
-          %h3= h event.title
+          = render partial: 'frontend/shared/event_metadata', locals: { event: event }

@@ -24,30 +24,6 @@ module Frontend
       self[:tags].compact.collect(&:strip)
     end
 
-    def linked_persons_text
-      if persons.length == 0
-        'n/a'
-      elsif persons.length == 1
-        linkify_persons(persons)[0]
-      else
-        persons = linkify_persons(self.persons)
-        persons = persons[0..-3] + [persons[-2..-1].join(' and ')]
-        persons.join(', ')
-      end
-    end
-
-    def linkify_persons(persons)
-      persons.map { |person| '<a href="/search/?q=' + CGI.escapeHTML(CGI.escape(person)) + '">' + CGI.escapeHTML(person) + '</a>' }
-    end
-
-    def persons_icon
-      if persons.length <= 1
-        'fa-user'
-      else
-        'fa-group'
-      end
-    end
-
     def preferred_recording(order: MimeType::PREFERRED_VIDEO, mime_type: nil)
       recordings = recordings_by_mime_type
       return if recordings.empty?

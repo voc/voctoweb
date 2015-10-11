@@ -6,5 +6,8 @@
     %span.fa.fa-calendar-o
     = date(event)
   %li.persons
-    %span.fa{class: event.persons_icon}
-    != event.linked_persons_text
+    %span.fa{class: persons_icon(event.persons)}
+    != linked_persons_text(event.persons)
+%h3
+  %a{href: show_event_url(event)}
+    = event.title

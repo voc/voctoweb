@@ -151,5 +151,29 @@ module Frontend
     rescue URI::InvalidURIError
       return ''
     end
+
+    def linked_persons_text(persons)
+      if persons.length == 0
+        'n/a'
+      elsif persons.length == 1
+        linkify_persons(persons)[0]
+      else
+        persons = linkify_persons(persons)
+        persons = persons[0..-3] + [persons[-2..-1].join(' and ')]
+        persons.join(', ')
+      end
+    end
+
+    def linkify_persons(persons)
+      persons.map { |person| '<a href="/search/?q=' + CGI.escapeHTML(CGI.escape(person)) + '">' + CGI.escapeHTML(person) + '</a>' }
+    end
+
+    def persons_icon(persons)
+      if persons.length <= 1
+        'fa-user'
+      else
+        'fa-group'
+      end
+    end
   end
 end
