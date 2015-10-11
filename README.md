@@ -1,4 +1,4 @@
-# media-backend 
+# media-backend
 
 media.ccc.de webfrontend meta data editor and API.
 
@@ -24,7 +24,7 @@ You need to create a secret token for sessions:
     cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
     rake secret
 
-And another one for devise:    
+And another one for devise:
 
     cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
     rake secret
@@ -51,13 +51,6 @@ To get the backend up and running:
     rake assets:precompile
     gem install passenger
     passenger start -p 8023
-
-### Trigger nanoc
-
-Nanoc is triggered via sudo
-
-    Cmnd_Alias FRONTED = /srv/www/media-frontend/media-frontend/bin/frontend-wrapper
-    media-backend ALL = (media-frontend) NOPASSWD: FRONTEND
 
 ## First Login
 
@@ -128,14 +121,10 @@ Download recordings again, after recording was created.
 
 
 Create news items
-      
+
     /api/news
 
-Generate the site      
-
-    /api/conferences/run_compile
-
-Update promoted flag of events by view count    
+Update promoted flag of events by view count
 
     /api/events/update_promoted
 

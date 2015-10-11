@@ -9,12 +9,7 @@ MediaBackend::Application.routes.draw do
 
   # VOC JSON API
   namespace :api do
-    resources :conferences, :defaults => { :format => 'json' } do
-      collection do
-        post 'run_compile'
-        post 'run_fast_compile'
-      end
-    end
+    resources :conferences, :defaults => { :format => 'json' }
     resources :events, :defaults => { :format => 'json' } do
       collection do
         post 'download'

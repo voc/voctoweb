@@ -49,16 +49,6 @@ class Conference < ActiveRecord::Base
     ScheduleDownloadWorker.perform_async(self.id)
   end
 
-  def self.run_compile_job
-    Rails.logger.info "Compiling static website"
-    `sudo -u media-frontend /srv/www/media-frontend/media-frontend/bin/nanoc-wrapper` unless Rails.env.test?
-  end
-
-  def self.run_fast_compile_job
-    Rails.logger.info "Fast Compiling static website"
-    `sudo -u media-frontend /srv/www/media-frontend/media-frontend/bin/nanoc-fast-wrapper` unless Rails.env.test?
-  end
-
   def get_event_url(id)
     if self.schedule_url.present?
       return self.schedule_url.sub('schedule.xml', "events/#{id}.html")

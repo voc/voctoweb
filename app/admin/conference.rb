@@ -73,30 +73,12 @@ ActiveAdmin.register Conference do
     redirect_to action: :show
   end
 
-  collection_action :run_compile, method: :post do
-    Conference.run_compile_job
-    redirect_to action: :index
-  end
-
-  collection_action :run_fast_compile, method: :post do
-    Conference.run_fast_compile_job
-    redirect_to action: :index
-  end
-
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
   end
 
   action_item(:add_event, only: [:show, :edit]) do
     link_to 'Add Event', new_admin_event_path(event: {conference_id: conference.id}), method: :get
-  end
-
-  action_item(:compile) do
-    link_to 'Compile', run_compile_admin_conferences_path, method: :post
-  end
-
-  action_item(:fast_compile) do
-    link_to 'Fast Compile', run_fast_compile_admin_conferences_path, method: :post
   end
 
   controller do
