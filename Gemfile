@@ -17,6 +17,7 @@ gem 'puma'
 gem 'dotenv-rails'
 
 group :development do
+  gem 'bullet'
   gem 'capistrano', '~> 3.4.0', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
