@@ -19,14 +19,13 @@
   .event-previews
     -# Build event overview
     - @events.each do |event|
-      - recordings = event.recordings.downloaded
       %a.event-preview{href: event_url(conference_slug: @conference.slug, slug: event.slug)}
         %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
         .caption
           %ul.metadata
             %li
               %span.fa.fa-clock-o
-              = recording_length(recordings)
+              = recording_length(event.recordings.downloaded)
             %li
               %span.fa.fa-calendar-o
               = date(event)
@@ -34,4 +33,3 @@
               %span.fa{class: event.persons_icon}
               = event.persons_text
           %h3= h event.title
-

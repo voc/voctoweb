@@ -2,8 +2,9 @@
   %div.container-fluid
     %div.navbar-header
       %a.navbar-brand(href='/')
-        %img{src: image_path('frontend/tv.png'), alt: 'ccc-tv logo, a tv displaying a play icon'}
-        ccc-tv
+        %span
+          %img{src: image_path('frontend/tv.png'), alt: 'ccc-tv logo, a tv displaying a play icon'}
+          ccc-tv
 
     .nav.navbar-form.navbar-right.button-wrapper
       - if @conference and Recording.recorded_at(@conference).count > 0
@@ -28,6 +29,6 @@
     %ol.container-fluid.breadcrumb
       - parts.each_with_index do |part, index|
         %li
-          %a.inverted{href: '/browse/'+parts[0..index].join('/')}
+          %a.inverted{href: '/' + parts[0..index].join('/')}
             = part
 
