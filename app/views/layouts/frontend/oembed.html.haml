@@ -4,14 +4,11 @@
     %title
       C3TV -
       = h @event.title
-    %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
+    = stylesheet_link_tag('frontend/styles.css')
+    = javascript_include_tag 'frontend'
 
   %body
     %div.container-fluid
       = render 'frontend/shared/videoplayer'
-
-    %script(src='/assets/js/jquery.min.js')
-    %script(src='/assets/js/bootstrap.min.js')
-    %script(src='/assets/js/mediaelement-and-player.min.js')
 
     = render 'frontend/shared/videoplayer_js'

@@ -1,9 +1,6 @@
 - content_for :title do
   = @event.title
 
-- content_for :head do
-  %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
-
 %h1
   = h @event.title
 - if @event.subtitle

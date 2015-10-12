@@ -37,11 +37,6 @@ module Frontend
       URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s
     end
 
-    def page_url(identifier)
-      return ''
-      Settings.baseURL + identifier.path
-    end
-
     def breadcrumbs_trail
       parts = if @conference
          @conference.slug.split('/')

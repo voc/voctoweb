@@ -4,24 +4,24 @@
 %h3 Share with others
 %ul
   %li
-    %a{:id => "btnTweet", :href => twitter_url(@event.title, page_url(@event)) }
+    %a{:id => "btnTweet", :href => twitter_url(@event.title, show_event_url(@event)) }
       %i{:class => "fa-twitter"}
       via Twitter
   %li
     %a{:id => "btnFacebook",
-       :href => facebook_url(@event.title, page_url(@event)) }
+       :href => facebook_url(@event.title, show_event_url(@event)) }
       %i{:class => "fa-facebook-square"}
       via Facebook
   %li
-    %a{:id => "btnGPlus", :href => googleplus_url(@event.title, page_url(@event)) }
+    %a{:id => "btnGPlus", :href => googleplus_url(@event.title, show_event_url(@event)) }
       %i{:class => "fa-google-plus"}
       via Google+
   %li
-    %a{:id => "btnAppNet", :href => appnet_url(@event.title, page_url(@event)) }
+    %a{:id => "btnAppNet", :href => appnet_url(@event.title, show_event_url(@event)) }
       %i{:class => "fa-adn"}
       via App.net
   %li
-    %a{:id => "btnMail", :href => mail_url(@event.title, page_url(@event)) }
+    %a{:id => "btnMail", :href => mail_url(@event.title, show_event_url(@event)) }
       %i{:class => "fa-envelope"}
       by Mail
 :javascript
