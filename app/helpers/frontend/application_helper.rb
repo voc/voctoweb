@@ -6,6 +6,10 @@ module Frontend
       event_url(conference_slug: event.conference.slug, slug: event.slug)
     end
 
+    def oembed_show_event_url(event)
+      oembed_event_url(conference_slug: event.conference.slug, slug: event.slug)
+    end
+
     def download_show_event_url(event)
       download_event_url(conference_slug: event.conference.slug, slug: event.slug)
     end
@@ -26,22 +30,11 @@ module Frontend
       'https://alpha.app.net/intent/post?text=' + URI.encode_www_form_component(title + ': ' + url)
     end
 
+    # TODO FIXME
     def mail_url(title, url)
       content = URI.encode_www_form_component(title + ': ' + url)
       subject = URI.encode_www_form_component(title)
       URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s
-    end
-
-    def oembed_url(identifier)
-      Settings.oembedURL + identifier[0..-2] + '.html'
-    end
-
-    # TODO: returns url to omebed page for recording?
-    def oembed_page_url(identifier)
-      id = identifier + 'oembed/'
-      return ''
-      oembed = @event.recordings.find { |i| i.identifier == id }
-      Settings.baseURL + oembed.path
     end
 
     def page_url(identifier)

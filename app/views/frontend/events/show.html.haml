@@ -3,10 +3,7 @@
 
 - content_for :head do
   = render 'frontend/shared/folder_feeds'
-  %link{href: '/assets/css/mediaelementplayer.min.css', type: 'text/css', rel: 'stylesheet'}
-  != "<link href='#{oembed_url(@item.identifier)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
-
-%script(src='/assets/js/jquery.min.js')
+  != "<link href='#{oembed_show_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
 %h1
   =  @event.title
@@ -81,9 +78,6 @@
   %h3 Tags
   - @event.tags.each do |tag|
     != link_for(tag)
-
-%script(src='/assets/js/bootstrap.min.js')
-%script(src='/assets/js/mediaelement-and-player.min.js')
 
 = render 'frontend/shared/videoplayer_js'
 

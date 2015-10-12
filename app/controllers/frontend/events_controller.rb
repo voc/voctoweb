@@ -1,6 +1,7 @@
 module Frontend
   class EventsController < FrontendController
     before_action :load_event
+
     def show
     end
 
@@ -17,8 +18,8 @@ module Frontend
       params[:slug] = '' if params[:slug] == 'index'
       @event = Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
       @conference = @event.conference
-      @video_recordings = []
-      @audio_recordings = []
+      @video_recordings = @event.recordings.video
+      @audio_recordings = @event.recordings.audio
     end
   end
 end

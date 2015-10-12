@@ -6,7 +6,7 @@
 
   %h1= @conference.acronym.gsub(/[\-_]/,' ')
   - if @conference.title and not @conference.acronym == @conference.title
-    %h2= h @conference.title
+    %h2= @conference.title
 
   #sorting.btn-group.btn-group-sm.btn-group-justified
     - %w{name duration date}.each do |sorting|
