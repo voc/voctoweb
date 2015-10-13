@@ -89,7 +89,7 @@ class Event < ActiveRecord::Base
   end
 
   def length
-    self.recordings.max { |e| e.length }.try(:length)
+    self.recordings.max { |e| e.length }.try(:length) || 0
   end
 
   def set_image_filenames(thumb_url, poster_url)
