@@ -49,8 +49,8 @@ module Frontend
     def set_conference
       return unless params[:slug]
       return unless params[:mime_type]
-      @conference = Conference.find_by!(slug: params[:slug])
-      @mime_type, @mime_type_name = @conference.mime_types.find { |m, _n| m == params[:mime_type] }
+      @conference = Frontend::Conference.find_by!(slug: params[:slug])
+      @mime_type, @mime_type_name = @conference.mime_types.find { |m, n| n == params[:mime_type] }
       fail ArgumentError unless @mime_type
     end
 

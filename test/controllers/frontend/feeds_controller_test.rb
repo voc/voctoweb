@@ -27,7 +27,7 @@ module Frontend
     end
 
     test "should get podcast_folder" do
-      get :podcast_folder, slug: Conference.first.slug, mime_type: 'video/webm', format: :xml
+      get :podcast_folder, slug: Conference.first.slug, mime_type: 'webm', format: :xml
       assert_response :success
     end
   end
