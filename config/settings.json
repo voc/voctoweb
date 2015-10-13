@@ -1,6 +1,5 @@
 {
-  "baseURL": "http://media.ccc.de",
-  "oembedURL": "http://api.media.ccc.de/public/oembed?url=http://media.ccc.de",
+  "oembedURL": "http://api.media.ccc.de/public/oembed?url=",
   "cdnURL": "http://cdn.media.ccc.de",
   "staticURL": "http://static.media.ccc.de",
   "header": {

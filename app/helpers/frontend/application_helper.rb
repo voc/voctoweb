@@ -7,7 +7,7 @@ module Frontend
     end
 
     def oembed_show_event_url(event)
-      oembed_event_url(conference_slug: event.conference.slug, slug: event.slug)
+      Settings.oembedURL + oembed_event_url(conference_slug: event.conference.slug, slug: event.slug)
     end
 
     def download_show_event_url(event)
