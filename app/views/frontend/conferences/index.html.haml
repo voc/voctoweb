@@ -1,19 +1,20 @@
-%h1 Browse by category
+.container-fluid
+  %h1 Browse by category
 
-- if @folders.present?
-  - @folders.each do |folder|
-    - if folder.conference
-      %a.thumbnail.conference{href: h(folder.url)}
-        .header
-          %span.fa.fa-video-camera
-          = Event.recorded_at(folder.conference).to_a.count
-        %img{src: folder.conference.logo_url, alt: 'conference logo'}
-        .caption
-          = folder.conference.title
-    - else
-      %a.thumbnail.folder{href: h(folder.url)}
-        .header
-          %span.fa.fa-th
-        .fa.fa-folder
-        .caption
-          = folder.name
+  - if @folders.present?
+    - @folders.each do |folder|
+      - if folder.conference
+        %a.thumbnail.conference{href: h(folder.url)}
+          .header
+            %span.fa.fa-video-camera
+            = Event.recorded_at(folder.conference).to_a.count
+          %img{src: folder.conference.logo_url, alt: 'conference logo'}
+          .caption
+            = folder.conference.title
+      - else
+        %a.thumbnail.folder{href: h(folder.url)}
+          .header
+            %span.fa.fa-th
+          .fa.fa-folder
+          .caption
+            = folder.name
