@@ -32,6 +32,7 @@ config/initializers/media_backend.rb
 config/database.yml
 db/seeds_live.rb
 .env.production
+.env.local
 .env
 
 # Ignore fixtures with sensitive data as a precaution

@@ -49,7 +49,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 set :bundle_without, %w{development test sqlite3}.join(' ')
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml .env.production .ruby-version}
+set :linked_files, %w{config/initializers/media_backend.rb config/database.yml config/secrets.yml .env.production .ruby-version}
 # Default value for linked_dirs is []
 set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
