@@ -13,7 +13,7 @@ set :user, ENV['CAP_USER']
 set :tmp_dir, "/srv/www/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
-#set :rvm_type, :user                     # Defaults to: :auto
+# set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, '2.2.3@media-site'
 
 # Default value for :log_level is :debug
@@ -34,24 +34,24 @@ set :puma_workers,    3
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
-#set :deploy_via,      :remote_cache
+# set :deploy_via,      :remote_cache
 set :deploy_to,       "/srv/www/#{fetch(:application)}/apps/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_bind,       ["unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock", 'tcp://127.0.0.1:4080']
 set :puma_conf,       "#{shared_path}/config/puma.rb"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :ssh_options,     forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :bundle_without, %w{development test sqlite3}.join(' ')
+set :puma_init_active_record, true # Change to false when not using ActiveRecord
+set :bundle_without, %w(development test sqlite3).join(' ')
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/initializers/media_backend.rb config/database.yml config/secrets.yml .env.production .ruby-version}
+set :linked_files, %w(config/initializers/media_backend.rb config/database.yml config/secrets.yml .env.production .ruby-version)
 # Default value for linked_dirs is []
-set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs,  %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -81,9 +81,9 @@ namespace :deploy do
     end
   end
 
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  after :finishing,    :compile_assets
+  after :finishing,    :cleanup
+  after :finishing,    :restart
 end
 
 # ps aux | grep puma    # Get puma pid
