@@ -4,6 +4,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise', '~> 3.4.0'
 gem 'aasm'
 gem 'sidekiq'
+gem 'airbrussh'
 
 # rails cache
 gem 'redis-rails'
