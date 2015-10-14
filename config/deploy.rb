@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'media-backend'
+set :application, 'media-site'
 set :repo_url, ENV['CAP_REPO']
 
 # Default branch is :master
@@ -10,11 +10,11 @@ set :branch, ENV['CAP_BRANCH']
 set :user, ENV['CAP_USER']
 
 # temporary deploy scripts, etc
-set :tmp_dir, "/srv/#{fetch(:user)}/tmp"
+set :tmp_dir, "/srv/www/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 #set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '2.2.3@media-backend'
+set :rvm_ruby_version, '2.2.3@media-site'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -38,7 +38,7 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 #set :deploy_via,      :remote_cache
-set :deploy_to,       "/srv/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :deploy_to,       "/srv/www/#{fetch(:application)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_conf,       "#{shared_path}/config/puma.rb"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
@@ -69,17 +69,6 @@ namespace :puma do
 end
 
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
-  task :check_revision do
-    on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse manno/#{fetch(:branch)}`
-        puts "WARNING: HEAD is not the same as manno/#{fetch(:branch)}"
-        puts "Run `git push` to sync changes."
-        exit
-      end
-    end
-  end
-
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -95,7 +84,6 @@ namespace :deploy do
     end
   end
 
-  before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
