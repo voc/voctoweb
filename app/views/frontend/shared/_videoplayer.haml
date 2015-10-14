@@ -1,6 +1,6 @@
 %video.video{controls: 'controls', width: aspect_ratio_width, height: aspect_ratio_height}
   - video_tag_sources(@video_recordings).each do |recording|
     %source{type: recording.display_mime_type, src: h(recording.url)}
-  %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: '/assets/flashmediaelement.swf' }
+  %object{ width: aspect_ratio_width, height: aspect_ratio_height, type: 'application/x-shockwave-flash', data: asset_url('flashmediaelement.swf') }
     %param{ name: 'allowFullScreen', value: 'true' }
     %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(@video_recordings)}" }
