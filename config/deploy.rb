@@ -16,9 +16,6 @@ set :tmp_dir, "/srv/www/#{fetch(:application)}/tmp"
 #set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, '2.2.3@media-site'
 
-# Default value for :scm is :git
-# set :scm, :git
-
 # Default value for :log_level is :debug
 # set :log_level, :debug
 

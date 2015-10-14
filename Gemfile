@@ -5,6 +5,7 @@ gem 'devise', '~> 3.4.0'
 gem 'aasm'
 gem 'sidekiq'
 gem 'airbrussh'
+gem 'foreman'
 
 # rails cache
 gem 'redis-rails'
