@@ -13,23 +13,13 @@ ruby 2.0.0, 2.1.1
 
 ### Deployment Instructions
 
-Copy and edit the configuration file `config/initializers/media_backend.rb.example` to `config/initializers/media_backend.rb`.
+Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
 
     recordings_base_dir: '/srv/recordings/cdn',
     images_base_dir: '/srv/www/cdn',
     tmp_dir: '/tmp'
 
-You need to create a secret token for sessions:
-
-    cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
-    rake secret
-
-And another one for devise:
-
-    cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
-    rake secret
-
-This changed
+You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
 
 ### Database Creation
 

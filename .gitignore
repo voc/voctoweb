@@ -42,3 +42,4 @@ test/fixtures/*.gif
 test/fixtures/*.yml
 test/fixtures/*.png
 test/fixtures/*.avi
+config/settings.yml
