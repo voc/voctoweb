@@ -6,15 +6,17 @@
           %img{src: image_path('frontend/tv.png'), alt: 'ccc-tv logo, a tv displaying a play icon'}
           ccc-tv
 
-    .nav.navbar-form.navbar-right.button-wrapper
-      - if @conference and Recording.recorded_at(@conference).count > 0
-        %a.form-control.btn.btn-default{href: podcast_folder_feed_url(slug: @conference.slug, mime_type: @conference.preferred_mime_type)}
-          %span.fa.fa-rss
-      - else
-        %a.form-control.btn.btn-default{href: '/podcast.xml'}
-          %span.fa.fa-rss
+    .nav.navbar-form.navbar-right.dropdown
+      %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        %span.fa.fa-rss
+      %ul.dropdown-menu{"aria-labelledby" => "feedMenu"}
+        = render 'frontend/shared/navbar_feeds'
+        - if @conference and Recording.recorded_at(@conference).count > 0
+          %li
+            %hr
+          = render 'frontend/shared/navbar_folder_feeds'
 
-          %span.fa.fa-magnet
+    .nav.navbar-form.navbar-right.button-wrapper
       %a.form-control.btn.btn-default{href: '/about.html'}
         %span.fa.fa-info
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
