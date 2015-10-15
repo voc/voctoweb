@@ -5,7 +5,7 @@ module ViewHelper
   end
 
   def frontend_link(event)
-    [Settings.frontendURL, 'browse', event.conference.slug, event.slug].join('/') + '.html'
+    [Settings.frontend_url, 'browse', event.conference.slug, event.slug].join('/') + '.html'
   end
 
   def show_recording_url(recording)

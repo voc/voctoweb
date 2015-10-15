@@ -28,7 +28,6 @@ vendor/gems/
 public/assets
 
 # Ignore secret tokens and configs
-config/initializers/media_backend.rb
 config/database.yml
 db/seeds_live.rb
 .env.production

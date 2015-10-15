@@ -11,13 +11,13 @@ class ImportTemplate < ActiveRecord::Base
   has_attached_directory :images,
     via: :images_path,
     prefix: Settings.folders['images_base_dir'],
-    url: Settings.staticURL,
+    url: Settings.static_url,
     url_path: Settings.folders['images_webroot']
 
   has_attached_directory :recordings,
     via: :recordings_path,
     prefix: Settings.folders['recordings_base_dir'],
-    url: Settings.cdnURL,
+    url: Settings.cdn_url,
     url_path: Settings.folders['recordings_webroot']
 
   has_attached_file :logo, via: :logo, belongs_into: :images

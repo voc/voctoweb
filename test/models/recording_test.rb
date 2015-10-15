@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class RecordingTest < ActiveSupport::TestCase
-
   setup do
     @recording = create(:recording)
     @event = @recording.event

@@ -16,13 +16,13 @@ class Conference < ActiveRecord::Base
   has_attached_directory :images,
     via: :images_path,
     prefix: Settings.folders['images_base_dir'],
-    url: Settings.staticURL,
+    url: Settings.static_url,
     url_path: Settings.folders['images_webroot']
 
   has_attached_directory :recordings,
     via: :recordings_path,
     prefix: Settings.folders['recordings_base_dir'],
-    url: Settings.cdnURL,
+    url: Settings.cdn_url,
     url_path: Settings.folders['recordings_webroot']
 
   aasm column: :schedule_state do
@@ -58,9 +58,9 @@ class Conference < ActiveRecord::Base
   # frontend generates logos like this:
   def logo_url
     if self.logo
-      File.join Settings.frontendURL, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
+      File.join Settings.frontend_url, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
     else
-      File.join Settings.frontendURL, 'images/logos/unknown.png'
+      File.join Settings.frontend_url, 'images/logos/unknown.png'
     end
   end
 

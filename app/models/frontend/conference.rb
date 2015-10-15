@@ -10,7 +10,7 @@ module Frontend
     end
 
     def recordings_url
-      File.join Settings.cdnURL, self.recordings_path
+      File.join Settings.cdn_url, self.recordings_path
     end
   end
 end
