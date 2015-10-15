@@ -33,12 +33,12 @@ class ConferenceTest < ActiveSupport::TestCase
 
   test "should get images path" do
     @conference = create(:conference_with_recordings)
-    assert_equal File.join(MediaBackend::Application.config.folders[:images_base_dir], @conference.images_path), @conference.get_images_path
+    assert_equal File.join(Settings.folders['images_base_dir'], @conference.images_path), @conference.get_images_path
   end
 
   test "should get images url" do
     @conference = create(:conference_with_recordings)
-    assert_equal "#{MediaBackend::Application.config.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path
+    assert_equal "#{Settings.folders['images_webroot']}/#{@conference.images_path}", @conference.get_images_url_path
   end
 
   test "should get logo url" do

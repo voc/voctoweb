@@ -76,7 +76,7 @@ class Recording < ActiveRecord::Base
   private
 
   def get_tmp_path
-    File.join(MediaBackend::Application.config.folders[:tmp_dir],
+    File.join(Settings.folders['tmp_dir'],
     Digest::MD5.hexdigest(self.filename))
   end
 

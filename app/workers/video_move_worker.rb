@@ -17,7 +17,7 @@ class VideoMoveWorker
   end
 
   def get_tmp_path(filename)
-    File.join(MediaBackend::Application.config.folders[:tmp_dir],
+    File.join(Settings.folders['tmp_dir'],
     Digest::MD5.hexdigest(filename))
   end
 end

@@ -10,15 +10,15 @@ class ImportTemplate < ActiveRecord::Base
 
   has_attached_directory :images,
     via: :images_path,
-    prefix: MediaBackend::Application.config.folders[:images_base_dir],
-    url: MediaBackend::Application.config.staticURL,
-    url_path: MediaBackend::Application.config.folders[:images_webroot]
+    prefix: Settings.folders['images_base_dir'],
+    url: Settings.staticURL,
+    url_path: Settings.folders['images_webroot']
 
   has_attached_directory :recordings,
     via: :recordings_path,
-    prefix: MediaBackend::Application.config.folders[:recordings_base_dir],
-    url: MediaBackend::Application.config.cdnURL,
-    url_path: MediaBackend::Application.config.folders[:recordings_webroot]
+    prefix: Settings.folders['recordings_base_dir'],
+    url: Settings.cdnURL,
+    url_path: Settings.folders['recordings_webroot']
 
   has_attached_file :logo, via: :logo, belongs_into: :images
 

@@ -1,7 +1,15 @@
 {
-  "oembedURL": "http://api.media.ccc.de/public/oembed?url=",
-  "cdnURL": "http://cdn.media.ccc.de",
-  "staticURL": "http://static.media.ccc.de",
+  "frontend_url":"http://media.ccc.de",
+  "cdn_url":"http://cdn.media.ccc.de",
+  "static_url":"http://static.media.ccc.de",
+  "oembed_url": "http://api.media.ccc.de/public/oembed?url=",
+  "folders":{
+    "recordings_base_dir":"/srv/recordings/cdn",
+    "recordings_webroot":"",
+    "images_base_dir":"/srv/www/cdn",
+    "images_webroot":"/media",
+    "tmp_dir":"/tmp"
+  },
   "header": {
     "description": "Video Streaming Portal des Chaos Computer Clubs",
     "author": "CCC",

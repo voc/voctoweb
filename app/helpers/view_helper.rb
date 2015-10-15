@@ -5,7 +5,7 @@ module ViewHelper
   end
 
   def frontend_link(event)
-    [MediaBackend::Application.config.frontendURL, 'browse', event.conference.slug, event.slug].join('/') + '.html'
+    [Settings.frontendURL, 'browse', event.conference.slug, event.slug].join('/') + '.html'
   end
 
   def show_recording_url(recording)

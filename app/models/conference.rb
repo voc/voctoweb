@@ -15,15 +15,15 @@ class Conference < ActiveRecord::Base
 
   has_attached_directory :images,
     via: :images_path,
-    prefix: MediaBackend::Application.config.folders[:images_base_dir],
-    url: MediaBackend::Application.config.staticURL,
-    url_path: MediaBackend::Application.config.folders[:images_webroot]
+    prefix: Settings.folders['images_base_dir'],
+    url: Settings.staticURL,
+    url_path: Settings.folders['images_webroot']
 
   has_attached_directory :recordings,
     via: :recordings_path,
-    prefix: MediaBackend::Application.config.folders[:recordings_base_dir],
-    url: MediaBackend::Application.config.cdnURL,
-    url_path: MediaBackend::Application.config.folders[:recordings_webroot]
+    prefix: Settings.folders['recordings_base_dir'],
+    url: Settings.cdnURL,
+    url_path: Settings.folders['recordings_webroot']
 
   aasm column: :schedule_state do
     state :not_present, initial: true
@@ -58,9 +58,9 @@ class Conference < ActiveRecord::Base
   # frontend generates logos like this:
   def logo_url
     if self.logo
-      File.join MediaBackend::Application.config.frontendURL, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
+      File.join Settings.frontendURL, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
     else
-      File.join MediaBackend::Application.config.frontendURL, 'images/logos/unknown.png'
+      File.join Settings.frontendURL, 'images/logos/unknown.png'
     end
   end
 

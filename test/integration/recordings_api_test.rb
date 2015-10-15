@@ -10,7 +10,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     @file = create_test_file FILE
     @json = get_json
 
-    FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:recordings_base_dir], @event.conference.recordings_path)
+    FileUtils.mkdir_p File.join(Settings.folders['recordings_base_dir'], @event.conference.recordings_path)
   end
 
   def get_json
