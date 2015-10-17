@@ -1,0 +1,113 @@
+- content_for :title do
+  = @event.title
+
+- content_for :head do
+  = render 'frontend/shared/folder_feeds'
+  != "<link href='#{oembed_show_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
+
+.container-fluid
+  %h1
+    =  @event.title
+  - if @event.subtitle
+    %h2
+      = @event.subtitle
+
+  %p.persons
+    %span.fa{class: persons_icon(@event)}
+      - @event.persons.to_enum.with_index(1).each do |speaker, index|
+        - if (@event.persons.count - 1) == index
+          %a{href: '/search/?q=' + h(speaker)}= speaker
+          and
+        - elsif @event.persons.count == index
+          %a{href: '/search/?q=' + h(speaker)}= speaker
+        - else
+          %a{href: '/search/?q=' + h(speaker)}= speaker
+          \,
+
+
+  %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
+    - if @video_recordings.present?
+      %li
+        %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+    - if @audio_recordings.present?
+      %li
+        %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
+    %li
+      %a{href: download_show_event_url(@event), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+
+    %li
+      %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
+
+  .tab-content
+    - if @video_recordings.present?
+      #video.tab-pane.active
+        = render 'frontend/shared/videoplayer'
+
+    - if @audio_recordings.present?
+      #audio.tab-pane
+        %audio.audio{controls: 'controls'}
+          - @audio_recordings.each do |recording|
+            %source{type: recording.display_mime_type, src: h(recording.url)}
+
+    #download.tab-pane
+      = render 'frontend/shared/download'
+
+    #embedshare.tab-pane
+      = render 'frontend/shared/embedshare'
+
+  %ul.metadata
+    %li
+      %span.fa.fa-clock-o
+      = duration_in_minutes(@event.duration)
+    %li
+      %span.fa.fa-calendar-o
+      = @event.display_date
+    %li
+      %span.fa.fa-eye
+      = @event.view_count
+    %li
+      %span.fa.fa-external-link
+      %a{href: @event.link}
+        = parse_url_host(@event)
+
+  - if @event.description.present?
+    %h3 About
+    %p.description
+      = @event.description
+
+  - if @event.tags.present?
+    %h3 Tags
+    - @event.tags.each do |tag|
+      != link_for(tag)
+
+  = render 'frontend/shared/videoplayer_js'
+  = render 'frontend/shared/audioplayer_js'
+
+  :javascript
+    // activate tab via hash and default to video
+    function setTabToHash() {
+      var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
+      var activeTab = $('.nav-tabs a[href=' + hash + '], .nav-tabs a[data-target=' + hash + ']')
+        .tab('show');
+
+      if (activeTab.length === 0) {
+        var hash = '#video';
+        if(window.history && window.history.replaceState) {
+          // set new hash without adding an entry into the browser history
+          window.history.replaceState(null, "", hash);
+        }
+        else {
+          // classic fallback
+          window.location.hash = hash;
+        }
+      }
+    }
+    setTabToHash();
+
+    // change hash on tab change
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+    });
+
+    // adjust tabs when hash changes
+    window.onhashchange = setTabToHash;

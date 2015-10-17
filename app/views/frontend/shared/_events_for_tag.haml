@@ -1,0 +1,10 @@
+%h1 Events for tag "#{@tag}"
+
+.event-previews-tags
+  - if @events.present?
+    - @events.each do |event|
+      .event-preview
+        %a{href: show_event_url(event)}
+          %img.conference-logo{src: h(event.conference.logo_url), alt: h(event.conference.title)}
+        .caption
+          = render partial: 'frontend/shared/event_metadata', locals: { event: event }

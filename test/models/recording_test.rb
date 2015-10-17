@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class RecordingTest < ActiveSupport::TestCase
-
   setup do
     @recording = create(:recording)
     @event = @recording.event
@@ -42,9 +41,9 @@ class RecordingTest < ActiveSupport::TestCase
     @recording.save
 
     run_background_jobs_immediately do
-      @recording.start_download
+      @recording.start_download!
     end
-    assert @recording.downloaded?
+    assert @recording.reload.downloaded?
   end
 
 end

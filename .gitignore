@@ -19,7 +19,8 @@
 .gemrc
 .ruby-version
 .vagrant/
-tags
+/tags
+/Gemfile.lock.tags
 *.patch
 vendor/gems/
 
@@ -27,10 +28,10 @@ vendor/gems/
 public/assets
 
 # Ignore secret tokens and configs
-config/initializers/media_backend.rb
 config/database.yml
 db/seeds_live.rb
 .env.production
+.env.local
 .env
 
 # Ignore fixtures with sensitive data as a precaution
@@ -41,3 +42,4 @@ test/fixtures/*.gif
 test/fixtures/*.yml
 test/fixtures/*.png
 test/fixtures/*.avi
+config/settings.yml

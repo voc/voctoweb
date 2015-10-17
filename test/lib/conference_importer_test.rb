@@ -23,12 +23,12 @@ class ConferenceImporterTest < ActiveSupport::TestCase
     create_test_file "#{it.get_recordings_path}/webm/testevent.mp4"
 
     FileUtils.mkdir_p it.get_images_path
-    create_test_file "#{it.get_images_path}/testevent.gif"
+    create_test_file "#{it.get_images_path}/testevent.jpg"
 
     assert_difference('Recording.count') do
       ConferenceImporter.import(it)
     end
-    assert_equal 'testevent.gif', Event.last.thumb_filename
+    assert_equal 'testevent.jpg', Event.last.thumb_filename
     assert_equal 'testevent.mp4', Recording.last.filename
   end
 

@@ -1,0 +1,38 @@
+%div.navbar.navbar-default.navbar-fixed-top(role="navigation")
+  %div.container-fluid
+    %div.navbar-header
+      %a.navbar-brand(href='/')
+        %span
+          %img{src: image_path('frontend/tv.png'), alt: 'ccc-tv logo, a tv displaying a play icon'}
+          ccc-tv
+
+    .nav.navbar-form.navbar-right.dropdown
+      %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        %span.fa.fa-rss
+      %ul.dropdown-menu{"aria-labelledby" => "feedMenu"}
+        = render 'frontend/shared/navbar_feeds'
+        - if @conference and Recording.recorded_at(@conference).count > 0
+          %li
+            %hr
+          = render 'frontend/shared/navbar_folder_feeds'
+
+    .nav.navbar-form.navbar-right.button-wrapper
+      %a.form-control.btn.btn-default{href: '/about.html'}
+        %span.fa.fa-info
+    %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
+      %div.form-group.input-group
+        %input.form-control{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
+        %span.input-group-btn
+          %button.btn.btn-default{type: 'submit'}
+            %span.fa.fa-search
+
+- breadcrumbs_trail do |parts, last|
+  #breadcrumb
+    %ol.container-fluid.breadcrumb
+      - parts.each_with_index do |part, index|
+        %li
+          %a.inverted{href: '/' + parts[0..index].join('/')}
+            = part
+      %li.active
+        = last
+

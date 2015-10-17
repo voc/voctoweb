@@ -14,7 +14,7 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"conference":'
     url = 'file://' + File.join(Rails.root, 'test', 'fixtures', 'schedule.xml')
-    d = %'{"acronym":"frab666","recordings_path":"conference/frab123","images_path":"events/frab","webgen_location":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":"#{url}"}'
+    d = %'{"acronym":"frab666","recordings_path":"conference/frab123","images_path":"events/frab","slug":"event/frab/frab123","aspect_ratio":"16:9","title":null,"schedule_url":"#{url}"}'
     json += d
     json+= '}'
     json

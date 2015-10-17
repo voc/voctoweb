@@ -10,7 +10,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     @file = create_test_file FILE
     @json = get_json
 
-    FileUtils.mkdir_p File.join(MediaBackend::Application.config.folders[:recordings_base_dir], @event.conference.recordings_path)
+    FileUtils.mkdir_p File.join(Settings.folders['recordings_base_dir'], @event.conference.recordings_path)
   end
 
   def get_json
@@ -34,6 +34,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
   end
 
   test "should call start_download after create" do
+    Sidekiq::Testing.inline!
     post_json '/api/recordings.json', @json
     event = Event.find_by guid: @event.guid
     assert_not_nil event

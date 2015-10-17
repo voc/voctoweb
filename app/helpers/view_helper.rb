@@ -4,10 +4,6 @@ module ViewHelper
     url.gsub(/https?:/, '').gsub(/.html$/, '/oembed.html')
   end
 
-  def frontend_link(event)
-    [MediaBackend::Application.config.frontendURL, 'browse', event.conference.webgen_location, event.slug].join('/') + '.html'
-  end
-
   def show_recording_url(recording)
     "(#{recording.get_recording_url})"
   end

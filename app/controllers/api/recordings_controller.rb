@@ -1,7 +1,7 @@
 class Api::RecordingsController < InheritedResources::Base
   before_filter :deny_json_request, if: :ssl_configured?
   before_filter :authenticate_api_key!
-  protect_from_forgery except: %i[create download]
+  protect_from_forgery except: %i(create download)
   respond_to :json
 
   def index
@@ -11,12 +11,12 @@ class Api::RecordingsController < InheritedResources::Base
 
   def create
     event = Event.find_by guid: params['guid']
-    @recording = Recording.new(params[:recording].permit([:original_url, :folder, :filename, :mime_type, :size, :width, :height, :length]))
+    @recording = Recording.new(recording_params)
     @recording.event = event
 
     respond_to do |format|
       if @recording.valid? and @recording.validate_for_api and @recording.save
-        @recording.start_download
+        @recording.start_download!
         format.json { render json: @recording, status: :created }
       else
         Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
@@ -28,9 +28,8 @@ class Api::RecordingsController < InheritedResources::Base
   def download
     event = Event.find_by guid: params['guid']
     respond_to do |format|
-      p event
       if event.present? and event.recordings.any?
-        event.recordings.each { |r| r.start_download }
+        event.recordings.each(&:start_download!)
         format.json { render json: event.recordings, status: :ok }
       else
         Rails.logger.info("JSON: failed to download recording: #{params.inspect}")
@@ -41,8 +40,11 @@ class Api::RecordingsController < InheritedResources::Base
 
   private
 
-  def permitted_params
-    {:event => params.require(:event).permit(:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height)}
+  def recording_params
+    params.require(:recording).permit(:original_url, :folder, :filename, :mime_type, :size, :width, :height, :length)
   end
 
+  def permitted_params
+    { :event => params.require(:event).permit(:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height) }
+  end
 end

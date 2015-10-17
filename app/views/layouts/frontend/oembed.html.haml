@@ -1,0 +1,14 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %title
+      C3TV -
+      = h @event.title
+    = stylesheet_link_tag('frontend/styles.css')
+    = javascript_include_tag 'frontend'
+
+  %body
+    %div.container-fluid
+      = render 'frontend/shared/videoplayer'
+
+    = render 'frontend/shared/videoplayer_js'

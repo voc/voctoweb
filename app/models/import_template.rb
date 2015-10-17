@@ -2,23 +2,23 @@ class ImportTemplate < ActiveRecord::Base
   include Storage
 
   validates_presence_of :acronym
-  validates_presence_of :webgen_location, :recordings_path, :images_path, :aspect_ratio, :release_date, :mime_type
+  validates_presence_of :slug, :recordings_path, :images_path, :aspect_ratio, :release_date, :mime_type
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
 
   validates_uniqueness_of :acronym
-  validates_uniqueness_of :webgen_location
+  validates_uniqueness_of :slug
 
-  has_attached_directory :images, 
+  has_attached_directory :images,
     via: :images_path,
-    prefix: MediaBackend::Application.config.folders[:images_base_dir],
-    url: MediaBackend::Application.config.staticURL,
-    url_path: MediaBackend::Application.config.folders[:images_webroot]
+    prefix: Settings.folders['images_base_dir'],
+    url: Settings.static_url,
+    url_path: Settings.folders['images_webroot']
 
-  has_attached_directory :recordings, 
+  has_attached_directory :recordings,
     via: :recordings_path,
-    prefix: MediaBackend::Application.config.folders[:recordings_base_dir],
-    url: MediaBackend::Application.config.cdnURL,
-    url_path: MediaBackend::Application.config.folders[:recordings_webroot]
+    prefix: Settings.folders['recordings_base_dir'],
+    url: Settings.cdn_url,
+    url_path: Settings.folders['recordings_webroot']
 
   has_attached_file :logo, via: :logo, belongs_into: :images
 

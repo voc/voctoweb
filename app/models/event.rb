@@ -22,11 +22,11 @@ class Event < ActiveRecord::Base
     joins(:recordings, :conference)
       .where(conferences: { id: conference })
       .where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 })
-      .group(:"events.id")
+      .group(:id)
   }
 
-  scope :by_identifier, ->(webgen_location, slug) {
-    joins(:conference).where(conferences: {webgen_location: webgen_location}, events: {slug: slug}).first
+  scope :by_conference_slug, ->(conference_slug, slug) {
+    joins(:conference).where(conferences: {slug: conference_slug}, events: {slug: slug})
   }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
@@ -38,6 +38,12 @@ class Event < ActiveRecord::Base
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
+  end
+
+  def self.by_identifier(conference_slug, slug)
+    event = by_conference_slug(conference_slug, slug).try(:first)
+    raise ActiveRecord::RecordNotFound, "#{conference_slug}/#{slug}" unless event
+    event
   end
 
   def self.update_promoted_from_view_count
@@ -82,12 +88,8 @@ class Event < ActiveRecord::Base
     self.tags = values.split("\n").map { |w| w.strip }
   end
 
-  def get_recording_by_mime_type(type)
-    self.recordings.where(mime_type: type)
-  end
-
   def length
-    self.recordings.max { |e| e.length }.try(:length)
+    self.recordings.max { |e| e.length }.try(:length) || 0
   end
 
   def set_image_filenames(thumb_url, poster_url)
@@ -108,7 +110,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  # TODO copied from frontend
   def persons_text
     if self.persons.length == 0
       'n/a'

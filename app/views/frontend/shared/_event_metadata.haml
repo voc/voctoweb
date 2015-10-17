@@ -1,0 +1,13 @@
+%ul.metadata
+  %li
+    %span.fa.fa-clock-o
+    = duration_in_minutes(event.duration)
+  %li
+    %span.fa.fa-calendar-o
+    = event.display_date
+  %li.persons
+    %span.fa{class: persons_icon(event.persons)}
+    != linked_persons_text(event.persons)
+%h3
+  %a{href: show_event_url(event)}
+    = event.title

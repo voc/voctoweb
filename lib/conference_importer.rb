@@ -3,7 +3,7 @@ class ConferenceImporter
 
     conference = Conference.create acronym: import_template.acronym,
       title: import_template.title,
-      webgen_location: import_template.webgen_location,
+      slug: import_template.slug,
       aspect_ratio: import_template.aspect_ratio,
       recordings_path: import_template.recordings_path,
       images_path: import_template.images_path,
@@ -20,15 +20,16 @@ class ConferenceImporter
         title:  slug,
         slug: slug,
         guid: SecureRandom.uuid
-      
+
       event.recordings.create filename: r.filename,
         folder: import_template.folder,
         state: 'downloaded',
         mime_type: import_template.mime_type,
         width: import_template.width,
-        height: import_template.height
+        height: import_template.height,
+        length: 0
 
     end
-  
+
   end
 end

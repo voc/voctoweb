@@ -1,0 +1,21 @@
+- content_for :title do
+  = @event.title
+
+.container-fluid
+  %h1
+    = h @event.title
+  - if @event.subtitle
+    %h2
+      = h @event.subtitle
+
+  %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+    %li
+      %a{href: show_event_url(@event)+'#video', role: 'tab'} Video
+    %li
+      %a{href: show_event_url(@event)+'#audio', role: 'tab'} Audio
+    %li.active
+      %a{href: '#download', role: 'tab'} Download
+
+  .tab-content
+    #download.tab-pane.active{style: 'display: block'}
+      = render 'frontend/shared/download'

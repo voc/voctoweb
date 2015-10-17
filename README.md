@@ -1,4 +1,4 @@
-# media-backend 
+# media-backend
 
 media.ccc.de webfrontend meta data editor and API.
 
@@ -9,27 +9,17 @@ media.ccc.de webfrontend meta data editor and API.
 
 ### Ruby Version
 
-ruby 2.0.0, 2.1.1
+ruby 2.2.3
 
 ### Deployment Instructions
 
-Copy and edit the configuration file `config/initializers/media_backend.rb.example` to `config/initializers/media_backend.rb`.
+Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
 
     recordings_base_dir: '/srv/recordings/cdn',
     images_base_dir: '/srv/www/cdn',
     tmp_dir: '/tmp'
 
-You need to create a secret token for sessions:
-
-    cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
-    rake secret
-
-And another one for devise:    
-
-    cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
-    rake secret
-
-This changed
+You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
 
 ### Database Creation
 
@@ -52,13 +42,6 @@ To get the backend up and running:
     gem install passenger
     passenger start -p 8023
 
-### Trigger nanoc
-
-Nanoc is triggered via sudo
-
-    Cmnd_Alias FRONTED = /srv/www/media-frontend/media-frontend/bin/frontend-wrapper
-    media-backend ALL = (media-frontend) NOPASSWD: FRONTEND
-
 ## First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
@@ -76,7 +59,7 @@ However folders and access rights need to be setup manually, before you can uplo
         "api_key":"4","acronym":"frab123",
         "recordings_path":"conference/frab123",
         "images_path":"events/frab",
-        "webgen_location":"event/frab/frab123",
+        "slug":"event/frab/frab123",
         "aspect_ratio":"16:9",
         "title":null,
         "schedule_url":"http://progam/schedule.xml"
@@ -128,14 +111,10 @@ Download recordings again, after recording was created.
 
 
 Create news items
-      
+
     /api/news
 
-Generate the site      
-
-    /api/conferences/run_compile
-
-Update promoted flag of events by view count    
+Update promoted flag of events by view count
 
     /api/events/update_promoted
 

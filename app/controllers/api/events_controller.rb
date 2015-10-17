@@ -1,14 +1,12 @@
 class Api::EventsController < InheritedResources::Base
   before_filter :deny_json_request, if: :ssl_configured?
   before_filter :authenticate_api_key!
-  protect_from_forgery except: %i[create download update_promoted]
+  protect_from_forgery except: %i(create download update_promoted)
   respond_to :json
 
   def index
     acronym = params['acronym']
-    unless acronym.nil?
-      conference = Conference.find_by acronym: acronym
-    end
+    conference = Conference.find_by acronym: acronym unless acronym.nil?
     unless conference.nil?
       @events = Event.find_by conference: conference
     else
@@ -20,11 +18,7 @@ class Api::EventsController < InheritedResources::Base
   def create
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym
-    @event = conference.events.build params[:event].permit([:guid, :link, :slug,
-                                                            :title, :subtitle,
-                                                            :description, :date,
-                                                            {persons: []}, {tags: []},
-                                                            :promoted, :release_date])
+    @event = conference.events.build event_params
 
     respond_to do |format|
       if create_event(params)
@@ -64,15 +58,22 @@ class Api::EventsController < InheritedResources::Base
       @event.fill_event_info
       return true if @event.save
     end
-    return false
+    false
+  end
+
+  def event_params
+    params.require(:event).permit(:guid, :link, :slug,
+      :title, :subtitle,
+      :description, :date,
+      { persons: [] }, { tags: [] },
+      :promoted, :release_date)
   end
 
   def permitted_params
-    {:event => params.require(:event).permit(:guid,
-                                             :thumb_filename, :poster_filename,
-                                             :conference_id, :title, :subtitle, :link, :slug,
-                                             :description, :persons_raw, :tags_raw, :date,
-                                             :promoted, :release_date, :event_id
-                                            )}
+    { :event => params.require(:event).permit(:guid,
+      :thumb_filename, :poster_filename,
+      :conference_id, :title, :subtitle, :link, :slug,
+      :description, :persons_raw, :tags_raw, :date,
+      :promoted, :release_date, :event_id) }
   end
 end

@@ -55,14 +55,25 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    airbrussh (0.7.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
+    autoprefixer-rails (6.0.3)
+      execjs
+      json
     bcrypt (3.1.10)
+    bootstrap-sass (3.3.5.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.3.0)
     bourbon (4.2.4)
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.2)
+    bullet (4.14.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     byebug (5.0.0)
       columnize (= 0.9.0)
     capistrano (3.4.0)
@@ -78,6 +89,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-sidekiq (0.5.3)
+      capistrano
+      sidekiq
     capistrano3-puma (1.2.1)
       capistrano (~> 3.0)
       puma (>= 2.6)
@@ -151,11 +165,15 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    foreman (0.78.0)
+      thor (~> 0.19.1)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    haml (4.0.7)
+      tilt
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -208,6 +226,8 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     puma (2.13.4)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-cors (0.4.0)
     rack-test (0.6.3)
@@ -244,6 +264,7 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rdoc (4.2.0)
+    redcarpet (3.3.2)
     redis (3.2.1)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -307,6 +328,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.9.0)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -316,23 +338,31 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activeadmin!
+  airbrussh
+  bootstrap-sass (~> 3.3.5)
+  bullet
   capistrano (~> 3.4.0)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
+  capistrano-sidekiq
   capistrano3-puma
   coffee-rails
   devise (~> 3.4.0)
   dotenv-rails
   factory_girl_rails (~> 4.0)
+  foreman
+  haml
   jbuilder (~> 1.2)
   jquery-rails
   pg
   pry-byebug
   pry-rails
   puma
+  quiet_assets
   rack-cors
   rails (~> 4.2.0)
+  redcarpet
   redis-rails
   ruby-graphviz
   sass-rails

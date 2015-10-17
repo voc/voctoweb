@@ -8,7 +8,7 @@ FactoryGirl.define do
     "frabcon#{n}"
   end
 
-  sequence :webgen_location do |n|
+  sequence :conference_slug do |n|
     "conference/frabcon" + SecureRandom.hex(16)
   end
   sequence :event_guid do |n|
@@ -37,10 +37,13 @@ FactoryGirl.define do
     title "FrabCon"
     recordings_path "events/frabcon123"
     images_path "frabcon123"
-    webgen_location { generate(:webgen_location) }
+    slug { generate(:conference_slug) }
     aspect_ratio "16:9"
 
     factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
+  end
+
+  factory :frontend_conference, parent: :conference, class: Frontend::Conference do
   end
 
   trait :conference_recordings do
@@ -93,7 +96,7 @@ FactoryGirl.define do
                 </event>
             </room>
         </day>
-    </schedule>    
+    </schedule>
     }
   end
 
@@ -143,7 +146,7 @@ FactoryGirl.define do
     title "FrabCon"
     recordings_path "events/frabcon123"
     images_path "frabcon123"
-    webgen_location { generate(:webgen_location) }
+    slug { generate(:conference_slug) }
     aspect_ratio "16:9"
     logo "logo.jpg"
     date "2013-08-21"

@@ -1,12 +1,9 @@
 language: ruby
 rvm:
-  - 2.0.0
-  - 2.1.1
+  - 2.2.3
 before_install:
-  - cp config/initializers/devise_secret_token.rb.example config/initializers/devise_secret_token.rb
-  - cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
-  - cp config/initializers/media_backend.rb.example config/initializers/media_backend.rb
   - cp config/database.yml.template config/database.yml
+  - cp config/settings.yml.template config/settings.yml
   - psql -c 'create database mirrorbrain;' -U postgres
 script:
   - bundle exec rake db:setup
