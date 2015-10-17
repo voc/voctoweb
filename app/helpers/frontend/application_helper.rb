@@ -78,12 +78,6 @@ module Frontend
       end
     end
 
-    def recording_length(recordings)
-      return unless recordings.present?
-      recording = recordings.find { |r| r.length.present? }
-      recording_length_minutes(recording) unless recording.nil?
-    end
-
     def recording_length_minutes(recording)
       "#{recording.length / 60} min" if recording.length > 0
     end
@@ -122,16 +116,6 @@ module Frontend
       when /4:3/
         high ? '300' : '90'
       end
-    end
-
-    def date(event)
-      date = event.release_date || event.date
-      date.strftime('%Y-%m-%d') if date
-    end
-
-    def datetime(event)
-      date = event.release_date || event.date
-      date.strftime('%Y-%m-%d %H:%M') if date
     end
 
     def parse_url_host(_urlish)

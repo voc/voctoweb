@@ -4,7 +4,7 @@
     = duration_in_minutes(event.duration)
   %li
     %span.fa.fa-calendar-o
-    = date(event)
+    = event.display_date
   %li.persons
     %span.fa{class: persons_icon(event.persons)}
     != linked_persons_text(event.persons)

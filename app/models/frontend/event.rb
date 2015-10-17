@@ -12,6 +12,11 @@ module Frontend
       self[:title].strip
     end
 
+    def display_date
+      d = release_date || date
+      d.strftime('%Y-%m-%d') if d
+    end
+
     def poster_url
       File.join(Settings.static_url, 'media', conference.images_path, poster_filename) if poster_filename
     end

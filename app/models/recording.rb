@@ -72,12 +72,4 @@ class Recording < ActiveRecord::Base
     }.delete_if { |dupe| dupe == self }
     self.errors.add :event, 'recording already exist on event' if dupe.present?
   end
-
-  private
-
-  def get_tmp_path
-    File.join(Settings.folders['tmp_dir'],
-    Digest::MD5.hexdigest(self.filename))
-  end
-
 end

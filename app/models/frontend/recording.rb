@@ -19,22 +19,5 @@ module Frontend
     def filetype
       MimeType.humanized_mime_type(mime_type)
     end
-
-    def magnet_uri
-      _, link = torrent_magnet_data
-      link
-    end
-
-    def magnet_info_hash
-      hash, _ = torrent_magnet_data
-      hash
-    end
-
-    private
-
-    def torrent_magnet_data
-      [nil, nil]
-    end
-
   end
 end

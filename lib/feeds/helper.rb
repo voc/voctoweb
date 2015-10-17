@@ -1,16 +1,11 @@
 module Feeds
   module Helper
-    def date(event)
-      date = event.release_date || event.date
-      date.strftime("%Y-%m-%d") if date
-    end
-
     def merge_config(config)
-      keep = [ :title, :channel_summary ]
-      @config.channel_title = [ @config.channel_title, config[:title] ].join(' - ')
+      keep = [:title, :channel_summary]
+      @config.channel_title = [@config.channel_title, config[:title]].join(' - ')
       @config.channel_summary += config[:channel_summary]
 
-      config.each { |k,v|
+      config.each { |k, v|
         next if keep.include? k
         @config[k] = v
       }
@@ -24,7 +19,7 @@ module Feeds
       elsif conference.acronym.present?
         title = conference.acronym
       end
-      title += ": "
+      title += ': '
       if event.title
         title += event.title
       else
