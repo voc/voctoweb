@@ -9,7 +9,7 @@ media.ccc.de webfrontend meta data editor and API.
 
 ### Ruby Version
 
-ruby 2.0.0, 2.1.1
+ruby 2.2.3
 
 ### Deployment Instructions
 
