@@ -30,8 +30,6 @@ set :puma_threads,    [4, 16]
 set :puma_workers,    3
 
 # Don't change these unless you know what you're doing
-# Default value for :pty is false
-set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 # set :deploy_via,      :remote_cache
