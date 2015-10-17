@@ -6,21 +6,22 @@ module Frontend
       'date' => 'release_date'
     }.freeze
 
-    before_action :check_sort_param, only: %w(slug show)
+    before_action :check_sort_param, only: %w(slug browse)
 
     def slug
       @conference = Frontend::Conference.find_by(slug: params[:slug])
       return show if @conference
-      index
+      browse
     end
 
-    def index
+    def browse
       @folders = conferences_folder_tree_at(params[:slug] || '')
       return redirect_to browse_start_url if @folders.blank?
-      render :index
+      render :browse
     end
 
     def show
+      @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
       @events = @conference.events.order(sort_param)
       @sorting = nil
       render :show

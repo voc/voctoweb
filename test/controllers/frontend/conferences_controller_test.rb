@@ -7,15 +7,27 @@ module Frontend
       assert_response :redirect
     end
 
-    test 'should get index' do
+    test 'should get browse' do
       get :slug
       assert_response :redirect
     end
 
-    test 'should get index for slug' do
-      create :conference, slug: '123'
-      get :slug, slug: '123'
+    test 'should get browse for slug' do
+      create :conference, slug: 'a/b/c'
+      create :conference, slug: 'a/e'
+      get :slug, slug: 'a'
       assert_response :success
+      assert_template :browse
+      get :slug, slug: 'a/e'
+      assert_template :show
+    end
+
+    test 'should access conference via acronym' do
+      create :conference, acronym: 'frabcon'
+      get :show, acronym: 'frabcon'
+      assert_response :success
+      assert_template :show
+      assert assigns(:conference)
     end
   end
 end

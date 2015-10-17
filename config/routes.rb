@@ -46,8 +46,10 @@ MediaBackend::Application.routes.draw do
     get '/search', to: 'home#search'
     get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
 
+    get '/conference/:acronym', to: 'conferences#show'
     get '/browse', to: 'conferences#slug', as: :browse_start
     get '/browse/*slug', to: 'conferences#slug', as: :browse
+    get '/event/:guid', to: 'events#show', as: :event_by_guid
     get '/event/:conference_slug/:slug', to: 'events#show', as: :event
     get '/event/:conference_slug/:slug/oembed', to: 'events#oembed', as: :oembed_event
     get '/event/:conference_slug/:slug/download', to: 'events#download', as: :download_event
@@ -61,17 +63,6 @@ MediaBackend::Application.routes.draw do
     get '/updates.rdf', to: 'feeds#updates', defaults: { format: 'xml' }
 
     get '/podcast/:slug/:mime_type', to: 'feeds#podcast_folder', defaults: { format: 'xml' }, as: :podcast_folder_feed
-
-    # rss feeds
-    # search
-    # sitemap
-    # tags               # show-tags
-    # about
-    # conference#index   # index
-    # conference#show    # show-folder
-    # event#show         # show-page
-    #                      # download-page
-    #                      # oembed-page
   end
 
 end

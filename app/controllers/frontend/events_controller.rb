@@ -15,11 +15,20 @@ module Frontend
     private
 
     def load_event
-      params[:slug] = '' if params[:slug] == 'index'
-      @event = Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
+      @event = event_from_params
       @conference = @event.conference
       @video_recordings = @event.recordings.video
       @audio_recordings = @event.recordings.audio
+    end
+
+    def event_from_params
+      if params[:slug] && params[:conference_slug]
+        Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
+      elsif params[:guid]
+        Frontend::Event.find_by!(guid: params[:guid])
+      else
+        fail ActiveRecord::NotFound
+      end
     end
   end
 end
