@@ -15,7 +15,7 @@ module Frontend
     end
 
     def index
-      @folders = FolderList.new(params[:slug] || '').folders
+      @folders = conferences_folder_tree_at(params[:slug] || '')
       return redirect_to browse_start_url if @folders.blank?
       render :index
     end
@@ -27,6 +27,12 @@ module Frontend
     end
 
     private
+
+    def conferences_folder_tree_at(path)
+      tree = FolderTree.new
+      tree.build(Conference.pluck(:id, :slug))
+      tree.folders_at(path)
+    end
 
     def sort_param
       return SORT_PARAM[@sorting] if @sorting

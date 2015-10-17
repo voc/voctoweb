@@ -3,7 +3,7 @@ class Conference < ActiveRecord::Base
   include Storage
   include AASM
 
-  ASPECT_RATIO = [ '4:3', '16:9' ]
+  ASPECT_RATIO = ['4:3', '16:9']
 
   has_many :events, dependent: :destroy
 
@@ -12,6 +12,7 @@ class Conference < ActiveRecord::Base
   validates_uniqueness_of :acronym
   validates_uniqueness_of :slug
   validates :slug, format: { with: %r{\A\w+(?:/\w+)*\z} }
+  validate :slug_reachable
 
   has_attached_directory :images,
     via: :images_path,
@@ -45,32 +46,39 @@ class Conference < ActiveRecord::Base
   end
 
   def download!
-    return unless self.schedule_url
-    ScheduleDownloadWorker.perform_async(self.id)
+    return unless schedule_url
+    ScheduleDownloadWorker.perform_async(id)
   end
 
   def get_event_url(id)
-    if self.schedule_url.present?
-      return self.schedule_url.sub('schedule.xml', "events/#{id}.html")
+    if schedule_url.present?
+      return schedule_url.sub('schedule.xml', "events/#{id}.html")
     end
   end
 
   # frontend generates logos like this:
   def logo_url
-    if self.logo
-      File.join Settings.frontend_url, 'images/logos', self.images_path, File.basename(self.logo, File.extname(self.logo))+'.png'
+    if logo
+      File.join Settings.frontend_url, 'images/logos', images_path, File.basename(logo, File.extname(logo)) + '.png'
     else
       File.join Settings.frontend_url, 'images/logos/unknown.png'
     end
   end
 
   def display_name
-    self.acronym || self.id
+    acronym || id
   end
 
   def validate_for_api
-    self.errors.add :images_path, "images path #{self.get_images_path} not writable" unless File.writable? self.get_images_path
-    self.errors.add :recordings_path, "recordings path #{self.get_recordings_path} not writable" unless File.writable? self.get_recordings_path
-    not self.errors.any?
+    errors.add :images_path, "images path #{get_images_path} not writable" unless File.writable? get_images_path
+    errors.add :recordings_path, "recordings path #{get_recordings_path} not writable" unless File.writable? get_recordings_path
+    not errors.any?
+  end
+
+  private
+
+  def slug_reachable
+    return unless Conference.pluck(:slug).any? { |s| s.starts_with?(slug + '/') }
+    errors.add :slug, "can't add conference below another conference"
   end
 end
