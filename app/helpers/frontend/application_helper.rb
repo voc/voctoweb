@@ -38,14 +38,18 @@ module Frontend
     end
 
     def breadcrumbs_trail
-      parts = if @conference
-         @conference.slug.split('/')
-      elsif params[:slug]
-        params[:slug].split('/')[0..-1]
-      end
+      path = if @conference
+               @conference.slug
+             elsif @folders
+               @folders.last.parent_path
+             else
+               ''
+             end
+      parts = path.split('/')
       return if parts.blank?
+      current = parts.pop
       parts = ['browse'] + parts
-      yield parts
+      yield parts, current
     end
 
     def video_download_sources(recordings)

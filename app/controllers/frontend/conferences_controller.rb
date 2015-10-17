@@ -31,7 +31,7 @@ module Frontend
     def conferences_folder_tree_at(path)
       tree = FolderTree.new
       tree.build(Conference.pluck(:id, :slug))
-      tree.folders_at(path)
+      tree.sort_folders(tree.folders_at(path))
     end
 
     def sort_param

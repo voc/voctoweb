@@ -29,6 +29,12 @@ module Frontend
       Conference.find(@conference_id)
     end
 
+    def parent_path
+      return '' if path == name
+      pos = path.rindex(name) - 2
+      path[0..pos]
+    end
+
     private
 
     def build_path(path, name)
@@ -50,6 +56,12 @@ module Frontend
       start = @root
       parts.each { |part| start = start.childs[part] }
       start.childs.values
+    end
+
+    def sort_folders(folders)
+      sorted = folders.select { |folder| not folder.conference? }.sort { |a, b| a.name <=> b.name }
+      sorted += (folders - sorted).sort { |a, b| b.conference.updated_at <=> a.conference.updated_at }
+      sorted
     end
 
     private

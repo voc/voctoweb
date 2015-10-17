@@ -26,11 +26,13 @@
           %button.btn.btn-default{type: 'submit'}
             %span.fa.fa-search
 
-- breadcrumbs_trail do |parts|
+- breadcrumbs_trail do |parts, last|
   #breadcrumb
     %ol.container-fluid.breadcrumb
       - parts.each_with_index do |part, index|
         %li
           %a.inverted{href: '/' + parts[0..index].join('/')}
             = part
+      %li.active
+        = last
 
