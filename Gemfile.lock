@@ -159,6 +159,9 @@ GEM
       dotenv (= 2.0.2)
       railties (~> 4.0)
     erubis (2.7.0)
+    exception_notification (4.1.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -350,6 +353,7 @@ DEPENDENCIES
   coffee-rails
   devise (~> 3.4.0)
   dotenv-rails
+  exception_notification
   factory_girl_rails (~> 4.0)
   foreman
   haml

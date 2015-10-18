@@ -9,6 +9,7 @@ gem 'foreman'
 
 # rails cache
 gem 'redis-rails'
+gem 'exception_notification'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
