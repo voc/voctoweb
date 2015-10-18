@@ -7,7 +7,7 @@ class Settings
         'recordings_base_dir' => Rails.root.join('tmp', 'tests', 'rec'),
         'images_base_dir' => Rails.root.join('tmp', 'tests', 'img'),
         'recordings_webroot' => '',
-        'images_webroot' => '/media',
+        'images_webroot' => '',
         'tmp_dir' => '/tmp'
       }
     else

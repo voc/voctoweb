@@ -7,7 +7,7 @@ folders:
   recordings_base_dir: "/srv/recordings/cdn"
   recordings_webroot: ''
   images_base_dir: "/srv/www/cdn"
-  images_webroot: "/media"
+  images_webroot: ""
   tmp_dir: "/tmp"
 header:
   description: Video Streaming Portal des Chaos Computer Clubs
