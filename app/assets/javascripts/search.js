@@ -37,7 +37,7 @@ $(function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: window.location.protocol+'//koeln.media.ccc.de/search/api/term',
+			url: window.location.protocol+'//api.media.ccc.de/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,

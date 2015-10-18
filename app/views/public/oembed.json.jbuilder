@@ -2,7 +2,7 @@ json.cache! json_cached_key(:event_oembed, @event), expires_in: 10.minutes do
   json.version '1.0'
   json.type 'video'
   json.provider_name 'media.ccc.de'
-  json.provider_url 'http://media.ccc.de'
+  json.provider_url Settings.frontend_url
   json.width @width
   json.height @height
   json.title @event.title
