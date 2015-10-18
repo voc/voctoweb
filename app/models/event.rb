@@ -36,6 +36,8 @@ class Event < ActiveRecord::Base
   # active admin and serialized fields workaround:
   attr_accessor   :persons_raw, :tags_raw
 
+  after_save { conference.touch }
+
   def generate_guid
     self.guid ||= SecureRandom.uuid
   end

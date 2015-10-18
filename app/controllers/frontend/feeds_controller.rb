@@ -5,11 +5,13 @@ module Frontend
     # podcast_recent
     def podcast
       events = Frontend::Event.newer(Time.now.ago(2.years)).includes(:conference)
-      feed = Feeds::PodcastGenerator.new view_context: view_context,
-        config: { title: 'recent events feed',
-                  channel_summary: 'This feed contains events from the last two years',
-                  logo: view_context.image_url('frontend/miro-banner.png') }
-      xml = feed.generate events, :preferred_recording
+      xml = Rails.cache.fetch(key_for_events(events, :podcast)) do
+        feed = Feeds::PodcastGenerator.new view_context: view_context,
+          config: { title: 'recent events feed',
+                    channel_summary: 'This feed contains events from the last two years',
+                    logo: view_context.image_url('frontend/miro-banner.png') }
+        feed.generate events, :preferred_recording
+      end
       respond_to do |format|
         format.xml { render xml: xml }
       end
@@ -17,11 +19,13 @@ module Frontend
 
     def podcast_archive
       events = Frontend::Event.older(Time.now.ago(2.years)).includes(:conference)
-      feed = Feeds::PodcastGenerator.new view_context: view_context,
+      xml = Rails.cache.fetch(key_for_events(events, :podcast_archive)) do
+        feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'archive feed',
                   channel_summary: 'This feed contains events older than two years',
                   logo: view_context.image_url('frontend/miro-banner.png') }
-      xml = feed.generate events, :preferred_recording
+        feed.generate events, :preferred_recording
+      end
       respond_to do |format|
         format.xml { render xml: xml }
       end
@@ -29,11 +33,13 @@ module Frontend
 
     def podcast_audio
       events = Frontend::Event.newer(Time.now.ago(1.years)).includes(:conference)
-      feed = Feeds::PodcastGenerator.new view_context: view_context,
-        config: { title: 'recent audio-only feed',
-                  channel_summary: 'This feed contains events from the last years',
-                  logo: view_context.image_url('frontend/miro-banner.png') }
-      xml = feed.generate events, :audio_recording
+      xml = Rails.cache.fetch(key_for_events(events, :podcast_audio)) do
+        feed = Feeds::PodcastGenerator.new view_context: view_context,
+          config: { title: 'recent audio-only feed',
+                    channel_summary: 'This feed contains events from the last years',
+                    logo: view_context.image_url('frontend/miro-banner.png') }
+        feed.generate events, :audio_recording
+      end
       respond_to do |format|
         format.xml { render xml: xml }
       end
@@ -42,23 +48,27 @@ module Frontend
     # rss 1.0 last 100 feed
     def updates
       events = Frontend::Event.recent(100).includes(:conference)
-      feed = Feeds::RDFGenerator.new view_context: view_context,
-        config: { title: 'last 100 events feed',
-                  channel_summary: 'This feed the most recent 100 events',
-                  logo: view_context.image_url('frontend/miro-banner.png') }
-      xml = feed.generate events
+      xml = Rails.cache.fetch(key_for_events(events, :rdftop100)) do
+        feed = Feeds::RDFGenerator.new view_context: view_context,
+          config: { title: 'last 100 events feed',
+                    channel_summary: 'This feed the most recent 100 events',
+                    logo: view_context.image_url('frontend/miro-banner.png') }
+        feed.generate events
+      end
       respond_to do |format|
         format.xml { render xml: xml }
       end
     end
 
     def podcast_folder
-      feeds = Feeds::PodcastGenerator.new view_context: view_context,
-        config: { mime_type: @mime_type,
-                  title: "#{@conference.title} (#{@mime_type_name})",
-                  channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
-                  logo: view_context.image_url('frontend/miro-banner.png') }
-      xml = feeds.generate downloaded_events, :by_mime_type
+      xml = Rails.cache.fetch([@conference, @mime_type]) do
+        feeds = Feeds::PodcastGenerator.new view_context: view_context,
+          config: { mime_type: @mime_type,
+                    title: "#{@conference.title} (#{@mime_type_name})",
+                    channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
+                    logo: view_context.image_url('frontend/miro-banner.png') }
+        feeds.generate downloaded_events, :by_mime_type
+      end
       respond_to do |format|
         format.xml { render xml: xml }
       end
@@ -66,11 +76,16 @@ module Frontend
 
     private
 
+    def key_for_events(events, name)
+      key = events.map(&:cache_key).join('/')
+      name.to_s + '/' + Digest::SHA1.hexdigest(key)
+    end
+
     def set_conference
       return unless params[:slug]
       return unless params[:mime_type]
       @conference = Frontend::Conference.find_by!(slug: params[:slug])
-      @mime_type, @mime_type_name = @conference.mime_types.find { |m, n| n == params[:mime_type] }
+      @mime_type, @mime_type_name = @conference.mime_types.find { |_m, n| n == params[:mime_type] }
       fail ArgumentError unless @mime_type
     end
 

@@ -18,6 +18,7 @@ class Recording < ActiveRecord::Base
   scope :recorded_at, ->(conference) { joins(event: :conference).where(events: {'conference_id' => conference} ) }
 
   after_save :update_downloaded_count
+  after_save { event.touch }
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
