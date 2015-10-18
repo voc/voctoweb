@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 4.2.0'
+gem 'dotenv-rails'
+
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise', '~> 3.4.0'
 gem 'aasm'
@@ -11,13 +15,8 @@ gem 'foreman'
 gem 'redis-rails'
 gem 'exception_notification'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.0'
-
 # Bundle puma application server
 gem 'puma'
-
-gem 'dotenv-rails'
 
 group :development do
   gem 'bullet'
