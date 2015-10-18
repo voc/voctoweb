@@ -37,7 +37,7 @@ $(function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: window.location.protocol+'//koeln.media.ccc.de/search/api/term',
+			url: window.location.protocol+'//api.media.ccc.de/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,
@@ -118,11 +118,10 @@ $(function() {
 							logourl = hit._source.conference.logo;
 
 						if(logourl.match(/\.(png|jpg|jpeg|gif)$/)) {
-							logourl = logourl.replace('http://static.media.ccc.de/media/', '/images/logos/');
 							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
 						}
 						else {
-							logourl = '/images/logos/unknown.png';
+							logourl = 'http://static.media.ccc.de/media/unknown.png';
 						}
 
 

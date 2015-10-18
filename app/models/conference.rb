@@ -59,9 +59,9 @@ class Conference < ActiveRecord::Base
   # frontend generates logos like this:
   def logo_url
     if logo
-      File.join Settings.frontend_url, 'images/logos', images_path, File.basename(logo, File.extname(logo)) + '.png'
+      File.join Settings.static_url, images_path, File.basename(logo, File.extname(logo)) + '.png'
     else
-      File.join Settings.frontend_url, 'images/logos/unknown.png'
+      File.join Settings.static_url, 'unknown.png'
     end
   end
 

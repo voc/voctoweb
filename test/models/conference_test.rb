@@ -43,7 +43,7 @@ class ConferenceTest < ActiveSupport::TestCase
 
   test "should get logo url" do
     @conference = create(:conference, logo: 'test.png')
-    assert_equal 'http://media.ccc.de/images/logos/frabcon123/test.png', @conference.logo_url
+    assert_equal 'http://static.media.ccc.de/media/frabcon123/test.png', @conference.logo_url
   end
 
   test "should deny validation with invalid path" do

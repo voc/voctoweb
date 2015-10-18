@@ -1,7 +1,7 @@
 ---
 frontend_url: http://media.ccc.de
 cdn_url: http://cdn.media.ccc.de
-static_url: http://static.media.ccc.de
+static_url: http://static.media.ccc.de/media
 oembed_url: http://api.media.ccc.de/public/oembed?url=
 folders:
   recordings_base_dir: "/srv/recordings/cdn"
@@ -24,5 +24,4 @@ feeds:
   channel_summary: A wide variety of video material distributed by the Chaos Computer
     Club.
   channel_owner: CCC media team
-  logo_image: "//media.ccc.de/images/miro-banner.png"
   channel_keywords: CCC Congress Hacking Security Netzpolitik

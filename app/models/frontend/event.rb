@@ -18,11 +18,11 @@ module Frontend
     end
 
     def poster_url
-      File.join(Settings.static_url, 'media', conference.images_path, poster_filename) if poster_filename
+      File.join(Settings.static_url, conference.images_path, poster_filename) if poster_filename
     end
 
     def thumb_url
-      File.join Settings.static_url, 'media', conference.images_path, thumb_filename
+      File.join Settings.static_url, conference.images_path, thumb_filename
     end
 
     def tags

@@ -56,7 +56,7 @@ MediaBackend::Application.routes.draw do
     get '/tags', to: 'tags#index'
     get '/tags/:tag', to: 'tags#show', as: :tag
 
-    get '/news.atom', to: 'news#index', defaults: { format: 'xml' }
+    get '/news.atom', to: 'news#index', defaults: { format: 'xml' }, as: :news
     get '/podcast-audio-only.xml', to: 'feeds#podcast_audio', defaults: { format: 'xml' }
     get '/podcast.xml', to: 'feeds#podcast', defaults: { format: 'xml' }
     get '/podcast-archive.xml', to: 'feeds#podcast_archive', defaults: { format: 'xml' }
