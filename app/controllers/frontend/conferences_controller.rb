@@ -36,7 +36,9 @@ module Frontend
     def conferences_folder_tree_at(path)
       tree = FolderTree.new
       tree.build(Conference.pluck(:id, :slug))
-      tree.sort_folders(tree.folders_at(path))
+      folders = tree.folders_at(path)
+      fail ActiveRecord::RecordNotFound unless folders
+      tree.sort_folders(folders)
     end
 
     def sort_param

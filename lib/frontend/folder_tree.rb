@@ -54,7 +54,11 @@ module Frontend
     def folders_at(path)
       parts = path.split('/')
       start = @root
-      parts.each { |part| start = start.childs[part] }
+      parts.each do |part|
+        start = start.childs[part]
+        return unless start
+      end
+      return unless start
       start.childs.values
     end
 
