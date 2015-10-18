@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011213109) do
+ActiveRecord::Schema.define(version: 20151018212350) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -54,18 +54,19 @@ ActiveRecord::Schema.define(version: 20151011213109) do
   end
 
   create_table "conferences", force: :cascade do |t|
-    t.string   "acronym",         limit: 255
-    t.string   "recordings_path", limit: 255
-    t.string   "images_path",     limit: 255
-    t.string   "slug",            limit: 255,      default: ""
-    t.string   "aspect_ratio",    limit: 255
+    t.string   "acronym",                 limit: 255
+    t.string   "recordings_path",         limit: 255
+    t.string   "images_path",             limit: 255
+    t.string   "slug",                    limit: 255,      default: ""
+    t.string   "aspect_ratio",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",           limit: 255
-    t.string   "schedule_url",    limit: 255
-    t.text     "schedule_xml",    limit: 10485760
-    t.string   "schedule_state",  limit: 255,      default: "not_present", null: false
-    t.string   "logo",            limit: 255
+    t.string   "title",                   limit: 255
+    t.string   "schedule_url",            limit: 255
+    t.text     "schedule_xml",            limit: 10485760
+    t.string   "schedule_state",          limit: 255,      default: "not_present", null: false
+    t.string   "logo",                    limit: 255
+    t.integer  "downloaded_events_count",                  default: 0,             null: false
   end
 
   add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
