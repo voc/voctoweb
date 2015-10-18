@@ -15,7 +15,7 @@
         %span.fa.fa-rss
       %ul.dropdown-menu{"aria-labelledby" => "feedMenu"}
         = render 'frontend/shared/navbar_feeds'
-        - if @conference and Recording.recorded_at(@conference).count > 0
+        - if @conference && @conference.downloaded_events_count > 0
           %li
             %hr
           = render 'frontend/shared/navbar_folder_feeds'

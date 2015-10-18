@@ -10,7 +10,7 @@
         %a.thumbnail.conference{href: browse_url(folder.path)}
           .header
             %span.fa.fa-video-camera
-            = Event.recorded_at(folder.conference).to_a.count
+            = folder.conference.downloaded_events_count
           %img{src: folder.conference.logo_url, alt: 'conference logo'}
           .caption
             = folder.conference.title

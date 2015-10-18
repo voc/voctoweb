@@ -17,6 +17,8 @@ class Recording < ActiveRecord::Base
 
   scope :recorded_at, ->(conference) { joins(event: :conference).where(events: {'conference_id' => conference} ) }
 
+  after_save :update_downloaded_count
+
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
   aasm column: :state do
@@ -71,5 +73,12 @@ class Recording < ActiveRecord::Base
       recording.filename == self.filename && recording.folder == self.folder
     }.delete_if { |dupe| dupe == self }
     self.errors.add :event, 'recording already exist on event' if dupe.present?
+  end
+
+  private
+
+  def update_downloaded_count
+    return true unless downloaded?
+    conference.update_column :downloaded_events_count, Event.recorded_at(conference).to_a.size
   end
 end
