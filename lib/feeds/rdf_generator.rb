@@ -48,7 +48,7 @@ module Feeds
       item.content_encoded = <<EOF
 <div align="center">
       #{item.description}<br/>
-    <a href="#{@view_context.event_url(conference_slug: event.conference.slug, slug: event.slug)}"><img src="#{event.thumb_url}" /></a><br/>
+    <a href="#{@view_context.event_slug_url(slug: event.slug)}"><img src="#{event.thumb_url}" /></a><br/>
     <b>Video:</b><a href="#{recording.url}">#{recording.filename}</a>
 </div>
 EOF

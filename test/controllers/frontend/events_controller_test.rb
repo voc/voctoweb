@@ -7,8 +7,8 @@ module Frontend
       @event = create :event, conference: conference, slug: 'abc'
     end
 
-    test 'should get show with guid' do
-      get :show, guid: @event.guid
+    test 'should get show with slug' do
+      get :show, slug: @event.slug
       assert_response :success
       assert_equal @event.id, assigns(:event).id
     end

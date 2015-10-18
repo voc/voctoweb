@@ -3,7 +3,7 @@ module Frontend
     require 'uri'
 
     def show_event_url(event)
-      event_url(conference_slug: event.conference.slug, slug: event.slug)
+      event_slug_url(slug: event.slug)
     end
 
     def oembed_show_event_url(event)

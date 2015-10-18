@@ -25,8 +25,8 @@ module Frontend
     def event_from_params
       if params[:slug] && params[:conference_slug]
         Frontend::Event.by_identifier(params[:conference_slug], params[:slug])
-      elsif params[:guid]
-        Frontend::Event.find_by!(guid: params[:guid])
+      elsif params[:slug]
+        Frontend::Event.find_by!(slug: params[:slug])
       else
         fail ActiveRecord::NotFound
       end
