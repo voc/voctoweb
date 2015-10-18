@@ -20,7 +20,7 @@ module Feeds
         create_channel(maker)
 
         events.each do |event|
-          recording = event.public_send query, mime_type: @config[:mime_type]
+          recording = event.public_send query
           next if recording.nil?
 
           fill_item(maker.items.new_item, event, recording)

@@ -1,10 +1,10 @@
 class MimeType
-  HTML5 = %w[audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-sd vnd.voc/webm-hd vnd.voc/h264-hd]
-  PREFERRED_VIDEO = %w[vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
-  WEB_PREFERRED_VIDEO = %w[vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg]
+  HTML5 = %w(audio/ogg audio/mpeg audio/opus video/mp4 video/ogg video/webm vnd.voc/h264-lq vnd.voc/h264-sd vnd.voc/webm-hd vnd.voc/h264-hd)
+  AUDIO = %w(audio/ogg audio/mpeg audio/opus)
+  PREFERRED_VIDEO = %w(vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg)
+  WEB_PREFERRED_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg)
 
   class << self
-
     def mime_type_slug(mime_type)
       humanized_mime_type(mime_type).to_param.downcase
     end
@@ -38,8 +38,6 @@ class MimeType
         true
       when 'vnd.voc/webm-hd'
         true
-      else
-        nil
       end
     end
 
@@ -63,7 +61,5 @@ class MimeType
         mime_type.split('/')[1]
       end
     end
-
   end
-
 end

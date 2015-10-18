@@ -29,7 +29,11 @@ module Frontend
       self[:tags].compact.collect(&:strip)
     end
 
-    def preferred_recording(order: MimeType::PREFERRED_VIDEO, mime_type: nil)
+    def audio_recording
+      preferred_recording(order: MimeType::AUDIO)
+    end
+
+    def preferred_recording(order: MimeType::PREFERRED_VIDEO)
       recordings = recordings_by_mime_type
       return if recordings.empty?
       order.each do |mt|

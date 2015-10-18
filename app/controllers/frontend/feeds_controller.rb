@@ -4,7 +4,7 @@ module Frontend
 
     # podcast_recent
     def podcast
-      events = Event.newer(Time.now.ago(2.years))
+      events = Frontend::Event.newer(Time.now.ago(2.years)).includes(:conference)
       feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'recent events feed',
                   channel_summary: 'This feed contains events from the last two years' }
@@ -13,7 +13,7 @@ module Frontend
     end
 
     def podcast_archive
-      events = Event.older(Time.now.ago(2.years))
+      events = Frontend::Event.older(Time.now.ago(2.years)).includes(:conference)
       feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'archive feed',
                   channel_summary: 'This feed contains events older than two years' }
@@ -21,13 +21,18 @@ module Frontend
       render xml: xml
     end
 
-    # TODO
     def podcast_audio
+      events = Frontend::Event.newer(Time.now.ago(1.years)).includes(:conference)
+      feed = Feeds::PodcastGenerator.new view_context: view_context,
+        config: { title: 'recent audio-only feed',
+                  channel_summary: 'This feed contains events from the last years' }
+      xml = feed.generate events, :audio_recording
+      render xml: xml
     end
 
     # rss 1.0 last 100 feed
     def updates
-      events = Event.recent(100)
+      events = Frontend::Event.recent(100).includes(:conference)
       feed = Feeds::RDFGenerator.new view_context: view_context,
         config: { title: 'last 100 events feed',
                   channel_summary: 'This feed the most recent 100 events' }
