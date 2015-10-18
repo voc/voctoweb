@@ -42,6 +42,9 @@ MediaBackend::Application.routes.draw do
   # FRONTEND
   scope module: 'frontend' do
     root to: 'home#index'
+    if Rails.env.production?
+      get '404', to: 'home#page_not_found'
+    end
     get '/about', to: 'home#about'
     get '/search', to: 'home#search'
     get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
