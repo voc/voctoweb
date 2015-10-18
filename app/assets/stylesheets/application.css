@@ -10,6 +10,6 @@
  *
  *= require_self
  *= require frontend/styles
- *= require mediaelementplayer.min
+ *= require mediaelementplayer
  *= require font-awesome
  */
