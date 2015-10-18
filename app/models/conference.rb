@@ -58,8 +58,8 @@ class Conference < ActiveRecord::Base
 
   # frontend generates logos like this:
   def logo_url
-    if logo
-      File.join Settings.static_url, images_path, File.basename(logo, File.extname(logo)) + '.png'
+    if logo_exists?
+      File.join Settings.static_url, images_path, logo
     else
       File.join Settings.static_url, 'unknown.png'
     end
@@ -76,6 +76,12 @@ class Conference < ActiveRecord::Base
   end
 
   private
+
+  def logo_exists?
+    return if logo.blank?
+    return unless File.readable?(File.join(get_images_path, logo))
+    true
+  end
 
   def slug_reachable
     return unless Conference.pluck(:slug).any? { |s| s.starts_with?(slug + '/') }
