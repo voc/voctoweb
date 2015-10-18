@@ -65,7 +65,7 @@ module Feeds
       item.content.type    = 'html'
       item.published       = news.created_at.utc
       item.updated         = news.updated_at.utc
-      item.link            = 'http://media.ccc.de/'
+      item.link            = Settings.frontend_url
     end
 
     # Assign options like a title or an author to an atom feed.
@@ -73,6 +73,7 @@ module Feeds
     # @param feed [RSS::Maker::Atom::Feed] atom feed
     # @param options [Hash] options
     def self.assign_feed_options(feed, options)
+      feed.channel.id      = 'media.ccc.de,news'
       feed.channel.author  = options[:author]
       feed.channel.updated = Time.now.utc.to_s
       feed.channel.about   = options[:about]
