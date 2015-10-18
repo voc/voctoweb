@@ -9,5 +9,4 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'image
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w(frontend/index.js frontend/styles.css font-awesome.css)
 Rails.application.config.assets.precompile += [/\.(?:eot|otf|svg|ttf|woff|swf)/]
