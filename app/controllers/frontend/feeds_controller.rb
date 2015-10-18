@@ -7,7 +7,8 @@ module Frontend
       events = Frontend::Event.newer(Time.now.ago(2.years)).includes(:conference)
       feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'recent events feed',
-                  channel_summary: 'This feed contains events from the last two years' }
+                  channel_summary: 'This feed contains events from the last two years',
+                  logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :preferred_recording
       render xml: xml
     end
@@ -16,7 +17,8 @@ module Frontend
       events = Frontend::Event.older(Time.now.ago(2.years)).includes(:conference)
       feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'archive feed',
-                  channel_summary: 'This feed contains events older than two years' }
+                  channel_summary: 'This feed contains events older than two years',
+                  logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :preferred_recording
       render xml: xml
     end
@@ -25,7 +27,8 @@ module Frontend
       events = Frontend::Event.newer(Time.now.ago(1.years)).includes(:conference)
       feed = Feeds::PodcastGenerator.new view_context: view_context,
         config: { title: 'recent audio-only feed',
-                  channel_summary: 'This feed contains events from the last years' }
+                  channel_summary: 'This feed contains events from the last years',
+                  logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :audio_recording
       render xml: xml
     end
@@ -35,7 +38,8 @@ module Frontend
       events = Frontend::Event.recent(100).includes(:conference)
       feed = Feeds::RDFGenerator.new view_context: view_context,
         config: { title: 'last 100 events feed',
-                  channel_summary: 'This feed the most recent 100 events' }
+                  channel_summary: 'This feed the most recent 100 events',
+                  logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events
       render xml: xml
     end
@@ -44,7 +48,8 @@ module Frontend
       feeds = Feeds::PodcastGenerator.new view_context: view_context,
         config: { mime_type: @mime_type,
                   title: "#{@conference.title} (#{@mime_type_name})",
-                  channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}" }
+                  channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
+                  logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feeds.generate downloaded_events, :by_mime_type
       render xml: xml
     end

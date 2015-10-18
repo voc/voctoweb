@@ -8,7 +8,7 @@ module Frontend
           title: 'CCC TV - NEWS',
           feed_url: news_url,
           icon: File.join(Settings.frontend_url, 'favicon.ico'),
-          logo: view_context.image_url('tv.png')
+          logo: view_context.image_url('frontend/tv.png')
         })
       render xml: atom_feed
     end
