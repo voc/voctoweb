@@ -1,10 +1,14 @@
-%div.navbar.navbar-default.navbar-fixed-top(role="navigation")
-  %div.container-fluid
-    %div.navbar-header
+.navbar.navbar-default.navbar-fixed-top(role="navigation")
+  .container-fluid
+    .navbar-header
       %a.navbar-brand(href='/')
         %span
           %img{src: image_path('frontend/tv.png'), alt: 'ccc-tv logo, a tv displaying a play icon'}
           ccc-tv
+
+    .nav.navbar-form.navbar-right.button-wrapper
+      %a.form-control.btn.btn-default{href: '/about.html'}
+        %span.fa.fa-info
 
     .nav.navbar-form.navbar-right.dropdown
       %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -16,11 +20,8 @@
             %hr
           = render 'frontend/shared/navbar_folder_feeds'
 
-    .nav.navbar-form.navbar-right.button-wrapper
-      %a.form-control.btn.btn-default{href: '/about.html'}
-        %span.fa.fa-info
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
-      %div.form-group.input-group
+      .form-group.input-group
         %input.form-control{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
         %span.input-group-btn
           %button.btn.btn-default{type: 'submit'}
