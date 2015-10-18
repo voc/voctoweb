@@ -47,6 +47,7 @@ module Frontend
              end
       parts = path.split('/')
       return if parts.blank?
+      parts += ['event'] if @event
       current = parts.pop
       parts = ['browse'] + parts
       yield parts, current
