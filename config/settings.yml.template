@@ -1,7 +1,7 @@
 ---
 frontend_url: http://media.ccc.de
 cdn_url: http://cdn.media.ccc.de
-static_url: http://static.media.ccc.de
+static_url: http://static.media.ccc.de/media
 oembed_url: http://api.media.ccc.de/public/oembed?url=
 folders:
   recordings_base_dir: "/srv/recordings/cdn"
