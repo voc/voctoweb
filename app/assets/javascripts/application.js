@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+//= require mediaelement-and-player
+//= require purl.min
+//= require handlebars.min-latest
+//= require search
