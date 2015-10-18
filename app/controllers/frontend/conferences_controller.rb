@@ -17,14 +17,18 @@ module Frontend
     def browse
       @folders = conferences_folder_tree_at(params[:slug] || '')
       return redirect_to browse_start_url if @folders.blank?
-      render :browse
+      respond_to do |format|
+        format.html { render :browse }
+      end
     end
 
     def show
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
       @events = @conference.events.order(sort_param)
       @sorting = nil
-      render :show
+      respond_to do |format|
+        format.html { render :show }
+      end
     end
 
     private

@@ -3,6 +3,7 @@ module Frontend
     before_action :load_event
 
     def show
+      respond_to { |format| format.html }
     end
 
     def download

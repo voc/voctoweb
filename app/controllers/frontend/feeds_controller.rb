@@ -10,7 +10,9 @@ module Frontend
                   channel_summary: 'This feed contains events from the last two years',
                   logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :preferred_recording
-      render xml: xml
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
     end
 
     def podcast_archive
@@ -20,7 +22,9 @@ module Frontend
                   channel_summary: 'This feed contains events older than two years',
                   logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :preferred_recording
-      render xml: xml
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
     end
 
     def podcast_audio
@@ -30,7 +34,9 @@ module Frontend
                   channel_summary: 'This feed contains events from the last years',
                   logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events, :audio_recording
-      render xml: xml
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
     end
 
     # rss 1.0 last 100 feed
@@ -41,7 +47,9 @@ module Frontend
                   channel_summary: 'This feed the most recent 100 events',
                   logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feed.generate events
-      render xml: xml
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
     end
 
     def podcast_folder
@@ -51,7 +59,9 @@ module Frontend
                   channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
                   logo: view_context.image_url('frontend/miro-banner.png') }
       xml = feeds.generate downloaded_events, :by_mime_type
-      render xml: xml
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
     end
 
     private
