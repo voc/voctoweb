@@ -9,5 +9,5 @@
     %span.fa{class: persons_icon(event.persons)}
     != linked_persons_text(event.persons)
 %h3
-  %a{href: show_event_url(event)}
+  %a{href: event_url(slug: event.slug)}
     = event.title

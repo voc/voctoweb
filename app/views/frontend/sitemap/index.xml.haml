@@ -10,5 +10,5 @@
       %lastmod= conference.events.maximum(:updated_at).strftime('%Y-%m-%d')
   - Event.find_each do |event|
     %url
-      %loc= show_event_url(event)
+      %loc= event_url(slug: event.slug)
       %lastmod= event.updated_at.strftime('%Y-%m-%d')
