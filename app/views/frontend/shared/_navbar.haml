@@ -30,9 +30,12 @@
 - breadcrumbs_trail do |parts, last|
   #breadcrumb
     %ol.container-fluid.breadcrumb
+      %li
+        %a.inverted{href: browse_start_url}
+          browse
       - parts.each_with_index do |part, index|
         %li
-          %a.inverted{href: '/' + parts[0..index].join('/')}
+          %a.inverted{href: browse_url(parts[0..index].join('/'))}
             = part
       %li.active
         = last

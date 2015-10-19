@@ -22,7 +22,7 @@ class PublicController < ActionController::Base
 
   def parse_url(url)
     return unless @url
-    m = @url.match(%r'\Ahttp://media.ccc.de/browse/(.*)/(.*).html\z')
+    m = @url.match(%r'\Ahttps?://media.ccc.de/b/(.*)/(.*)\z')
     return unless m
     @event = Event.by_identifier(m[1], m[2])
     return unless @event
