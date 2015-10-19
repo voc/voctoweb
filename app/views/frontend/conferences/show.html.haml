@@ -12,9 +12,9 @@
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date}.each do |sorting|
         - if @sorting == sorting
-          %a.btn.btn-primary.active{ href: browse_url(slug: @conference.slug, sort: sorting) }= sorting
+          %a.btn.btn-primary.active{ href: conference_url(acronym: @conference.acronym, sort: sorting) }= sorting
         - else
-          %a.btn.btn-primary{ href: browse_url(slug: @conference.slug, sort: sorting) }= sorting
+          %a.btn.btn-primary{ href: conference_url(acronym: @conference.acronym, sort: sorting) }= sorting
 
   - if @events.present?
     .event-previews
