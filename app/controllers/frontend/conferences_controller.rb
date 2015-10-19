@@ -6,15 +6,11 @@ module Frontend
       'date' => 'release_date'
     }.freeze
 
-    before_action :check_sort_param, only: %w(slug browse)
-
-    def slug
-      @conference = Frontend::Conference.find_by(slug: params[:slug])
-      return show if @conference
-      browse
-    end
+    before_action :check_sort_param, only: %w(browse)
 
     def browse
+      return show if slug_matches_conference
+
       @folders = conferences_folder_tree_at(params[:slug] || '')
       return redirect_to browse_start_url if @folders.blank?
       respond_to do |format|
@@ -32,6 +28,10 @@ module Frontend
     end
 
     private
+
+    def slug_matches_conference
+      @conference = Frontend::Conference.find_by(slug: params[:slug])
+    end
 
     def conferences_folder_tree_at(path)
       tree = FolderTree.new

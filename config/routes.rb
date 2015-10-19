@@ -54,8 +54,8 @@ MediaBackend::Application.routes.draw do
     get '/event/:slug/download', to: 'events#download', as: :download_event, :constraints => { slug: %r'[^/]+' }
 
     get '/conferences/:acronym', to: 'conferences#show', as: :conference
-    get '/browse', to: 'conferences#slug', as: :browse_start
-    get '/browse/*slug', to: 'conferences#slug', as: :browse
+    get '/browse', to: 'conferences#browse', as: :browse_start
+    get '/browse/*slug', to: 'conferences#browse', as: :browse
 
     get '/tags', to: 'tags#index'
     get '/tags/:tag', to: 'tags#show', as: :tag
