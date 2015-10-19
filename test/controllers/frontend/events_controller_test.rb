@@ -14,17 +14,17 @@ module Frontend
     end
 
     test 'should get show' do
-      get :show, conference_slug: '123', slug: 'abc'
+      get :show, slug: 'abc'
       assert_response :success
     end
 
     test 'should get oembed' do
-      get :oembed, conference_slug: '123', slug: 'abc'
+      get :oembed, slug: 'abc'
       assert_response :success
     end
 
     test 'should get download' do
-      get :download, conference_slug: '123', slug: 'abc'
+      get :download, slug: 'abc'
       assert_response :success
     end
   end

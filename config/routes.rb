@@ -49,14 +49,14 @@ MediaBackend::Application.routes.draw do
     get '/search', to: 'home#search'
     get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
 
-    get '/conferences/:acronym', to: 'conferences#show', as: :conference_acronym
-    get '/events/:slug', to: 'events#show', as: :event_slug, :constraints => { slug: %r'[^/]+' }
+    get '/events/:slug', to: 'events#show', as: :event, :constraints => { slug: %r'[^/]+' }
+    get '/event/:slug/oembed', to: 'events#oembed', as: :oembed_event, :constraints => { slug: %r'[^/]+' }
+    get '/event/:slug/download', to: 'events#download', as: :download_event, :constraints => { slug: %r'[^/]+' }
 
+    get '/conferences/:acronym', to: 'conferences#show', as: :conference_acronym
     get '/browse', to: 'conferences#slug', as: :browse_start
     get '/browse/*slug', to: 'conferences#slug', as: :browse
-    get '/event/:conference_slug/:slug', to: 'events#show', as: :event, :constraints => { slug: %r'[^/]+' }
-    get '/event/:conference_slug/:slug/oembed', to: 'events#oembed', as: :oembed_event, :constraints => { slug: %r'[^/]+' }
-    get '/event/:conference_slug/:slug/download', to: 'events#download', as: :download_event, :constraints => { slug: %r'[^/]+' }
+
     get '/tags', to: 'tags#index'
     get '/tags/:tag', to: 'tags#show', as: :tag
 

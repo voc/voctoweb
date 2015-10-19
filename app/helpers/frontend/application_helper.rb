@@ -3,15 +3,15 @@ module Frontend
     require 'uri'
 
     def show_event_url(event)
-      event_slug_url(slug: event.slug)
+      event_url(slug: event.slug)
     end
 
     def oembed_show_event_url(event)
-      Settings.oembed_url + oembed_event_url(conference_slug: event.conference.slug, slug: event.slug)
+      Settings.oembed_url + oembed_event_url(slug: event.slug)
     end
 
     def download_show_event_url(event)
-      download_event_url(conference_slug: event.conference.slug, slug: event.slug)
+      download_event_url(slug: event.slug)
     end
 
     def twitter_url(title, url)

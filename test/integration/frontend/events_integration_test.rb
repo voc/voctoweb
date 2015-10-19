@@ -14,7 +14,7 @@ class Frontend::EventsIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'should view event' do
     event = @conference.events.first
-    get event_url(conference_slug: @conference.slug, slug: event.slug)
+    get event_url(slug: event.slug)
     assert_response :success
     assert_equal @conference.id, assigns(:conference).id
     assert_equal event.id, assigns(:event).id
@@ -23,7 +23,7 @@ class Frontend::EventsIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'should view event with shorter url' do
     event = @conference.events.first
-    get event_slug_url(slug: event.slug)
+    get event_url(slug: event.slug)
     assert_response :success
     assert_equal @conference.id, assigns(:conference).id
     assert_equal event.id, assigns(:event).id
