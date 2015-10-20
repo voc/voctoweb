@@ -22,7 +22,11 @@ module Frontend
     end
 
     def thumb_url
-      File.join Settings.static_url, conference.images_path, thumb_filename
+      if thumb_filename_exists?
+        File.join Settings.static_url, conference.images_path, thumb_filename
+      else
+        conference.logo_url
+      end
     end
 
     def tags
@@ -48,6 +52,12 @@ module Frontend
     end
 
     private
+
+    def thumb_filename_exists?
+      return if thumb_filename.blank?
+      return unless File.readable?(File.join(conference.get_images_path, thumb_filename))
+      true
+    end
 
     def recordings_by_mime_type
       Hash[recordings.downloaded.map { |r| [r.mime_type, r] }]
