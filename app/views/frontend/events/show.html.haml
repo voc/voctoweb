@@ -74,7 +74,7 @@
     - if @event.description.present?
       %h3 About
       %p.description
-        = @event.description
+        = simple_format @event.description
 
     - if @event.tags.present?
       %h3 Tags
