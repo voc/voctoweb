@@ -37,7 +37,7 @@ $(function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: window.location.protocol+'//api.media.ccc.de/search/api/term',
+			url: '/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,
@@ -121,7 +121,7 @@ $(function() {
 							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
 						}
 						else {
-							logourl = 'http://static.media.ccc.de/media/unknown.png';
+							logourl = 'https://static.media.ccc.de/media/unknown.png';
 						}
 
 
