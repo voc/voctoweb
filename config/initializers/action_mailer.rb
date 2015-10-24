@@ -1,7 +1,7 @@
 MediaBackend::Application.configure do
   config.action_mailer.default_url_options = {
-    host: ENV['APP_HOST'],
-    protocol: ENV['APP_PROTO']
+    host: Settings.frontend_host,
+    protocol: Settings.frontend_proto,
   }
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_HOST'],
