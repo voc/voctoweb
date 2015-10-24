@@ -1,8 +1,5 @@
-class Api::EventsController < InheritedResources::Base
-  before_filter :deny_json_request, if: :ssl_configured?
-  before_filter :authenticate_api_key!
+class Api::EventsController < Api::BaseController
   protect_from_forgery except: %i(create download update_promoted)
-  respond_to :json
 
   def index
     acronym = params['acronym']
@@ -17,7 +14,7 @@ class Api::EventsController < InheritedResources::Base
 
   def create
     acronym = params['acronym']
-    conference = Conference.find_by acronym: acronym
+    conference = Conference.find_by! acronym: acronym
     @event = conference.events.build event_params
 
     respond_to do |format|
@@ -32,15 +29,10 @@ class Api::EventsController < InheritedResources::Base
   end
 
   def download
-    event = Event.find_by guid: params[:guid]
+    event = Event.find_by! guid: params[:guid]
     respond_to do |format|
-      if event.present?
-        event.download_images(params[:thumb_url], params[:poster_url])
-        format.json { render json: event, status: :ok }
-      else
-        Rails.logger.info("JSON: failed to download event: #{params.inspect}")
-        format.json { render json: 'not found event', status: :unprocessable_entity }
-      end
+      event.download_images(params[:thumb_url], params[:poster_url])
+      format.json { render json: event, status: :ok }
     end
   end
 

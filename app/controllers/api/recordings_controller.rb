@@ -1,8 +1,5 @@
-class Api::RecordingsController < InheritedResources::Base
-  before_filter :deny_json_request, if: :ssl_configured?
-  before_filter :authenticate_api_key!
+class Api::RecordingsController < Api::BaseController
   protect_from_forgery except: %i(create download)
-  respond_to :json
 
   def index
     @recordings = Recording.recent(100)
@@ -10,7 +7,7 @@ class Api::RecordingsController < InheritedResources::Base
   end
 
   def create
-    event = Event.find_by guid: params['guid']
+    event = Event.find_by! guid: params['guid']
     @recording = Recording.new(recording_params)
     @recording.event = event
 
@@ -26,15 +23,11 @@ class Api::RecordingsController < InheritedResources::Base
   end
 
   def download
-    event = Event.find_by guid: params['guid']
+    event = Event.find_by! guid: params['guid']
+    fail ActiveRecord::RecordNotFound if event.recordings.blank?
     respond_to do |format|
-      if event.present? and event.recordings.any?
-        event.recordings.each(&:start_download!)
-        format.json { render json: event.recordings, status: :ok }
-      else
-        Rails.logger.info("JSON: failed to download recording: #{params.inspect}")
-        format.json { render json: event, status: :unprocessable_entity }
-      end
+      event.recordings.each(&:start_download!)
+      format.json { render json: event.recordings, status: :ok }
     end
   end
 
