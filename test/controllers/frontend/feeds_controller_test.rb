@@ -3,7 +3,7 @@ require 'test_helper'
 module Frontend
   class FeedsControllerTest < ActionController::TestCase
     setup do
-      create :conference_with_recordings
+      @conference = create :conference_with_recordings
     end
 
     test 'should get podcast' do
@@ -27,7 +27,7 @@ module Frontend
     end
 
     test 'should get podcast_folder' do
-      get :podcast_folder, slug: Conference.first.slug, mime_type: 'webm', format: :xml
+      get :podcast_folder, acronym: @conference.acronym, mime_type: 'webm', format: :xml
       assert_response :success
     end
   end

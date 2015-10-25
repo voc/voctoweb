@@ -7,20 +7,34 @@ module Feeds
     require 'rss/content'
     include Feeds::Helper
 
-    def initialize(config: {}, view_context: nil)
-      @view_context = view_context
+    def self.create_preferred(title: '', summary: '', logo: '', events: [])
+      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
+      feed.generate(events, &:preferred_recording)
+    end
+
+    def self.create_audio(title: '', summary: '', logo: '', events: [])
+      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
+      feed.generate(events, &:audio_recording)
+    end
+
+    def self.create_mime_type(title: '', summary: '', logo: '', events: [], mime_type: '')
+      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
+      feed.generate(events) { |event| event.recordings.by_mime_type(mime_type).first }
+    end
+
+    def initialize(config: {})
       @config = OpenStruct.new Settings.feeds
       merge_config(config)
     end
     attr_reader :config
     attr_writer :config
 
-    def generate(events, query)
+    def generate(events)
       rss = RSS::Maker.make('2.0') do |maker|
         create_channel(maker)
 
         events.each do |event|
-          recording = event.public_send query
+          recording = yield event
           next if recording.nil?
 
           fill_item(maker.items.new_item, event, recording)

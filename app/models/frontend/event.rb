@@ -7,6 +7,7 @@ module Frontend
     scope :recent, ->(n) { order('release_date desc').limit(n) }
     scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
     scope :older, ->(date) { where('release_date < ?', date).order('release_date desc') }
+    scope :downloaded, -> { joins(:recordings).where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 }) }
 
     def title
       self[:title].strip
