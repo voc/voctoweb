@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require mediaelement-and-player
+//= require mediaelement-fix
 //= require purl.min
 //= require handlebars.min-latest
 //= require search
