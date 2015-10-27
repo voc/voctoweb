@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018212350) do
+ActiveRecord::Schema.define(version: 20151027160631) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -94,6 +94,9 @@ ActiveRecord::Schema.define(version: 20151018212350) do
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
   add_index "events", ["guid"], name: "index_events_on_guid"
+  add_index "events", ["release_date"], name: "index_events_on_release_date"
+  add_index "events", ["slug", "id"], name: "index_events_on_slug_and_id"
+  add_index "events", ["slug"], name: "index_events_on_slug"
   add_index "events", ["title"], name: "index_events_on_title"
 
   create_table "import_templates", force: :cascade do |t|
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 20151018212350) do
   add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"
   add_index "recordings", ["filename"], name: "index_recordings_on_filename"
   add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type"
+  add_index "recordings", ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type"
   add_index "recordings", ["state"], name: "index_recordings_on_state"
 
 end
