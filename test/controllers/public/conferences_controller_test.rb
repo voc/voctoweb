@@ -10,8 +10,8 @@ class Public::ConferencesControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    create :conference_with_recordings
-    get :show, id: 1, format: :json
+    conference = create :conference_with_recordings
+    get :show, id: conference.id, format: :json
     assert_response :success
     refute_empty JSON.parse(response.body)
     #puts JSON.pretty_generate JSON.parse(response.body)
