@@ -39,4 +39,12 @@ class EventTest < ActiveSupport::TestCase
     assert_equal event.link, 'http://localhost/events/5060.html'
   end
 
+  test "should not touch conference if view count changed" do
+    conference = create(:conference_with_recordings)
+    event = conference.events.first
+    old_updated_at = conference.reload.updated_at.to_i
+    event.view_count = 123
+    event.save!
+    assert_equal old_updated_at, conference.reload.updated_at.to_i
+  end
 end
