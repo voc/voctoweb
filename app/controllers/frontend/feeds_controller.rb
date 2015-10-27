@@ -1,15 +1,16 @@
 module Frontend
   class FeedsController < FrontendController
     before_filter :set_conference, only: %i(podcast_folder)
+    EXPIRE_FEEDS = 15
 
     # podcast_recent
     def podcast
-      events = downloaded_events.newer(Time.now.ago(2.years))
-      xml = Rails.cache.fetch(key_for_events(events, :podcast)) do
+      time = round_time(Time.now.ago(2.years))
+      xml = Rails.cache.fetch([time, :podcast], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
           title: 'recent events feed', summary: 'This feed contains events from the last two years',
           logo: logo_image_url,
-          events: events)
+          events: downloaded_events.newer(time))
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -17,12 +18,12 @@ module Frontend
     end
 
     def podcast_archive
-      events = downloaded_events.older(Time.now.ago(2.years))
-      xml = Rails.cache.fetch(key_for_events(events, :podcast_archive)) do
+      time = round_time(Time.now.ago(2.years))
+      xml = Rails.cache.fetch([time, :podcast_archive], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
           title: 'archive feed', summary: 'This feed contains events older than two years',
           logo: logo_image_url,
-          events: events)
+          events: downloaded_events.older(time))
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -30,8 +31,9 @@ module Frontend
     end
 
     def podcast_audio
-      events = downloaded_events.newer(Time.now.ago(1.years))
-      xml = Rails.cache.fetch(key_for_events(events, :podcast_audio)) do
+      time = round_time(Time.now.ago(1.years))
+      xml = Rails.cache.fetch([time, :podcast_audio], expires_in: EXPIRE_FEEDS.minutes) do
+        events = downloaded_events.newer(time)
         Feeds::PodcastGenerator.create_audio(
           title: 'recent audio-only feed', summary: 'This feed contains events from the last years',
           logo: logo_image_url,
@@ -44,8 +46,8 @@ module Frontend
 
     # rss 1.0 last 100 feed
     def updates
-      events = downloaded_events.recent(100)
-      xml = Rails.cache.fetch(key_for_events(events, :rdftop100)) do
+      xml = Rails.cache.fetch(:rdftop100, expires_in: EXPIRE_FEEDS.minutes) do
+        events = downloaded_events.recent(100)
         feed = Feeds::RDFGenerator.new view_context: view_context,
           config: { title: 'last 100 events feed',
                     channel_summary: 'This feed the most recent 100 events',
@@ -81,9 +83,9 @@ module Frontend
       view_context.image_url('frontend/miro-banner.png')
     end
 
-    def key_for_events(events, name)
-      key = events.map(&:cache_key).join('/')
-      name.to_s + '/' + Digest::SHA1.hexdigest(key)
+    def round_time(time)
+      seconds = 15 * 60
+      Time.at((time.to_f / seconds).floor * seconds)
     end
 
     def set_conference
