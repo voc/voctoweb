@@ -9,5 +9,6 @@ json.mirrors(@mirrors.select { |m| m.enabled }.sort { |a,b| a.identifier <=> b.i
   json.lng mirror.lng
   json.asn mirror.asn
   json.nfiles mirror.nfiles
+  json.operator_url mirror.operator_url
   json.last_scan l(mirror.last_scan, format: :pretty_datetime)
 end

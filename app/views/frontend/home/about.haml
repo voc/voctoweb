@@ -84,6 +84,7 @@
     <th>Location</th>
     <th>Last Scan</th>
     <th>Files</th>
+    <th>Stats</th>
     </tr>
     {{#each mirrors}}
     {{#if this.status_baseurl}}
@@ -95,6 +96,7 @@
     <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
     <td>{{this.last_scan}}</td>
     <td>{{this.nfiles}}</td>
+    <td>{{#if this.operator_url}}<a href="{{this.operator_url}}">{{this.identifier}}</a>{{/if}}</td>
     </tr>
     {{/each}}
     </table>
