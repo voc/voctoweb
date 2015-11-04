@@ -1,6 +1,9 @@
 module Frontend
   class Conference < ::Conference
     has_many :events, class_name: Frontend::Event
+    has_many :downloaded_events, -> {
+      joins(:recordings).where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 }).uniq
+    }, class_name: Frontend::Event
 
     def mime_types
       return enum_for(:mime_types) unless block_given?
