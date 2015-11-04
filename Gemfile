@@ -5,6 +5,7 @@ gem 'rails', '~> 4.2.0'
 gem 'dotenv-rails'
 
 gem 'activeadmin', github: 'activeadmin'
+gem 'tinymce-rails'
 gem 'devise', '~> 3.4.0'
 gem 'aasm'
 gem 'sidekiq'

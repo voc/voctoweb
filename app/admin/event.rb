@@ -63,7 +63,7 @@ ActiveAdmin.register Event do
       f.input :conference, collection: Conference.order(:acronym)
       f.input :title
       f.input :subtitle
-      f.input :description
+      f.input :description, input_html: { class: 'tinymce' }
       f.input :link
       f.input :promoted
       f.input :persons_raw, as: :text
