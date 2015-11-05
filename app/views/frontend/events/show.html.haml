@@ -14,7 +14,7 @@
         = @event.subtitle
 
     %p.persons
-      %span.fa{class: persons_icon(@event)}
+      %span.fa{class: persons_icon(@event.persons)}
         - @event.persons.to_enum.with_index(1).each do |speaker, index|
           - if (@event.persons.count - 1) == index
             %a{href: '/search/?q=' + h(speaker)}= speaker
