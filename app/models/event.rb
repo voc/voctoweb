@@ -91,8 +91,8 @@ class Event < ActiveRecord::Base
     self.tags = values.split("\n").map(&:strip)
   end
 
-  def length
-    self.recordings.max { |e| e.length }.try(:length) || 0
+  def duration_from_recordings
+    recordings.max { |e| e.length }.try(:length) || 0
   end
 
   def set_image_filenames(thumb_url, poster_url)
