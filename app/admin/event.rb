@@ -60,7 +60,7 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs "Event Details" do
       f.input :guid
-      f.input :conference
+      f.input :conference, collection: Conference.order(:acronym)
       f.input :title
       f.input :subtitle
       f.input :description
