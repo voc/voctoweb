@@ -1,4 +1,9 @@
-$(function() {
+/*
+ * search.js
+ */
+
+var ready;
+ready = function() {
 	var
 		$search = $('.search'),
 		$results = $('.results'),
@@ -37,7 +42,7 @@ $(function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: '/search/api/term',
+			url: 'https://media.ccc.de/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,
@@ -223,7 +228,7 @@ $(function() {
 		for (var i = 0; i < personnames.length; i++) {
 			personnames[i] = $('<a />')
 				.attr({
-					href: baseUrl+'?q='+encodeURIComponent(personnames[i]),
+					href: '/search?q='+encodeURIComponent(personnames[i]),
 					title: 'Search for "'+personnames[i]+'"'
 				})
 				.text(personnames[i])
@@ -233,4 +238,7 @@ $(function() {
 		return personnames;
 	}
 
-});
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

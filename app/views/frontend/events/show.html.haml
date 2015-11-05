@@ -16,15 +16,11 @@
     %p.persons
       %span.fa{class: persons_icon(@event.persons)}
         - @event.persons.to_enum.with_index(1).each do |speaker, index|
+          %a{href: search_url(q: speaker)}= speaker
           - if (@event.persons.count - 1) == index
-            %a{href: '/search/?q=' + h(speaker)}= speaker
             and
-          - elsif @event.persons.count == index
-            %a{href: '/search/?q=' + h(speaker)}= speaker
-          - else
-            %a{href: '/search/?q=' + h(speaker)}= speaker
+          - elsif @event.persons.count != index
             \,
-
 
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
       - if @video_recordings.present?
