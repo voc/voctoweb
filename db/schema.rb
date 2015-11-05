@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027160631) do
+ActiveRecord::Schema.define(version: 20151105165721) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -72,24 +72,25 @@ ActiveRecord::Schema.define(version: 20151027160631) do
   add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
 
   create_table "events", force: :cascade do |t|
-    t.string   "guid",            limit: 255
-    t.string   "poster_filename", limit: 255
+    t.string   "guid",                        limit: 255
+    t.string   "poster_filename",             limit: 255
     t.integer  "conference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",           limit: 255
-    t.string   "thumb_filename",  limit: 255
+    t.string   "title",                       limit: 255
+    t.string   "thumb_filename",              limit: 255
     t.datetime "date"
     t.text     "description"
-    t.string   "link",            limit: 255
+    t.string   "link",                        limit: 255
     t.text     "persons"
-    t.string   "slug",            limit: 255
-    t.string   "subtitle",        limit: 255
+    t.string   "slug",                        limit: 255
+    t.string   "subtitle",                    limit: 255
     t.text     "tags"
     t.date     "release_date"
     t.boolean  "promoted"
-    t.integer  "view_count",                  default: 0
-    t.integer  "duration",                    default: 0
+    t.integer  "view_count",                              default: 0
+    t.integer  "duration",                                default: 0
+    t.integer  "downloaded_recordings_count",             default: 0
   end
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
