@@ -16,8 +16,11 @@ class Recording < ActiveRecord::Base
   scope :video, -> { where(mime_type: %w(vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm)) }
 
   after_save { update_conference_downloaded_count if downloaded? }
+  after_save { update_event_downloaded_count if downloaded? }
   after_save { update_event_duration if length_changed? }
   after_save { event.touch }
+  after_destroy { update_conference_downloaded_count if downloaded? }
+  after_destroy { update_event_downloaded_count if downloaded? }
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
@@ -79,6 +82,10 @@ class Recording < ActiveRecord::Base
 
   def update_conference_downloaded_count
     conference.update_column :downloaded_events_count, Event.recorded_at(conference).to_a.size
+  end
+
+  def update_event_downloaded_count
+    event.update_column :downloaded_recordings_count, event.downloaded_recordings.count
   end
 
   def update_event_duration

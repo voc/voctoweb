@@ -46,4 +46,12 @@ class RecordingTest < ActiveSupport::TestCase
     assert @recording.reload.downloaded?
   end
 
+  test "should increase counter on event" do
+    @event.recordings << create(:recording, state: 'downloaded', filename: 'video2.webm', event: @event)
+    @event.reload
+    assert_equal 2, @event.downloaded_recordings_count
+    @event.recordings.last.destroy
+    @event.reload
+    assert_equal 1, @event.downloaded_recordings_count
+  end
 end

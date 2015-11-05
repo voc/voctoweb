@@ -65,7 +65,7 @@ module Frontend
           title: "#{@conference.title} (#{@mime_type_name})",
           summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
           logo: logo_image_url,
-          events: @conference.downloaded_events.includes(:recordings),
+          events: @conference.downloaded_events,
           mime_type: @mime_type)
       end
       respond_to do |format|
@@ -76,7 +76,7 @@ module Frontend
     private
 
     def downloaded_events
-      Frontend::Event.downloaded.includes(:conference, :recordings)
+      Frontend::Event.downloaded.includes(:conference)
     end
 
     def logo_image_url

@@ -7,6 +7,9 @@ class Event < ActiveRecord::Base
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
+  has_many :downloaded_recordings, -> {
+    where(state: 'downloaded', mime_type: MimeType::HTML5)
+  }, class_name: Recording
 
   after_initialize :generate_guid
 

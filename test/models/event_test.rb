@@ -6,6 +6,13 @@ class EventTest < ActiveSupport::TestCase
     @event = create(:event)
   end
 
+  test "should count downloaded recordings" do
+    @event.recordings << create(:recording, state: 'new', filename: 'video.webm', event: @event)
+    @event.recordings << create(:recording, state: 'downloaded', filename: 'video2.webm', event: @event)
+    @event.reload
+    assert_equal 1, @event.downloaded_recordings.count
+  end
+
   test "should not save without a conference" do
     @event.conference = nil
     assert_raises (ActiveRecord::RecordInvalid) { @event.save!  }
