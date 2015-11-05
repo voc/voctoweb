@@ -13,7 +13,7 @@ class Recording < ActiveRecord::Base
   validate :unique_recording
 
   scope :downloaded, -> { where(state: 'downloaded') }
-  scope :video, -> { where(mime_type: %w[vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm]) }
+  scope :video, -> { where(mime_type: %w(vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm)) }
 
   after_save :update_downloaded_count
   after_save { event.touch }
@@ -39,39 +39,39 @@ class Recording < ActiveRecord::Base
   end
 
   def download!
-    VideoDownloadWorker.perform_async(self.id)
+    VideoDownloadWorker.perform_async(id)
   end
 
   def move_files!
-    VideoMoveWorker.perform_async(self.id)
+    VideoMoveWorker.perform_async(id)
   end
 
   def display_name
-    if self.event.present?
-      str = self.event.display_name
+    if event.present?
+      str = event.display_name
     else
-     str = self.filename
+      str = filename
     end
 
-    return self.id if str.empty?
+    return id if str.empty?
     str
   end
 
   def validate_for_api
-    self.errors.add(:folder, "recording folder #{self.conference.get_recordings_path} not writable") unless File.writable? self.conference.get_recordings_path
-    self.errors.add(:original_url, 'missing original_url') if self.original_url.nil?
-    not self.errors.any?
+    errors.add(:folder, "recording folder #{conference.get_recordings_path} not writable") unless File.writable? conference.get_recordings_path
+    errors.add(:original_url, 'missing original_url') if original_url.nil?
+    not errors.any?
   end
 
   def unique_recording
-    unless self.event.present?
-      self.errors.add :event, 'missing event on recording'
+    unless event.present?
+      errors.add :event, 'missing event on recording'
       return
     end
-    dupe = self.event.recordings.select { |recording|
-      recording.filename == self.filename && recording.folder == self.folder
+    dupe = event.recordings.select { |recording|
+      recording.filename == filename && recording.folder == folder
     }.delete_if { |dupe| dupe == self }
-    self.errors.add :event, 'recording already exist on event' if dupe.present?
+    errors.add :event, 'recording already exist on event' if dupe.present?
   end
 
   private

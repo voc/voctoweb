@@ -27,7 +27,7 @@ class Event < ActiveRecord::Base
   }
 
   scope :by_conference_slug, ->(conference_slug, slug) {
-    joins(:conference).where(conferences: {slug: conference_slug}, events: {slug: slug})
+    joins(:conference).where(conferences: { slug: conference_slug }, events: { slug: slug })
   }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
   # active admin and serialized fields workaround:
-  attr_accessor   :persons_raw, :tags_raw
+  attr_accessor :persons_raw, :tags_raw
 
   after_save { conference.touch unless view_count_changed? }
 
@@ -45,13 +45,13 @@ class Event < ActiveRecord::Base
 
   def self.by_identifier(conference_slug, slug)
     event = by_conference_slug(conference_slug, slug).try(:first)
-    raise ActiveRecord::RecordNotFound, "#{conference_slug}/#{slug}" unless event
+    fail ActiveRecord::RecordNotFound, "#{conference_slug}/#{slug}" unless event
     event
   end
 
   def self.update_promoted_from_view_count
-    self.connection.execute %{ UPDATE events SET promoted = 'false' }
-    popular_event_ids = self.connection.execute %{
+    connection.execute %( UPDATE events SET promoted = 'false' )
+    popular_event_ids = connection.execute %{
       SELECT events.id
         FROM events
         JOIN recordings
@@ -71,24 +71,24 @@ class Event < ActiveRecord::Base
 
   # active admin and serialized fields workaround:
   def persons_raw
-    self.persons.join("\n") unless self.persons.nil?
+    persons.join("\n") unless persons.nil?
   end
 
   # active admin and serialized fields workaround:
   def persons_raw=(values)
     self.persons = []
-    self.persons = values.split("\n").map { |w| w.strip }
+    self.persons = values.split("\n").map(&:strip)
   end
 
   # active admin and serialized fields workaround:
   def tags_raw
-    self.tags.join("\n") unless self.tags.nil?
+    tags.join("\n") unless tags.nil?
   end
 
   # active admin and serialized fields workaround:
   def tags_raw=(values)
     self.tags = []
-    self.tags = values.split("\n").map { |w| w.strip }
+    self.tags = values.split("\n").map(&:strip)
   end
 
   def length
@@ -106,18 +106,18 @@ class Event < ActiveRecord::Base
   end
 
   def display_name
-    if self.title.present?
-      self.conference.acronym + ": " + self.title
+    if title.present?
+      conference.acronym + ': ' + title
     else
-      self.guid || self.id
+      self.guid || id
     end
   end
 
   def persons_text
-    if self.persons.length == 0
+    if persons.length == 0
       'n/a'
-    elsif self.persons.length == 1
-      self.persons[0]
+    elsif persons.length == 1
+      persons[0]
     else
       persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
       persons.join(', ')
@@ -135,8 +135,7 @@ class Event < ActiveRecord::Base
     if url
       File.basename URI(url).path
     else
-      ""
+      ''
     end
   end
-
 end
