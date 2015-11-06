@@ -41,7 +41,7 @@
 
       - if @audio_recordings.present?
         #audio.tab-pane
-          %audio.audio{controls: 'controls'}
+          %audio.audio{controls: 'controls', preload: 'none'}
             - @audio_recordings.each do |recording|
               %source{type: recording.display_mime_type, src: h(recording.url)}
 
