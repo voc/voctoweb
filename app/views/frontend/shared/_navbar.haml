@@ -18,7 +18,7 @@
         - if @conference && @conference.downloaded_events_count > 0
           %li
             %hr
-          = render 'frontend/shared/navbar_folder_feeds'
+          = render partial: 'frontend/shared/navbar_folder_feeds', locals: { conference: @conference }
 
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
       .form-group.input-group

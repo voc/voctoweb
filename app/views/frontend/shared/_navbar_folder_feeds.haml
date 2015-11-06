@@ -1,4 +1,7 @@
-- @conference.mime_types do |mime_type, mime_type_name|
-  %li
-    %a{href: podcast_folder_feed_url(acronym: @conference.acronym, mime_type: mime_type_name)}
-      = "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder"
+%li
+  %a Podcast feeds for #{conference.acronym}
+  %ul
+    - conference.mime_types do |mime_type, mime_type_name|
+      %li
+        %a{href: podcast_folder_feed_url(acronym: conference.acronym, mime_type: mime_type_name)}
+          = MimeType.humanized_mime_type(mime_type)

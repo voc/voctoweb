@@ -18,4 +18,4 @@
 
   .tab-content
     #download.tab-pane.active{style: 'display: block'}
-      = render 'frontend/shared/download'
+      = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, conference: @conference }

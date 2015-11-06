@@ -1,27 +1,27 @@
 %h3 Embed into your website
 %input{:type => "text", :size=> "85", :readonly => true, :id => "txtShareFrame",
-       :value => "<iframe width=\"853\" height=\"480\" src=\"#{oembed_show_event_url(@event)}\" frameborder=\"0\" allowfullscreen></iframe>"}
+       :value => "<iframe width=\"853\" height=\"480\" src=\"#{oembed_show_event_url(event)}\" frameborder=\"0\" allowfullscreen></iframe>"}
 %h3 Share with others
 %ul
   %li
-    %a{:id => "btnTweet", :href => twitter_url(@event.title, event_url(slug: @event.slug)) }
+    %a{:id => "btnTweet", :href => twitter_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-twitter"}
       via Twitter
   %li
     %a{:id => "btnFacebook",
-       :href => facebook_url(@event.title, event_url(slug: @event.slug)) }
+       :href => facebook_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-facebook-square"}
       via Facebook
   %li
-    %a{:id => "btnGPlus", :href => googleplus_url(@event.title, event_url(slug: @event.slug)) }
+    %a{:id => "btnGPlus", :href => googleplus_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-google-plus"}
       via Google+
   %li
-    %a{:id => "btnAppNet", :href => appnet_url(@event.title, event_url(slug: @event.slug)) }
+    %a{:id => "btnAppNet", :href => appnet_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-adn"}
       via App.net
   %li
-    %a{:id => "btnMail", :href => mail_url(@event.title, event_url(slug: @event.slug)) }
+    %a{:id => "btnMail", :href => mail_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-envelope"}
       by Mail
 :javascript

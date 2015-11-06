@@ -2,7 +2,7 @@
   = @event.title
 
 - content_for :head do
-  = render 'frontend/shared/folder_feeds'
+  = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_show_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
 - cache(@event) do
@@ -38,7 +38,7 @@
     .tab-content
       - if @video_recordings.present?
         #video.tab-pane.active
-          = render 'frontend/shared/videoplayer'
+          = render partial: 'frontend/shared/videoplayer', locals: { video_recordings: @video_recordings, poster_url: @event.poster_url }
 
       - if @audio_recordings.present?
         #audio.tab-pane
@@ -47,10 +47,10 @@
               %source{type: recording.display_mime_type, src: h(recording.url)}
 
       #download.tab-pane
-        = render 'frontend/shared/download'
+        = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, conference: @conference }
 
       #embedshare.tab-pane
-        = render 'frontend/shared/embedshare'
+        = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
     %ul.metadata
       %li
@@ -77,7 +77,7 @@
       - @event.tags.each do |tag|
         != link_for(tag)
 
-  = render 'frontend/shared/videoplayer_js'
+  = render partial: 'frontend/shared/videoplayer_js', locals: { event: @event }
   = render 'frontend/shared/audioplayer_js'
 
   :javascript

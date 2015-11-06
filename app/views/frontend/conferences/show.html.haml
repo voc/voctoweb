@@ -1,5 +1,5 @@
 - content_for :head do
-  = render 'frontend/shared/folder_feeds'
+  = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
 
 .container-fluid
   .events-header
