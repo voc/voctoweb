@@ -74,10 +74,6 @@ module Frontend
       end
     end
 
-    def recording_length_minutes(recording)
-      "#{recording.length / 60} min" if recording.length > 0
-    end
-
     def duration_in_minutes(duration)
       "#{duration / 60} min" if duration > 0
     end
