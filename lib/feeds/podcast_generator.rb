@@ -94,8 +94,12 @@ module Feeds
       item.pubDate = event.date.to_s if event.date.present?
 
       item.enclosure.url = recording.url
-      item.enclosure.length = recording.size || 0
+      item.enclosure.length = size_to_bytes(recording.size) || 0
       item.enclosure.type = recording.display_mime_type
+    end
+
+    def size_to_bytes(size)
+      size * 1024 * 1024
     end
   end
 end
