@@ -6,11 +6,13 @@ module Frontend
       respond_to { |format| format.html }
     end
 
+    # TODO obsolete action? old javascript fallback maybe? now probably defunct.
     def download
     end
 
+    # videoplayer suitable for embedding in an iframe
     def oembed
-      # render layout: 'frontend/oembed'
+      render layout: 'frontend/oembed'
     end
 
     private

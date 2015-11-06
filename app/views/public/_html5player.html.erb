@@ -1,1 +1,1 @@
-<iframe src="<%= oembed_url(@url) %>" width="<%= @width %>" height="<%= @height %>" frameborder="0" title="<%= @event.title %>" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="<%= oembed_event_url(slug: event.slug) %>" width="<%= width %>" height="<%= height %>" frameborder="0" title="<%= event.title %>" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

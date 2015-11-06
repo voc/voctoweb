@@ -3,7 +3,7 @@
 
 - content_for :head do
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
-  != "<link href='#{oembed_show_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
+  != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
 - cache(@event) do
   .container-fluid

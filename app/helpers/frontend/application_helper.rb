@@ -2,8 +2,8 @@ module Frontend
   module ApplicationHelper
     require 'uri'
 
-    def oembed_show_event_url(event)
-      Settings.oembed_url + oembed_event_url(slug: event.slug)
+    def oembed_api_event_url(event)
+      Settings.oembed_url + event_url(slug: event.slug)
     end
 
     def twitter_url(title, url)

@@ -29,10 +29,6 @@ class Event < ActiveRecord::Base
       .group(:id)
   }
 
-  scope :by_conference_slug, ->(conference_slug, slug) {
-    joins(:conference).where(conferences: { slug: conference_slug }, events: { slug: slug })
-  }
-
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
@@ -44,12 +40,6 @@ class Event < ActiveRecord::Base
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
-  end
-
-  def self.by_identifier(conference_slug, slug)
-    event = by_conference_slug(conference_slug, slug).try(:first)
-    fail ActiveRecord::RecordNotFound, "#{conference_slug}/#{slug}" unless event
-    event
   end
 
   def self.update_promoted_from_view_count

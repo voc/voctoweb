@@ -8,5 +8,5 @@ xml.oembed do
   xml.title @event.title
   xml.author @event.persons_text
   xml.thumbnail_url @event.get_thumb_url
-  xml.html render(partial: 'html5player', formats: [:html], locals: { width: @width, height: @height, recording: @recording })
+  xml.html render(partial: 'html5player', formats: [:html], locals: { width: @width, height: @height, event: @event })
 end

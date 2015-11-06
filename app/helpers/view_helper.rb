@@ -1,9 +1,4 @@
 module ViewHelper
-
-  def oembed_url(url)
-    url.gsub(/https?:/, '').gsub(/.html$/, '/oembed.html')
-  end
-
   def show_recording_url(recording)
     "(#{recording.get_recording_url})"
   end
