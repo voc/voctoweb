@@ -6,7 +6,7 @@ module Frontend
       'date' => 'release_date'
     }.freeze
 
-    before_action :check_sort_param, only: %w(browse)
+    before_action :check_sort_param, only: %w(show)
 
     def browse
       return show if slug_matches_conference
@@ -20,7 +20,7 @@ module Frontend
 
     def show
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
-      @events = @conference.downloaded_events.order(sort_param)
+      @events = @conference.downloaded_events.includes(:conference).order(sort_param)
       @sorting = nil
       respond_to do |format|
         format.html { render :show }
