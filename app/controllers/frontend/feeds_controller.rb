@@ -8,6 +8,7 @@ module Frontend
       time = round_time(Time.now.ago(2.years))
       xml = Rails.cache.fetch([time, :podcast], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
+          view_context: view_context,
           title: 'recent events feed', summary: 'This feed contains events from the last two years',
           logo: logo_image_url,
           events: downloaded_events.newer(time))
@@ -21,6 +22,7 @@ module Frontend
       time = round_time(Time.now.ago(2.years))
       xml = Rails.cache.fetch([time, :podcast_archive], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
+          view_context: view_context,
           title: 'archive feed', summary: 'This feed contains events older than two years',
           logo: logo_image_url,
           events: downloaded_events.older(time))
@@ -35,6 +37,7 @@ module Frontend
       xml = Rails.cache.fetch([time, :podcast_audio], expires_in: EXPIRE_FEEDS.minutes) do
         events = downloaded_events.newer(time)
         Feeds::PodcastGenerator.create_audio(
+          view_context: view_context,
           title: 'recent audio-only feed', summary: 'This feed contains events from the last years',
           logo: logo_image_url,
           events: events)
@@ -51,7 +54,7 @@ module Frontend
         feed = Feeds::RDFGenerator.new view_context: view_context,
           config: { title: 'last 100 events feed',
                     channel_summary: 'This feed the most recent 100 events',
-                    logo: view_context.image_url('frontend/miro-banner.png') }
+                    logo: logo_image_url }
         feed.generate events
       end
       respond_to do |format|
@@ -61,12 +64,12 @@ module Frontend
 
     def podcast_folder
       xml = Rails.cache.fetch([@conference, @mime_type]) do
-        Feeds::PodcastGenerator.create_mime_type(
-          title: "#{@conference.title} (#{@mime_type_name})",
-          summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type_name}",
-          logo: logo_image_url,
-          events: @conference.downloaded_events,
-          mime_type: @mime_type)
+        Feeds::PodcastGenerator.create_conference(
+          view_context: view_context,
+          conference: @conference,
+          mime_type: @mime_type,
+          mime_type_name: @mime_type_name
+        )
       end
       respond_to do |format|
         format.xml { render xml: xml }

@@ -7,22 +7,36 @@ module Feeds
     require 'rss/content'
     include Feeds::Helper
 
-    def self.create_preferred(title: '', summary: '', logo: '', events: [])
-      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
+    def self.create_preferred(view_context: nil, title: '', summary: '', logo: '', events: [])
+      feed = Feeds::PodcastGenerator.new(
+        view_context,
+        title: title, channel_summary: summary, logo_image: logo
+      )
       feed.generate(events, &:preferred_recording)
     end
 
-    def self.create_audio(title: '', summary: '', logo: '', events: [])
-      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
+    def self.create_audio(view_context: nil, title: '', summary: '', logo: '', events: [])
+      feed = Feeds::PodcastGenerator.new(
+        view_context,
+        title: title, channel_summary: summary, logo_image: logo
+      )
       feed.generate(events, &:audio_recording)
     end
 
-    def self.create_mime_type(title: '', summary: '', logo: '', events: [], mime_type: '')
-      feed = Feeds::PodcastGenerator.new(config: { title: title, channel_summary: summary, logo: logo })
-      feed.generate(events) { |event| event.recordings.by_mime_type(mime_type).first }
+    def self.create_conference(view_context: nil, conference: nil, url: '', mime_type: '', mime_type_name: '')
+      feed = Feeds::PodcastGenerator.new(
+        view_context,
+        title: "#{conference.title} (#{mime_type_name})",
+        channel_summary: "This feed contains all events from #{conference.acronym} as #{mime_type_name}",
+        channel_description: "This feed contains all events from #{conference.acronym} as #{mime_type_name}",
+        base_url: view_context.conference_url(acronym: conference.acronym),
+        logo_image: conference.logo_url
+      )
+      feed.generate(conference.downloaded_events.includes(:conference)) { |event| event.recordings.by_mime_type(mime_type).first }
     end
 
-    def initialize(config: {})
+    def initialize(view_context, config = {})
+      @view_context = view_context
       @config = OpenStruct.new Settings.feeds
       merge_config(config)
     end
@@ -47,10 +61,10 @@ module Feeds
 
     def create_channel(maker)
       maker.channel.title = @config.channel_title
+      maker.channel.generator =  'media.ccc.de / RSS ' + RSS::VERSION
       maker.channel.link =  @config.base_url
       maker.channel.description = @config.channel_description
       maker.channel.copyright = 'mostly cc-by-nc'
-      maker.channel.language = 'en-us, de-de'
       maker.channel.lastBuildDate = Time.now
 
       # see http://www.apple.com/itunes/podcasts/specs.html#category
@@ -75,9 +89,9 @@ module Feeds
 
     def fill_item(item, event, recording)
       item.title = get_item_title(event)
-      item.link = recording.url
+      item.link = @view_context.event_url(slug: event.slug)
       item.itunes_keywords = event.try(:tags).join(',')
-      item.guid.content = recording.url
+      item.guid.content = recording.url + '?' + recording.created_at.to_i.to_s
       item.guid.isPermaLink = true
       item.dc_identifier = event.guid
 
@@ -94,7 +108,7 @@ module Feeds
       item.pubDate = event.date.to_s if event.date.present?
 
       item.enclosure.url = recording.url
-      item.enclosure.length = size_to_bytes(recording.size) || 0
+      item.enclosure.length = size_to_bytes(recording.size || 0)
       item.enclosure.type = recording.display_mime_type
     end
 

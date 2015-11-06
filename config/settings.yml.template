@@ -2,7 +2,7 @@ defaults: &defaults
   frontend_proto: https
   frontend_host: media.ccc.de
   cdn_url: http://cdn.media.ccc.de
-  static_url: http://static.media.ccc.de/media
+  static_url: https://static.media.ccc.de/media
   oembed_url: http://api.media.ccc.de/public/oembed?url=
   folders:
     recordings_base_dir: "/srv/recordings/cdn"
@@ -16,7 +16,7 @@ defaults: &defaults
     google: 2ozQIr-cQ-sJzGeJT_iTkS147fs3c5R3I1i6Dk_YLwA
     keywords: Chaos Computer Club, Video, Media, Streaming, TV, Hacker
   feeds:
-    base_url: "//media.ccc.de/"
+    base_url: "https://media.ccc.de/"
     channel_title: Chaos Computer Club
     channel_subtitle: A wide variety of video material distributed by the CCC. All content
       is taken from cdn.media.ccc.de and media.ccc.de
@@ -25,7 +25,6 @@ defaults: &defaults
     channel_summary: A wide variety of video material distributed by the Chaos Computer
       Club.
     channel_owner: CCC media team
-    logo_image: "//media.ccc.de/images/miro-banner.png"
     channel_keywords: CCC Congress Hacking Security Netzpolitik
 
 development:

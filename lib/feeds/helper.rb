@@ -12,34 +12,17 @@ module Feeds
     end
 
     def get_item_title(event)
-      conference = event.conference
-      title = ''
-      if conference.title.present?
-        title = conference.title
-      elsif conference.acronym.present?
-        title = conference.acronym
-      end
-      title += ': '
-      if event.title
-        title += event.title
-      else
-        title += event.slug
-      end
-      title
+      "#{event.title} (#{event.conference.acronym})"
     end
 
     def get_item_description(event)
       description = []
-      description << event.description or event.subtitle
+      description << event.description
 
       link = event.link
       description << "about this event: #{link}\n" if link
 
-      # file = 'src/browse/bla.page'
-      url = @config['base_url'] + event.slug + '.html'
-      description << "event on media: #{url}\n"
-
-      description.join
+      description.join("\n")
     end
   end
 end
