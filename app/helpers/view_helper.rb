@@ -24,7 +24,6 @@ module ViewHelper
   end
 
   def show_recording_path(recording)
-    show_folder label: recording.filename ,path: recording.get_recording_path
+    show_folder label: recording.filename, path: recording.get_recording_path
   end
-
 end
