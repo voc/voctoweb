@@ -25,13 +25,12 @@
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
       - if @video_recordings.present?
         %li
-          %a{href: '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+          %a{href: event_url(slug: @event.slug), 'data-target' => '#video', role: 'tab', 'data-toggle' => 'tab'} Video
       - if @audio_recordings.present?
         %li
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
       %li
-        %a{href: download_event_url(slug: @event), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
-
+        %a{href: download_event_url(slug: @event.slug), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
       %li
         %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
 
@@ -81,30 +80,36 @@
   = render 'frontend/shared/audioplayer_js'
 
   :javascript
+    function setDefaultHash() {
+      var hash = '#video';
+      if(window.history && window.history.replaceState) {
+        // set new hash without adding an entry into the browser history
+        window.history.replaceState(null, "", hash);
+      } else {
+        // classic fallback
+        window.location.hash = hash;
+      }
+    }
+
     // activate tab via hash and default to video
     function setTabToHash() {
       var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
-      if (hash === '') { hash = '#video' }
+      if (hash === '') {
+        setDefaultHash();
+        return;
+      }
       var activeTab = $('.nav-tabs a[href=' + hash + '], .nav-tabs a[data-target=' + hash + ']')
-        .tab('show');
-
       if (activeTab.length === 0) {
-        var hash = '#video';
-        if(window.history && window.history.replaceState) {
-          // set new hash without adding an entry into the browser history
-          window.history.replaceState(null, "", hash);
-        }
-        else {
-          // classic fallback
-          window.location.hash = hash;
-        }
+        console.warn('invalid hash, cannot use tab!');
+        setDefaultHash();
       }
     }
     setTabToHash();
 
     // change hash on tab change
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
-      window.location.hash = e.target.hash;
+      var hash = e.target.hash || e.target.dataset.target;
+      window.location.hash = hash;
     });
 
     // adjust tabs when hash changes
