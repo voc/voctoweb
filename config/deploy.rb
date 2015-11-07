@@ -33,7 +33,7 @@ set :puma_workers,    3
 set :use_sudo,        false
 set :stage,           :production
 # set :deploy_via,      :remote_cache
-set :deploy_to,       "/srv/www/#{fetch(:application)}/apps/#{fetch(:application)}"
+set :deploy_to,       "/srv/www/#{fetch(:application)}"
 set :puma_bind,       ["unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock", 'tcp://127.0.0.1:4080']
 set :puma_conf,       "#{shared_path}/config/puma.rb"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
