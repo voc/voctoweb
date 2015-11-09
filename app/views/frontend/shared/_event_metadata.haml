@@ -6,8 +6,7 @@
     %span.fa.fa-calendar-o
     = event.display_date
   %li.persons
-    %span.fa{class: persons_icon(event.persons)}
-    != linked_persons_text(event.persons)
+    = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
 %h3
   %a{href: event_url(slug: event.slug)}
     = event.title

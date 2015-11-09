@@ -14,13 +14,7 @@
         = @event.subtitle
 
     %p.persons
-      %span.fa{class: persons_icon(@event.persons)}
-        - @event.persons.to_enum.with_index(1).each do |speaker, index|
-          %a{href: search_url(q: speaker)}= speaker
-          - if (@event.persons.count - 1) == index
-            and
-          - elsif @event.persons.count != index
-            \,
+      = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
 
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
       - if @video_recordings.present?
