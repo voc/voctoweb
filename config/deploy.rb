@@ -23,7 +23,7 @@ set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 # taken from: https://www.digitalocean.com/community/tutorials/deploying-a-rails-app-on-ubuntu-14-04-with-capistrano-nginx-and-puma
 set :puma_threads,    [4, 16]
-set :puma_workers,    3
+set :puma_workers,    2
 set :puma_bind,       ["unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock", 'tcp://127.0.0.1:4080']
 set :puma_conf,       "#{shared_path}/config/puma.rb"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
