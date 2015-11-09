@@ -118,6 +118,10 @@ Update promoted flag of events by view count
 
     /api/events/update_promoted
 
+Update view counts of events viewed in the last 30 minutes
+
+    /api/events/update_view_counts
+
 ## Public JSON API
 
     /public/conferences

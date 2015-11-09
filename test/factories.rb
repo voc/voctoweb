@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   sequence :email do |n|
     "test#{n}@example.com"
   end
@@ -8,14 +7,14 @@ FactoryGirl.define do
     "frabcon#{n}"
   end
 
-  sequence :conference_slug do |n|
-    "conference/frabcon" + SecureRandom.hex(16)
+  sequence :conference_slug do |_n|
+    'conference/frabcon' + SecureRandom.hex(16)
   end
-  sequence :event_guid do |n|
+  sequence :event_guid do |_n|
     SecureRandom.hex(16)
   end
 
-  sequence :event_slug do |n|
+  sequence :event_slug do |_n|
     SecureRandom.hex(4)
   end
 
@@ -28,17 +27,17 @@ FactoryGirl.define do
   end
 
   factory :api_key do
-    key "4"
-    description "key"
+    key '4'
+    description 'key'
   end
 
   factory :conference do
     acronym { generate(:conference_acronym) }
-    title "FrabCon"
-    recordings_path "events/frabcon123"
-    images_path "frabcon123"
+    title 'FrabCon'
+    recordings_path 'events/frabcon123'
+    images_path 'frabcon123'
     slug { generate(:conference_slug) }
-    aspect_ratio "16:9"
+    aspect_ratio '16:9'
 
     factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
   end
@@ -56,13 +55,13 @@ FactoryGirl.define do
   trait :event_recordings do
     after(:create) do |event|
       event.recordings << FactoryGirl.create(:recording)
-      event.recordings << FactoryGirl.create(:recording)
+      event.recordings << FactoryGirl.create(:recording, filename: 'video.webm')
     end
   end
 
   trait :has_schedule do
-    schedule_url "http://localhost/schedule.xml"
-    schedule_state "downloaded"
+    schedule_url 'http://localhost/schedule.xml'
+    schedule_state 'downloaded'
     schedule_xml %{
     <?xml version="1.0" encoding="utf-8"?>
     <schedule>
@@ -104,55 +103,54 @@ FactoryGirl.define do
     conference
     guid { generate(:event_guid) }
     title { generate(:event_title) }
-    thumb_filename "frabcon123.jpg"
-    poster_filename "frabcon123_logo.jpg"
-    subtitle "subtitle"
+    thumb_filename 'frabcon123.jpg'
+    poster_filename 'frabcon123_logo.jpg'
+    subtitle 'subtitle'
 
     slug { generate(:event_slug) }
-    link "http://localhost/ev_info"
-    description "description"
-    persons ["Name"]
-    tags ["tag"]
-    date "2013-08-21"
-    release_date "2013-08-21"
+    link 'http://localhost/ev_info'
+    description 'description'
+    persons ['Name']
+    tags ['tag']
+    date '2013-08-21'
+    release_date '2013-08-21'
 
     factory :event_with_recordings, traits: [:event_recordings]
   end
 
   factory :recording do
     event
-    filename "audio.mp3"
-    folder ""
-    mime_type "video/webm"
-    original_url "file:///fixtures/test.webm"
-    size "12"
-    length "5"
-    state "downloaded"
+    filename 'audio.mp3'
+    folder ''
+    mime_type 'video/webm'
+    original_url 'file:///fixtures/test.webm'
+    size '12'
+    length '5'
+    state 'downloaded'
   end
 
   factory :admin_user do
-    email  { generate :email }
-    password "admin123"
+    email { generate :email }
+    password 'admin123'
   end
 
   factory :news do
-    title "MyString"
-    body "MyText <b>bold</b> most html allowed."
-    date "2014-05-03"
+    title 'MyString'
+    body 'MyText <b>bold</b> most html allowed.'
+    date '2014-05-03'
   end
 
   factory :import_template do
     acronym { generate(:conference_acronym) }
-    title "FrabCon"
-    recordings_path "events/frabcon123"
-    images_path "frabcon123"
+    title 'FrabCon'
+    recordings_path 'events/frabcon123'
+    images_path 'frabcon123'
     slug { generate(:conference_slug) }
-    aspect_ratio "16:9"
-    logo "logo.jpg"
-    date "2013-08-21"
-    release_date "2013-08-21"
-    folder "webm"
-    mime_type "video/webm"
+    aspect_ratio '16:9'
+    logo 'logo.jpg'
+    date '2013-08-21'
+    release_date '2013-08-21'
+    folder 'webm'
+    mime_type 'video/webm'
   end
-
 end

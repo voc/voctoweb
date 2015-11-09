@@ -14,6 +14,7 @@ MediaBackend::Application.routes.draw do
       collection do
         post 'download'
         post 'update_promoted'
+        post 'update_view_counts'
       end
     end
     resources :recordings, :defaults => { :format => 'json' } do

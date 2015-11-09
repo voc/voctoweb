@@ -38,4 +38,17 @@ class Api::EventsControllerTest < ActionController::TestCase
     events.each { |event| assert Event.find(event.id).promoted }
   end
 
+  test "should update view counts of events" do
+    conference = create(:conference)
+    event = create(:event_with_recordings, conference: conference, view_count: 1)
+    event.recordings.first.recording_views.create
+    event.recordings.first.recording_views.create
+    event.recordings.last.recording_views.create
+    other_event = create(:event_with_recordings, conference: conference, view_count: 2)
+    other_event.recordings.last.recording_views.create
+
+    get 'update_view_counts', format: :json, api_key: @key.key
+    assert_equal 3, event.reload.view_count
+    assert_equal 1, other_event.reload.view_count
+  end
 end

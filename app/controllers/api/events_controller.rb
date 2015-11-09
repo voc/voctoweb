@@ -41,6 +41,11 @@ class Api::EventsController < Api::BaseController
     render json: { status: 'ok' }
   end
 
+  def update_view_counts
+    Event.update_view_counts
+    render json: { status: 'ok' }
+  end
+
   private
 
   def create_event(params)

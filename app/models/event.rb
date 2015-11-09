@@ -53,6 +53,8 @@ class Event < ActiveRecord::Base
 
   # runs every 15 minutes by whenever
   def self.update_view_counts
+    event_ids = recently_viewed_event_ids
+    return unless event_ids.present?
     connection.execute %{
       UPDATE events
       SET view_count = (
@@ -62,8 +64,9 @@ class Event < ActiveRecord::Base
             ON recording_views.recording_id = recordings.id
             AND recordings.event_id         = events.id
       )
-      WHERE events.id IN (#{recently_viewed_event_ids.join(',')})
+      WHERE events.id IN (#{event_ids.join(',')})
     }
+    event_ids.map { |id| Event.find(id).touch }
   end
 
   # active admin and serialized fields workaround:
