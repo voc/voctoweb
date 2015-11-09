@@ -6,11 +6,9 @@ class Public::RecordingsController < InheritedResources::Base
 
   def count
     @event = Event.find params[:event_id]
-    if not @event
-      return render json: { status: :unprocessable_entity }
-    end
+    return render json: { status: :unprocessable_entity } unless @event
 
-    @recording = @event.recordings.where(filename: File.basename(params[:src])).first
+    @recording = @event.recordings.find_by(filename: File.basename(params[:src]))
     if not @recording or throttle?(@recording.filename)
       return render json: { status: :unprocessable_entity }
     end

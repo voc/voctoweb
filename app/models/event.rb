@@ -42,24 +42,28 @@ class Event < ActiveRecord::Base
     self.guid ||= SecureRandom.uuid
   end
 
+  # run daily maybe, or as required
   def self.update_promoted_from_view_count
     connection.execute %( UPDATE events SET promoted = 'false' )
-    popular_event_ids = connection.execute %{
-      SELECT events.id
-        FROM events
-        JOIN recordings
-          ON recordings.event_id          = events.id
-        JOIN recording_views
-          ON recording_views.recording_id = recordings.id
-      WHERE recording_views.created_at    > '#{Time.now.ago 1.week}'
-      GROUP BY events.id
-      ORDER BY count(recording_views.id) DESC LIMIT #{MAX_PROMOTED}
-    }
     popular_event_ids.each do |event_id|
       event = Event.find event_id['id']
-      event.promoted = true
-      event.save
+      event.update_column :promoted, true
     end
+  end
+
+  # runs every 15 minutes by whenever
+  def self.update_view_counts
+    connection.execute %{
+      UPDATE events
+      SET view_count = (
+        SELECT count(*)
+        FROM recording_views
+          JOIN recordings
+            ON recording_views.recording_id = recordings.id
+            AND recordings.event_id         = events.id
+      )
+      WHERE events.id IN (#{recently_viewed_event_ids.join(',')})
+    }
   end
 
   # active admin and serialized fields workaround:
@@ -118,6 +122,24 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+  def self.popular_event_ids
+    connection.execute %{
+      SELECT events.id
+        FROM events
+        JOIN recordings
+          ON recordings.event_id          = events.id
+        JOIN recording_views
+          ON recording_views.recording_id = recordings.id
+      WHERE recording_views.created_at    > '#{Time.now.ago 1.week}'
+      GROUP BY events.id
+      ORDER BY count(recording_views.id) DESC LIMIT #{MAX_PROMOTED}
+    }
+  end
+
+  def self.recently_viewed_event_ids
+    RecordingView.joins(:recording).where('recording_views.updated_at > ?', Time.now.ago(30.minutes)).pluck('recordings.event_id').uniq
+  end
 
   def download_image(url, filename)
     return if url.nil? or filename.nil?
