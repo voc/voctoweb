@@ -10,7 +10,7 @@ module Frontend
 
     def show
       @tag = params[:tag]
-      raise ActiveRecord::NotFound unless @tag
+      raise ActiveRecord::RecordNotFound unless @tag
       # TODO native postgresql query?
       @events = Frontend::Event.all.select { |event| event.tags.include? @tag }
       respond_to { |format| format.html }

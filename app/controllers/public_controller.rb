@@ -26,8 +26,9 @@ class PublicController < ActionController::Base
     return unless allowed_url?(uri)
 
     @event = Event.find_by!(slug: slug_from_uri(uri))
-
     recording = @event.downloaded_recordings.video.first
+    fail ActiveRecord::RecordNotFound unless recording
+
     @width = [1280, recording.width.to_i].min
     @height = [720, recording.height.to_i].min
     @width = [@width.to_i, params[:maxwidth].to_i].min if params[:maxwidth]

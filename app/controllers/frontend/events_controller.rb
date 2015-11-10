@@ -18,18 +18,10 @@ module Frontend
     private
 
     def load_event
-      @event = event_from_params
+      @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
       @video_recordings = @event.recordings.video
       @audio_recordings = @event.recordings.audio
-    end
-
-    def event_from_params
-      if params[:slug]
-        Frontend::Event.find_by!(slug: params[:slug])
-      else
-        fail ActiveRecord::NotFound
-      end
     end
   end
 end
