@@ -8,8 +8,8 @@ module Frontend
     end
 
     test 'should get browse for slug' do
-      create :conference, slug: 'a/b/c'
-      create :conference, slug: 'a/e'
+      create :conference, slug: 'a/b/c', downloaded_events_count: 1
+      create :conference, slug: 'a/e', downloaded_events_count: 1
       get :browse, slug: 'a'
       assert_response :success
       assert_template :browse

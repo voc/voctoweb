@@ -35,10 +35,14 @@ module Frontend
 
     def conferences_folder_tree_at(path)
       tree = FolderTree.new
-      tree.build(Conference.pluck(:id, :slug))
+      tree.build(conferences_with_downloaded_events)
       folders = tree.folders_at(path)
       fail ActiveRecord::RecordNotFound unless folders
       tree.sort_folders(folders)
+    end
+
+    def conferences_with_downloaded_events
+      Conference.where('downloaded_events_count > 0').pluck(:id, :slug)
     end
 
     def sort_param

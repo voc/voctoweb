@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Frontend::BrowseIntegrationTest < ActionDispatch::IntegrationTest
   setup do
-    create :conference, slug: 'a/b'
-    create :conference, slug: 'a/c'
-    create :conference, slug: 'a/d/e'
+    create :conference, slug: 'a/b', downloaded_events_count: 1
+    create :conference, slug: 'a/c', downloaded_events_count: 1
+    create :conference, slug: 'a/d/e', downloaded_events_count: 1
   end
 
   test 'should browse folders' do
