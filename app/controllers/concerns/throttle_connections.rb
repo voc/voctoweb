@@ -15,7 +15,7 @@ module ThrottleConnections
   private
 
   def cache_key(key)
-    [key, Digest::MD5.hexdigest(remote_ip)]
+    ['throttle', key, Digest::MD5.hexdigest(remote_ip)]
   end
 
   def remote_ip

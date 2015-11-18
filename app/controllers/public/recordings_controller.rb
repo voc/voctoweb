@@ -9,7 +9,7 @@ class Public::RecordingsController < InheritedResources::Base
     return render json: { status: :unprocessable_entity } unless @event
 
     @recording = @event.recordings.find_by(filename: File.basename(params[:src]))
-    if not @recording or throttle?(@recording.filename)
+    if not @recording or throttle?([@recording.event_id, @recording.filename].join('/'))
       return render json: { status: :unprocessable_entity }
     end
 

@@ -6,7 +6,7 @@ module Frontend
     # podcast_recent
     def podcast
       time = round_time(Time.now.ago(2.years))
-      xml = Rails.cache.fetch([time, :podcast], expires_in: EXPIRE_FEEDS.minutes) do
+      xml = Rails.cache.fetch([:podcast, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
           view_context: view_context,
           title: 'recent events feed', summary: 'This feed contains events from the last two years',
@@ -20,7 +20,7 @@ module Frontend
 
     def podcast_archive
       time = round_time(Time.now.ago(2.years))
-      xml = Rails.cache.fetch([time, :podcast_archive], expires_in: EXPIRE_FEEDS.minutes) do
+      xml = Rails.cache.fetch([:podcast_archive, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
         Feeds::PodcastGenerator.create_preferred(
           view_context: view_context,
           title: 'archive feed', summary: 'This feed contains events older than two years',
@@ -34,7 +34,7 @@ module Frontend
 
     def podcast_audio
       time = round_time(Time.now.ago(1.years))
-      xml = Rails.cache.fetch([time, :podcast_audio], expires_in: EXPIRE_FEEDS.minutes) do
+      xml = Rails.cache.fetch([:podcast_audio, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
         events = downloaded_events.newer(time)
         Feeds::PodcastGenerator.create_audio(
           view_context: view_context,
@@ -63,7 +63,7 @@ module Frontend
     end
 
     def podcast_folder
-      xml = Rails.cache.fetch([@conference, @mime_type]) do
+      xml = Rails.cache.fetch([:podcast_folder, @conference, @mime_type]) do
         Feeds::PodcastGenerator.create_conference(
           view_context: view_context,
           conference: @conference,
