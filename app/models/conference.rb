@@ -12,6 +12,7 @@ class Conference < ActiveRecord::Base
   validates_uniqueness_of :acronym
   validates_uniqueness_of :slug
   validates :slug, format: { with: %r{\A\w+(?:/\w+)*\z} }
+  validate :schedule_url_valid
   validate :slug_reachable
 
   has_attached_directory :images,
@@ -86,5 +87,12 @@ class Conference < ActiveRecord::Base
   def slug_reachable
     return unless Conference.pluck(:slug).any? { |s| s.starts_with?(slug + '/') }
     errors.add :slug, "can't add conference below another conference"
+  end
+
+  def schedule_url_valid
+    return unless schedule_url
+    URI.parse(schedule_url)
+  rescue URI::Exception
+    errors.add :schedule_url, 'not a valid url'
   end
 end
