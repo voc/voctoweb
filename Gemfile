@@ -6,7 +6,7 @@ gem 'dotenv-rails'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'tinymce-rails'
-gem 'devise', '~> 3.4.0'
+gem 'devise', '~> 3.5.0'
 gem 'aasm'
 gem 'sidekiq'
 gem 'airbrussh'
@@ -56,7 +56,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 # Cross origin resource sharing for public json api and ajax clients
 gem 'rack-cors', :require => 'rack/cors'
