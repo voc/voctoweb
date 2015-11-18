@@ -12,6 +12,7 @@ module Frontend
 
     # videoplayer suitable for embedding in an iframe
     def oembed
+      response.headers.delete 'X-Frame-Options'
       render layout: 'frontend/oembed'
     end
 
