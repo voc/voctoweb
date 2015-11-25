@@ -1,4 +1,5 @@
 class Public::RecordingsController < InheritedResources::Base
+  include ApiErrorResponses
   include ThrottleConnections
   respond_to :json
   actions :index, :show

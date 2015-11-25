@@ -1,4 +1,5 @@
 class Public::EventsController < InheritedResources::Base
+  include ApiErrorResponses
   respond_to :json
   actions :index, :show
 

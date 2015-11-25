@@ -17,4 +17,8 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     #puts JSON.pretty_generate JSON.parse(response.body)
   end
 
+  test "should return 404 error" do
+    get :show, id: 123, format: :json
+    assert_response :not_found
+  end
 end
