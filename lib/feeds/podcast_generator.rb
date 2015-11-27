@@ -65,7 +65,7 @@ module Feeds
       maker.channel.link =  @config.base_url
       maker.channel.description = @config.channel_description
       maker.channel.copyright = 'mostly cc-by-nc'
-      maker.channel.lastBuildDate = Time.now
+      maker.channel.lastBuildDate = Time.now.utc.to_s
 
       # see http://www.apple.com/itunes/podcasts/specs.html#category
       # category = maker.channel.itunes_categories.new_category
