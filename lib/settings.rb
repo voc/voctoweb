@@ -9,10 +9,10 @@ class Settings
   end
 
   def self.frontend_url
-    "#{frontend_proto}://#{frontend_host}"
+    "#{frontend_proto}://#{frontend_host}".freeze
   end
 
   def self.config
-    @config ||= OpenStruct.new Rails.application.config_for(:settings)
+    @config ||= OpenStruct.new(Rails.application.config_for(:settings)).freeze
   end
 end

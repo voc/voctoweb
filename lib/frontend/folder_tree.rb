@@ -2,10 +2,11 @@ module Frontend
   class FolderNode
     def initialize(name = '', path = '')
       @childs = {}
-      @name = name
-      @path = build_path(path, name)
+      @name = name.freeze
+      @path = build_path(path, name).freeze
     end
-    attr_accessor :conference_id, :childs, :path, :name
+    attr_accessor :conference_id
+    attr_reader :childs, :path, :name
 
     def add(name)
       if @childs.key? name
