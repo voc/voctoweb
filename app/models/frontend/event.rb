@@ -35,16 +35,19 @@ module Frontend
     end
 
     def audio_recording
-      preferred_recording(order: MimeType::AUDIO)
+      audio_recordings = recordings.downloaded.where(mime_type: MimeType::AUDIO)
+      return if audio_recordings.empty?
+      seen = Hash[audio_recordings.map { |r| [r.mime_type, r] }]
+      MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
+      seen.first[1]
     end
 
     def preferred_recording(order: MimeType::PREFERRED_VIDEO)
-      recordings = recordings_by_mime_type
-      return if recordings.empty?
-      order.each do |mt|
-        return recordings[mt] if recordings.key?(mt)
-      end
-      recordings.first[1]
+      video_recordings = recordings.downloaded.where.not(mime_type: MimeType::AUDIO)
+      return if video_recordings.empty?
+      seen = Hash[video_recordings.map { |r| [r.mime_type, r] }]
+      order.each { |mt| return seen[mt] if seen.key?(mt) }
+      seen.first[1]
     end
 
     # @return [Array(Recording)]
@@ -58,10 +61,6 @@ module Frontend
       return if thumb_filename.blank?
       return unless File.readable?(File.join(conference.get_images_path, thumb_filename))
       true
-    end
-
-    def recordings_by_mime_type
-      Hash[recordings.downloaded.map { |r| [r.mime_type, r] }]
     end
   end
 end
