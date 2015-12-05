@@ -1,7 +1,7 @@
 class Settings
   def self.method_missing(name)
     fail "not implemented: #{name}" unless config.respond_to?(name)
-    config.public_send(name)
+    config.public_send(name).freeze
   end
 
   def self.respond_to?(name)

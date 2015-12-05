@@ -7,12 +7,12 @@ module Frontend
     def mime_types
       return enum_for(:mime_types) unless block_given?
       recordings.pluck(:mime_type).uniq.map { |mime_type|
-        yield mime_type, MimeType.mime_type_slug(mime_type)
+        yield mime_type.freeze, MimeType.mime_type_slug(mime_type)
       }
     end
 
     def recordings_url
-      File.join Settings.cdn_url, recordings_path
+      File.join(Settings.cdn_url, recordings_path).freeze
     end
   end
 end

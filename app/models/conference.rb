@@ -53,7 +53,7 @@ class Conference < ActiveRecord::Base
 
   def get_event_url(id)
     if schedule_url.present?
-      return schedule_url.sub('schedule.xml', "events/#{id}.html")
+      return schedule_url.sub('schedule.xml', "events/#{id}.html").freeze
     end
   end
 
@@ -63,7 +63,7 @@ class Conference < ActiveRecord::Base
       File.join Settings.static_url, images_path, logo
     else
       File.join Settings.static_url, 'unknown.png'
-    end
+    end.freeze
   end
 
   def display_name

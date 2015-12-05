@@ -19,19 +19,19 @@ module Frontend
     end
 
     def poster_url
-      File.join(Settings.static_url, conference.images_path, poster_filename) if poster_filename
+      File.join(Settings.static_url, conference.images_path, poster_filename).freeze if poster_filename
     end
 
     def thumb_url
       if thumb_filename_exists?
-        File.join Settings.static_url, conference.images_path, thumb_filename
+        File.join(Settings.static_url, conference.images_path, thumb_filename).freeze
       else
-        conference.logo_url
+        conference.logo_url.freeze
       end
     end
 
     def tags
-      self[:tags].compact.collect(&:strip)
+      self[:tags].compact.collect(&:strip).map!(&:freeze)
     end
 
     def audio_recording
@@ -52,7 +52,7 @@ module Frontend
 
     # @return [Array(Recording)]
     def by_mime_type(mime_type: 'video/mp4')
-      recordings.downloaded.by_mime_type(mime_type).first
+      recordings.downloaded.by_mime_type(mime_type).first.freeze
     end
 
     private

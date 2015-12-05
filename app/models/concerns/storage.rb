@@ -48,7 +48,7 @@ module Storage
       end
 
       klass.send :define_method, for_url_path(symbol) do
-        '/' + URL.join(url_path, send(instance_var))
+        '/'.freeze + URL.join(url_path, send(instance_var))
       end
 
       klass.send :define_method, for_path(symbol) do
@@ -102,10 +102,11 @@ module Storage
   class URL
     def self.join(*args)
       args.select(&:present?).map { |w|
+        w = w.dup
         w.sub!(%r{^/}, ''.freeze)
         w.sub!(%r{/$}, ''.freeze)
         w
-      }.join('/'.freeze)
+      }.join('/'.freeze).freeze
     end
   end
 end

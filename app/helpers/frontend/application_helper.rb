@@ -3,30 +3,30 @@ module Frontend
     require 'uri'
 
     def oembed_api_event_url(event)
-      Settings.oembed_url + event_url(slug: event.slug)
+      (Settings.oembed_url + event_url(slug: event.slug)).freeze
     end
 
     def twitter_url(title, url)
-      'http://twitter.com/home?status=' + URI.encode_www_form_component(title + ': ' + url)
+      'http://twitter.com/home?status='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
 
     def facebook_url(title, url)
-      'https://www.facebook.com/sharer/sharer.php?t=' + URI.encode_www_form_component(title) + '&u=' + URI.encode_www_form_component(url)
+      'https://www.facebook.com/sharer/sharer.php?t='.freeze + URI.encode_www_form_component(title) + '&u=' + URI.encode_www_form_component(url)
     end
 
     def googleplus_url(title, url)
-      'https://plus.google.com/share?title=' + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
+      'https://plus.google.com/share?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
     end
 
     def appnet_url(title, url)
-      'https://alpha.app.net/intent/post?text=' + URI.encode_www_form_component(title + ': ' + url)
+      'https://alpha.app.net/intent/post?text='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
 
     # TODO FIXME
     def mail_url(title, url)
       content = URI.encode_www_form_component(title + ': ' + url)
       subject = URI.encode_www_form_component(title)
-      URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s
+      URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s.freeze
     end
 
     def breadcrumbs_trail
@@ -35,13 +35,13 @@ module Frontend
              elsif @folders
                @folders.last.parent_path
              else
-               ''
+               ''.freeze
              end
       parts = path.split('/')
       return if parts.blank?
       parts += ['event'] if @event
       current = parts.pop
-      yield parts, current
+      yield parts.map!(&:freeze), current.freeze
     end
 
     def video_download_sources(recordings)
@@ -113,14 +113,14 @@ module Frontend
     def parse_url_host(_urlish)
       URI.parse(@event.link).host
     rescue URI::InvalidURIError
-      return ''
+      return ''.freeze
     end
 
     def persons_icon(persons)
       if persons.length <= 1
-        'fa-user'
+        'fa-user'.freeze
       else
-        'fa-group'
+        'fa-group'.freeze
       end
     end
 
