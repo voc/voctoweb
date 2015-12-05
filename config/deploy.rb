@@ -22,9 +22,9 @@ set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.
 set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 
 # puma
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_env, -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
-set :puma_conf,       "#{shared_path}/config/puma.rb"
+set :puma_pid,        -> { "#{shared_path}/tmp/pids/puma.pid" }
+set :puma_env,        -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
+set :puma_conf,       -> { "#{shared_path}/config/puma.rb" }
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
