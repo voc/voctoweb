@@ -7,8 +7,11 @@ class Event < ActiveRecord::Base
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
+  has_many :downloaded_video_recordings, -> {
+    where(state: 'downloaded', mime_type: MimeType::HTML5_VIDEO)
+  }, class_name: Recording
   has_many :downloaded_recordings, -> {
-    where(state: 'downloaded', mime_type: MimeType::HTML5)
+    where(state: 'downloaded', mime_type: MimeType.all)
   }, class_name: Recording
 
   after_initialize :generate_guid
@@ -25,7 +28,7 @@ class Event < ActiveRecord::Base
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
       .where(conferences: { id: conference })
-      .where(recordings: { state: 'downloaded', mime_type: MimeType::HTML5 })
+      .where(recordings: { state: 'downloaded', mime_type: MimeType.all })
       .group(:id)
   }
 
