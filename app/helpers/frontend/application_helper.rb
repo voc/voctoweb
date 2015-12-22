@@ -123,5 +123,10 @@ module Frontend
         'fa-group'
       end
     end
+
+    def display_date_title(event)
+      return 'event date' if event.date
+      'video release date'
+    end
   end
 end
