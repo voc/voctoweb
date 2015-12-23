@@ -18,6 +18,7 @@ gem 'exception_notification'
 
 # Bundle puma application server
 gem 'puma'
+gem 'puma_worker_killer'
 
 # Debug
 gem 'rbtrace', github: 'tmm1/rbtrace', require: false
