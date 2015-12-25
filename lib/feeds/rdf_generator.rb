@@ -1,3 +1,4 @@
+# # frozen_string_literal: true
 # generate rssfeed from svn log
 module Feeds
   class RDFGenerator

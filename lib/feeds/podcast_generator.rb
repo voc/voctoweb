@@ -1,3 +1,4 @@
+# # frozen_string_literal: true
 # generate iTunes store feed
 module Feeds
   class PodcastGenerator

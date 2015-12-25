@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Settings
   def self.method_missing(name)
     fail "not implemented: #{name}" unless config.respond_to?(name)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rss/maker'
 
 module Feeds

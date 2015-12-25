@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 class MimeType
-  HTML5_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm).map!(&:freeze).freeze
-  AUDIO = %w(audio/ogg audio/mpeg audio/opus).map!(&:freeze).freeze
+  HTML5_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web video/mp4 vnd.voc/h264-lq vnd.voc/h264-hd vnd.voc/h264-sd vnd.voc/webm-hd video/ogg video/webm).freeze
+  AUDIO = %w(audio/ogg audio/mpeg audio/opus).freeze
 
-  PREFERRED_VIDEO = %w(vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).map!(&:freeze).freeze
-  WEB_PREFERRED_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).map!(&:freeze).freeze
+  PREFERRED_VIDEO = %w(vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).freeze
+  WEB_PREFERRED_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).freeze
 
   class << self
     def all
@@ -16,18 +17,18 @@ class MimeType
 
     def display_mime_type(mime_type)
       case mime_type
-      when 'vnd.voc/h264-lq'.freeze
-        'video/mp4'.freeze
-      when 'vnd.voc/h264-sd'.freeze
-        'video/mp4'.freeze
-      when 'vnd.voc/h264-hd'.freeze
-        'video/mp4'.freeze
-      when 'vnd.voc/mp4-web'.freeze
-        'video/mp4'.freeze
-      when 'vnd.voc/webm-hd'.freeze
-        'video/webm'.freeze
-      when 'vnd.voc/webm-web'.freeze
-        'video/webm'.freeze
+      when 'vnd.voc/h264-lq'
+        'video/mp4'
+      when 'vnd.voc/h264-sd'
+        'video/mp4'
+      when 'vnd.voc/h264-hd'
+        'video/mp4'
+      when 'vnd.voc/mp4-web'
+        'video/mp4'
+      when 'vnd.voc/webm-hd'
+        'video/webm'
+      when 'vnd.voc/webm-web'
+        'video/webm'
       else
         mime_type
       end
@@ -35,33 +36,33 @@ class MimeType
 
     def hd?(mime_type)
       case mime_type
-      when 'vnd.voc/h264-lq'.freeze
+      when 'vnd.voc/h264-lq'
         false
-      when 'vnd.voc/h264-sd'.freeze
+      when 'vnd.voc/h264-sd'
         false
-      when 'vnd.voc/h264-hd'.freeze
+      when 'vnd.voc/h264-hd'
         true
-      when 'vnd.voc/webm-hd'.freeze
+      when 'vnd.voc/webm-hd'
         true
       end
     end
 
     def humanized_mime_type(mime_type)
       case mime_type
-      when 'vnd.voc/h264-lq'.freeze
-        'MP4 (LQ)'.freeze
-      when 'vnd.voc/h264-sd'.freeze
-        'MP4 (SD)'.freeze
-      when 'vnd.voc/h264-hd'.freeze
-        'MP4 (HD)'.freeze
-      when 'vnd.voc/webm-hd'.freeze
-        'WEBM (HD)'.freeze
-      when 'vnd.voc/webm-web'.freeze
-        'WEBM (html5)'.freeze
-      when 'vnd.voc/mp4-web'.freeze
-        'MP4 (html5)'.freeze
+      when 'vnd.voc/h264-lq'
+        'MP4 (LQ)'
+      when 'vnd.voc/h264-sd'
+        'MP4 (SD)'
+      when 'vnd.voc/h264-hd'
+        'MP4 (HD)'
+      when 'vnd.voc/webm-hd'
+        'WEBM (HD)'
+      when 'vnd.voc/webm-web'
+        'WEBM (html5)'
+      when 'vnd.voc/mp4-web'
+        'MP4 (html5)'
       when 'audio/mpeg'
-        'MP3'.freeze
+        'MP3'
       else
         mime_type.split('/'.freeze)[1]
       end

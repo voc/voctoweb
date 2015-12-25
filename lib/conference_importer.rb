@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ConferenceImporter
   def self.import(import_template)
 
