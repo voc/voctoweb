@@ -2,6 +2,7 @@ ActiveAdmin.register Recording do
 
   filter :state
   filter :mime_type
+  filter :language
   filter :original_url
   filter :filename
   filter :folder
@@ -17,6 +18,7 @@ ActiveAdmin.register Recording do
     end
     column :folder
     column :mime_type
+    column :language
     column :size
     column :length
     column :state
@@ -36,6 +38,7 @@ ActiveAdmin.register Recording do
       row :event
       row :original_url
       row :mime_type
+      row :language
       row :size
       row :length
       row :state
@@ -46,6 +49,7 @@ ActiveAdmin.register Recording do
     f.inputs "Recording Details" do
       f.input :event
       f.input :mime_type, collection: MimeType.all
+      f.input :language
       f.input :size, label: 'file size in mb'
       f.input :length, label: 'run-time in seconds'
       f.input :width
@@ -62,7 +66,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:original_url, :folder, :filename, :mime_type, :size, :length, :width, :height, :state, :event_id]
+      params.permit recording: [:original_url, :folder, :filename, :mime_type, :language, :size, :length, :width, :height, :state, :event_id]
     end
   end
 
