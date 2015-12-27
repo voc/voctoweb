@@ -59,6 +59,8 @@ MediaBackend::Application.routes.draw do
     get '/b', to: 'conferences#browse', as: :browse_start
     get '/b/*slug', to: 'conferences#browse', as: :browse
 
+    get '/recent', to: 'recent_changes#index'
+
     get '/tags', to: 'tags#index'
     get '/tags/:tag', to: 'tags#show', as: :tag
 
