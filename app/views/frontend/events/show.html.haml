@@ -2,6 +2,11 @@
   = @event.title
 
 - content_for :head do
+  %meta{property: 'og:title', content: @event.title}
+  %meta{property: 'og:type', content: 'video.other'}
+  %meta{property: 'og:url', content: event_url(slug: @event.slug)}
+  %meta{property: 'og:image', content: @event.poster_url}
+  %meta{property: 'og:video', content: opengraph_video(@video_recordings)}
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 

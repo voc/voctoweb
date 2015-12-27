@@ -50,6 +50,7 @@ module Frontend
     end
 
     def video_tag_sources(recordings, order = MimeType::WEB_PREFERRED_VIDEO)
+      return @video_tag_sources if @video_tag_sources
       scores = {}
       recordings.select { |r| order.include? r.mime_type }.each do |r|
         pos = order.index r.mime_type
@@ -60,10 +61,14 @@ module Frontend
           scores[r.display_mime_type] = pos
         end
       end
-      scores.map do |_, pos|
+      @video_tag_sources = scores.map do |_, pos|
         mime_type = order[pos]
         recordings.detect { |r| r.mime_type == mime_type }
       end
+    end
+
+    def opengraph_video(recordings)
+      video_tag_sources(recordings).first.try(:url)
     end
 
     def keywords
