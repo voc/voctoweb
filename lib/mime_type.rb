@@ -6,9 +6,11 @@ class MimeType
   PREFERRED_VIDEO = %w(vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).freeze
   WEB_PREFERRED_VIDEO = %w(vnd.voc/mp4-web vnd.voc/webm-web vnd.voc/h264-hd vnd.voc/h264-lq video/mp4 vnd.voc/h264-sd vnd.voc/webm-hd video/webm video/ogg).freeze
 
+  SUBTITLE = %w(application/x-subrip)
+
   class << self
     def all
-      (HTML5_VIDEO + AUDIO).uniq.freeze
+      (HTML5_VIDEO + AUDIO + SUBTITLE).uniq.freeze
     end
 
     def mime_type_slug(mime_type)
