@@ -3,7 +3,7 @@ module FahrplanUpdater
   include FahrplanParser
 
   def fill_event_info
-    if self.conference.downloaded?
+    if conference.downloaded?
       fahrplan = FahrplanParser.new(self.conference.schedule_xml)
       info = fahrplan.event_info_by_guid[self.guid]
       return if info.empty?

@@ -3,7 +3,7 @@
   %ul
     - video_download_sources(video_recordings).each do |recording|
       %li
-        %span.label.filetype= recording.filetype
+        %span.label.filetype= "#{recording.filetype} #{recording.language}"
         %a{href: recording.url, download: true}
           %span.fa.fa-download
           http download
@@ -16,13 +16,23 @@
   %ul
     - audio_recordings.each do |recording|
       %li
-        .label.filetype= recording.filetype
+        .label.filetype= "#{recording.filetype} #{recording.language}"
         %a{href: recording.url, download: true}
           %span.fa.fa-download
           http download
         %a{href: recording.torrent_url, download: true}
           %span.fa.fa-download
           torrent
+
+- if subtitle_recording.present?
+  %h3 Subtitle
+  %ul
+    %li
+      .label.filetype
+        srt
+      %a{href: subtitle_recording.url, download: true}
+        %span.fa.fa-download
+          = subtitle_recording.language
 
 %h3 Parent directory
 %a{href: conference.recordings_url}
