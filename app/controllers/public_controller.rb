@@ -29,10 +29,8 @@ class PublicController < ActionController::Base
     recording = @event.downloaded_video_recordings.first
     fail ActiveRecord::RecordNotFound unless recording
 
-    @width = [1280, recording.width.to_i].min
-    @height = [720, recording.height.to_i].min
-    @width = [@width.to_i, params[:maxwidth].to_i].min if params[:maxwidth]
-    @height = [@height.to_i, params[:maxheight].to_i].min if params[:maxheight]
+    @width = recording.min_width(params[:maxwidth])
+    @height = recording.min_height(params[:maxheight])
     true
   rescue URI::InvalidURIError
     false

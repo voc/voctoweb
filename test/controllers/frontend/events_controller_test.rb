@@ -21,6 +21,8 @@ module Frontend
     test 'should get oembed' do
       get :oembed, slug: 'abc'
       assert_response :success
+      get :oembed, slug: 'abc', width: 12, height: 13
+      assert_equal "12", assigns(:width)
     end
 
     test 'should get download' do

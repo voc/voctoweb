@@ -12,6 +12,8 @@ module Frontend
 
     # videoplayer suitable for embedding in an iframe
     def oembed
+      @width = params[:width] || view_context.aspect_ratio_width
+      @height = params[:height] || view_context.aspect_ratio_height
       response.headers.delete 'X-Frame-Options'
       render layout: 'frontend/oembed'
     end

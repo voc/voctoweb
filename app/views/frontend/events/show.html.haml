@@ -36,7 +36,7 @@
     .tab-content
       - if @video_recordings.present?
         #video.tab-pane.active
-          = render partial: 'frontend/shared/videoplayer', locals: { video_recordings: @video_recordings, poster_url: @event.poster_url }
+          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings, poster_url: @event.poster_url }
 
       - if @audio_recordings.present?
         #audio.tab-pane

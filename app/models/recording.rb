@@ -78,6 +78,20 @@ class Recording < ActiveRecord::Base
     errors.add :event, 'recording already exist on event' if dupe.present?
   end
 
+  def min_width(maxwidth=nil)
+    width = 1280
+    width = [width, self.width.to_i].min if self.width
+    width = [width, maxwidth.to_i].min if maxwidth
+    width.to_i
+  end
+
+  def min_height(maxheight=nil)
+    height = 720
+    height = [height, self.height.to_i].min if self.height
+    height = [height, maxheight.to_i].min if maxheight
+    height.to_i
+  end
+
   private
 
   def update_conference_downloaded_count
