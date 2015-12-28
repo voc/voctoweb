@@ -45,7 +45,7 @@
               %source{type: recording.display_mime_type, src: h(recording.url)}
 
       #download.tab-pane
-        = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, conference: @conference }
+        = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, subtitle_recording: @subtitle_recording, conference: @conference }
 
       #embedshare.tab-pane
         = render partial: 'frontend/shared/embedshare', locals: { event: @event }
