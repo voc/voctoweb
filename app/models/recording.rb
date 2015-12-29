@@ -5,7 +5,7 @@ class Recording < ActiveRecord::Base
 
   belongs_to :event
   has_one :conference, through: :event
-  has_many :recording_views, dependent: :destroy
+  has_many :recording_views
 
   validates_presence_of :event
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
@@ -19,6 +19,7 @@ class Recording < ActiveRecord::Base
   after_save { update_event_downloaded_count if downloaded? }
   after_save { update_event_duration if length_changed? }
   after_save { event.touch }
+  after_destroy { delete_recording_views }
   after_destroy { update_conference_downloaded_count if downloaded? }
   after_destroy { update_event_downloaded_count if downloaded? }
 
@@ -93,6 +94,10 @@ class Recording < ActiveRecord::Base
   end
 
   private
+
+  def delete_recording_views
+    recording_views.delete_all
+  end
 
   def update_conference_downloaded_count
     conference.update_column :downloaded_events_count, Event.recorded_at(conference).to_a.size
