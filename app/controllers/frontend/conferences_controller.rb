@@ -3,7 +3,7 @@ module Frontend
     SORT_PARAM = {
       'name' => 'title',
       'duration' => 'duration',
-      'date' => 'release_date'
+      'date' => 'release_date desc'
     }.freeze
 
     before_action :check_sort_param, only: %w(show)
@@ -21,7 +21,6 @@ module Frontend
     def show
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
       @events = @conference.downloaded_events.includes(:conference).order(sort_param)
-      @sorting = nil
       respond_to do |format|
         format.html { render :show }
       end
