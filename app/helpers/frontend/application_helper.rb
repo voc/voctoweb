@@ -96,8 +96,7 @@ module Frontend
     end
 
     def aspect_ratio_width(high = true)
-      conference = @conference
-      case conference.aspect_ratio
+      case @conference.aspect_ratio
       when /16:9/
         high ? '640' : '188'
       when /4:3/
@@ -106,8 +105,7 @@ module Frontend
     end
 
     def aspect_ratio_height(high = true)
-      conference = @conference
-      case conference.aspect_ratio
+      case @conference.aspect_ratio
       when /16:9/
         high ? '360' : '144'
       when /4:3/
