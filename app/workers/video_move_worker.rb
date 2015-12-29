@@ -2,6 +2,8 @@ class VideoMoveWorker
   include Sidekiq::Worker
   include Downloader
 
+  sidekiq_options queue: :critical
+
   def perform(recording_id)
     recording = Recording.find(recording_id)
 
