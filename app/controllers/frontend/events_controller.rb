@@ -23,9 +23,9 @@ module Frontend
     def load_event
       @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
-      @video_recordings = @event.recordings.video
-      @audio_recordings = @event.recordings.audio
-      @subtitle_recording = @event.recordings.subtitle.first
+      @video_recordings = @event.recordings.downloaded.video
+      @audio_recordings = @event.recordings.downloaded.audio
+      @subtitle_recording = @event.recordings.subtitle.downloaded.first
     end
   end
 end
