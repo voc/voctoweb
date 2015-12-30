@@ -5,6 +5,8 @@ require 'minitest/pride'
 require 'sidekiq/testing'
 require 'tilt/redcarpet'
 
+Sidekiq::Logging.logger = nil
+
 class ActionController::TestCase
   include Devise::TestHelpers
 end

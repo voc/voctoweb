@@ -6,6 +6,7 @@ class VideoMoveWorker
 
   def perform(recording_id)
     recording = Recording.find(recording_id)
+    logger.info "moving recording #{recording.id} to #{recording.filename}"
 
     tmp_path = get_tmp_path(recording.filename)
     create_recording_dir(recording)

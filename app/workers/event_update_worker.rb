@@ -4,7 +4,7 @@ class EventUpdateWorker
 
   # bulk update several events using the saved schedule.xml files
   def perform(ids)
-    logger.info "Bulk updating events from XML"
+    logger.info "bulk updating events from XML for events: #{ids.join(', ')}"
     fahrplans = {}
     ActiveRecord::Base.transaction do
       Event.where(id: ids).each do |event|

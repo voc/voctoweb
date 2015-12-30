@@ -4,6 +4,7 @@ class VideoDownloadWorker
 
   def perform(recording_id)
     recording = Recording.find(recording_id)
+    logger.info "downloading recording #{recording.id} to temporary file"
 
     path = get_tmp_path(recording.filename)
     result = download_to_file(recording.original_url, path)
