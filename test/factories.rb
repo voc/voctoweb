@@ -107,6 +107,7 @@ FactoryGirl.define do
     poster_filename 'frabcon123_logo.jpg'
     subtitle 'subtitle'
 
+    original_language 'en'
     slug { generate(:event_slug) }
     link 'http://localhost/ev_info'
     description 'description'
@@ -121,6 +122,7 @@ FactoryGirl.define do
   factory :recording do
     event
     filename 'audio.mp3'
+    language 'en'
     folder ''
     mime_type 'video/webm'
     original_url 'file:///fixtures/test.webm'

@@ -53,9 +53,9 @@ module Frontend
       return @video_tag_sources if @video_tag_sources
       scores = {}
       recordings.select { |r| order.include? r.mime_type }.each do |r|
-        pos = order.index r.mime_type
+        pos = order.index(r.mime_type)
         fail r.mime_type unless pos
-        if scores.key? r.display_mime_type
+        if scores.key?(r.display_mime_type)
           scores[r.display_mime_type] = pos unless scores[r.display_mime_type] < pos
         else
           scores[r.display_mime_type] = pos
@@ -63,8 +63,10 @@ module Frontend
       end
       @video_tag_sources = scores.map do |_, pos|
         mime_type = order[pos]
-        recordings.detect { |r| r.mime_type == mime_type }
-      end
+        recordings.detect do |r|
+          r.mime_type == mime_type && r.language == r.event.original_language
+        end
+      end.compact || []
     end
 
     def opengraph_video(recordings)

@@ -21,6 +21,7 @@ ActiveAdmin.register Event do
     column :poster_filename do |event|
       line_break_filename event.poster_filename
     end
+    column :original_language
     column :conference
     column :promoted
     column :created_at do |event|
