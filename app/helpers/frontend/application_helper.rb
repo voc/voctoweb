@@ -44,11 +44,6 @@ module Frontend
       yield parts.map!(&:freeze), current.freeze
     end
 
-    def video_download_sources(recordings)
-      skip = %w(vnd.voc/mp4-web vnd.voc/webm-web)
-      recordings.reject { |r| skip.include? r.mime_type }
-    end
-
     def video_tag_sources(recordings, order = MimeType::WEB_PREFERRED_VIDEO)
       return @video_tag_sources if @video_tag_sources
       scores = {}

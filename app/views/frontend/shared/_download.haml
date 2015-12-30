@@ -1,7 +1,7 @@
 - if video_recordings.present?
   %h3 Video
   %ul
-    - video_download_sources(video_recordings).each do |recording|
+    - video_recordings.each do |recording|
       %li
         %span.label.filetype= recording.filetype
         %span.label.filetype= recording.language
