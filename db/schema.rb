@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227115938) do
+ActiveRecord::Schema.define(version: 20151230105406) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20151227115938) do
     t.integer  "view_count",                              default: 0
     t.integer  "duration",                                default: 0
     t.integer  "downloaded_recordings_count",             default: 0
+    t.string   "original_language"
   end
 
   add_index "events", ["conference_id"], name: "index_events_on_conference_id"
