@@ -21,12 +21,16 @@
       %i{:class => "fa-adn"}
       via App.net
   %li
+    %a{:id => "btnDiaspora", :href => appnet_url(event.title, event_url(slug: event.slug)) }
+      %i{:class => "fa-diapora"}
+      via Diapora*
+  %li
     %a{:id => "btnMail", :href => mail_url(event.title, event_url(slug: event.slug)) }
       %i{:class => "fa-envelope"}
       by Mail
 :javascript
   $(function() {
-    $('#btnTweet, #btnFacebook, #btnGPlus, #btnAppNet').on('click', function (e) {
+    $('#btnTweet, #btnFacebook, #btnGPlus, #btnAppNet, #btnDiaspora').on('click', function (e) {
       window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
       e.preventDefault();
     });
