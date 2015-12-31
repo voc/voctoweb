@@ -54,4 +54,10 @@ class RecordingTest < ActiveSupport::TestCase
     @event.reload
     assert_equal 1, @event.downloaded_recordings_count
   end
+
+  test 'should change events original language' do
+    @recording.language = 'kr-en'
+    @recording.save
+    assert_equal 'kr', @event.reload.original_language
+  end
 end

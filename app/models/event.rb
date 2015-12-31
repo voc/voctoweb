@@ -127,6 +127,12 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def original_language_from_recordings
+    languages = recordings.pluck(:language).uniq
+    return if languages.empty?
+    languages.max_by(&:length).split(/-/).first
+  end
+
   private
 
   def self.popular_event_ids
