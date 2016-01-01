@@ -9,7 +9,7 @@ module ThrottleConnections
   end
 
   def add_throttling(key)
-    Rails.cache.write(cache_key(key), true, expires_in: 23.minute, race_condition_ttl: 5)
+    Rails.cache.write(cache_key(key), true, expires_in: 1.day, race_condition_ttl: 5)
   end
 
   private
