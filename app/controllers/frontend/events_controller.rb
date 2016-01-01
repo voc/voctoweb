@@ -8,6 +8,7 @@ module Frontend
 
     # TODO obsolete action? old javascript fallback maybe? now probably defunct.
     def download
+      respond_to { |format| format.html }
     end
 
     # videoplayer suitable for embedding in an iframe
