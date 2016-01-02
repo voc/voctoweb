@@ -129,6 +129,7 @@ FactoryGirl.define do
     size '12'
     length '5'
     state 'downloaded'
+    html5 true
   end
 
   factory :admin_user do

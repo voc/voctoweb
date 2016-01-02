@@ -36,21 +36,6 @@ class MimeType
       end
     end
 
-    def hd?(mime_type)
-      case mime_type
-      when 'vnd.voc/h264-lq'
-        false
-      when 'vnd.voc/h264-sd'
-        false
-      when 'vnd.voc/h264-hd'
-        true
-      when 'vnd.voc/webm-hd'
-        true
-      else
-        true
-      end
-    end
-
     def humanized_mime_type(mime_type)
       case mime_type
       when 'vnd.voc/h264-lq'
