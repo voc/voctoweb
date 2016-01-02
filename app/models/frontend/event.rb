@@ -48,7 +48,7 @@ module Frontend
     end
 
     def preferred_recording(order: MimeType::PREFERRED_VIDEO)
-      video_recordings = recordings.downloaded.where(mime_type: MimeType::HTML5_VIDEO)
+      video_recordings = recordings.downloaded.html5.video
       return if video_recordings.empty?
       seen = Hash[video_recordings.map { |r| [r.mime_type, r] }]
       order.each { |mt| return seen[mt] if seen.key?(mt) }

@@ -48,6 +48,7 @@ module Frontend
       yield parts.map!(&:freeze), current.freeze
     end
 
+    # TODO is the order really important? Javascript doesn't seem to care?
     def video_tag_sources(recordings, order = MimeType::WEB_PREFERRED_VIDEO)
       return @video_tag_sources if @video_tag_sources
       @video_tag_sources = VideoTagSources.new(recordings, order).build

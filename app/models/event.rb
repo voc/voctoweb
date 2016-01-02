@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   belongs_to :conference
   has_many :recordings, dependent: :destroy
   has_many :downloaded_video_recordings, -> {
-    where(state: 'downloaded', mime_type: MimeType::HTML5_VIDEO)
+    where(state: 'downloaded', html5: true, mime_type: MimeType::VIDEO)
   }, class_name: Recording
   has_many :downloaded_recordings, -> {
     where(state: 'downloaded', mime_type: MimeType.all)
