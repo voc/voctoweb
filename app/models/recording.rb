@@ -13,7 +13,8 @@ class Recording < ActiveRecord::Base
   validate :unique_recording
 
   scope :downloaded, -> { where(state: 'downloaded') }
-  scope :video, -> { where(mime_type: MimeType::HTML5_VIDEO) }
+  scope :video, -> { where(mime_type: MimeType::VIDEO) }
+  scope :html5, -> { where(html5: true) }
 
   after_save { update_conference_downloaded_count if downloaded? }
   after_save { update_event_downloaded_count if downloaded? }

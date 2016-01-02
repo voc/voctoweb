@@ -6,7 +6,7 @@
   %meta{property: 'og:type', content: 'video.other'}
   %meta{property: 'og:url', content: event_url(slug: @event.slug)}
   %meta{property: 'og:image', content: @event.poster_url}
-  %meta{property: 'og:video', content: opengraph_video(@video_recordings)}
+  %meta{property: 'og:video', content: opengraph_video(@video_recordings.html5)}
   %meta{property: 'og:description', content: @event.short_description}
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
@@ -26,7 +26,7 @@
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
 
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
-      - if @video_recordings.present?
+      - if @video_recordings.html5.present?
         %li
           %a{href: event_url(slug: @event.slug), 'data-target' => '#video', role: 'tab', 'data-toggle' => 'tab'} Video
       - if @audio_recordings.present?
@@ -38,9 +38,9 @@
         %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
 
     .tab-content
-      - if @video_recordings.present?
+      - if @video_recordings.html5.present?
         #video.tab-pane.active
-          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings, poster_url: @event.poster_url, event_id: @event.id }
+          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings.html5, poster_url: @event.poster_url, event_id: @event.id }
 
       - if @audio_recordings.present?
         #audio.tab-pane
