@@ -1,8 +1,6 @@
 namespace :media do
-
-  desc "import videos from one folder into the database"
-  task :import_folder => :environment do |t,args|
-
+  desc 'import recordings from one folder to existing events, if filename matches slug'
+  task :import_folder => :environment do |_t, _args|
     @list = ENV['list']
     @folder = ENV['folder'] # existing folder in CDN, below conference.recordings_path
     @mime_type = ENV['mime_type']
@@ -10,7 +8,7 @@ namespace :media do
     @height = ENV['height']
 
     if not @list or not File.readable? @list or @folder.nil? or @mime_type.nil?
-      puts "Usage: rake media:import_folder list=videos.lst folder=mp4 mime_type=video/mp4 width=320 height=240"
+      puts 'Usage: rake media:import_folder list=videos.lst folder=mp4 mime_type=video/mp4 width=320 height=240'
       exit
     end
 
@@ -22,7 +20,7 @@ namespace :media do
 
         event = Event.where(slug: slug).first
         unless event
-          STDERR.puts "### not found #{filename}" 
+          STDERR.puts "### not found #{filename}"
           next
         end
 
@@ -34,6 +32,5 @@ namespace :media do
         puts "#{recording.get_recording_path} added to #{event.slug}"
       end
     end
-
   end
 end
