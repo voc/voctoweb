@@ -21,6 +21,10 @@ module Frontend
     def appnet_url(title, url)
       'https://alpha.app.net/intent/post?text='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
+    
+    def diaspora_url(title, url)
+      'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
+    end
 
     # TODO FIXME
     def mail_url(title, url)
