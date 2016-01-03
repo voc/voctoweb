@@ -57,12 +57,14 @@ However folders and access rights need to be setup manually, before you can uplo
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4","acronym":"frab123",
-        "recordings_path":"conference/frab123",
-        "images_path":"events/frab",
-        "slug":"event/frab/frab123",
-        "aspect_ratio":"16:9",
-        "title":null,
-        "schedule_url":"http://progam/schedule.xml"
+        "conference":{
+          "recordings_path":"conference/frab123",
+          "images_path":"events/frab",
+          "slug":"event/frab/frab123",
+          "aspect_ratio":"16:9",
+          "title":null,
+          "schedule_url":"http://progam/schedule.xml"
+        }
       }' "http://localhost:3000/api/conferences"
 
 You can add images to an event, like the poster image. The event is identified by its `guid` and the conference `acronym`.
@@ -70,10 +72,13 @@ You can add images to an event, like the poster image. The event is identified b
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4",
         "acronym":"frab123",
-        "guid":"123",
-        "slug":"123",
         "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
-        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg"
+        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
+        "event":{
+          "guid":"123",
+          "slug":"123",
+          "title":"qwerty"
+        }
       }' "http://localhost:3000/api/events"
 
 Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
