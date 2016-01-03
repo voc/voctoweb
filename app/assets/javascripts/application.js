@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require mirrorbrain-fix
 //= require mediaelement-and-player
 //= require mediaelement-fix
 //= require purl.min
