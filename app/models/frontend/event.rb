@@ -22,6 +22,11 @@ module Frontend
       File.join(Settings.static_url, conference.images_path, poster_filename).freeze if poster_filename
     end
 
+    def short_description
+      return unless description
+      description.truncate(140)
+    end
+
     def thumb_url
       if thumb_filename_exists?
         File.join(Settings.static_url, conference.images_path, thumb_filename).freeze

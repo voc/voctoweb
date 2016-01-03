@@ -7,8 +7,12 @@
   %meta{property: 'og:url', content: event_url(slug: @event.slug)}
   %meta{property: 'og:image', content: @event.poster_url}
   %meta{property: 'og:video', content: opengraph_video(@video_recordings)}
+  %meta{property: 'og:description', content: @event.short_description}
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
+
+- content_for :description do
+  %meta{name: 'description', content: @event.short_description}
 
 - cache(@event) do
   .container-fluid

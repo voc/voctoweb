@@ -4,7 +4,10 @@
     = render 'frontend/shared/header'
     %title
       C3TV -
-      = @event.try(:title) || @conference.try(:title) || @location || yield(:title)
+      - if content_for?(:title)
+        = yield :title
+      - else
+        = @event.try(:title) || @conference.try(:title)
 
     = yield :head
 
