@@ -40,18 +40,7 @@
     .tab-content
       - if @video_recordings.present?
         #video.tab-pane.active
-          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings, poster_url: @event.poster_url }
-        :javascript
-          var promises = [];
-          $('video source').each(function() {
-            var $source = $(this);
-            // prop always presents the fully resolved url
-            promises.push(
-              selectMirror($source.prop('src'), function(mirror) {
-              $source.attr('src', mirror);
-            })
-            );
-          });
+          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings, poster_url: @event.poster_url, event_id: @event.id }
 
       - if @audio_recordings.present?
         #audio.tab-pane
@@ -90,8 +79,6 @@
       - @event.tags.each do |tag|
         != link_for(tag)
 
-  - if @video_recordings.present?
-    = render partial: 'frontend/shared/videoplayer_js', locals: { event: @event }
   - if @audio_recordings.present?
     = render 'frontend/shared/audioplayer_js'
 

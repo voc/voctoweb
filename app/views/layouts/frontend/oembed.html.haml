@@ -4,11 +4,12 @@
     %title
       C3TV -
       = h @event.title
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'mirrorbrain-fix'
     = javascript_include_tag 'mediaelement-and-player'
     = javascript_include_tag 'mediaelement-fix'
+    = stylesheet_link_tag 'mediaelementplayer'
 
   %body
     %div.container-fluid
-      = render partial: 'frontend/shared/videoplayer', locals: { height: @height, width: @width, video_recordings: @video_recordings, poster_url: @event.poster_url }
-
-    = render partial: 'frontend/shared/videoplayer_js', locals: { event: @event }
+      = render partial: 'frontend/shared/videoplayer', locals: { height: @height, width: @width, video_recordings: @video_recordings, poster_url: @event.poster_url, event_id: @event.id }

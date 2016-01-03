@@ -1,6 +1,9 @@
-%video.video{controls: 'controls', poster: poster_url, width: width, height: height}
+%video.video{controls: 'controls', 'data-id' => event_id, poster: poster_url, width: width, height: height}
   - video_tag_sources(video_recordings).each do |recording|
     %source{type: recording.display_mime_type, src: h(recording.url)}
   %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('flashmediaelement.swf') }
     %param{ name: 'allowFullScreen', value: 'true' }
     %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(video_recordings)}" }
+
+:javascript
+  $(function() { MirrorbrainFix.setupPlayer(); })
