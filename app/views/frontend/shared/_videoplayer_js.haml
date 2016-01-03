@@ -2,6 +2,7 @@
   var stamp = window.location.hash.split('&t=')[1];
   $('video').mediaelementplayer({
     usePluginFullScreen: true,
+    mode: $.browser.chrome ? 'shim' : 'auto',
 
     //pluginPath: '/assets/',
     enableAutosize: true,
