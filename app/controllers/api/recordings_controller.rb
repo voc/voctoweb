@@ -36,8 +36,4 @@ class Api::RecordingsController < Api::BaseController
   def recording_params
     params.require(:recording).permit(:original_url, :folder, :filename, :mime_type, :language, :size, :width, :height, :length)
   end
-
-  def permitted_params
-    { :event => params.require(:event).permit(:original_url, :folder, :filename, :mime_type, :language, :size, :length, :width, :height) }
-  end
 end
