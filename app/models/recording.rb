@@ -18,7 +18,6 @@ class Recording < ActiveRecord::Base
   after_save { update_conference_downloaded_count if downloaded? }
   after_save { update_event_downloaded_count if downloaded? }
   after_save { update_event_duration if length_changed? }
-  after_save { update_event_language if downloaded? && language_changed? }
   after_save { event.touch }
   after_destroy { delete_recording_views }
   after_destroy { update_conference_downloaded_count if downloaded? }
@@ -110,9 +109,5 @@ class Recording < ActiveRecord::Base
 
   def update_event_duration
     event.update duration: event.duration_from_recordings
-  end
-
-  def update_event_language
-    event.update original_language: event.original_language_from_recordings
   end
 end
