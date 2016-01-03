@@ -61,6 +61,7 @@ class Api::EventsController < Api::BaseController
   def event_params
     params.require(:event).permit(:guid, :slug,
       :title, :subtitle, :link,
+      :original_language,
       :thumb_filename, :poster_filename,
       :conference_id,
       :description, :date,

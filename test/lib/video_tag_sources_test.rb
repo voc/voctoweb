@@ -35,6 +35,8 @@ class VideoTagSourcesImporterTest < ActiveSupport::TestCase
     create :recording, state: :downloaded, event: @event, mime_type: 'vnd.voc/mp4-web', filename: 'de-Schweigen.mp4', language: 'de'
     create :recording, state: :downloaded, event: @event, mime_type: 'vnd.voc/mp4-web', filename: 'en-Schweigen.mp4', language: 'en'
     create :recording, state: :downloaded, event: @event, mime_type: 'vnd.voc/h264-hd', filename: 'de-en-Schweigen_hd.mp4', language: 'de-en'
+    @event.update(original_language: :de)
+
     sources = VideoTagSources.new(Frontend::Recording.all, MimeType::WEB_PREFERRED_VIDEO).build
     assert_equal 2, sources.count
     assert sources.detect { |r| r.filename == 'en-Schweigen_webm-hd.webm' }
