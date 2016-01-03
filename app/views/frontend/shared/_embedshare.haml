@@ -22,7 +22,7 @@
       via App.net
   %li
     %a{:id => "btnDiaspora", :href => diaspora_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-diaspora"}
+      %img{src: image_path('frontend/diaspora-64.png'), height: '12px'}
       via Diaspora*
   %li
     %a{:id => "btnMail", :href => mail_url(event.title, event_url(slug: event.slug)) }
