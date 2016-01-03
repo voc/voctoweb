@@ -46,6 +46,8 @@ class MimeType
         true
       when 'vnd.voc/webm-hd'
         true
+      else
+        true
       end
     end
 
