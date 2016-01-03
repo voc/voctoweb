@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102232606) do
+ActiveRecord::Schema.define(version: 20160104122727) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(version: 20160102232606) do
     t.integer  "width"
     t.integer  "height"
     t.string   "language",                 default: "en"
+    t.boolean  "hd_quality",               default: true,  null: false
+    t.boolean  "html5",                    default: false, null: false
   end
 
   add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"
