@@ -18,6 +18,20 @@ ready = function() {
 		pageNr = 0,
 		perPage = 15;
 
+
+	function padInt(int, length) {
+		return ('0'.repeat(length)+int).slice(-length);
+	}
+
+	function formatDate(date) {
+		if(!date) return null;
+
+		var d = new Date(date);
+		if(!d) return null;
+
+		return padInt(d.getFullYear(), 4)+'-'+padInt(d.getMonth()+1, 2)+'-'+padInt(d.getDate(), 2);
+	}
+
 	$search
 		.find('input.text')
 		.focus()
@@ -157,8 +171,11 @@ ready = function() {
 							.find('.recording_length .t')
 								.text(Math.round(parseInt(hit._source.event.length) / 60)+' min')
 							.end()
-							.find('.date .t')
-								.text(hit._source.event.date)
+							.find('.date')
+								.toggleClass('hidden', !hit._source.event.date)
+								.find('.t')
+									.text(formatDate(hit._source.event.date))
+								.end()
 							.end()
 							.find('.persons .t')
 								.html(personlinks(hit._source.event.persons))
