@@ -39,7 +39,6 @@ test/fixtures/admin_users.yml
 test/fixtures/api_keys.yml
 test/fixtures/*.jpg
 test/fixtures/*.gif
-test/fixtures/*.yml
 test/fixtures/*.png
 test/fixtures/*.avi
 config/settings.yml
