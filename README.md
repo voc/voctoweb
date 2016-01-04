@@ -30,6 +30,13 @@ rake db:fixtures:load
 
 # run dev-server
 rails server
+
+# done
+http://localhost:3000/ <- Frontend
+http://localhost:3000/admin/ <- Backend
+Backend-Login:
+  Username: admin@localhost.test
+  Password: testadmin
 ````
 
 ### Ruby Version
