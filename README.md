@@ -1,13 +1,18 @@
 # media-backend
 
-media.ccc.de webfrontend meta data editor and API.
+media.ccc.de webfrontend, meta data editor and API.
 
 [![Build Status](https://travis-ci.org/cccc/media-backend.svg?branch=master)](https://travis-ci.org/cccc/media-backend)
 [![Code Climate](https://codeclimate.com/github/cccc/media-backend.png)](https://codeclimate.com/github/cccc/media-backend)
 
 ## Install
 
-### Quickstart
+### Ruby Version
+
+ruby 2.3.0
+
+### Quickstart / Development
+
 ````
 # install rvm
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -39,11 +44,7 @@ Backend-Login:
   Password: testadmin
 ````
 
-### Ruby Version
-
-ruby 2.3.0
-
-### Deployment Instructions
+### Production Deployment
 
 Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
 
@@ -53,17 +54,17 @@ Copy and edit the configuration file `config/settings.yml.template` to `config/s
 
 You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
 
-### Database Creation
+#### Database Creation
 
 Setup your database in config/database.yml needed.
 
     rake db:setup
 
-### Services (job queues, cache servers, search engines, etc.)
+#### Services (job queues, cache servers, search engines, etc.)
 
     sidekiq
 
-### Start a Server
+#### Start a Server
 
 To get the backend up and running:
 
@@ -74,7 +75,7 @@ To get the backend up and running:
     gem install passenger
     passenger start -p 8023
 
-## First Login
+#### First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
 
