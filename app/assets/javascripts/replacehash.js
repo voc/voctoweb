@@ -6,7 +6,7 @@
       newhash = '#' + newhash;
 
     if(window.history && window.history.replaceState) {
-      history.replaceState({}, '', newhash);
+      history.replaceState({url: window.location.href}, '', newhash);
     }
     else
     {
