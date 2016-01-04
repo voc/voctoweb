@@ -26,6 +26,7 @@ cd media.ccc.de
 bundle install
 ./bin/setup
 rake db:migrate
+rake db:fixtures:load
 
 # run dev-server
 rails server
