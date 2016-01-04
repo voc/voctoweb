@@ -1,9 +1,9 @@
-# media-backend
+# media.ccc.de
 
 media.ccc.de webfrontend, meta data editor and API.
 
-[![Build Status](https://travis-ci.org/cccc/media-backend.svg?branch=master)](https://travis-ci.org/cccc/media-backend)
-[![Code Climate](https://codeclimate.com/github/cccc/media-backend.png)](https://codeclimate.com/github/cccc/media-backend)
+[![Build Status](https://travis-ci.org/voc/media.ccc.de.svg?branch=master)](https://travis-ci.org/voc/media.ccc.de)
+[![Code Climate](https://codeclimate.com/github/voc/media.ccc.de.png)](https://codeclimate.com/github/voc/media.ccc.de)
 
 ## Install
 
