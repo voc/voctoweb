@@ -7,6 +7,30 @@ media.ccc.de webfrontend meta data editor and API.
 
 ## Install
 
+### Quickstart
+````
+# install rvm
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+\curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer
+\curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc
+gpg --verify rvm-installer.asc
+bash rvm-installer stable
+source /home/peter/.rvm/scripts/rvm
+
+# install ruby 2.3.0
+rvm install ruby-2.3.0
+
+# obtaining & setting up media.ccc.de instance
+git clone git@github.com:voc/media.ccc.de.git
+cd media.ccc.de
+bundle install
+./bin/setup
+rake db:migrate
+
+# run dev-server
+rails server
+````
+
 ### Ruby Version
 
 ruby 2.3.0
