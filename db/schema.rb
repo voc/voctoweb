@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230105406) do
+ActiveRecord::Schema.define(version: 20160102232606) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -100,24 +100,6 @@ ActiveRecord::Schema.define(version: 20151230105406) do
   add_index "events", ["slug", "id"], name: "index_events_on_slug_and_id"
   add_index "events", ["slug"], name: "index_events_on_slug"
   add_index "events", ["title"], name: "index_events_on_title"
-
-  create_table "import_templates", force: :cascade do |t|
-    t.string   "acronym",         limit: 255
-    t.string   "title",           limit: 255
-    t.string   "logo",            limit: 255
-    t.string   "slug",            limit: 255
-    t.string   "aspect_ratio",    limit: 255
-    t.string   "recordings_path", limit: 255
-    t.string   "images_path",     limit: 255
-    t.date     "date"
-    t.date     "release_date"
-    t.string   "mime_type",       limit: 255
-    t.string   "folder",          limit: 255
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
