@@ -50,15 +50,8 @@ var MirrorbrainFix = {
             $.post("/public/recordings/count", {event_id: $video.data('id'), src: mediaElement.src});
           }, false);
           mediaElement.addEventListener('pause', function() {
-            var hash = '#video&t='+Math.round(mediaElement.currentTime);;
-            if(window.history && window.history.replaceState) {
-              // set new hash without adding an entry into the browser history
-              window.history.replaceState(null, "", hash);
-            }
-            else {
-              // classic fallback
-              window.location.hash = hash;
-            }
+            var hash = '#video&t='+Math.round(mediaElement.currentTime);
+            window.location.replaceHash(hash);
           }, false);
         }
       });

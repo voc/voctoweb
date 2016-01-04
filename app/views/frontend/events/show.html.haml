@@ -84,14 +84,7 @@
 
   :javascript
     function setDefaultHash() {
-      var hash = '#video';
-      if(window.history && window.history.replaceState) {
-        // set new hash without adding an entry into the browser history
-        window.history.replaceState(null, "", hash);
-      } else {
-        // classic fallback
-        window.location.hash = hash;
-      }
+      window.location.replaceHash('#video');
     }
 
     // activate tab via hash and default to video
@@ -112,7 +105,7 @@
     // change hash on tab change
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
       var hash = e.target.hash || e.target.dataset.target;
-      window.location.hash = hash;
+      window.location.replaceHash(hash);
     });
 
     // adjust tabs when hash changes
