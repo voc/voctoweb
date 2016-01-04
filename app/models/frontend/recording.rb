@@ -13,10 +13,6 @@ module Frontend
       (url + '.torrent').freeze
     end
 
-    def display_mime_type
-      MimeType.display_mime_type(mime_type)
-    end
-
     def filetype
       MimeType.humanized_mime_type(mime_type)
     end

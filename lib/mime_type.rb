@@ -16,26 +16,6 @@ class MimeType
       humanized_mime_type(mime_type).to_param.downcase.freeze
     end
 
-    # TODO this will be just mime_type one day?
-    def display_mime_type(mime_type)
-      case mime_type
-      when 'vnd.voc/h264-lq'
-        'video/mp4'
-      when 'vnd.voc/h264-sd'
-        'video/mp4'
-      when 'vnd.voc/h264-hd'
-        'video/mp4'
-      when 'vnd.voc/mp4-web'
-        'video/mp4'
-      when 'vnd.voc/webm-hd'
-        'video/webm'
-      when 'vnd.voc/webm-web'
-        'video/webm'
-      else
-        mime_type
-      end
-    end
-
     def humanized_mime_type(mime_type)
       case mime_type
       when 'vnd.voc/h264-lq'

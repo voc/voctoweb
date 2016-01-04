@@ -46,7 +46,7 @@
         #audio.tab-pane
           %audio.audio{controls: 'controls', preload: 'none'}
             - @audio_recordings.each do |recording|
-              %source{type: recording.display_mime_type, src: h(recording.url)}
+              %source{type: recording.mime_type, src: h(recording.url)}
 
       #download.tab-pane
         = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, subtitle_recording: @subtitle_recording, conference: @conference }

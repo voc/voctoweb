@@ -21,7 +21,7 @@ module Frontend
     def appnet_url(title, url)
       'https://alpha.app.net/intent/post?text='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
-    
+
     def diaspora_url(title, url)
       'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
     end
@@ -66,7 +66,7 @@ module Frontend
     end
 
     def video_for_flash(recordings)
-      url = recordings.find { |recording| recording.display_mime_type == 'video/mp4' }.try(:url)
+      url = recordings.find { |recording| recording.mime_type == 'video/mp4' }.try(:url)
       if url.present?
         h(url)
       elsif recordings.present?
