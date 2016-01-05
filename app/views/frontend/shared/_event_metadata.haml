@@ -9,4 +9,4 @@
     = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
 %h3
   %a{href: event_url(slug: event.slug)}
-    = event.title
+    = truncate(event.title, length: 90, separator: ' ', omission: '…')
