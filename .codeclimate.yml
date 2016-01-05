@@ -1,3 +1,19 @@
 engines:
+  rubocop:
+    enabled: true
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
   duplication:
     enabled: false
+ratings:
+   paths:
+   - app/**
+   - lib/**
+   - "**.rb"
+   - "**.js"
+   - "**.css"
+exclude_paths:
+- spec/**/*
+- vendor/**/*
