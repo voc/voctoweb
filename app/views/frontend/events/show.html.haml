@@ -91,7 +91,6 @@
     function setTabToHash() {
       var hash = window.location.hash.split('&')[0]; // split video-stamp of the hash
       if (hash === '') {
-        setDefaultHash();
         return;
       }
       var activeTab = $('.nav-tabs a[href=' + hash + '], .nav-tabs a[data-target=' + hash + ']')

@@ -10,7 +10,7 @@
     }
     else
     {
-      window.location.hash = hash;
+      window.location.hash = newhash;
     }
   }
 
