@@ -160,7 +160,7 @@ Update view counts of events viewed in the last 30 minutes
     /public/conferences
     /public/conferences/:id
     /public/events
-    /public/events/:id
+    /public/events/:slug
     /public/recordings
     /public/recordings/:id
     /public/mirrors
