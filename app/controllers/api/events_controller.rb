@@ -59,18 +59,13 @@ class Api::EventsController < Api::BaseController
   end
 
   def event_params
-    params.require(:event).permit(:guid, :link, :slug,
-      :title, :subtitle,
+    params.require(:event).permit(:guid, :slug,
+      :title, :subtitle, :link,
+      :original_language,
+      :thumb_filename, :poster_filename,
+      :conference_id,
       :description, :date,
       { persons: [] }, { tags: [] },
       :promoted, :release_date)
-  end
-
-  def permitted_params
-    { :event => params.require(:event).permit(:guid,
-      :thumb_filename, :poster_filename,
-      :conference_id, :title, :subtitle, :link, :slug,
-      :description, :persons_raw, :tags_raw, :date,
-      :promoted, :release_date, :event_id) }
   end
 end

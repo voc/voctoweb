@@ -21,7 +21,7 @@ module Frontend
     def appnet_url(title, url)
       'https://alpha.app.net/intent/post?text='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
-    
+
     def diaspora_url(title, url)
       'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
     end
@@ -48,13 +48,9 @@ module Frontend
       yield parts.map!(&:freeze), current.freeze
     end
 
-    def video_tag_sources(recordings, order = MimeType::WEB_PREFERRED_VIDEO)
-      return @video_tag_sources if @video_tag_sources
-      @video_tag_sources = VideoTagSources.new(recordings, order).build
-    end
-
+    # TODO which video to prefer?
     def opengraph_video(recordings)
-      video_tag_sources(recordings).first.try(:url)
+      recordings.first.try(:url)
     end
 
     def keywords
@@ -70,7 +66,7 @@ module Frontend
     end
 
     def video_for_flash(recordings)
-      url = recordings.find { |recording| recording.display_mime_type == 'video/mp4' }.try(:url)
+      url = recordings.find { |recording| recording.mime_type == 'video/mp4' }.try(:url)
       if url.present?
         h(url)
       elsif recordings.present?

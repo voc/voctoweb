@@ -110,7 +110,7 @@ module Feeds
 
       item.enclosure.url = recording.url
       item.enclosure.length = size_to_bytes(recording.size || 0)
-      item.enclosure.type = recording.display_mime_type
+      item.enclosure.type = recording.mime_type
     end
 
     def size_to_bytes(size)
