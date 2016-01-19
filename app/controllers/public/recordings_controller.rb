@@ -14,15 +14,21 @@ class Public::RecordingsController < ActionController::Base
     return render json: { status: :unprocessable_entity } unless @event
 
     @recording = @event.recordings.find_by(filename: File.basename(params[:src]))
-    if not @recording or throttle?([@recording.event_id, @recording.filename].join('/'))
+    if not @recording or throttle?(key(@recording))
       return render json: { status: :unprocessable_entity }
     end
 
     if @recording.recording_views.create
-      add_throttling(@recording.filename)
+      add_throttling(key(@recording))
       render json: { status: :ok }
     else
       render json: { status: :error }
     end
+  end
+
+  private
+
+  def key(recording)
+    [@recording.event_id, @recording.filename].join('/')
   end
 end
