@@ -1,17 +1,33 @@
-class Api::EventsController < Api::BaseController
+class Api::EventsController < ApiController
   protect_from_forgery except: %i(create download update_promoted)
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  # POST /api/events.json
   def index
+    # TODO unreachable with this param?
     acronym = params['acronym']
     conference = Conference.find_by acronym: acronym unless acronym.nil?
-    unless conference.nil?
+    if conference
       @events = Event.find_by conference: conference
     else
       @events = Event.recent(25)
     end
-    index!
   end
 
+  # GET /api/events/1.json
+  def show
+  end
+
+  # GET /api/events/new
+  def new
+    @event = Event.new
+  end
+
+  # GET /api/events/1/edit
+  def edit
+  end
+
+  # POST /api/events.json
   def create
     acronym = params['acronym']
     conference = Conference.find_by! acronym: acronym
@@ -25,6 +41,25 @@ class Api::EventsController < Api::BaseController
         Rails.logger.info("JSON: failed to create event: #{@event.errors.inspect}")
         format.json { render json: @event.errors.messages, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH/PUT /api/events/1.json
+  def update
+    respond_to do |format|
+      if @event.update(event_params)
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /api/events/1.json
+  def destroy
+    @event.destroy
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 
@@ -47,6 +82,11 @@ class Api::EventsController < Api::BaseController
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
   def create_event(params)
     @event.transaction do
