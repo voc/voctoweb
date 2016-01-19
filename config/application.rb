@@ -31,5 +31,7 @@ module MediaBackend
 
     # use custom error pages
     config.exceptions_app = self.routes
+
+    config.app_generators.scaffold_controller = :scaffold_controller
   end
 end

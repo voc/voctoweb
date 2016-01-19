@@ -1,13 +1,10 @@
-module Public
-  class EventsController < InheritedResources::Base
-    include ApiErrorResponses
-    respond_to :json
-    actions :index, :show
+class Public::EventsController < ActionController::Base
+  include ApiErrorResponses
+  include ThrottleConnections
+  respond_to :json
 
-    protected
-
-    def collection
-      get_collection_ivar || set_collection_ivar(Event.includes(:conference).includes(:recordings))
-    end
+  # GET /public/events/1.json
+  def show
+    @event = Event.find(params[:id])
   end
 end
