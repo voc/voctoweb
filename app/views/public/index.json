@@ -1,6 +1,6 @@
 {
   "conferences_url":        "public/conferences{/id}",
-  "events_url":             "public/events{/id}",
-  "recordings_url":         "public/recordings{/id}",
+  "events_url":             "public/events/id",
+  "recordings_url":         "public/recordings/id",
   "conferences_url":        "public/mirrors"
 }

@@ -27,7 +27,7 @@ MediaBackend::Application.routes.draw do
 
   # PUBLIC JSON API
   namespace :public do
-    get :index, defaults: { format: 'json' }, only: :index
+    get :index, path: '/', defaults: { format: 'json' }, only: :index
     get :oembed, only: :oembed
     resources :mirrors, only: [:index], defaults: { format: 'json' }
     resources :torrents, only: [:index], defaults: { format: 'text' }
