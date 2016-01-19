@@ -65,6 +65,10 @@ gem 'yajl-ruby'
 # Cross origin resource sharing for public json api and ajax clients
 gem 'rack-cors', :require => 'rack/cors'
 
+# API pagination
+gem 'kaminari'
+gem 'api-pagination'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
