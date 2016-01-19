@@ -32,7 +32,11 @@ MediaBackend::Application.routes.draw do
     resources :mirrors, only: [:index], defaults: { format: 'json' }
     resources :torrents, only: [:index], defaults: { format: 'text' }
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
-    resources :events, only: [:show], defaults: { format: 'json' }
+    resources :events, only: [:show], defaults: { format: 'json' } do
+      member do
+        get 'find'
+      end
+    end
     resources :recordings, only: [:show], defaults: { format: 'json' } do
       collection do
         post 'count'
