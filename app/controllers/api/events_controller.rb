@@ -4,14 +4,7 @@ class Api::EventsController < ApiController
 
   # POST /api/events.json
   def index
-    # TODO unreachable with this param?
-    acronym = params['acronym']
-    conference = Conference.find_by acronym: acronym unless acronym.nil?
-    if conference
-      @events = Event.find_by conference: conference
-    else
-      @events = Event.recent(25)
-    end
+    @events = Event.all
   end
 
   # GET /api/events/1.json
