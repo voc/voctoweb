@@ -23,7 +23,7 @@ module Frontend
     end
 
     def diaspora_url(title, url)
-      'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
+      'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title).gsub(/\+/, '%20') + '&url=' + URI.encode_www_form_component(url)
     end
 
     # TODO FIXME
