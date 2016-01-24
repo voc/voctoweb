@@ -9,10 +9,6 @@ module Frontend
       File.join(event.conference.recordings_url, folder || '', filename).freeze
     end
 
-    def torrent_url
-      (url + '.torrent').freeze
-    end
-
     def filetype
       MimeType.humanized_mime_type(mime_type)
     end

@@ -8,9 +8,6 @@
         %a{href: recording.url, download: true}
           %span.fa.fa-download
           http download
-        %a{href: recording.torrent_url, download: true}
-          %span.fa.fa-download
-          torrent
 
 - if audio_recordings.present?
   %h3 Audio
@@ -22,9 +19,6 @@
         %a{href: recording.url, download: true}
           %span.fa.fa-download
           http download
-        %a{href: recording.torrent_url, download: true}
-          %span.fa.fa-download
-          torrent
 
 - if subtitle_recording.present?
   %h3 Subtitle
