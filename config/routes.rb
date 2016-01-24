@@ -29,8 +29,6 @@ MediaBackend::Application.routes.draw do
   namespace :public do
     get :index, path: '/', defaults: { format: 'json' }, only: :index
     get :oembed, only: :oembed
-    resources :mirrors, only: [:index], defaults: { format: 'json' }
-    resources :torrents, only: [:index], defaults: { format: 'text' }
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
     resources :events, only: [:show], defaults: { format: 'json' } do
       member do

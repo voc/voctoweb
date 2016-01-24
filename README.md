@@ -166,7 +166,6 @@ Update view counts of events viewed in the last 30 minutes
     /public/conferences/:id
     /public/events/:id
     /public/recordings/:id
-    /public/mirrors
 
 
 Example:

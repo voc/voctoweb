@@ -6,8 +6,6 @@ services:
 before_install:
   - cp config/database.yml.template config/database.yml
   - cp config/settings.yml.template config/settings.yml
-  - psql -c 'create database mirrorbrain;' -U postgres
 script:
   - bundle exec rake db:setup
-  - bundle exec rake db:create_mirrorbrain
   - bundle exec rake
