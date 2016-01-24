@@ -25,10 +25,10 @@ class Api::RecordingsController < ApiController
     event = Event.find_by! guid: params['guid']
     @recording = Recording.new(recording_params)
     @recording.event = event
+    @recording.state = :downloaded
 
     respond_to do |format|
-      if @recording.valid? and @recording.validate_for_api and @recording.save
-        @recording.start_download!
+      if @recording.save
         format.json { render json: @recording, status: :created }
       else
         Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
@@ -53,15 +53,6 @@ class Api::RecordingsController < ApiController
     @recording.destroy
     respond_to do |format|
       format.json { head :no_content }
-    end
-  end
-
-  def download
-    event = Event.find_by! guid: params['guid']
-    fail ActiveRecord::RecordNotFound if event.recordings.blank?
-    respond_to do |format|
-      event.recordings.each(&:start_download!)
-      format.json { render json: event.recordings, status: :ok }
     end
   end
 

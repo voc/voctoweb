@@ -35,7 +35,6 @@ ActiveAdmin.register Recording do
   show do |r|
     attributes_table do
       row :filename do
-        div show_recording_path r
         div show_recording_url r
       end
       row :folder
@@ -65,8 +64,8 @@ ActiveAdmin.register Recording do
       f.input :original_url
     end
     f.inputs "Storage" do
-      f.input :folder, hint: recording.try(:conference).try(:get_recordings_path)
-      f.input :filename, hint: recording.try(:get_recording_dir)
+      f.input :folder, hint: recording.try(:conference).try(:get_recordings_url)
+      f.input :filename
       f.input :state, collection: Recording.aasm.states.map(&:name)
     end
     f.actions
@@ -77,5 +76,4 @@ ActiveAdmin.register Recording do
       params.permit recording: [:original_url, :folder, :filename, :mime_type, :language, :html5, :size, :length, :width, :height, :state, :event_id]
     end
   end
-
 end

@@ -1,5 +1,5 @@
 class Api::EventsController < ApiController
-  protect_from_forgery except: %i(create download update_promoted)
+  protect_from_forgery except: %i(create update_promoted)
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # POST /api/events.json
@@ -28,7 +28,6 @@ class Api::EventsController < ApiController
 
     respond_to do |format|
       if create_event(params)
-        @event.download_images(params[:thumb_url], params[:poster_url])
         format.json { render json: @event, status: :created }
       else
         Rails.logger.info("JSON: failed to create event: #{@event.errors.inspect}")
@@ -53,14 +52,6 @@ class Api::EventsController < ApiController
     @event.destroy
     respond_to do |format|
       format.json { head :no_content }
-    end
-  end
-
-  def download
-    event = Event.find_by! guid: params[:guid]
-    respond_to do |format|
-      event.download_images(params[:thumb_url], params[:poster_url])
-      format.json { render json: event, status: :ok }
     end
   end
 

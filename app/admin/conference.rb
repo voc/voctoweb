@@ -24,10 +24,10 @@ ActiveAdmin.register Conference do
       row :acronym
       row :title
       row :recordings_path do
-        div show_folder label: c.recordings_path, path: c.get_recordings_path
+        div show_folder label: c.recordings_path, path: c.get_recordings_url
       end
       row :images_path do
-        div show_folder label: c.images_path, path: c.get_images_path
+        div show_folder label: c.images_path, path: c.get_images_url
       end
       row :slug
       row :logo
@@ -56,8 +56,8 @@ ActiveAdmin.register Conference do
       f.input :slug
     end
     f.inputs "Paths" do
-      f.input :recordings_path, hint: conference.get_recordings_path
-      f.input :images_path, hint: conference.get_images_path
+      f.input :recordings_path, hint: conference.get_recordings_url
+      f.input :images_path, hint: conference.get_images_url
     end
     f.inputs "Files" do
       f.input :logo, hint: 'filename from frontend repo'

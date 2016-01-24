@@ -33,32 +33,11 @@ class Recording < ActiveRecord::Base
 
   aasm column: :state do
     state :new, initial: true
-    state :downloading
     state :downloaded
-
-    event :download_failed do
-      transitions to: :new
-    end
-
-    event :start_download, after: :download! do
-      transitions to: :downloading
-    end
-
-    event :finish_download, after: :move_files! do
-      transitions from: :downloading, to: :downloaded
-    end
   end
 
   def video?
     mime_type.in? MimeType::VIDEO
-  end
-
-  def download!
-    VideoDownloadWorker.perform_async(id)
-  end
-
-  def move_files!
-    VideoMoveWorker.perform_async(id)
   end
 
   def display_name
@@ -70,12 +49,6 @@ class Recording < ActiveRecord::Base
 
     return id if str.empty?
     str
-  end
-
-  def validate_for_api
-    errors.add(:folder, "recording folder #{conference.get_recordings_path} not writable") unless File.writable? conference.get_recordings_path
-    errors.add(:original_url, 'missing original_url') if original_url.nil?
-    not errors.any?
   end
 
   def min_width(maxwidth = nil)

@@ -12,16 +12,11 @@ MediaBackend::Application.routes.draw do
     resources :conferences, :defaults => { :format => 'json' }
     resources :events, :defaults => { :format => 'json' } do
       collection do
-        post 'download'
         post 'update_promoted'
         post 'update_view_counts'
       end
     end
-    resources :recordings, :defaults => { :format => 'json' } do
-      collection do
-        post 'download'
-      end
-    end
+    resources :recordings, :defaults => { :format => 'json' }
     resources :news, :defaults => { :format => 'json' }
   end
 

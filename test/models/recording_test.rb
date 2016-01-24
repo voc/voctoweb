@@ -35,19 +35,6 @@ class RecordingTest < ActiveSupport::TestCase
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end
 
-  test "should download file" do
-    path = create_test_file 'test.webm'
-    @recording.mime_type = 'video/webm'
-    @recording.original_url = "file://" + path
-    @recording.state = 'new'
-    @recording.save
-
-    run_background_jobs_immediately do
-      @recording.start_download!
-    end
-    assert @recording.reload.downloaded?
-  end
-
   test "should increase counter on event" do
     @event.recordings << create(:recording, state: 'downloaded', filename: 'video2.webm', event: @event)
     @event.reload

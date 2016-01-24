@@ -48,8 +48,6 @@ Backend-Login:
 
 Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
 
-    recordings_base_dir: '/srv/recordings/cdn',
-    images_base_dir: '/srv/www/cdn',
     tmp_dir: '/tmp'
 
 You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.

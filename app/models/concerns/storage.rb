@@ -50,10 +50,6 @@ module Storage
       klass.send :define_method, for_url_path(symbol) do
         '/'.freeze + URL.join(url_path, send(instance_var))
       end
-
-      klass.send :define_method, for_path(symbol) do
-        Storage.file_join prefix, send(instance_var)
-      end
     end
   end
 
@@ -74,23 +70,6 @@ module Storage
         target = on ? send(on) : self
         folder = ivar_folder ? send(ivar_folder) : ''
         '/' + URL.join(target.send(url_path_name), folder, send(ivar_via))
-      end
-
-      path_name = for_path(dir_symbol)
-      klass.send :define_method, for_path(symbol) do
-        target = on ? send(on) : self
-        parts = []
-        parts << target.send(path_name)
-        parts << send(ivar_folder) if ivar_folder
-        parts << send(ivar_via)
-        Storage.file_join parts
-      end
-
-      klass.send :define_method, for_dir(symbol) do
-        target = on ? send(on) : self
-        return if target.nil?
-        folder = ivar_folder ? send(ivar_folder) : ''
-        Storage.file_join target.send(path_name), folder
       end
     end
   end

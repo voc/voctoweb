@@ -9,8 +9,6 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     @event = create(:event)
     @file = create_test_file FILE
     @json = get_json
-
-    FileUtils.mkdir_p File.join(Settings.folders['recordings_base_dir'], @event.conference.recordings_path)
   end
 
   def get_json

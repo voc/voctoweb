@@ -5,9 +5,7 @@ defaults: &defaults
   static_url: https://static.media.ccc.de/media
   oembed_url: http://api.media.ccc.de/public/oembed?url=
   folders:
-    recordings_base_dir: "/srv/recordings/cdn"
     recordings_webroot: ''
-    images_base_dir: "/srv/www/cdn"
     images_webroot: ""
     tmp_dir: "/tmp"
   header:
@@ -33,8 +31,6 @@ test:
   <<: *defaults
   static_url: http://static.media.ccc.de/media
   folders:
-    recordings_base_dir: <%= Rails.root.join('tmp', 'tests', 'rec') %>
-    images_base_dir: <%= Rails.root.join('tmp', 'tests', 'img') %>
     recordings_webroot: ''
     images_webroot: ''
     tmp_dir: '/tmp'
