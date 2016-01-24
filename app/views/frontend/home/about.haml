@@ -48,6 +48,10 @@
     :markdown
       The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
 
+  %h3 Current Mirrors
+
+  #status
+
   %h2 Apps
 
   %ul
@@ -74,4 +78,39 @@
   %p
     :markdown
       Please see [ccc.de](//ccc.de/de/imprint).
+
+  %script#status-template{type: 'text/x-handlebars-template'}
+    <table class="table table-striped table-condensed">
+    <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Last Scan</th>
+    <th>Files</th>
+    <th>Stats</th>
+    </tr>
+    {{#each mirrors}}
+    {{#if this.status_baseurl}}
+    <tr>
+    {{else}}
+    <tr class='warning'>
+    {{/if}}
+    <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
+    <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
+    <td>{{this.last_scan}}</td>
+    <td>{{this.nfiles}}</td>
+    <td>{{#if this.operator_url}}<a href="{{this.operator_url}}">{{this.identifier}}</a>{{/if}}</td>
+    </tr>
+    {{/each}}
+    </table>
+
+  :javascript
+    $(document).ready(function() {
+      var source = $('#status-template').html();
+      var template = Handlebars.compile(source);
+      var target = $('#status');
+      $.get("/public/mirrors", function(data,status,xhr){
+        var html = template(data);
+        target.html(html);
+      });
+    });
 
