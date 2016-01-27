@@ -43,7 +43,7 @@
           = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings.html5, poster_url: @event.poster_url, event_id: @event.id }
 
       - if @audio_recordings.present?
-        #audio.tab-pane
+        #audio.tab-pane{class: ('active' if @audio_recordings.present?)}
           %audio.audio{controls: 'controls', preload: 'none'}
             - @audio_recordings.each do |recording|
               %source{type: recording.mime_type, src: h(recording.url)}
