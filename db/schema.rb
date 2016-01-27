@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114143746) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20160104122727) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -27,9 +24,9 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -46,8 +43,8 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "key",         limit: 255
@@ -60,19 +57,19 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.string   "acronym",                 limit: 255
     t.string   "recordings_path",         limit: 255
     t.string   "images_path",             limit: 255
-    t.string   "slug",                    limit: 255, default: ""
+    t.string   "slug",                    limit: 255,      default: ""
     t.string   "aspect_ratio",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title",                   limit: 255
     t.string   "schedule_url",            limit: 255
-    t.text     "schedule_xml"
-    t.string   "schedule_state",          limit: 255, default: "not_present", null: false
+    t.text     "schedule_xml",            limit: 10485760
+    t.string   "schedule_state",          limit: 255,      default: "not_present", null: false
     t.string   "logo",                    limit: 255
-    t.integer  "downloaded_events_count",             default: 0,             null: false
+    t.integer  "downloaded_events_count",                  default: 0,             null: false
   end
 
-  add_index "conferences", ["acronym"], name: "index_conferences_on_acronym", using: :btree
+  add_index "conferences", ["acronym"], name: "index_conferences_on_acronym"
 
   create_table "events", force: :cascade do |t|
     t.string   "guid",                        limit: 255
@@ -97,12 +94,12 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.string   "original_language"
   end
 
-  add_index "events", ["conference_id"], name: "index_events_on_conference_id", using: :btree
-  add_index "events", ["guid"], name: "index_events_on_guid", using: :btree
-  add_index "events", ["release_date"], name: "index_events_on_release_date", using: :btree
-  add_index "events", ["slug", "id"], name: "index_events_on_slug_and_id", using: :btree
-  add_index "events", ["slug"], name: "index_events_on_slug", using: :btree
-  add_index "events", ["title"], name: "index_events_on_title", using: :btree
+  add_index "events", ["conference_id"], name: "index_events_on_conference_id"
+  add_index "events", ["guid"], name: "index_events_on_guid"
+  add_index "events", ["release_date"], name: "index_events_on_release_date"
+  add_index "events", ["slug", "id"], name: "index_events_on_slug_and_id"
+  add_index "events", ["slug"], name: "index_events_on_slug"
+  add_index "events", ["title"], name: "index_events_on_title"
 
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -112,18 +109,13 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.datetime "updated_at"
   end
 
-  create_table "public_foos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "recording_views", force: :cascade do |t|
     t.integer  "recording_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "recording_views", ["recording_id"], name: "index_recording_views_on_recording_id", using: :btree
+  add_index "recording_views", ["recording_id"], name: "index_recording_views_on_recording_id"
 
   create_table "recordings", force: :cascade do |t|
     t.integer  "size"
@@ -143,10 +135,10 @@ ActiveRecord::Schema.define(version: 20160114143746) do
     t.boolean  "html5",                    default: false, null: false
   end
 
-  add_index "recordings", ["event_id"], name: "index_recordings_on_event_id", using: :btree
-  add_index "recordings", ["filename"], name: "index_recordings_on_filename", using: :btree
-  add_index "recordings", ["mime_type", "state"], name: "index_recordings_on_mime_type_and_state", using: :btree
-  add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type", using: :btree
-  add_index "recordings", ["state"], name: "index_recordings_on_state", using: :btree
+  add_index "recordings", ["event_id"], name: "index_recordings_on_event_id"
+  add_index "recordings", ["filename"], name: "index_recordings_on_filename"
+  add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type"
+  add_index "recordings", ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type"
+  add_index "recordings", ["state"], name: "index_recordings_on_state"
 
 end
