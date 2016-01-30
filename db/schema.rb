@@ -120,14 +120,13 @@ ActiveRecord::Schema.define(version: 20160203134927) do
   create_table "recordings", force: :cascade do |t|
     t.integer  "size"
     t.integer  "length"
-    t.string   "mime_type",    limit: 255
+    t.string   "mime_type",  limit: 255
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "filename",     limit: 255
-    t.string   "original_url", limit: 255
-    t.string   "state",        limit: 255, default: "new", null: false
-    t.string   "folder",       limit: 255
+    t.string   "filename",   limit: 255
+    t.string   "state",      limit: 255, default: "new", null: false
+    t.string   "folder",     limit: 255
     t.integer  "width"
     t.integer  "height"
     t.string   "language",                 default: "en"
