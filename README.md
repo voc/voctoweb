@@ -119,7 +119,6 @@ The recording length is specified in seconds.
         "api_key":"4",
         "guid":"123",
         "recording":{
-          "original_url":"file:///tmp/123",
           "filename":"some.mp4",
           "folder":"mp4",
           "folder":"video/mp4",

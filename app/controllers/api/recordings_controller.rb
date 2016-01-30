@@ -64,6 +64,6 @@ class Api::RecordingsController < ApiController
   end
 
   def recording_params
-    params.require(:recording).permit(:original_url, :folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length)
+    params.require(:recording).permit(:folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length)
   end
 end

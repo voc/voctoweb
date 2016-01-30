@@ -3,7 +3,6 @@ ActiveAdmin.register Recording do
   filter :state
   filter :mime_type
   filter :language
-  filter :original_url
   filter :filename
   filter :folder
   filter :html5
@@ -14,7 +13,6 @@ ActiveAdmin.register Recording do
 
   index do
     selectable_column
-    column :original_url
     column :filename do |recording|
       line_break_filename recording.filename
     end
@@ -39,7 +37,6 @@ ActiveAdmin.register Recording do
       end
       row :folder
       row :event
-      row :original_url
       row :mime_type
       row :html5
       row :high_quality
@@ -61,7 +58,6 @@ ActiveAdmin.register Recording do
       f.input :high_quality
       f.input :width
       f.input :height
-      f.input :original_url
     end
     f.inputs "Storage" do
       f.input :folder, hint: recording.try(:conference).try(:get_recordings_url)
@@ -73,7 +69,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:original_url, :folder, :filename, :mime_type, :language, :html5, :size, :length, :width, :height, :state, :event_id]
+      params.permit recording: [:folder, :filename, :mime_type, :language, :html5, :size, :length, :width, :height, :state, :event_id]
     end
   end
 end
