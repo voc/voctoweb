@@ -51,9 +51,29 @@ ActiveAdmin.register Event do
       row :date
       row :release_date
     end
-    table_for e.recordings.order('filename ASC') do
-      column "Recordings" do |recording|
+    table_for e.recordings.video.order('filename ASC') do
+      column "Video Recordings" do |recording|
         link_to recording.filename, [ :admin, recording ]
+      end
+      column "folder" do |recording|
+        recording.folder
+      end
+      column "html5" do |recording|
+        recording.html5
+      end
+      column "language" do |recording|
+        recording.language
+      end
+    end
+    table_for e.recordings.audio.order('filename ASC') do
+      column "Audio Recordings" do |recording|
+        link_to recording.filename, [ :admin, recording ]
+      end
+      column "folder" do |recording|
+        recording.folder
+      end
+      column "language" do |recording|
+        recording.language
       end
     end
   end
