@@ -126,6 +126,8 @@ FactoryGirl.define do
     folder ''
     mime_type 'video/webm'
     original_url 'file:///fixtures/test.webm'
+    height 720
+    width 1024
     size '12'
     length '5'
     state 'downloaded'

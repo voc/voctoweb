@@ -29,6 +29,8 @@ class RecordingTest < ActiveSupport::TestCase
     r.filename = "some.avi"
     r.mime_type = 'video/webm'
     r.length = '10'
+    r.width = 1
+    r.height = 1
     r.folder = ''
     assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
   end

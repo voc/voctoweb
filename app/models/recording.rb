@@ -10,6 +10,7 @@ class Recording < ActiveRecord::Base
   validates_presence_of :event
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates_presence_of :filename, :mime_type, :length
+  validates_presence_of :width, :height, if: :video?
   validate :unique_recording
 
   scope :downloaded, -> { where(state: 'downloaded') }
@@ -44,6 +45,10 @@ class Recording < ActiveRecord::Base
     event :finish_download, after: :move_files! do
       transitions from: :downloading, to: :downloaded
     end
+  end
+
+  def video?
+    mime_type.in? MimeType::VIDEO
   end
 
   def download!
