@@ -24,6 +24,7 @@ class Recording < ActiveRecord::Base
   after_destroy { delete_recording_views }
   after_destroy { update_conference_downloaded_count if downloaded? }
   after_destroy { update_event_downloaded_count if downloaded? }
+  after_destroy { event.touch }
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
