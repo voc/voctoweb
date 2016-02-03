@@ -7,7 +7,7 @@ ActiveAdmin.register Recording do
   filter :filename
   filter :folder
   filter :html5
-  filter :hd_quality
+  filter :high_quality
   filter :conference, :collection => proc { Conference.all }
   filter :event, :collection => proc { Event.includes(:conference).all }
   filter :updated_at
@@ -21,7 +21,7 @@ ActiveAdmin.register Recording do
     column :folder
     column :mime_type
     column :html5
-    column :hd_quality
+    column :high_quality
     column :language
     column :size
     column :length
@@ -43,7 +43,7 @@ ActiveAdmin.register Recording do
       row :original_url
       row :mime_type
       row :html5
-      row :hd_quality
+      row :high_quality
       row :language
       row :size
       row :length
@@ -59,7 +59,7 @@ ActiveAdmin.register Recording do
       f.input :language
       f.input :size, label: 'file size in mb'
       f.input :length, label: 'run-time in seconds'
-      f.input :hd_quality
+      f.input :high_quality
       f.input :width
       f.input :height
       f.input :original_url
