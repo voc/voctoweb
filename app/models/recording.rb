@@ -12,6 +12,7 @@ class Recording < ActiveRecord::Base
   validates_presence_of :filename, :mime_type, :length
   validates_presence_of :width, :height, if: :video?
   validate :unique_recording
+  validate :filename_without_path
 
   scope :downloaded, -> { where(state: 'downloaded') }
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
@@ -76,17 +77,6 @@ class Recording < ActiveRecord::Base
     not errors.any?
   end
 
-  def unique_recording
-    unless event.present?
-      errors.add :event, 'missing event on recording'
-      return
-    end
-    dupe = event.recordings.select { |recording|
-      recording.filename == filename && recording.folder == folder
-    }.delete_if { |dupe| dupe == self }
-    errors.add :event, 'recording already exist on event' if dupe.present?
-  end
-
   def min_width(maxwidth=nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width
@@ -102,6 +92,22 @@ class Recording < ActiveRecord::Base
   end
 
   private
+
+  def filename_without_path
+    return unless filename
+    errors.add :filename, 'not allowed to contain a path' if File.basename(filename) != filename
+  end
+
+  def unique_recording
+    unless event.present?
+      errors.add :event, 'missing event on recording'
+      return
+    end
+    dupe = event.recordings.select { |recording|
+      recording.filename == filename && recording.folder == folder
+    }.delete_if { |dupe| dupe == self }
+    errors.add :event, 'recording already exist on event' if dupe.present?
+  end
 
   def delete_recording_views
     recording_views.delete_all
