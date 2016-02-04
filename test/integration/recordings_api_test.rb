@@ -20,7 +20,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"guid":"' + @event.guid + '",'
     json += '"recording":'
-    d = '{"original_url":"file://' + @file + '","filename":"some.mp4","folder":"","mime_type":"audio/mp4","size":"12","length":"30"}'
+    d = '{"original_url":"file://' + @file + '","filename":"some.mp4","folder":"","mime_type":"audio/ogg","size":"12","length":"30"}'
     json += d
     json+= '}'
     json

@@ -16,11 +16,8 @@ class Event < ActiveRecord::Base
 
   after_initialize :generate_guid
 
-  validates_presence_of :conference
-  validates_presence_of :release_date, :slug, :title
-  validates_presence_of :guid
-  validates_uniqueness_of :guid
-  validates_uniqueness_of :slug
+  validates :conference, :release_date, :slug, :title, :guid, presence: true
+  validates :guid, :slug, uniqueness: true
 
   serialize :persons, Array
   serialize :tags, Array

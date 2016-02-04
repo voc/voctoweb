@@ -7,10 +7,8 @@ class Conference < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
 
-  validates_presence_of :acronym
-  validates_presence_of :slug
-  validates_uniqueness_of :acronym
-  validates_uniqueness_of :slug
+  validates :acronym, :slug, presence: true
+  validates :acronym, :slug, uniqueness: true
   validates :slug, format: { with: %r{\A\w+(?:/\w+)*\z} }
   validate :schedule_url_valid
   validate :slug_reachable

@@ -7,10 +7,10 @@ class Recording < ActiveRecord::Base
   has_one :conference, through: :event
   has_many :recording_views
 
-  validates_presence_of :event
+  validates :event, :filename, :mime_type, :length, presence: true
+  validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
-  validates_presence_of :filename, :mime_type, :length
-  validates_presence_of :width, :height, if: :video?
+  validates :mime_type, inclusion: { in: MimeType.all }
   validate :unique_recording
   validate :filename_without_path
 
@@ -77,14 +77,14 @@ class Recording < ActiveRecord::Base
     not errors.any?
   end
 
-  def min_width(maxwidth=nil)
+  def min_width(maxwidth = nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width
     width = [width, maxwidth.to_i].min if maxwidth
     width.to_i
   end
 
-  def min_height(maxheight=nil)
+  def min_height(maxheight = nil)
     height = 720
     height = [height, self.height.to_i].min if self.height
     height = [height, maxheight.to_i].min if maxheight
