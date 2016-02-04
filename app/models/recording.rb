@@ -7,10 +7,11 @@ class Recording < ActiveRecord::Base
   has_one :conference, through: :event
   has_many :recording_views
 
-  validates :event, :filename, :mime_type, :length, presence: true
+  validates :event, :filename, :mime_type, :length, :language, presence: true
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
+  validates :language, inclusion: { in: Event::LANGUAGES }
   validate :unique_recording
   validate :filename_without_path
 

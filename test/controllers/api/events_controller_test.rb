@@ -57,6 +57,7 @@ class Api::EventsControllerTest < ActionController::TestCase
       guid: 'qwerty',
       poster_url: 'http://koeln.ccc.de/images/chaosknoten_preview.jpg',
       thumb_url: 'http://koeln.ccc.de/images/chaosknoten.jpg',
+      original_language: 'en-de',
       slug: 'best_event',
       title: 'Event?',
       subtitle: 'abcd',

@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   include Storage
 
   MAX_PROMOTED = 10
+  LANGUAGES = %w(de en fr gsw).freeze
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -16,8 +17,9 @@ class Event < ActiveRecord::Base
 
   after_initialize :generate_guid
 
-  validates :conference, :release_date, :slug, :title, :guid, presence: true
+  validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
+  validate :original_language_valid
 
   serialize :persons, Array
   serialize :tags, Array
@@ -124,12 +126,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def original_language_from_recordings
-    languages = recordings.pluck(:language).uniq
-    return if languages.empty?
-    languages.max_by(&:length).split(/-/).first
-  end
-
   private
 
   def self.popular_event_ids
@@ -148,6 +144,12 @@ class Event < ActiveRecord::Base
 
   def self.recently_viewed_event_ids
     RecordingView.joins(:recording).where('recording_views.updated_at > ?', Time.now.ago(30.minutes)).pluck('recordings.event_id').uniq
+  end
+
+  def original_language_valid
+    return unless original_language
+    languages = original_language.split('-')
+    errors.add(:original_language, 'not a valid language') unless languages.all? { |l| LANGUAGES.include?(l) }
   end
 
   def download_image(url, filename)
