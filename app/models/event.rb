@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   include Storage
 
   MAX_PROMOTED = 10
-  LANGUAGES = %w(de en fr gsw).freeze
+  LANGUAGES = %w(deu eng fra gsw).freeze
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
