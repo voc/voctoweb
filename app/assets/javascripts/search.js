@@ -56,7 +56,7 @@ ready = function() {
 		$('#media-search input[name=q]').val(term);
 		$.ajax({
 			dataType: $.support.cors ? 'json' : 'jsonp',
-			url: 'https://media.ccc.de/search/api/term',
+			url: 'https://search.media.ccc.de/search/api/term',
 			type: 'post',
 			data: {
 				term: lterm,
