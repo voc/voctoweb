@@ -48,8 +48,6 @@ Backend-Login:
 
 Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
 
-    recordings_base_dir: '/srv/recordings/cdn',
-    images_base_dir: '/srv/www/cdn',
     tmp_dir: '/tmp'
 
 You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
@@ -121,7 +119,6 @@ The recording length is specified in seconds.
         "api_key":"4",
         "guid":"123",
         "recording":{
-          "original_url":"file:///tmp/123",
           "filename":"some.mp4",
           "folder":"mp4",
           "folder":"video/mp4",
@@ -166,7 +163,6 @@ Update view counts of events viewed in the last 30 minutes
     /public/conferences/:id
     /public/events/:id
     /public/recordings/:id
-    /public/mirrors
 
 
 Example:

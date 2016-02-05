@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   include Storage
 
   MAX_PROMOTED = 10
-  LANGUAGES = %w(de en fr gsw).freeze
+  LANGUAGES = %w(deu eng fra gsw).freeze
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -102,11 +102,6 @@ class Event < ActiveRecord::Base
     self.poster_filename = get_image_filename poster_url if poster_url
   end
 
-  def download_images(thumb_url, poster_url)
-    download_image(thumb_url, thumb_filename)
-    download_image(poster_url, poster_filename)
-  end
-
   def display_name
     if title.present?
       conference.acronym + ': ' + title
@@ -150,11 +145,6 @@ class Event < ActiveRecord::Base
     return unless original_language
     languages = original_language.split('-')
     errors.add(:original_language, 'not a valid language') unless languages.all? { |l| LANGUAGES.include?(l) }
-  end
-
-  def download_image(url, filename)
-    return if url.nil? or filename.nil?
-    DownloadWorker.perform_async(conference.get_images_path, filename, url)
   end
 
   def get_image_filename(url)

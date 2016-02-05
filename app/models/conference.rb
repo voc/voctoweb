@@ -15,13 +15,11 @@ class Conference < ActiveRecord::Base
 
   has_attached_directory :images,
     via: :images_path,
-    prefix: Settings.folders['images_base_dir'],
     url: Settings.static_url,
     url_path: Settings.folders['images_webroot']
 
   has_attached_directory :recordings,
     via: :recordings_path,
-    prefix: Settings.folders['recordings_base_dir'],
     url: Settings.cdn_url,
     url_path: Settings.folders['recordings_webroot']
 
@@ -68,17 +66,10 @@ class Conference < ActiveRecord::Base
     acronym || id
   end
 
-  def validate_for_api
-    errors.add :images_path, "images path #{get_images_path} not writable" unless File.writable? get_images_path
-    errors.add :recordings_path, "recordings path #{get_recordings_path} not writable" unless File.writable? get_recordings_path
-    not errors.any?
-  end
-
   private
 
   def logo_exists?
     return if logo.blank?
-    return unless File.readable?(File.join(get_images_path, logo))
     true
   end
 

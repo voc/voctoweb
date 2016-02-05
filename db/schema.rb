@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203134927) do
+ActiveRecord::Schema.define(version: 20160205214028) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -125,12 +125,11 @@ ActiveRecord::Schema.define(version: 20160203134927) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "filename",     limit: 255
-    t.string   "original_url", limit: 255
     t.string   "state",        limit: 255, default: "new", null: false
     t.string   "folder",       limit: 255
     t.integer  "width"
     t.integer  "height"
-    t.string   "language",                 default: "en"
+    t.string   "language",                 default: "eng"
     t.boolean  "high_quality",             default: true,  null: false
     t.boolean  "html5",                    default: false, null: false
   end

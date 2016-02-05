@@ -9,8 +9,6 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     @event = create(:event)
     @file = create_test_file FILE
     @json = get_json
-
-    FileUtils.mkdir_p File.join(Settings.folders['recordings_base_dir'], @event.conference.recordings_path)
   end
 
   def get_json
@@ -20,7 +18,7 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '",'
     json += '"guid":"' + @event.guid + '",'
     json += '"recording":'
-    d = '{"original_url":"file://' + @file + '","filename":"some.mp4","folder":"","mime_type":"audio/ogg","size":"12","length":"30"}'
+    d = '{"filename":"some.mp4","folder":"","mime_type":"audio/ogg","size":"12","length":"30"}'
     json += d
     json+= '}'
     json

@@ -64,7 +64,6 @@ module Frontend
 
     def thumb_filename_exists?
       return if thumb_filename.blank?
-      return unless File.readable?(File.join(conference.get_images_path, thumb_filename))
       true
     end
   end

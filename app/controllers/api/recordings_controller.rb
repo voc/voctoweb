@@ -25,10 +25,10 @@ class Api::RecordingsController < ApiController
     event = Event.find_by! guid: params['guid']
     @recording = Recording.new(recording_params)
     @recording.event = event
+    @recording.state = :downloaded
 
     respond_to do |format|
-      if @recording.valid? and @recording.validate_for_api and @recording.save
-        @recording.start_download!
+      if @recording.save
         format.json { render json: @recording, status: :created }
       else
         Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
@@ -56,15 +56,6 @@ class Api::RecordingsController < ApiController
     end
   end
 
-  def download
-    event = Event.find_by! guid: params['guid']
-    fail ActiveRecord::RecordNotFound if event.recordings.blank?
-    respond_to do |format|
-      event.recordings.each(&:start_download!)
-      format.json { render json: event.recordings, status: :ok }
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -73,6 +64,6 @@ class Api::RecordingsController < ApiController
   end
 
   def recording_params
-    params.require(:recording).permit(:original_url, :folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length)
+    params.require(:recording).permit(:folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length)
   end
 end

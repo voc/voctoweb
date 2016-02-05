@@ -6,8 +6,6 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     @key = create(:api_key)
     @conference = create(:conference)
     @json = get_json
-    FileUtils.mkdir_p File.join(Settings.folders['images_base_dir'], @conference.images_path)
-    FileUtils.mkdir_p File.join(Settings.folders['recordings_base_dir'], @conference.recordings_path)
   end
 
   def get_json
@@ -18,7 +16,7 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += '"guid":"12345",'
     json += '"slug":"12345",'
     json += '"link":"http://link.to",'
-    json += '"original_language":"en-de",'
+    json += '"original_language":"eng-deu",'
     json += '"title":"title1",'
     json += '"persons":["a","b","c"],'
     json += '"acronym":"'

@@ -23,10 +23,3 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
-
-mirrorbrain:
-  adapter: postgresql
-  database: mirrorbrain
-  username: postgres
-  encoding: utf8
-

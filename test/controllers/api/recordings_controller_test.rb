@@ -13,8 +13,7 @@ class Api::RecordingsControllerTest < ActionController::TestCase
   end
 
   test 'should create recording' do
-    args = { original_url: 'http://example.com',
-             filename: 'test.mp3',
+    args = { filename: 'test.mp3',
              folder: 'mp3s',
              mime_type: 'audio/ogg',
              size: '123',

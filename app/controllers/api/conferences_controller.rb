@@ -25,7 +25,7 @@ class Api::ConferencesController < ApiController
     @conference = Conference.new(conference_params)
 
     respond_to do |format|
-      if not @conference.schedule_url.nil? and @conference.valid? and @conference.validate_for_api and @conference.save
+      if @conference.schedule_url && @conference.save
         @conference.url_changed!
         format.json { render json: @conference, status: :created }
       else
