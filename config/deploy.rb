@@ -7,7 +7,7 @@ set :branch, ENV['CAP_BRANCH']
 set :user, ENV['CAP_USER']
 
 # temporary deploy scripts, etc
-set :tmp_dir, "/srv/www/#{fetch(:application)}/tmp"
+set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 # set :rvm_type, :user                     # Defaults to: :auto
@@ -15,7 +15,7 @@ set :rvm_ruby_version, '2.3.0@media-site'
 
 set :use_sudo,        false
 set :stage,           :production
-set :deploy_to,       "/srv/www/#{fetch(:application)}"
+set :deploy_to,       "/srv/media/#{fetch(:application)}"
 set :ssh_options,     forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)
 set :bundle_without,  %w(development test sqlite3).join(' ')
 set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.yml .env.production .ruby-version)
