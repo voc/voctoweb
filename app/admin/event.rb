@@ -1,5 +1,4 @@
 ActiveAdmin.register Event do
-
   filter :guid
   filter :title
   filter :link
@@ -41,6 +40,7 @@ ActiveAdmin.register Event do
         div show_event_folder e, :poster_filename
       end
       row :conference
+      row :original_language
       row :promoted
       row :subtitle
       row :link
@@ -52,34 +52,24 @@ ActiveAdmin.register Event do
       row :release_date
     end
     table_for e.recordings.video.order('filename ASC') do
-      column "Video Recordings" do |recording|
-        link_to recording.filename, [ :admin, recording ]
+      column 'Video Recordings' do |recording|
+        link_to recording.filename, [:admin, recording]
       end
-      column "folder" do |recording|
-        recording.folder
-      end
-      column "html5" do |recording|
-        recording.html5
-      end
-      column "language" do |recording|
-        recording.language
-      end
+      column 'folder', &:folder
+      column 'html5', &:html5
+      column 'language', &:language
     end
     table_for e.recordings.audio.order('filename ASC') do
-      column "Audio Recordings" do |recording|
-        link_to recording.filename, [ :admin, recording ]
+      column 'Audio Recordings' do |recording|
+        link_to recording.filename, [:admin, recording]
       end
-      column "folder" do |recording|
-        recording.folder
-      end
-      column "language" do |recording|
-        recording.language
-      end
+      column 'folder', &:folder
+      column 'language', &:language
     end
   end
 
   form do |f|
-    f.inputs "Event Details" do
+    f.inputs 'Event Details' do
       f.input :guid
       f.input :conference, collection: Conference.order(:acronym)
       f.input :title
@@ -87,12 +77,13 @@ ActiveAdmin.register Event do
       f.input :description, input_html: { class: 'tinymce' }
       f.input :link
       f.input :promoted
+      f.input :original_language, hint: 'ISO-639-2 codes (deu, eng), delimeted by -'
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
     end
-    f.inputs "Files" do
+    f.inputs 'Files' do
       f.input :slug
       f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
@@ -119,7 +110,7 @@ ActiveAdmin.register Event do
   end
 
   action_item(:add_recording, only: [:show, :edit]) do
-    link_to 'Add Recording', new_admin_recording_path(recording: {event_id: event.id}), method: :get
+    link_to 'Add Recording', new_admin_recording_path(recording: { event_id: event.id }), method: :get
   end
 
   action_item(:update_promoted) do
@@ -135,8 +126,8 @@ ActiveAdmin.register Event do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :poster_filename,
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
+                            :original_language,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end
-
 end

@@ -60,7 +60,7 @@ ActiveAdmin.register Conference do
       f.input :images_path, hint: conference.get_images_url
     end
     f.inputs "Files" do
-      f.input :logo, hint: 'filename from frontend repo'
+      f.input :logo, hint: 'filename in images path'
     end
     f.actions
   end

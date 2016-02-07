@@ -1,7 +1,7 @@
 ActiveAdmin.register Recording do
 
   filter :state
-  filter :mime_type
+  filter :mime_type, collection: proc { MimeType.all }
   filter :language
   filter :filename
   filter :folder
