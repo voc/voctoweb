@@ -43,6 +43,8 @@ ActiveAdmin.register Recording do
       row :language
       row :size
       row :length
+      row :width
+      row :height
       row :state
     end
   end
