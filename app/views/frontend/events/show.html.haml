@@ -27,10 +27,10 @@
 
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
       - if @video_recordings.html5.present?
-        %li
+        %li.active
           %a{href: event_url(slug: @event.slug), 'data-target' => '#video', role: 'tab', 'data-toggle' => 'tab'} Video
       - if @audio_recordings.present?
-        %li
+        %li{class: ('active' unless @video_recordings.present?)}
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
       %li
         %a{href: download_event_url(slug: @event.slug), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
