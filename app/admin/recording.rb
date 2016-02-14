@@ -69,7 +69,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:folder, :filename, :mime_type, :language, :html5, :size, :length, :width, :height, :state, :event_id]
+      params.permit recording: [:folder, :filename, :mime_type, :language, :html5, :high_quality, :size, :length, :width, :height, :state, :event_id]
     end
   end
 end
