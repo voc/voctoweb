@@ -2,6 +2,14 @@ module Frontend
   module ApplicationHelper
     require 'uri'
 
+    def recording_quality(recording)
+      recording.high_quality ? 'high' : 'low'
+    end
+
+    def recording_title(recording)
+      "#{MimeType.humanized_mime_type(recording.mime_type)} #{recording.resolution} #{recording.language}"
+    end
+
     def oembed_api_event_url(event)
       (Settings.oembed_url + event_url(slug: event.slug)).freeze
     end

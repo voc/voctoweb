@@ -9,6 +9,18 @@ module Frontend
       File.join(event.conference.recordings_url, folder || '', filename).freeze
     end
 
+    def resolution
+      if width <= 320
+        'sd'
+      elsif width > 320 && width <= 720
+        'hd'
+      elsif width > 720 && width <= 1920
+        'full-hd'
+      elsif width > 1920
+        '4k'
+      end
+    end
+
     def filetype
       MimeType.humanized_mime_type(mime_type)
     end
