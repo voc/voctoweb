@@ -5,7 +5,7 @@ class Recording < ActiveRecord::Base
 
   belongs_to :event
   has_one :conference, through: :event
-  has_many :recording_views
+  has_many :recording_views, dependent: :delete_all
 
   validates :event, :filename, :mime_type, :length, :language, presence: true
   validates :width, :height, presence: true, if: :video?
@@ -24,7 +24,6 @@ class Recording < ActiveRecord::Base
   after_save { update_event_downloaded_count if downloaded? }
   after_save { update_event_duration if length_changed? }
   after_save { event.touch }
-  after_destroy { delete_recording_views }
   after_destroy { update_conference_downloaded_count if downloaded? }
   after_destroy { update_event_downloaded_count if downloaded? }
   after_destroy { event.touch }
@@ -81,10 +80,6 @@ class Recording < ActiveRecord::Base
       recording.filename == filename && recording.folder == folder
     }.delete_if { |dupe| dupe == self }
     errors.add :event, 'recording already exist on event' if dupe.present?
-  end
-
-  def delete_recording_views
-    recording_views.delete_all
   end
 
   def update_conference_downloaded_count
