@@ -10,13 +10,14 @@ module Frontend
     end
 
     def resolution
-      if width <= 320
+      return '' unless height
+      if height < 720
         'sd'
-      elsif width > 320 && width <= 720
+      elsif height < 1080
         'hd'
-      elsif width > 720 && width <= 1920
+      elsif height < 1716
         'full-hd'
-      elsif width > 1920
+      else
         '4k'
       end
     end
