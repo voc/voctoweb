@@ -88,3 +88,30 @@ namespace :deploy do
   after :finishing,    :cleanup
   after :finishing,    :restart
 end
+
+namespace :fixtures do
+  set :fixtures_path, 'tmp/fixtures_dump'
+
+  desc 'Download fixtures'
+  task :download do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env), fixtures_path: fetch(:fixtures_path) do
+          execute :mkdir, '-p', fetch(:fixtures_path)
+          execute :rake, 'db:fixtures:dump'
+        end
+      end
+      download!("#{current_path}/#{fetch(:fixtures_path)}", 'tmp/', recursive: true)
+    end
+  end
+
+  desc 'Upload fixtures'
+  task :upload do
+    on roles(:app) do
+      within release_path do
+        execute :rm, "-rf #{current_path}/#{fetch(:fixtures_path)}"
+      end
+      upload!(fetch(:fixtures_path), "#{current_path}/tmp/", recursive: true)
+    end
+  end
+end
