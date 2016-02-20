@@ -14,16 +14,30 @@ ruby 2.3.0
 ### Quickstart / Development
 
 ````
+## for ubuntu 15.10
+# install deps for ruby
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison
+
+# install deps for media.ccc.de
+sudo apt-get install redis-server redis-server libpqxx-dev
+
+# install node.js
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+sudo apt-get install nodejs
+
 # install rvm
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 \curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer
 \curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc
 gpg --verify rvm-installer.asc
 bash rvm-installer stable
-source /home/peter/.rvm/scripts/rvm
+source ~/.rvm/scripts/rvm
 
 # install ruby 2.3.0
 rvm install ruby-2.3.0
+
+# install bundler
+rvm install bundler
 
 # obtaining & setting up media.ccc.de instance
 git clone git@github.com:voc/media.ccc.de.git
@@ -34,14 +48,14 @@ rake db:migrate
 rake db:fixtures:load
 
 # run dev-server
-rails server
+rails server -b 0.0.0.0
 
 # done
 http://localhost:3000/ <- Frontend
 http://localhost:3000/admin/ <- Backend
 Backend-Login:
-  Username: admin@localhost.test
-  Password: testadmin
+  Username: admin@example.org
+  Password: media123
 ````
 
 ### Production Deployment
