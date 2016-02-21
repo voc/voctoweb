@@ -11,19 +11,25 @@ media.ccc.de webfrontend, meta data editor and API.
 
 ruby 2.3.0
 
-### Quickstart / Development
+### Dependencies
 
-````
+* redis-server >= 2.8
+* postgresql
+* nodejs
+
+### Quickstart / Development Notes
+
+```
 ## for ubuntu 15.10
 # install deps for ruby
 sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison
 
 # install deps for media.ccc.de
-sudo apt-get install redis-server redis-server libpqxx-dev
+sudo apt-get install redis-server libpqxx-dev
 
 # install node.js
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install nodejs
+
+    sudo apt-get install nodejs
 
 # install rvm
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -47,6 +53,10 @@ bundle install
 rake db:migrate
 rake db:fixtures:load
 
+# postgresql setup
+sudo -u postgres -i
+createuser -d -P media
+
 # run dev-server
 rails server -b 0.0.0.0
 
@@ -56,13 +66,11 @@ http://localhost:3000/admin/ <- Backend
 Backend-Login:
   Username: admin@example.org
   Password: media123
-````
+```
 
-### Production Deployment
+### Production Deployment Notes
 
 Copy and edit the configuration file `config/settings.yml.template` to `config/settings.yml`.
-
-    tmp_dir: '/tmp'
 
 You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
 
@@ -76,16 +84,35 @@ Setup your database in config/database.yml needed.
 
     sidekiq
 
-#### Start a Server
+#### Puma
 
-To get the backend up and running:
+```puma.rb
+#!/usr/bin/env puma
 
-    export RAILS_ENV=production
-    bundle install
-    rake db:setup
-    rake assets:precompile
-    gem install passenger
-    passenger start -p 8023
+directory '/srv/www/media-site/current'
+rackup "/srv/www/media-site/current/config.ru"
+environment 'production'
+
+pidfile "/srv/www/media-site/shared/tmp/pids/puma.pid"
+state_path "/srv/www/media-site/shared/tmp/pids/puma.state"
+stdout_redirect '/srv/www/media-site/current/log/puma.error.log', '/srv/www/media-site/current/log/puma.access.log', true
+
+threads 4,16
+
+bind 'unix:///srv/www/media-site/shared/tmp/sockets/media-site-puma.sock'
+bind 'tcp://127.0.0.1:3080'
+
+workers 2
+
+on_restart do
+  puts 'Refreshing Gemfile'
+  ENV["BUNDLE_GEMFILE"] = "/srv/www/media-site/current/Gemfile"
+end
+
+before_fork do
+  require 'rbtrace'
+end
+```
 
 #### First Login
 
