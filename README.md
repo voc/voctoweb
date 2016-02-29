@@ -43,7 +43,7 @@ source ~/.rvm/scripts/rvm
 rvm install ruby-2.3.0
 
 # install bundler
-rvm install bundler
+gem install bundler
 
 # obtaining & setting up media.ccc.de instance
 git clone git@github.com:voc/media.ccc.de.git
