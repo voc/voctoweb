@@ -3,6 +3,11 @@ class Public::EventsController < ActionController::Base
   include ThrottleConnections
   respond_to :json
 
+  def index
+    events = Event.all
+    paginate json: events
+  end
+
   # GET /public/events/1.json
   def show
     @event = Event.find(params[:id])

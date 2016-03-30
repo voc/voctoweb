@@ -4,6 +4,11 @@ class Public::RecordingsController < ActionController::Base
   skip_before_filter :verify_authenticity_token, only: :count
   respond_to :json
 
+  def index
+    recordings = Recording.downloaded.all
+    paginate json: recordings
+  end
+
   # GET /public/recordings/1.json
   def show
     @recording = Recording.find(params[:id])
