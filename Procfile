@@ -1,2 +1,2 @@
-web: bundle exec puma -C puma.rb
+web: bundle exec puma
 jobs: bundle exec sidekiq
