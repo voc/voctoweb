@@ -6,7 +6,7 @@ class Public::RecordingsController < ActionController::Base
 
   def index
     recordings = Recording.downloaded.all
-    paginate json: recordings
+    paginate json: recordings, per_page: 50, max_per_page: 256
   end
 
   # GET /public/recordings/1.json

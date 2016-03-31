@@ -5,7 +5,7 @@ class Public::EventsController < ActionController::Base
 
   def index
     events = Event.all
-    paginate json: events
+    paginate json: events, per_page: 50, max_per_page: 256
   end
 
   # GET /public/events/1.json
