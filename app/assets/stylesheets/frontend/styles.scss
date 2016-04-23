@@ -432,29 +432,67 @@ a.inverted {
     display: block;
     clear: both;
     height: 120px;
+    position: relative;
+
+    background-color: #fafafa;
+    &:nth-child(odd) {
+      background-color: #ffffff;
+    }
+    &:hover {
+      background-color: #fcfcfc;
+    }
     
     .video-thumbnail {
       float: left;
       height: 120px;
       width: 160px;
     }
+
+    h3 {
+      margin-bottom: 0;
+      padding-top: 10px;
+      line-height: 1em;
+    }
+    h4 {
+      margin-top: 4px;
+    }
     
     color: black;
-    &:hover, &:focus, &:active {
-      text-decoration: none;
-      .caption h3, .metadata li {
-        color: $link-color;
-      }
-    }
     
     .metadata {
       text-align: left;
       border: none;
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 8px;
+
       li {
         padding: $padding-xs-vertical;
         padding-right: $padding-xs-horizontal;
         color: $gray-dark;
         min-width: inherit;
+
+        color: lighten(#333333, 25%);
+
+        &.duration { display: none; }
+      }
+    }
+
+    .duration-container {
+      width: 160px;
+      height: 120px;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .duration {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: white;
+        background: black;
+        padding: 2px 4px;
       }
     }
     
@@ -668,32 +706,21 @@ a.inverted {
   .event-previews {
     .event-preview {
       height: auto;
-      
-      .video-thumbnail {
-        margin-top: 1.5em;
-        height: 90px;
-        width: 120px;
-      }
-      
+      > a { display: none; }
+      .duration-container { display: none; }
       .caption {
-        margin-left: 120px;
-        padding-left: $padding-small-horizontal;
-        h3 {
-          height: 90px;
-          vertical-align: middle;
-          display: table-cell;
-          margin-top: 0;
-          font-size: 17px;
+        margin-left: 0;
+        h4 {
+          margin-bottom: 5px;
         }
       }
+
       .metadata {
-        position: relative;
-        left: -130px;
-        padding: 0;
-        margin-bottom: 3px;
-        white-space: nowrap;
-        margin-bottom: $padding-small-vertical;
-      }
+        position: static;
+        li { display: block; }
+        li.duration { display: block; }
+        li.date { display: none; }
+       }
     }
   }
   
