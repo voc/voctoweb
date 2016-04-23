@@ -20,15 +20,16 @@
           %span.fa.fa-download
           http download
 
-- if subtitle_recording.present?
+- if subtitle_tracks.present?
   %h3 Subtitle
   %ul
-    %li
-      .label.filetype
-        srt
-      %a{href: subtitle_recording.url, download: true}
-        %span.fa.fa-download
-          = subtitle_recording.language
+    - subtitle_tracks.each do |track|
+      %li
+        .label.filetype
+          srt
+        %a{href: track.url, download: true}
+          %span.fa.fa-download
+            = track.language
 
 %h3 Parent directory
 %a{href: conference.recordings_url}

@@ -5,7 +5,7 @@ class MimeType
 
   PREFERRED_VIDEO = %w(video/mp4 video/webm video/ogg).freeze
 
-  SUBTITLE = %w(application/x-subrip)
+  SUBTITLE = %w(application/x-subrip).freeze
 
   class << self
     def all
