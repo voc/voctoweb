@@ -3,6 +3,7 @@ rvm:
   - 2.3.0
 services:
   - redis-server
+  - elasticsearch
 before_install:
   - cp config/database.yml.template config/database.yml
   - cp config/settings.yml.template config/settings.yml

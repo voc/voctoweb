@@ -19,9 +19,4 @@
   - if @events.present?
     .event-previews
       - @events.each do |event|
-        - cache(event) do
-          .event-preview
-            %a{href: event_url(slug: event.slug)}
-              %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
-            .caption
-              = render partial: 'frontend/shared/event_metadata', locals: { event: event }
+        = render event

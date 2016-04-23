@@ -38,6 +38,8 @@ gem 'redcarpet'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :sqlite3
 gem 'pg', group: :postgresql
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

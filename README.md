@@ -14,6 +14,7 @@ ruby 2.3.0
 ### Dependencies
 
 * redis-server >= 2.8
+* elasticsearch
 * postgresql
 * nodejs
 
