@@ -16,4 +16,10 @@ $(function() {
   }
   init();
   $(document).on('page:load', init);
+  $(document).on('ready resize page:load', function() {
+    $('.bx-viewport').css({
+      'left': '50%',
+      'margin-left': -parseInt($('.bx-wrapper').css('max-width')) / 2
+    });
+  });
 });
