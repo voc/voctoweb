@@ -66,7 +66,7 @@ module Frontend
 
     def sort_folders(folders)
       sorted = folders.select { |folder| not folder.conference? }.sort { |a, b| a.name <=> b.name }
-      sorted += (folders - sorted).sort { |a, b| b.conference.updated_at <=> a.conference.updated_at }
+      sorted += (folders - sorted).sort { |a, b| b.name <=> a.name }
       sorted
     end
 
