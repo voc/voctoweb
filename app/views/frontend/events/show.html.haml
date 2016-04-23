@@ -40,6 +40,7 @@
     .tab-content
       - if @video_recordings.html5.present?
         #video.tab-pane.active
+          .kiosk
           = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings.html5, poster_url: @event.poster_url, event_id: @event.id }
 
       - if @audio_recordings.present?
