@@ -1,12 +1,7 @@
-%div.promoted
+.promoted
   .titlebar
-  .carousel.slide{'data-ride' => 'carousel'}
-    .carousel-inner
-      - cache("promoted_events", expires_in: 1.hour) do
-        - Frontend::Event.promoted(10).includes(:conference).each_with_index do |event, i|
-          %a.item{href: event_url(slug: event.slug), 'class' => (i == 0 and 'active')}
-            %img{src: h(event.thumb_url), alt: event.title, title: event.title}
-            .carousel-caption
-              %h2.title= event.title
-              - if event.subtitle.present?
-                %h3.subtitle= event.subtitle
+  .slider
+    - Frontend::Event.promoted(10).includes(:conference).each_with_index do |event, i|
+      .slide
+        %a.item{href: event_url(slug: event.slug), 'class' => (i == 0 and 'active')}
+          %img{src: h(event.thumb_url), alt: event.title, title: event.title}

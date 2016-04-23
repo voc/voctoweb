@@ -20,4 +20,6 @@
 //= require mediaelement-fix
 //= require purl.min
 //= require handlebars.min-latest
-//= require search
+//= require jquery.bxslider
+//= require jquery.nextPrevWrap
+//= require slider
