@@ -16,6 +16,7 @@ class Recording < ActiveRecord::Base
 
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
+  scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
 
   after_save { update_conference_downloaded_count }
@@ -33,11 +34,11 @@ class Recording < ActiveRecord::Base
   end
 
   def display_name
-    if event.present?
-      str = event.display_name
-    else
-      str = filename
-    end
+    str = if event.present?
+            event.display_name
+          else
+            filename
+          end
 
     return id if str.empty?
     str
@@ -56,9 +57,9 @@ class Recording < ActiveRecord::Base
     height = [height, maxheight.to_i].min if maxheight
     height.to_i
   end
-  
-  def language_iso_639_1()
-    return Languages.to_iso_639_1(self.language)
+
+  def language_iso_639_1
+    Languages.to_iso_639_1(language)
   end
 
   private
