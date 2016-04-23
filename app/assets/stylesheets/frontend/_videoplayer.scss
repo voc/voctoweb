@@ -1,0 +1,42 @@
+@mixin foo($w, $next) {
+  @media all and (min-width: $w) and (max-width: $next)  {
+    .mejs-video {
+      margin-left: -((($w)-670px)/2)  !important; //
+    } 
+    .tab-content {
+      #video, video, .video {
+        width: $w !important;
+      }
+    }
+  }
+}
+
+
+
+// 1920x1080, 1280x720, 1024x576, 854x480, 640x360
+
+@include foo(640px, 854px);
+@include foo(854px, 1024px);
+@include foo(1024px, 1280px);
+@include foo(1280px, 1920px);
+@include foo(1920px, 99999px);
+
+
+
+/* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
+.mejs-container {
+  width: 100% !important;
+  //width: auto !important;
+  height: auto !important;
+  padding-top: 56.25%; /* 16:9 */
+}
+.mejs-overlay, .mejs-poster {
+  width: 100% !important;
+  height: 100% !important;
+}
+.mejs-mediaelement video {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
