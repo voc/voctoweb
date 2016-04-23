@@ -134,13 +134,10 @@ ready = function() {
 					jQuery.each(res.hits.hits, function(idx, hit) {
 						var
 							quality = hit._score * 100 / res.hits.max_score,
-							logourl = hit._source.conference.logo;
+							image = hit._source.event.thumb_url;
 
-						if(logourl.match(/\.(png|jpg|jpeg|gif)$/)) {
-							logourl = logourl.substr(0, logourl.lastIndexOf('.')) + '.png';
-						}
-						else {
-							logourl = 'https://static.media.ccc.de/media/unknown.png';
+						if(!image) {
+							image = 'https://static.media.ccc.de/media/unknown.png';
 						}
 
 
@@ -161,9 +158,9 @@ ready = function() {
 							.find('h3 .t')
 								.text(hit._source.event.title)
 							.end()
-							.find('img.conference-logo')
-								.attr('alt', hit._source.conference.title)
-								.attr('src', logourl)
+							.find('img.image')
+								.attr('alt', hit._source.event.title)
+								.attr('src', image)
 							.end()
 							.find('a.conference-url')
 								.attr('href', hit._source.event.frontend_link)
