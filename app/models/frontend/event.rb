@@ -1,6 +1,7 @@
 module Frontend
   class Event < ::Event
-    include ElasticsearchEvent
+    index_name "media-event-#{Rails.env}"
+    document_type 'event'
 
     belongs_to :conference, class_name: Frontend::Conference
     has_many :recordings, class_name: Frontend::Recording

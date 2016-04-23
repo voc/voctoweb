@@ -1,0 +1,7 @@
+.container-fluid
+  .events-header
+
+  - if @events.present?
+    .event-previews
+      - @events.each do |event|
+        = render event
