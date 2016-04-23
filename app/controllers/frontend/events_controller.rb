@@ -21,7 +21,7 @@ module Frontend
       @conference = @event.conference
       @video_recordings = @event.recordings.downloaded.video
       @audio_recordings = @event.recordings.downloaded.audio
-      @subtitle_recording = @event.recordings.subtitle.downloaded.first
+      @subtitle_tracks = @event.recordings.downloaded.subtitle
     end
   end
 end
