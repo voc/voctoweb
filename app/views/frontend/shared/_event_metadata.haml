@@ -1,12 +1,20 @@
+%h3
+  %a{href: event_url(slug: event.slug)}
+    = truncate(event.title, length: 90, separator: ' ', omission: '…')
+%h4{title: event.subtitle}
+  = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
+
 %ul.metadata
-  %li
+  %li.duration
     %span.fa.fa-clock-o
     = duration_in_minutes(event.duration)
-  %li
+  %li.date
     %span.fa.fa-calendar-o
     = event.display_date
   %li.persons
     = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
-%h3
-  %a{href: event_url(slug: event.slug)}
-    = truncate(event.title, length: 90, separator: ' ', omission: '…')
+
+.duration-container
+  .duration
+    %span.fa.fa-clock-o
+    = duration_in_minutes(event.duration)
