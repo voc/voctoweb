@@ -21,5 +21,4 @@
 //= require purl.min
 //= require handlebars.min-latest
 //= require jquery.bxslider
-//= require jquery.nextPrevWrap
 //= require slider
