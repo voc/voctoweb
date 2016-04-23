@@ -45,6 +45,10 @@ rvm install ruby-2.3.0
 # install bundler
 gem install bundler
 
+# postgresql setup
+sudo -u postgres -i
+createuser -d -P media
+
 # obtaining & setting up media.ccc.de instance
 git clone git@github.com:voc/media.ccc.de.git
 cd media.ccc.de
@@ -53,9 +57,6 @@ bundle install
 rake db:migrate
 rake db:fixtures:load
 
-# postgresql setup
-sudo -u postgres -i
-createuser -d -P media
 
 # run dev-server
 rails server -b 0.0.0.0
