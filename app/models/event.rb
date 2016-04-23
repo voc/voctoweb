@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   include Recent
   include FahrplanUpdater
   include Storage
+  include ElasticsearchEvent
 
   MAX_PROMOTED = 10
   LANGUAGES = %w(deu eng fra gsw).freeze

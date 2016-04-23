@@ -1,7 +1,5 @@
 module Frontend
   class Event < ::Event
-    include ElasticsearchEvent
-
     belongs_to :conference, class_name: Frontend::Conference
     has_many :recordings, class_name: Frontend::Recording
 

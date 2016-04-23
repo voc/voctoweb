@@ -115,3 +115,26 @@ namespace :fixtures do
     end
   end
 end
+namespace :elasticsearch do
+  desc 'Create initial index'
+  task :create_index do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, "exec rails runner Event.__elasticsearch__.create_index! force: true"
+        end
+      end
+    end
+  end
+
+  desc 'Update elasticsearch'
+  task :update do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, "exec rails runner Event.import"
+        end
+      end
+    end
+  end
+end
