@@ -2,17 +2,9 @@ class Event < ActiveRecord::Base
   include Recent
   include FahrplanUpdater
   include Storage
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
   MAX_PROMOTED = 10
   LANGUAGES = %w(deu eng fra gsw).freeze
-
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :title, analyzer: 'english', index_options: 'offsets'
-    end
-  end
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
