@@ -1,9 +1,11 @@
 %span.fa{class: persons_icon(persons)}
-  - if persons.empty?
-    n/a
-  - persons.to_enum.with_index(1).each do |speaker, index|
+- if persons.empty?
+  n/a
+- persons.to_enum.with_index(1).each do |speaker, index|
+  - if (persons.count - 1) == index
+    - delimiter = ' and'
+  - elsif persons.count != index
+    - delimiter = ','
+
+  = succeed delimiter do
     %a{href: search_url(q: speaker)}= speaker
-    - if (persons.count - 1) == index
-      and
-    - elsif persons.count != index
-      \,
