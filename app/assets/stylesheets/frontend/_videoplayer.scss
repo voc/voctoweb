@@ -1,10 +1,10 @@
-@mixin foo($w, $next) {
-  @media all and (min-width: $w) and (max-width: $next)  {
-    .mejs-video {
-      margin-left: -((($w)-670px)/2)  !important; //
+@mixin video-player-size($w) {
+  @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
+    .mejs-container.video {
+      margin-left: -((($w)-670px)/2)  !important; 
     } 
     .tab-content {
-      #video, video, .video {
+      #video {
         width: $w !important;
       }
     }
@@ -12,21 +12,17 @@
 }
 
 
+// 1920x1080, 1280x720, 1024x576, 854x480, 670=~640x~360
 
-// 1920x1080, 1280x720, 1024x576, 854x480, 640x360
-
-@include foo(640px, 854px);
-@include foo(854px, 1024px);
-@include foo(1024px, 1280px);
-@include foo(1280px, 1920px);
-@include foo(1920px, 99999px);
-
+@include video-player-size(854px);
+@include video-player-size(1024px);
+@include video-player-size(1280px);
+@include video-player-size(1920px);
 
 
 /* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
-.mejs-container {
+.mejs-container.video {
   width: 100% !important;
-  //width: auto !important;
   height: auto !important;
   padding-top: 56.25%; /* 16:9 */
 }
