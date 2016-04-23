@@ -1,0 +1,52 @@
+@mixin video-player-size($w) {
+  $h: $w / 16 * 9;
+
+  @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
+    .mejs-container.video {
+      margin-left: -(($w - ($max-width - 30))/2)  !important; 
+    } 
+    .tab-content {
+      #video {
+        width: $w !important;
+      }
+    }
+
+
+    .kiosk {
+      position: absolute;
+      z-index: -500;
+      left: 0;
+      right: 0;
+
+      background: #000;
+      padding-top: $h;
+
+      border-top: 38px solid #555;
+      margin-top: -38px;
+    }
+  }
+}
+
+
+// 1920x1080, 1280x720, 1024x576, 854x480, 670=~640x~360
+
+@include video-player-size(1280px);
+@include video-player-size(1920px);
+
+
+/* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
+.mejs-container.video {
+  width: 100% !important;
+  height: auto !important;
+  padding-top: 56.25%; /* 16:9 */
+}
+.mejs-overlay, .mejs-poster {
+  width: 100% !important;
+  height: 100% !important;
+}
+.mejs-mediaelement video {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
