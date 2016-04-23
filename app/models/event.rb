@@ -5,7 +5,6 @@ class Event < ActiveRecord::Base
   include ElasticsearchEvent
 
   MAX_PROMOTED = 10
-  LANGUAGES = %w(deu eng fra gsw).freeze
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -142,7 +141,7 @@ class Event < ActiveRecord::Base
   def original_language_valid
     return unless original_language
     languages = original_language.split('-')
-    errors.add(:original_language, 'not a valid language') unless languages.all? { |l| LANGUAGES.include?(l) }
+    errors.add(:original_language, 'not a valid language') unless languages.all? { |l| Languages.all.include?(l) }
   end
 
   def get_image_filename(url)
