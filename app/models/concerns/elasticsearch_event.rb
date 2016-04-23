@@ -3,6 +3,21 @@ require 'active_support/concern'
 module ElasticsearchEvent
   extend ActiveSupport::Concern
 
+  included do
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
+
+    index_name "media-event-#{Rails.env}"
+
+    def as_indexed_json(_options = {})
+      as_json(
+        only: %i(title subtitle description persons length release_date date updated_at),
+        id: :guid,
+        include: { conference: { only: %i(title acronym) }
+      })
+    end
+  end
+
   class_methods do
     def query(term)
       search_for query: {
@@ -45,19 +60,6 @@ module ElasticsearchEvent
     # avoid conflict with active admins ransack #search method
     def search_for(*args, &block)
       __elasticsearch__.search(*args, &block)
-    end
-  end
-
-  included do
-    include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
-
-    def as_indexed_json(_options = {})
-      as_json(
-        only: %i(title subtitle description persons length release_date date updated_at),
-        id: :guid,
-        include: { conference: { only: %i(title acronym) }
-      })
     end
   end
 end

@@ -44,7 +44,7 @@ MediaBackend::Application.routes.draw do
       get '404', to: 'home#page_not_found'
     end
     get '/about', to: 'home#about'
-    get '/search', to: 'home#search'
+    get '/search', to: 'search#index'
     get '/sitemap.xml', to: 'sitemap#index', defaults: { format: 'xml' }
 
     get '/v/:slug', to: 'events#show', as: :event, :constraints => { slug: %r'[^/]+' }
