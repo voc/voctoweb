@@ -2,8 +2,10 @@
 - if persons.empty?
   n/a
 - persons.to_enum.with_index(1).each do |speaker, index|
-  %a{href: search_url(q: speaker)}= speaker
   - if (persons.count - 1) == index
-    and
+    - delimiter = ' and'
   - elsif persons.count != index
-    \,
+    - delimiter = ','
+
+  = succeed delimiter do
+    %a{href: search_url(q: speaker)}= speaker
