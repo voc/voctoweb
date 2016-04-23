@@ -3,7 +3,7 @@ module Frontend
     SORT_PARAM = {
       'name' => 'title',
       'duration' => 'duration',
-      'date' => 'release_date desc'
+      'date' => 'date desc, release_date desc'
     }.freeze
 
     before_action :check_sort_param, only: %w(show)
@@ -46,7 +46,7 @@ module Frontend
 
     def sort_param
       return SORT_PARAM[@sorting] if @sorting
-      'title'
+      'date desc, release_date desc'
     end
 
     def check_sort_param
