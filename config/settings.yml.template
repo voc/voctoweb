@@ -4,6 +4,7 @@ defaults: &defaults
   cdn_url: http://cdn.media.ccc.de
   static_url: https://static.media.ccc.de/media
   oembed_url: http://api.media.ccc.de/public/oembed?url=
+  cors_url: https://koeln.ftp.media.ccc.de
   folders:
     recordings_webroot: ''
     images_webroot: ""
