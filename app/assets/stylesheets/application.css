@@ -11,6 +11,6 @@
  *= require_self
  *= require frontend/styles
  *= require mediaelementplayer
- *= require font-awesome
+ *= require icomoon-font
  *= require jquery.bxslider
  */

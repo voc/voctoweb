@@ -51,16 +51,11 @@ h2 {
 
 p {
   margin-bottom: 0.5em;
-  .fa {
+  .icon {
     display: inline;
     color: $gray-dark;
     font-size: 1.1em;
   }
-}
-
-i {
-  font-style: normal;
-  font-family: FontAwesome;
 }
 
 .container, .container-fluid {
@@ -113,9 +108,10 @@ i {
     padding-top: 6px;
   }
   
-  .fa {
+  .icon {
     min-width: 20px;
     font-size: 1.3em;
+    display: inline-block;
   }
 }
 
@@ -127,9 +123,16 @@ i {
     max-width: $max-width;
     padding: $padding-small-vertical $padding-large-horizontal;
     margin-bottom: 0;
+
     li + li:before {
-      font-family: FontAwesome;
+      content: '';
+      display: none;
+    }
+
+    .icon {
       font-size: 9px;
+      color: #eee;
+      padding: 0 3px;
     }
   }
 }
@@ -142,7 +145,7 @@ i {
   .btn-lg {
     margin: $padding-small-vertical $padding-small-horizontal;
   }
-  .fa {
+  .icon {
     font-size: 1.3em;
   }
 }
@@ -274,7 +277,7 @@ ul.metadata {
     min-width: 24.5%;
     padding: $padding-small-vertical $padding-small-horizontal;
   }
-  .fa {
+  .icon {
     margin-right: $padding-xs-horizontal;
   }
 }
@@ -297,7 +300,7 @@ a.inverted {
 .btn-lg {
   padding-top: 5px;
   padding-bottom: 5px;
-  .fa {
+  .icon {
     /* nicely positioned icons on large buttons */
     position: relative;
     top: 0.15em;
@@ -418,7 +421,7 @@ a.inverted {
       margin-bottom: $padding-large-vertical;
     }
     
-    .fa.fa-folder {
+    .icon.icon-folder {
       font-size: 40px;
       padding: 10px 0;
     }

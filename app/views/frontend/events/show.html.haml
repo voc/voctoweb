@@ -57,18 +57,19 @@
 
     %ul.metadata
       %li
-        %span.fa.fa-clock-o
+        %span.icon.icon-clock-o
         = duration_in_minutes(@event.duration)
       %li
-        %span.fa.fa-calendar-o{title: display_date_title(@event)}
+        %span.icon.icon-calendar-o{title: display_date_title(@event)}
         = @event.display_date
       %li
-        %span.fa.fa-eye
+        %span.icon.icon-eye
         = @event.view_count
-      %li
-        %span.fa.fa-external-link
-        %a{href: @event.link}
-          = parse_url_host(@event)
+      - if @event.link.present?
+        %li
+          %span.icon.icon-external-link
+          %a{href: @event.link}
+            = parse_url_host(@event)
 
     - if @event.description.present?
       %h3 About

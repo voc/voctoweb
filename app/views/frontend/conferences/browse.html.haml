@@ -9,7 +9,7 @@
       - if folder.conference?
         %a.thumbnail.conference{href: conference_url(acronym: folder.conference.acronym)}
           .header
-            %span.fa.fa-video-camera
+            %span.icon.icon-video-camera
             = folder.conference.downloaded_events_count
           %img{src: folder.conference.logo_url, alt: 'conference logo'}
           .caption
@@ -17,7 +17,7 @@
       - else
         %a.thumbnail.folder{href: browse_url(folder.path)}
           .header
-            %span.fa.fa-th
-          .fa.fa-folder
+            %span.icon.icon-th
+          .icon.icon-folder
           .caption
             = folder.name
