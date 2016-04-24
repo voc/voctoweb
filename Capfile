@@ -11,6 +11,7 @@ require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/sidekiq'
 require 'airbrussh/capistrano'
+require 'mqtt'
 
 require 'dotenv'
 Dotenv.load

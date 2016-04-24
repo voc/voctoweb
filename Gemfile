@@ -30,6 +30,7 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
 end
 
 gem 'haml'

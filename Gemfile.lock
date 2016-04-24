@@ -35,6 +35,12 @@ GIT
       msgpack (>= 0.4.3)
       trollop (>= 1.16.2)
 
+GIT
+  remote: https://github.com/njh/ruby-mqtt.git
+  revision: 4459a0146c6ff393b54419e7b135d355f04b03aa
+  specs:
+    mqtt (0.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -353,6 +359,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
+  mqtt!
   pg
   pry-byebug
   pry-rails

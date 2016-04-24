@@ -84,9 +84,17 @@ namespace :deploy do
     end
   end
 
+  desc 'Notify IRC about deployment'
+  task :notify do
+    MQTT::Client.connect(ENV['MQTT_URL']) do |c|
+      c.publish('/voc/alert', %'{"component": "media-deploy", "msg": "#{revision_log_message}", "level": "info"}')
+    end
+  end
+
   after :finishing,    :compile_assets
   after :finishing,    :cleanup
   after :finishing,    :restart
+  after :finishing,    :notify
 end
 
 namespace :fixtures do
@@ -115,6 +123,7 @@ namespace :fixtures do
     end
   end
 end
+
 namespace :elasticsearch do
   desc 'Create initial index'
   task :create_index do
