@@ -2,7 +2,7 @@ class Api::RecordingsController < ApiController
   protect_from_forgery except: %i(create download)
   before_action :set_recording, only: [:show, :edit, :update, :destroy]
 
-  # GET /api/recordings.json
+  # GET /api/recordings/
   def index
     @recordings = Recording.recent(100)
   end
@@ -20,7 +20,7 @@ class Api::RecordingsController < ApiController
   def edit
   end
 
-  # POST /api/recordings.json
+  # POST /api/recordings/
   def create
     event = Event.find_by! guid: params['guid']
     @recording = Recording.new(recording_params)
