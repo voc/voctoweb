@@ -20,7 +20,7 @@ module Frontend
 
     def show
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
-      @events = @conference.downloaded_events.includes(:conference).order(sort_param)
+      @events = @conference.events.includes(:conference).order(sort_param)
       respond_to do |format|
         format.html { render :show }
       end
@@ -34,13 +34,13 @@ module Frontend
 
     def conferences_folder_tree_at(path)
       tree = FolderTree.new
-      tree.build(conferences_with_downloaded_events)
+      tree.build(conferences_with_events)
       folders = tree.folders_at(path)
       fail ActiveRecord::RecordNotFound unless folders
       tree.sort_folders(folders)
     end
 
-    def conferences_with_downloaded_events
+    def conferences_with_events
       Conference.where('downloaded_events_count > 0').pluck(:id, :slug)
     end
 

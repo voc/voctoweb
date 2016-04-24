@@ -25,7 +25,6 @@ class Api::RecordingsController < ApiController
     event = Event.find_by! guid: params['guid']
     @recording = Recording.new(recording_params)
     @recording.event = event
-    @recording.state = :downloaded
 
     respond_to do |format|
       if @recording.save

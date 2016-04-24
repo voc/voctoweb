@@ -26,7 +26,7 @@ class PublicController < ActionController::Base
     return unless allowed_url?(uri)
 
     @event = Event.find_by!(slug: slug_from_uri(uri))
-    recording = @event.downloaded_video_recordings.first
+    recording = @event.video_recordings.first
     fail ActiveRecord::RecordNotFound unless recording
 
     @conference = @event.conference

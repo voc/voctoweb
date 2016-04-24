@@ -6,11 +6,6 @@ class RecordingTest < ActiveSupport::TestCase
     @event = @recording.event
   end
 
-  test "should set initial state" do
-    r = Recording.new
-    assert r.new?
-   end
-
   test "should not save without event" do
     r = Recording.new
     r.filename = "some.avi"
@@ -36,7 +31,7 @@ class RecordingTest < ActiveSupport::TestCase
   end
 
   test "should increase counter on event" do
-    @event.recordings << create(:recording, state: 'downloaded', filename: 'video2.webm', event: @event)
+    @event.recordings << create(:recording, filename: 'video2.webm', event: @event)
     @event.reload
     assert_equal 2, @event.downloaded_recordings_count
     @event.recordings.last.destroy

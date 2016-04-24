@@ -79,7 +79,7 @@ module Frontend
     private
 
     def downloaded_events
-      Frontend::Event.downloaded.includes(:conference)
+      Frontend::Event.includes(:conference)
     end
 
     def logo_image_url

@@ -17,7 +17,7 @@ module Frontend
     private
 
     def fetch_events
-      recent_events = Frontend::Event.downloaded.order(release_date: :desc).limit(1000).offset(@offset).includes(:conference)
+      recent_events = Frontend::Event.order(release_date: :desc).limit(1000).offset(@offset).includes(:conference)
       @offset += 1000
       return nil if recent_events.empty?
       recent_events
