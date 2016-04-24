@@ -171,23 +171,6 @@ The recording length is specified in seconds.
       }' "http://localhost:3000/api/recordings"
 
 
-Download event images again, after event was created.
-
-    curl -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"4",
-        "guid":"123",
-        "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
-        "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg"
-      }' "http://localhost:3000/api/events/download"
-
-Download recordings again, after recording was created.
-
-    curl -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"4",
-        "guid":"123"
-      }' "http://localhost:3000/api/recordings/download"
-
-
 Create news items
 
     /api/news
