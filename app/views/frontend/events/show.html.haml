@@ -65,10 +65,11 @@
       %li
         %span.icon.icon-eye
         = @event.view_count
-      %li
-        %span.icon.icon-external-link
-        %a{href: @event.link}
-          = parse_url_host(@event)
+      - if @event.link.present?
+        %li
+          %span.icon.icon-external-link
+          %a{href: @event.link}
+            = parse_url_host(@event)
 
     - if @event.description.present?
       %h3 About
