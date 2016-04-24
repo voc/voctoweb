@@ -156,15 +156,21 @@ You can add images to an event, like the poster image. The event is identified b
       }' "http://localhost:3000/api/events"
 
 Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
-The recording length is specified in seconds.
+The recording length is specified in seconds. 
+* Available fields: https://github.com/voc/media.ccc.de/blob/master/db/schema.rb#L120-L135 
+* Required fields: https://github.com/voc/media.ccc.de/blob/master/app/models/recording.rb#L9-L13 
+* Allowed languages: https://github.com/voc/media.ccc.de/blob/master/lib/languages.rb
+* Example implementation: https://github.com/voc/publishing/blob/refactor/media_ccc_de_api_client.py#L291
+
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4",
         "guid":"123",
         "recording":{
           "filename":"some.mp4",
-          "folder":"mp4",
-          "folder":"video/mp4",
+          "folder":"h264-hd",
+          "mime_type":"video/mp4",
+          "language":"deu"
           "size":"12",
           "length":"3600"
           }
