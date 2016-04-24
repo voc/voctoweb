@@ -54,7 +54,7 @@ ActiveAdmin.register Recording do
       f.input :event
       f.input :mime_type, collection: MimeType.all
       f.input :html5
-      f.input :language
+      f.input :language, collection: Languages.all
       f.input :size, label: 'file size in mb'
       f.input :length, label: 'run-time in seconds'
       f.input :high_quality
