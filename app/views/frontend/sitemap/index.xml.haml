@@ -7,7 +7,7 @@
   - Frontend::Conference.find_each do |conference|
     %url
       %loc= browse_url(conference.slug)
-      %lastmod= conference.downloaded_events.maximum(:updated_at).try(:strftime, '%Y-%m-%d')
+      %lastmod= conference.events.maximum(:updated_at).try(:strftime, '%Y-%m-%d')
   - Frontend::Event.find_each do |event|
     %url
       %loc= event_url(slug: event.slug)
