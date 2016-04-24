@@ -2,7 +2,7 @@ class AddDurationToEvent < ActiveRecord::Migration
   def change
     add_column :events, :duration, :integer, default: 0
     Event.find_each do |event|
-      recordings = event.recordings.downloaded
+      recordings = event.recordings
       next unless recordings.present?
       recording = recordings.find { |r| r.length.present? }
       next unless recording

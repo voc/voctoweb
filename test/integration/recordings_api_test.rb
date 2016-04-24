@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class RecordingsApiTest < ActionDispatch::IntegrationTest
-
-  FILE = 'test.mp3'
+  FILE = 'test.mp3'.freeze
 
   setup do
     @key = create(:api_key)
@@ -20,23 +19,15 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
     json += '"recording":'
     d = '{"filename":"some.mp4","folder":"","mime_type":"audio/ogg","size":"12","length":"30"}'
     json += d
-    json+= '}'
+    json += '}'
     json
   end
 
-  test "should create recording via json" do
+  test 'should create recording via json' do
     assert JSON.parse(@json)
     assert_difference('Recording.count') do
       post_json '/api/recordings.json', @json
     end
+    assert @event.recordings.last
   end
-
-  test "should call start_download after create" do
-    Sidekiq::Testing.inline!
-    post_json '/api/recordings.json', @json
-    event = Event.find_by guid: @event.guid
-    assert_not_nil event
-    assert event.recordings.last.downloaded?
-  end
-
 end

@@ -33,7 +33,7 @@ module Feeds
         base_url: view_context.conference_url(acronym: conference.acronym),
         logo_image: conference.logo_url
       )
-      feed.generate(conference.downloaded_events.includes(:conference)) { |event| event.recordings.by_mime_type(mime_type).first }
+      feed.generate(conference.events.includes(:conference)) { |event| event.recordings.by_mime_type(mime_type).first }
     end
 
     def initialize(view_context, config = {})

@@ -8,7 +8,7 @@
     %url
       %loc= browse_url(conference.slug)
       %lastmod= conference.downloaded_events.maximum(:updated_at).try(:strftime, '%Y-%m-%d')
-  - Frontend::Event.downloaded.find_each do |event|
+  - Frontend::Event.find_each do |event|
     %url
       %loc= event_url(slug: event.slug)
       %lastmod= event.updated_at.strftime('%Y-%m-%d')

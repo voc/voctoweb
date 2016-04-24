@@ -10,7 +10,6 @@ module Frontend
     scope :recent, ->(n) { order('release_date desc').limit(n) }
     scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
     scope :older, ->(date) { where('release_date < ?', date).order('release_date desc') }
-    scope :downloaded, -> { where('downloaded_recordings_count > 0') }
 
     def title
       self[:title].strip
@@ -43,7 +42,7 @@ module Frontend
     end
 
     def audio_recording
-      audio_recordings = recordings.downloaded.where(mime_type: MimeType::AUDIO)
+      audio_recordings = recordings.where(mime_type: MimeType::AUDIO)
       return if audio_recordings.empty?
       seen = Hash[audio_recordings.map { |r| [r.mime_type, r] }]
       MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
@@ -51,7 +50,7 @@ module Frontend
     end
 
     def preferred_recording(order: MimeType::PREFERRED_VIDEO)
-      video_recordings = recordings.downloaded.html5.video
+      video_recordings = recordings.html5.video
       return if video_recordings.empty?
       seen = Hash[video_recordings.map { |r| [r.mime_type, r] }]
       order.each { |mt| return seen[mt] if seen.key?(mt) }
@@ -60,7 +59,7 @@ module Frontend
 
     # @return [Array(Recording)]
     def by_mime_type(mime_type: 'video/mp4')
-      recordings.downloaded.by_mime_type(mime_type).first.freeze
+      recordings.by_mime_type(mime_type).first.freeze
     end
 
     private

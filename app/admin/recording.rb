@@ -64,7 +64,6 @@ ActiveAdmin.register Recording do
     f.inputs "Storage" do
       f.input :folder, hint: recording.try(:conference).try(:get_recordings_url)
       f.input :filename
-      f.input :state, collection: Recording.aasm.states.map(&:name)
     end
     f.actions
   end
