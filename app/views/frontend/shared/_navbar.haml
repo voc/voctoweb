@@ -8,11 +8,11 @@
 
     .nav.navbar-form.navbar-right.button-wrapper
       %a.form-control.btn.btn-default{href: '/about.html'}
-        %span.fa.fa-info
+        %span.icon.icon-info
 
     .nav.navbar-form.navbar-right.dropdown
       %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-        %span.fa.fa-rss
+        %span.icon.icon-rss
       %ul.dropdown-menu{"aria-labelledby" => "feedMenu"}
         = render 'frontend/shared/navbar_feeds'
         - if @conference && @conference.downloaded_events_count > 0
@@ -25,7 +25,7 @@
         %input.form-control{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
         %span.input-group-btn
           %button.btn.btn-default{type: 'submit'}
-            %span.fa.fa-search
+            %span.icon.icon-search
 
 - breadcrumbs_trail do |parts, last|
   #breadcrumb
@@ -35,8 +35,10 @@
           browse
       - parts.each_with_index do |part, index|
         %li
+          %span.icon.icon-chevron-right
           %a.inverted{href: browse_url(parts[0..index].join('/'))}
             = part
       %li.active
+        %span.icon.icon-chevron-right
         = last
 

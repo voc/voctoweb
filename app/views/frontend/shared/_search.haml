@@ -6,7 +6,7 @@
     %input.form-control.text{type: 'search', size: '17', name: 'q', placeholder: 'Search…'}
     %span.input-group-btn
       %button.btn.btn-default.submit{type: 'submit'}
-        %span.fa.fa-search
+        %span.icon.icon-search
 
   %section.results.initial
     .statistics
@@ -36,13 +36,13 @@
           .caption
             %ul.metadata
               %li.recording_length
-                %span.fa.fa-clock-o
+                %span.icon.icon-clock-o
                 %span.t
               %li.date
-                %span.fa.fa-calendar-o
+                %span.icon.icon-calendar-o
                 %span.t
               %li.persons
-                %span.persons.fa
+                %span.persons.icon
                 %span.t
             %h3
               %a.conference-url{href: '#event.url'}
@@ -51,7 +51,7 @@
 
     %ul.paging
       %li.prev
-        %a.fa.fa-chevron-left{:href => ""}
+        %a.icon.icon-chevron-left{:href => ""}
       %li.prefix M
 
       %li.page.template
@@ -61,4 +61,4 @@
 
       %li.postfix dia.ccc.de
       %li.next
-        %a.fa.fa-chevron-right{:href => ""}
+        %a.icon.icon-chevron-right{:href => ""}

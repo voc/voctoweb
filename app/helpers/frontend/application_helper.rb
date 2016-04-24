@@ -111,9 +111,9 @@ module Frontend
 
     def persons_icon(persons)
       if persons.length <= 1
-        'fa-user'.freeze
+        'icon-user-light'.freeze
       else
-        'fa-group'.freeze
+        'icon-users-light'.freeze
       end
     end
 

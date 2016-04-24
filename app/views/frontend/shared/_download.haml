@@ -6,7 +6,7 @@
         %span.label.filetype= recording.filetype
         %span.label.filetype= recording.language
         %a{href: recording.url, download: true}
-          %span.fa.fa-download
+          %span.icon.icon-download
           http download
 
 - if audio_recordings.present?
@@ -17,7 +17,7 @@
         %span.label.filetype= recording.filetype
         %span.label.filetype= recording.language
         %a{href: recording.url, download: true}
-          %span.fa.fa-download
+          %span.icon.icon-download
           http download
 
 - if subtitle_recording.present?
@@ -27,10 +27,10 @@
       .label.filetype
         srt
       %a{href: subtitle_recording.url, download: true}
-        %span.fa.fa-download
+        %span.icon.icon-download
           = subtitle_recording.language
 
 %h3 Parent directory
 %a{href: conference.recordings_url}
-  %span.fa.fa-folder-open
+  %span.icon.icon-folder-open
   = conference.recordings_path
