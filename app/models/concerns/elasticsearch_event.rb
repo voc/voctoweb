@@ -21,6 +21,7 @@ module ElasticsearchEvent
 
   class_methods do
     def query(term)
+      term ||= ''
       search_for query: {
         function_score:  {
           query:  {
