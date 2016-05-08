@@ -7,7 +7,7 @@ class Api::RecordingsController < ApiController
     @recordings = Recording.recent(100)
   end
 
-  # GET /api/recordings/1.json
+  # GET /api/recordings/1
   def show
   end
 
@@ -36,7 +36,7 @@ class Api::RecordingsController < ApiController
     end
   end
 
-  # PATCH/PUT /api/recordings/1.json
+  # PATCH/PUT /api/recordings/1
   def update
     respond_to do |format|
       if @recording.update(recording_params)
@@ -47,7 +47,7 @@ class Api::RecordingsController < ApiController
     end
   end
 
-  # DELETE /api/recordings/1.json
+  # DELETE /api/recordings/1
   def destroy
     @recording.destroy
     respond_to do |format|
