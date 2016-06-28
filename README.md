@@ -7,7 +7,7 @@ media.ccc.de webfrontend, meta data editor and API.
 
 ## APIs
 
- Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the congress or lecture series like datengarten or openchaos) and consits of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and lanuages (live-translation), subtitle tracks as srt or slides as pdf. 
+ Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the congress or lecture series like datengarten or openchaos) and consits of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and lanuages (live-translation), subtitle tracks as srt or slides as pdf.
 
 ### Public JSON API
 
@@ -60,10 +60,10 @@ You can add images to an event, like the poster image. The event is identified b
       }' "http://localhost:3000/api/events"
 
 Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
-The recording length is specified in seconds. 
+The recording length is specified in seconds.
   * other available methods: https://github.com/voc/media.ccc.de/blob/master/app/controllers/api/recordings_controller.rb
-  * Available fields: https://github.com/voc/media.ccc.de/blob/master/db/schema.rb#L120-L135 
-  * Required fields: https://github.com/voc/media.ccc.de/blob/master/app/models/recording.rb#L9-L13 
+  * Available fields: https://github.com/voc/media.ccc.de/blob/master/db/schema.rb#L120-L135
+  * Required fields: https://github.com/voc/media.ccc.de/blob/master/app/models/recording.rb#L9-L13
   * Allowed languages: https://github.com/voc/media.ccc.de/blob/master/lib/languages.rb
   * Example implementation: https://github.com/voc/publishing/blob/refactor/media_ccc_de_api_client.py#L291
 
@@ -200,10 +200,6 @@ workers 2
 on_restart do
   puts 'Refreshing Gemfile'
   ENV["BUNDLE_GEMFILE"] = "/srv/www/media-site/current/Gemfile"
-end
-
-before_fork do
-  require 'rbtrace'
 end
 ```
 

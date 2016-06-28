@@ -20,9 +20,6 @@ gem 'exception_notification'
 gem 'puma'
 gem 'puma_worker_killer'
 
-# Debug
-gem 'rbtrace', github: 'tmm1/rbtrace', require: false
-
 group :development do
   gem 'bullet'
   gem 'capistrano', '~> 3.4.0', group: :capistrano, require: false
