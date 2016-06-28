@@ -4,12 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.0'
 gem 'dotenv-rails'
 
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 1.0.0.pre'
 gem 'tinymce-rails'
-gem 'devise', '~> 3.5.0'
+gem 'devise', '~> 4.1.0'
 gem 'aasm'
 gem 'sidekiq'
-gem 'airbrussh'
 gem 'foreman'
 
 # rails cache
@@ -22,7 +21,7 @@ gem 'puma_worker_killer'
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', '~> 3.4.0', group: :capistrano, require: false
+  gem 'capistrano', '~> 3.5.0', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
@@ -36,8 +35,8 @@ gem 'redcarpet'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :sqlite3
 gem 'pg', group: :postgresql
-gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
-gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

@@ -1,50 +1,13 @@
 GIT
-  remote: git://github.com/activeadmin/activeadmin.git
-  revision: e829379d844e03ab33e619647355091c4859f407
-  specs:
-    activeadmin (1.0.0.pre2)
-      arbre (~> 1.0, >= 1.0.2)
-      bourbon
-      coffee-rails
-      formtastic (~> 3.1)
-      formtastic_i18n
-      inherited_resources (~> 1.6)
-      jquery-rails
-      jquery-ui-rails
-      kaminari (~> 0.15)
-      rails (>= 3.2, < 5.0)
-      ransack (~> 1.3)
-      sass-rails
-
-GIT
-  remote: git://github.com/elasticsearch/elasticsearch-rails.git
-  revision: a714d5931182501531d2ce6b767bcb3c97ce56a7
-  specs:
-    elasticsearch-model (0.1.8)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.8)
-
-GIT
-  remote: git://github.com/tmm1/rbtrace.git
-  revision: cb41fa4617dbab5fb1fcccd2c156fb9faa2887b3
-  specs:
-    rbtrace (0.4.7)
-      ffi (>= 1.0.6)
-      msgpack (>= 0.4.3)
-      trollop (>= 1.16.2)
-
-GIT
   remote: https://github.com/njh/ruby-mqtt.git
-  revision: 4459a0146c6ff393b54419e7b135d355f04b03aa
+  revision: f41a1366eeb41214808e16e44dbeffd9657bb605
   specs:
     mqtt (0.4.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (4.5.1)
+    aasm (4.11.0)
     actionmailer (4.2.6)
       actionpack (= 4.2.6)
       actionview (= 4.2.6)
@@ -64,6 +27,20 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    activeadmin (1.0.0.pre3)
+      arbre (~> 1.0, >= 1.0.2)
+      bourbon
+      coffee-rails
+      formtastic (~> 3.1)
+      formtastic_i18n
+      inherited_resources (~> 1.6)
+      jquery-rails
+      jquery-ui-rails
+      kaminari (~> 0.15)
+      rails (>= 3.2, < 5.0)
+      ransack (~> 1.3)
+      sass-rails
+      sprockets (< 4)
     activejob (4.2.6)
       activesupport (= 4.2.6)
       globalid (>= 0.3.0)
@@ -80,35 +57,37 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    airbrussh (0.8.0)
+    airbrussh (1.0.2)
       sshkit (>= 1.6.1, != 1.7.0)
-    api-pagination (4.2.0)
+    api-pagination (4.3.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
-    autoprefixer-rails (6.2.2)
+    autoprefixer-rails (6.3.6.2)
       execjs
-      json
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    bourbon (4.2.6)
+    bourbon (4.2.7)
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.2)
-    bullet (4.14.10)
+    bullet (5.1.0)
       activesupport (>= 3.0.0)
-      uniform_notifier (~> 1.9.0)
-    byebug (8.2.1)
-    capistrano (3.4.0)
+      uniform_notifier (~> 1.10.0)
+    byebug (9.0.5)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
       i18n
       rake (>= 10.0.0)
-      sshkit (~> 1.3)
+      sshkit (>= 1.9.0)
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.5)
+    capistrano-harrow (0.5.2)
+    capistrano-rails (1.1.7)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rvm (0.1.2)
@@ -117,7 +96,7 @@ GEM
     capistrano-sidekiq (0.5.4)
       capistrano
       sidekiq (>= 3.4)
-    coderay (1.1.0)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -125,46 +104,49 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
-    devise (3.5.3)
+    devise (4.1.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.1)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    dotenv (2.0.2)
-    dotenv-rails (2.0.2)
-      dotenv (= 2.0.2)
-      railties (~> 4.0)
-    elasticsearch (1.0.17)
-      elasticsearch-api (= 1.0.17)
-      elasticsearch-transport (= 1.0.17)
-    elasticsearch-api (1.0.17)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
+    elasticsearch (1.0.18)
+      elasticsearch-api (= 1.0.18)
+      elasticsearch-transport (= 1.0.18)
+    elasticsearch-api (1.0.18)
       multi_json
-    elasticsearch-transport (1.0.17)
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.9)
+    elasticsearch-transport (1.0.18)
       faraday
       multi_json
     erubis (2.7.0)
-    exception_notification (4.1.3)
+    exception_notification (4.1.4)
       actionmailer (~> 4.0)
       activesupport (~> 4.0)
-    execjs (2.6.0)
-    factory_girl (4.5.0)
+    execjs (2.7.0)
+    factory_girl (4.7.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.10)
-    foreman (0.78.0)
+    foreman (0.82.0)
       thor (~> 0.19.1)
-    formtastic (3.1.3)
+    formtastic (3.1.4)
       actionpack (>= 3.2.13)
-    formtastic_i18n (0.4.1)
-    get_process_mem (0.2.0)
+    formtastic_i18n (0.6.0)
+    get_process_mem (0.2.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -172,24 +154,24 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    hashie (3.4.3)
+    hashie (3.4.4)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    jbuilder (2.4.0)
+    jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    jquery-rails (4.0.5)
-      rails-dom-testing (~> 1.0)
+    jquery-rails (4.1.1)
+      rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
-    kaminari (0.16.3)
+    kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     loofah (2.0.3)
@@ -197,36 +179,37 @@ GEM
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
-    mime-types (3.0)
+    mime-types (3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0221)
-    mini_portile2 (2.0.0)
-    minitest (5.8.4)
-    msgpack (0.7.1)
-    multi_json (1.11.2)
+    mime-types-data (3.2016.0521)
+    mini_portile2 (2.1.0)
+    minitest (5.9.0)
+    multi_json (1.12.1)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (3.0.1)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    net-ssh (3.2.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    pkg-config (1.1.7)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.3.0)
-      byebug (~> 8.0)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (2.15.3)
-    puma_worker_killer (0.0.4)
+    puma (3.4.0)
+    puma_worker_killer (0.0.6)
       get_process_mem (~> 0.2)
-      puma (~> 2.7)
+      puma (>= 2.7, < 4)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -257,17 +240,17 @@ GEM
       activesupport (= 4.2.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.1.2)
+    rake (10.4.2)
     ransack (1.7.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
-    rdoc (4.2.1)
+    rdoc (4.2.2)
       json (~> 1.4)
     redcarpet (3.3.4)
-    redis (3.2.2)
+    redis (3.3.0)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -284,10 +267,10 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.7)
       redis (>= 2.2)
-    responders (2.1.1)
+    responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     ruby-graphviz (1.2.2)
-    sass (3.4.20)
+    sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -297,38 +280,35 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sidekiq (4.0.1)
+    sidekiq (4.1.2)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
-      json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
     slop (3.6.0)
-    sprockets (3.5.2)
+    sprockets (3.6.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.4)
+    sprockets-rails (3.1.0)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.11)
-    sshkit (1.8.1)
+    sshkit (1.11.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (2.0.1)
-    tinymce-rails (4.3.2)
+    tilt (2.0.5)
+    tinymce-rails (4.3.13)
       railties (>= 3.1.1)
-    trollop (2.1.2)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.2)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
-    uniform_notifier (1.9.0)
-    warden (1.2.4)
+    uglifier (3.0.0)
+      execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
+    warden (1.2.6)
       rack (>= 1.0)
     yajl-ruby (1.2.1)
 
@@ -337,21 +317,20 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  activeadmin!
-  airbrussh
+  activeadmin (~> 1.0.0.pre)
   api-pagination
   bootstrap-sass (~> 3.3.5)
   bullet
-  capistrano (~> 3.4.0)
+  capistrano (~> 3.5.0)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
   coffee-rails
-  devise (~> 3.5.0)
+  devise (~> 4.1.0)
   dotenv-rails
-  elasticsearch-model!
-  elasticsearch-rails!
+  elasticsearch-model
+  elasticsearch-rails
   exception_notification
   factory_girl_rails (~> 4.0)
   foreman
@@ -368,7 +347,6 @@ DEPENDENCIES
   quiet_assets
   rack-cors
   rails (~> 4.2.0)
-  rbtrace!
   redcarpet
   redis-rails
   ruby-graphviz
@@ -382,4 +360,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
