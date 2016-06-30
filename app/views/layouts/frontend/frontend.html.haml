@@ -3,7 +3,7 @@
   %head
     = render 'frontend/shared/header'
     %title
-      C3TV -
+      = t('custom.title')
       - if content_for?(:title)
         = yield :title
       - else

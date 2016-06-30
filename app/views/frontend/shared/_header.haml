@@ -1,11 +1,11 @@
 %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge'}
 %meta{'http-equiv' => 'Content-Type', content: 'text/html; charset=UTF-8'}
 %meta{name: 'robots', content: 'index,follow'}
-%meta{name: 'author', content: Settings.header['author']}
+%meta{name: 'author', content: I18n.t('custom.header.author')}
 - if content_for?(:description)
   = yield :description
 - else
-  %meta{name: 'description', content: Settings.header['description']}
+  %meta{name: 'description', content: I18n.t('custom.header.description')}
 %meta{name: 'keywords', content: keywords}
 %meta{name: 'google-site-verification', content: Settings.header['google']}
 %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
@@ -21,7 +21,7 @@
 = stylesheet_link_tag 'application'
 = javascript_include_tag 'application'
 
-%link{rel: 'alternate', type: 'application/atom+xml', title: 'C3TV - News', href: '/news.atom'}
-%link{rel: 'alternate', type: 'application/rss+xml', title: 'C3TV - RSS, last 100', href: '/updates.rdf'}
-%link{rel: 'alternate', type: 'application/rss+xml', title: 'C3TV - Podcast feed of the last two years', href: '/podcast.xml'}
-%link{rel: 'alternate', type: 'application/rss+xml', title: 'C3TV - Podcast archive feed', href: '/podcast-archive.xml'}
+%link{rel: 'alternate', type: 'application/atom+xml', title: I18n.t('rss.title.atom'), href: '/news.atom'}
+%link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.last100'), href: '/updates.rdf'}
+%link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.last100'), href: '/podcast.xml'}
+%link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.podcast_archive'), href: '/podcast-archive.xml'}

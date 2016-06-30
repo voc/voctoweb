@@ -63,9 +63,9 @@ module Frontend
 
     def keywords
       if @event && @event.tags
-        [@event.tags, Settings.header['keywords']].join(', ')
+        [@event.tags, I18n.t('custom.header.keywords')].join(', ')
       else
-        Settings.header['keywords']
+        I18n.t('custom.header.keywords')
       end
     end
 

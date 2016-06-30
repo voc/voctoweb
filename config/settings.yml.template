@@ -10,10 +10,7 @@ defaults: &defaults
     images_webroot: ""
     tmp_dir: "/tmp"
   header:
-    description: Video Streaming Portal des Chaos Computer Clubs
-    author: CCC
     google: 2ozQIr-cQ-sJzGeJT_iTkS147fs3c5R3I1i6Dk_YLwA
-    keywords: Chaos Computer Club, Video, Media, Streaming, TV, Hacker
   feeds:
     base_url: "https://media.ccc.de/"
     channel_title: Chaos Computer Club
