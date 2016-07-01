@@ -3,7 +3,8 @@ class Languages
     'deu' => 'de',
     'eng' => 'en',
     'fra' => 'fr',
-    'gsw' => 'de-ch'
+    'gsw' => 'de-ch',
+    'spa' => 'es'
   }.freeze
 
   class << self
