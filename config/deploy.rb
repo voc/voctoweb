@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, 'media-site'
 set :repo_url, ENV['CAP_REPO']
@@ -87,7 +87,7 @@ namespace :deploy do
   desc 'Notify IRC about deployment'
   task :notify do
     MQTT::Client.connect(ENV['MQTT_URL']) do |c|
-      c.publish('/voc/alert', %'{"component": "media-deploy", "msg": "#{revision_log_message}", "level": "info"}')
+      c.publish('/voc/alert', %'{"component": "media-deploy", "msg": "#{revision_log_message} on #{ENV['CAP_HOST']}", "level": "info"}')
     end
   end
 
