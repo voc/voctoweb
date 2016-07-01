@@ -1,6 +1,7 @@
 class Languages
   LANGUAGES = {
     'deu' => 'de',
+    'spa' => 'es',
     'eng' => 'en',
     'fra' => 'fr',
     'gsw' => 'de-ch'

@@ -10,7 +10,8 @@ class Recording < ActiveRecord::Base
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
-  validates :language, inclusion: { in: Languages.all }
+  validates :language, inclusion: { in: Languages.all }, if: :html5?
+  validate :language_valid, unless: :html5?
   validate :unique_recording
   validate :filename_without_path
 
@@ -63,6 +64,12 @@ class Recording < ActiveRecord::Base
   end
 
   private
+
+  def language_valid
+    return unless language
+    languages = language.split('-')
+    errors.add(:language, 'not a valid language') unless languages.all? { |l| Languages.all.include?(l) }
+  end
 
   def filename_without_path
     return unless filename
