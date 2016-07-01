@@ -73,10 +73,10 @@ class Api::EventsControllerTest < ActionController::TestCase
     assert_response :success
     assert JSON.parse(response.body)
     event = assigns(:event)
-    assert 'qwerty', event.guid
-    assert 'best_event', event.slug
-    assert 'Event?', event.title
-    assert %w(p q r), event.persons
-    assert %w(t u v), event.tags
+    assert_equal 'qwerty', event.guid
+    assert_equal 'best_event', event.slug
+    assert_equal 'Event?', event.title
+    assert_equal %w(p q r), event.persons
+    assert_equal %w(t u v), event.tags
   end
 end

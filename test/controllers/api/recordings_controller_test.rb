@@ -24,22 +24,22 @@ class Api::RecordingsControllerTest < ActionController::TestCase
     assert_response :success
     assert JSON.parse(response.body)
     recording = assigns(:recording)
-    assert '123', recording.size
-    assert '456', recording.length
-    assert 'audio/ogg', recording.mime_type
-    assert 'mp3s', recording.folder
-    assert 'test.mp3', recording.filename
+    assert_equal 123, recording.size
+    assert_equal 456, recording.length
+    assert_equal 'audio/ogg', recording.mime_type
+    assert_equal 'mp3s', recording.folder
+    assert_equal 'test.mp3', recording.filename
   end
 
   test 'should create recording2' do
     args = { filename: 'test.mp4',
              folder: 'mp4s',
              mime_type: 'video/mp4',
-             html5: 'False',
+             html5: false,
              language: 'deu-eng',
              width: '1920',
              height: '1080',
-             high_quality: 'True',
+             high_quality: true,
              size: '123',
              length: '456' }
     assert_difference('Recording.count') do
@@ -48,11 +48,13 @@ class Api::RecordingsControllerTest < ActionController::TestCase
     assert_response :success
     assert JSON.parse(response.body)
     recording = assigns(:recording)
-    assert '123', recording.size
-    assert '456', recording.length
-    assert 'video/mp4', recording.mime_type
-    assert 'mp4s', recording.folder
-    assert 'test.mp4', recording.filename
-    assert 'deu-eng', recording.language
+    refute recording.html5
+    assert recording.high_quality
+    assert_equal 123, recording.size
+    assert_equal 456, recording.length
+    assert_equal 'video/mp4', recording.mime_type
+    assert_equal 'mp4s', recording.folder
+    assert_equal 'test.mp4', recording.filename
+    assert_equal 'deu-eng', recording.language
   end
 end
