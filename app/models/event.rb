@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   }, class_name: Recording
 
   after_initialize :generate_guid
+  after_find :sort_recordings
 
   validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
@@ -41,6 +42,10 @@ class Event < ActiveRecord::Base
     self.guid ||= SecureRandom.uuid
   end
 
+  def sort_recordings
+    self.recordings ||= self.recordings.sort { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+    self.video_recordings ||= self.video_recordings.sort { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+  end
   # run daily maybe, or as required
   def self.update_promoted_from_view_count
     connection.execute %( UPDATE events SET promoted = 'false' )
