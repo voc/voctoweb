@@ -8,7 +8,9 @@ class Api::EventsController < ApiController
   end
 
   # GET /api/events/1.json
+  # GET /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def show
+    # see set_event method
   end
 
   # GET /api/events/new
@@ -69,7 +71,11 @@ class Api::EventsController < ApiController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    if params[:id] =~ /\A[0-9]+\z/
+      @event = Event.find(params[:id])
+    else
+      @event = Event.find_by(guid: params[:id])
+    end
   end
 
   def create_event(params)
