@@ -148,9 +148,12 @@ bundle install
 ./bin/setup
 rake db:migrate
 rake db:fixtures:load
+```
 
+### Run dev server
 
-# run dev-server
+```
+source ~/.rvm/scripts/rvm
 rails server -b 0.0.0.0
 
 # done
