@@ -1,10 +1,11 @@
 class Languages
   LANGUAGES = {
-    'deu' => 'de',
-    'spa' => 'es',
-    'eng' => 'en',
-    'fra' => 'fr',
-    'gsw' => 'de-ch'
+    'eng' => ['en', 'English'],
+    'deu' => ['de', 'German'],
+    'gsw' => ['de-ch', 'Swiss German'],
+    'fra' => ['fr', 'French'],
+    'spa' => ['es', 'Spanish'],
+    'jpn' => ['ja', 'Japanese']
   }.freeze
 
   class << self
@@ -13,7 +14,11 @@ class Languages
     end
 
     def to_iso_639_1(lang)
-      LANGUAGES[lang]
+      LANGUAGES[lang][0]
+    end
+    
+    def to_string(lang)
+      LANGUAGES[lang][1]
     end
   end
 end
