@@ -41,7 +41,7 @@
       - if @video_recordings.html5.present?
         #video.tab-pane.active
           .kiosk
-          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @video_recordings.html5, subtitle_tracks: @subtitle_tracks, poster_url: @event.poster_url, event_id: @event.id }
+          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @event.video_recordings_sorted, subtitle_tracks: @subtitle_tracks, poster_url: @event.poster_url, event_id: @event.id }
 
       - if @audio_recordings.present?
         #audio.tab-pane{class: ('active' unless @video_recordings.present?)}
@@ -50,7 +50,7 @@
               %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }}
 
       #download.tab-pane
-        = render partial: 'frontend/shared/download', locals: { video_recordings: @video_recordings, audio_recordings: @audio_recordings, subtitle_tracks: @subtitle_tracks, conference: @conference }
+        = render partial: 'frontend/shared/download', locals: { video_recordings: @event.video_recordings_sorted, audio_recordings: @audio_recordings, subtitle_tracks: @subtitle_tracks, conference: @conference }
 
       #embedshare.tab-pane
         = render partial: 'frontend/shared/embedshare', locals: { event: @event }
