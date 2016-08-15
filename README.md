@@ -7,7 +7,7 @@ media.ccc.de webfrontend, meta data editor and API.
 
 ## APIs
 
- Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the congress or lecture series like datengarten or openchaos) and consits of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and lanuages (live-translation), subtitle tracks as srt or slides as pdf.
+ Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the congress or lecture series like datengarten or openchaos) and consits of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
 
 ### Public JSON API
 
