@@ -5,7 +5,8 @@ class Languages
     'gsw' => ['de-ch', 'Swiss German'],
     'fra' => ['fr', 'French'],
     'spa' => ['es', 'Spanish'],
-    'jpn' => ['ja', 'Japanese']
+    'jpn' => ['ja', 'Japanese'],
+    'orig' => ['', 'Original (different presenters using not the same languages, text not translated)'] # use only for subtiltes and not for audio or video recordings!
   }.freeze
 
   class << self
