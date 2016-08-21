@@ -46,4 +46,13 @@ class RecordingTest < ActiveSupport::TestCase
     @recording.html5 = false
     assert @recording.valid?
   end
+
+  test 'should not save anything but subtitle with orig language' do
+    @recording.language = 'orig'
+    refute @recording.valid?
+    @recording.mime_type = 'audio/mpeg'
+    refute @recording.valid?
+    @recording.mime_type = MimeType::SUBTITLE.first
+    assert @recording.valid?
+  end
 end

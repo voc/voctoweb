@@ -11,6 +11,7 @@ class Recording < ActiveRecord::Base
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
   validates :language, inclusion: { in: Languages.all }, if: :html5?
+  validates :language, exclusion: { in: %w(orig) }, unless: :subtitle?
   validate :language_valid, unless: :html5?
   validate :unique_recording
   validate :filename_without_path
@@ -32,6 +33,10 @@ class Recording < ActiveRecord::Base
 
   def video?
     mime_type.in? MimeType::VIDEO
+  end
+
+  def subtitle?
+    mime_type.in? MimeType::SUBTITLE
   end
 
   def display_name
