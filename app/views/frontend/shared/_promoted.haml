@@ -3,5 +3,5 @@
   .slider
     - Frontend::Event.promoted(10).includes(:conference).each_with_index do |event, i|
       .slide
-        %a.item{href: event_url(slug: event.slug), 'class' => (i == 0 and 'active')}
+        %a.item{href: event_path(slug: event.slug), 'class' => (i == 0 and 'active')}
           %img{src: h(event.thumb_url), alt: event.title, title: event.title}

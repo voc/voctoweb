@@ -8,7 +8,7 @@
     - if @events.present?
       - @events.each do |event|
         .event-preview
-          %a{href: event_url(slug: event.slug)}
+          %a{href: event_path(slug: event.slug)}
             %img.conference-logo{src: h(event.conference.logo_url), alt: h(event.conference.title)}
           .caption
           = render partial: 'frontend/shared/event_metadata', locals: { event: event }

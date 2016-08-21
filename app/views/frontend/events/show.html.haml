@@ -4,7 +4,7 @@
 - content_for :head do
   %meta{property: 'og:title', content: @event.title}
   %meta{property: 'og:type', content: 'video.other'}
-  %meta{property: 'og:url', content: event_url(slug: @event.slug)}
+  %meta{property: 'og:url', content: event_path(slug: @event.slug)}
   %meta{property: 'og:image', content: @event.poster_url}
   %meta{property: 'og:video', content: opengraph_video(@video_recordings.html5)}
   %meta{property: 'og:description', content: @event.short_description}
@@ -28,12 +28,12 @@
     %ul.nav.nav-tabs.nav-justified{role: 'tablist', 'data-tabs' => 'tabs'}
       - if @video_recordings.html5.present?
         %li.active
-          %a{href: event_url(slug: @event.slug), 'data-target' => '#video', role: 'tab', 'data-toggle' => 'tab'} Video
+          %a{href: event_path(slug: @event.slug), 'data-target' => '#video', role: 'tab', 'data-toggle' => 'tab'} Video
       - if @audio_recordings.present?
         %li{class: ('active' unless @video_recordings.present?)}
           %a{href: '#audio', role: 'tab', 'data-toggle' => 'tab'} Audio
       %li
-        %a{href: download_event_url(slug: @event.slug), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
+        %a{href: download_event_path(slug: @event.slug), 'data-target' => '#download', role: 'tab', 'data-toggle' => 'tab'} Download
       %li
         %a{href: '#embedshare', role: 'tab', 'data-toggle' => 'tab'} Share
 

@@ -1,6 +1,6 @@
 .caption
   %h3
-    %a{href: event_url(slug: event.slug)}
+    %a{href: event_path(slug: event.slug)}
       = truncate(event.title, length: 90, separator: ' ', omission: '…')
   %h4{title: event.subtitle}
     = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')

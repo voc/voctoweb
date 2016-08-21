@@ -31,12 +31,12 @@
   #breadcrumb
     %ol.container-fluid.breadcrumb
       %li
-        %a.inverted{href: browse_start_url}
+        %a.inverted{href: browse_start_path}
           browse
       - parts.each_with_index do |part, index|
         %li
           %span.icon.icon-chevron-right
-          %a.inverted{href: browse_url(parts[0..index].join('/'))}
+          %a.inverted{href: browse_path(parts[0..index].join('/'))}
             = part
       %li.active
         %span.icon.icon-chevron-right

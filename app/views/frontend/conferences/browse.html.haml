@@ -7,7 +7,7 @@
   - if @folders.present?
     - @folders.each do |folder|
       - if folder.conference?
-        %a.thumbnail.conference{href: conference_url(acronym: folder.conference.acronym)}
+        %a.thumbnail.conference{href: conference_path(acronym: folder.conference.acronym)}
           .header
             %span.icon.icon-video-camera
             = folder.conference.downloaded_events_count
@@ -15,7 +15,7 @@
           .caption
             = folder.conference.title
       - else
-        %a.thumbnail.folder{href: browse_url(folder.path)}
+        %a.thumbnail.folder{href: browse_path(folder.path)}
           .header
             %span.icon.icon-th
           .icon.icon-folder

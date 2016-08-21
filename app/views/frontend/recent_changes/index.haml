@@ -9,7 +9,7 @@
         - conferences = @buckets[date]
         - conferences.each do |conference, count|
           .event-preview
-            %a{href: conference_url(acronym: conference.acronym, sort: :date)}
+            %a{href: conference_path(acronym: conference.acronym, sort: :date)}
               %img.video-thumbnail{src: conference.logo_url, alt: conference.title}
             .caption
               %ul.metadata
@@ -17,7 +17,7 @@
                   %span.icon.icon-calendar-o
                   = date
               %h3
-                %a{href: conference_url(acronym: conference.acronym, sort: :date)}
+                %a{href: conference_path(acronym: conference.acronym, sort: :date)}
                   Event:
                   = conference.acronym
               new entries:

@@ -10,13 +10,13 @@
 
   %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
     %li
-      %a{href: event_url(slug: @event.slug)+'#video', role: 'tab'} Video
+      %a{href: event_path(slug: @event.slug)+'#video', role: 'tab'} Video
     %li
-      %a{href: event_url(slug: @event.slug)+'#audio', role: 'tab'} Audio
+      %a{href: event_path(slug: @event.slug)+'#audio', role: 'tab'} Audio
     %li.active
       %a{href: '#download', role: 'tab'} Download
     %li
-      %a{href: event_url(slug: @event.slug)+'#embedshare', role: 'tab'} Share
+      %a{href: event_path(slug: @event.slug)+'#embedshare', role: 'tab'} Share
 
   .tab-content
     #download.tab-pane.active{style: 'display: block'}
