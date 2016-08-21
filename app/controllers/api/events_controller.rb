@@ -77,7 +77,7 @@ class Api::EventsController < ApiController
       @event.release_date = Time.now unless @event.release_date
       @event.set_image_filenames(params[:thumb_url], params[:poster_url])
       @event.fill_event_info
-      return true if @event.save
+      return @event.save
     end
     false
   end
