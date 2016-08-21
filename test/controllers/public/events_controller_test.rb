@@ -22,8 +22,8 @@ class Public::EventsControllerTest < ActionController::TestCase
     # puts JSON.pretty_generate JSON.parse(response.body)
   end
 
-  test 'should get find' do
-    get :find, id: @event.guid, format: :json
+  test 'should get show with uuid' do
+    get :show, id: @event.guid, format: :json
     assert_response :success
     assert_equal @event, assigns(:event)
   end

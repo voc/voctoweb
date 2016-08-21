@@ -25,11 +25,7 @@ MediaBackend::Application.routes.draw do
     get :index, path: '/', defaults: { format: 'json' }, only: :index
     get :oembed, only: :oembed
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
-    resources :events, only: %i(index show), defaults: { format: 'json' } do
-      member do
-        get 'find'
-      end
-    end
+    resources :events, only: %i(index show), defaults: { format: 'json' }
     resources :recordings, only: %i(index show), defaults: { format: 'json' } do
       collection do
         post 'count'

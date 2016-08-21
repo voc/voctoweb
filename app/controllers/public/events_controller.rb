@@ -19,9 +19,4 @@ class Public::EventsController < ActionController::Base
       @event = Event.find_by(guid: params[:id])
     end
   end
-
-  def find
-    @event = Event.find_by(guid: params[:id])
-    render :show
-  end
 end
