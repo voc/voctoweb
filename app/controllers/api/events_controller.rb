@@ -10,7 +10,6 @@ class Api::EventsController < ApiController
   # GET /api/events/1.json
   # GET /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def show
-    # see set_event method
   end
 
   # GET /api/events/new
@@ -19,6 +18,7 @@ class Api::EventsController < ApiController
   end
 
   # GET /api/events/1/edit
+  # GET /api/events/654331ae-1710-42e5-bdf4-65a03a80c614/edit
   def edit
   end
 
@@ -39,6 +39,7 @@ class Api::EventsController < ApiController
   end
 
   # PATCH/PUT /api/events/1.json
+  # PATCH/PUT /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -50,6 +51,7 @@ class Api::EventsController < ApiController
   end
 
   # DELETE /api/events/1.json
+  # DELETE /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def destroy
     @event.destroy
     respond_to do |format|
