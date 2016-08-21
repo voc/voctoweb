@@ -8,6 +8,7 @@ class Api::EventsController < ApiController
   end
 
   # GET /api/events/1.json
+  # GET /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def show
   end
 
@@ -17,6 +18,7 @@ class Api::EventsController < ApiController
   end
 
   # GET /api/events/1/edit
+  # GET /api/events/654331ae-1710-42e5-bdf4-65a03a80c614/edit
   def edit
   end
 
@@ -37,6 +39,7 @@ class Api::EventsController < ApiController
   end
 
   # PATCH/PUT /api/events/1.json
+  # PATCH/PUT /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -48,6 +51,7 @@ class Api::EventsController < ApiController
   end
 
   # DELETE /api/events/1.json
+  # DELETE /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def destroy
     @event.destroy
     respond_to do |format|
@@ -69,7 +73,11 @@ class Api::EventsController < ApiController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    if params[:id] =~ /\A[0-9]+\z/
+      @event = Event.find(params[:id])
+    else
+      @event = Event.find_by(guid: params[:id])
+    end
   end
 
   def create_event(params)
