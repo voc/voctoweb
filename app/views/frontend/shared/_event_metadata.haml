@@ -1,20 +1,21 @@
-%h3
-  %a{href: event_url(slug: event.slug)}
-    = truncate(event.title, length: 90, separator: ' ', omission: '…')
-%h4{title: event.subtitle}
-  = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
+.caption
+  %h3
+    %a{href: event_url(slug: event.slug)}
+      = truncate(event.title, length: 90, separator: ' ', omission: '…')
+  %h4{title: event.subtitle}
+    = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
 
-%ul.metadata
-  %li.duration
-    %span.icon.icon-clock-o
-    = duration_in_minutes(event.duration)
-  %li.date
-    %span.icon.icon-calendar-o
-    = event.display_date
-  %li.persons
-    = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
+  %ul.metadata
+    %li.duration
+      %span.icon.icon-clock-o
+      = duration_in_minutes(event.duration)
+    %li.date
+      %span.icon.icon-calendar-o
+      = event.display_date
+    %li.persons
+      = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
 
-.duration-container
-  .duration
-    %span.icon.icon-clock-o
-    = duration_in_minutes(event.duration)
+  .duration-container
+    .duration
+      %span.icon.icon-clock-o
+      = duration_in_minutes(event.duration)
