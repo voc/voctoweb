@@ -35,6 +35,7 @@ module ElasticsearchEvent
                       'title^4',
                       'subtitle^3',
                       'persons^3',
+                      'slug^2',
                       'conference.acronym^2',
                       'conference.title^2',
                       'description^1'
