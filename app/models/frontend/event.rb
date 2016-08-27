@@ -41,6 +41,10 @@ module Frontend
       self[:tags].compact.collect(&:strip).map!(&:freeze)
     end
 
+    def videos_sorted_by_language
+      self.recordings.video.sort_by { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+    end
+
     def audio_recording
       audio_recordings = recordings.original_language.where(mime_type: MimeType::AUDIO)
       return if audio_recordings.empty?

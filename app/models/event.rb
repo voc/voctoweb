@@ -118,10 +118,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def video_recordings_sorted
-    self.recordings.video.sort_by { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
-  end
-
   private
 
   def self.popular_event_ids
