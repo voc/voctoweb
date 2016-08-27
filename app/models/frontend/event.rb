@@ -42,7 +42,7 @@ module Frontend
     end
 
     def audio_recording
-      audio_recordings = recordings.where(mime_type: MimeType::AUDIO)
+      audio_recordings = recordings.original_language.where(mime_type: MimeType::AUDIO)
       return if audio_recordings.empty?
       seen = Hash[audio_recordings.map { |r| [r.mime_type, r] }]
       MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
