@@ -32,8 +32,6 @@ end
 gem 'haml'
 gem 'redcarpet'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :sqlite3
 gem 'pg', group: :postgresql
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'

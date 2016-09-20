@@ -20,6 +20,7 @@ class Recording < ActiveRecord::Base
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
   scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
+  scope :original_language, -> { joins(:event).where('events.original_language = recordings.language') }
 
   after_save { update_conference_downloaded_count }
   after_save { update_event_downloaded_count }

@@ -84,7 +84,7 @@ ActiveAdmin.register Event do
       f.input :description, input_html: { class: 'tinymce' }
       f.input :link
       f.input :promoted
-      f.input :original_language, hint: 'ISO-639-2 codes (deu, eng), delimeted by -'
+      f.input :original_language, hint: 'ISO-639-2 codes', collection: Languages.all
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
       f.input :date, hint: 'Actual date of the event'
