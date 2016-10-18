@@ -206,6 +206,15 @@ on_restart do
 end
 ```
 
+#### Alternative: Setup with vagrant
+```# for ubuntu and debian one might want to install vagrant from upstream
+# (https://www.vagrantup.com/downloads.html), because of a packaging bug:
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=818237
+$ sudo apt-get install vagrant virtualbox
+$ vagrant plugin install vagrant-hostsupdater
+$ vagrant up
+now access http://media.ccc.vm:3000/ or http://media.ccc.vm:3000/admin/
+
 #### First Login
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
