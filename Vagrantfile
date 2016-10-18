@@ -70,15 +70,15 @@ Vagrant.configure(2) do |config|
     apt-get update
     apt-get install -y redis-server elasticsearch ruby2.3 ruby2.3-dev postgresql-9.5 nodejs libssl-dev build-essential libpq-dev libsqlite3-dev
 
+    # postgresql
+    echo "create role voctoweb with createdb login password 'voctoweb';" | sudo -u postgres psql
+
     # elasticsearch
 		sed -i -e 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
     systemctl restart elasticsearch
     cd /vagrant
     sudo gem install bundler
 		sudo -u ubuntu bin/setup
-
-    # postgresql
-    echo "create role voctoweb with createdb login password 'voctoweb'; | sudo -u postgres psql
 
     # Puma
     tee /etc/systemd/system/voctoweb-puma.service <<UNIT
