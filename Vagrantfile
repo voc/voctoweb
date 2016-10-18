@@ -108,6 +108,7 @@ SyslogIdentifier=voctoweb-puma
 WantedBy=default.target
 UNIT
   systemctl enable voctoweb-puma
+  systemctl start voctoweb-puma
 
   SHELL
 end
