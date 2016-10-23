@@ -54,4 +54,12 @@ class EventTest < ActiveSupport::TestCase
     event.save!
     assert_equal old_updated_at, conference.reload.updated_at.to_i
   end
+
+  test 'should trim whitespace on paths' do
+    recording = create(:event, poster_filename: ' poster.png ', thumb_filename: ' thump.jpeg ', title: '  some  artistic   title ')
+    assert recording.poster_filename.strip == recording.poster_filename
+    assert recording.thumb_filename.strip == recording.thumb_filename
+
+    refute recording.title.strip == recording.title
+  end
 end

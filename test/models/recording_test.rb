@@ -55,4 +55,10 @@ class RecordingTest < ActiveSupport::TestCase
     @recording.mime_type = MimeType::SUBTITLE.first
     assert @recording.valid?
   end
+
+  test 'should trim whitespace on paths' do
+    recording = create(:recording, filename: ' video2.webm ', folder: ' fldr ', event: @event)
+    assert recording.filename.strip == recording.filename
+    assert recording.folder.strip == recording.folder
+  end
 end
