@@ -212,10 +212,16 @@ end
 # (https://www.vagrantup.com/downloads.html), because of a packaging bug:
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=818237
 $ sudo apt-get install vagrant virtualbox
+
 $ vagrant plugin install vagrant-hostsupdater
 $ vagrant up
+
+http://localhost:3000/ <- Frontend
+http://localhost:3000/admin/ <- Backend
+Backend-Login:
+  Username: admin@example.org
+  Password: media123
 ```
-now access http://media.ccc.vm:3000/ or http://media.ccc.vm:3000/admin/
 
 #### First Login
 
