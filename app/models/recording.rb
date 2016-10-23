@@ -29,6 +29,7 @@ class Recording < ActiveRecord::Base
   after_destroy { update_conference_downloaded_count }
   after_destroy { update_event_downloaded_count }
   after_destroy { event.touch }
+  before_save { trim_paths }
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
@@ -103,5 +104,10 @@ class Recording < ActiveRecord::Base
 
   def update_event_duration
     event.update duration: event.duration_from_recordings
+  end
+
+  def trim_paths
+    filename.strip! unless filename.blank?
+    folder.strip! unless folder.blank?
   end
 end
