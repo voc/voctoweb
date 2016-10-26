@@ -461,7 +461,7 @@ a.inverted {
 }
 
 /* events overview */
-.event-previews, .event-previews-tags, .event-previews-search {
+.event-previews, .event-previews-search {
   .event-preview {
     margin: 16px 0;
     display: block;
@@ -555,8 +555,7 @@ a.inverted {
   }
 }
 
-/* event overview for tags */
-.event-previews-tags .event-preview,
+/* event overview for search */
 .event-previews-search .event-preview {
     height: auto;
     overflow: hidden;
@@ -748,8 +747,7 @@ a.inverted {
     }
   }
   
-  /* event overview for searches & tags */
-  .event-previews-tags .event-preview,
+  /* event overview for search */
   .event-previews-search .event-preview {
     h3 {
       font-size: 17px;
