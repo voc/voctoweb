@@ -50,3 +50,12 @@
   width: 100% !important;
   height: 100% !important;
 }
+
+.mejs-mediaelement .me-cannotplay {
+  width: 100% !important;
+  height: auto !important;
+
+  > span {
+    display: none;
+  }
+}
