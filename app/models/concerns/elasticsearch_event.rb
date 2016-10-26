@@ -12,7 +12,7 @@ module ElasticsearchEvent
 
     def as_indexed_json(_options = {})
       as_json(
-        only: %i(title subtitle description persons length release_date date updated_at),
+        only: %i(title subtitle description persons length release_date date updated_at slug),
         id: :guid,
         include: { conference: { only: %i(title acronym) }
       })
