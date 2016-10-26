@@ -15,7 +15,8 @@
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
 
-  .duration-container
-    .duration
-      %span.icon.icon-clock-o
-      = duration_in_minutes(event.duration)
+  %a{href: event_path(slug: event.slug)}
+    .duration-container
+      .duration
+        %span.icon.icon-clock-o
+        = duration_in_minutes(event.duration)
