@@ -14,9 +14,8 @@ $(function() {
       moveSlides: 1    // The number of slides to move on transition.
     });
   }
-  init();
-  $(document).on('page:load', init);
-  $(document).on('ready resize page:load', function() {
+  $(document).on('turbolinks:load', init);
+  $(document).on('ready resize turbolinks:load', function() {
     $('.bx-viewport').css({
       'left': '50%',
       'margin-left': -parseInt($('.bx-wrapper').css('max-width')) / 2
