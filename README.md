@@ -148,9 +148,6 @@ bundle install
 ./bin/setup
 rake db:migrate
 rake db:fixtures:load
-
-# import production-data (imports 32c3)
-rake db:import:conference[https://api.media.ccc.de/public/conferences/78
 ```
 
 ### Run dev server
@@ -218,9 +215,6 @@ $ sudo apt-get install vagrant virtualbox
 
 $ vagrant plugin install vagrant-hostsupdater
 $ vagrant up
-
-# import production-data (imports 32c3)
-vagrant ssh -c "cd /vagrant && rake db:import:conference[https://api.media.ccc.de/public/conferences/78]"
 
 http://localhost:3000/ <- Frontend
 http://localhost:3000/admin/ <- Backend
