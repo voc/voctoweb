@@ -1,10 +1,13 @@
 namespace :db do
   namespace :fixtures do
     desc 'Dump fixtures from database'
-    task dump: :environment do
+    task :dump, [:include_private] => [:environment] do |t, args|
       fixtures_dir = ENV['FIXTURES_PATH'] || 'test/fixtures'
       sql = 'SELECT * FROM %s'
-      skip_tables = %w(schema_info schema_migrations sessions recording_views)
+
+      skip_tables = %w(schema_info schema_migrations sessions recording_views active_admin_comments)
+      skip_tables += %w(api_keys admin_users) unless args[:include_private]
+
       ActiveRecord::Base.establish_connection(Rails.env)
       i = '000'
       (ActiveRecord::Base.connection.tables - skip_tables).each do |table|
