@@ -32,6 +32,8 @@ class Event < ActiveRecord::Base
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
+  before_save { trim_paths }
+
   # active admin and serialized fields workaround:
   attr_accessor :persons_raw, :tags_raw
 
@@ -150,5 +152,11 @@ class Event < ActiveRecord::Base
     else
       ''
     end
+  end
+
+  def trim_paths
+    thumb_filename.strip! unless thumb_filename.blank?
+    poster_filename.strip! unless poster_filename.blank?
+    link.strip! unless link.blank?
   end
 end

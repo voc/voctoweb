@@ -56,4 +56,13 @@ class ConferenceTest < ActiveSupport::TestCase
       @conference.save
     end
   end
+
+  test 'should trim whitespace on paths' do
+    recording = create(:conference, logo: ' logo.png ', images_path: ' to/the/images ', title: '  some  artistic   title ')
+    assert recording.logo.strip == recording.logo
+    assert recording.images_path.strip == recording.images_path
+    puts recording.title
+
+    refute recording.title.strip == recording.title
+  end
 end

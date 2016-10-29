@@ -23,6 +23,8 @@ class Conference < ActiveRecord::Base
     url: Settings.cdn_url,
     url_path: Settings.folders['recordings_webroot']
 
+  before_save { trim_paths }
+
   aasm column: :schedule_state do
     state :not_present, initial: true
     state :new
@@ -83,5 +85,12 @@ class Conference < ActiveRecord::Base
     URI.parse(schedule_url)
   rescue URI::Exception
     errors.add :schedule_url, 'not a valid url'
+  end
+
+  def trim_paths
+    logo.strip! unless logo.blank?
+    schedule_url.strip! unless schedule_url.blank?
+    images_path.strip! unless images_path.blank?
+    recordings_path.strip! unless recordings_path.blank?
   end
 end
