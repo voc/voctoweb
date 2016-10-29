@@ -1,4 +1,9 @@
+- content_for :title do
+  Search for "#{@searchquery}"
+
 .container-fluid
+  %h1
+    Search for "#{@searchquery}"
   .events-header
 
   - if @events.present?
