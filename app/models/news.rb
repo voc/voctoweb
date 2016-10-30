@@ -1,3 +1,3 @@
-class News < ActiveRecord::Base
+class News < ApplicationRecord
   validates_presence_of :date
 end
