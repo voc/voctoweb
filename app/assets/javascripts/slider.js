@@ -1,5 +1,14 @@
 $(function() {
+  var initialPromotedHtml;
+
   function init() {
+    if(!initialPromotedHtml) {
+      initialPromotedHtml = $('.promoted').html();
+    }
+    else {
+      $('.promoted').html(initialPromotedHtml);
+    }
+
     $('.promoted .slider').bxSlider({
       slideWidth: 200,
       minSlides: 1,
