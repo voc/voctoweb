@@ -1,4 +1,4 @@
-if Rails.env.production?
+if Rails.env.production? && ENV['NOTIFY_RECEIVER'].present?
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     email: {
       email_prefix: '[MEDIA] ',
