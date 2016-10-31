@@ -2,7 +2,7 @@
 
 media.ccc.de webfrontend, meta data editor and API.
 
-[![Build Status](https://travis-ci.org/voc/media.ccc.de.svg?branch=master)](https://travis-ci.org/voc/media.ccc.de)
+[![Build Status](https://travis-ci.org/voc/voctoweb.svg?branch=master)](https://travis-ci.org/voc/voctoweb)
 [![Code Climate](https://codeclimate.com/github/voc/media.ccc.de.png)](https://codeclimate.com/github/voc/media.ccc.de)
 
 ## APIs
