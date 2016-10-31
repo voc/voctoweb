@@ -1,0 +1,27 @@
+html {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  /* poor support - but for the future! */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+body {
+  padding-top: $navbar-height;
+
+  @media #{$xs-or-smaller} {
+    padding-top: 0;
+  }
+
+  width: 100%;
+  overflow: hidden;
+  overflow-y: initial;
+}
+
+.container, .container-fluid {
+  max-width: $max-width;
+}

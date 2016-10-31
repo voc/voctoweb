@@ -1,0 +1,39 @@
+// library setup
+@import "lib/fonts";
+@import "lib/variables";
+@import "bootstrap";
+
+// general page layout
+@import "base/base";
+@import "base/header";
+@import "base/footer";
+
+// pages
+@import "page/startpage";
+@import "page/search";
+@import "page/folder";
+@import "page/list";
+@import "page/event";
+@import "page/about";
+
+.top-space {
+  padding-top: 40px;
+}
+
+h2 {
+  .date {
+    margin-right: 0.2em;
+    color: $brand-primary;
+    font-size: 16px;
+  }
+}
+
+p {
+  .icon {
+    display: inline;
+    color: $gray-dark;
+    font-size: 1.1em;
+  }
+}
+
+.mejs-overlay-loading { background: none !important; }

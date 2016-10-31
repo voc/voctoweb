@@ -1,6 +1,9 @@
 - content_for :title do
   = @event.title
 
+- content_for :body_class do
+  page-show
+
 .container-fluid
   %h1
     = h @event.title

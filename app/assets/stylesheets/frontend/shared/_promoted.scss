@@ -1,0 +1,85 @@
+.promoted {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  background-image: image-url('promoted_bg.jpg');
+  position: relative;
+  .carousel-inner {
+    height: 100%;
+  }
+  .item:hover {
+    text-decoration: none;
+  }
+  .item img {
+    height: 190px;
+    display: inline-block;
+    margin-top: 12px;
+    border: 1px solid $transparent-white;
+  }
+  .titlebar {
+    width: 100%;
+    height: 112px;
+    background-color: $transparent-white;
+    position: absolute;
+    top: 188px;
+    bottom: 0;
+  }
+  .bx-wrapper {
+    overflow: hidden;
+    height: 300px;
+
+    .bx-viewport {
+      background: transparent;
+      border: none;
+      margin-top: 35px;
+      overflow: visible !important;
+
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+
+      .item img {
+        margin-top: 0;
+        height: auto;
+
+        -moz-box-shadow: 0 0 5px #ccc;
+        -webkit-box-shadow: 0 0 5px #ccc;
+        box-shadow: 0 0 5px #ccc;
+      }
+
+      .bx-caption {
+        bottom: auto;
+        top: 150px;
+        height: 95px;
+
+        background: none;
+
+        color: white;
+        font-size: 25px;
+        margin-bottom: 0;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      }
+    }
+
+    .bx-controls {
+      padding-top: 85px;
+      .bx-pager {
+        bottom: 5px;
+      }
+    }
+  }
+  .title {
+    color: white;
+    margin: 0.7em;
+    margin-bottom: 0;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: $brand-primary;
+    margin: 0 0.8em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

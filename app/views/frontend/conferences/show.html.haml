@@ -1,6 +1,9 @@
 - content_for :head do
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
 
+- content_for :body_class do
+  page-list
+
 .container-fluid
   .events-header
     %img{src: @conference.logo_url, alt: 'conference logo'}

@@ -1,7 +1,15 @@
 - content_for :title do
   404 - Page not found
 
+- content_for :body_class do
+  page-not-found
 
-%h3 Page not found
+.container-fluid
+  %h1 Page not found
 
-= render partial: 'frontend/shared/search', locals: { title: '404 - Page not found' }
+  %form.search{role: 'search', action: '/search/', method: 'get'}
+    .form-group.input-group
+      %input.form-control{type: 'search', name: 'q', placeholder: 'Search…'}
+      %span.input-group-btn
+        %button.btn.btn-default{type: 'submit'}
+          %span.icon.icon-search

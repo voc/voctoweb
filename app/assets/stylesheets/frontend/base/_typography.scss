@@ -1,0 +1,30 @@
+h1 {
+  color: $gray-dark;
+  margin-top: 60px;
+  line-height: 0.9em;
+
+  @media #{$xs-or-smaller} {
+    font-size: 34px;
+    margin-top: 30px;
+  }
+}
+
+h1 + h2 {
+  margin-top: -0.2em;
+}
+
+h2 {
+  margin-top: 1.2em;
+
+  @media #{$xs-or-smaller} {
+    font-size: 23px;
+  }
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+a.inverted {
+  color: $gray-lighter;
+}

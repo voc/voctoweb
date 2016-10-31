@@ -1,6 +1,9 @@
 - content_for :title do
   = @tag
 
+- content_for :body_class do
+  page-list
+
 .container-fluid
   %h1 Events for tag "#{@tag}"
 
