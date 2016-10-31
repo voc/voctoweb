@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   # PUBLIC JSON API
   namespace :public do
-    get :index, path: '/', defaults: { format: 'json' }, only: :index
-    get :oembed, only: :oembed
+    get :index, path: '/', defaults: { format: 'json' }
+    get :oembed
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
     resources :events, only: %i(index show), defaults: { format: 'json' }
     resources :recordings, only: %i(index show), defaults: { format: 'json' } do
@@ -68,5 +68,4 @@ Rails.application.routes.draw do
     # new
     get '/c/:acronym/podcast/:mime_type.xml', to: 'feeds#podcast_folder', defaults: { format: 'xml' }, as: :podcast_folder_feed
   end
-
 end

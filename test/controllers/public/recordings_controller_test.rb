@@ -12,7 +12,7 @@ class Public::RecordingsControllerTest < ActionController::TestCase
   test 'should get show' do
     create :conference_with_recordings
     recording = Recording.first
-    get :show, id: recording.id, format: :json
+    get :show, params: { id: recording.id }, format: :json
     assert_response :success
     assert assigns(:recording)
     refute_empty JSON.parse(response.body)
@@ -23,7 +23,7 @@ class Public::RecordingsControllerTest < ActionController::TestCase
     create :conference_with_recordings
     e = Event.first
     r = e.recordings.first
-    post :count, event_id: e.id, src: r.filename, format: :json
+    post :count, params: { event_id: e.id, src: r.filename }, format: :json
     assert_response :success
     refute_empty JSON.parse(response.body)
     assert_equal 'ok', JSON.parse(response.body)['status']

@@ -8,7 +8,7 @@ module Frontend
     end
 
     test "should get show for tag" do
-      get :show, { tag: '123' }
+      get :show, params: { tag: '123' }
       assert_response :success
     end
   end

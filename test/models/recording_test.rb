@@ -27,7 +27,7 @@ class RecordingTest < ActiveSupport::TestCase
     r.width = 1
     r.height = 1
     r.folder = ''
-    assert_nothing_raised(ActiveRecord::RecordInvalid) { r.save! }
+    assert_nothing_raised { r.save! }
   end
 
   test 'should increase counter on event' do
