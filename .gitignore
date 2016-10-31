@@ -42,3 +42,10 @@ test/fixtures/*.gif
 test/fixtures/*.png
 test/fixtures/*.avi
 config/settings.yml
+
+# vagrant logfile
+/ubuntu*.log
+
+# sublimetext project files
+/*.sublime-project
+/*.sublime-workspace
