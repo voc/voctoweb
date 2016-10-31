@@ -12,7 +12,7 @@ module Frontend
       return show if slug_matches_conference
 
       @folders = conferences_folder_tree_at(params[:slug] || '')
-      return redirect_to browse_start_url if @folders.blank?
+      return redirect_to root_url if @folders.blank?
       respond_to do |format|
         format.html { render :browse }
       end
