@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'pathname'
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  # This script is a way to update the data in your development environment.
+
+  puts '== Downloading Data-Dump =='
+  system! 'curl https://media.ccc.de/system/voctoweb.dump.tar.gz | tar xvz'
+
+  puts "\n== Updating database =="
+  system! 'FIXTURES_DIR=../../tmp/fixtures bin/rake db:fixtures:load'
+
+  puts "\n== Updating Elasticsearch =="
+  system! 'echo "Event.__elasticsearch__.create_index! force: true; Event.import" | bin/rails console'
+end

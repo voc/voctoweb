@@ -170,11 +170,12 @@ Copy and edit the configuration file `config/settings.yml.template` to `config/s
 
 You need to create a secret token for sessions, copy `env.example` to `.env.production` and edit.
 
-#### Database Creation
+#### Database Creation & Fixtures import
 
 Setup your database in config/database.yml needed.
 
     rake db:setup
+    ./bin/update-data
 
 #### Services (job queues, cache servers, search engines, etc.)
 
@@ -215,6 +216,7 @@ $ sudo apt-get install vagrant virtualbox
 
 $ vagrant plugin install vagrant-hostsupdater
 $ vagrant up
+$ vagrant ssh -c 'cd /vagrant && ./bin/update-data'
 
 http://localhost:3000/ <- Frontend
 http://localhost:3000/admin/ <- Backend
