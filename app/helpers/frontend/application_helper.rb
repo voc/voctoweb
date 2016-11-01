@@ -34,11 +34,10 @@ module Frontend
       'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title).gsub(/\+/, '%20') + '&url=' + URI.encode_www_form_component(url)
     end
 
-    # TODO FIXME
     def mail_url(title, url)
-      content = URI.encode_www_form_component(title + ': ' + url)
-      subject = URI.encode_www_form_component(title)
-      URI::MailTo.build(['', [['Subject', subject], ['Body', content]]]).to_s.freeze
+      content = ERB::Util.url_encode(title + ': ' + url)
+      subject = ERB::Util.url_encode(title)
+      URI::MailTo.build(['', [['subject', subject], ['body', content]]]).to_s.freeze
     end
 
     def breadcrumbs_trail
