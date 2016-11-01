@@ -21,11 +21,6 @@
   }
 }
 
-.video.player {
-  margin-top: 50px;
-}
-
-
 // 1920x1080, 1280x720, 1024x576, 854x480, 670=~640x~360
 
 @include video-player-size(1280px);

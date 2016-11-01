@@ -18,10 +18,10 @@
   %meta{name: 'description', content: @event.short_description}
 
 - cache(@event) do
-  .container-fluid.event-show
+  .container-fluid
     %h1
       =  @event.title
-    - if @event.subtitle
+    - unless @event.subtitle.empty?
       %h2
         = @event.subtitle
 
@@ -60,13 +60,15 @@
         = simple_format @event.description
 
     %h3 Share/Embed
-    = render partial: 'frontend/shared/embedshare', locals: { event: @event }
-
+    .share
+      = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
     %h3 Download
-    = render partial: 'frontend/shared/download', locals: { video_recordings: @event.videos_sorted_by_language, audio_recordings: @audio_recordings, subtitle_tracks: @subtitle_tracks, conference: @conference }
+    .download
+      = render partial: 'frontend/shared/download', locals: { video_recordings: @event.videos_sorted_by_language, audio_recordings: @audio_recordings, subtitle_tracks: @subtitle_tracks, conference: @conference }
 
     - if @event.tags.present?
       %h3 Tags
-      - @event.tags.each do |tag|
-        != link_for(tag)
+      .tags
+        - @event.tags.each do |tag|
+          != link_for(tag)

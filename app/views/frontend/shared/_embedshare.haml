@@ -1,32 +1,32 @@
 %h4 On your blog:
 
 %textarea.share{:rows=> "2", :readonly => true}
-  <iframe width="853" height="480" src="#{oembed_event_url(slug: event.slug)}" frameborder="0" allowfullscreen></iframe>"
+  <iframe width="1024" height="576" src="#{oembed_event_url(slug: event.slug)}" frameborder="0" allowfullscreen></iframe>
 
 %h4 With others:
 
 %ul.share
   %li
-    %a{:href => twitter_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-twitter"}
-      via Twitter
+    %a.popup{:href => twitter_url(event.title, event_url(slug: event.slug)), :title => 'via Twitter'}
+      %i{:class => "icon-twitter"}
+
   %li
-    %a{:href => facebook_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-facebook-square"}
-      via Facebook
+    %a.popup{:href => facebook_url(event.title, event_url(slug: event.slug)), :title => 'via Facebook'}
+      %i{:class => "icon-facebook"}
+
   %li
-    %a{:href => diaspora_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-diaspora"}
-      via Diaspora
+    %a.popup{:href => diaspora_url(event.title, event_url(slug: event.slug)), :title => 'via Diaspora'}
+      %i{:class => "icon-diaspora"}
+
   %li
-    %a{:href => mail_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-envelope"}
-      by Mail
+    %a{:href => mail_url(event.title, event_url(slug: event.slug)), :title => 'by Mail'}
+      %i{:class => "icon-envelope"}
+
 
 :javascript
   $(function() {
-    $('.share').on('click', 'a', function (e) {
-      window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
+    $('.share').on('click', 'a.popup', function (e) {
+      window.open(this.href, 'share it', 'width=800,height=420,resizable=yes');
       e.preventDefault();
     });
     $("textarea.share").on('focus', function() {
