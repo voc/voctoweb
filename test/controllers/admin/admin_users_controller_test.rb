@@ -20,7 +20,7 @@ class Admin::AdminUsersControllerTest < ActionController::TestCase
 
   test "should show an admin user" do
     user = create :admin_user
-    get 'show', id: user.id
+    get 'show', params: { id: user.id }
     assert_response :success
   end
 

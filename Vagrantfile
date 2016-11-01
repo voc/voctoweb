@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
     systemctl restart elasticsearch
     cd /vagrant
     sudo gem install bundler
-    sudo -u ubuntu bin/setup
+    sudo -u ubuntu -H bin/setup
 
     # Puma
     tee /etc/systemd/system/voctoweb-puma.service <<UNIT

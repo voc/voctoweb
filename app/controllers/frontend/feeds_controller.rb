@@ -1,6 +1,6 @@
 module Frontend
   class FeedsController < FrontendController
-    before_filter :set_conference, only: %i(podcast_folder)
+    before_action :set_conference, only: %i(podcast_folder)
     EXPIRE_FEEDS = 15
 
     # podcast_recent

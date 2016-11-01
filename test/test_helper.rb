@@ -22,7 +22,8 @@ class ActiveSupport::TestCase
   end
 
   def post_json(action, json)
-    post action, json, 'CONTENT_TYPE' => 'application/json'
+    #post action, json, 'CONTENT_TYPE' => 'application/json'
+    post action, headers: { 'CONTENT_TYPE' => 'application/json' }, params: json
   end
 
   def create_test_file(target, source = 'audio.mp3')

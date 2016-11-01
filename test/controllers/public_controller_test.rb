@@ -12,7 +12,7 @@ class PublicControllerTest < ActionController::TestCase
   end
 
   test 'should get oembed' do
-    get :oembed, url: event_url(slug: @conference.events.first.slug)
+    get :oembed, params: { url: event_url(slug: @conference.events.first.slug) }
     assert_response :success
     oembed = JSON.parse(response.body)
     refute_empty oembed
@@ -21,7 +21,7 @@ class PublicControllerTest < ActionController::TestCase
   end
 
   test 'should get oembed with dimensions' do
-    get :oembed, url: event_url(slug: @conference.events.first.slug), maxwidth: 234
+    get :oembed, params: { url: event_url(slug: @conference.events.first.slug), maxwidth: 234 }
     assert_response :success
     oembed = JSON.parse(response.body)
     assert_equal 234, oembed['width']

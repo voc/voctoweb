@@ -20,7 +20,7 @@ class Admin::ApiKeysControllerTest < ActionController::TestCase
 
   test "should show an api key" do
     api_key = create :api_key
-    get 'show', id: api_key.id
+    get 'show', params: { id: api_key.id }
     assert_response :success
   end
 

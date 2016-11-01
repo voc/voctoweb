@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include Recent
   include FahrplanUpdater
   include Storage

@@ -1,7 +1,6 @@
 class Public::RecordingsController < ActionController::Base
   include ApiErrorResponses
   include ThrottleConnections
-  skip_before_filter :verify_authenticity_token, only: :count
   respond_to :json
 
   def index

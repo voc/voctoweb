@@ -19,7 +19,7 @@ class Admin::RecordingsControllerTest < ActionController::TestCase
 
   test "should show a recording" do
     recording = create :recording
-    get 'show', id: recording.id
+    get 'show', params: { id: recording.id }
     assert_response :success
   end
 

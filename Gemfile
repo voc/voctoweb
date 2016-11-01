@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 5.0.0'
 gem 'dotenv-rails'
 
 gem 'activeadmin', '~> 1.0.0.pre'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
 gem 'tinymce-rails'
 gem 'devise', '~> 4.1.0'
 gem 'aasm'
@@ -75,9 +77,9 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'quiet_assets'
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
 end

@@ -7,7 +7,7 @@ class Api::RecordingsControllerTest < ActionController::TestCase
   end
 
   test 'should list recent recordings' do
-    get 'index', format: :json, api_key: @key.key
+    get 'index', format: :json, params: { api_key: @key.key }
     assert_response :success
     assert JSON.parse(response.body)
   end
@@ -19,7 +19,7 @@ class Api::RecordingsControllerTest < ActionController::TestCase
              size: '123',
              length: '456' }
     assert_difference('Recording.count') do
-      post 'create', format: :json, api_key: @key.key, guid: Event.first.guid, recording: args
+      post 'create', format: :json, params: { api_key: @key.key, guid: Event.first.guid, recording: args }
     end
     assert_response :success
     assert JSON.parse(response.body)
@@ -43,7 +43,7 @@ class Api::RecordingsControllerTest < ActionController::TestCase
              size: '123',
              length: '456' }
     assert_difference('Recording.count') do
-      post 'create', format: :json, api_key: @key.key, guid: Event.first.guid, recording: args
+      post 'create', format: :json, params: { api_key: @key.key, guid: Event.first.guid, recording: args }
     end
     assert_response :success
     assert JSON.parse(response.body)

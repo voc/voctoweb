@@ -8,25 +8,25 @@ module Frontend
     end
 
     test 'should get show with slug' do
-      get :show, slug: @event.slug
+      get :show, params: { slug: @event.slug }
       assert_response :success
       assert_equal @event.id, assigns(:event).id
     end
 
     test 'should get show' do
-      get :show, slug: 'abc'
+      get :show, params: { slug: 'abc' }
       assert_response :success
     end
 
     test 'should get oembed' do
-      get :oembed, slug: 'abc'
+      get :oembed, params: { slug: 'abc' }
       assert_response :success
-      get :oembed, slug: 'abc', width: 12, height: 13
+      get :oembed, params: { slug: 'abc', width: 12, height: 13 }
       assert_equal "12", assigns(:width)
     end
 
     test 'should get download' do
-      get :download, slug: 'abc'
+      get :download, params: { slug: 'abc' }
       assert_response :success
     end
   end

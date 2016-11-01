@@ -4,6 +4,6 @@ module Recent
   extend ActiveSupport::Concern
 
   included do
-    scope :recent, lambda { |n| order('created_at desc').limit(n) }
+    scope :recent, ->(n) { order('created_at desc').limit(n) }
   end
 end

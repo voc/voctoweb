@@ -1,4 +1,4 @@
-class Recording < ActiveRecord::Base
+class Recording < ApplicationRecord
   include Recent
   include Storage
 

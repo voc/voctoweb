@@ -15,7 +15,7 @@ class Public::EventsControllerTest < ActionController::TestCase
   end
 
   test 'should get show' do
-    get :show, id: @event.id, format: :json
+    get :show, params: { id: @event.id }, format: :json
     assert_response :success
     assert_equal @event, assigns(:event)
     refute_empty JSON.parse(response.body)
@@ -23,7 +23,7 @@ class Public::EventsControllerTest < ActionController::TestCase
   end
 
   test 'should get show with uuid' do
-    get :show, id: @event.guid, format: :json
+    get :show, params: { id: @event.guid }, format: :json
     assert_response :success
     assert_equal @event, assigns(:event)
   end

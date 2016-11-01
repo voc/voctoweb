@@ -1,12 +1,9 @@
 require 'test_helper'
 
 class RecordingsApiTest < ActionDispatch::IntegrationTest
-  FILE = 'test.mp3'.freeze
-
   setup do
     @key = create(:api_key)
     @event = create(:event)
-    @file = create_test_file FILE
     @json = get_json
   end
 

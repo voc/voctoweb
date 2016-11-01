@@ -6,7 +6,7 @@ class Api::ConferencesControllerTest < ActionController::TestCase
   end
 
   test 'should list conferences' do
-    get 'index', format: :json, api_key: @key.key
+    get 'index', format: :json, params: { api_key: @key.key }
     assert_response :success
     assert JSON.parse(response.body)
   end

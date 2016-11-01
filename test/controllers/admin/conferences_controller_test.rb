@@ -20,7 +20,7 @@ class Admin::ConferencesControllerTest < ActionController::TestCase
 
   test "should show a conference" do
     conference = create :conference
-    get 'show', id: conference.id
+    get 'show', params: { id: conference.id }
     assert_response :success
   end
 
