@@ -1,37 +1,27 @@
-- if video_recordings.present?
+- if event.recordings.video.present?
   %h3 Video
-  %ul
-    - video_recordings.each do |recording|
-      %li
-        %span.label.filetype= recording.filetype
-        %span.label.filetype= recording.language
-        %a{href: recording.url, download: true}
-          %span.icon.icon-download
-          http download
 
-- if audio_recordings.present?
+  %ul.nav.nav-tabs{role: "tablist"}
+    - event.video_filetypes.each_with_index do |(type, display), idx|
+      %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
+        %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
+          = display
+
+  .tab-content
+    - event.video_filetypes.each_with_index do |(type, display), idx|
+      .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
+        = display
+
+- if event.recordings.audio.present?
   %h3 Audio
-  %ul
-    - audio_recordings.each do |recording|
-      %li
-        %span.label.filetype= recording.filetype
-        %span.label.filetype= recording.language
-        %a{href: recording.url, download: true}
-          %span.icon.icon-download
-          http download
 
-- if subtitle_tracks.present?
-  %h3 Subtitle
-  %ul
-    - subtitle_tracks.each do |track|
-      %li
-        .label.filetype
-          srt
-        %a{href: track.url, download: true}
-          %span.icon.icon-download
-          = track.language
+  %ul.nav.nav-tabs{role: "tablist"}
+    - event.audio_filetypes.each_with_index do |(type, display), idx|
+      %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
+        %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
+          = display
 
-%h3 Parent directory
-%a{href: conference.recordings_url}
-  %span.icon.icon-folder-open
-  = conference.recordings_path
+  .tab-content
+    - event.audio_filetypes.each_with_index do |(type, display), idx|
+      .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
+        = display

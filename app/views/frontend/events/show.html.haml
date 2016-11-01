@@ -65,7 +65,7 @@
 
     %h3 Download
     .download
-      = render partial: 'frontend/shared/download', locals: { video_recordings: @event.videos_sorted_by_language, audio_recordings: @audio_recordings, subtitle_tracks: @subtitle_tracks, conference: @conference }
+      = render partial: 'frontend/shared/download', locals: { event: @event, conference: @conference }
 
     - if @event.tags.present?
       %h3 Tags

@@ -52,6 +52,22 @@ class Recording < ApplicationRecord
     str
   end
 
+  def display_filetype
+    display_filetypes = {
+      'webm' => 'WebM',
+      'mp4' => 'MP4',
+      'mp3' => 'MP3',
+      'opus' => 'Opus',
+      'srt' => 'SRT',
+    }
+
+    if display_filetypes.key?(filetype)
+      display_filetypes[filetype]
+    else
+      filetype
+    end
+  end
+
   def min_width(maxwidth = nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width
