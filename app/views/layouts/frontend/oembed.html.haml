@@ -12,4 +12,4 @@
 
   %body
     %div.container-fluid
-      = render partial: 'frontend/shared/videoplayer', locals: { height: @height, width: @width, video_recordings: @video_recordings, subtitle_tracks: @subtitle_tracks, poster_url: @event.poster_url, event_id: @event.id }
+      = render partial: 'frontend/shared/videoplayer', locals: { height: @height, width: @width, event: @event }

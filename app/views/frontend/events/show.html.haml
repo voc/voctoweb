@@ -27,15 +27,15 @@
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
-      - if @video_recordings.present?
+      - if @event.recordings.video.present?
         .player.video
           .kiosk
-          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, video_recordings: @event.videos_sorted_by_language, subtitle_tracks: @subtitle_tracks, poster_url: @event.poster_url, event_id: @event.id }
+          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
 
-      - elsif @audio_recordings.present?
+      - elsif @event.recordings.audio.present?
         .player.audio
           %audio.audio{controls: 'controls', preload: 'none'}
-            - @audio_recordings.each do |recording|
+            - @event.recordings.audio.each do |recording|
               %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }}
 
     %ul.metadata
