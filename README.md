@@ -100,7 +100,7 @@ Update view counts of events viewed in the last 30 minutes
 
 ### Ruby Version
 
-ruby 2.3.0
+ruby 2.3.1
 
 ### Dependencies
 
@@ -131,8 +131,8 @@ gpg --verify rvm-installer.asc
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 2.3.0
-rvm install ruby-2.3.0
+# install ruby 2.3.1
+rvm install ruby-2.3.1
 
 # install bundler
 gem install bundler
