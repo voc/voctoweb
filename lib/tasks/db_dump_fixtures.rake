@@ -8,7 +8,7 @@ namespace :db do
       skip_tables = %w(schema_info schema_migrations sessions recording_views active_admin_comments)
       skip_tables += %w(api_keys admin_users) unless args[:include_private]
 
-      ActiveRecord::Base.establish_connection(Rails.env)
+      ActiveRecord::Base.establish_connection
       i = '000'
       (ActiveRecord::Base.connection.tables - skip_tables).each do |table|
         File.open(File.join(fixtures_dir, "#{table}.yml"), 'w') do |file|
