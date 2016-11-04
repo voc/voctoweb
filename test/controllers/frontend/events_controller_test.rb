@@ -24,10 +24,5 @@ module Frontend
       get :oembed, params: { slug: 'abc', width: 12, height: 13 }
       assert_equal "12", assigns(:width)
     end
-
-    test 'should get download' do
-      get :download, params: { slug: 'abc' }
-      assert_response :success
-    end
   end
 end
