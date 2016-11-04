@@ -45,7 +45,6 @@ Rails.application.routes.draw do
 
     get '/v/:slug', to: 'events#show', as: :event, :constraints => { slug: %r'[^/]+' }
     get '/v/:slug/oembed', to: 'events#oembed', as: :oembed_event, :constraints => { slug: %r'[^/]+' }
-    get '/v/:slug/download', to: 'events#download', as: :download_event, :constraints => { slug: %r'[^/]+' }
 
     get '/c/:acronym', to: 'conferences#show', as: :conference
 
