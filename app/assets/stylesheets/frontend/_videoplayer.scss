@@ -59,3 +59,9 @@
     display: none;
   }
 }
+
+#video .mejs-captions-layer  {
+  width: 100% !important;
+  line-height: 1.4em;
+	font-size: 2em;
+}
