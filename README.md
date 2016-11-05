@@ -141,9 +141,9 @@ gem install bundler
 sudo -u postgres -i
 createuser -d -P media
 
-# obtaining & setting up media.ccc.de instance
-git clone git@github.com:voc/media.ccc.de.git
-cd media.ccc.de
+# obtaining & setting up a voctoweb instance
+git clone git@github.com:voc/voctoweb.git
+cd voctoweb
 bundle install
 ./bin/setup
 rake db:migrate
