@@ -1,4 +1,4 @@
-%video.video{controls: 'controls', 'data-id' => event_id, poster: poster_url, width: width, height: height}
+%video.video{controls: 'controls', 'data-id' => event_id, poster: poster_url, width: width, height: height, preload: 'metadata'}
   - video_recordings.each do |recording|
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
   - subtitle_tracks.each do |track|
