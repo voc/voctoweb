@@ -1,0 +1,65 @@
+body.page-browse {
+  .thumbnail {
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    min-width: 130px;
+    margin: 5px;
+    height: 135px;
+
+    .header {
+      text-align: left;
+    }
+
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+    }
+
+    &.folder {
+      background-color: $brand-primary;
+      color: white;
+
+      .header {
+        margin-bottom: $padding-large-vertical;
+      }
+
+      .icon.icon-folder {
+        font-size: 40px;
+        padding: 10px 0;
+      }
+
+      &:hover, &:focus, &:active {
+        background-color: $gray-dark;
+      }
+
+      .caption {
+        color: white;
+      }
+    }
+
+    &.conference {
+      color: $gray-dark;
+
+      img {
+        height: 64px;
+        margin: $padding-small-vertical auto;
+      }
+
+      .caption {
+        color: white;
+        background-color: $gray-dark;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover, &:focus, &:active {
+        color: $brand-primary;
+        .caption {
+          background-color: $brand-primary;
+        }
+      }
+    }
+  }
+}

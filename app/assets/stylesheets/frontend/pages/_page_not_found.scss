@@ -1,0 +1,10 @@
+body.page-not-found {
+  form.search {
+    width: 50%;
+
+    .input-group-btn button {
+        border-color: $input-border;
+        height: 26px;
+    }
+  }
+}

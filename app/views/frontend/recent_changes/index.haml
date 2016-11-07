@@ -1,6 +1,9 @@
 - content_for :title do
   recent changes
 
+- content_for :body_class do
+  page-list
+
 .container-fluid
   %h1 Recent Changes
   - if @buckets.present?

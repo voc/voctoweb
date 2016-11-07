@@ -1,0 +1,31 @@
+body.page-start {
+  .browse-button-bar {
+    text-align: center;
+    margin-top: $padding-large-vertical;
+    margin-bottom: $padding-large-vertical;
+
+    .btn-lg {
+      margin: $padding-small-vertical $padding-small-horizontal;
+
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      @media #{$xs-or-smaller} {
+        font-size: 23px;
+      }
+
+      .icon {
+        /* nicely positioned icons on large buttons */
+        position: relative;
+        top: 0.15em;
+        margin-right: 0.3em;
+        font-size: 1.3em;
+      }
+    }
+  }
+
+  /* news */
+  h1 + .news-item {
+    margin-top: -0.5em;
+  }
+}

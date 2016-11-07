@@ -1,0 +1,23 @@
+body.page-tags {
+  .tag-cloud {
+    margin-top: 1.5em;
+
+   .xtiny {
+      font-size: 0.9em;
+    }
+   .tiny {
+      font-size: 1.1em;
+      font-weight:lighter;
+    }
+   .normal {
+      font-size: 1.3em;
+    }
+   .large {
+      font-size: 1.5em;
+    }
+   .xlarge {
+      font-size: 1.75em;
+      font-weight:bold;
+    }
+  }
+}

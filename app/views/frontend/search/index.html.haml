@@ -1,6 +1,9 @@
 - content_for :title do
   Search for "#{@searchquery}"
 
+- content_for :body_class do
+  page-list
+
 .container-fluid
   %h1
     Search for "#{@searchquery}"

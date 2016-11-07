@@ -1,0 +1,23 @@
+.breadcrumb {
+  background-color: $gray;
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 0;
+
+  ol {
+    max-width: $max-width;
+    padding: $padding-small-vertical $padding-large-horizontal;
+    margin-bottom: 0;
+
+    li + li:before {
+      content: '';
+      display: none;
+    }
+
+    .icon {
+      font-size: 9px;
+      color: #eee;
+      padding: 0 3px;
+    }
+  }
+}

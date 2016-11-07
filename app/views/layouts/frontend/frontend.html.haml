@@ -11,7 +11,7 @@
 
     = yield :head
 
-  %body
+  %body{:class => content_for(:body_class)}
     = render partial: 'frontend/shared/navbar'
 
     = yield

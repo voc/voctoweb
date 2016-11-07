@@ -3,8 +3,8 @@
 
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .mejs-container.video {
-      margin-left: -(($w - ($max-width - 30))/2)  !important; 
-    } 
+      margin-left: -(($w - ($max-width - 30))/2)  !important;
+    }
     .tab-content {
       #video {
         width: $w !important;
@@ -60,8 +60,8 @@
   }
 }
 
-#video .mejs-captions-layer  {
+.mejs-captions-layer  {
   width: 100% !important;
   line-height: 1.4em;
-	font-size: 2em;
+  font-size: 2em;
 }

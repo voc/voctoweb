@@ -1,0 +1,140 @@
+body.page-list {
+  .events-header {
+    clear: both;
+    img {
+      float: left;
+      max-height: 40px;
+      margin-right: $padding-small-horizontal;
+    }
+    #sorting {
+      margin: $padding-large-vertical 0;
+      float: right;
+    }
+  }
+
+  .events-header {
+    clear: both;
+
+    img {
+      float: left;
+      max-height: 40px;
+      margin-right: $padding-small-horizontal;
+    }
+
+    #sorting {
+      margin: $padding-large-vertical 0;
+      float: right;
+    }
+  }
+
+  .event-preview {
+    margin: 16px 0;
+    display: block;
+    clear: both;
+    height: 120px;
+    position: relative;
+    background-color: #fafafa;
+
+    &:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    &:hover {
+      background-color: #fcfcfc;
+    }
+
+    .video-thumbnail {
+      float: left;
+      height: 120px;
+      width: 160px;
+    }
+
+    h3 {
+      margin-bottom: 0;
+      padding-top: 10px;
+      line-height: 1em;
+    }
+    h4 {
+      margin-top: 4px;
+    }
+
+    color: black;
+
+    .metadata {
+      text-align: left;
+      border: none;
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 0;
+      padding: 5px 0 8px 0;
+
+      li {
+        display: inline-block;
+        list-style-type: none;
+        min-width: 24.5%;
+        padding: $padding-small-vertical $padding-small-horizontal;
+
+        padding: $padding-xs-vertical;
+        padding-right: $padding-xs-horizontal;
+        color: $gray-dark;
+        min-width: inherit;
+
+        color: lighten(#333333, 25%);
+
+        &.duration { display: none; }
+
+        .icon {
+          margin-right: $padding-xs-horizontal;
+        }
+      }
+    }
+
+    .duration-container {
+      width: 160px;
+      height: 120px;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .duration {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: white;
+        background: black;
+        padding: 2px 4px;
+      }
+    }
+
+    .caption {
+      margin-left: 160px;
+      padding-left: $padding-large-horizontal;
+      h3 {
+        margin-top: 0;
+        color: black;
+      }
+    }
+
+    @media #{$xs-or-smaller} {
+      width: 100%;
+      height: auto;
+
+      > a { display: none; }
+      .duration-container { display: none; }
+
+      .caption {
+        margin-left: 0;
+        h4 {
+          margin-bottom: 5px;
+        }
+      }
+
+      .metadata {
+        position: static;
+        li { display: block; }
+        li.duration { display: block; }
+        li.date { display: none; }
+       }
+    }
+  }
+}
