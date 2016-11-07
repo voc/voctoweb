@@ -212,7 +212,9 @@ end
 # for ubuntu and debian one might want to install vagrant from upstream
 # (https://www.vagrantup.com/downloads.html), because of a packaging bug:
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=818237
-$ sudo apt-get install vagrant virtualbox
+$ sudo apt-get install vagrant virtualbox nfs-kernel-server
+
+# On MacOS you should just install Vagrant and Virtualbox via their dmgs/pkgs
 
 $ vagrant plugin install vagrant-hostsupdater
 $ vagrant up
