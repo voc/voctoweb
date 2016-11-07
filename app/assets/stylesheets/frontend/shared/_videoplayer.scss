@@ -4,6 +4,10 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .mejs-container.video {
       margin-left: -(($w - ($max-width - 30))/2)  !important;
+
+      &.mejs-container-fullscreen {
+        margin-left: 0 !important;
+      }
     }
     .tab-content {
       #video {
