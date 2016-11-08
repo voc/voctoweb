@@ -21,7 +21,7 @@
   .container-fluid
     %h1
       =  @event.title
-    - unless @event.subtitle.empty?
+    - unless @event.subtitle.nil? || @event.subtitle.empty?
       %h2
         = @event.subtitle
 
@@ -65,7 +65,7 @@
 
     %h3 Download
     .download
-      = render partial: 'frontend/shared/download', locals: { event: @event, conference: @conference }
+      = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
 
     - if @event.tags.present?
       %h3 Tags
