@@ -65,5 +65,8 @@ body.page-show {
     width: 100%;
     padding: 5px;
     line-height: 130%;
+
+    background-color: $gray-lighter;
+    border: 1px solid $gray-light;
   }
 }
