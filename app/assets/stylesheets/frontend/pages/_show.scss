@@ -67,6 +67,48 @@ body.page-show {
     line-height: 130%;
 
     background-color: $gray-lighter;
-    border: 1px solid $gray-light;
+    border: 1px solid #e3e3e3;
+  }
+
+  .downloads {
+    .row {
+      margin-bottom: 30px;
+    }
+
+    // extract into shared scss?
+    .nav-tabs {
+      li > a {
+        padding: 10px 20px;
+
+        background-color: $gray;
+        color: $gray-lighter;
+      }
+      li.active a {
+        background-color: $gray-lighter;
+        color: $gray-dark;
+      }
+    }
+
+    .tab-content {
+      background-color: $gray-lighter;
+      border-bottom: 1px solid #e3e3e3;
+      border-left: 1px solid #e3e3e3;
+      border-right: 1px solid #e3e3e3;
+      padding: 10px;
+
+      overflow: hidden;
+    }
+
+    .btn-wrap {
+      width: 25%;
+      display: block;
+      float: left;
+
+      .btn {
+        margin: 5px;
+        height: 55px;
+        display: block;
+      }
+    }
   }
 }
