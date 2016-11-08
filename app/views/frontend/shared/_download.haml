@@ -51,12 +51,12 @@
                 - if recording.size
                   .size= recording.size.to_s+' MB'
 
-- if event.recordings.subtitle.present?
-  .row.downloads.subtitle
-    .col-sm-2.col-md-1
-      %h4 Subtitles
+.row.downloads.subtitle
+  .col-sm-2.col-md-1
+    %h4 Subtitles
 
-    .col-sm-4.col-md-5
+  .col-sm-4.col-md-5
+    - if event.recordings.subtitle.present?
       - if event.recordings.subtitle.count == 1
         - recording = event.recordings.subtitle.first
         %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
@@ -70,3 +70,7 @@
               %li{class: recording.language}
                 %a{href: recording.url}
                   = recording.language
+
+    - else
+      %a.btn.btn-default.download.subtitle.missing{href: 'https://c3subtitles.de/'}
+        Help us to subtitle this talk!
