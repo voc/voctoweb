@@ -1,76 +1,92 @@
-- if event.recordings.video.present?
-  .row.downloads.video
+.downloads
+  - if event.recordings.video.present?
+    .row.video
+      .col-sm-2.col-md-1
+        %h4 Video
+
+      .col-sm-10.col-md-11
+        %ul.nav.nav-tabs{role: "tablist"}
+          - event.filetypes(MimeType::VIDEO).each_with_index do |(type, display), idx|
+            %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
+              %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
+                = display
+
+        .tab-content
+          - event.filetypes(MimeType::VIDEO).each_with_index do |(type, display), idx|
+            .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
+              - hq = event.video_for_download(type, high_quality: true)
+              - lq = event.video_for_download(type, high_quality: false)
+
+              - unless hq.nil?
+                .btn-wrap
+                  %a.btn.btn-default.download.hq{href: hq.url}
+                    = 'Download'
+                    - if hq.size
+                      .size= hq.size.to_s+' MB'
+
+              - unless lq.nil?
+                .btn-wrap
+                  %a.btn.btn-default.download.video.lq{href: lq.url}
+                    = 'Download' + (' (Low Quality)' unless hq.nil?)
+                    - if lq.size
+                      .size= lq.size.to_s+' MB'
+
+  - if event.has_translation
+    .row.multiaudio-warning
+      .col-sm-2.col-md-1
+        /
+      .col-sm-10.col-md-11
+        .well
+          %h4 These files contain multiple languages.
+          %p
+            This Talk was translated into multiple languages. The files available
+          %p
+            Please look for "audio tracks" in your desktop video player.
+
+
+  - if event.recordings.audio.present?
+    .row.audio
+      .col-sm-2.col-md-1
+        %h4 Audio
+
+      .col-sm-10.col-md-11
+        %ul.nav.nav-tabs{role: "tablist"}
+          - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
+            %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
+              %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
+                = display
+
+        .tab-content
+          - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
+            .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
+              - @event.audio_recordings_for_download(type).each do |language, recording|
+                .btn-wrap
+                  %a.btn.btn-default.download.audio{href: recording.url, class: language}
+                    .language= language
+                    = 'Download'
+                    - if recording.size
+                      .size= recording.size.to_s+' MB'
+
+  .row.subtitle
     .col-sm-2.col-md-1
-      %h4 Video
+      %h4 Subtitles
 
-    .col-sm-10.col-md-11
-      %ul.nav.nav-tabs{role: "tablist"}
-        - event.filetypes(MimeType::VIDEO).each_with_index do |(type, display), idx|
-          %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
-            %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
-              = display
-
-      .tab-content
-        - event.filetypes(MimeType::VIDEO).each_with_index do |(type, display), idx|
-          .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
-            - hq = event.video_for_download(type, high_quality: true)
-            - lq = event.video_for_download(type, high_quality: false)
-
-            - unless hq.nil?
-              %a.btn.btn-default.download.hq{href: hq.url}
-                = 'Download'
-                - if hq.size
-                  .size= hq.size.to_s+' MB'
-
-            - unless lq.nil?
-              %a.btn.btn-default.download.video.lq{href: lq.url}
-                = 'Download' + (' (Low Quality)' unless hq.nil?)
-                - if lq.size
-                  .size= lq.size.to_s+' MB'
-
-
-- if event.recordings.audio.present?
-  .row.downloads.audio
-    .col-sm-2.col-md-1
-      %h4 Audio
-
-    .col-sm-10.col-md-11
-      %ul.nav.nav-tabs{role: "tablist"}
-        - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-          %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
-            %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
-              = display
-
-      .tab-content
-        - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-          .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
-            - @event.audio_recordings_for_download(type).each do |language, recording|
-              %a.btn.btn-default.download.audio{href: recording.url, class: language}
-                .language= language
-                = 'Download'
-                - if recording.size
-                  .size= recording.size.to_s+' MB'
-
-.row.downloads.subtitle
-  .col-sm-2.col-md-1
-    %h4 Subtitles
-
-  .col-sm-4.col-md-5
-    - if event.recordings.subtitle.present?
-      - if event.recordings.subtitle.count == 1
-        - recording = event.recordings.subtitle.first
-        %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
-          Download .srt
-      - else
-        .dropdown
-          %a.btn.btn-default.download.subtitle.multiple{'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}
+    .col-sm-4.col-md-5
+      - if event.recordings.subtitle.present?
+        - if event.recordings.subtitle.count == 1
+          - recording = event.recordings.subtitle.first
+          %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
             Download .srt
-          %ul.dropdown-menu
-            - event.recordings.subtitle.each do |recording|
-              %li{class: recording.language}
-                %a{href: recording.url}
-                  = recording.language
+        - else
+          .dropdown
+            %a.btn.btn-default.download.subtitle.multiple{'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}
+              Download .srt
+            %ul.dropdown-menu
+              - event.recordings.subtitle.each do |recording|
+                %li{class: recording.language}
+                  %a{href: recording.url}
+                    = recording.language
 
-    - else
-      %a.btn.btn-default.download.subtitle.missing{href: 'https://c3subtitles.de/'}
-        Help us to subtitle this talk!
+      - else
+        %a.btn.btn-default.download.subtitle.missing{href: 'https://c3subtitles.de/'}
+          Help us to subtitle this talk!

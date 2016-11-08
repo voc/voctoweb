@@ -41,6 +41,10 @@ module Frontend
       self[:tags].compact.collect(&:strip).map!(&:freeze)
     end
 
+    def has_translation
+      self.recordings.select { |x| x.languages.length > 1 }.present?
+    end
+
     def filetypes(mime_type)
       self.recordings.by_mime_type(mime_type)
         .map { |x| [x.filetype, x.display_filetype] }
