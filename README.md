@@ -220,8 +220,8 @@ $ vagrant plugin install vagrant-hostsupdater
 $ vagrant up
 $ vagrant ssh -c 'cd /vagrant && ./bin/update-data'
 
-http://localhost:3000/ <- Frontend
-http://localhost:3000/admin/ <- Backend
+http://media.ccc.vm:3000/ <- Frontend
+http://media.ccc.vm:3000/admin/ <- Backend
 Backend-Login:
   Username: admin@example.org
   Password: media123
