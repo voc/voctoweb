@@ -81,7 +81,7 @@
       .col-sm-2.col-md-1
         %h4 Subtitles
 
-      .col-sm-4.col-md-5
+      .col-sm-10.col-md-11
         - if event.recordings.subtitle.present?
           - if event.recordings.subtitle.count == 1
             - recording = event.recordings.subtitle.first
@@ -96,6 +96,8 @@
                   %li{class: recording.language}
                     %a{href: recording.url}
                       = recording.language
+          %a.subtitle.improve{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid, target: '_blank'}
+            Help us to improve these subtitles!
 
         - else
           - if @conference.metadata['subtitles'].present?

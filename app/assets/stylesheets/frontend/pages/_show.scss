@@ -147,8 +147,20 @@ body.page-show {
       }
     }
 
-    .subtitle .btn {
-      margin-top: 3px;
+    .subtitle {
+      .dropdown {
+        display: block;
+        float: left;
+      }
+      .improve {
+        display: block;
+        float: left;
+        margin-left: 15px;
+        line-height: 32px;
+      }
+      .btn {
+        margin-top: 3px;
+      }
     }
   }
 }
