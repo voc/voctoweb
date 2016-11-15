@@ -105,9 +105,42 @@ body.page-show {
       float: left;
 
       .btn {
+        $btn-height: 55px;
+
         margin: 5px;
-        height: 55px;
+        height: $btn-height;
         display: block;
+        padding-top: 8px;
+
+        background: $gray-light;
+        border-width: 0;
+        color: white;
+
+        &:hover {
+          background: lighten($gray-light, 10%);
+        }
+
+        position: relative;
+
+        .title { font-size: 19px; }
+        .size { color: $gray-lighter; }
+        .language {
+          $language-height: 32px;
+
+          color: $gray-darker;
+          background: white;
+          border: 1px solid $gray-darker;
+
+          position: absolute;
+
+          text-align: center;
+          line-height: $language-height;
+
+          height: $language-height;
+          width: $language-height;
+          left: ($btn-height - $language-height) / 2;
+          top: ($btn-height - $language-height) / 2;
+        }
       }
     }
   }

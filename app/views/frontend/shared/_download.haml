@@ -20,14 +20,14 @@
               - unless hq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.hq{href: hq.url}
-                    = 'Download'
+                    .title= 'Download'
                     - if hq.size
                       .size= hq.size.to_s+' MB'
 
               - unless lq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.video.lq{href: lq.url}
-                    = 'Download' + (' (Low Quality)' unless hq.nil?)
+                    .title= 'Download' + (' (Low Quality)' unless hq.nil?)
                     - if lq.size
                       .size= lq.size.to_s+' MB'
 
@@ -62,8 +62,10 @@
               - @event.audio_recordings_for_download(type).each do |language, recording|
                 .btn-wrap
                   %a.btn.btn-default.download.audio{href: recording.url, class: language}
-                    .language= language
-                    = 'Download'
+                    - if event.has_translation
+                      .language= language
+
+                    .title= 'Download'
                     - if recording.size
                       .size= recording.size.to_s+' MB'
 
@@ -77,7 +79,7 @@
           - if event.recordings.subtitle.count == 1
             - recording = event.recordings.subtitle.first
             %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
-              Download .srt
+              .title= Download .srt
           - else
             .dropdown
               %a.btn.btn-default.download.subtitle.multiple{'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}
