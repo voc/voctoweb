@@ -30,6 +30,9 @@
                     .title= 'Download' + (' (Low Quality)' unless hq.nil?).to_s
                     - if lq.size
                       .size= lq.size.to_s+' MB'
+                    - else
+                      .codec= display
+
 
   - if event.has_translation
     .row.multiaudio-warning
@@ -68,6 +71,8 @@
                     .title= 'Download'
                     - if recording.size
                       .size= recording.size.to_s+' MB'
+                    - else
+                      .codec= display
 
   - if event.recordings.subtitle.present? || @conference.metadata['subtitles'].present?
     .row.subtitle

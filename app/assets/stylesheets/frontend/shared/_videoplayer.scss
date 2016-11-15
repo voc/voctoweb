@@ -6,6 +6,10 @@
       width: $w !important;
       .mejs-container.video {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
+
+        &.mejs-container-fullscreen {
+          margin-left: 0 !important;
+        }
       }
     }
 
