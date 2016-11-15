@@ -97,12 +97,12 @@ body.page-show {
       padding: 10px;
 
       overflow: hidden;
-    }
 
-    .btn-wrap {
-      width: 25%;
-      display: block;
-      float: left;
+      .btn-wrap {
+        width: 25%;
+        display: block;
+        float: left;
+      }
 
       .btn {
         $btn-height: 55px;
@@ -112,14 +112,7 @@ body.page-show {
         display: block;
         padding-top: 8px;
 
-        background: $gray-light;
         border-width: 0;
-        color: white;
-
-        &:hover {
-          background: lighten($gray-light, 10%);
-        }
-
         position: relative;
 
         .title { font-size: 19px; }
@@ -142,6 +135,20 @@ body.page-show {
           top: ($btn-height - $language-height) / 2;
         }
       }
+    }
+
+    // this includes the subtitles button
+    .btn {
+      background: $gray-light;
+      color: white;
+
+      &:hover {
+        background: lighten($gray-light, 10%);
+      }
+    }
+
+    .subtitle .btn {
+      margin-top: 3px;
     }
   }
 }

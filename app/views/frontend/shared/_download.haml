@@ -79,11 +79,11 @@
           - if event.recordings.subtitle.count == 1
             - recording = event.recordings.subtitle.first
             %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
-              .title= Download .srt
+              .title= Download Subtitle
           - else
             .dropdown
               %a.btn.btn-default.download.subtitle.multiple{'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                Download .srt
+                Download Subtitle
               %ul.dropdown-menu
                 - event.recordings.subtitle.each do |recording|
                   %li{class: recording.language}
@@ -92,5 +92,5 @@
 
         - else
           - if @conference.metadata['subtitles'].present?
-            %a.btn.btn-default.download.subtitle.missing{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid}
+            %a.btn.btn-default.download.subtitle.missing{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid, target: '_blank'}
               Help us to subtitle this talk!
