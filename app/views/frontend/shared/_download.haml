@@ -27,7 +27,7 @@
               - unless lq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.video.lq{href: lq.url}
-                    .title= 'Download' + (' (Low Quality)' unless hq.nil?)
+                    .title= 'Download' + (' (Low Quality)' unless hq.nil?).to_s
                     - if lq.size
                       .size= lq.size.to_s+' MB'
 
