@@ -57,6 +57,7 @@ class Recording < ApplicationRecord
       'webm' => 'WebM',
       'mp4' => 'MP4',
       'mp3' => 'MP3',
+      'ogg' => 'Ogg',
       'opus' => 'Opus',
       'srt' => 'SRT',
     }
