@@ -23,6 +23,8 @@
                     .title= 'Download'
                     - if hq.size
                       .size= hq.size.to_s+' MB'
+                    - else
+                      .codec= display
 
               - unless lq.nil?
                 .btn-wrap
