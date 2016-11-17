@@ -8,6 +8,7 @@
 
 .container-fluid
   .row
+    / Searchbox
     .col-xs-12.col-sm-10.col-sm-push-1.col-md-8.col-md-push-2
       %form.search{role: 'search', action: '/search/', method: 'get'}
         .form-group.has-addon
@@ -19,6 +20,7 @@
           #{number_with_delimiter(@events_count, delimiter: ".")} videos in
           #{number_with_delimiter(@conferences_count, delimiter: ".")} events and conferences
 
+    / Buttons
     .col-xs-12.col-sm-8.col-sm-push-2
       .browse-button-bar
         %a.btn.btn-secondary.btn-lg{role: 'button', href: '#tbd'}
@@ -32,6 +34,33 @@
         %a.btn.btn-secondary.btn-lg{role: 'button', href: '#tbd'}
           %span.icon.icon-rss
           Feeds
+
+    / Recently
+    .col-xs-12
+      %h2 Recently published
+      %ul.conferences
+        - Frontend::Conference.recent(3).each do |conference|
+          %li.conference
+            %a{href: conference_path(acronym: conference.acronym)}
+              %b= conference.display_name
+            %span.tagline #{conference.events.count} videos
+
+            %ul
+              - conference.events.recent(3).each do |event|
+                %li
+                  %a{href: event_path(slug: event.slug)}
+                    .event-preview
+                      %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.display_name)}
+
+                    %b= event.display_name
+                    - if event.subtitle
+                      %span
+                        = event.subtitle
+
+            %a{href: conference_path(acronym: conference.acronym)}
+              Show other videos from #{conference.acronym}
+
+
 
 
   %h1 News
