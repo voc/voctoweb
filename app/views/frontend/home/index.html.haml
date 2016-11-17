@@ -7,6 +7,19 @@
 = render 'frontend/shared/promoted'
 
 .container-fluid
+  .row
+    .col-xs-12.col-sm-8.col-sm-push-2
+      %form.search{role: 'search', action: '/search/', method: 'get'}
+        .form-group.has-addon
+          .input-group
+            %i.input-group-addon.icon-search
+            %input.form-control{type: 'search', placeholder: 'Username', name: 'q', placeholder: 'Search'}
+        %p.tagline
+          #{number_with_delimiter(@events_count, delimiter: ".")} videos in
+          #{number_with_delimiter(@conferences_count, delimiter: ".")} events and conferences
+
+
+.container-fluid
   .row.browse-button-bar
     %a.btn.btn-primary.btn-lg{role: 'button', href: tags_path}
       %span.icon.icon-tags
