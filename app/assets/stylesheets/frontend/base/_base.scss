@@ -25,3 +25,7 @@ body {
 .container, .container-fluid {
   max-width: $max-width;
 }
+
+.btn-secondary {
+  @include button-variant(white, $gray, $gray-dark);
+}

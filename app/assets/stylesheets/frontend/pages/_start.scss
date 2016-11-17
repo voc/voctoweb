@@ -1,6 +1,6 @@
 body.page-start {
   .search {
-    margin: 64px 0 32px 0;
+    margin: 64px 0 40px 0;
 
     .form-group {
       margin-bottom: 12px;
@@ -35,15 +35,15 @@ body.page-start {
     .btn-lg {
       margin: $padding-small-vertical $padding-small-horizontal;
 
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 25px;
 
       @media #{$xs-or-smaller} {
         font-size: 23px;
+        padding: 5px 15px;
       }
 
+      /* nicely positioned icons on large buttons */
       .icon {
-        /* nicely positioned icons on large buttons */
         position: relative;
         top: 0.15em;
         margin-right: 0.3em;

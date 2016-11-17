@@ -8,30 +8,30 @@
 
 .container-fluid
   .row
-    .col-xs-12.col-sm-8.col-sm-push-2
+    .col-xs-12.col-sm-10.col-sm-push-1.col-md-8.col-md-push-2
       %form.search{role: 'search', action: '/search/', method: 'get'}
         .form-group.has-addon
           .input-group
             %i.input-group-addon.icon-search
             %input.form-control{type: 'search', placeholder: 'Username', name: 'q', placeholder: 'Search'}
+
         %p.tagline
           #{number_with_delimiter(@events_count, delimiter: ".")} videos in
           #{number_with_delimiter(@conferences_count, delimiter: ".")} events and conferences
 
+    .col-xs-12.col-sm-8.col-sm-push-2
+      .browse-button-bar
+        %a.btn.btn-secondary.btn-lg{role: 'button', href: '#tbd'}
+          %span.icon.icon-tags
+          Popular
 
-.container-fluid
-  .row.browse-button-bar
-    %a.btn.btn-primary.btn-lg{role: 'button', href: tags_path}
-      %span.icon.icon-tags
-      Browse by tag
+        %a.btn.btn-primary.btn-lg{role: 'button', href: browse_start_path}
+          %span.icon.icon-th
+          All Events
 
-    %a.btn.btn-primary.btn-lg{role: 'button', href: browse_start_path}
-      %span.icon.icon-th
-      Browse by category
-
-    %a.btn.btn-primary.btn-lg{role: 'button', href: recent_path}
-      %span.icon.icon-calendar
-      Recent Videos
+        %a.btn.btn-secondary.btn-lg{role: 'button', href: '#tbd'}
+          %span.icon.icon-rss
+          Feeds
 
 
   %h1 News
