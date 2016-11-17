@@ -16,7 +16,7 @@ module Frontend
     end
 
     def display_date
-      d = date || release_date
+      d = release_date || date
       d.strftime('%Y-%m-%d') if d
     end
 
