@@ -2,8 +2,8 @@ module Frontend
   class HomeController < FrontendController
     def index
       @news = Frontend::News.recent(10)
-      @events_count = Event.count
-      @conferences_count = Conference.count
+      @events_count = Frontend::Event.count
+      @conferences_count = Frontend::Conference.count
 
 
       respond_to { |format| format.html }
