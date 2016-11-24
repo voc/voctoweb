@@ -39,26 +39,39 @@
     .col-xs-12
       %h2 Recently published
       %ul.conferences
+        / top 3 conferences, ordered by updated_at (also triggered by event change)
+        / FIXME: should be ordered by event_last_released_at
         - Frontend::Conference.recent(3).each do |conference|
           %li.conference
             %a{href: conference_path(acronym: conference.acronym)}
-              %b= conference.display_name
-            %span.tagline #{conference.events.count} videos
+              = conference.display_name
+
+            - recent_days = 30
+            - recent_events_count=conference.events.newer(Date.today - 30).count
+
+            - if recent_events_count > 0
+              %span.tagline{title: "during the last #{recent_days} days"}
+                #{recent_events_count} videos recently published
 
             %ul
+              / top 3 events, ordered by release_date
+              / not reusing 'events newer then 30 days' here because there may be 0 of them
               - conference.events.recent(3).each do |event|
-                %li
+                %li.event
                   %a{href: event_path(slug: event.slug)}
                     .event-preview
                       %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.display_name)}
+                      / FIXME: thumbnail w/ duration in partitial, fix css & list
 
-                    %b= event.display_name
+                    %strong= event.display_name
                     - if event.subtitle
-                      %span
+                      %span.subtitle
                         = event.subtitle
 
+                    %span.date= event.display_date
+
             %a{href: conference_path(acronym: conference.acronym)}
-              Show other videos from #{conference.acronym}
+              Show other videos from #{conference.display_name}
 
 
 
