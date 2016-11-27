@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     get '/b/*slug', to: 'conferences#browse', as: :browse
 
     get '/recent', to: 'recent#index'
+    get '/popular', to: 'popular#index'
 
     get '/news.atom', to: 'news#index', defaults: { format: 'xml' }, as: :news
     get '/podcast-audio-only.xml', to: 'feeds#podcast_audio', defaults: { format: 'xml' }
