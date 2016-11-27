@@ -52,6 +52,23 @@ class Recording < ApplicationRecord
     str
   end
 
+  def display_filetype
+    display_filetypes = {
+      'webm' => 'WebM',
+      'mp4' => 'MP4',
+      'mp3' => 'MP3',
+      'ogg' => 'Ogg',
+      'opus' => 'Opus',
+      'srt' => 'SRT',
+    }
+
+    if display_filetypes.key?(filetype)
+      display_filetypes[filetype]
+    else
+      filetype
+    end
+  end
+
   def min_width(maxwidth = nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width
@@ -70,11 +87,14 @@ class Recording < ApplicationRecord
     Languages.to_iso_639_1(language)
   end
 
+  def languages
+    language.split('-')
+  end
+
   private
 
   def language_valid
     return unless language
-    languages = language.split('-')
     errors.add(:language, 'not a valid language') unless languages.all? { |l| Languages.all.include?(l) }
   end
 

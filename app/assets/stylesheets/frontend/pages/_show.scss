@@ -1,123 +1,12 @@
 body.page-show {
-  .nav.nav-tabs.nav-justified {
-    margin-top: 16px;
-    font-weight: bold;
-    font-size: 24px;
-    background-color: $gray;
-
-    & > li {
-      a {
-        padding: $padding-large-vertical 0 0 0;
-        margin-bottom: 0;
-        border: none;
-        &:hover, &:focus, &:active {
-          background-color: #fff;
-        }
-        &:hover, &:focus, &:active {
-          border: none;
-        }
-      }
-      &.active > a {
-        color: white;
-        background-color: $gray-dark;
-      }
-
-      @media #{$xs-or-smaller} {
-        a {
-          font-size: 20px;
-          padding-top: 5px;
-        }
-        &.active > a {
-          background-color: $gray;
-        }
-      }
-    }
+  h3 {
+    border-bottom: 1px solid #ccc;
+    margin-top: 50px;
+    margin-bottom: 12px;
   }
 
-  .tab-content {
-    background-color: $gray-dark;
-
-    .tab-pane {
-      display: none;
-      &.active {
-        display: block;
-      }
-    }
-
-    #video {
-      text-align: center;
-      .video {
-        margin: auto;
-      }
-    }
-
-    #audio * {
-      max-width: 100%;
-    }
-
-    #download {
-      padding: $padding-large-horizontal;
-      h3 {
-        color: $gray-light;
-        &:first-child {
-          margin-top: 0;
-        }
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-        li {
-          min-width: 49%;
-          display: inline-block;
-        }
-        a {
-          margin: 0 $padding-xs-horizontal;
-        }
-      }
-      .filetype {
-        text-transform: uppercase;
-        margin-right: $padding-small-horizontal;
-        color: #000;
-        background-color: #fff;
-        min-width: 4em;
-      }
-      a:hover, a:focus, a:active {
-        text-decoration: none;
-      }
-    }
-
-    #embedshare {
-      padding: $padding-large-horizontal;
-      input {
-        border: 1px solid #d87500;
-        color: #d87500;
-        border-width: 1px;
-        background-color: #555;
-      }
-      h3 {
-        color: $gray-light;
-        &:first-child {
-          margin-top: 0;
-        }
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-        li {
-          min-width: 49%;
-          display: inline-block;
-        }
-        a {
-          margin: 0 $padding-xs-horizontal;
-        }
-      }
-      a:hover, a:focus, a:active {
-        text-decoration: none;
-      }
-      i {
-        color: #d87500;
-      }
-    }
+  h4 {
+    margin-top: 10px;
   }
 
   .metadata {
@@ -125,23 +14,61 @@ body.page-show {
     padding: $padding-small-vertical 0;
     text-align: center;
     border-bottom: 1px solid $gray;
+    font-size: 16px;
+
     li {
       display: inline-block;
       min-width: 24.5%;
       padding: $padding-small-vertical $padding-small-horizontal;
     }
+
     .icon {
       margin-right: $padding-xs-horizontal;
+
+      & + a {
+        position: relative;
+        top: -2px;
+      }
     }
   }
 
-  .event-show {
-    h3 {
-      border-bottom: 1px solid #ccc;
-      margin-top: 50px;
-    }
-    h4 {
-      margin-top: 10px;
+  .description {
+    margin-top: 12px;
+  }
+
+  ul.share {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      display: block;
+      float: left;
+      margin-right: 10px;
+
+      a {
+        display: block;
+        color: white;
+
+        background: $gray-light;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $gray;
+        }
+
+        width: 48px;
+        height: 48px;
+        border-radius: 5px;
+
+        text-align: center;
+
+        i {
+          font-size: 32px;
+          line-height: 48px;
+        }
+      }
     }
   }
 
@@ -149,6 +76,114 @@ body.page-show {
     width: 100%;
     padding: 5px;
     line-height: 130%;
+
+    background-color: $gray-lighter;
+    border: 1px solid #e3e3e3;
   }
 
+  .downloads {
+    .row {
+      margin-bottom: 12px;
+    }
+
+    .multiaudio-warning .well {
+      margin-bottom: 0;
+    }
+
+    // extract into shared scss?
+    .nav-tabs {
+      li > a {
+        padding: 10px 20px;
+
+        background-color: $gray;
+        color: $gray-lighter;
+
+        font-size: 16px;
+      }
+      li.active a {
+        background-color: $gray-lighter;
+        color: $gray-dark;
+      }
+    }
+
+    .tab-content {
+      background-color: $gray-lighter;
+      border-bottom: 1px solid #e3e3e3;
+      border-left: 1px solid #e3e3e3;
+      border-right: 1px solid #e3e3e3;
+      padding: 10px;
+
+      overflow: hidden;
+
+      .btn-wrap {
+        width: 25%;
+        display: block;
+        float: left;
+      }
+
+      .btn {
+        $btn-height: 55px;
+
+        margin: 5px;
+        height: $btn-height;
+        display: block;
+        padding-top: 9px;
+
+        border-width: 0;
+        position: relative;
+
+        .title { font-size: 19px; }
+        .size {
+          color: $gray-lighter;
+          font-weight: lighter;
+          font-size: 13px;
+        }
+        .language {
+          $language-height: 32px;
+
+          color: $gray-darker;
+          background: white;
+          border: 1px solid $gray;
+
+          border-radius: 4px;
+
+          position: absolute;
+
+          text-align: center;
+          line-height: $language-height;
+
+          height: $language-height;
+          width: $language-height;
+          left: ($btn-height - $language-height) / 2;
+          top: ($btn-height - $language-height) / 2;
+        }
+      }
+    }
+
+    // this includes the subtitles button
+    .btn {
+      background: $gray-light;
+      color: white;
+
+      &:hover {
+        background: lighten($gray-light, 10%);
+      }
+    }
+
+    .subtitle {
+      .dropdown {
+        display: block;
+        float: left;
+      }
+      .improve {
+        display: block;
+        float: left;
+        margin-left: 15px;
+        line-height: 34px;
+      }
+      .btn {
+        margin-top: 3px;
+      }
+    }
+  }
 }

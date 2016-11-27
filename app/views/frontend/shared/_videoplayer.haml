@@ -1,11 +1,15 @@
-%video.video{controls: 'controls', 'data-id' => event_id, poster: poster_url, width: width, height: height}
-  - video_recordings.each do |recording|
+%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height}
+  - event.videos_sorted_by_language.each do |recording|
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
-  - subtitle_tracks.each do |track|
+
+  - event.recordings.subtitle.each do |track|
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+
   %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('flashmediaelement.swf') }
     %param{ name: 'allowFullScreen', value: 'true' }
-    %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(video_recordings)}" }
+    %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(event.videos_sorted_by_language)}" }
+
+    %p Your Browser can't play this Video-File. Please download the File below and use a Desktop-Player.
 
 :javascript
   $(function() { MirrorbrainFix.setupPlayer(); })

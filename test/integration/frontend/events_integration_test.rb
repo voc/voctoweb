@@ -18,7 +18,6 @@ class Frontend::EventsIntegrationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal @conference.id, assigns(:conference).id
     assert_equal event.id, assigns(:event).id
-    assert_equal event.recordings.count, assigns(:video_recordings).count
   end
 
   test 'should view event with shorter url' do
@@ -27,6 +26,5 @@ class Frontend::EventsIntegrationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal @conference.id, assigns(:conference).id
     assert_equal event.id, assigns(:event).id
-    assert_equal event.recordings.count, assigns(:video_recordings).count
   end
 end

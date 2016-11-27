@@ -1,41 +1,38 @@
-%h3 Embed into your website
-%input{:type => "text", :size=> "85", :readonly => true, :id => "txtShareFrame",
-       :value => "<iframe width=\"853\" height=\"480\" src=\"#{oembed_event_url(slug: event.slug)}\" frameborder=\"0\" allowfullscreen></iframe>"}
-%h3 Share with others
-%ul
-  %li
-    %a{:id => "btnTweet", :href => twitter_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-twitter"}
-      via Twitter
-  %li
-    %a{:id => "btnFacebook",
-       :href => facebook_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-facebook-square"}
-      via Facebook
-  %li
-    %a{:id => "btnGPlus", :href => googleplus_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-google-plus"}
-      via Google+
-  %li
-    %a{:id => "btnAppNet", :href => appnet_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-adn"}
-      via App.net
-  %li
-    %a{:id => "btnDiaspora", :href => diaspora_url(event.title, event_url(slug: event.slug)) }
-      %img{src: image_path('frontend/diaspora-64.png'), height: '12px'}
-      via Diaspora*
-  %li
-    %a{:id => "btnMail", :href => mail_url(event.title, event_url(slug: event.slug)) }
-      %i{:class => "fa-envelope"}
-      by Mail
+.row
+  .col-md-6
+    %h3 Embed
+
+    %textarea.share{:rows=> "2", :readonly => true}
+      <iframe width="1024" height="576" src="#{oembed_event_url(slug: event.slug)}" frameborder="0" allowfullscreen></iframe>
+
+  .col-md-6
+    %h3 Share:
+
+    %ul.share
+      %li
+        %a.popup{:href => twitter_url(event.title, event_url(slug: event.slug)), :title => 'via Twitter'}
+          %i{:class => "icon-twitter"}
+
+      %li
+        %a.popup{:href => facebook_url(event.title, event_url(slug: event.slug)), :title => 'via Facebook'}
+          %i{:class => "icon-facebook"}
+
+      %li
+        %a.popup{:href => diaspora_url(event.title, event_url(slug: event.slug)), :title => 'via Diaspora'}
+          %i{:class => "icon-diaspora"}
+
+      %li
+        %a{:href => mail_url(event.title, event_url(slug: event.slug)), :title => 'by Mail'}
+          %i{:class => "icon-envelope"}
+
+
 :javascript
   $(function() {
-    $('#btnTweet, #btnFacebook, #btnGPlus, #btnAppNet, #btnDiaspora').on('click', function (e) {
-      window.open(this.href, 'share it', 'width=550,height=420,resizable=yes');
+    $('.share').on('click', 'a.popup', function (e) {
+      window.open(this.href, 'share it', 'width=800,height=420,resizable=yes');
       e.preventDefault();
     });
-    $("#txtShareFrame").on('focus', function() {
+    $("textarea.share").on('focus', function() {
       $(this).select();
     });
   });
-

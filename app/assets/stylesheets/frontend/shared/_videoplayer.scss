@@ -2,19 +2,16 @@
   $h: $w / 16 * 9;
 
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
-    .mejs-container.video {
-      margin-left: -(($w - ($max-width - 30))/2)  !important;
+    .video.player {
+      width: $w !important;
+      .mejs-container.video {
+        margin-left: -(($w - ($max-width - 30))/2)  !important;
 
-      &.mejs-container-fullscreen {
-        margin-left: 0 !important;
+        &.mejs-container-fullscreen {
+          margin-left: 0 !important;
+        }
       }
     }
-    .tab-content {
-      #video {
-        width: $w !important;
-      }
-    }
-
 
     .kiosk {
       position: absolute;
@@ -24,13 +21,9 @@
 
       background: #000;
       padding-top: $h;
-
-      border-top: 38px solid #555;
-      margin-top: -38px;
     }
   }
 }
-
 
 // 1920x1080, 1280x720, 1024x576, 854x480, 670=~640x~360
 

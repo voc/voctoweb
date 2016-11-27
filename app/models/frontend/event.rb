@@ -41,8 +41,33 @@ module Frontend
       self[:tags].compact.collect(&:strip).map!(&:freeze)
     end
 
+    def has_translation
+      self.recordings.select { |x| x.languages.length > 1 }.present?
+    end
+
+    def filetypes(mime_type)
+      self.recordings.by_mime_type(mime_type)
+        .map { |x| [x.filetype, x.display_filetype] }
+        .uniq.to_h.sort
+    end
+
     def videos_sorted_by_language
       self.recordings.video.sort_by { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+    end
+
+    def video_for_download(filetype, high_quality: true)
+      self.recordings.video
+        .select { |x| x.filetype == filetype && x.high_quality == !!high_quality }
+        .sort_by { |x| x.html5 ? 1 : 0 }
+        .first
+    end
+
+    def audio_recordings_for_download(filetype)
+      self.recordings.audio
+        .select { |x| x.filetype == filetype }
+        .sort_by { |x| x.language == self.original_language ? '' : x.language }
+        .map { |x| [x.language, x] }
+        .to_h
     end
 
     def audio_recording
