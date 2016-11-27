@@ -36,7 +36,6 @@
           %span.icon.icon-rss
           Feeds
 
-    / Recently
     .col-xs-12.recently
       .headline
         %h2 Recently published
@@ -44,8 +43,8 @@
           More recent videos
 
       .row.conferences
-        / top 3 conferences, ordered by updated_at (also triggered by event change)
-        / FIXME: should be ordered by event_last_released_at
+        -# top 3 conferences, ordered by updated_at (also triggered by event change)
+        -# FIXME: should be ordered by event_last_released_at
         - Frontend::Conference.recent(3).each do |conference|
           - cache(conference) do
             .col-md-4.conference
@@ -61,9 +60,9 @@
                   #{recent_events_count} videos recently published
 
               %ul.list-unstyled
-                / top 3 events, ordered by release_date
-                / not reusing 'events newer then 30 days' here because there may be 0 of them
-                / FIXME: use recent_events when conference ordering is fixed
+                -# top 3 events, ordered by release_date
+                -# not reusing 'events newer then 30 days' here because there may be 0 of them
+                -# FIXME: use recent_events when conference ordering is fixed
                 - conference.events.recent(3).each do |event|
                   - cache(event) do
                     %li.event
