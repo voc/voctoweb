@@ -79,10 +79,34 @@ body.page-start {
     .event {
       overflow: hidden;
 
-      .event-preview {
-        width: 160px;
-        float: left;
-        margin: 0 12px 12px 0;
+      // left/right view
+      @media #{$sm-or-bigger} {
+        .event-preview {
+          width: 160px;
+          float: left;
+          margin: 0 12px 12px 0;
+        }
+      }
+
+      // top/down view
+      @media #{$xs-or-smaller} {
+        margin-bottom: 24px;
+        padding: 6px;
+
+        &:nth-child(odd) {
+          background-color: $gray-even-lighter;
+        }
+
+        > a {
+          text-align: center;
+          display: block;
+          font-size: 18px;
+          margin: 12px 0 4px 0;
+        }
+        .date {
+          text-align: center;
+          display: block;
+        }
       }
     }
 
@@ -94,6 +118,11 @@ body.page-start {
 
       a.more {
         font-size: 18px;
+        @media #{$xs-or-smaller} {
+          // too many links for such a small display
+          // (and the title links there anyway)
+          display: none;
+        }
       }
 
       @media #{$md-or-bigger} {
