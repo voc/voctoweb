@@ -32,18 +32,17 @@ body.page-list {
     display: block;
     clear: both;
     height: 120px;
-    position: relative;
-    background-color: #fafafa;
+    background-color: $gray-lightest;
 
     &:nth-child(odd) {
       background-color: #ffffff;
     }
 
     &:hover {
-      background-color: #fcfcfc;
+      background-color: $gray-even-lighter;
     }
 
-    .video-thumbnail {
+    .duration-container {
       float: left;
       height: 120px;
       width: 160px;
@@ -59,52 +58,6 @@ body.page-list {
     }
 
     color: black;
-
-    .metadata {
-      text-align: left;
-      border: none;
-      position: absolute;
-      bottom: 0;
-      margin-bottom: 0;
-      padding: 5px 0 8px 0;
-
-      li {
-        display: inline-block;
-        list-style-type: none;
-        min-width: 24.5%;
-        padding: $padding-small-vertical $padding-small-horizontal;
-
-        padding: $padding-xs-vertical;
-        padding-right: $padding-xs-horizontal;
-        color: $gray-dark;
-        min-width: inherit;
-
-        color: lighten(#333333, 25%);
-
-        &.duration { display: none; }
-
-        .icon {
-          margin-right: $padding-xs-horizontal;
-        }
-      }
-    }
-
-    .duration-container {
-      width: 160px;
-      height: 120px;
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      .duration {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        color: white;
-        background: black;
-        padding: 2px 4px;
-      }
-    }
 
     .caption {
       margin-left: 160px;

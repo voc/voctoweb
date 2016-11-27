@@ -1,7 +1,7 @@
 module Frontend
   class HomeController < FrontendController
     def index
-      @news = Frontend::News.recent(10)
+      @news = Frontend::News.recent(1).first()
       @events_count = Frontend::Event.count
       @conferences_count = Frontend::Conference.count
 

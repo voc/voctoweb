@@ -2,8 +2,10 @@
   %h3
     %a{href: event_path(slug: event.slug)}
       = truncate(event.title, length: 90, separator: ' ', omission: '…')
-  %h4{title: event.subtitle}
-    = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
+
+  - if event.subtitle.present?
+    %h4{title: event.subtitle}
+      = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
 
   %ul.metadata
     %li.duration
@@ -14,9 +16,3 @@
       = event.display_date
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
-
-  %a{href: event_path(slug: event.slug)}
-    .duration-container
-      .duration
-        %span.icon.icon-clock-o
-        = duration_in_minutes(event.duration)

@@ -21,6 +21,8 @@ $max-width: 1024px;
 // $gray:                   lighten(#000, 33.5%) // #555
 // $gray-light:             lighten(#000, 60%)   // #999
 // $gray-lighter:           lighten(#000, 93.5%) // #eee
+$gray-even-lighter:         #fcfcfc;
+$gray-lightest:             #fafafa;
 
 $brand-primary:         #d87500; // orange
 $transparent-white:     rgba(255, 255, 255, 0.3);
@@ -297,9 +299,9 @@ $xs-or-smaller: "only screen and (max-width: #{$screen-xs-max})";
 $sm-or-smaller: "only screen and (max-width: #{$screen-sm-max})";
 $md-or-smaller: "only screen and (max-width: #{$screen-md-max})";
 
-$sm-or-biggger: "only screen and (min-width: #{$screen-sm})";
-$md-or-smaller: "only screen and (max-width: #{$screen-md})";
-$lg-or-smaller: "only screen and (max-width: #{$screen-lg})";
+$sm-or-bigger: "only screen and (min-width: #{$screen-sm})";
+$md-or-bigger: "only screen and (max-width: #{$screen-md})";
+$lg-or-bigger: "only screen and (max-width: #{$screen-lg})";
 
 
 //== Grid system

@@ -20,7 +20,7 @@
 - cache(@event) do
   .container-fluid
     %h1
-      =  @event.title
+      = @event.title
     - unless @event.subtitle.nil? || @event.subtitle.empty?
       %h2
         = @event.subtitle

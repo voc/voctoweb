@@ -1,4 +1,8 @@
 body.page-start {
+  h2 {
+    border-bottom: 1px solid #ccc;
+  }
+
   .search {
     margin: 64px 0 40px 0;
 
@@ -48,6 +52,58 @@ body.page-start {
         top: 0.15em;
         margin-right: 0.3em;
         font-size: 1.3em;
+      }
+    }
+  }
+
+
+  .recently {
+    .headline
+    {
+      position: relative;
+      margin-top: 1.2em;
+
+      h2 {
+        margin-top: 0
+      }
+
+      @media #{$sm-or-bigger} {
+        > a {
+          position: absolute;
+          right: 0;
+          bottom: 5px;
+        }
+      }
+    }
+
+    .event {
+      overflow: hidden;
+
+      .event-preview {
+        width: 160px;
+        float: left;
+        margin: 0 12px 12px 0;
+      }
+    }
+
+    .conferences .conference {
+      position: relative;
+      height: 480px;
+
+      h3 {
+        border-bottom: 1px solid #ccc;
+      }
+
+      &:nth-child(odd) {
+        background-color: $gray-even-lighter;
+      }
+
+      a.more {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+
+        font-size: 18px;
       }
     }
   }

@@ -1,0 +1,6 @@
+%a{href: event_path(slug: event.slug)}
+  .duration-container
+    %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title)}
+    .duration
+      %span.icon.icon-clock-o
+      = duration_in_minutes(event.duration)

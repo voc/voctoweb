@@ -36,51 +36,57 @@
           Feeds
 
     / Recently
-    .col-xs-12
-      %h2 Recently published
-      %ul.conferences
+    .col-xs-12.recently
+      .headline
+        %h2 Recently published
+        %a{href: recent_path}
+          More recent videos
+
+      .row.conferences
         / top 3 conferences, ordered by updated_at (also triggered by event change)
         / FIXME: should be ordered by event_last_released_at
         - Frontend::Conference.recent(3).each do |conference|
-          %li.conference
-            %a{href: conference_path(acronym: conference.acronym)}
-              = conference.display_name
+          - cache(conference) do
+            .col-md-4.conference
+              %h3
+                %a{href: conference_path(acronym: conference.acronym)}
+                  = conference.title
 
-            - recent_days = 30
-            - recent_events_count=conference.events.newer(Date.today - 30).count
+              - recent_days = 30
+              - recent_events_count=conference.events.newer(Date.today - 30).count
 
-            - if recent_events_count > 0
-              %span.tagline{title: "during the last #{recent_days} days"}
-                #{recent_events_count} videos recently published
+              - if recent_events_count > 0
+                %span.tagline{title: "during the last #{recent_days} days"}
+                  #{recent_events_count} videos recently published
 
-            %ul
-              / top 3 events, ordered by release_date
-              / not reusing 'events newer then 30 days' here because there may be 0 of them
-              - conference.events.recent(3).each do |event|
-                %li.event
-                  %a{href: event_path(slug: event.slug)}
-                    .event-preview
-                      %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.display_name)}
-                      / FIXME: thumbnail w/ duration in partitial, fix css & list
+              %ul.list-unstyled
+                / top 3 events, ordered by release_date
+                / not reusing 'events newer then 30 days' here because there may be 0 of them
+                / FIXME: use recent_events when conference ordering is fixed
+                - conference.events.recent(3).each do |event|
+                  - cache(event) do
+                    %li.event
+                      .event-preview
+                        = render partial: 'frontend/shared/event_thumb', locals: { event: event }
 
-                    %strong= event.display_name
-                    - if event.subtitle
-                      %span.subtitle
-                        = event.subtitle
-
-                    %span.date= event.display_date
-
-            %a{href: conference_path(acronym: conference.acronym)}
-              Show other videos from #{conference.display_name}
+                      %strong= event.title
+                      %div
+                        %span.icon.icon-calendar-o{title: display_date_title(event)}
+                        = event.display_date
 
 
+              %a.more{href: conference_path(acronym: conference.acronym)}
+                Show more videos from #{conference.display_name}
 
 
-  %h1 News
+  .row
+    .col-sm-6
+      %h2 News
+      %article.news-item
+        %span.date.pull-right= @news.date_formatted
+        %h3= @news.title
+        != @news.body
 
-  - @news.each do |news|
-    %article.news-item
-      %h2
-        %span.date= news.date_formatted
-        = news.title
-      != news.body
+    .col-sm-6
+      %h2 About
+      =render 'frontend/shared/short_about'
