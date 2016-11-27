@@ -5,23 +5,8 @@
   page-list
 
 .container-fluid
-  %h1 Recent Changes
-  - if @buckets.present?
+  %h1 Recent Events
+  - if @events.present?
     .event-previews
-      - @buckets.keys.sort[1..-1].reverse.each do |date|
-        - conferences = @buckets[date]
-        - conferences.each do |conference, count|
-          .event-preview
-            %a{href: conference_path(acronym: conference.acronym, sort: :date)}
-              %img.video-thumbnail{src: conference.logo_url, alt: conference.title}
-            .caption
-              %ul.metadata
-                %li
-                  %span.icon.icon-calendar-o
-                  = date
-              %h3
-                %a{href: conference_path(acronym: conference.acronym, sort: :date)}
-                  Event:
-                  = conference.acronym
-              new entries:
-              = count
+      - @events.each do |event|
+        = render partial: 'frontend/recent_changes/event', locals: { event: event }

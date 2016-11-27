@@ -33,6 +33,7 @@ body.page-list {
     clear: both;
     height: 120px;
     background-color: $gray-lightest;
+    position: relative;
 
     &:nth-child(odd) {
       background-color: #ffffff;
@@ -46,6 +47,14 @@ body.page-list {
       float: left;
       height: 120px;
       width: 160px;
+    }
+
+    .conference {
+      position: absolute;
+      bottom: 8px;
+      right: 16px;
+
+      color: lighten(#333333, 25%);
     }
 
     h3 {
