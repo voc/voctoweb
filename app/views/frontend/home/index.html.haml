@@ -17,8 +17,9 @@
             %input.form-control{type: 'search', placeholder: 'Username', name: 'q', placeholder: 'Search'}
 
         %p.tagline
-          #{number_with_delimiter(@events_count, delimiter: ".")} videos in
-          #{number_with_delimiter(@conferences_count, delimiter: ".")} events and conferences
+          #{number_with_delimiter(@recordings_count, delimiter: ".")} files in
+          #{number_with_delimiter(@events_count, delimiter: ".")} talks at
+          #{number_with_delimiter(@conferences_count, delimiter: ".")} conferences
 
     / Buttons
     .col-xs-12.col-sm-8.col-sm-push-2
