@@ -87,23 +87,28 @@ body.page-start {
     }
 
     .conferences .conference {
-      position: relative;
-      height: 480px;
-
       h3 {
         border-bottom: 1px solid #ccc;
       }
 
-      &:nth-child(odd) {
-        background-color: $gray-even-lighter;
-      }
 
       a.more {
-        position: absolute;
-        bottom: 10px;
-        left: 15px;
-
         font-size: 18px;
+      }
+
+      @media #{$md-or-bigger} {
+        position: relative;
+        height: 480px;
+
+        &:nth-child(odd) {
+          background-color: $gray-even-lighter;
+        }
+
+        a.more {
+          position: absolute;
+          bottom: 10px;
+          left: 15px;
+        }
       }
     }
   }
