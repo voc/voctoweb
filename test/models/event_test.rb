@@ -56,10 +56,17 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should trim whitespace on paths' do
-    recording = create(:event, poster_filename: ' poster.png ', thumb_filename: ' thump.jpeg ', title: '  some  artistic   title ')
-    assert recording.poster_filename.strip == recording.poster_filename
-    assert recording.thumb_filename.strip == recording.thumb_filename
+    event = create(:event, poster_filename: ' poster.png ', thumb_filename: ' thump.jpeg ', title: '  some  artistic   title ')
+    assert_equal event.poster_filename, event.poster_filename.strip
+    assert_equal event.thumb_filename, event.thumb_filename.strip
+    refute_equal event.title, event.title.strip
+  end
 
-    refute recording.title.strip == recording.title
+  test 'should trigger callback to update conferences event_last_released_at' do
+    assert @event.conference
+    assert_equal @event.conference.event_last_released_at, @event.release_date
+    release_date = Time.now.since(2.days).to_date
+    @event.update(release_date: release_date)
+    assert_equal release_date, @event.conference.event_last_released_at
   end
 end
