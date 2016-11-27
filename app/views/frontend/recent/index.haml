@@ -9,4 +9,4 @@
   - if @events.present?
     .event-previews
       - @events.each do |event|
-        = render partial: 'frontend/recent_changes/event', locals: { event: event }
+        = render partial: 'frontend/recent/event', locals: { event: event }

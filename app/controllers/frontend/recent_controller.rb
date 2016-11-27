@@ -1,5 +1,5 @@
 module Frontend
-  class RecentChangesController < FrontendController
+  class RecentController < FrontendController
     def index
       @events = Frontend::Event.recent(20).includes(:conference)
 
