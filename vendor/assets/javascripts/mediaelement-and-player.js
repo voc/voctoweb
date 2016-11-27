@@ -5846,17 +5846,6 @@ $.extend(mejs.MepDefaults,
 					'<label for="' + t.id + '_sourcechooser_' + label + type + '">' + label + ' (' + type + ')</label>'+
 				'</li>')
 			);
-
-			t.adjustSourcechooserBox();
-
-		},
-
-		adjustSourcechooserBox: function() {
-			var t = this;
-			// adjust the size of the outer box
-			t.sourcechooserButton.find('.mejs-sourcechooser-selector').height(
-				t.sourcechooserButton.find('.mejs-sourcechooser-selector ul').outerHeight(true)
-			);
 		}
 	});
 

@@ -813,47 +813,42 @@
 	bottom: 26px;
 	right: -10px;
 	width: 130px;
-	height: 100px;
+	height: auto !important;
 	background: image-url('background.png');
 	background: rgba(50,50,50,0.7);
 	border: solid 1px transparent;
-	padding: 10px;
+	padding: 10px 10px 0px 10px;
 	overflow: hidden;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-}
 
-.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul {
-	margin: 0;
-	padding: 0;
-	display: block;
-	list-style-type: none !important;
-	overflow: hidden;
-}
+	ul {
+		margin: 0;
+		padding: 0;
+		display: block;
+		list-style-type: none !important;
+		overflow: hidden;
 
-.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li {
-	margin: 0 0 6px 0;
-	padding: 0;
-	list-style-type: none !important;
-	display: block;
-	color: #fff;
-	overflow: hidden;
-}
+		li {
+			list-style-type: none !important;
+			display: block;
+			color: #fff;
+			overflow: hidden;
 
-.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li input {
-	clear: both;
-	float: left;
-	margin: 3px 3px 0 5px;
-}
+			input {
+				float: left;
+				display: block;
+				margin-right: 5px;
+			}
 
-.mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector ul li label {
-	width: 100px;
-	float: left;
-	padding: 4px 0 0 0;
-	line-height: 15px;
-	font-family: helvetica, arial;
-	font-size: 10px;
+			label {
+				line-height: 15px;
+				font-size: 10px;
+				display: block;
+			}
+		}
+	}
 }
 /* End: Source Chooser */
 
