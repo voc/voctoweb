@@ -43,27 +43,15 @@
           More recent videos
 
       .row.conferences
-        -# top 3 conferences, ordered by updated_at (also triggered by event change)
-        -# FIXME: should be ordered by event_last_released_at
-        - Frontend::Conference.recent(3).each do |conference|
+        - @recent_conferences.each do |conference|
           - cache(conference) do
             .col-md-4.conference
               %h3
                 %a{href: conference_path(acronym: conference.acronym)}
                   = conference.title
 
-              - recent_days = 30
-              - recent_events_count=conference.events.newer(Date.today - 30).count
-
-              - if recent_events_count > 0
-                %span.tagline{title: "during the last #{recent_days} days"}
-                  #{recent_events_count} videos recently published
-
               %ul.list-unstyled
-                -# top 3 events, ordered by release_date
-                -# not reusing 'events newer then 30 days' here because there may be 0 of them
-                -# FIXME: use recent_events when conference ordering is fixed
-                - conference.events.recent(3).each do |event|
+                - recent_events_for_conference(conference).each do |event|
                   - cache(event) do
                     %li.event
                       .event-preview
@@ -76,8 +64,9 @@
                         = event.display_date
 
 
-              %a.more{href: conference_path(acronym: conference.acronym)}
-                Show more videos from #{conference.display_name}
+              - if conference.events.count > 3
+                %a.more{href: conference_path(acronym: conference.acronym)}
+                  Show #{conference.events.count - 3} more videos from #{conference.display_name}
 
 
   .row
