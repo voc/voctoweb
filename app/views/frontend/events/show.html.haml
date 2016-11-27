@@ -53,17 +53,17 @@
             = parse_url_host(@event)
 
     - if @event.description.present?
-      %h3 About
+      /%h3 About
       %p.description
         = simple_format @event.description
-
-    %h3 Share/Embed
-    .share
-      = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
     %h3 Download
     .download
       = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
+
+    /%h3 Embed/Share
+    .share
+      = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
     - if @event.tags.present?
       %h3 Tags

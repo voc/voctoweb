@@ -2,6 +2,7 @@ body.page-show {
   h3 {
     border-bottom: 1px solid #ccc;
     margin-top: 50px;
+    margin-bottom: 12px;
   }
 
   h4 {
@@ -13,6 +14,7 @@ body.page-show {
     padding: $padding-small-vertical 0;
     text-align: center;
     border-bottom: 1px solid $gray;
+    font-size: 16px;
 
     li {
       display: inline-block;
@@ -22,7 +24,16 @@ body.page-show {
 
     .icon {
       margin-right: $padding-xs-horizontal;
+
+      & + a {
+        position: relative;
+        top: -2px;
+      }
     }
+  }
+
+  .description {
+    margin-top: 12px;
   }
 
   ul.share {
@@ -72,7 +83,11 @@ body.page-show {
 
   .downloads {
     .row {
-      margin-bottom: 30px;
+      margin-bottom: 12px;
+    }
+
+    .multiaudio-warning .well {
+      margin-bottom: 0;
     }
 
     // extract into shared scss?
@@ -82,6 +97,8 @@ body.page-show {
 
         background-color: $gray;
         color: $gray-lighter;
+
+        font-size: 16px;
       }
       li.active a {
         background-color: $gray-lighter;
@@ -110,19 +127,25 @@ body.page-show {
         margin: 5px;
         height: $btn-height;
         display: block;
-        padding-top: 8px;
+        padding-top: 9px;
 
         border-width: 0;
         position: relative;
 
         .title { font-size: 19px; }
-        .size { color: $gray-lighter; }
+        .size {
+          color: $gray-lighter;
+          font-weight: lighter;
+          font-size: 13px;
+        }
         .language {
           $language-height: 32px;
 
           color: $gray-darker;
           background: white;
-          border: 1px solid $gray-darker;
+          border: 1px solid $gray;
+
+          border-radius: 4px;
 
           position: absolute;
 
@@ -156,7 +179,7 @@ body.page-show {
         display: block;
         float: left;
         margin-left: 15px;
-        line-height: 32px;
+        line-height: 34px;
       }
       .btn {
         margin-top: 3px;
