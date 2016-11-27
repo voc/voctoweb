@@ -81,13 +81,14 @@
 
 
   .row
-    .col-sm-6
-      %h2 News
-      %article.news-item
-        %span.date.pull-right= @news.date_formatted
-        %h3= @news.title
-        != @news.body
+    - if @news.present?
+      .col-sm-6
+        %h2 News
+        %article.news-item
+          %span.date.pull-right= @news.date_formatted
+          %h3= @news.title
+          != @news.body
 
-    .col-sm-6
+    %div{class: @news.present? ? 'col-sm-6' : 'col-sm-12'}
       %h2 About
       =render 'frontend/shared/short_about'
