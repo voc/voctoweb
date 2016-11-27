@@ -34,9 +34,7 @@
 
       - elsif @event.recordings.audio.present?
         .player.audio
-          %audio.audio{controls: 'controls', preload: 'none'}
-            - @event.recordings.audio.each do |recording|
-              %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }}
+          = render partial: 'frontend/shared/audioplayer', locals: { event: @event }
 
     %ul.metadata
       %li

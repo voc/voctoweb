@@ -1,0 +1,8 @@
+%audio.audio{controls: 'controls', 'data-id' => event.id, preload: 'none'}
+  - @event.recordings.audio.each do |recording|
+    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }}
+
+    %p Your Browser can't play this Audio-File. Please download the File below and use a Desktop-Player.
+
+:javascript
+  $(function() { MirrorbrainFix.setupPlayer(); })
