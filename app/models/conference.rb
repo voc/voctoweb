@@ -68,6 +68,13 @@ class Conference < ApplicationRecord
     acronym || id
   end
 
+  def update_last_released_at_column
+    last_date = events.maximum(:release_date)
+    logger.info "max-date = #{last_date}"
+
+    self.update_column(:event_last_released_at, last_date)
+  end
+
   private
 
   def logo_exists?
