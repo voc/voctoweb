@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827151338) do
+ActiveRecord::Schema.define(version: 20161127165450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +24,10 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -44,10 +42,9 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "key",         limit: 255
@@ -71,9 +68,9 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.string   "logo",                    limit: 255
     t.integer  "downloaded_events_count",             default: 0,             null: false
     t.jsonb    "metadata",                            default: {}
+    t.date     "event_last_released_at"
+    t.index ["acronym"], name: "index_conferences_on_acronym", using: :btree
   end
-
-  add_index "conferences", ["acronym"], name: "index_conferences_on_acronym", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "guid",                        limit: 255
@@ -96,14 +93,13 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.integer  "duration",                                default: 0
     t.integer  "downloaded_recordings_count",             default: 0
     t.string   "original_language"
+    t.index ["conference_id"], name: "index_events_on_conference_id", using: :btree
+    t.index ["guid"], name: "index_events_on_guid", using: :btree
+    t.index ["release_date"], name: "index_events_on_release_date", using: :btree
+    t.index ["slug", "id"], name: "index_events_on_slug_and_id", using: :btree
+    t.index ["slug"], name: "index_events_on_slug", using: :btree
+    t.index ["title"], name: "index_events_on_title", using: :btree
   end
-
-  add_index "events", ["conference_id"], name: "index_events_on_conference_id", using: :btree
-  add_index "events", ["guid"], name: "index_events_on_guid", using: :btree
-  add_index "events", ["release_date"], name: "index_events_on_release_date", using: :btree
-  add_index "events", ["slug", "id"], name: "index_events_on_slug_and_id", using: :btree
-  add_index "events", ["slug"], name: "index_events_on_slug", using: :btree
-  add_index "events", ["title"], name: "index_events_on_title", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -117,9 +113,8 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.integer  "recording_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["recording_id"], name: "index_recording_views_on_recording_id", using: :btree
   end
-
-  add_index "recording_views", ["recording_id"], name: "index_recording_views_on_recording_id", using: :btree
 
   create_table "recordings", force: :cascade do |t|
     t.integer  "size"
@@ -136,12 +131,11 @@ ActiveRecord::Schema.define(version: 20160827151338) do
     t.string   "language",                 default: "eng"
     t.boolean  "high_quality",             default: true,  null: false
     t.boolean  "html5",                    default: false, null: false
+    t.index ["event_id"], name: "index_recordings_on_event_id", using: :btree
+    t.index ["filename"], name: "index_recordings_on_filename", using: :btree
+    t.index ["mime_type"], name: "index_recordings_on_mime_type", using: :btree
+    t.index ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type", using: :btree
+    t.index ["state"], name: "index_recordings_on_state", using: :btree
   end
-
-  add_index "recordings", ["event_id"], name: "index_recordings_on_event_id", using: :btree
-  add_index "recordings", ["filename"], name: "index_recordings_on_filename", using: :btree
-  add_index "recordings", ["mime_type"], name: "index_recordings_on_mime_type", using: :btree
-  add_index "recordings", ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type", using: :btree
-  add_index "recordings", ["state"], name: "index_recordings_on_state", using: :btree
 
 end
