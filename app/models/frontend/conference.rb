@@ -4,25 +4,21 @@ module Frontend
     has_many :recordings, through: :events
 
     scope :with_events, ->() {
-      joins(:events)
-        .group('conferences.id')
+      where('event_last_released_at IS NOT NULL')
     }
     scope :with_recent_events, ->() {
-      joins(:events)
-        .group('conferences.id')
-        .order('MAX(events.release_date) desc')
+      where('event_last_released_at IS NOT NULL')
+        .order('event_last_released_at DESC')
     }
     scope :with_events_newer, ->(date) {
-      joins(:events)
-        .group('conferences.id')
-        .having('MAX(events.release_date) > ?', date)
-        .order('MAX(events.release_date) desc')
+      where('event_last_released_at IS NOT NULL')
+        .order('event_last_released_at DESC')
+        .where('event_last_released_at > ?', date)
     }
     scope :with_events_older, ->(date) {
-      joins(:events)
-        .group('conferences.id')
-        .having('MAX(events.release_date) < ?', date)
-        .order('MAX(events.release_date) desc')
+      where('event_last_released_at IS NOT NULL')
+        .order('event_last_released_at DESC')
+        .where('event_last_released_at < ?', date)
     }
 
     def mime_types
