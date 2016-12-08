@@ -7,25 +7,79 @@
 = render 'frontend/shared/promoted'
 
 .container-fluid
-  .row.browse-button-bar
-    %a.btn.btn-primary.btn-lg{role: 'button', href: tags_path}
-      %span.icon.icon-tags
-      Browse by tag
+  .row
+    / Searchbox
+    .col-xs-12.col-sm-10.col-sm-push-1.col-md-8.col-md-push-2
+      %form.search{role: 'search', action: '/search/', method: 'get'}
+        .form-group
+          .input-group
+            %input.form-control{type: 'search', name: 'q', placeholder: 'Search'}
+            .input-group-btn
+              %button.btn.btn-default{type: 'submit'}
+                %i.icon-search
 
-    %a.btn.btn-primary.btn-lg{role: 'button', href: browse_start_path}
-      %span.icon.icon-th
-      Browse by category
+        %p.tagline
+          #{number_with_delimiter(@recordings_count, delimiter: ".")} files in
+          #{number_with_delimiter(@events_count, delimiter: ".")} videos at
+          #{number_with_delimiter(@conferences_count, delimiter: ".")} conferences
 
-    %a.btn.btn-primary.btn-lg{role: 'button', href: recent_path}
-      %span.icon.icon-calendar
-      Recent Videos
+    / Buttons
+    .col-xs-12.col-sm-8.col-sm-push-2
+      .browse-button-bar
+        %a.btn.btn-secondary.btn-lg{role: 'button', href: popular_path}
+          %span.icon.icon-tags
+          Popular
+
+        %a.btn.btn-primary.btn-lg{role: 'button', href: browse_start_path}
+          %span.icon.icon-th
+          All Events
+
+        %a.btn.btn-secondary.btn-lg{role: 'button', href: recent_path}
+          %span.icon.icon-clock-o
+          Recent
+
+    .col-xs-12.recently
+      .headline
+        %h2 Recently published
+        %a{href: recent_path}
+          More recent videos
+
+      .row.conferences
+        - @recent_conferences.each do |conference|
+          - cache(conference) do
+            .col-md-4.conference
+              %h3
+                %a{href: conference_path(acronym: conference.acronym)}
+                  = conference.title
+
+              %ul.list-unstyled
+                - recent_events_for_conference(conference).each do |event|
+                  - cache(event) do
+                    %li.event
+                      .event-preview
+                        = render partial: 'frontend/shared/event_thumb', locals: { event: event }
+
+                      %a.title{href: event_path(slug: event.slug)}
+                        = event.title
+                      .date
+                        %span.icon.icon-calendar-o{title: display_date_title(event)}
+                        = event.display_date
 
 
-  %h1 News
+              - if conference.events.count > 3
+                %a.more{href: conference_path(acronym: conference.acronym)}
+                  Show #{conference.events.count - 3} more videos from #{conference.display_name}
 
-  - @news.each do |news|
-    %article.news-item
-      %h2
-        %span.date= news.date_formatted
-        = news.title
-      != news.body
+
+  .row
+    - if @news.present?
+      .col-sm-6
+        %h2 News
+        %article.news-item
+          %span.date.pull-right= @news.date_formatted
+          %h3= @news.title
+          != @news.body
+
+    %div{class: @news.present? ? 'col-sm-6' : 'col-sm-12'}
+      %h2 About
+      =render 'frontend/shared/short_about'

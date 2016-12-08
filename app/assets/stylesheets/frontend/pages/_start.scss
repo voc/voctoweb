@@ -1,25 +1,183 @@
 body.page-start {
+  h2 {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .search {
+    margin: 64px 0 20px 0;
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    $h: 48px;
+    input {
+      height: $h;
+      border-radius: $h;
+      line-height: $h;
+      font-size: 25px;
+
+      padding-left: 20px;
+      padding-top: 6px;
+    }
+    .btn {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      font-size: 22px;
+      height: $h;
+      background-color: $gray-lighter;
+      border-color: #ccc;
+
+      &:hover {
+        background-color: #ccc;
+      }
+
+      padding-top: 6px;
+      padding-right: 16px;
+    }
+
+    .tagline {
+      text-align: center;
+      color: $gray-light;
+      font-size: 18px;
+    }
+  }
+
   .browse-button-bar {
     text-align: center;
     margin-top: $padding-large-vertical;
-    margin-bottom: $padding-large-vertical;
+    margin-bottom: $padding-large-vertical * 5;
 
     .btn-lg {
       margin: $padding-small-vertical $padding-small-horizontal;
 
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 25px;
 
       @media #{$xs-or-smaller} {
         font-size: 23px;
+        padding: 5px 15px;
       }
 
+      /* nicely positioned icons on large buttons */
       .icon {
-        /* nicely positioned icons on large buttons */
         position: relative;
         top: 0.15em;
         margin-right: 0.3em;
         font-size: 1.3em;
+      }
+    }
+  }
+
+
+  .recently {
+    h3 > a {
+      display: block;
+      height: 27px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .headline
+    {
+      position: relative;
+      margin-top: 1.2em;
+
+      h2 {
+        margin-top: 0
+      }
+
+      @media #{$sm-or-bigger} {
+        > a {
+          position: absolute;
+          right: 0;
+          bottom: 5px;
+        }
+      }
+    }
+
+    .event {
+      overflow: hidden;
+
+      a.title {
+        font-size: 18px;
+      }
+
+      .date {
+        color: $gray-light;
+        .icon {
+          margin-right: 3px;
+        }
+      }
+
+      // left/right view
+      @media #{$sm-or-bigger} {
+        .event-preview {
+          width: 110px;
+          float: left;
+          margin: 0 12px 12px 0;
+        }
+
+        .date {
+          margin-top: 5px;
+        }
+      }
+
+      // top/down view
+      @media #{$xs-or-smaller} {
+        margin-bottom: 24px;
+        padding: 6px;
+
+        &:nth-child(odd) {
+          background-color: $gray-even-lighter;
+        }
+
+        > a {
+          text-align: center;
+          display: block;
+          font-size: 18px;
+          margin: 12px 0 4px 0;
+        }
+        .date {
+          text-align: center;
+          display: block;
+        }
+      }
+    }
+
+    .conferences .conference {
+      h3 {
+        border-bottom: 1px solid #ccc;
+      }
+
+
+      a.more {
+        font-size: 18px;
+        @media #{$xs-or-smaller} {
+          // too many links for such a small display
+          // (and the title links there anyway)
+          display: none;
+        }
+      }
+
+      @media #{$md-or-bigger} {
+        position: relative;
+        height: 375px;
+
+        &:nth-child(odd) {
+          background-color: $gray-even-lighter;
+        }
+
+        a.more {
+          position: absolute;
+          bottom: 0;
+          left: 15px;
+          right: 0;
+
+          border-top: 1px solid #ccc;
+          padding-top: 10px;
+          display: block;
+        }
       }
     }
   }

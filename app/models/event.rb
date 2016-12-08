@@ -33,6 +33,8 @@ class Event < ApplicationRecord
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
   before_save { trim_paths }
+  after_save { conference.update_last_released_at_column if release_date_changed? }
+  after_destroy { conference.update_last_released_at_column }
 
   # active admin and serialized fields workaround:
   attr_accessor :persons_raw, :tags_raw

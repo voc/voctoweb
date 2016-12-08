@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Frontend
-  class RecentChangesControllerTest < ActionController::TestCase
+  class RecentControllerTest < ActionController::TestCase
     test 'should redirect if slug is not found' do
       create :conference_with_recordings
       conference = create :conference_with_recordings

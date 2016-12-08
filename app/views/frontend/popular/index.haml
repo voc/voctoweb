@@ -1,0 +1,12 @@
+- content_for :title do
+  Popular Events
+
+- content_for :body_class do
+  page-list
+
+.container-fluid
+  %h1 Popular Events
+  - if @events.present?
+    .event-previews
+      - @events.each do |event|
+        = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
