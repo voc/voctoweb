@@ -11,10 +11,12 @@
     / Searchbox
     .col-xs-12.col-sm-10.col-sm-push-1.col-md-8.col-md-push-2
       %form.search{role: 'search', action: '/search/', method: 'get'}
-        .form-group.has-addon
+        .form-group
           .input-group
-            %i.input-group-addon.icon-search
             %input.form-control{type: 'search', name: 'q', placeholder: 'Search'}
+            .input-group-btn
+              %button.btn.btn-default{type: 'submit'}
+                %i.icon-search
 
         %p.tagline
           #{number_with_delimiter(@recordings_count, delimiter: ".")} files in

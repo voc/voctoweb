@@ -10,18 +10,30 @@ body.page-start {
       margin-bottom: 12px;
     }
 
+    $h: 48px;
     input {
-      $h: 48px;
-
       height: $h;
       border-radius: $h;
       line-height: $h;
       font-size: 25px;
+
+      padding-left: 20px;
+      padding-top: 6px;
     }
-    .input-group-addon {
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
+    .btn {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
       font-size: 22px;
+      height: $h;
+      background-color: $gray-lighter;
+      border-color: #ccc;
+
+      &:hover {
+        background-color: #ccc;
+      }
+
+      padding-top: 6px;
+      padding-right: 16px;
     }
 
     .tagline {
