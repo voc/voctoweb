@@ -1,15 +1,26 @@
+- title = @searchquery.present? ? "Search for \"#{@searchquery}\"" : "Search"
+
 - content_for :title do
-  Search for "#{@searchquery}"
+  = title
 
 - content_for :body_class do
   page-list
 
 .container-fluid
-  %h1
-    Search for "#{@searchquery}"
+  %h1= title
   .events-header
 
   - if @events.present?
     .event-previews
       - @events.each do |event|
         = render event
+  - else
+    %p
+      The Search for "#{@searchquery}" did not return any results.
+    %p
+      Go take a look at our
+      %a{href: recent_path}
+        Recent Videos
+      or watch some of our most
+      %a{href: popular_path}
+        popular Videos.
