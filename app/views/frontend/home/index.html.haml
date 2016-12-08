@@ -59,7 +59,7 @@
                       .event-preview
                         = render partial: 'frontend/shared/event_thumb', locals: { event: event }
 
-                      %a{href: event_path(slug: event.slug)}
+                      %a.title{href: event_path(slug: event.slug)}
                         = event.title
                       .date
                         %span.icon.icon-calendar-o{title: display_date_title(event)}

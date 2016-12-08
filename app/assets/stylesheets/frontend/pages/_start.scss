@@ -4,7 +4,7 @@ body.page-start {
   }
 
   .search {
-    margin: 64px 0 40px 0;
+    margin: 64px 0 20px 0;
 
     .form-group {
       margin-bottom: 12px;
@@ -46,7 +46,7 @@ body.page-start {
   .browse-button-bar {
     text-align: center;
     margin-top: $padding-large-vertical;
-    margin-bottom: $padding-large-vertical;
+    margin-bottom: $padding-large-vertical * 5;
 
     .btn-lg {
       margin: $padding-small-vertical $padding-small-horizontal;
@@ -70,6 +70,14 @@ body.page-start {
 
 
   .recently {
+    h3 > a {
+      display: block;
+      height: 27px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     .headline
     {
       position: relative;
@@ -91,10 +99,21 @@ body.page-start {
     .event {
       overflow: hidden;
 
+      a.title {
+        font-size: 18px;
+      }
+
+      .date {
+        color: $gray-light;
+        .icon {
+          margin-right: 3px;
+        }
+      }
+
       // left/right view
       @media #{$sm-or-bigger} {
         .event-preview {
-          width: 160px;
+          width: 110px;
           float: left;
           margin: 0 12px 12px 0;
         }
@@ -143,7 +162,7 @@ body.page-start {
 
       @media #{$md-or-bigger} {
         position: relative;
-        height: 480px;
+        height: 375px;
 
         &:nth-child(odd) {
           background-color: $gray-even-lighter;
@@ -151,8 +170,13 @@ body.page-start {
 
         a.more {
           position: absolute;
-          bottom: 10px;
+          bottom: 0;
           left: 15px;
+          right: 0;
+
+          border-top: 1px solid #ccc;
+          padding-top: 10px;
+          display: block;
         }
       }
     }
