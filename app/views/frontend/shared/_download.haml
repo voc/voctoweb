@@ -78,7 +78,7 @@
                     - else
                       .codec= display
 
-  - if event.recordings.subtitle.present? || @conference.metadata['subtitles'].present?
+  - if event.recordings.subtitle.present? || ( @conference.metadata && @conference.metadata['subtitles'].present? )
     .row.subtitle
       .col-sm-2.col-md-1
         %h4 Subtitles
@@ -102,6 +102,6 @@
             Help us to improve these subtitles!
 
         - else
-          - if @conference.metadata['subtitles'].present?
+          - if ( @conference.metadata && @conference.metadata['subtitles'].present? )
             %a.subtitle.improve{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid, target: '_blank'}
               Help us to subtitle this talk!
