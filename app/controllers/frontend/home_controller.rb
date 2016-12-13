@@ -25,7 +25,7 @@ module Frontend
     private
 
     def recent_events_for_conference(conference)
-      conference.events.order('release_date desc').limit(@events_limit)
+      conference.events.order('release_date DESC, id DESC').limit(@events_limit)
     end
   end
 end
