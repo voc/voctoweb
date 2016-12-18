@@ -18,5 +18,6 @@ class Public::EventsController < ActionController::Base
     else
       @event = Event.find_by(guid: params[:id])
     end
+    fail ActiveRecord::RecordNotFound unless @event
   end
 end

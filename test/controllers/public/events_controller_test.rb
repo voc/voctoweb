@@ -27,4 +27,9 @@ class Public::EventsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal @event, assigns(:event)
   end
+
+  test 'redirects to page not found' do
+    get :show, params: { id: 'notexisting'}, format: :json
+    assert_response :not_found
+  end
 end
