@@ -116,9 +116,16 @@ body.page-show {
       overflow: hidden;
 
       .btn-wrap {
-        width: 25%;
+        width: 100%;
         display: block;
         float: left;
+
+        @media #{$smmd-or-bigger} {
+          width: 50%;
+        }
+        @media #{$md-or-bigger} {
+          width: 25%;
+        }
       }
 
       .btn {
