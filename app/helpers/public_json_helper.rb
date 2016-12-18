@@ -5,6 +5,7 @@ module PublicJsonHelper
   end
 
   def json_cached_key(identifier, *models)
-    'js_' + identifier.to_s + Digest::SHA1.hexdigest(models.flatten.uniq.map { |m| m.updated_at.to_i }.join(';'))
+    key = models.flatten.uniq.map { |m| "#{m.class}#{m.id}=#{m.updated_at.to_i}" }.join(';')
+    'js_' + identifier.to_s + Digest::SHA1.hexdigest(key)
   end
 end
