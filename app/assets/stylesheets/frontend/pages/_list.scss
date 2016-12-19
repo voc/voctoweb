@@ -45,8 +45,19 @@ body.page-list {
 
     .duration-container {
       float: left;
-      height: 120px;
-      width: 160px;
+      height: 117px;
+      width: 208px;
+
+      background-color: $gray-dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img.video-thumbnail {
+        width: auto;
+        height: 100%;
+        display: block;
+      }
     }
 
     .conference {
@@ -69,7 +80,7 @@ body.page-list {
     color: black;
 
     .caption {
-      margin-left: 160px;
+      margin-left: 208px;
       padding-left: $padding-large-horizontal;
       h3 {
         margin-top: 0;
