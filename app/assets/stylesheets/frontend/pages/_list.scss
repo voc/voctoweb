@@ -54,7 +54,9 @@ body.page-list {
       bottom: 8px;
       right: 16px;
 
-      color: lighten(#333333, 25%);
+      &, a {
+        color: lighten(#333333, 25%);
+      }
     }
 
     h3 {
