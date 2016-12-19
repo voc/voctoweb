@@ -3,4 +3,5 @@
     = render partial: 'frontend/shared/event_thumb', locals: { event: event }
     = render partial: 'frontend/shared/event_metadata', locals: { event: event }
     .conference
-      = event.conference.title
+      %a{href: conference_path(acronym: event.conference.acronym)}
+        = event.conference.title
