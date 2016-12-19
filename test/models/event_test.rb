@@ -62,6 +62,98 @@ class EventTest < ActiveSupport::TestCase
     refute_equal event.title, event.title.strip
   end
 
+  test 'should initialize event_last_released_at to nil' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+  end
+
+  test 'should update event_last_released_at when newer event is added' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+
+    event1 = create(:event_with_recordings)
+    event1.release_date = Time.new(2016, 01, 01)
+    conference.events << event1
+
+    assert_equal event1.release_date, conference.event_last_released_at
+
+
+    # newer
+    event2 = create(:event_with_recordings)
+    event2.release_date = Time.new(2016, 01, 13)
+    conference.events << event2
+
+    # now event2
+    assert_equal event2.release_date, conference.event_last_released_at
+
+
+    # older
+    event3 = create(:event_with_recordings)
+    event3.release_date = Time.new(2015, 03, 01)
+    conference.events << event3
+
+    # still event2
+    assert_equal event2.release_date, conference.event_last_released_at
+  end
+
+  test 'should update event_last_released_at when newer event is removed' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+
+    event1 = create(:event_with_recordings)
+    event1.release_date = Time.new(2016, 01, 01)
+    conference.events << event1
+
+    # newer
+    event2 = create(:event_with_recordings)
+    event2.release_date = Time.new(2016, 01, 13)
+    conference.events << event2
+
+    # older
+    event3 = create(:event_with_recordings)
+    event3.release_date = Time.new(2015, 03, 01)
+    conference.events << event3
+
+    # event2
+    assert_equal event2.release_date, conference.event_last_released_at
+
+    # still event2
+    conference.events.delete(event3)
+    assert_equal event2.release_date, conference.event_last_released_at
+
+    # now event1
+    conference.events.delete(event2)
+    assert_equal event1.release_date, conference.event_last_released_at
+
+    # now nil
+    conference.events.delete(event1)
+    assert_nil conference.event_last_released_at
+  end
+
+  test 'should update event_last_released_at when newer event is modified' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+
+    event1 = create(:event_with_recordings)
+    event1.release_date = Time.new(2016, 01, 01)
+    conference.events << event1
+
+    # newer
+    event2 = create(:event_with_recordings)
+    event2.release_date = Time.new(2016, 01, 13)
+    conference.events << event2
+
+    # event2
+    assert_equal event2.release_date, conference.event_last_released_at
+
+    # move event2 into the past
+    event2.release_date = Time.new(2014, 01, 01)
+    event2.save()
+
+    # now event1
+    assert_equal event1.release_date, conference.event_last_released_at
+  end
+
   test 'should trigger callback to update conferences event_last_released_at' do
     assert @event.conference
     assert_equal @event.conference.event_last_released_at, @event.release_date
