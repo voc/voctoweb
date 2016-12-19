@@ -13,7 +13,7 @@
   - if @events.present?
     .event-previews
       - @events.each do |event|
-        = render event
+        = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
   - else
     %p
       The Search for "#{@searchquery}" did not return any results.
