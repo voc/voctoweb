@@ -77,6 +77,16 @@ body.page-list {
       }
     }
 
+    @media #{$sm-or-smaller} {
+      height: auto;
+      min-height: 120px;
+
+      .metadata {
+        position: static;
+        padding-top: 10px;
+       }
+    }
+
     @media #{$xs-or-smaller} {
       width: 100%;
       height: auto;

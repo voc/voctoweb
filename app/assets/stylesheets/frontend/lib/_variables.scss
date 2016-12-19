@@ -299,6 +299,7 @@ $xs-or-smaller: "only screen and (max-width: #{$screen-xs-max})";
 $sm-or-smaller: "only screen and (max-width: #{$screen-sm-max})";
 $md-or-smaller: "only screen and (max-width: #{$screen-md-max})";
 
+$smmd-or-bigger: "only screen and (min-width: 600px)";
 $sm-or-bigger: "only screen and (min-width: #{$screen-sm})";
 $md-or-bigger: "only screen and (min-width: #{$screen-md})";
 $lg-or-bigger: "only screen and (min-width: #{$screen-lg})";
