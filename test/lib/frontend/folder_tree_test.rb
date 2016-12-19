@@ -15,17 +15,31 @@ module Frontend
       folders = tree.folders_at('')
       assert_equal 2, folders.length
       assert_equal nil, folders[0].conference_id
-      assert_equal 'a', folders[0].path
+
+      paths = folders.map{ |folder| folder.path }
+      assert_includes paths, 'a'
+      assert_includes paths, 'h'
+
 
       folders = tree.folders_at('a')
       assert_equal 3, folders.length
-      assert_equal 'a/b', folders[0].path
+
+      paths = folders.map{ |folder| folder.path }
+      assert_includes paths, 'a/b'
+      assert_includes paths, 'a/e'
+      assert_includes paths, 'a/g'
+
 
       folders = tree.folders_at('a/b')
       assert_equal 2, folders.length
-      assert_equal one.id, folders[0].conference_id
-      assert_equal one.slug, folders[0].path
-      assert_equal two.id, folders[1].conference_id
+
+      paths = folders.map{ |folder| folder.path }
+      assert_includes paths, one.slug
+      assert_includes paths, two.slug
+
+      conference_ids = folders.map{ |folder| folder.conference_id }
+      assert_includes conference_ids, one.id
+      assert_includes conference_ids, two.id
     end
 
     test 'fails to create invalid folder' do
