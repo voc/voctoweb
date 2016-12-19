@@ -10,4 +10,4 @@
   .event-previews
     - if @events.present?
       - @events.each do |event|
-        = render partial: 'frontend/events/event', locals: { event: event }
+        = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
