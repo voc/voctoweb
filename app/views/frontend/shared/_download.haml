@@ -26,6 +26,9 @@
                     - else
                       .codec= display
 
+                  %a.btn.btn-default.torrent.hq{href: hq.torrent_url}
+                    .title= 'Torrent'
+
               - unless lq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.video.lq{href: lq.url}
@@ -34,6 +37,9 @@
                       .size= lq.size.to_s+' MB'
                     - else
                       .codec= display
+
+                  %a.btn.btn-default.torrent.hq{href: lq.torrent_url}
+                    .title= 'Torrent'
 
 
   - if event.has_translation
