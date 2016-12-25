@@ -20,7 +20,6 @@
   .titlebar {
     width: 100%;
     height: 112px;
-    background-color: $transparent-white;
     position: absolute;
     top: 188px;
     bottom: 0;
@@ -65,6 +64,11 @@
     .bx-controls {
       padding-top: 85px;
       .bx-pager {
+
+        a:hover, a.active {
+          background: white;
+        }
+
         bottom: 5px;
       }
       .bx-controls-direction {
