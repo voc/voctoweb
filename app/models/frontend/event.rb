@@ -38,7 +38,7 @@ module Frontend
     end
 
     def tags
-      self[:tags].compact.collect(&:strip).map!(&:freeze)
+      self[:tags].compact.collect(&:to_s).collect(&:strip).map!(&:freeze)
     end
 
     def has_translation
