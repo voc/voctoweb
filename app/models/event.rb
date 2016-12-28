@@ -20,6 +20,7 @@ class Event < ApplicationRecord
   serialize :persons, Array
   serialize :tags, Array
 
+  # events with recordings of any type for a given conference
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
       .where(conferences: { id: conference })
@@ -34,6 +35,7 @@ class Event < ApplicationRecord
 
   before_save { trim_paths }
   after_save { conference.update_last_released_at_column if release_date_changed? }
+  after_save { update_conference_downloaded_count if conference_id_changed? }
   after_destroy { conference.update_last_released_at_column }
 
   # active admin and serialized fields workaround:
@@ -142,9 +144,20 @@ class Event < ApplicationRecord
       ORDER BY count(recording_views.id) DESC LIMIT #{MAX_PROMOTED}
     }
   end
+  private_class_method :popular_event_ids
 
   def self.recently_viewed_event_ids
     RecordingView.joins(:recording).where('recording_views.updated_at > ?', Time.now.ago(30.minutes)).pluck('recordings.event_id').uniq
+  end
+  private_class_method :recently_viewed_event_ids
+
+  def update_conference_downloaded_count
+    conference.update_downloaded_count!
+    begin
+      Conference.find(conference_id_was).update_downloaded_count!
+    rescue ActiveRecord::RecordNotFound
+      # could have vanished and it's ok
+    end
   end
 
   def original_language_valid

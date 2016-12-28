@@ -6,6 +6,7 @@ class Conference < ApplicationRecord
   ASPECT_RATIO = ['4:3', '16:9']
 
   has_many :events, dependent: :destroy
+  has_many :recordings, through: :events
 
   validates :acronym, :slug, presence: true
   validates :acronym, :slug, uniqueness: true
@@ -64,7 +65,11 @@ class Conference < ApplicationRecord
 
   def update_last_released_at_column
     last_date = events.maximum(:release_date)
-    self.update_column(:event_last_released_at, last_date)
+    update_column(:event_last_released_at, last_date)
+  end
+
+  def update_downloaded_count!
+    update_column :downloaded_events_count, Event.recorded_at(self).to_a.size
   end
 
   private
