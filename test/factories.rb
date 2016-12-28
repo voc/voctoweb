@@ -129,7 +129,6 @@ FactoryGirl.define do
     width 1024
     size '12'
     length '5'
-    state 'downloaded'
     html5 true
   end
 
