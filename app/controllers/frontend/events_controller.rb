@@ -6,6 +6,14 @@ module Frontend
       respond_to { |format| format.html }
     end
 
+    def postroll
+      events = @conference.events.to_a
+      pos = events.index(@event) + 1
+      pos = 0 if pos >= events.count
+      @new_event = events[pos]
+      render layout: false
+    end
+
     # videoplayer suitable for embedding in an iframe
     def oembed
       @width = params[:width] || view_context.aspect_ratio_width

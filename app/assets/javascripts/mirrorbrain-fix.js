@@ -39,7 +39,7 @@ var MirrorbrainFix = {
       $('video').mediaelementplayer({
         usePluginFullScreen: true,
         enableAutosize: true,
-        features: ['playpause','progress','current','duration','tracks','volume', 'speed', 'sourcechooser', 'fullscreen'],
+        features: ['playpause','progress','current','duration','tracks','volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll'],
         success: function (mediaElement) {
           mediaElement.addEventListener('canplay', function () {
             if(stamp) {
