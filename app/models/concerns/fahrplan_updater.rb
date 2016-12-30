@@ -11,8 +11,6 @@ module FahrplanUpdater
     end
   end
 
-  private
-
   # update event attributes from schedule XML
   def update_event_info(info)
     self.title = info.delete(:title)
