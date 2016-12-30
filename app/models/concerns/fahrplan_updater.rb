@@ -16,6 +16,7 @@ module FahrplanUpdater
     self.title = info.delete(:title)
     id = info.delete(:id)
     self.link = self.conference.get_event_url(id)
+    info[:tags] << id.to_s
     self.update_attributes info
   end
 end
