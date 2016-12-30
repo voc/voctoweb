@@ -20,5 +20,5 @@ chdir APP_ROOT do
   system! 'FIXTURES_DIR=../../tmp/fixtures bin/rake db:fixtures:load'
 
   puts "\n== Updating Elasticsearch =="
-  system! 'echo "Event.__elasticsearch__.create_index! force: true; Event.import" | bin/rails console'
+  system! 'bin/rails runner "Event.__elasticsearch__.create_index! force: true; Event.import"'
 end
