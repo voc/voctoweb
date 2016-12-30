@@ -5,11 +5,15 @@
   - event.recordings.subtitle.each do |track|
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
 
+
   %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('flashmediaelement.swf') }
     %param{ name: 'allowFullScreen', value: 'true' }
     %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(event.videos_sorted_by_language)}" }
 
     %p Your Browser can't play this Video-File. Please download the File below and use a Desktop-Player.
+
+  %link{rel: "postroll", href: postroll_path(slug: event.slug)}
+
 
 :javascript
   $(function() { MirrorbrainFix.setupPlayer(); })
