@@ -15,13 +15,13 @@ module FahrplanUpdater
     self.title = info.delete(:title)
     id = info.delete(:id)
     self.metadata[:remote_id] = id
-    self.link = get_event_url(conference, id)
+    self.link = get_event_url(id)
     update_attributes info
   end
 
   private
 
-  def get_event_url(conference, id)
+  def get_event_url(id)
     return unless conference.schedule_url.present?
     conference.schedule_url.sub('schedule.xml', "events/#{id}.html").freeze
   end
