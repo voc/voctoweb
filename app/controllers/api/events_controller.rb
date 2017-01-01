@@ -96,6 +96,7 @@ class Api::EventsController < ApiController
       :original_language,
       :thumb_filename, :poster_filename,
       :conference_id,
+      :metadata,
       :description, :date,
       { persons: [] }, { tags: [] },
       :promoted, :release_date)
