@@ -5,20 +5,30 @@ class EventUpdateWorker
   # bulk update several events using the saved schedule.xml files
   def perform(ids)
     logger.info "bulk updating events from XML for events: #{ids.join(', ')}"
-    fahrplans = {}
+    @fahrplans = {}
+    @event_infos = {}
+
     ActiveRecord::Base.transaction do
       Event.where(id: ids).each do |event|
         conference = event.conference
-        if fahrplans[conference.acronym]
-          fahrplan = fahrplans[conference.acronym]
-        else
-          fahrplan = FahrplanParser.new(conference.schedule_xml)
-          fahrplans[conference.acronym] = fahrplan
-        end
 
-        info = fahrplan.event_info_by_guid[event.guid]
+        fahrplan = fahrplan_for_conference(conference)
+        next unless fahrplan
+        info = event_info(fahrplan, event.guid)
+        next unless info.present?
         event.update_event_info(info)
       end
     end
+  end
+
+  private
+
+  def fahrplan_for_conference(conference)
+    @fahrplans[conference.acronym] ||= FahrplanParser.new(conference.schedule_xml)
+  end
+
+  def event_info(fahrplan, guid)
+    @event_infos[fahrplan] ||= fahrplan.event_info_by_guid
+    @event_infos[fahrplan][guid]
   end
 end
