@@ -1,4 +1,8 @@
 .postroll
-  %h3
-    = render partial: 'frontend/shared/event_title', locals: { event: @new_event }
-  = render partial: 'frontend/shared/event_thumb', locals: { event: @new_event }
+  %h3 continue ...
+  .container-fluid
+    .row
+      - @events.each do |event|
+        .col-md-4.conference
+          = render partial: 'frontend/shared/event_title', locals: { event: event }
+          = render partial: 'frontend/shared/event_thumb', locals: { event: event }

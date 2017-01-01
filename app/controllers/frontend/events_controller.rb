@@ -7,10 +7,7 @@ module Frontend
     end
 
     def postroll
-      events = @conference.events.to_a
-      pos = events.index(@event) + 1
-      pos = 0 if pos >= events.count
-      @new_event = events[pos]
+      @events = related_events(3)
       render layout: false
     end
 
@@ -23,6 +20,11 @@ module Frontend
     end
 
     private
+
+    def related_events(n)
+      return Event.find(@event.related_event_ids(n)) if @event.metadata[:related].present?
+      @event.next_from_conference(n)
+    end
 
     def load_event
       @event = Frontend::Event.find_by!(slug: params[:slug])
