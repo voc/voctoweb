@@ -113,8 +113,27 @@ StartLimitInterval=0
 WantedBy=default.target
 Depends=vagrant.mount
 UNIT
-  systemctl enable voctoweb-puma
-  systemctl start voctoweb-puma
+    systemctl enable --now voctoweb-puma
+
+    tee /etc/systemd/system/voctoweb-sidekiq.service <<UNIT
+[Unit]
+Description=Sidekiq job runner for media.ccc.de
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/vagrant
+User=ubuntu
+ExecStart=/usr/local/bin/bundle exec sidekiq --index 0 --environment development
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=voctoweb-sidekiq
+
+[Install]
+WantedBy=default.target
+UNIT
+    systemctl enable --now voctoweb-sidekiq
 
   SHELL
 end
