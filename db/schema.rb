@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127165450) do
+ActiveRecord::Schema.define(version: 20161231215656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,8 +93,10 @@ ActiveRecord::Schema.define(version: 20161127165450) do
     t.integer  "duration",                                default: 0
     t.integer  "downloaded_recordings_count",             default: 0
     t.string   "original_language"
+    t.jsonb    "metadata",                                default: {}
     t.index ["conference_id"], name: "index_events_on_conference_id", using: :btree
     t.index ["guid"], name: "index_events_on_guid", using: :btree
+    t.index ["metadata"], name: "index_events_on_metadata", using: :gin
     t.index ["release_date"], name: "index_events_on_release_date", using: :btree
     t.index ["slug", "id"], name: "index_events_on_slug_and_id", using: :btree
     t.index ["slug"], name: "index_events_on_slug", using: :btree

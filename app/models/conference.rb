@@ -49,12 +49,6 @@ class Conference < ApplicationRecord
     ScheduleDownloadWorker.perform_async(id)
   end
 
-  def get_event_url(id)
-    if schedule_url.present?
-      return schedule_url.sub('schedule.xml', "events/#{id}.html").freeze
-    end
-  end
-
   # frontend generates logos like this:
   def logo_url
     if logo_exists?
