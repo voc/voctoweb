@@ -122,6 +122,11 @@ class Event < ApplicationRecord
     end
   end
 
+  # for elastic search
+  def remote_id
+    metadata[:remote_id] if metadata.key?(:remote_id)
+  end
+
   private
 
   def self.popular_event_ids
