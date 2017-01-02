@@ -10,7 +10,7 @@ class Conference < ApplicationRecord
 
   validates :acronym, :slug, presence: true
   validates :acronym, :slug, uniqueness: true
-  validates :slug, format: { with: %r{\A\w+(?:/\w+)*\z} }
+  validates :slug, format: { with: %r{\A\w[\w-]*(?:/[\w-]+)*\z} }
   validate :schedule_url_valid
   validate :slug_reachable
 
