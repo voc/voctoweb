@@ -22,11 +22,11 @@ class Recording < ApplicationRecord
   scope :html5, -> { where(html5: true) }
   scope :original_language, -> { joins(:event).where('events.original_language = recordings.language') }
 
-  after_save { update_conference_downloaded_count }
+  after_save { conference.update_downloaded_count! }
   after_save { update_event_downloaded_count }
   after_save { update_event_duration if length_changed? }
   after_save { event.touch }
-  after_destroy { update_conference_downloaded_count }
+  after_destroy { conference.update_downloaded_count! }
   after_destroy { update_event_downloaded_count }
   after_destroy { event.touch }
   before_save { trim_paths }
@@ -112,10 +112,6 @@ class Recording < ApplicationRecord
       recording.filename == filename && recording.folder == folder
     }.delete_if { |dupe| dupe == self }
     errors.add :event, 'recording already exist on event' if dupe.present?
-  end
-
-  def update_conference_downloaded_count
-    conference.update_column :downloaded_events_count, Event.recorded_at(conference).to_a.size
   end
 
   def update_event_downloaded_count
