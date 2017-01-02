@@ -1,5 +1,4 @@
 class Event < ApplicationRecord
-  include Recent
   include FahrplanUpdater
   include Storage
   include ElasticsearchEvent
@@ -27,6 +26,7 @@ class Event < ApplicationRecord
       .where(recordings: { mime_type: MimeType.all })
       .group(:id)
   }
+  scope :recent, ->(n) { order('release_date desc').limit(n) }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
