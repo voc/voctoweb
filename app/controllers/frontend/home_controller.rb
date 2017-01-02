@@ -18,7 +18,9 @@ module Frontend
 
     def page_not_found
       respond_to do |format|
-        format.html { render :page_not_found, status: 404 }
+        format.json { head :no_content }
+        format.xml { render xml: { status: :error } }
+        format.all { render :page_not_found, status: 404 }
       end
     end
 
