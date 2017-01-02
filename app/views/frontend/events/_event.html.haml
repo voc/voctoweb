@@ -1,4 +1,4 @@
-- cache(event) do
+- cache([event.conference, event]) do
   .event-preview
     = render partial: 'frontend/shared/event_thumb', locals: { event: event }
     = render partial: 'frontend/shared/event_metadata', locals: { event: event }

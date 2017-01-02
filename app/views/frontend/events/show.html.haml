@@ -17,7 +17,7 @@
 - content_for :description do
   %meta{name: 'description', content: @event.short_description}
 
-- cache(@event) do
+- cache([@event.conference, @event]) do
   .container-fluid
     %h1
       = @event.title
