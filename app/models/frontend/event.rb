@@ -91,7 +91,7 @@ module Frontend
     end
 
     def related_event_ids(n)
-      metadata[:related].shuffle[0..n-1]
+      metadata['related'].shuffle[0..n-1]
     end
 
     def next_from_conference(n)

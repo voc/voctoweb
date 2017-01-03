@@ -20,4 +20,11 @@ class EventTest < ActiveSupport::TestCase
     @event = Frontend::Event.find(@event.id)
     assert_equal nil, @event.audio_recording
   end
+
+  test 'should list related events' do
+    events = create_list(:event, 3)
+    @event.metadata[:related] = events.pluck(:id)
+    @event.save
+    assert_equal 3, @event.metadata['related'].count
+  end
 end

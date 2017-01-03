@@ -22,7 +22,7 @@ module Frontend
     private
 
     def related_events(n)
-      return Event.find(@event.related_event_ids(n)) if @event.metadata[:related].present?
+      return Event.find(@event.related_event_ids(n)) if @event.metadata['related'].present?
       @event.next_from_conference(n)
     end
 

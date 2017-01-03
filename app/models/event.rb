@@ -126,7 +126,7 @@ class Event < ApplicationRecord
 
   # for elastic search
   def remote_id
-    metadata[:remote_id] if metadata.key?(:remote_id)
+    metadata['remote_id']
   end
 
   private
