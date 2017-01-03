@@ -3,28 +3,18 @@ require 'active_support/concern'
 module ThrottleConnections
   extend ActiveSupport::Concern
 
-  def throttle?(key)
+  def throttle?(recording_view)
     return false if Rails.env.test?
-    Rails.cache.exist?(cache_key(key))
+    Rails.cache.exist?(cache_key(recording_view))
   end
 
-  def add_throttling(key)
-    Rails.cache.write(cache_key(key), true, expires_in: 1.day, race_condition_ttl: 5)
+  def add_throttling(recording_view)
+    Rails.cache.write(cache_key(recording_view), true, expires_in: 12.hours, race_condition_ttl: 5)
   end
 
   private
 
-  def cache_key(key)
-    ['throttle', key, Digest::MD5.hexdigest(remote_ip)]
+  def cache_key(recording_view)
+    ['throttle', recording_view.recording.event_id, recording_view.recording.filename, recording_view.identifier]
   end
-
-  def remote_ip
-    if request.env.has_key? 'HTTP_X_FORWARDED_FOR'
-      request.env['HTTP_X_FORWARDED_FOR']
-    else
-      request.remote_ip
-    end
-  end
-
 end
-

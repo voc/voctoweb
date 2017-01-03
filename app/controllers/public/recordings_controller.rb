@@ -15,15 +15,13 @@ class Public::RecordingsController < ActionController::Base
 
   def count
     @event = Event.find(params[:event_id])
-    return render json: { status: :unprocessable_entity } unless @event
+    @recording = @event.recordings.find_by!(filename: File.basename(params[:src]))
+    recording_view = @recording.recording_views.build(identifier: remote_ip, user_agent: request.user_agent)
 
-    @recording = @event.recordings.find_by(filename: File.basename(params[:src]))
-    if not @recording or throttle?(key(@recording))
-      return render json: { status: :unprocessable_entity }
-    end
+    return render json: { status: :unprocessable_entity } if throttle?(recording_view)
 
-    if @recording.recording_views.create
-      add_throttling(key(@recording))
+    if recording_view.save
+      add_throttling(recording_view)
       render json: { status: :ok }
     else
       render json: { status: :error }
@@ -32,7 +30,11 @@ class Public::RecordingsController < ActionController::Base
 
   private
 
-  def key(recording)
-    [@recording.event_id, @recording.filename].join('/')
+  def remote_ip
+    if request.env.key? 'HTTP_X_FORWARDED_FOR'
+      request.env['HTTP_X_FORWARDED_FOR']
+    else
+      request.remote_ip
+    end
   end
 end

@@ -1,6 +1,5 @@
 class Public::EventsController < ActionController::Base
   include ApiErrorResponses
-  include ThrottleConnections
   respond_to :json
 
   def index
