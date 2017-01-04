@@ -84,20 +84,20 @@
     <th>Name</th>
     <th>Location</th>
     <th>Last Scan</th>
-    <th>Files</th>
+    <th>AS</th>
     <th>Stats</th>
     </tr>
-    {{#each mirrors}}
-    {{#if this.status_baseurl}}
+    {{#each MirrorList}}
+    {{#if this.HttpURL}}
     <tr>
     {{else}}
     <tr class='warning'>
     {{/if}}
-    <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
-    <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
-    <td>{{this.last_scan}}</td>
-    <td>{{this.nfiles}}</td>
-    <td>{{#if this.operator_url}}<a href="{{this.operator_url}}">{{this.identifier}}</a>{{/if}}</td>
+    <td><a href="{{this.HttpURL}}">{{this.ID}}</a></td>
+    <td><a href="//www.openstreetmap.org/#map=9/{{this.Latitude}}/{{this.Longitude}}">{{this.ContinentCode}}/{{this.CountryCodes}}</a></td>
+    <td>{{this.LastSync}}</td>
+    <td>{{this.Asnum}}</td>
+    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{/if}}</td>
     </tr>
     {{/each}}
     </table>
@@ -107,9 +107,9 @@
       var source = $('#status-template').html();
       var template = Handlebars.compile(source);
       var target = $('#status');
-      $.get("https://cdn-api.media.ccc.de/public/mirrors", function(data,status,xhr){
+      $.get("https://cdn.media.ccc.de/INDEX.gz", function(data,status,xhr){
         var html = template(data);
         target.html(html);
-      });
+      }, "json");
     });
 
