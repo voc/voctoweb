@@ -55,7 +55,6 @@ ActiveAdmin.register Conference do
       f.input :schedule_url
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
       f.input :slug
-      f.input :metadata, as: :text
     end
     f.inputs "Paths" do
       f.input :recordings_path, hint: conference.get_recordings_url
@@ -90,7 +89,6 @@ ActiveAdmin.register Conference do
                                   :schedule_url,
                                   :recordings_path,
                                   :images_path,
-                                  :metadata,
                                   :logo,
                                   :slug,
                                   :aspect_ratio ]
