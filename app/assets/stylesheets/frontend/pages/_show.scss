@@ -164,15 +164,6 @@ body.page-show {
           left: ($btn-height - $language-height) / 2;
           top: ($btn-height - $language-height) / 2;
         }
-
-        &.torrent {
-          height: 20px;
-          padding: 2px;
-
-          .title {
-            font-size: 15px;
-          }
-        }
       }
     }
 

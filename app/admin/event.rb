@@ -90,7 +90,6 @@ ActiveAdmin.register Event do
       f.input :tags_raw, as: :text
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
-      f.input :metadata, as: :text
     end
     f.inputs 'Files' do
       f.input :slug
@@ -135,7 +134,7 @@ ActiveAdmin.register Event do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :poster_filename,
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
-                            :original_language, :metadata,
+                            :original_language,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end

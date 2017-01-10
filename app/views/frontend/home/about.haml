@@ -4,6 +4,8 @@
 .container
 
   %h1 About media.ccc.de
+  %h3
+    Feel free to download as much as you like, all our traffic is sponsored.
 
   =render 'frontend/shared/short_about'
 
@@ -14,6 +16,11 @@
 
   %b Contact:
   %a{href: 'mailto:media@koeln.ccc.de'} media@koeln.ccc.de
+
+  %h2 Direct Download
+
+  :markdown
+    You can download all files directly from our [CDN](https://cdn.media.ccc.de).
 
   %h2 Licenses
 
@@ -41,15 +48,16 @@
     Video and audio files are often provided by mirrors and are not covered by this policy.
     These files are served via HTTP, without encryption, due to technical issues.
 
-  %h2 cdn.media.ccc.de
+  %h2 Current Mirrors
+
+  #status
 
   %p
     :markdown
-      The website is basically a frontend for all files stored on [cdn.media.ccc.de](//cdn.media.ccc.de).
-
-  %h3 Current Mirrors
-
-  #status
+      Currently we can't show all mirrors in the table above, due to technical difficulties.
+      You can however append `?mirrorlist` or `?mirrorstats` to all file URLs on our [CDN](https://cdn.media.ccc.de),
+      [like](https://cdn.media.ccc.de/congress/2016/webm-hd/33c3-8429-eng-deu-fra-33C3_Opening_Ceremony_webm-hd.webm?mirrorlist)
+      [this](https://cdn.media.ccc.de/congress/2016/webm-hd/33c3-8429-eng-deu-fra-33C3_Opening_Ceremony_webm-hd.webm?mirrorstats).
 
   %h2#apps Apps
 
@@ -84,20 +92,20 @@
     <th>Name</th>
     <th>Location</th>
     <th>Last Scan</th>
-    <th>Files</th>
+    <th>AS</th>
     <th>Stats</th>
     </tr>
-    {{#each mirrors}}
-    {{#if this.status_baseurl}}
+    {{#each MirrorList}}
+    {{#if this.HttpURL}}
     <tr>
     {{else}}
     <tr class='warning'>
     {{/if}}
-    <td><a href="{{this.baseurl}}">{{this.identifier}}</a></td>
-    <td><a href="//www.openstreetmap.org/#map=9/{{this.lat}}/{{this.lng}}">{{this.region}}/{{this.country}}</a></td>
-    <td>{{this.last_scan}}</td>
-    <td>{{this.nfiles}}</td>
-    <td>{{#if this.operator_url}}<a href="{{this.operator_url}}">{{this.identifier}}</a>{{/if}}</td>
+    <td><a href="{{this.HttpURL}}">{{this.ID}}</a></td>
+    <td><a href="//www.openstreetmap.org/#map=9/{{this.Latitude}}/{{this.Longitude}}">{{this.ContinentCode}}/{{this.CountryCodes}}</a></td>
+    <td>{{this.LastSync}}</td>
+    <td>{{this.Asnum}}</td>
+    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{/if}}</td>
     </tr>
     {{/each}}
     </table>
@@ -107,9 +115,9 @@
       var source = $('#status-template').html();
       var template = Handlebars.compile(source);
       var target = $('#status');
-      $.get("https://cdn-api.media.ccc.de/public/mirrors", function(data,status,xhr){
+      $.get("https://cdn.media.ccc.de/INDEX.gz", function(data,status,xhr){
         var html = template(data);
         target.html(html);
-      });
+      }, "json");
     });
 
