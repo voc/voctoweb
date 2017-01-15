@@ -13,12 +13,8 @@
     .nav.navbar-form.navbar-right.dropdown
       %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
         %span.icon.icon-rss
-      %ul.dropdown-menu{"aria-labelledby" => "feedMenu"}
-        = render 'frontend/shared/navbar_feeds'
-        - if @conference && @conference.downloaded_events_count > 0
-          %li
-            %hr
-          = render partial: 'frontend/shared/navbar_folder_feeds', locals: { conference: @conference }
+      %div.dropdown-menu.feeds_dropdown{"aria-labelledby" => "feedMenu"}
+        = render 'frontend/shared/navbar_feeds', locals: { conference: @conference }
 
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}
       .form-group.input-group
@@ -26,6 +22,10 @@
         %span.input-group-btn
           %button.btn.btn-default{type: 'submit'}
             %span.icon.icon-search
+
+  %div#feedMenuMobile.feeds_dropdown{"aria-labelledby" => "feedMenu"}
+    = render 'frontend/shared/navbar_feeds', locals: { conference: @conference }
+
 
 - breadcrumbs_trail do |parts, last|
   .breadcrumb

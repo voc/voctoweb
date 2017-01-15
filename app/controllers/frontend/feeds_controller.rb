@@ -1,17 +1,39 @@
 module Frontend
   class FeedsController < FrontendController
     before_action :set_conference, only: %i(podcast_folder)
-    EXPIRE_FEEDS = 15
+    FEEDS_EXPIRY_DURATION = 15.minutes
 
-    # podcast_recent
     def podcast
-      time = round_time(Time.now.ago(2.years))
-      xml = Rails.cache.fetch([:podcast, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
-        Feeds::PodcastGenerator.create_preferred(
-          view_context: view_context,
-          title: 'recent events feed', summary: 'This feed contains events from the last two years',
-          logo: logo_image_url,
-          events: downloaded_events.newer(time))
+      events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
+
+      xml = Rails.cache.fetch([:podcast, params[:quality], events_max_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: 'recent events feed',
+          channel_summary: 'This feed contains events from the last two years',
+          logo_image: logo_image_url,
+        )
+        feed.generate(downloaded_events.newer(events_max_age)) {
+          |event| EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
+        }
+      end
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
+    end
+
+    def podcast_legacy
+      events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
+
+      xml = Rails.cache.fetch([:podcast_legacy, events_max_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: 'recent events feed',
+          channel_summary: 'This feed contains events from the last two years',
+          logo_image: logo_image_url
+        )
+        # Leave filter method like this to not change the results of the feed
+        feed.generate(downloaded_events.newer(events_max_age), &:preferred_recording)
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -19,13 +41,57 @@ module Frontend
     end
 
     def podcast_archive
-      time = round_time(Time.now.ago(2.years))
-      xml = Rails.cache.fetch([:podcast_archive, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
-        Feeds::PodcastGenerator.create_preferred(
-          view_context: view_context,
-          title: 'archive feed', summary: 'This feed contains events older than two years',
-          logo: logo_image_url,
-          events: downloaded_events.older(time))
+      events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
+
+      xml = Rails.cache.fetch([:podcast_archive, params[:quality], events_min_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: 'archive feed',
+          channel_summary: 'This feed contains events older than two years',
+          logo_image: logo_image_url
+        )
+        feed.generate(downloaded_events.older(events_min_age)) {
+          |event| EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
+        }
+      end
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
+    end
+
+    def podcast_archive_legacy
+      events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
+
+      xml = Rails.cache.fetch([:podcast_archive_legacy, events_min_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: 'archive feed',
+          channel_summary: 'This feed contains events older than two years',
+          logo_image: logo_image_url
+        )
+        feed.generate(downloaded_events.older(events_min_age), &:preferred_recording)
+      end
+      respond_to do |format|
+        format.xml { render xml: xml }
+      end
+    end
+
+    def podcast_folder
+      xml = Rails.cache.fetch([:podcast_folder, params[:quality], @conference, @mime_type]) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: "#{@conference.title} (#{@mime_type})",
+          channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type}",
+          channel_description: "This feed contains all events from #{@conference.acronym} as #{@mime_type}",
+          base_url: view_context.conference_url(acronym: @conference.acronym),
+          logo_image: @conference.logo_url
+        )
+        feed.generate(@conference.events.includes(:conference)) {
+          |event| EventRecordingFilter
+              .by_quality_string(params[:quality])
+              .with_mime_type(@mime_type)
+              .filter(event)
+        }
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -33,14 +99,15 @@ module Frontend
     end
 
     def podcast_audio
-      time = round_time(Time.now.ago(1.years))
-      xml = Rails.cache.fetch([:podcast_audio, time.to_i], expires_in: EXPIRE_FEEDS.minutes) do
-        events = downloaded_events.newer(time)
-        Feeds::PodcastGenerator.create_audio(
-          view_context: view_context,
-          title: 'recent audio-only feed', summary: 'This feed contains events from the last years',
-          logo: logo_image_url,
-          events: events)
+      events_max_age = round_to_quarter_hour(Time.now.ago(1.years))
+      xml = Rails.cache.fetch([:podcast_audio, events_max_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
+        feed = Feeds::PodcastGenerator.new(
+          view_context,
+          title: 'recent audio-only feed',
+          channel_summary: 'This feed contains audio files from the last year',
+          logo_image: logo_image_url
+        )
+        feed.generate(downloaded_events.newer(events_max_age), &:audio_recording)
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -49,27 +116,17 @@ module Frontend
 
     # rss 1.0 last 100 feed
     def updates
-      xml = Rails.cache.fetch(:rdftop100, expires_in: EXPIRE_FEEDS.minutes) do
+      xml = Rails.cache.fetch(:rdftop100, expires_in: FEEDS_EXPIRY_DURATION) do
         events = downloaded_events.recent(100)
-        feed = Feeds::RDFGenerator.new view_context: view_context,
-          config: { title: 'last 100 events feed',
-                    channel_summary: 'This feed the most recent 100 events',
-                    logo: logo_image_url }
-        feed.generate events
-      end
-      respond_to do |format|
-        format.xml { render xml: xml }
-      end
-    end
-
-    def podcast_folder
-      xml = Rails.cache.fetch([:podcast_folder, @conference, @mime_type]) do
-        Feeds::PodcastGenerator.create_conference(
+        feed = Feeds::RDFGenerator.new(
           view_context: view_context,
-          conference: @conference,
-          mime_type: @mime_type,
-          mime_type_name: @mime_type_name
+          config: {
+             title: 'last 100 events feed',
+             channel_summary: 'This feed the most recent 100 events',
+             logo: logo_image_url
+          }
         )
+        feed.generate events
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -86,7 +143,7 @@ module Frontend
       view_context.image_url('frontend/miro-banner.png')
     end
 
-    def round_time(time)
+    def round_to_quarter_hour(time)
       seconds = 15 * 60
       Time.at((time.to_f / seconds).floor * seconds)
     end

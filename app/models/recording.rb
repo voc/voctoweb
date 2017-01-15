@@ -83,6 +83,10 @@ class Recording < ApplicationRecord
     height.to_i
   end
 
+  def number_of_pixels()
+    height.to_i * width.to_i
+  end
+
   def language_iso_639_1
     Languages.to_iso_639_1(language)
   end

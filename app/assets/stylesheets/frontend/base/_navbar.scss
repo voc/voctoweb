@@ -41,10 +41,10 @@
     padding-left: 0.2em;
     margin-top: 0.8em;
     margin-bottom: 0.8em;
-  }
 
-  .navbar-form.dropdown {
-    padding-right: 0.0em;
+    &.dropdown {
+      padding-right: 0.0em;
+    }
   }
 
   input {

@@ -22,3 +22,4 @@
 //= require handlebars.min-latest
 //= require jquery.bxslider
 //= require slider
+//= require feed_toggle

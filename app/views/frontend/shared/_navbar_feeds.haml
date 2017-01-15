@@ -1,15 +1,20 @@
-%li
-  %a{href: '/news.atom'}
-    News
-%li
-  %a{href: "/updates.rdf"}
-    RSS, last 100
-%li
-  %a{href: "/podcast.xml"}
-    Podcast feed of the last two years
-%li
-  %a{href: "/podcast-audio-only.xml"}
-    Podcast audio feed of the last year
-%li
-  %a{href: "/podcast-archive.xml"}
-    Podcast archive feed, everything older than two years
+%table.feeds_list
+  -# Translates the feeds menu structure to HTML - see feeds_navigation_bar_structure_helper.rb for the structure
+  - feed_structure.each do |entry|
+    - if entry[:headline]
+      %tr{:class => 'headline'}
+        %td{:class => %w(headline)}
+          %span
+            #{entry[:headline]}
+        %td{:class => %w(placeholder)}
+    - else
+      %tr
+        %td
+          %a{:href => entry[:left][:href], :title => entry[:left][:title], :class => entry[:left][:indented]}
+            #{entry[:left][:content]}
+        - if entry[:right]
+          %td
+            %a{:href => entry[:right][:href], :title => entry[:right][:title]}
+              #{entry[:right][:content]}
+        - else
+          %td{:class => %w(placeholder)}
