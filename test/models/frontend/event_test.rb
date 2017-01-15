@@ -27,4 +27,13 @@ class EventTest < ActiveSupport::TestCase
     @event.save
     assert_equal 3, @event.metadata['related'].count
   end
+
+  test 'should shorten titles using ellipsis character' do
+    @event = Frontend::Event.new
+    @event.title = "regular title"
+    assert_equal "regular title", @event.short_title
+
+    @event.title = "too long title.....20...25...30...35...40....45"
+    assert_equal "too long title.....20...25...30...35...…", @event.short_title
+  end
 end
