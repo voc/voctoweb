@@ -87,7 +87,7 @@
           - if event.recordings.subtitle.count == 1
             - recording = event.recordings.subtitle.first
             %a.btn.btn-default.download.subtitle.onlyone{href: recording.url, class: recording.language}
-              .title= Download Subtitle
+              .title= 'Download Subtitle'
           - else
             .dropdown
               %a.btn.btn-default.download.subtitle.multiple{'data-toggle': "dropdown", 'aria-haspopup': "true", 'aria-expanded': "false"}
