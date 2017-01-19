@@ -26,7 +26,7 @@ Example:
 
 ### Private REST API
 
-The private API is used by our (video) production teams. They mange the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example api client can be found at https://github.com/voc/publishing/blob/master/media_ccc_de_api_client.py
+The private API is used by our (video) production teams. They mange the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example api client can be found as part of our publishing-script repository: https://github.com/voc/publishing/
 
 Most REST operations work as expected. Examples for resource creation are listed on the applications dashboard page.
 
