@@ -14,6 +14,12 @@ module Frontend
       self[:title].strip
     end
 
+    def short_title
+      return unless title
+      # Truncate title e.g. for slider, value was determined experimentally
+      title.truncate(40, omission: '…')
+    end
+
     def display_date
       d = release_date || date
       d.strftime('%Y-%m-%d') if d
