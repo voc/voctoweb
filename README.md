@@ -7,11 +7,11 @@ media.ccc.de webfrontend, meta data editor and API.
 
 ## APIs
 
- Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the congress or lecture series like datengarten or openchaos) and consits of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
+ Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
 
 ### Public JSON API
 
-The public api provides a programatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different eco systems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
+The public API provides a programatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different eco systems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
 
     /public/conferences
     /public/conferences/:id
@@ -26,7 +26,7 @@ Example:
 
 ### Private REST API
 
-The private API is used by our (video) production teams. They mange the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example api client can be found as part of our publishing-script repository: https://github.com/voc/publishing/
+The private API is used by our (video) production teams. They manage the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example API client can be found as part of our publishing-script repository: https://github.com/voc/publishing/
 
 Most REST operations work as expected. Examples for resource creation are listed on the applications dashboard page.
 
@@ -68,18 +68,18 @@ The recording length is specified in seconds.
   * Example implementation: https://github.com/voc/publishing/
 
 ```
-    curl -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"4",
-        "guid":"123",
-        "recording":{
-          "filename":"some.mp4",
-          "folder":"h264-hd",
-          "mime_type":"video/mp4",
-          "language":"deu"
-          "size":"12",
-          "length":"3600"
-          }
-      }' "http://localhost:3000/api/recordings"
+curl -H "CONTENT-TYPE: application/json" -d '{
+    "api_key":"4",
+    "guid":"123",
+    "recording":{
+      "filename":"some.mp4",
+      "folder":"h264-hd",
+      "mime_type":"video/mp4",
+      "language":"deu"
+      "size":"12",
+      "length":"3600"
+      }
+  }' "http://localhost:3000/api/recordings"
 ```
 
 Create news items
@@ -113,15 +113,17 @@ ruby 2.3.1
 
 ```
 ## for ubuntu 15.10
+
 # install deps for ruby
-sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev \
+libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
+python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison
 
 # install deps for media.ccc.de
 sudo apt-get install redis-server libpqxx-dev
 
 # install node.js
-
-    sudo apt-get install nodejs
+sudo apt-get install nodejs
 
 # install rvm
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -172,7 +174,7 @@ You need to create a secret token for sessions, copy `env.example` to `.env.prod
 
 #### Database Creation & Fixtures import
 
-Setup your database in config/database.yml needed.
+Setup your database in `config/database.yml` needed.
 
     rake db:setup
     ./bin/update-data
