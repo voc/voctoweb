@@ -27,16 +27,15 @@
   .bx-wrapper {
     overflow: hidden;
     height: 300px;
+    background: transparent;
+    border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 
     .bx-viewport {
-      background: transparent;
-      border: none;
       margin-top: 35px;
       overflow: visible !important;
-
-      -moz-box-shadow: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
 
       .item img {
         margin-top: 0;
@@ -70,6 +69,11 @@
         }
 
         bottom: 5px;
+
+        .bx-pager-item {
+          font-size: inherit;
+          line-height: inherit;
+        }
       }
       .bx-controls-direction {
         display: none;
