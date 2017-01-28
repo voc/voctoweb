@@ -14,5 +14,8 @@
     %li.date
       %span.icon.icon-calendar-o
       = event.display_date
+    %li.view-count
+      %span.icon.icon-eye
+      = event.view_count
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
