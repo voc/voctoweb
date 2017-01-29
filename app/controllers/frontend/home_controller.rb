@@ -4,6 +4,7 @@ module Frontend
 
     def index
       @news = Frontend::News.recent(1).first()
+      @hours_count = Frontend::Event.sum(:duration)/(60*60)
       @recordings_count = Frontend::Recording.count
       @events_count = Frontend::Event.count
       @conferences_count = Frontend::Conference.count
