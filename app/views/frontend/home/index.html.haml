@@ -19,10 +19,10 @@
                 %i.icon-search
 
         %p.tagline
-          #{number_with_delimiter(@hours_count, delimiter: ".")} hours of content in
-          #{number_with_delimiter(@recordings_count, delimiter: ".")} files of
-          #{number_with_delimiter(@events_count, delimiter: ".")} recordings at
-          #{number_with_delimiter(@conferences_count, delimiter: ".")} events
+          #{number_with_delimiter(@hours_count, delimiter: "\u2009")} hours of content in
+          #{number_with_delimiter(@recordings_count, delimiter: "\u2009")} files of
+          #{number_with_delimiter(@events_count, delimiter: "\u2009")} recordings at
+          #{number_with_delimiter(@conferences_count, delimiter: "\u2009")} events
 
     / Buttons
     .col-xs-12.col-sm-8.col-sm-push-2
