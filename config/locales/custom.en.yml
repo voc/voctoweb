@@ -1,13 +1,13 @@
 en:
   custom:
-    title: C3TV -
-    news_title: CCC TV - NEWS
+    title: media.ccc.de -
+    news_title: media.ccc.de - NEWS
     rss:
       title:
-        atom: C3TV - News
-        last100: C3TV - RSS, last 100
-        lastyears: C3TV - Podcast feed of the last two years
-        podcast_archive: C3TV - Podcast archive feed
+        atom: media.ccc.de - News
+        last100: media.ccc.de - RSS, last 100
+        lastyears: media.ccc.de - Podcast feed of the last two years
+        podcast_archive: media.ccc.de - Podcast archive feed
     header:
       author: CCC
       description: Video Streaming Portal des Chaos Computer Clubs
