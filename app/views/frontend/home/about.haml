@@ -54,8 +54,7 @@
 
   %p
     :markdown
-      Currently we can't show all mirrors in the table above, due to technical difficulties.
-      You can however append `?mirrorlist` or `?mirrorstats` to all file URLs on our [CDN](https://cdn.media.ccc.de),
+      You can append `?mirrorlist` or `?mirrorstats` to all file URLs on our [CDN](https://cdn.media.ccc.de),
       [like](https://cdn.media.ccc.de/congress/2016/webm-hd/33c3-8429-eng-deu-fra-33C3_Opening_Ceremony_webm-hd.webm?mirrorlist)
       [this](https://cdn.media.ccc.de/congress/2016/webm-hd/33c3-8429-eng-deu-fra-33C3_Opening_Ceremony_webm-hd.webm?mirrorstats).
 
@@ -95,7 +94,9 @@
     <th>Name</th>
     <th>Location</th>
     <th>Last Scan</th>
-    <th>AS</th>
+    <th>Monthly Terrabyte</th>
+    <th>Monthly Downloads</th>
+    <th>File Count</th>
     <th>Stats</th>
     </tr>
     {{#each MirrorList}}
@@ -106,19 +107,29 @@
     {{/if}}
     <td><a href="{{this.HttpURL}}">{{this.ID}}</a></td>
     <td><a href="//www.openstreetmap.org/#map=9/{{this.Latitude}}/{{this.Longitude}}">{{this.ContinentCode}}/{{this.CountryCodes}}</a></td>
-    <td>{{this.LastSync}}</td>
-    <td>{{this.Asnum}}</td>
-    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{/if}}</td>
+    <td>{{formatDate this.LastSync}}</td>
+    <td>{{gb this.MonthBytes}}</td>
+    <td>{{this.MonthDownloads}}</td>
+    <td>{{this.FileCount}}</td>
+    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{/if}}
     </tr>
     {{/each}}
     </table>
 
   :javascript
+    Handlebars.registerHelper("formatDate", function(datetime) {
+      var aDate = new Date(1000*datetime);
+      return aDate.toLocaleString();
+    });
+    Handlebars.registerHelper("gb", function(bytes) {
+      var magic = 10;
+      return Math.floor(bytes / Math.pow(1024, 4) / magic);
+    });
     $(document).ready(function() {
       var source = $('#status-template').html();
       var template = Handlebars.compile(source);
       var target = $('#status');
-      $.get("https://cdn.media.ccc.de/INDEX.gz", function(data,status,xhr){
+      $.get("https://cdn-api.media.ccc.de/", function(data,status,xhr){
         var html = template(data);
         target.html(html);
       }, "json");
