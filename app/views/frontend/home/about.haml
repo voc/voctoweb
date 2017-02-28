@@ -94,7 +94,7 @@
     <th>Name</th>
     <th>Location</th>
     <th>Last Scan</th>
-    <th>Monthly Terrabyte</th>
+    <th>Monthly TB (estimate)</th>
     <th>Monthly Downloads</th>
     <th>File Count</th>
     <th>Stats</th>
@@ -122,8 +122,7 @@
       return aDate.toLocaleString();
     });
     Handlebars.registerHelper("gb", function(bytes) {
-      var magic = 10;
-      return Math.floor(bytes / Math.pow(1024, 4) / magic);
+      return Math.floor(bytes / Math.pow(1024, 4));
     });
     $(document).ready(function() {
       var source = $('#status-template').html();
