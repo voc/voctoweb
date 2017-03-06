@@ -19,6 +19,11 @@
   .navbar-brand {
     font-size: 24px;
     padding: 12px 15px;
+    img {
+      width: 27px;
+      height: 27px;
+      vertical-align: text-bottom;
+    }
   }
 
   .btn.btn-default {
