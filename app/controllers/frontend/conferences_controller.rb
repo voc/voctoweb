@@ -3,7 +3,8 @@ module Frontend
     SORT_PARAM = {
       'name' => 'title',
       'duration' => 'duration',
-      'date' => 'date desc, release_date desc'
+      'date' => 'date desc, release_date desc',
+      'view_count' => 'view_count desc'
     }.freeze
 
     before_action :check_sort_param, only: %w(show)
