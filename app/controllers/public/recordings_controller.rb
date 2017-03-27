@@ -1,16 +1,17 @@
-class Public::RecordingsController < ActionController::Base
+class Public::RecordingsController < ActionController::API
   include ApiErrorResponses
   include ThrottleConnections
   respond_to :json
 
   def index
-    recordings = Recording.all
-    paginate json: recordings, per_page: 50, max_per_page: 256
+    recordings = paginate(Recording.all, per_page: 50, max_per_page: 256)
+    render json: recordings
   end
 
   # GET /public/recordings/1.json
   def show
     @recording = Recording.find(params[:id])
+    render json: @recording
   end
 
   def count
