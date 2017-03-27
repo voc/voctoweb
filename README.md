@@ -15,14 +15,22 @@ The public API provides a programatic access to the data behind media.ccc.de. Co
 
     /public/conferences
     /public/conferences/:id
+    /public/events
     /public/events/:id
     /public/recordings/:id
+    /public/recordings
 
 The id's are internal database ids, not to be confused with guids or conference talk ids (alias pentabarf/frab id), e.g. https://media.ccc.de/public/events/2935
 
 Example:
 
     curl -H "CONTENT-TYPE: application/json" http://localhost:3000/public/conferences
+
+The resulting JSON will contain URLs to each of the individual conferences.
+
+Additionally the API for events and recordings uses RFC-5988 HTTP header based pagination to reduce the server load.
+
+    curl -H "CONTENT-TYPE: application/json" "http://localhost:3000/public/events?page=10"
 
 ### Private REST API
 
