@@ -1,10 +1,10 @@
-class Public::EventsController < ActionController::Base
+class Public::EventsController < ActionController::API
   include ApiErrorResponses
   respond_to :json
 
   def index
-    events = Event.all
-    paginate json: events, per_page: 50, max_per_page: 256
+    events = paginate(Event.all, per_page: 50, max_per_page: 256)
+    render json: events
   end
 
   # GET /public/events/1
@@ -18,5 +18,6 @@ class Public::EventsController < ActionController::Base
       @event = Event.find_by(guid: params[:id])
     end
     fail ActiveRecord::RecordNotFound unless @event
+    render json: @event
   end
 end

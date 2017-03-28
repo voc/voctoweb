@@ -39,7 +39,7 @@ Style/Lambda:
 Style/CommentAnnotation:
   Enabled: false
 
-# vim prefers fixed indent
+# Vim prefers fixed indent, avoid manual vertical alignment
 Style/AlignParameters:
   Enabled: true
   EnforcedStyle: with_fixed_indentation

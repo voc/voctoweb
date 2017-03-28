@@ -14,7 +14,7 @@ module Frontend
 
       folders = tree.folders_at('')
       assert_equal 2, folders.length
-      assert_equal nil, folders[0].conference_id
+      assert_nil folders[0].conference_id
 
       paths = folders.map{ |folder| folder.path }
       assert_includes paths, 'a'

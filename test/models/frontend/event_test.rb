@@ -18,7 +18,7 @@ class EventTest < ActiveSupport::TestCase
   test "should not find preferred recordings" do
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', event: @event)
     @event = Frontend::Event.find(@event.id)
-    assert_equal nil, @event.audio_recording
+    assert_nil @event.audio_recording
   end
 
   test 'should list related events' do

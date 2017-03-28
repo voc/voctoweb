@@ -2,6 +2,7 @@ module ApiErrorResponses
   extend ActiveSupport::Concern
 
   included do
+    include ActionController::MimeResponds
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   end
 
