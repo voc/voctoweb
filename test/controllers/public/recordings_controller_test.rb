@@ -5,8 +5,9 @@ class Public::RecordingsControllerTest < ActionController::TestCase
     create :conference_with_recordings
     get :index, format: :json
     assert_response :success
-    refute_empty JSON.parse(response.body)
-    # puts JSON.pretty_generate JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    refute_empty json
+    assert_equal 1024, json['recordings'][0]['width']
   end
 
   test 'should get show' do
@@ -15,8 +16,9 @@ class Public::RecordingsControllerTest < ActionController::TestCase
     get :show, params: { id: recording.id }, format: :json
     assert_response :success
     assert assigns(:recording)
-    refute_empty JSON.parse(response.body)
-    # puts JSON.pretty_generate JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    refute_empty json
+    assert_equal 1024, json['width']
   end
 
   test 'should increase view count' do

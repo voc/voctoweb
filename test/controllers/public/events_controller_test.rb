@@ -10,16 +10,21 @@ class Public::EventsControllerTest < ActionController::TestCase
     create :conference_with_recordings
     get :index, format: :json
     assert_response :success
-    refute_empty JSON.parse(response.body)
-    #puts JSON.pretty_generate JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    refute_empty json
+    refute_empty json['events'][0]['url']
+    assert_equal ['Name'], json['events'][0]['persons']
   end
 
   test 'should get show' do
     get :show, params: { id: @event.id }, format: :json
     assert_response :success
     assert_equal @event, assigns(:event)
-    refute_empty JSON.parse(response.body)
-    # puts JSON.pretty_generate JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    #puts JSON.pretty_generate json
+    refute_empty json
+    refute_empty json['tags']
+    refute_empty json['recordings']
   end
 
   test 'should get show with uuid' do
@@ -29,7 +34,7 @@ class Public::EventsControllerTest < ActionController::TestCase
   end
 
   test 'redirects to page not found' do
-    get :show, params: { id: 'notexisting'}, format: :json
+    get :show, params: { id: 'notexisting' }, format: :json
     assert_response :not_found
   end
 end

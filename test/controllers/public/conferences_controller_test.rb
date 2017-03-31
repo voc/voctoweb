@@ -5,15 +5,19 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     create :conference_with_recordings
     get :index, format: :json
     assert_response :success
-    refute_empty JSON.parse(response.body)
-    #puts JSON.pretty_generate JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    refute_empty json['conferences']
+    refute_empty json['conferences'][0]['url']
   end
 
   test "should get show" do
     conference = create :conference_with_recordings
     get :show, params: { id: conference.id }, format: :json
     assert_response :success
-    refute_empty JSON.parse(response.body)
+    json = JSON.parse(response.body)
+    refute_empty json
+    refute_empty json['acronym']
+    refute_empty json['events']
     #puts JSON.pretty_generate JSON.parse(response.body)
   end
 
