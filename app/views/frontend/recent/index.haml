@@ -1,11 +1,11 @@
 - content_for :title do
-  Recent Events
+  Recent Videos
 
 - content_for :body_class do
   page-list
 
 .container-fluid
-  %h1 Recent Events
+  %h1 Recent Videos
   - if @events.present?
     .event-previews
       - @events.each do |event|
