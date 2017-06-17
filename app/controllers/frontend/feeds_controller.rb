@@ -9,7 +9,7 @@ module Frontend
       xml = Rails.cache.fetch([:podcast, params[:quality], events_max_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
-          title: 'recent events feed',
+          title: "recent events feed (#{FeedQuality.display_name(params[:quality])})",
           channel_summary: 'This feed contains events from the last two years',
           logo_image: logo_image_url,
         )
@@ -46,7 +46,7 @@ module Frontend
       xml = Rails.cache.fetch([:podcast_archive, params[:quality], events_min_age.to_i], expires_in: FEEDS_EXPIRY_DURATION) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
-          title: 'archive feed',
+          title: "archive feed (#{FeedQuality.display_name(params[:quality])})",
           channel_summary: 'This feed contains events older than two years',
           logo_image: logo_image_url
         )
@@ -78,11 +78,13 @@ module Frontend
 
     def podcast_folder
       xml = Rails.cache.fetch([:podcast_folder, params[:quality], @conference, @mime_type]) do
+
+        mime_display_name = MimeType.humanized_mime_type(@mime_type)
         feed = Feeds::PodcastGenerator.new(
           view_context,
-          title: "#{@conference.title} (#{@mime_type})",
-          channel_summary: "This feed contains all events from #{@conference.acronym} as #{@mime_type}",
-          channel_description: "This feed contains all events from #{@conference.acronym} as #{@mime_type}",
+          title: "#{@conference.title} (#{FeedQuality.display_name(params[:quality])} #{mime_display_name})",
+          channel_summary: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
+          channel_description: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           base_url: view_context.conference_url(acronym: @conference.acronym),
           logo_image: @conference.logo_url
         )

@@ -1,15 +1,11 @@
 module Frontend
   class EventRecordingFilter
     def self.by_quality_string(quality)
-      if nil == quality || quality.empty?
+      if quality.nil? || quality.empty?
         return EventRecordingFilter.new
       end
 
-      case quality.upcase
-        when 'HQ' then EventRecordingFilterHighQuality.new
-        when 'LQ' then EventRecordingFilterLowQuality.new
-        else raise ArgumentError, "Invalid quality argument"
-      end
+      return FeedQuality.eventRecordingFilter(quality)
     end
 
     @target_mime_type = nil

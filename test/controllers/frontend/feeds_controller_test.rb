@@ -12,12 +12,12 @@ module Frontend
     end
 
     test 'should get podcast low quality' do
-      get :podcast, params: { quality: 'lq' }, format: :xml
+      get :podcast, params: { quality: FeedQuality::LQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast high quality' do
-      get :podcast, params: { quality: 'hq' }, format: :xml
+      get :podcast, params: { quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
@@ -27,12 +27,12 @@ module Frontend
     end
 
     test 'should get podcast_archive in low quality' do
-      get :podcast_archive, params: { quality: 'lq' }, format: :xml
+      get :podcast_archive, params: { quality: FeedQuality::LQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_archive in high quality' do
-      get :podcast_archive, params: { quality: 'hq' }, format: :xml
+      get :podcast_archive, params: { quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
@@ -52,12 +52,12 @@ module Frontend
     end
 
     test 'should get podcast_folder hq' do
-      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: 'hq' }, format: :xml
+      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_folder lq' do
-      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: 'lq' }, format: :xml
+      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: FeedQuality::LQ }, format: :xml
       assert_response :success
     end
 

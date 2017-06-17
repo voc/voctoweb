@@ -30,12 +30,12 @@ module Frontend
             :left => {
               :indented => 'indented',
               :content  => MimeType.humanized_mime_type(mime_type),
-              :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: 'hq'),
+              :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: FeedQuality::HQ),
               :title => MimeType.humanized_mime_type(mime_type)
             },
             :right => {
               :content => 'SD Quality',
-              :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: 'lq'),
+              :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: FeedQuality::LQ),
               :title => MimeType.humanized_mime_type(mime_type) + ' (SD)'
             }
           })
