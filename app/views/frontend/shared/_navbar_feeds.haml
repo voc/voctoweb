@@ -3,10 +3,10 @@
   - feed_structure.each do |entry|
     - if entry[:headline]
       %tr{:class => 'headline'}
-        %td{:class => %w(headline)}
-          %span
-            #{entry[:headline]}
-        %td{:class => %w(placeholder)}
+        %td{:class => 'headline', :colspan => 2}
+          %div
+            %span
+              #{entry[:headline]}
     - else
       %tr
         %td
