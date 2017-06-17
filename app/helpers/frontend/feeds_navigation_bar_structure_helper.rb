@@ -1,5 +1,7 @@
 module Frontend
   module FeedsNavigationBarStructureHelper
+    SD_LABEL = 'or SD quality'
+
     # rendered by _navbar_feeds.haml
     def feed_structure
       menu = [
@@ -7,11 +9,11 @@ module Frontend
           { :left => { :content => 'RSS, last 100', :href => '/updates.rdf' } },
           { :left => { :content => 'Podcast feed of the last two years', :href => '/podcast-hq.xml' },
                 :right =>
-                    { :content => 'SD quality', :href => '/podcast-lq.xml', :title =>  'Podcast feed of the last two years (SD)'} },
+                    { :content => SD_LABEL, :href => '/podcast-lq.xml', :title =>  'Podcast feed of the last two years (SD)'} },
           { :left => { :content => 'Podcast audio feed of the last year', :href => '/podcast-audio-only.xml' } },
           { :left => { :content => 'Podcast archive feed, everything older than two years', :href => '/podcast-archive-hq.xml' },
                 :right =>
-                    { :content => 'SD quality', :href => '/podcast-archive-lq.xml', :title =>  'Podcast archive feed, everything older than two years (SD)'} } ]
+                    { :content => SD_LABEL, :href => '/podcast-archive-lq.xml', :title =>  'Podcast archive feed, everything older than two years (SD)'} } ]
 
       if @conference && @conference.downloaded_events_count > 0
         menu += add_feeds_for_conference_recordings(@conference)
@@ -34,7 +36,7 @@ module Frontend
               :title => MimeType.humanized_mime_type(mime_type)
             },
             :right => {
-              :content => 'SD quality',
+              :content => SD_LABEL,
               :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: FeedQuality::LQ),
               :title => MimeType.humanized_mime_type(mime_type) + ' (SD)'
             }
