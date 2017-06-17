@@ -1,6 +1,6 @@
 module Frontend
   module FeedsNavigationBarStructureHelper
-    SD_LABEL = 'or SD quality'
+    SD_LABEL = 'SD quality'
 
     # rendered by _navbar_feeds.haml
     def feed_structure

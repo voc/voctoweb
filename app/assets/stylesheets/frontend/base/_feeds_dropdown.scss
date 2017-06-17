@@ -61,26 +61,35 @@
             padding: 0 10pt;
 
             &.indented {
-              padding-left: 23pt;
+              padding-left: 24pt;
+            }
+
+            &::before {
+              content: '•';
+              padding-right: 3px;
             }
           }
         }
 
         &.headline {
           td {
-              line-height: 2.5;
+            line-height: 2.5;
 
             &:hover {
               background-color: inherit;
             }
 
             div {
-              padding: 0 20pt;
+              padding: 0 10pt 0 10pt;
 
               span {
                 padding: 0;
                 margin-bottom: 14px;
                 border-bottom: 2px solid #888;
+
+                &::before {
+                  content: '';
+                }
               }
             }
           }
