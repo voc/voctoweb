@@ -41,7 +41,7 @@
 
     .col-xs-12.recently
       .headline
-        %h2 Recently published
+        %h2 Recently added
         %a{href: recent_path}
           More recent videos
 
@@ -63,7 +63,7 @@
                       %a.title{href: event_path(slug: event.slug), title: event.title.length > 55 ? event.title : ''}
                         = truncate(event.title, length: 55, separator: ' ', omission: '…')
                       .date
-                        %span.icon.icon-calendar-o{title: display_date_title(event)}
+                        %span.icon.icon-calendar-o{title: display_release_date_title(event)}
                         = event.display_date
 
 

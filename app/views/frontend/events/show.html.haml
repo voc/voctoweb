@@ -41,8 +41,12 @@
         %span.icon.icon-clock-o
         = duration_in_minutes(@event.duration)
       %li
-        %span.icon.icon-calendar-o{title: display_date_title(@event)}
+        %span.icon.icon-calendar-o{title: display_release_date_title(@event)}
         = @event.display_date
+      - if ! @event.released_on_event_day?
+        %li
+          %span.icon.icon-upload{title: 'release date'}
+          = @event.release_date 
       %li
         %span.icon.icon-eye
         = @event.view_count

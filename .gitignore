@@ -46,3 +46,6 @@ config/settings.yml
 # sublimetext project files
 /*.sublime-project
 /*.sublime-workspace
+
+# vim
+*.swp

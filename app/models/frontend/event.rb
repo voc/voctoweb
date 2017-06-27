@@ -1,4 +1,6 @@
 module Frontend
+  require "date"
+
   class Event < ::Event
     index_name "media-event-#{Rails.env}"
     document_type 'event'
@@ -21,8 +23,12 @@ module Frontend
     end
 
     def display_date
-      d = release_date || date
+      d = date || release_date
       d.strftime('%Y-%m-%d') if d
+    end
+
+    def released_on_event_day?
+      date && date.to_date === release_date.to_date
     end
 
     def poster_url
