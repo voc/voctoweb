@@ -116,7 +116,8 @@ module Frontend
       end
     end
 
-    def display_date_title(event)
+    def display_release_date_title(event)
+      return 'event and release date' if event.released_on_event_day?
       return 'event date' if event.date
       'video release date'
     end
