@@ -50,3 +50,6 @@ config/settings.yml
 # IntelliJ files
 /.idea
 /*.iml
+
+# vim
+*.swp
