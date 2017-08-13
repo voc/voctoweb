@@ -80,9 +80,10 @@ module Frontend
       xml = Rails.cache.fetch([:podcast_folder, params[:quality], @conference, @mime_type]) do
 
         mime_display_name = MimeType.humanized_mime_type(@mime_type)
+        quality_display_name = FeedQuality.display_name(params[:quality])
         feed = Feeds::PodcastGenerator.new(
           view_context,
-          title: "#{@conference.title} (#{FeedQuality.display_name(params[:quality])} #{mime_display_name})",
+          title: "#{@conference.title} ("+[quality_display_name, mime_display_name].reject(&:empty?).join(" ")+")",
           channel_summary: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           channel_description: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           base_url: view_context.conference_url(acronym: @conference.acronym),
