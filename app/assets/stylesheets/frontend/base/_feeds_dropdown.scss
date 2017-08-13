@@ -1,0 +1,150 @@
+#feedMenuMobile {
+  display: none; // displayed via js
+}
+
+.feeds_list {
+  background-color: $body-bg;
+
+  a {
+    color: $text-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  tr.headline {
+    td {
+      div {
+        span {
+          margin-bottom: 14px;
+          border-bottom: 2px solid #888;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .feeds_dropdown {
+    margin: 0 5px;
+    padding: 0;
+    box-shadow: 5px 5px 15px #333333;
+    border: none;
+    font-size: 16px;
+    line-height: 1.5;
+
+    .feeds_list {
+      padding: 0; // remove some bs default padding
+      margin: 0;
+
+      tr:nth-child(odd) {
+        background-color: #f5f5f5;
+      }
+
+      tr {
+        td {
+          white-space: nowrap; // let the dropdown grow with it's width
+
+          &:hover {
+            background-color: darken($body-bg, 20%);
+          }
+
+          &.placeholder:hover {
+            background-color: inherit;
+          }
+
+          a, span {
+            display: inline-block;
+            width: 100%;
+            line-height: 2;
+            padding: 0 10pt;
+
+            &.indented {
+              padding-left: 24pt;
+            }
+
+            &::before {
+              content: '•';
+              padding-right: 3px;
+            }
+          }
+        }
+
+        &.headline {
+          td {
+            line-height: 2.5;
+
+            &:hover {
+              background-color: inherit;
+            }
+
+            div {
+              padding: 0 10pt 0 10pt;
+
+              span {
+                padding: 0;
+                margin-bottom: 14px;
+                border-bottom: 2px solid #888;
+
+                &::before {
+                  content: '';
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .feeds_dropdown {
+    background-color: $body-bg;
+    padding: 8pt 5pt 5pt 10pt;
+
+    .feeds_list {
+      width: 100%;
+      font-size: 14pt;
+      margin-left: 20px;
+
+      tr {
+        display: list-item;
+        list-style-type: none;
+
+        td {
+          display: list-item;
+          list-style-type: circle;
+          line-height: 2;
+          padding-right: 20pt;
+
+          &.placeholder {
+            display: none;
+          }
+
+          &:nth-child(2) {
+            margin-left: 20pt;
+          }
+
+          a:hover {
+            background-color: darken($body-bg, 20%);
+          }
+        }
+
+        &.headline {
+          td {
+            list-style-type: none;
+          }
+        }
+      }
+
+      .headline {
+        a, span {
+          font-size: 18pt;
+          line-height: 2;
+        }
+      }
+    }
+  }
+}

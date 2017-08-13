@@ -1,7 +1,7 @@
 module Frontend
   class NewsController < FrontendController
     def index
-      news = News.all
+      news = News.latest_first
       atom_feed = Feeds::NewsFeedGenerator.generate(news,
         options: {
           author: Settings.feeds['channel_owner'],

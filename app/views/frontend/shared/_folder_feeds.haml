@@ -1,2 +1,6 @@
 - conference.mime_types do |mime_type, mime_type_name|
-  %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: podcast_folder_feed_url(acronym: conference.acronym, mime_type: mime_type_name)}
+  - if MimeType.is_video(mime_type)
+    - feed_url = podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: 'hq')
+  - else
+    - feed_url = podcast_folder_feed_url(acronym: conference.acronym, mime_type: mime_type_name)
+  %link{rel: "alternate", type: "application/rss+xml", title: "Podcast feed #{MimeType.humanized_mime_type(mime_type)} for this folder", href: feed_url}

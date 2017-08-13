@@ -58,14 +58,27 @@ Rails.application.routes.draw do
     get '/tags/:tag', to: 'tags#show', as: :tag
 
     get '/news.atom', to: 'news#index', defaults: { format: 'xml' }, as: :news
-    get '/podcast-audio-only.xml', to: 'feeds#podcast_audio', defaults: { format: 'xml' }
-    get '/podcast.xml', to: 'feeds#podcast', defaults: { format: 'xml' }
-    get '/podcast-archive.xml', to: 'feeds#podcast_archive', defaults: { format: 'xml' }
     get '/updates.rdf', to: 'feeds#updates', defaults: { format: 'xml' }
+    get '/podcast-audio-only.xml', to: 'feeds#podcast_audio', defaults: { format: 'xml' }
 
-    # legacy
+    get '/podcast-(:quality).xml', to: 'feeds#podcast',
+        defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }
+    get '/podcast-archive-(:quality).xml', to: 'feeds#podcast_archive',
+        defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }
+
+    # For video files with quality option
+    get '/c/:acronym/podcast/:mime_type-(:quality).xml', to: 'feeds#podcast_folder',
+        defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }, as: :podcast_folder_video_feed
+    # For audio and subtitle files
+    get '/c/:acronym/podcast/:mime_type.xml', to: 'feeds#podcast_folder',
+        defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }, as: :podcast_folder_feed
+
+    # Preserve for existing users but do not advertise, remove when it seem appropriate
+    # deprecated 2015-10
     get '/podcast/:slug/:mime_type', to: 'feeds#podcast_folder', defaults: { format: 'xml' }, as: :old_podcast_folder_feed
-    # new
-    get '/c/:acronym/podcast/:mime_type.xml', to: 'feeds#podcast_folder', defaults: { format: 'xml' }, as: :podcast_folder_feed
+    # deprecated 2017-04
+    get '/podcast.xml', to: 'feeds#podcast_legacy', defaults: { format: 'xml' }
+    # deprecated 2017-04
+    get '/podcast-archive.xml', to: 'feeds#podcast_archive_legacy', defaults: { format: 'xml' }
   end
 end

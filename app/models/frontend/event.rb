@@ -93,7 +93,7 @@ module Frontend
 
     # @return [Array(Recording)]
     def by_mime_type(mime_type: 'video/mp4')
-      recordings.by_mime_type(mime_type).first.freeze
+        recordings.by_mime_type(mime_type).first.freeze
     end
 
     def related_event_ids(n)
