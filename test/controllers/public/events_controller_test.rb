@@ -37,4 +37,11 @@ class Public::EventsControllerTest < ActionController::TestCase
     get :show, params: { id: 'notexisting' }, format: :json
     assert_response :not_found
   end
+
+  test 'search for events' do
+    get :search, params: { q: 'not-existing' }, format: :json
+    assert_response :success
+    json = JSON.parse(response.body)
+    assert_empty json['events']
+  end
 end
