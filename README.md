@@ -125,7 +125,7 @@ Backend-Login:
 
 ### Ruby Version
 
-ruby 2.3.1
+ruby 2.4.1
 
 ### Dependencies
 
@@ -158,8 +158,8 @@ gpg --verify rvm-installer.asc
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 2.3.1
-rvm install ruby-2.3.1
+# install ruby 2.4.1
+rvm install ruby-2.4.1
 
 # install bundler
 gem install bundler
