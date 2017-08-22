@@ -1,6 +1,6 @@
 module Frontend
   class Conference < ::Conference
-    has_many :events, class_name: Frontend::Event
+    has_many :events, class_name: 'Frontend::Event'
     has_many :recordings, through: :events
 
     scope :with_events, ->() {

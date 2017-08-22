@@ -1,6 +1,6 @@
 module Frontend
   class Recording < ::Recording
-    belongs_to :event, class_name: Frontend::Event
+    belongs_to :event, class_name: 'Frontend::Event'
     scope :by_mime_type, ->(mime_type) { where(mime_type: mime_type) }
 
     def url

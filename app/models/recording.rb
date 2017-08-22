@@ -24,7 +24,7 @@ class Recording < ApplicationRecord
 
   after_save { conference.update_downloaded_count! }
   after_save { update_event_downloaded_count }
-  after_save { update_event_duration if length_changed? }
+  after_save { update_event_duration if saved_change_to_length? }
   after_save { event.touch }
   after_destroy { conference.update_downloaded_count! }
   after_destroy { update_event_downloaded_count }

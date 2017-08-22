@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   has_many :recordings, dependent: :destroy
   has_many :video_recordings, -> {
     where(html5: true, mime_type: MimeType::VIDEO)
-  }, class_name: Recording
+  }, class_name: 'Recording'
 
   after_initialize :generate_guid
 
@@ -34,14 +34,14 @@ class Event < ApplicationRecord
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
   before_save { trim_paths }
-  after_save { conference.update_last_released_at_column if release_date_changed? }
-  after_save { update_conference_downloaded_count if conference_id_changed? }
+  after_save { conference.update_last_released_at_column if saved_change_to_release_date? }
+  after_save { update_conference_downloaded_count if saved_change_to_conference_id? }
   after_destroy { conference.update_last_released_at_column }
 
   # active admin and serialized fields workaround:
   attr_accessor :persons_raw, :tags_raw
 
-  after_save { conference.touch unless view_count_changed? }
+  after_save { conference.touch unless saved_change_to_view_count? }
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
@@ -154,7 +154,7 @@ class Event < ApplicationRecord
   def update_conference_downloaded_count
     conference.update_downloaded_count!
     begin
-      Conference.find(conference_id_was).update_downloaded_count!
+      Conference.find(attribute_before_last_save(:conference_id)).update_downloaded_count!
     rescue ActiveRecord::RecordNotFound
       # could have vanished and it's ok
     end

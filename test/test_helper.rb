@@ -8,7 +8,7 @@ require 'tilt/redcarpet'
 Sidekiq::Logging.logger = nil
 
 class ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 end
 
 class ActiveSupport::TestCase

@@ -5,8 +5,8 @@ module Frontend
     index_name "media-event-#{Rails.env}"
     document_type 'event'
 
-    belongs_to :conference, class_name: Frontend::Conference
-    has_many :recordings, class_name: Frontend::Recording
+    belongs_to :conference, class_name: 'Frontend::Conference'
+    has_many :recordings, class_name: 'Frontend::Recording'
 
     scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
     scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
