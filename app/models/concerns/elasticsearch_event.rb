@@ -55,7 +55,7 @@ module ElasticsearchEvent
           },
           boost:  1.2,
           functions:  [
-            { gauss:  { date:  { scale:  '96w', decay:  0.5 } } }
+            { gauss:  { date:  { scale:  '730d', decay:  0.5 } } }
           ]
         }
       }
