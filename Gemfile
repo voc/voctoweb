@@ -34,6 +34,9 @@ end
 gem 'haml'
 gem 'redcarpet'
 
+# kaminari must be listed before elasticsearch and api-pagination
+gem 'kaminari'
+
 gem 'pg', group: :postgresql
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -65,7 +68,6 @@ gem 'yajl-ruby'
 gem 'rack-cors', :require => 'rack/cors'
 
 # API pagination
-gem 'kaminari'
 gem 'api-pagination'
 
 group :doc do

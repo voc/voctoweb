@@ -44,4 +44,16 @@ class Public::EventsControllerTest < ActionController::TestCase
     json = JSON.parse(response.body)
     assert_empty json['events']
   end
+
+  test 'search for events return multiple results' do
+    Event.__elasticsearch__.create_index! force: true
+    create_list(:event, 11, title: 'fake-event')
+    Event.import
+    Event.__elasticsearch__.refresh_index!
+
+    get :search, params: { q: 'fake-event' }, format: :json
+    assert_response :success
+    json = JSON.parse(response.body)
+    assert_equal 11, json['events'].count
+  end
 end
