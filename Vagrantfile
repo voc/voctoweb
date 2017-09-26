@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
     echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
     export DEBIAN_FRONTEND="noninteractive"
     apt-get update
-    apt-get install -y redis-server elasticsearch ruby2.3 ruby2.3-dev postgresql-9.5 nodejs libssl-dev build-essential libpq-dev libsqlite3-dev
+    apt-get install -y redis-server elasticsearch ruby2.3 ruby2.3-dev postgresql-9.5 nodejs libssl-dev build-essential libpq-dev libsqlite3-dev nginx
 
     # postgresql
     echo "create role voctoweb with createdb login password 'voctoweb';" | sudo -u postgres psql
@@ -134,6 +134,33 @@ SyslogIdentifier=voctoweb-sidekiq
 WantedBy=default.target
 UNIT
     systemctl enable --now voctoweb-sidekiq
+
+    # nginx
+    tee /etc/nginx/sites-enabled/default <<NGINX
+upstream puma {
+	server localhost:3000;
+}
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name _;
+	root /vagrant/public;
+	location @puma {
+		set $remote_addr_v4 $remote_addr;
+		if ($remote_addr ~* ^::ffff:(.*)) {
+			set $remote_addr_v4 $1;
+		}
+		proxy_set_header  X-Forwarded-For $remote_addr_v4;
+		proxy_set_header  X-Forwarded-Proto $scheme;
+		proxy_set_header  X-Real-IP  $remote_addr;
+		proxy_set_header  Host $http_host;
+		proxy_redirect    off;
+		proxy_pass        http://puma;
+	}
+	try_files /system/maintenance.html $uri $uri/index.html $uri.html @puma;
+}
+NGINX
 
   SHELL
 end
