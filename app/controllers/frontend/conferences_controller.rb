@@ -47,7 +47,7 @@ module Frontend
 
     def sort_param
       return SORT_PARAM[@sorting] if @sorting
-      'date desc, release_date desc'
+      'view_count desc'
     end
 
     def check_sort_param
