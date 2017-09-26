@@ -21,7 +21,10 @@ class Public::EventsController < ActionController::Base
   end
 
   def search
-    @events = paginate(Frontend::Event.query(params[:q]).records, per_page: 50, max_per_page: 256)
+    results = Frontend::Event.query(params[:q]).page(params[:page])
+    # calling this just to set headers
+    paginate(results)
+    @events = results.records.includes(recordings: :conference)
     respond_to { |format| format.json }
   end
 end
