@@ -11,6 +11,8 @@
   .events-header
 
   - if @events.present?
+    = link_to_prev_page @events, 'prev'
+    = link_to_next_page @events, 'next'
     .event-previews
       - @events.each do |event|
         = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
