@@ -161,6 +161,7 @@ server {
 	try_files /system/maintenance.html $uri $uri/index.html $uri.html @puma;
 }
 NGINX
+    systemctl enable --now nginx
 
   SHELL
 end
