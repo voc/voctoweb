@@ -3721,11 +3721,13 @@ if (typeof jQuery != 'undefined') {
 			}, false);
 
 			media.addEventListener('seeking', function() {
+				bigPlay.hide();
 				loading.show();
 				controls.find('.mejs-time-buffering').show();
 			}, false);
 
 			media.addEventListener('seeked', function() {
+				bigPlay.show();
 				loading.hide();
 				controls.find('.mejs-time-buffering').hide();
 			}, false);
@@ -3737,6 +3739,7 @@ if (typeof jQuery != 'undefined') {
 			}, false);
 
 			media.addEventListener('waiting', function() {
+				bigPlay.hide();
 				loading.show();
 				controls.find('.mejs-time-buffering').show();
 			}, false);
@@ -3748,6 +3751,7 @@ if (typeof jQuery != 'undefined') {
 				//if (mejs.MediaFeatures.isChrome && media.getAttribute && media.getAttribute('preload') === 'none')
 				//	return;
 
+				bigPlay.hide();
 				loading.show();
 				controls.find('.mejs-time-buffering').show();
 				// Firing the 'canplay' event after a timeout which isn't getting fired on some Android 4.1 devices (https://github.com/johndyer/mediaelement/issues/1305)
@@ -3764,6 +3768,7 @@ if (typeof jQuery != 'undefined') {
 				}
 			}, false);
 			media.addEventListener('canplay',function() {
+				bigPlay.show();
 				loading.hide();
 				controls.find('.mejs-time-buffering').hide();
 				clearTimeout(media.canplayTimeout); // Clear timeout inside 'loadeddata' to prevent 'canplay' to fire twice
