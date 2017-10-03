@@ -40,7 +40,7 @@ class Api::RecordingsController < ApiController
   def update
     respond_to do |format|
       if @recording.update(recording_params)
-        format.json { render :show, status: :ok, location: @recording }
+        format.json { render :show, status: :ok }
       else
         format.json { render json: @recording.errors, status: :unprocessable_entity }
       end

@@ -57,4 +57,28 @@ class Api::RecordingsControllerTest < ActionController::TestCase
     assert_equal 'test.mp4', recording.filename
     assert_equal 'deu-eng', recording.language
   end
+
+  test 'should update recording' do
+    recording = Recording.last
+    args =  {
+      recording: {
+        filename: 'fake-filename',
+        length: '236',
+        high_quality: 'True',
+        language: 'deu',
+        mime_type: 'video/mp4',
+        height: '1080',
+        folder: 'h264-hd',
+        width: '1920',
+        html5: 'True',
+        size: '54'
+      },
+      api_key: @key.key,
+      id: recording.id
+    }
+    patch 'update', format: :json, params: args
+    assert_response :success
+    recording.reload
+    assert_equal 'fake-filename', recording.filename
+  end
 end

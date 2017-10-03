@@ -43,7 +43,7 @@ class Api::EventsController < ApiController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.json { render :show, status: :ok, location: @event }
+        format.json { render :show, status: :ok }
       else
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end

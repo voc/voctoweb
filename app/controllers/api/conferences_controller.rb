@@ -39,7 +39,7 @@ class Api::ConferencesController < ApiController
   def update
     respond_to do |format|
       if @conference.update(conference_params)
-        format.json { render :show, status: :ok, location: @conference }
+        format.json { render :show, status: :ok }
       else
         format.json { render json: @conference.errors, status: :unprocessable_entity }
       end
