@@ -4,29 +4,28 @@ module Storage
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def has_attached_directory(symbol, via: nil, prefix: nil, url: nil, url_path: nil)
-      AttachedDirectory.define_on(self, symbol, via, prefix, url, url_path)
+    def has_attached_directory(symbol, via: nil, url: nil, url_path: nil)
+      AttachedDirectory.define_on(self, symbol, via, url, url_path)
     end
 
-    def has_attached_file(symbol, via:nil, folder: nil, belongs_into: nil, on: nil)
-      AttachedFile.define_on(self, symbol, via, folder, belongs_into, on)
+    def has_attached_file(symbol, via: nil, folder: nil, belongs_into: nil, on: nil)
+      AttachedFile.define_on(
+        self, symbol, belongs_into,
+        OpenStruct.new(via: via, folder: folder, association_for_dir: on)
+      )
     end
   end
 
   private
 
-  module NameHelper
-    def for_url(symbol)
-      "get_#{symbol}_url".freeze
-    end
-    def for_url_path(symbol)
-      "get_#{symbol}_url_path".freeze
-    end
-    def for_path(symbol)
-      "get_#{symbol}_path".freeze
-    end
-    def for_dir(symbol)
-      "get_#{symbol}_dir".freeze
+  class MethodName
+    class << self
+      def for_url(symbol)
+        "get_#{symbol}_url".freeze
+      end
+      def for_url_path(symbol)
+        "get_#{symbol}_url_path".freeze
+      end
     end
   end
 
@@ -39,43 +38,47 @@ module Storage
   end
 
   class AttachedDirectory
-    extend NameHelper
-    def self.define_on(klass, symbol, instance_var, prefix, url, url_path)
+    def self.define_on(klass, symbol, instance_var, url, url_path)
       klass.send :validates, instance_var, path: true
 
-      klass.send :define_method, for_url(symbol) do
+      klass.send :define_method, MethodName.for_url(symbol) do
         URL.join url, url_path, send(instance_var)
       end
 
-      klass.send :define_method, for_url_path(symbol) do
+      klass.send :define_method, MethodName.for_url_path(symbol) do
         '/'.freeze + URL.join(url_path, send(instance_var))
       end
     end
   end
 
   class AttachedFile
-    extend NameHelper
-    def self.define_on(klass, symbol, ivar_via, ivar_folder, dir_symbol, on)
-      klass.send :validates, ivar_via, path: true
+    def self.define_on(klass, symbol, dir_symbol, ivars)
+      klass.send :validates, ivars.via, path: true
 
-      url_name = for_url(dir_symbol)
-      klass.send :define_method, for_url(symbol) do
-        target = on ? send(on) : self
-        folder = ivar_folder ? send(ivar_folder) : ''
-        URL.join target.send(url_name), folder, send(ivar_via)
-      end
+      define_storage_url_helper(
+        klass,
+        MethodName.for_url(symbol),
+        MethodName.for_url(dir_symbol),
+        ivars,
+        ''
+      )
 
-      url_path_name = for_url_path(dir_symbol)
-      klass.send :define_method, for_url_path(symbol) do
-        target = on ? send(on) : self
-        folder = ivar_folder ? send(ivar_folder) : ''
-        '/' + URL.join(target.send(url_path_name), folder, send(ivar_via))
+      define_storage_url_helper(
+        klass,
+        MethodName.for_url_path(symbol),
+        MethodName.for_url_path(dir_symbol),
+        ivars,
+        '/'
+      )
+    end
+
+    def self.define_storage_url_helper(klass, helper_name, url_name, ivars, prefix)
+      klass.send :define_method, helper_name do
+        target = ivars.association_for_dir ? send(ivars.association_for_dir) : self
+        folder = ivars.folder ? send(ivars.folder) : ''
+        prefix + URL.join(target.send(url_name), folder, send(ivars.via))
       end
     end
-  end
-
-  def self.file_join(*args)
-    File.join args.flatten.select(&:present?)
   end
 
   class URL
