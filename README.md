@@ -17,11 +17,12 @@ The public API provides a programatic access to the data behind media.ccc.de. Co
     /public/conferences/:id
     /public/events
     /public/events/:id
+    /public/events/:guid
     /public/events/search?q=:term
-    /public/recordings/:id
     /public/recordings
+    /public/recordings/:id
 
-The id's are internal database ids, not to be confused with guids or conference talk ids (alias pentabarf/frab id), e.g. https://media.ccc.de/public/events/2935
+The id's are internal database ids, not to be confused with remote talk ids (alias pentabarf/frab id), e.g. https://media.ccc.de/public/events/2935 which is also accessible via https://media.ccc.de/public/events/f9d33869-f9a2-4570-9e9a-25c56e32082a
 
 Example:
 
