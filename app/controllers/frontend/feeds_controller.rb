@@ -143,7 +143,7 @@ module Frontend
     end
 
     def logo_image_url
-      view_context.image_url('frontend/miro-banner.png')
+      view_context.image_url('frontend/feed-banner.png')
     end
 
     def round_to_quarter_hour(time)
