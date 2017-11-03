@@ -15,7 +15,7 @@ module Frontend
     end
 
     def twitter_url(title, url)
-      'http://twitter.com/home?status='.freeze + URI.encode_www_form_component(title + ': ' + url)
+      'https://twitter.com/home?status='.freeze + URI.encode_www_form_component(title + ': ' + url)
     end
 
     def facebook_url(title, url)
