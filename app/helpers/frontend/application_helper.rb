@@ -11,7 +11,7 @@ module Frontend
     end
 
     def oembed_api_event_url(event)
-      (Settings.oembed_url + event_url(slug: event.slug)).freeze
+      (public_oembed_url(url: event_url(slug: event.slug))).freeze
     end
 
     def twitter_url(title, url)
