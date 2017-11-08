@@ -12,4 +12,4 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'ic
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += [/\.(?:eot|otf|svg|ttf|woff|swf|svg|gif|png)/]
-Rails.application.config.assets.precompile += %w( mediaelement-and-player.js mediaelement-fix.js mirrorbrain-fix jquery mediaelementplayer )
+Rails.application.config.assets.precompile += %w( mediaelement-and-player.js mediaelement-fix.js mirrorbrain-fix jquery mediaelementplayer embed.css )
