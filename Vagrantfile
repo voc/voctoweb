@@ -147,18 +147,18 @@ server {
 	server_name _;
 	root /vagrant/public;
 	location @puma {
-		set $remote_addr_v4 $remote_addr;
-		if ($remote_addr ~* ^::ffff:(.*)) {
-			set $remote_addr_v4 $1;
+		set \$remote_addr_v4 \$remote_addr;
+		if (\$remote_addr ~* ^::ffff:(.*)) {
+			set \$remote_addr_v4 \$1;
 		}
-		proxy_set_header  X-Forwarded-For $remote_addr_v4;
-		proxy_set_header  X-Forwarded-Proto $scheme;
-		proxy_set_header  X-Real-IP  $remote_addr;
-		proxy_set_header  Host $http_host;
+		proxy_set_header  X-Forwarded-For \$remote_addr_v4;
+		proxy_set_header  X-Forwarded-Proto \$scheme;
+		proxy_set_header  X-Real-IP  \$remote_addr;
+		proxy_set_header  Host \$http_host;
 		proxy_redirect    off;
 		proxy_pass        http://puma;
 	}
-	try_files /system/maintenance.html $uri $uri/index.html $uri.html @puma;
+	try_files /system/maintenance.html \$uri \$uri/index.html \$uri.html @puma;
 }
 NGINX
     systemctl enable --now nginx
