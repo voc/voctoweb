@@ -1,0 +1,8 @@
+
+.promoted
+  .titlebar
+  .slider
+    - Frontend::Conference.live.each_with_index do |event, i|
+      .slide
+        %a.item{href: event['link'], 'class' => (i == 0 and 'active')}
+          %img{src: h(event['thumb']), alt: event['display'], title: event['display']}

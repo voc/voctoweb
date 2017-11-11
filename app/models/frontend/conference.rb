@@ -21,6 +21,16 @@ module Frontend
         .where('event_last_released_at < ?', date)
     }
 
+    def self.has_live?
+      Conference.where('streaming ? :key', key: 'groups').any?
+    end
+
+    def self.live
+      conferences = Conference.where('streaming ? :key', key: 'groups')
+      groups = conferences.map { |c| c.streaming['groups'].first }.compact
+      groups.map { |g| g['rooms'] }.flatten
+    end
+
     def mime_types
       return enum_for(:mime_types) unless block_given?
       recordings.pluck(:mime_type).uniq.map { |mime_type|

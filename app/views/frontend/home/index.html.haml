@@ -4,7 +4,10 @@
 - content_for :body_class do
   page-start
 
-= render 'frontend/shared/promoted'
+- if Frontend::Conference.has_live?
+  = render 'frontend/shared/live'
+- else
+  = render 'frontend/shared/promoted'
 
 .container-fluid
   .row

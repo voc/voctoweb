@@ -1,0 +1,984 @@
+[
+    {
+        "conference": "32C3",
+        "slug": "32c3",
+        "author": "CCC",
+        "description": "Live-Streaming vom 32C3",
+        "keywords": "32C3, Hacking, Chaos Computer Club, Video, Music, Podcast, Media, Streaming, Hacker, Hamburg",
+        "startsAt": "2015-12-27T05:00:00+0000",
+        "endsAt": "2015-12-30T20:00:00+0000",
+        "groups": [
+            {
+                "group": "Lecture Rooms",
+                "rooms": [
+                    {
+                        "slug": "hall1",
+                        "schedulename": "Hall 1",
+                        "thumb": "http://localhost:8000/streams/thumbs/s1.png",
+                        "link": "http://localhost:8000/streams/32c3/hall1?forceopen=yess",
+                        "display": "Hall 1",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Hall 1 FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated",
+                                "display": "Hall 1 FullHD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Hall 1 SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated",
+                                "display": "Hall 1 SD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "Hall 1 Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_native_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated",
+                                "display": "Hall 1 Slides (Translation)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s1_translated_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Hall 1 Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated",
+                                "display": "Hall 1 Audio (Translation)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s1_translated.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "hall2",
+                        "schedulename": "Hall 2",
+                        "thumb": "http://localhost:8000/streams/thumbs/s2.png",
+                        "link": "http://localhost:8000/streams/32c3/hall2?forceopen=yess",
+                        "display": "Hall 2",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Hall 2 FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated",
+                                "display": "Hall 2 FullHD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_translated_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_translated_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Hall 2 SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated",
+                                "display": "Hall 2 SD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_translated_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_translated_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "Hall 2 Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_native_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated",
+                                "display": "Hall 2 Slides (Translation)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_translated_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s2_translated_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Hall 2 Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated",
+                                "display": "Hall 2 Audio (Translation)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_translated.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s2_translated.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "hallg",
+                        "schedulename": "Hall G",
+                        "thumb": "http://localhost:8000/streams/thumbs/s3.png",
+                        "link": "http://localhost:8000/streams/32c3/hallg?forceopen=yess",
+                        "display": "Hall G",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Hall G FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated",
+                                "display": "Hall G FullHD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_translated_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_translated_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Hall G SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated",
+                                "display": "Hall G SD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_translated_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_translated_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "Hall G Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_native_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated",
+                                "display": "Hall G Slides (Translation)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_translated_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s3_translated_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Hall G Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated",
+                                "display": "Hall G Audio (Translation)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_translated.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s3_translated.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "hall6",
+                        "schedulename": "Hall 6",
+                        "thumb": "http://localhost:8000/streams/thumbs/s4.png",
+                        "link": "http://localhost:8000/streams/32c3/hall6?forceopen=yess",
+                        "display": "Hall 6",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Hall 6 FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "hd-translated",
+                                "display": "Hall 6 FullHD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_translated_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_translated_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Hall 6 SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-translated",
+                                "display": "Hall 6 SD Video (Translation)",
+                                "type": "video",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_translated_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_translated_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-native",
+                                "display": "Hall 6 Slides",
+                                "type": "slides",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_native_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_native_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "slides-translated",
+                                "display": "Hall 6 Slides (Translation)",
+                                "type": "slides",
+                                "isTranslated": true,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_translated_slides.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, XXX kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s4_translated_slides.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Hall 6 Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_native.opus"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-translated",
+                                "display": "Hall 6 Audio (Translation)",
+                                "type": "audio",
+                                "isTranslated": true,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_translated.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s4_translated.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "group": "Live Music",
+                "rooms": [
+                    {
+                        "slug": "lounge",
+                        "schedulename": "Lounge",
+                        "thumb": "http://localhost:8000/streams/thumbs/lounge.png",
+                        "link": "http://localhost:8000/streams/32c3/lounge?forceopen=yess",
+                        "display": "Lounge",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Lounge Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/lounge.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/lounge.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "ambient",
+                        "schedulename": "Ambient",
+                        "thumb": "http://localhost:8000/streams/thumbs/ambient.png",
+                        "link": "http://localhost:8000/streams/32c3/ambient?forceopen=yess",
+                        "display": "Ambient",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Ambient Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/ambient.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/ambient.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "dome",
+                        "schedulename": "Dome",
+                        "thumb": "http://localhost:8000/streams/thumbs/dome.png",
+                        "link": "http://localhost:8000/streams/32c3/dome?forceopen=yess",
+                        "display": "Dome",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Dome Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/dome.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/dome.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "chaos-west",
+                        "schedulename": "Chaos-West",
+                        "thumb": "http://localhost:8000/streams/thumbs/chaos-west.png",
+                        "link": "http://localhost:8000/streams/32c3/chaos-west?forceopen=yess",
+                        "display": "Chaos-West",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Chaos-West Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/chaos-west.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/chaos-west.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "radio",
+                        "schedulename": "Radio Fairydust",
+                        "thumb": "http://localhost:8000/streams/thumbs/radio.png",
+                        "link": "http://localhost:8000/streams/32c3/radio?forceopen=yess",
+                        "display": "Radio Fairydust",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Radio Fairydust Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/radio.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/radio.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "group": "Live Podcasts",
+                "rooms": [
+                    {
+                        "slug": "sendezentrum",
+                        "schedulename": "Bühne",
+                        "thumb": "http://localhost:8000/streams/thumbs/s5.png",
+                        "link": "http://localhost:8000/streams/32c3/sendezentrum?forceopen=yess",
+                        "display": "Sendezentrum",
+                        "streams": [
+                            {
+                                "slug": "hd-native",
+                                "display": "Sendezentrum FullHD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1920,
+                                    1080
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1920x1080, VP8+Vorbis in WebM, 2.8 MBit/s",
+                                        "url": "http://cdn.c3voc.de/s5_native_hd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1920x1080, h264+AAC im MPEG-TS-Container via HTTP, 3 MBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s5_native_hd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "sd-native",
+                                "display": "Sendezentrum SD Video",
+                                "type": "video",
+                                "isTranslated": false,
+                                "videoSize": [
+                                    1024,
+                                    576
+                                ],
+                                "urls": {
+                                    "webm": {
+                                        "display": "WebM",
+                                        "tech": "1024x576, VP8+Vorbis in WebM, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s5_native_sd.webm"
+                                    },
+                                    "hls": {
+                                        "display": "HLS",
+                                        "tech": "1024x576, h264+AAC im MPEG-TS-Container via HTTP, 800 kBit/s",
+                                        "url": "http://cdn.c3voc.de/hls/s5_native_sd.m3u8"
+                                    }
+                                }
+                            },
+                            {
+                                "slug": "audio-native",
+                                "display": "Sendezentrum Audio",
+                                "type": "audio",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s5_native.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 64 kBit/s",
+                                        "url": "http://cdn.c3voc.de/s5_native.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "slug": "podcastertisch",
+                        "schedulename": "Podcaster-Tisch",
+                        "thumb": "http://localhost:8000/streams/thumbs/podcastertisch.png",
+                        "link": "http://localhost:8000/streams/32c3/podcastertisch?forceopen=yess",
+                        "display": "Sendezentrum - Podcastertisch",
+                        "streams": [
+                            {
+                                "slug": "music-native",
+                                "display": "Sendezentrum - Podcastertisch Radio",
+                                "type": "music",
+                                "isTranslated": false,
+                                "videoSize": null,
+                                "urls": {
+                                    "mp3": {
+                                        "display": "MP3",
+                                        "tech": "MP3-Audio, 192 kBit/s",
+                                        "url": "http://cdn.c3voc.de/podcastertisch.mp3"
+                                    },
+                                    "opus": {
+                                        "display": "Opus",
+                                        "tech": "Opus-Audio, 96 kBit/s",
+                                        "url": "http://cdn.c3voc.de/podcastertisch.opus"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
