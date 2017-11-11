@@ -38,6 +38,7 @@ class Api::EventsControllerTest < ActionController::TestCase
   end
 
   test 'should update view counts of events' do
+    EventViewCount.touch!
     conference = create(:conference)
     event = create(:event_with_recordings, conference: conference, view_count: 1)
     event.recordings.first.recording_views.create
@@ -47,8 +48,14 @@ class Api::EventsControllerTest < ActionController::TestCase
     other_event.recordings.last.recording_views.create
 
     get 'update_view_counts', format: :json, params: { api_key: @key.key }
-    assert_equal 3, event.reload.view_count
-    assert_equal 1, other_event.reload.view_count
+    assert_equal 4, event.reload.view_count
+    assert_equal 3, other_event.reload.view_count
+
+    event.recordings.last.recording_views.create
+    other_event.recordings.last.recording_views.create
+    get 'update_view_counts', format: :json, params: { api_key: @key.key }
+    assert_equal 5, event.reload.view_count
+    assert_equal 4, other_event.reload.view_count
   end
 
   test 'should create event' do

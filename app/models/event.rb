@@ -60,17 +60,20 @@ class Event < ApplicationRecord
   def self.update_view_counts
     event_ids = recently_viewed_event_ids
     return unless event_ids.present?
+    view_count_updated_at = EventViewCount.updated_at
     connection.execute %{
       UPDATE events
-      SET view_count = (
+      SET view_count = view_count + (
         SELECT count(*)
         FROM recording_views
           JOIN recordings
             ON recording_views.recording_id = recordings.id
             AND recordings.event_id         = events.id
+            AND recording_views.created_at > #{connection.quote(view_count_updated_at)}
       )
       WHERE events.id IN (#{event_ids.join(',')})
     }
+    EventViewCount.touch!
     event_ids.map { |id| Event.find(id).touch }
   end
 

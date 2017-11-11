@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111152136) do
+ActiveRecord::Schema.define(version: 20171111211412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,10 @@ ActiveRecord::Schema.define(version: 20171111152136) do
     t.jsonb "streaming", default: {}
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
+  end
+
+  create_table "event_view_counts", force: :cascade do |t|
+    t.datetime "last_updated_at"
   end
 
   create_table "events", force: :cascade do |t|

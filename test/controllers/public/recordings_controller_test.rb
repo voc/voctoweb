@@ -22,6 +22,7 @@ class Public::RecordingsControllerTest < ActionController::TestCase
   end
 
   test 'should increase view count' do
+    EventViewCount.touch!
     create :conference_with_recordings
     e = Event.first
     r = e.recordings.first
