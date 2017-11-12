@@ -23,7 +23,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'should list related events' do
     events = create_list(:event, 3)
-    @event.metadata[:related] = events.pluck(:id)
+    @event.metadata[:related] = events.pluck(:id).each_with_object({}) { |v,h| h[v] = 1 }
     @event.save
     assert_equal 3, @event.metadata['related'].count
   end

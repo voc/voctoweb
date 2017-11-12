@@ -1,6 +1,7 @@
 class UpdateRelatedEvents
   def initialize
     @graph = {}
+    @recording_cache = {}
   end
 
   def update
@@ -14,19 +15,25 @@ class UpdateRelatedEvents
   private
 
   def update_related
-    @graph.each { |id, edges|
-      event = Recording.find(id).event
+    @graph.each do |id, edges|
+      event = find_recording(id).event
       next unless event
-      sorted = Hash[edges.sort_by { |_, v| -v }]
-      new_event_ids = sorted.keys.map { |recording_id|
-        event_id = Recording.find(recording_id).event.id
+      related_events = {}
+      edges.map do |recording_id, weight|
+        event_id = find_recording(recording_id).event_id
         next unless event_id
-        event_id
-      }.compact
-      event.metadata['related'] ||= []
-      event.metadata['related'] += new_event_ids
-      event.save
-    }
+        related_events[event_id] = weight
+      end
+
+      event.metadata['related'] ||= {}
+      event.metadata['related'].merge!(related_events)
+      # skip callbacks
+      event.update_columns(metadata: event.metadata)
+    end
+  end
+
+  def find_recording(recording_id)
+    @recording_cache[recording_id] ||= Recording.find(recording_id)
   end
 
   def build_graph(related)
@@ -52,7 +59,7 @@ class UpdateRelatedEvents
 
   def related_by_views
     views = RecordingView.connection.execute(%{
-        SELECT array_agg(recording_id) as recording_group
+        SELECT array_agg(DISTINCT recording_id) as recording_group
           FROM recording_views
          GROUP BY identifier, user_agent
     })
