@@ -61,9 +61,9 @@
       %p.description
         = simple_format @event.description
 
-    - if @event.metadata['related']
+    - if @event.metadata['related'].present?
       %h3 Related
-      = render partial: 'frontend/shared/related', locals: { events: Frontend::Event.find(@event.metadata['related']) }
+      = render partial: 'frontend/shared/related', locals: { events: Frontend::Event.find(@event.related_event_ids(10)) }
 
     %h3 Download
     .download
