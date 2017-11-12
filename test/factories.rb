@@ -133,6 +133,12 @@ FactoryGirl.define do
     html5 true
   end
 
+  factory :recording_view do
+    recording
+    identifier '1234'
+    user_agent 'browser/1.0'
+  end
+
   factory :admin_user do
     email { generate :email }
     password 'admin123'
