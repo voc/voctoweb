@@ -7,6 +7,8 @@ class RecordingViewTest < ActiveSupport::TestCase
     @r3 = create(:recording)
     @r4 = create(:recording)
     @r5 = create(:recording)
+    @r1a = create(:recording, event: @r1.event)
+    @r3a = create(:recording, event: @r3.event)
     @r1.event.update(metadata: {'related' => {123 => 2}})
   end
 
@@ -17,13 +19,16 @@ class RecordingViewTest < ActiveSupport::TestCase
     create(:recording_view, recording: @r3)
     create(:recording_view, recording: @r4)
     create(:recording_view, recording: @r5)
+    create(:recording_view, recording: @r1a)
+
     create(:recording_view, recording: @r1, user_agent: 'other/1.0')
     create(:recording_view, recording: @r2, user_agent: 'other/1.0')
     create(:recording_view, recording: @r3, user_agent: 'other/1.0')
     create(:recording_view, recording: @r4, user_agent: 'other/1.0')
+
     create(:recording_view, recording: @r1, user_agent: 'free/2.0')
     create(:recording_view, recording: @r2, user_agent: 'free/2.0')
-    create(:recording_view, recording: @r3, user_agent: 'free/2.0')
+    create(:recording_view, recording: @r3a, user_agent: 'free/2.0')
 
     UpdateRelatedEvents.new.update
 

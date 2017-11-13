@@ -24,20 +24,21 @@ class UpdateRelatedEvents
   end
 
   def build_graph(related)
-    related.each { |events|
+    related.each do |recording_ids|
       # identifier is valid for 12 hours only, how many presentations can one human watch?
-      next if events.size == 1 || events.size > 50
+      next if recording_ids.size == 1 || recording_ids.size > 50
 
-      events.each { |event|
-        node = if @graph.key?(event)
-                 @graph[event]
+      event_ids = Recording.where(id: recording_ids).pluck(:event_id).uniq
+      event_ids.each do |event_id|
+        node = if @graph.key?(event_id)
+                 @graph[event_id]
                else
-                 @graph[event] = Hash.new { |h, v| h[v] = 0 }
+                 @graph[event_id] = Hash.new { |h, v| h[v] = 0 }
                end
 
-        (events-[event]).each { |v| node[v] +=1 }
-      }
-    }
+        (event_ids-[event_id]).each { |id| node[id] +=1 }
+      end
+    end
 
     @graph.each do |_id, edges|
       weights = edges.values
@@ -57,23 +58,13 @@ class UpdateRelatedEvents
 
   def update_related
     @graph.each do |id, edges|
-      event = find_recording(id).event
+      event = Event.find(id)
       next unless event
-      related_events = {}
-      edges.map do |recording_id, weight|
-        event_id = find_recording(recording_id).event_id
-        next unless event_id
-        related_events[event_id] = weight
-      end
 
       event.metadata['related'] ||= {}
-      event.metadata['related'].merge!(related_events)
+      event.metadata['related'].merge!(edges)
       # skip callbacks
       event.update_columns(metadata: event.metadata)
     end
-  end
-
-  def find_recording(recording_id)
-    @recording_cache[recording_id] ||= Recording.find(recording_id)
   end
 end
