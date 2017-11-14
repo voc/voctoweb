@@ -25,6 +25,10 @@ module Frontend
       Conference.where('streaming ? :key', key: 'groups').any?
     end
 
+    def self.first_live
+      Conference.where('streaming ? :key', key: 'groups').first
+    end
+
     def self.live
       conferences = Conference.where('streaming ? :key', key: 'groups')
       groups = conferences.map { |c| c.streaming['groups'].first }.compact
