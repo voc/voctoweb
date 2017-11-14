@@ -6,14 +6,20 @@
   position: relative;
 
   &.live {
-    height: 380px;
+    @media #{$lg-or-bigger} {
+      height: 380px;
+    }
 
     h2 {
       color: white;
       border-bottom: 0;
-      font-size: 70px;
       text-shadow: white 0 0 5px;
-      margin: 30px 0 0 0;
+      margin: 20px 0 0 0;
+
+      @media #{$lg-or-bigger} {
+        font-size: 70px;
+        margin: 30px 0 0 0;
+      }
     }
   }
 
