@@ -14,6 +14,12 @@
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
+- if current_admin_user
+  - content_for :navbar do
+    .nav.navbar-form.navbar-right.button-wrapper
+      %a.form-control.btn.btn-default{href: edit_admin_event_path(@event)}
+        %span.icon.icon-edit
+
 - content_for :description do
   %meta{name: 'description', content: @event.short_description}
 
