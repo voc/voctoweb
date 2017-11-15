@@ -21,6 +21,15 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     #puts JSON.pretty_generate JSON.parse(response.body)
   end
 
+  test "should get show via acronym" do
+    conference = create :conference_with_recordings
+    get :show, params: { id: conference.acronym }, format: :json
+    assert_response :success
+    json = JSON.parse(response.body)
+    refute_empty json['acronym']
+  end
+
+
   test "should return 404 error" do
     get :show, params: { id: 123 }, format: :json
     assert_response :not_found
