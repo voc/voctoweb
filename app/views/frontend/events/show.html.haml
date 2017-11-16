@@ -33,14 +33,20 @@
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
-      - if @event.recordings.video.present?
-        .player.video
-          .kiosk
-          = render partial: 'frontend/shared/player_video', locals: { height: aspect_ratio_height, width: aspect_ratio_width, stretching: 'responsive', event: @event }
 
-      - elsif @event.recordings.audio.present?
-        .player.audio
-          = render partial: 'frontend/shared/player_audio', locals: { event: @event }
+    - if @event.recordings.video.present?
+      .player.video
+        .kiosk
+        = render partial: 'frontend/shared/player_video', locals: { height: aspect_ratio_height, width: aspect_ratio_width, stretching: 'responsive', event: @event }
+
+    - elsif @event.recordings.audio.present?
+      .player.audio
+        = render partial: 'frontend/shared/player_audio', locals: { event: @event }
+
+    - elsif @event.relive_present?
+      .player.video
+        .kiosk
+        = render partial: 'frontend/shared/reliveplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
 
     %ul.metadata
       %li

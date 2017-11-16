@@ -32,3 +32,8 @@
 //= require jquery.bxslider-v4.2.12-patched
 //= require slider
 //= require feed_toggle
+
+//= require clappr.min
+//= require clappr-thumbnails-plugin
+//= require clappr-playback-rate-plugin
+//= require relive-seek

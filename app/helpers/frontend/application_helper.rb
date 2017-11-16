@@ -9,7 +9,7 @@ module Frontend
     def recording_title(recording)
       if recording.slides?
         "slides #{recording.language} #{recording.height}p"
-      else 
+      else
         "#{recording.language} #{recording.height}p"
       end
     end
@@ -125,6 +125,18 @@ module Frontend
       return 'event and release date' if event.released_on_event_day?
       return 'event date' if event.date
       'video release date'
+    end
+
+    def relive_data(event, width, height)
+      data = { width: width, height: height, m3u8: event.relive['playlist'] }
+      return data unless event.relive['sprites']
+
+      data.merge!(
+        sprites: event.relive['sprites']['url'],
+        'sprites-n': event.relive['sprites']['n'],
+        'sprites-cols': event.relive['sprites']['cols'],
+        'sprites-interval': event.relive['sprites']['interval']
+      )
     end
   end
 end

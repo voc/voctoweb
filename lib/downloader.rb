@@ -11,7 +11,7 @@ module Downloader
     content = ''
     uri = URI(url)
     if uri.scheme == 'file'
-      path = absolute_path(url, uri)
+      path = absolute_path(uri)
       File.open(path, 'r:UTF-8') { |f| content = f.read }
     else
       content = open(url).read
@@ -40,7 +40,7 @@ module Downloader
   private
 
   # URI does not distinguish between file:// and file:///, so fallback to readable?
-  def absolute_path(url, uri)
+  def absolute_path(uri)
     return uri.path if File.readable?(uri.path)
     File.join(Rails.root, uri.path)
   end
