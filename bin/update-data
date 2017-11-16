@@ -17,7 +17,7 @@ chdir APP_ROOT do
   system! 'curl https://media.ccc.de/system/voctoweb.dump.tar.gz | tar xvz'
 
   puts "\n== Updating database =="
-  system! 'FIXTURES_DIR=../../tmp/fixtures bin/rake db:fixtures:load'
+  system! 'FIXTURES_DIR=../../tmp/fixtures bin/rake db:fixtures:load_jsonb'
 
   puts "\n== Updating Elasticsearch =="
   system! 'bin/rails runner "Event.__elasticsearch__.create_index! force: true; Event.import"'
