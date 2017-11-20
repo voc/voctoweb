@@ -1,4 +1,4 @@
-class AddOriginalLanguageToEvent < ActiveRecord::Migration
+class AddOriginalLanguageToEvent < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :original_language, :string
 

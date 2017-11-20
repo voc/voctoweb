@@ -1,4 +1,4 @@
-class AddIndexes < ActiveRecord::Migration
+class AddIndexes < ActiveRecord::Migration[4.2]
   def change
     add_index 'events', ['slug'], name: 'index_events_on_slug'
     add_index 'events', ['release_date'], name: 'index_events_on_release_date'

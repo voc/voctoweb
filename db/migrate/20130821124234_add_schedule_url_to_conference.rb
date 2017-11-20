@@ -1,4 +1,4 @@
-class AddScheduleUrlToConference < ActiveRecord::Migration
+class AddScheduleUrlToConference < ActiveRecord::Migration[4.2]
   def change
     add_column :conferences, :schedule_url, :string
     add_column :conferences, :schedule_xml, :binary

@@ -1,4 +1,4 @@
-class AddReleaseDateToEvent < ActiveRecord::Migration
+class AddReleaseDateToEvent < ActiveRecord::Migration[4.2]
   def up
     add_column :events, :release_date, :datetime
     Event.all.each { |e|
