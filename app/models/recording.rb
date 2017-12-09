@@ -18,6 +18,7 @@ class Recording < ApplicationRecord
 
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
+  scope :slides, -> { where("folder LIKE 'slides%'") }
   scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
   scope :original_language, -> { joins(:event).where('events.original_language = recordings.language') }
@@ -35,6 +36,10 @@ class Recording < ApplicationRecord
 
   def video?
     mime_type.in? MimeType::VIDEO
+  end
+
+  def slides?
+    folder.start_with?('slides')
   end
 
   def subtitle?
@@ -59,6 +64,7 @@ class Recording < ApplicationRecord
       'mp3' => 'MP3',
       'ogg' => 'Ogg',
       'opus' => 'Opus',
+      'pdf' => 'PDF',
       'srt' => 'SRT',
     }
 
