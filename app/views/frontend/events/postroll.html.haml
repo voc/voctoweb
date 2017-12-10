@@ -1,8 +1,8 @@
 .postroll
-  %h3 continue ...
+  %h4 continue…
   .container-fluid
     .row
       - @events.each do |event|
-        .col-md-4.conference
+        .col-xs-4.event
           = render partial: 'frontend/shared/event_title', locals: { event: event }
           = render partial: 'frontend/shared/event_thumb', locals: { event: event }
