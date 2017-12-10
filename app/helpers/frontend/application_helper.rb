@@ -7,7 +7,7 @@ module Frontend
     end
 
     def recording_title(recording)
-      "#{MimeType.humanized_mime_type(recording.mime_type)} #{recording.resolution} #{recording.language}"
+      "#{recording.language} #{recording.height}p"
     end
 
     def oembed_api_event_url(event)
