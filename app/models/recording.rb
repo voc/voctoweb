@@ -6,7 +6,8 @@ class Recording < ApplicationRecord
   has_one :conference, through: :event
   has_many :recording_views, dependent: :delete_all
 
-  validates :event, :filename, :mime_type, :length, :language, presence: true
+  validates :event, :filename, :mime_type,  :language, presence: true
+  validates :length, presence: true, if: :requires_length
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
@@ -36,6 +37,14 @@ class Recording < ApplicationRecord
 
   def video?
     mime_type.in? MimeType::VIDEO
+  end
+  
+  def audio?
+    mime_type.in? MimeType::AUDIO
+  end
+  
+  def requires_length
+    self.video? || self.audio?
   end
 
   def slides?
