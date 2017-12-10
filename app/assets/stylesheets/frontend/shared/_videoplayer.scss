@@ -4,10 +4,10 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
-      .mejs-container.video, .video-native {
+      .mejs__container.video, .video-native {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
 
-        &.mejs-container-fullscreen {
+        &.mejs__container-fullscreen {
           margin-left: 0 !important;
         }
       }
@@ -32,27 +32,24 @@
 
 
 /* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
-.mejs-container.video {
-  width: 100% !important;
-  height: auto !important;
-  padding-top: 56.25%; /* 16:9 */
-}
-.mejs-overlay, .mejs-poster {
 .video-native {
   width: 100% !important;
   height: auto !important;
 }
+/*
+.mejs__overlay, .mejs__poster {
   width: 100% !important;
   height: 100% !important;
 }
-.mejs-mediaelement video {
+
+.mejs__mediaelement video {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100% !important;
   height: 100% !important;
 }
 
-.mejs-mediaelement .me-cannotplay {
+.mejs__mediaelement .me-cannotplay {
   width: 100% !important;
   height: auto !important;
 
@@ -60,8 +57,8 @@
     display: none;
   }
 }
-
-.mejs-captions-layer  {
+*/
+.mejs__captions-layer  {
   width: 100% !important;
   line-height: 1.4em;
   font-size: 2em;

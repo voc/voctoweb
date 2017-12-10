@@ -36,6 +36,7 @@ var MirrorbrainFix = {
         usePluginFullScreen: true,
         enableAutosize: true,
         features: ['playpause','progress','current','duration','tracks','volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll'],
+        stretching: 'responsive',
         success: function (mediaElement) {
           mediaElement.addEventListener('canplay', function () {
             if(stamp) {
