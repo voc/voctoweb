@@ -4,7 +4,7 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
-      .mejs-container.video {
+      .mejs-container.video, .video-native {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
 
         &.mejs-container-fullscreen {
@@ -38,6 +38,10 @@
   padding-top: 56.25%; /* 16:9 */
 }
 .mejs-overlay, .mejs-poster {
+.video-native {
+  width: 100% !important;
+  height: auto !important;
+}
   width: 100% !important;
   height: 100% !important;
 }

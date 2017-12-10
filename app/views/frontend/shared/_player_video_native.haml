@@ -1,0 +1,8 @@
+<!-- Native HTML5 video element -->
+
+%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'none', class: 'video-native'}
+  - event.videos_sorted_by_language.each do |recording|
+    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
+
+  - event.recordings.subtitle.each do |track|
+    %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}

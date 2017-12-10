@@ -29,6 +29,11 @@ module Frontend
     def load_event
       @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
+      @player = ''
+      if params[:player]
+        # TODO input sanitation/validation?
+        @player = '_' + params[:player]
+      end
     end
   end
 end
