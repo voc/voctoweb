@@ -17,7 +17,7 @@ var MirrorbrainFix = {
   },
 
   setupPlayer: function() {
-    var stamp = window.location.hash.split('&t=')[1],
+    var stamp = window.location.hash.split('#t=')[1] || window.location.hash.split('&t=')[1],
         $video = $('video'),
         promises = [];
 
@@ -47,7 +47,7 @@ var MirrorbrainFix = {
             $.post("/public/recordings/count", {event_id: $video.data('id'), src: mediaElement.src});
           }, false);
           mediaElement.addEventListener('pause', function() {
-            var hash = '#video&t='+Math.round(mediaElement.currentTime);
+            var hash = '#t='+Math.round(mediaElement.currentTime);
             window.location.replaceHash(hash);
           }, false);
         }
