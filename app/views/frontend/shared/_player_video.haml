@@ -1,4 +1,3 @@
-<!-- Media element JS -->
 <!-- Mediaelement Player -->
 
 %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height}
@@ -9,7 +8,7 @@
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
 
 
-  %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('flashmediaelement.swf') }
+  %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('mediaelement-flash-video.swf') }
     %param{ name: 'allowFullScreen', value: 'true' }
     %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(event.videos_sorted_by_language)}" }
 
