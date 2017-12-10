@@ -57,25 +57,20 @@
 
       .col-sm-10.col-md-11
         %ul.nav.nav-tabs{role: "tablist"}
-          - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-            %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
-              %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
-                = display
 
         .tab-content
           - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-            .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
-              - @event.audio_recordings_for_download(type).each do |language, recording|
-                .btn-wrap
-                  %a.btn.btn-default.download.audio{href: recording.url, class: language}
-                    - if event.has_translation
-                      .language= language
+            - @event.audio_recordings_for_download(type).each do |language, recording|
+              .btn-wrap
+                %a.btn.btn-default.download.audio{href: recording.url, class: language}
+                  - if event.has_translation
+                    .language= language
 
-                    .title= 'Download'
-                    - if recording.size
-                      .size= recording.size.to_s+' MB'
-                    - else
-                      .codec= display
+                  .title= 'Download ' + type
+                  - if recording.size
+                    .size= recording.size.to_s+' MB'
+                  - else
+                    .codec= display
 
   - if event.recordings.slides.present?
     .row.slides
@@ -83,26 +78,19 @@
         %h4 Slides
 
       .col-sm-10.col-md-11
-        %ul.nav.nav-tabs{role: "tablist"}
-          - event.filetypes(MimeType::SLIDES).each_with_index do |(type, display), idx|
-            %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
-              %a{href: "#slides-"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
-                = display
-
         .tab-content
           - event.filetypes(MimeType::SLIDES).each_with_index do |(type, display), idx|
-            .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: "slides-" + type}
-              - @event.slides_for_download(type).each do |language, recording|
-                .btn-wrap
-                  %a.btn.btn-default.download.slides{href: recording.url, class: language}
-                    - if event.has_translation
-                      .language= language
+            - @event.slides_for_download(type).each do |language, recording|
+              .btn-wrap
+                %a.btn.btn-default.download.slides{href: recording.url, class: language}
+                  - if event.has_translation
+                    .language= language
 
-                    .title= 'Download'
-                    - if recording.size
-                      .size= recording.size.to_s+' MB'
-                    - else
-                      .codec= display
+                  .title= 'Download ' + type
+                  - if recording.size
+                    .size= recording.size.to_s+' MB'
+                  - else
+                    .codec= display
 
 
   - if event.recordings.subtitle.present? || ( @conference.metadata && @conference.metadata['subtitles'].present? )
