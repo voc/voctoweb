@@ -36,11 +36,11 @@
       - if @event.recordings.video.present?
         .player.video
           .kiosk
-          = render partial: 'frontend/shared/videoplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
+          = render partial: 'frontend/shared/player_video', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
 
       - elsif @event.recordings.audio.present?
         .player.audio
-          = render partial: 'frontend/shared/audioplayer', locals: { event: @event }
+          = render partial: 'frontend/shared/player_audio', locals: { event: @event }
 
     %ul.metadata
       %li

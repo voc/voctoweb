@@ -1,3 +1,5 @@
+<!-- Media element JS -->
+
 %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height}
   - event.videos_sorted_by_language.each do |recording|
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
@@ -10,7 +12,7 @@
     %param{ name: 'allowFullScreen', value: 'true' }
     %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(event.videos_sorted_by_language)}" }
 
-    %p Your Browser can't play this Video-File. Please download the File below and use a Desktop-Player.
+    %p Your browser can't play this video file. Please download the file below and use a desktop player e.g. VLC.
 
   %link{rel: "postroll", href: postroll_path(slug: event.slug)}
 
