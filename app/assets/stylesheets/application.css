@@ -11,6 +11,14 @@
  *= require_self
  *= require frontend/styles
  *= require mediaelementplayer
+ *= mediaelement-plugins/source-chooser/source-chooser
+ *= mediaelement-plugins/speed/speed
+ *= mediaelement-plugins/postroll/postroll
+ *= mediaelement-plugins/skip-back/skip-back
+ *= mediaelement-plugins/jump-forward/jump-forward
+ *= mediaelement-plugins/cromecast/cromecast
+ *= mediaelement-plugins/airplay/airplay
+TOOD require_tree mediaelement-plugins 
  *= require icomoon-font
  *= require jquery.bxslider
  */
