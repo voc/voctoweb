@@ -1,4 +1,4 @@
-class RemoveViewCountFromRecordings < ActiveRecord::Migration
+class RemoveViewCountFromRecordings < ActiveRecord::Migration[4.2]
   def up
     remove_column :recordings, :view_count
   end

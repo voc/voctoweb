@@ -1,4 +1,4 @@
-class AddConferenceIndexes < ActiveRecord::Migration
+class AddConferenceIndexes < ActiveRecord::Migration[4.2]
   def up
     add_index :conferences, :acronym
   end

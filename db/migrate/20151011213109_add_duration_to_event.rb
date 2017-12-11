@@ -1,4 +1,4 @@
-class AddDurationToEvent < ActiveRecord::Migration
+class AddDurationToEvent < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :duration, :integer, default: 0
     Event.find_each do |event|

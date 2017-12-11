@@ -1,4 +1,4 @@
-class AddDownloadedRecordingsCounterOnEvents < ActiveRecord::Migration
+class AddDownloadedRecordingsCounterOnEvents < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :downloaded_recordings_count, :integer, default: 0
     Event.reset_column_information

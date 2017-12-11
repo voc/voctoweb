@@ -1,4 +1,4 @@
-class ChangeReleaseDateToDate < ActiveRecord::Migration
+class ChangeReleaseDateToDate < ActiveRecord::Migration[4.2]
   def up
     change_column :import_templates, :release_date, :date
     change_column :events, :release_date, :date

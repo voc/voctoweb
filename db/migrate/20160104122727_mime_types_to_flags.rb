@@ -1,4 +1,4 @@
-class MimeTypesToFlags < ActiveRecord::Migration
+class MimeTypesToFlags < ActiveRecord::Migration[4.2]
   def change
     html5 = %w(vnd.voc/mp4-web vnd.voc/webm-web)
     Recording.find_each do |recording|

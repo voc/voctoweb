@@ -1,4 +1,4 @@
-class FillRecordingsFolderFromMimeTypes < ActiveRecord::Migration
+class FillRecordingsFolderFromMimeTypes < ActiveRecord::Migration[4.2]
 
   def up
     mappings = {

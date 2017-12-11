@@ -1,4 +1,4 @@
-class AddViewCountToRecordings < ActiveRecord::Migration
+class AddViewCountToRecordings < ActiveRecord::Migration[4.2]
   def up
     add_column :recordings, :view_count, :integer, default: 0
 

@@ -1,4 +1,4 @@
-class AddDownloadedEventsCountToConferences < ActiveRecord::Migration
+class AddDownloadedEventsCountToConferences < ActiveRecord::Migration[4.2]
   def change
     add_column :conferences, :downloaded_events_count, :integer, default: 0, null: false
     Conference.reset_column_information

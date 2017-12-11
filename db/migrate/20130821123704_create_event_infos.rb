@@ -1,4 +1,4 @@
-class CreateEventInfos < ActiveRecord::Migration
+class CreateEventInfos < ActiveRecord::Migration[4.2]
   def change
     create_table :event_infos do |t|
       t.references :event, index: true

@@ -1,4 +1,4 @@
-class ChangeConferenceScheduleXmlToText < ActiveRecord::Migration
+class ChangeConferenceScheduleXmlToText < ActiveRecord::Migration[4.2]
   def up
     change_column :conferences, :schedule_xml, :text, limit: 10.megabyte
   end
