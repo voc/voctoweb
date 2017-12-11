@@ -3744,7 +3744,8 @@ var MediaElementPlayer = function () {
 					    mediaFiles = [],
 					    tracks = [];
 
-					for (var i = 0, total = children.length; i < total; i++) {
+					// Don't ask my why, but during iteration the 7th element vanishes without traces... --Andi
+					for (var i = 0; i < children.length; i++) {
 						var childNode = children[i];
 
 						(function () {
