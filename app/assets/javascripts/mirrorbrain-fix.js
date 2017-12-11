@@ -35,8 +35,9 @@ var MirrorbrainFix = {
       $('video').mediaelementplayer({
         usePluginFullScreen: true,
         enableAutosize: true,
-        features: ['playpause','progress','current','duration','tracks','volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll'],
         stretching: 'responsive',
+        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll'],
+        skipBackInterval: 15,
         success: function (mediaElement) {
           mediaElement.addEventListener('canplay', function () {
             if(stamp) {
