@@ -1,4 +1,5 @@
-.promoted.themed-banner
+.promoted.themed-banner.live
+  %h2= "Live now – " + Frontend::Conference.first_live.title
   .titlebar
   .slider
     - Frontend::Conference.live.each_with_index do |event, i|
