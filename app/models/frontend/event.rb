@@ -88,7 +88,7 @@ module Frontend
       MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
       seen.first[1]
     end
-    
+
     def slides_for_download(filetype)
       self.recordings.slides
         .select { |x| x.filetype == filetype }
@@ -97,11 +97,11 @@ module Frontend
         .to_h
     end
 
-    def slides
-      slides = recordings.where("folder LIKE 'slides%'")
+    def slide
+      slides = recordings.slides
       return if slides.empty?
       seen = Hash[slides.map { |r| [r.mime_type, r] }]
-      MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
+      MimeType::SLIDES.each { |mt| return seen[mt] if seen.key?(mt) }
       seen.first[1]
     end
 
