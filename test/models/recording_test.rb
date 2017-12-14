@@ -62,9 +62,8 @@ class RecordingTest < ActiveSupport::TestCase
     assert recording.folder.strip == recording.folder
   end
 
-  test 'should list video recordings' do
+  test 'should list video recordings and slide videos' do
     @event.recordings << create(:recording, filename: 'video.pdf', event: @event)
-    @event.recordings << create(:recording, filename: 'video.mp4', event: @event)
     @event.recordings << create(:recording, folder: 'slides', filename: 'slides.mp4', event: @event)
 
     assert_equal 3, @event.recordings.video.count
