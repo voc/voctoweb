@@ -2,6 +2,7 @@ class UpdateRelatedEvents
   def initialize
     @graph = {}
     @recording_cache = {}
+    @event_cache = {}
   end
 
   def update
@@ -12,7 +13,29 @@ class UpdateRelatedEvents
     update_related
   end
 
+  def clean
+    Event.where('metadata ? :value', value: 'related').each do |event|
+      weights = event.metadata['related'].values
+      if weights.count > 10
+        limit = percentile(weights, 0.25)
+        event.metadata['related'].delete_if { |_k, v| v < limit.to_i }
+      end
+      #r = event.metadata['related'].count
+      #puts "#{event.id}: removing weak #{weights.count - r} of #{weights.count}" if weights.count != r
+
+      event.metadata['related'].delete_if { |k, _v| !event_exists?(k) }
+      #d = event.metadata['related'].count
+      #puts "#{event.id}: removing deleted #{r - d} of #{weights.count - r}" if d != r
+
+      event.update_columns(metadata: event.metadata)
+    end
+  end
+
   private
+
+  def event_exists?(id)
+    @event_cache[id] ||= Event.exists?(id)
+  end
 
   def related_by_views
     views = RecordingView.connection.execute(%{

@@ -5,6 +5,11 @@ namespace :voctoweb do
       UpdateRelatedEvents.new.update
     end
 
+    desc 'Clean up related'
+    task clean: :environment do
+      UpdateRelatedEvents.new.clean
+    end
+
     desc 'Remove related info from all events'
     task remove: :environment do
       Event.all.map { |e|

@@ -20,6 +20,8 @@ class Event < ApplicationRecord
   serialize :persons, Array
   serialize :tags, Array
 
+  after_destroy { |record| delete_related_from_other_events(record.id.to_s) }
+
   # events with recordings of any type for a given conference
   scope :recorded_at, ->(conference) {
     joins(:recordings, :conference)
@@ -181,5 +183,12 @@ class Event < ApplicationRecord
     thumb_filename.strip! unless thumb_filename.blank?
     poster_filename.strip! unless poster_filename.blank?
     link.strip! unless link.blank?
+  end
+
+  def delete_related_from_other_events(id)
+    Event.where("metadata->'related' ? :value", value: id).each do |event|
+      event.metadata['related'].delete(id)
+      event.update_columns(metadata: event.metadata)
+    end
   end
 end
