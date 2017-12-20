@@ -11,16 +11,12 @@ class Event < ApplicationRecord
     where(html5: true, mime_type: MimeType::VIDEO)
   }, class_name: 'Recording'
 
-  after_initialize :generate_guid
-
   validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
   validate :original_language_valid
 
   serialize :persons, Array
   serialize :tags, Array
-
-  after_destroy { |record| delete_related_from_other_events(record.id.to_s) }
 
   # events with recordings of any type for a given conference
   scope :recorded_at, ->(conference) {
@@ -35,15 +31,17 @@ class Event < ApplicationRecord
 
   has_attached_file :poster, via: :poster_filename, belongs_into: :images, on: :conference
 
+  after_initialize :generate_guid
   before_save { trim_paths }
   after_save { conference.update_last_released_at_column if saved_change_to_release_date? }
   after_save { update_conference_downloaded_count if saved_change_to_conference_id? }
+  after_save { conference.touch unless saved_change_to_view_count? }
+  after_destroy { |record| delete_related_from_other_events(record.id.to_s) }
   after_destroy { conference.update_last_released_at_column }
+  after_destroy { conference.touch }
 
   # active admin and serialized fields workaround:
   attr_accessor :persons_raw, :tags_raw
-
-  after_save { conference.touch unless saved_change_to_view_count? }
 
   def generate_guid
     self.guid ||= SecureRandom.uuid
