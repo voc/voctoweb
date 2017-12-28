@@ -6,7 +6,8 @@ class Recording < ApplicationRecord
   has_one :conference, through: :event
   has_many :recording_views, dependent: :delete_all
 
-  validates :event, :filename, :mime_type, :length, :language, presence: true
+  validates :event, :filename, :mime_type,  :language, presence: true
+  validates :length, presence: true, if: :requires_length
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
@@ -18,6 +19,7 @@ class Recording < ApplicationRecord
 
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
+  scope :slides, -> { where("folder LIKE 'slides%'") }
   scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
   scope :original_language, -> { joins(:event).where('events.original_language = recordings.language') }
@@ -35,6 +37,18 @@ class Recording < ApplicationRecord
 
   def video?
     mime_type.in? MimeType::VIDEO
+  end
+  
+  def audio?
+    mime_type.in? MimeType::AUDIO
+  end
+  
+  def requires_length
+    self.video? || self.audio?
+  end
+
+  def slides?
+    folder.start_with?('slides')
   end
 
   def subtitle?
@@ -59,6 +73,7 @@ class Recording < ApplicationRecord
       'mp3' => 'MP3',
       'ogg' => 'Ogg',
       'opus' => 'Opus',
+      'pdf' => 'PDF',
       'srt' => 'SRT',
     }
 

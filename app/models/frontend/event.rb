@@ -89,6 +89,22 @@ module Frontend
       seen.first[1]
     end
 
+    def slides_for_download(filetype)
+      self.recordings.slides
+        .select { |x| x.filetype == filetype }
+        .sort_by { |x| x.language == self.original_language ? '' : x.language }
+        .map { |x| [x.language, x] }
+        .to_h
+    end
+
+    def slide
+      slides = recordings.slides
+      return if slides.empty?
+      seen = Hash[slides.map { |r| [r.mime_type, r] }]
+      MimeType::SLIDES.each { |mt| return seen[mt] if seen.key?(mt) }
+      seen.first[1]
+    end
+
     def preferred_recording(order: MimeType::PREFERRED_VIDEO)
       video_recordings = recordings.html5.video
       return if video_recordings.empty?

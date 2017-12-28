@@ -6,6 +6,14 @@ class EventTest < ActiveSupport::TestCase
     @event = create(:event)
   end
 
+  test "should return first slide by order of mime types" do
+    @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'audio.ogg', event: @event)
+    @event.recordings << create(:recording, mime_type: 'video/mp4', folder: 'slides', filename: 'slides.mp4', event: @event)
+    @event.recordings << create(:recording, mime_type: 'application/pdf', folder: 'slides', filename: 'slides.pdf', event: @event)
+    @event = Frontend::Event.find(@event.id)
+    assert_equal 'slides.pdf', @event.slide.filename
+  end
+
   test "should find preferred recordings" do
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio.mp3', event: @event)
     @event.recordings << create(:recording, mime_type: 'audio/ogg', filename: 'audio.ogg', event: @event)

@@ -74,6 +74,13 @@ ActiveAdmin.register Event do
       column 'folder', &:folder
       column 'language', &:language
     end
+    table_for e.recordings.slides.order('filename ASC') do
+      column 'Slides' do |recording|
+        link_to recording.filename, [:admin, recording]
+      end
+      column 'folder', &:folder
+      column 'language', &:language
+    end
   end
 
   form do |f|

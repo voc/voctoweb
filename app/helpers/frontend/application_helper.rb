@@ -7,7 +7,11 @@ module Frontend
     end
 
     def recording_title(recording)
-      "#{MimeType.humanized_mime_type(recording.mime_type)} #{recording.resolution} #{recording.language}"
+      if recording.slides?
+        "slides #{recording.language} #{recording.height}p"
+      else 
+        "#{recording.language} #{recording.height}p"
+      end
     end
 
     def oembed_api_event_url(event)
@@ -50,6 +54,7 @@ module Frontend
              end
       parts = path.split('/')
       return if parts.blank?
+      #TODO -> use title instead of 'event'
       parts += ['event'] if @event
       current = parts.pop
       yield parts.map!(&:freeze), current.freeze

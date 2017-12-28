@@ -20,7 +20,7 @@
               - unless hq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.hq{href: hq.url}
-                    .title= 'Download'
+                    .title= 'Download ' + hq.height.to_s + 'p'
                     - if hq.size
                       .size= hq.size.to_s+' MB'
                     - else
@@ -29,7 +29,7 @@
               - unless lq.nil?
                 .btn-wrap
                   %a.btn.btn-default.download.video.lq{href: lq.url}
-                    .title= 'Download' + (' (Low Quality)' unless hq.nil?).to_s
+                    .title= 'Download ' + lq.height.to_s + 'p'
                     - if lq.size
                       .size= lq.size.to_s+' MB'
                     - else
@@ -57,25 +57,41 @@
 
       .col-sm-10.col-md-11
         %ul.nav.nav-tabs{role: "tablist"}
-          - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-            %li{role: "presentation", class: if idx == 0 then 'active' else '' end}
-              %a{href: "#"+type, 'aria-controls': type, role: "tab", 'data-toggle': "tab"}
-                = display
 
         .tab-content
           - event.filetypes(MimeType::AUDIO).each_with_index do |(type, display), idx|
-            .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
-              - @event.audio_recordings_for_download(type).each do |language, recording|
-                .btn-wrap
-                  %a.btn.btn-default.download.audio{href: recording.url, class: language}
-                    - if event.has_translation
-                      .language= language
+            - @event.audio_recordings_for_download(type).each do |language, recording|
+              .btn-wrap
+                %a.btn.btn-default.download.audio{href: recording.url, class: language}
+                  - if event.has_translation
+                    .language= language
 
-                    .title= 'Download'
-                    - if recording.size
-                      .size= recording.size.to_s+' MB'
-                    - else
-                      .codec= display
+                  .title= 'Download ' + type
+                  - if recording.size
+                    .size= recording.size.to_s+' MB'
+                  - else
+                    .codec= display
+
+  - if event.recordings.slides.present?
+    .row.slides
+      .col-sm-2.col-md-1
+        %h4 Slides
+
+      .col-sm-10.col-md-11
+        .tab-content
+          - event.filetypes(MimeType::SLIDES).each_with_index do |(type, display), idx|
+            - @event.slides_for_download(type).each do |language, recording|
+              .btn-wrap
+                %a.btn.btn-default.download.slides{href: recording.url, class: language}
+                  - if event.has_translation
+                    .language= language
+
+                  .title= 'Download ' + type
+                  - if recording.size
+                    .size= recording.size.to_s+' MB'
+                  - else
+                    .codec= display
+
 
   - if event.recordings.subtitle.present? || ( @conference.metadata && @conference.metadata['subtitles'].present? )
     .row.subtitle
