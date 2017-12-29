@@ -8,6 +8,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'images', 'frontend')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement-plugins')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'icomoon-font')
 
 # Precompile additional assets.

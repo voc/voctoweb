@@ -19,13 +19,14 @@
 //= require mirrorbrain-fix
 //= require mediaelement-and-player
 // //= require mediaelement-fix
-//= mediaelement-plugins/source-chooser/source-chooser
-//= mediaelement-plugins/speed/speed
-//= mediaelement-plugins/postroll/postroll
-//= mediaelement-plugins/skip-back/skip-back
-//= mediaelement-plugins/jump-forward/jump-forward
-//= mediaelement-plugins/cromecast/cromecast
-//= mediaelement-plugins/airplay/airplay
+
+//= require source-chooser/source-chooser
+//= require speed/speed
+//= require postroll/postroll
+//= require skip-back/skip-back
+//= require jump-forward/jump-forward
+//= require chromecast/chromecast
+//= require airplay/airplay
 
 //= require purl.min
 //= require handlebars.min-latest

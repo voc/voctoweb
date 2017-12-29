@@ -14,15 +14,11 @@
  *= require jquery.bxslider
  *= require mediaelementplayer
 
-
-TODO the following lines does not yield the expected - therby I added them manuelly to _header.haml as a workaround
- *= mediaelement-plugins/source-chooser/source-chooser
- *= mediaelement-plugins/speed/speed
- *= mediaelement-plugins/postroll/postroll
- *= mediaelement-plugins/skip-back/skip-back
- *= mediaelement-plugins/jump-forward/jump-forward
- *= mediaelement-plugins/cromecast/cromecast
- *= mediaelement-plugins/airplay/airplay
-TOOD require_tree mediaelement-plugins 
-
- */
+ *= require source-chooser/source-chooser
+ *= require speed/speed
+ *= require postroll/postroll
+ *= require skip-back/skip-back
+ *= require jump-forward/jump-forward
+ *= require chromecast/chromecast
+ *= require airplay/airplay
+*/

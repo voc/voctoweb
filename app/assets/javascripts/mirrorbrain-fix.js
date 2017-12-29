@@ -1,7 +1,6 @@
 var MirrorbrainFix = {
-
   selectMirror: function(url, cb) {
-    // always request cdn via https
+    // Always request CDN via https
     url = url.replace(/^http/, 'https');
     console.log('asking cdn for mirror at', url);
     return $.ajax({
@@ -23,7 +22,7 @@ var MirrorbrainFix = {
 
     $('video source').each(function() {
       var $source = $(this);
-      // prop always presents the fully resolved url
+      // Prop always presents the fully resolved URL
       promises.push(
         MirrorbrainFix.selectMirror($source.prop('src'), function(mirror) {
         $source.attr('src', mirror);
