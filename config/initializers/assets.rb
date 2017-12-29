@@ -6,7 +6,9 @@ Rails.application.config.assets.version = '1.0'
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'images', 'frontend')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement-plugins')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'icomoon-font')
 
 # Precompile additional assets.

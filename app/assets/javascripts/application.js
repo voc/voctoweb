@@ -7,7 +7,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // compiled file.
 //
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
+// Read Sprockets README (https://github.com/rails/sprockets#directives) for details
 // about supported directives.
 //
 //= require replacehash
@@ -15,9 +15,19 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+
 //= require mirrorbrain-fix
 //= require mediaelement-and-player
-//= require mediaelement-fix
+// //= require mediaelement-fix
+
+//= require source-chooser/source-chooser
+//= require speed/speed
+//= require postroll/postroll
+//= require skip-back/skip-back
+//= require jump-forward/jump-forward
+//= require chromecast/chromecast
+//= require airplay/airplay
+
 //= require purl.min
 //= require handlebars.min-latest
 //= require jquery.bxslider
