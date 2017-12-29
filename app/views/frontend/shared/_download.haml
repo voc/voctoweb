@@ -63,9 +63,6 @@
             - @event.audio_recordings_for_download(type).each do |language, recording|
               .btn-wrap
                 %a.btn.btn-default.download.audio{href: recording.url, class: language}
-                  - if event.has_translation
-                    .language= language
-
                   .title= 'Download ' + type
                   - if recording.size
                     .size= recording.size.to_s+' MB'
@@ -83,9 +80,6 @@
             - @event.slides_for_download(type).each do |language, recording|
               .btn-wrap
                 %a.btn.btn-default.download.slides{href: recording.url, class: language}
-                  - if event.has_translation
-                    .language= language
-
                   .title= 'Download ' + type
                   - if recording.size
                     .size= recording.size.to_s+' MB'
