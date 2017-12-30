@@ -213,7 +213,7 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
 }
 
 .mejs__button > button {
-    background: transparent url('mejs-controls.svg');
+    background: transparent asset-url('mejs-controls.svg');
     border: 0;
     cursor: pointer;
     display: block;
