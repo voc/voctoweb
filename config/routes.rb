@@ -71,6 +71,9 @@ Rails.application.routes.draw do
     # For video files with quality option
     get '/c/:acronym/podcast/:mime_type-(:quality).xml', to: 'feeds#podcast_folder',
         defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }, as: :podcast_folder_video_feed
+    # For master video files
+    get '/c/:acronym/podcast/:mime_type-master.xml', to: 'feeds#podcast_folder',
+        defaults: { format: 'xml', quality: 'master' }, as: :podcast_folder_video_master_feed
     # For audio and subtitle files
     get '/c/:acronym/podcast/:mime_type.xml', to: 'feeds#podcast_folder',
         defaults: { format: 'xml' }, :constraints => { quality: %r'\w\w' }, as: :podcast_folder_feed
