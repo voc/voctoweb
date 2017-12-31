@@ -22,7 +22,7 @@ module Frontend
         when HQ then EventRecordingFilterHighQuality.new
         when LQ then EventRecordingFilterLowQuality.new
         when MASTER then EventRecordingFilterMaster.new
-        else raise ArgumentError, "Invalid quality argument: #{quality}"
+        else raise ActiveRecord::RecordNotFound, "Invalid quality argument: #{quality}"
       end
     end
   end
