@@ -12,7 +12,7 @@ class ActionController::TestCase
 end
 
 class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   # Add more helper methods to be used by all tests here...
   def run_background_jobs_immediately

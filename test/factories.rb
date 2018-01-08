@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :email do |n|
     "test#{n}@example.com"
   end
@@ -47,15 +47,15 @@ FactoryGirl.define do
 
   trait :conference_recordings do
     after(:create) do |conference|
-      conference.events << FactoryGirl.create(:event_with_recordings)
-      conference.events << FactoryGirl.create(:event_with_recordings)
+      conference.events << create(:event_with_recordings)
+      conference.events << create(:event_with_recordings)
     end
   end
 
   trait :event_recordings do
     after(:create) do |event|
-      event.recordings << FactoryGirl.create(:recording)
-      event.recordings << FactoryGirl.create(:recording, filename: 'video.webm')
+      event.recordings << create(:recording)
+      event.recordings << create(:recording, filename: 'video.webm')
     end
   end
 
