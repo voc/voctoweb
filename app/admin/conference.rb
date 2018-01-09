@@ -74,8 +74,23 @@ ActiveAdmin.register Conference do
     redirect_to action: :show
   end
 
+  member_action :toggle_subtitles, method: :post do
+    conference = Conference.find(params[:id])
+    if conference.subtitles?
+      conference.metadata.delete('subtitles')
+    else
+      conference.metadata['subtitles'] = true
+    end
+    conference.save
+    redirect_to action: :show
+  end
+
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+  end
+
+  action_item(:toggle_subtitles, only: :show) do
+    link_to 'Toggle Subtitles', toggle_subtitles_admin_conference_path(conference), method: :post
   end
 
   action_item(:add_event, only: [:show, :edit]) do

@@ -63,6 +63,10 @@ class Conference < ApplicationRecord
     acronym || id
   end
 
+  def subtitles?
+    @conference&.metadata&.fetch('subtitles', false)
+  end
+
   def update_last_released_at_column
     last_date = events.maximum(:release_date)
     update_column(:event_last_released_at, last_date)
