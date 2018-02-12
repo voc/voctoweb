@@ -2,7 +2,7 @@ var MirrorbrainFix = {
   selectMirror: function(url, cb) {
     // Always request CDN via https
     url = url.replace(/^http/, 'https');
-    console.log('asking cdn for mirror at', url);
+    console.log('asking cdn for first mirror of', url);
     return $.ajax({
       url: url,
       dataType: 'json',

@@ -9,13 +9,6 @@
 
   %link{rel: "postroll", href: postroll_path(slug: event.slug)}
 
-  -# Flash fallback for browsers with flash, but without JavaScript… – to be deleted? --Andi
-  %object{ width: width, height: height, type: 'application/x-shockwave-flash', data: asset_url('mediaelement-flash-video.swf') }
-    %param{ name: 'allowFullScreen', value: 'true' }
-    %param{ name: 'flashvars', value: "controls=true&file=#{video_for_flash(event.videos_sorted_by_language)}" }
-
-    %p Your browser can't play this video file. Please download the file below and use a desktop player e.g. VLC.
-
 :javascript
   $(function() {
     var stamp = window.location.hash.split('#t=')[1] || window.location.hash.split('&t=')[1],
@@ -27,8 +20,8 @@
       // Prop always presents the fully resolved URL
       promises.push(
         MirrorbrainFix.selectMirror($source.prop('src'), function(mirror) {
-        $source.attr('src', mirror);
-      })
+          $source.attr('src', mirror);
+        })
       );
     });
 
