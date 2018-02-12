@@ -4,7 +4,7 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
-      .mejs__container.video, .video-native {
+      .mejs__container.video {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
 
         &.mejs__container-fullscreen {
@@ -32,10 +32,6 @@
 
 
 /* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
-.video-native {
-  width: 100% !important;
-  height: auto !important;
-}
 /*
 .mejs__overlay, .mejs__poster {
   width: 100% !important;
