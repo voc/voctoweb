@@ -39,11 +39,11 @@ class Recording < ApplicationRecord
   def video?
     mime_type.in? MimeType::VIDEO
   end
-  
+
   def audio?
     mime_type.in? MimeType::AUDIO
   end
-  
+
   def requires_length
     self.video? || self.audio?
   end

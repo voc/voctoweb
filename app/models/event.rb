@@ -36,6 +36,7 @@ class Event < ApplicationRecord
   after_save { conference.update_last_released_at_column if saved_change_to_release_date? }
   after_save { update_conference_downloaded_count if saved_change_to_conference_id? }
   after_save { conference.touch unless saved_change_to_view_count? }
+  after_touch { conference.touch }
   after_destroy { |record| delete_related_from_other_events(record.id.to_s) }
   after_destroy { conference.update_last_released_at_column }
   after_destroy { conference.touch }
