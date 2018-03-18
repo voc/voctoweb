@@ -51,6 +51,12 @@ module Frontend
       assert_response :success
     end
 
+    test 'should raise if podcast_folder with invalid quality' do
+      assert_raise ActiveRecord::RecordNotFound do
+        get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: 'exhaust memory' }, format: :xml
+      end
+    end
+
     test 'should get podcast_folder hq' do
       get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: FeedQuality::HQ }, format: :xml
       assert_response :success

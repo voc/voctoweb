@@ -27,4 +27,9 @@ class Frontend::EventsIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal @conference.id, assigns(:conference).id
     assert_equal event.id, assigns(:event).id
   end
+
+  test 'should view recent' do
+    get recent_url
+    assert_response :success
+  end
 end
