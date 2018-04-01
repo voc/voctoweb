@@ -11,7 +11,7 @@ $(function() {
   }
 
   function initSliders() {
-    var $slider = $('.promoted .slider');
+    var $slider = $('.promoted .slider, .related .slider');
     var numberOfSlides = $slider.find('> .slide').length;
     var doAutoTransition = numberOfSlides > 5;
     console.log('numberOfSlides=', numberOfSlides, 'doAutoTransition=', doAutoTransition);
