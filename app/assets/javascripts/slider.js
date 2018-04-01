@@ -32,8 +32,10 @@ $(function() {
     });
   }
 
-  $(document).on('turbolinks:load', restorePromoted);
-  $(document).on('turbolinks:load', initSliders);
+  $(document).on('turbolinks:load', function() {
+    restorePromoted();
+    initSliders();
+  });
 
   $(document).on('ready resize turbolinks:load', function() {
     $('.bx-viewport').css({
