@@ -1,5 +1,5 @@
 /**
- * bxSlider v4.2.12
+ * bxSlider v4.2.12 (patched according to https://stackoverflow.com/a/49327537/1659732)
  * Copyright 2013-2015 Steven Wanderski
  * Written while drinking Belgian ales and listening to jazz
  * Licensed under MIT (http://opensource.org/licenses/MIT)
@@ -1106,7 +1106,7 @@
         slider.touch.start.x = touchPoints[0].pageX;
         slider.touch.start.y = touchPoints[0].pageY;
 
-        if (slider.viewport.get(0).setPointerCapture) {
+        if (slider.viewport.get(0).setPointerCapture && orig.pointerId) {
           slider.pointerId = orig.pointerId;
           slider.viewport.get(0).setPointerCapture(slider.pointerId);
         }

@@ -29,6 +29,6 @@
 
 //= require purl.min
 //= require handlebars.min-latest
-//= require jquery.bxslider
+//= require jquery.bxslider-v4.2.12-patched
 //= require slider
 //= require feed_toggle
