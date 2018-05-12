@@ -33,7 +33,7 @@ module Frontend
     end
 
     def self.live
-      conferences = Conference.isCurrentlyStreaming
+      conferences = Conference.currently_streaming
       groups = conferences.map { |c| c.streaming['groups'].first }.compact
       groups.map { |g| g['rooms'] }.flatten
     end
