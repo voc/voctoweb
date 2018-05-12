@@ -20,17 +20,20 @@ module Frontend
         .order('event_last_released_at DESC')
         .where('event_last_released_at < ?', date)
     }
+    scope :isCurrentlyStreaming, ->() {
+      where('(streaming ->> :key)::boolean', key: 'isCurrentlyStreaming')
+    }
 
     def self.has_live?
-      Conference.where('streaming ? :key', key: 'groups').any?
+      Conference.isCurrentlyStreaming.any?
     end
 
     def self.first_live
-      Conference.where('streaming ? :key', key: 'groups').first
+      Conference.isCurrentlyStreaming.first
     end
 
     def self.live
-      conferences = Conference.where('streaming ? :key', key: 'groups')
+      conferences = Conference.isCurrentlyStreaming
       groups = conferences.map { |c| c.streaming['groups'].first }.compact
       groups.map { |g| g['rooms'] }.flatten
     end

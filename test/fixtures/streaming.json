@@ -7,6 +7,7 @@
         "keywords": "32C3, Hacking, Chaos Computer Club, Video, Music, Podcast, Media, Streaming, Hacker, Hamburg",
         "startsAt": "2015-12-27T05:00:00+0000",
         "endsAt": "2015-12-30T20:00:00+0000",
+        "isCurrentlyStreaming": true,
         "groups": [
             {
                 "group": "Lecture Rooms",
