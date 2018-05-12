@@ -20,16 +20,16 @@ module Frontend
         .order('event_last_released_at DESC')
         .where('event_last_released_at < ?', date)
     }
-    scope :isCurrentlyStreaming, ->() {
+    scope :currently_streaming, ->() {
       where('(streaming ->> :key)::boolean', key: 'isCurrentlyStreaming')
     }
 
     def self.has_live?
-      Conference.isCurrentlyStreaming.any?
+      Conference.currently_streaming.any?
     end
 
     def self.first_live
-      Conference.isCurrentlyStreaming.first
+      Conference.currently_streaming.first
     end
 
     def self.live
