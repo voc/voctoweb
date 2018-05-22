@@ -106,23 +106,26 @@ Update view counts of events viewed in the last 30 minutes
     /api/events/update_view_counts
 
 
-#### Setup Development-Server
-```
-# for ubuntu and debian one might want to install vagrant from upstream
-# (https://www.vagrantup.com/downloads.html), because of a packaging bug:
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=818237
-$ sudo apt-get install vagrant virtualbox
+## Set up development environment
 
-$ vagrant plugin install vagrant-hostsupdater
-$ vagrant up
-$ vagrant ssh -c 'cd /vagrant && ./bin/update-data'
+A convenient way to set up an environment for developing voctoweb is [Docker](https://www.docker.com).
 
-http://media.ccc.vm:3000/ <- Frontend
-http://media.ccc.vm:3000/admin/ <- Backend
-Backend-Login:
-  Username: admin@example.org
-  Password: media123
+First, install Docker and [Docker Compose](https://docs.docker.com/compose/) – you will probably find them in your distribution's package manager.
+
+Then, clone this repository, make it your working directory, and run the following commands:
+
 ```
+cp config/database.yml.docker config/database.yml
+cp config/settings.yml.template config/settings.yml
+docker-compose build
+docker-compose run voctoweb rake db:setup
+docker-compose run voctoweb bin/update-data
+docker-compose up
+```
+
+You can now reach the voctoweb frontend at `http://localhost:3000`. The backend is at `http://localhost:3000/admin/`, with the default username `admin@example.org` and the password `media123`. You can stop the running containers using *Ctrl-C*. To start them again, just run `docker-compose up`.
+
+The whole application directory is mounted into the containers, so all changes you make to the files are reflected inside the application automatically. To run commands inside the voctoweb container, run `docker-compose run voctoweb $COMMAND`. If you ever need to rebuild the containers (because of new dependencies, for example), run the `docker-compose build` command again.
 
 ## Install for Production
 
