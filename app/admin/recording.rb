@@ -1,6 +1,5 @@
 ActiveAdmin.register Recording do
 
-  filter :state
   filter :mime_type, collection: proc { MimeType.all }
   filter :language
   filter :filename
@@ -23,7 +22,6 @@ ActiveAdmin.register Recording do
     column :language
     column :size
     column :length
-    column :state
     column :updated_at do |recording|
       l(recording.updated_at, format: :pretty_datetime)
     end
@@ -45,7 +43,6 @@ ActiveAdmin.register Recording do
       row :length
       row :width
       row :height
-      row :state
     end
   end
 
@@ -70,7 +67,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:folder, :filename, :mime_type, :language, :html5, :high_quality, :size, :length, :width, :height, :state, :event_id]
+      params.permit recording: [:folder, :filename, :mime_type, :language, :html5, :high_quality, :size, :length, :width, :height, :event_id]
     end
   end
 end
