@@ -9,6 +9,6 @@
     = javascript_include_tag 'mediaelement-and-player'
     = stylesheet_link_tag 'embed'
 
-  %body{style: 'height: 100%;'}
+  %body{style: 'height: 100%; overflow: hidden;'}
     .player.video
       = render partial: 'frontend/shared/player_video', locals: { height: '450', width: '800', stretching: 'responsive', event: @event }
