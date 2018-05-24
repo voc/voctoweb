@@ -1,5 +1,5 @@
 !!! 5
-%html{lang: 'en'}
+%html{lang: 'en', style: 'height: 100%;'}
   %head
     %title
       = t('custom.title')
@@ -9,6 +9,6 @@
     = javascript_include_tag 'mediaelement-and-player'
     = stylesheet_link_tag 'embed'
 
-  %body
+  %body{style: 'height: 100%;'}
     .player.video
-      = render partial: 'frontend/shared/player_video', locals: { height: '100%', width: '100%', stretching: 'fill', event: @event }
+      = render partial: 'frontend/shared/player_video', locals: { height: '450', width: '800', stretching: 'responsive', event: @event }
