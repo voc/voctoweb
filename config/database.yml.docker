@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  username: postgres
+  password:
+  host: postgres
+
+development:
+  <<: *default
+  database: voctoweb
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: voctoweb_test
+
+production:
+  <<: *default
+  database: voctoweb_live

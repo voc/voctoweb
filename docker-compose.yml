@@ -1,0 +1,32 @@
+version: '2'
+services:
+  voctoweb:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/voctoweb
+    ports:
+      - 3000:3000
+    environment:
+      - ELASTICSEARCH_URL=elasticsearch:9200
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - sidekiq
+      - postgres
+      - elasticsearch
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/voctoweb
+    environment:
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres:alpine
+  elasticsearch:
+    image: elasticsearch:alpine
+  redis:
+    image: redis:alpine
