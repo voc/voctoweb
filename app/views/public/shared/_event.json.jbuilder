@@ -8,6 +8,6 @@ json.url public_event_url(id: event.guid, format: :json)
 json.conference_url public_conference_url(id: event.conference.acronym, format: :json)
 json.related(event.metadata['related']) do |id, weight|
   json.event_id id
-  json.event_slug Event.find(id)&.slug
+  json.event_guid Event.find(id)&.guid
   json.weight weight
 end
