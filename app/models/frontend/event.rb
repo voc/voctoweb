@@ -131,6 +131,15 @@ module Frontend
       events[pos..pos+n-1]
     end
 
+    def relive_present?
+      return unless conference.metadata['relive'].present?
+      conference.metadata['relive'].any? { |r| r['guid'] == guid }
+    end
+
+    def relive
+      conference.metadata['relive']&.first { |r| r['guid'] == guid }
+    end
+
     private
 
     def thumb_filename_exists?

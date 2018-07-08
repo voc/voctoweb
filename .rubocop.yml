@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
 # old ruby style syntax may still be needed
 Style/HashSyntax:
   Enabled: false

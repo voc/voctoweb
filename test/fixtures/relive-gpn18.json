@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Open Hardware Multichannel Sound Interface for Hearing Aid Research on BeagleBone Black with openMHA: Cape4all",
+    "duration": 3600,
+    "guid": "abcd",
+    "room": "mainhall",
+    "thumbnail": "//cdn.c3voc.de/relive/lac18/35/thumb.jpg",
+    "mtime": 1528454929,
+    "start": 1528452000,
+    "release_url": "https://media.ccc.de/v/lac2018-35-open_hardware_multichannel_sound_interface_for_hearing_aid_research_on_beaglebone_black_with_openmha_cape4all",
+    "playlist": "//cdn.c3voc.de/relive/lac18/35/index.m3u8",
+    "id": "35",
+    "status": "released"
+  },
+  {
+    "sprites": {
+      "cols": 12,
+      "interval": 15,
+      "n": 153,
+      "url": "//cdn.c3voc.de/relive/lac18/55/sprites.jpg"
+    },
+    "guid": "efgh",
+    "thumbnail": "//cdn.c3voc.de/relive/lac18/55/thumb.jpg",
+    "room": "mainhall",
+    "title": "Dark Path #2 (multichannel vers.)",
+    "duration": 2270,
+    "start": 1528485060,
+    "mtime": 1528486538,
+    "status": "recorded",
+    "mp4": "//cdn.c3voc.de/relive/lac18/55/muxed.mp4",
+    "id": "55",
+    "playlist": "//cdn.c3voc.de/relive/lac18/55/index.m3u8"
+  }
+]
