@@ -1,4 +1,6 @@
 <!-- Mediaelement Player -->
+- content_for :javascript do
+  = javascript_include_tag 'mediaelement-player'
 
 %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height}
   - event.videos_sorted_by_language.each do |recording|

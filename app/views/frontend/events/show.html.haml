@@ -46,7 +46,7 @@
     - elsif @event.relive_present?
       .player.video
         .kiosk
-        = render partial: 'frontend/shared/reliveplayer', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
+        = render partial: 'frontend/shared/player_relive', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
 
     %ul.metadata
       %li
