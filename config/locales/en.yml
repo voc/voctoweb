@@ -26,4 +26,9 @@ en:
   time:
     formats:
       pretty_datetime: "%Y-%m-%d %H:%M"
+  rss:
+    title:
+      atom: ATOM
+      last100: last 100
+      podcast_archive: podcast archive
 
