@@ -1,5 +1,6 @@
 <!-- Mediaelement Player -->
 - content_for :javascript do
+  = javascript_include_tag 'mediaelement-and-player'
   = javascript_include_tag 'mediaelement-player'
 
 %audio.audio{controls: 'controls', 'data-id' => event.id, preload: 'none'}

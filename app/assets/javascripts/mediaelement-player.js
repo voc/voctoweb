@@ -1,5 +1,4 @@
 //= require mirrorbrain-fix
-//= require mediaelement-and-player
 //= require source-chooser/source-chooser
 //= require speed/speed
 //= require postroll/postroll

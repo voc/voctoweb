@@ -20,6 +20,7 @@ Rails.application.config.assets.precompile += %w[embed.css]
 
 # players
 Rails.application.config.assets.precompile += %w[
+  mediaelement-and-player
   mediaelement-player
   relive-player
   oembed-player
