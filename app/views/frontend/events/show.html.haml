@@ -45,7 +45,7 @@
     - if @event.recordings.video.present?
       .player.video
         .kiosk
-        = render partial: 'frontend/shared/player_video', locals: { height: aspect_ratio_height, width: aspect_ratio_width, stretching: 'responsive', event: @event }
+        = render partial: 'frontend/shared/player_video', locals: video_player_ivars
 
     - elsif @event.recordings.audio.present?
       .player.audio
@@ -54,7 +54,7 @@
     - elsif @event.relive_present?
       .player.video
         .kiosk
-        = render partial: 'frontend/shared/player_relive', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
+        = render partial: 'frontend/shared/player_relive', locals: video_player_ivars
 
     %ul.metadata
       %li
@@ -80,6 +80,12 @@
       /%h3 About
       %p.description
         = simple_format @event.description
+
+    %h3 Playlists
+    %ul.metadata
+      - if @event.metadata['related'].present?
+        %li= link_to 'Related', playlist_related_path(slug: @event.slug)
+      %li= link_to 'Conference', playlist_conference_path(slug: @event.slug)
 
     - if @event.metadata['related'].present?
       %h3 Related

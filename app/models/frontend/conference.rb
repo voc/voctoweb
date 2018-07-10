@@ -48,5 +48,12 @@ module Frontend
     def recordings_url
       File.join(Settings.cdn_url, recordings_path).freeze
     end
+
+    def playlist(event = nil)
+      return events unless event
+      n = events.includes(:recordings).index(event)
+      return events unless n
+      events[n..-1]
+    end
   end
 end
