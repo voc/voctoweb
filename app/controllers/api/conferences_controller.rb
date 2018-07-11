@@ -62,6 +62,6 @@ class Api::ConferencesController < ApiController
   end
 
   def conference_params
-    params.require(:conference).permit(:acronym, :schedule_url, :recordings_path, :images_path, :metadata, :slug, :aspect_ratio)
+    params.require(:conference).permit(:acronym, :schedule_url, :recordings_path, :images_path, :metadata, :slug, :aspect_ratio, :logo, :title)
   end
 end
