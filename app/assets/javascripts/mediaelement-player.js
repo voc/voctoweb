@@ -7,3 +7,4 @@
 //= require jump-forward/jump-forward
 //= require chromecast/chromecast
 //= require airplay/airplay
+//= require playlist/playlist

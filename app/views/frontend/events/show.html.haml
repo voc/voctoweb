@@ -45,16 +45,24 @@
     - if @event.recordings.video.present?
       .player.video
         .kiosk
-        = render partial: 'frontend/shared/player_video', locals: { height: aspect_ratio_height, width: aspect_ratio_width, stretching: 'responsive', event: @event }
+        = render partial: 'frontend/shared/player_video', locals: video_player_ivars
 
-    - elsif @event.recordings.audio.present?
-      .player.audio
-        = render partial: 'frontend/shared/player_audio', locals: { event: @event }
+      Playlists:
+      = link_to 'Conference', playlist_conference_path(slug: @event.slug)
+      - if @conference.audio_recordings?
+        \/
+        = link_to 'Audio', audio_playlist_conference_path(slug: @conference.events.first.slug), method: :get
+      - if @event.metadata['related'].present?
+        \/
+        = link_to 'Related', playlist_related_path(slug: @event.slug)
 
     - elsif @event.relive_present?
       .player.video
         .kiosk
-        = render partial: 'frontend/shared/player_relive', locals: { height: aspect_ratio_height, width: aspect_ratio_width, event: @event }
+        = render partial: 'frontend/shared/player_relive', locals: video_player_ivars
+
+    - else
+      No content found (yet?).
 
     %ul.metadata
       %li

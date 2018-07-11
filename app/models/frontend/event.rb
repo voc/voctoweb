@@ -131,6 +131,11 @@ module Frontend
       events[pos..pos+n-1]
     end
 
+    def playlist
+      related_ids = related_event_ids(20)
+      [self] + Event.where(id: related_ids).includes(:conference).to_a
+    end
+
     def relive_present?
       return unless conference.metadata['relive'].present?
       conference.metadata['relive'].any? { |r| r['guid'] == guid }

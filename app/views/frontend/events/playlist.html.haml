@@ -1,0 +1,40 @@
+- content_for :title do
+  Playlist for
+  = %("#{@playlist.title}")
+
+- content_for :body_class do
+  page-show
+
+- content_for :head do
+  - if @playlist.conference
+    = render partial: 'frontend/shared/folder_feeds', locals: { conference: @playlist.conference }
+
+- content_for :javascript do
+  = javascript_include_tag 'mediaelement-player'
+
+- cache([@playlist.playlist]) do
+  .container-fluid
+    %h1
+      Playlist for
+      = %("#{@playlist.title}")
+
+    %p.persons
+      = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }
+
+    - if @playlist.audio?
+      .player.audio
+        = render partial: 'frontend/shared/player_playlist_audio', locals: { playlist: @playlist }
+
+    - else
+      .player.video
+        .kiosk
+        = render partial: 'frontend/shared/player_playlist_video', locals: video_player_ivars(playlist: @playlist)
+
+
+    %ul.metadata
+      %li
+        %span.event_title
+          = @playlist.lead_event.title
+
+    %p
+      = simple_format(@playlist.lead_event.description, class: :description)

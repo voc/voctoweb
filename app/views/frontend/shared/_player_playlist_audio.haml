@@ -1,0 +1,45 @@
+%audio.audio{controls: 'controls', preload: 'none'}
+  - playlist.playlist.each do |event, recording|
+    %source{type: recording.mime_type, src: h(recording.url), title: event.title.truncate(30), data: { lang: recording.language, id: event.id, mep: { description: event.description }, title: event.title, persons: event.persons.join(', ')}}
+
+:javascript
+  $(function() {
+    var promises = [];
+
+    $('audio source').each(function() {
+      var $source = $(this);
+      // Prop always presents the fully resolved URL
+      promises.push(
+        MirrorbrainFix.selectMirror($source.prop('src'), function(mirror) {
+          $source.attr('src', mirror);
+        })
+      );
+    });
+
+    $.when.apply($, promises).done(function() {
+      $('audio').mediaelementplayer({
+        playlistposition: 'bottom',
+        alwaysShowPlaylist: true,
+        currentMessage: 'Playing: ',
+        features: [
+          'playlistfeature',
+          'skipback', 'prevtrack', 'playpause', 'nexttrack', 'jumpforward', 'progress', 'current',
+          'duration', 'tracks', 'volume', 'speed',
+          'playlist'
+          ],
+        skipBackInterval: 15,
+        success: function (mediaElement) {
+          mediaElement.addEventListener('canplay', function () {
+            var ev = $('video source[src="' + mediaElement.src + '"');
+            $('.description').html(ev.data('mepDescription'));
+            $('span.event_title').html(ev.data('title'));
+            $('p.persons').html(ev.data('persons'));
+          }, false);
+          mediaElement.addEventListener('playing', function () {
+            var eventId = $('video source[src="' + mediaElement.src + '"').data('id');
+            $.post("/public/recordings/count", {event_id: eventId, src: mediaElement.src});
+          }, false);
+        }
+      });
+    });
+  })

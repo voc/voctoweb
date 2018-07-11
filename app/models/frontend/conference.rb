@@ -38,6 +38,10 @@ module Frontend
       groups.map { |g| g['rooms'] }.flatten
     end
 
+    def audio_recordings?
+      recordings.original_language.where(mime_type: MimeType::AUDIO).exists?
+    end
+
     def mime_types
       return enum_for(:mime_types) unless block_given?
       recordings.pluck(:mime_type).uniq.map { |mime_type|
@@ -47,6 +51,13 @@ module Frontend
 
     def recordings_url
       File.join(Settings.cdn_url, recordings_path).freeze
+    end
+
+    def playlist(event = nil)
+      return events unless event
+      n = events.includes(:recordings).index(event)
+      return events unless n
+      events[n..-1]
     end
   end
 end

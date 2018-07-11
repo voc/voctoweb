@@ -54,8 +54,11 @@ module Frontend
              end
       parts = path.split('/')
       return if parts.blank?
-      #TODO -> use title instead of 'event'
-      parts += ['event'] if @event
+      if @playlist
+        parts += ['playlist']
+      elsif @event
+        parts += ['event']
+      end
       current = parts.pop
       yield parts.map!(&:freeze), current.freeze
     end
@@ -137,6 +140,18 @@ module Frontend
         'sprites-cols': event.relive['sprites']['cols'],
         'sprites-interval': event.relive['sprites']['interval']
       )
+    end
+
+    def video_player_ivars(args={})
+      {
+        height: aspect_ratio_height,
+        width: aspect_ratio_width,
+        event: @event
+      }.merge(args)
+    end
+
+    def stretching
+      'responsive'
     end
   end
 end
