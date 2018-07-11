@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get '/postroll/:slug', to: 'events#postroll', as: :postroll, :constraints => { slug: %r'[^/]+' }
     get '/v/:slug/oembed', to: 'events#oembed', as: :oembed_event, :constraints => { slug: %r'[^/]+' }
     get '/v/:slug/playlist', to: 'events#playlist_conference', as: :playlist_conference, :constraints => { slug: %r'[^/]+' }
+    get '/v/:slug/audio', to: 'events#audio_playlist_conference', as: :audio_playlist_conference, :constraints => { slug: %r'[^/]+' }
     get '/v/:slug/related', to: 'events#playlist_related', as: :playlist_related, :constraints => { slug: %r'[^/]+' }
 
     get '/c/:acronym', to: 'conferences#show', as: :conference

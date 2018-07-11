@@ -12,7 +12,12 @@ module Frontend
     end
 
     def playlist_conference
-      @playlist = Playlist.for_conference(@conference, @event)
+      @playlist = Playlist.for_conference(@conference, lead_event: @event)
+      respond_to { |format| format.html { render :playlist } }
+    end
+
+    def audio_playlist_conference
+      @playlist = Playlist.for_conference(@conference, lead_event: @event, audio: true)
       respond_to { |format| format.html { render :playlist } }
     end
 

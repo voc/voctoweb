@@ -1,12 +1,12 @@
-%video.video{controls: 'controls', poster: playlist.poster_url, width: width, height: height}
+%audio.audio{controls: 'controls', preload: 'none'}
   - playlist.playlist.each do |event, recording|
-    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording), id: event.id, mep: { description: event.description }, title: event.title, persons: event.persons.join(', ') }, title: event.title.truncate(30)}
+    %source{type: recording.mime_type, src: h(recording.url), title: event.title.truncate(30), data: { lang: recording.language, id: event.id, mep: { description: event.description }, title: event.title, persons: event.persons.join(', ')}}
 
 :javascript
   $(function() {
     var promises = [];
 
-    $('video source').each(function() {
+    $('audio source').each(function() {
       var $source = $(this);
       // Prop always presents the fully resolved URL
       promises.push(
@@ -17,19 +17,15 @@
     });
 
     $.when.apply($, promises).done(function() {
-      $('video').mediaelementplayer({
-        usePluginFullScreen: true,
-        enableAutosize: true,
-        stretching: '#{stretching}',
+      $('audio').mediaelementplayer({
         playlistposition: 'bottom',
         alwaysShowPlaylist: true,
-        autoClosePlaylist: true,
+        currentMessage: 'Playing: ',
         features: [
           'playlistfeature',
           'skipback', 'prevtrack', 'playpause', 'nexttrack', 'jumpforward', 'progress', 'current',
           'duration', 'tracks', 'volume', 'speed',
-          'playlist',
-          'fullscreen'
+          'playlist'
           ],
         skipBackInterval: 15,
         success: function (mediaElement) {
