@@ -48,13 +48,13 @@
         = render partial: 'frontend/shared/player_video', locals: video_player_ivars
 
       Playlists:
-      = link_to 'Conference', playlist_conference_path(slug: @event.slug)
+      = link_to "'#{@conference.acronym}' videos starting here", playlist_conference_path(slug: @event.slug)
       - if @conference.audio_recordings?
         \/
-        = link_to 'Audio', audio_playlist_conference_path(slug: @conference.events.first.slug), method: :get
+        = link_to 'audio', audio_playlist_conference_path(slug: @event.slug), method: :get
       - if @event.metadata['related'].present?
         \/
-        = link_to 'Related', playlist_related_path(slug: @event.slug)
+        = link_to 'related events', playlist_related_path(slug: @event.slug)
 
     - elsif @event.relive_present?
       .player.video

@@ -14,9 +14,13 @@
 
 - cache([@playlist.playlist]) do
   .container-fluid
-    %h1
-      Playlist for
-      = %("#{@playlist.title}")
+    .playlist-header
+      - if @conference&.logo_url
+        %img{src: @conference.logo_url, alt: 'conference logo'}
+
+      %h1
+        Playlist for
+        = %("#{@playlist.title}")
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }

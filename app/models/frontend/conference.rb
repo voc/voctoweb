@@ -1,14 +1,15 @@
 module Frontend
   class Conference < ::Conference
-    has_many :events, class_name: 'Frontend::Event'
+    has_many :events, -> { order(release_date: :desc, id: :desc) }, class_name: 'Frontend::Event'
     has_many :recordings, through: :events
 
-    scope :with_events, ->() {
+    scope :with_events, -> {
       where('event_last_released_at IS NOT NULL')
     }
-    scope :with_recent_events, ->() {
+    scope :with_recent_events, ->(n) {
       where('event_last_released_at IS NOT NULL')
         .order('event_last_released_at DESC')
+        .limit(n)
     }
     scope :with_events_newer, ->(date) {
       where('event_last_released_at IS NOT NULL')
@@ -20,7 +21,7 @@ module Frontend
         .order('event_last_released_at DESC')
         .where('event_last_released_at < ?', date)
     }
-    scope :currently_streaming, ->() {
+    scope :currently_streaming, -> {
       where('(streaming ->> :key)::boolean', key: 'isCurrentlyStreaming')
     }
 
@@ -54,10 +55,14 @@ module Frontend
     end
 
     def playlist(event = nil)
-      return events unless event
-      n = events.includes(:recordings).index(event)
-      return events unless n
+      return events.includes(:conference) unless event
+      n = events.index(event)
+      return events.includes(:conference) unless n.positive?
       events[n..-1]
+    end
+
+    def first_slug
+      events.first.slug
     end
   end
 end

@@ -1,18 +1,17 @@
 module Frontend
   class HomeController < FrontendController
     helper_method :recent_events_for_conference
+    CONFERENCE_LIMIT = 3
+    EVENT_LIMIT = 3
 
     def index
-      @news = Frontend::News.recent(1).first()
+      @news = Frontend::News.recent(1).first
       @hours_count = Frontend::Event.sum(:duration)/(60*60)
       @recordings_count = Frontend::Recording.count
       @events_count = Frontend::Event.count
       @conferences_count = Frontend::Conference.count
 
-      @conference_limit = 3
-      @events_limit = 3
-
-      @recent_conferences = Frontend::Conference.with_recent_events().limit(@conference_limit)
+      @recent_conferences = Frontend::Conference.with_recent_events(CONFERENCE_LIMIT)
 
       respond_to { |format| format.html }
     end
@@ -28,7 +27,7 @@ module Frontend
     private
 
     def recent_events_for_conference(conference)
-      conference.events.order('release_date DESC, id DESC').limit(@events_limit)
+      conference.events.includes(:conference).limit(EVENT_LIMIT)
     end
   end
 end

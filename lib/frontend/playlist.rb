@@ -1,6 +1,5 @@
 module Frontend
   class Playlist
-
     def self.for_conference(conference, lead_event: nil, audio: false)
       Playlist.new(conference.playlist(lead_event), conference: conference, audio: audio)
     end

@@ -70,9 +70,9 @@
                         = event.display_date
 
 
-              - if conference.events.count > 3
+              - if conference.events.count > Frontend::HomeController::EVENT_LIMIT
                 %a.more{href: conference_path(acronym: conference.acronym)}
-                  Show #{conference.events.count - 3} more videos from #{conference.display_name}
+                  Show #{conference.events.count - Frontend::HomeController::EVENT_LIMIT} more videos from #{conference.display_name}
 
 
   .row

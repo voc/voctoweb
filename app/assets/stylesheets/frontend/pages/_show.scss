@@ -9,6 +9,16 @@ body.page-show {
     margin-top: 10px;
   }
 
+  .playlist-header {
+    clear: both;
+
+    img {
+      float: left;
+      max-height: 40px;
+      margin-right: $padding-small-horizontal;
+    }
+  }
+
   .metadata {
     list-style: none;
     padding: $padding-small-vertical 0;

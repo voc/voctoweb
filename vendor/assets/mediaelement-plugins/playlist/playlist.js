@@ -53,7 +53,7 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		player.endedCallback = function () {
 			if (player.currentPlaylistItem < player.listItems.length) {
-				player.setSrc(player.playlist[++player.currentPlaylistItem]);
+				player.setSrc(player.playlist[++player.currentPlaylistItem].src);
 				player.load();
 				setTimeout(function () {
 					player.play();
