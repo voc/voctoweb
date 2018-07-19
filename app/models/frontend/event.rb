@@ -121,6 +121,7 @@ module Frontend
     end
 
     def related_event_ids(n)
+      return conference.events.ids unless metadata.key?('related')
       metadata['related'].keys.shuffle[0..n-1]
     end
 
