@@ -105,6 +105,8 @@ FactoryBot.define do
     title { generate(:event_title) }
     thumb_filename 'frabcon123.jpg'
     poster_filename 'frabcon123_logo.jpg'
+    timeline_filename 'frabcon123.timeline.jpg'
+    thumbnails_filename 'frabcon123.thumbnails.vtt'
     subtitle 'subtitle'
 
     original_language 'eng'

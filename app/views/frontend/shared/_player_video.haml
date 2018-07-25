@@ -1,9 +1,12 @@
-%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height}
+%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'auto', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
   - event.videos_sorted_by_language.each do |recording|
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
 
   - event.recordings.subtitle.each do |track|
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+
+  - if event.timelens_present?
+    %track{kind: "metadata", label: "thumbnails", src: event.thumbnails_url, srclang: "unknown"}
 
   %link{rel: "postroll", href: postroll_path(slug: event.slug)}
 
@@ -28,13 +31,16 @@
         usePluginFullScreen: true,
         enableAutosize: true,
         stretching: '#{stretching}',
-        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll'],
+        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll', 'timelens'],
         skipBackInterval: 15,
         success: function (mediaElement) {
           mediaElement.addEventListener('canplay', function () {
             if(stamp) {
               mediaElement.setCurrentTime(stamp);
               stamp = null;
+              // Toggle play on/off so that the preview image is correct:
+              mediaElement.play();
+              mediaElement.pause();
             }
           });
           mediaElement.addEventListener('playing', function () {

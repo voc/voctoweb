@@ -13,6 +13,8 @@
  *= require icomoon-font
  *= require jquery.bxslider
  *= require mediaelementplayer
+ *= require timelens
+ *= require timelens-custom
 
  *= require source-chooser/source-chooser
  *= require speed/speed

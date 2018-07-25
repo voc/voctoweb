@@ -56,9 +56,11 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should trim whitespace on paths' do
-    event = create(:event, poster_filename: ' poster.png ', thumb_filename: ' thump.jpeg ', title: '  some  artistic   title ')
+    event = create(:event, poster_filename: ' poster.png ', thumb_filename: ' thump.jpeg ', timeline_filename: ' timeline.jpeg ', thumbnails_filename: ' thumbnails.vtt ', title: '  some  artistic   title ')
     assert_equal event.poster_filename, event.poster_filename.strip
     assert_equal event.thumb_filename, event.thumb_filename.strip
+    assert_equal event.timeline_filename, event.timeline_filename.strip
+    assert_equal event.thumbnails_filename, event.thumbnails_filename.strip
     refute_equal event.title, event.title.strip
   end
 

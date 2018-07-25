@@ -83,7 +83,7 @@ class Api::EventsController < ApiController
   def create_event(params)
     @event.transaction do
       @event.release_date = Time.now unless @event.release_date
-      @event.set_image_filenames(params[:thumb_url], params[:poster_url])
+      @event.set_image_filenames(params[:thumb_url], params[:poster_url], params[:timeline_url], params[:thumbnails_url])
       return @event.save
     end
     false
@@ -93,7 +93,7 @@ class Api::EventsController < ApiController
     params.require(:event).permit(:guid, :slug,
       :title, :subtitle, :link,
       :original_language,
-      :thumb_filename, :poster_filename,
+      :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
       :conference_id,
       :metadata,
       :description, :date,
