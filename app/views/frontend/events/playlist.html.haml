@@ -9,9 +9,6 @@
   - if @playlist.conference
     = render partial: 'frontend/shared/folder_feeds', locals: { conference: @playlist.conference }
 
-- content_for :javascript do
-  = javascript_include_tag 'mediaelement-player'
-
 - cache([@playlist.playlist]) do
   .container-fluid
     .playlist-header

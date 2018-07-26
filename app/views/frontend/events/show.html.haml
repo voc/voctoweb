@@ -23,14 +23,6 @@
 - content_for :description do
   %meta{name: 'description', content: @event.short_description}
 
-- if @event.recordings.video.present?
-  - content_for :javascript do
-    = javascript_include_tag 'mediaelement-player'
-
-- elsif @event.relive_present?
-  - content_for :javascript do
-    = javascript_include_tag 'relive-player'
-
 - cache([@event.conference, @event]) do
   .container-fluid
     %h1

@@ -19,8 +19,4 @@ Rails.application.config.assets.precompile += [/\.(?:eot|otf|svg|ttf|woff|swf|sv
 Rails.application.config.assets.precompile += %w[embed.css]
 
 # players
-Rails.application.config.assets.precompile += %w[
-  mediaelement-player
-  relive-player
-  oembed-player
-]
+Rails.application.config.assets.precompile += %w[oembed-player]
