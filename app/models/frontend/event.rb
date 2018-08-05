@@ -126,7 +126,7 @@ module Frontend
     end
 
     def next_from_conference(n)
-      events = conference.events.order(:date).to_a
+      events = conference.events.to_a
       pos = events.index(self) + 1
       pos = 0 if pos >= events.count
       events[pos..pos+n-1]
