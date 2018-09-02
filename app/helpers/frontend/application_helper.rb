@@ -30,10 +30,6 @@ module Frontend
       'https://plus.google.com/share?title='.freeze + URI.encode_www_form_component(title) + '&url=' + URI.encode_www_form_component(url)
     end
 
-    def appnet_url(title, url)
-      'https://alpha.app.net/intent/post?text='.freeze + URI.encode_www_form_component(title + ': ' + url)
-    end
-
     def diaspora_url(title, url)
       'https://share.diasporafoundation.org/?title='.freeze + URI.encode_www_form_component(title).gsub(/\+/, '%20') + '&url=' + URI.encode_www_form_component(url)
     end
