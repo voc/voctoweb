@@ -9,14 +9,22 @@ body.page-show {
     margin-top: 10px;
   }
 
-  .playlist-header {
+  .player-header {
     clear: both;
 
-    img {
-      float: left;
-      max-height: 40px;
-      margin-right: $padding-small-horizontal;
+    .thumbnail {
+      float: right;
+      img {
+        max-height: 180px;
+        max-width: 180px;
+      } 
+      margin-left: $padding-small-horizontal;
+      margin-top: -$padding-large-horizontal;
     }
+  }
+
+  .player {
+    clear: both;
   }
 
   .metadata {

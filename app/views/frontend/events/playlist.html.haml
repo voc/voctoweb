@@ -11,9 +11,10 @@
 
 - cache([@playlist.playlist]) do
   .container-fluid
-    .playlist-header
+    .player-header
       - if @conference&.logo_url
-        %img{src: @conference.logo_url, alt: 'conference logo'}
+        %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
+          %img{src: @conference.logo_url, alt: 'conference logo'}
 
       %h1
         Playlist for

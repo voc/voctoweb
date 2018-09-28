@@ -25,11 +25,16 @@
 
 - cache([@event.conference, @event]) do
   .container-fluid
-    %h1
-      = @event.title
-    - unless @event.subtitle.nil? || @event.subtitle.empty?
-      %h2
-        = @event.subtitle
+    .player-header
+      .conference
+        - if @conference&.logo_url
+          %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
+            %img{src: @conference.logo_url, alt: 'conference logo'}
+      %h1
+        = @event.title
+      - unless @event.subtitle.nil? || @event.subtitle.empty?
+        %h2
+          = @event.subtitle
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
