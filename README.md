@@ -150,7 +150,7 @@ sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libread
 libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
 python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison
 
-# install deps for media.ccc.de
+# install deps for voctoweb
 sudo apt-get install redis-server libpqxx-dev
 
 # install node.js
@@ -172,7 +172,7 @@ gem install bundler
 
 # postgresql setup
 sudo -u postgres -i
-createuser -d -P media
+createuser -d -P voctoweb
 
 # obtaining & setting up a voctoweb instance
 git clone git@github.com:voc/voctoweb.git
