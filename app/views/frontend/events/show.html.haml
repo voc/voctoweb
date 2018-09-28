@@ -30,6 +30,11 @@
         - if @conference&.logo_url
           %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
             %img{src: @conference.logo_url, alt: 'conference logo'}
+            - if @conference.logo_does_not_contain_title
+              .caption
+                = @conference.title
+        - else 
+          =@conference.title
       %h1
         = @event.title
       - unless @event.subtitle.nil? || @event.subtitle.empty?
