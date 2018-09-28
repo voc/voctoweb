@@ -63,8 +63,28 @@ class Conference < ApplicationRecord
     acronym || id
   end
 
+  store_accessor :metadata, [ :subtitles, :logo_does_not_contain_title ]
+
   def subtitles?
     @conference&.metadata&.fetch('subtitles', false)
+  end
+
+  def subtitles=(val)
+    puts 'subtitles?='
+    puts val
+    if val == '1'
+      self[:metadata]['subtitles'] = true
+    else
+      self[:metadata].delete('subtitles')
+    end
+  end
+  
+  def logo_does_not_contain_title=(val)
+    if val == '1'
+      self[:metadata]['logo_does_not_contain_title'] = true
+    else
+      self[:metadata].delete('logo_does_not_contain_title')
+    end
   end
 
   def update_last_released_at_column

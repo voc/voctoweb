@@ -62,6 +62,10 @@ ActiveAdmin.register Conference do
     end
     f.inputs "Files" do
       f.input :logo, hint: 'filename in images path'
+      f.input :logo_does_not_contain_title, :as => :boolean, hint: 'displays title below conference logo in player view'
+    end
+    f.inputs "Meta" do
+      f.input :subtitles, :as => :boolean, label: 'Conference has subtitles', hint: 'displays subtitle appeal below player'
     end
     f.actions
   end
@@ -73,24 +77,9 @@ ActiveAdmin.register Conference do
     end
     redirect_to action: :show
   end
-
-  member_action :toggle_subtitles, method: :post do
-    conference = Conference.find(params[:id])
-    if conference.subtitles?
-      conference.metadata.delete('subtitles')
-    else
-      conference.metadata['subtitles'] = true
-    end
-    conference.save
-    redirect_to action: :show
-  end
-
+  
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
-  end
-
-  action_item(:toggle_subtitles, only: :show) do
-    link_to 'Toggle Subtitles', toggle_subtitles_admin_conference_path(conference), method: :post
   end
 
   action_item(:add_event, only: [:show, :edit]) do
@@ -105,8 +94,10 @@ ActiveAdmin.register Conference do
                                   :recordings_path,
                                   :images_path,
                                   :logo,
+                                  :logo_does_not_contain_title,
                                   :slug,
-                                  :aspect_ratio ]
+                                  :aspect_ratio,
+                                  :subtitles ]
     end
   end
 
