@@ -9,6 +9,13 @@ module Frontend
 
     before_action :check_sort_param, only: %w(show)
 
+    def all
+      @conferences = conferences_with_events.order('event_last_released_at DESC')
+      respond_to do |format|
+        format.html { render :list }
+      end
+    end
+
     def browse
       return show if slug_matches_conference
 
@@ -35,14 +42,14 @@ module Frontend
 
     def conferences_folder_tree_at(path)
       tree = FolderTree.new
-      tree.build(conferences_with_events)
+      tree.build(conferences_with_events.pluck(:id, :slug))
       folders = tree.folders_at(path)
       fail ActiveRecord::RecordNotFound unless folders
       tree.sort_folders(folders)
     end
 
     def conferences_with_events
-      Conference.where('downloaded_events_count > 0').pluck(:id, :slug)
+      Conference.where('downloaded_events_count > 0')
     end
 
     def sort_param
