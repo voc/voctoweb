@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
     get '/c/:acronym', to: 'conferences#show', as: :conference
 
+    get '/a', to: 'conferences#all', as: :all_conferences
     get '/b', to: 'conferences#browse', as: :browse_start
     get '/b/*slug', to: 'conferences#browse', as: :browse
 

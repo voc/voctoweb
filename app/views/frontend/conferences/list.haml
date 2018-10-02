@@ -1,0 +1,19 @@
+- content_for :title do
+  Conferences by date
+
+- content_for :body_class do
+  page-browse
+
+.container-fluid
+  %h1 All conferences and series, recently updated first
+
+  - if @conferences.present?
+    - @conferences.each do |conference|
+      %a.thumbnail.conference{href: conference_path(acronym: conference.acronym)}
+        .header
+          %span.icon.icon-video-camera
+          = conference.downloaded_events_count
+        %img{src: conference.logo_url, alt: 'conference logo'}
+        .caption
+          = conference.title
+
