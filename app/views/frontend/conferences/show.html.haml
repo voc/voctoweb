@@ -6,11 +6,9 @@
 
 .container-fluid
   .events-header
-    %img{src: @conference.logo_url, alt: 'conference logo'}
-
+    .logo
+      %img{src: @conference.logo_url, alt: 'conference logo'}
     %h1= @conference.title or @conference.acronym.gsub(/[\-_]/,' ')
-    - if @conference.title
-      %h2= @conference.acronym.gsub(/[\-_]/,' ')
 
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date view_count}.each do |sorting|

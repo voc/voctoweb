@@ -13,11 +13,14 @@ body.page-list {
   }
 
   .events-header {
-    clear: both;
+    display: table-cell; 
+    vertical-align: middle;
 
     img {
       float: left;
-      max-height: 40px;
+      max-height: 150px;
+      max-width: 150px;
+
       margin-right: $padding-small-horizontal;
     }
 
