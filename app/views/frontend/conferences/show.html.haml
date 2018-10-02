@@ -10,6 +10,13 @@
       %img{src: @conference.logo_url, alt: 'conference logo'}
     %h1= @conference.title or @conference.acronym.gsub(/[\-_]/,' ')
 
+    - if @events.present?
+      Full playlist:
+      = link_to 'Video', playlist_conference_path(slug: @conference.first_slug), method: :get
+      - if @conference.audio_recordings?
+        \/
+        = link_to 'Audio', audio_playlist_conference_path(slug: @conference.first_slug), method: :get
+
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date view_count}.each do |sorting|
         - if @sorting == sorting
@@ -18,11 +25,6 @@
           %a.btn.btn-primary{ href: conference_path(acronym: @conference.acronym, sort: sorting) }= sorting.gsub(/_/, ' ')
 
   - if @events.present?
-    Full playlist:
-    = link_to 'Video', playlist_conference_path(slug: @conference.first_slug), method: :get
-    - if @conference.audio_recordings?
-      \/
-      = link_to 'Audio', audio_playlist_conference_path(slug: @conference.first_slug), method: :get
     .event-previews
       - @events.each do |event|
         = render event
