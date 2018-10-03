@@ -56,13 +56,15 @@ However folders and access rights need to be setup manually, before you can uplo
         }
       }' "http://localhost:3000/api/conferences"
 
-You can add images to an event, like the poster image. The event is identified by its `guid` and the conference `acronym`.
+You can add images to an event, like the poster image. The event is identified by its `guid` and the conference `acronym`. For an explanation what the `timeline_url` and `thumbnails_url` parameters are, see <https://timelens.io>.
 
     curl -H "CONTENT-TYPE: application/json" -d '{
         "api_key":"4",
         "acronym":"frab123",
         "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
         "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
+        "timeline_url":"http://koeln.ccc.de/images/chaosknoten.timeline.jpg",
+        "thumbnails_url":"http://koeln.ccc.de/images/chaosknoten.thumbnails.vtt",
         "event":{
           "guid":"123",
           "slug":"123",

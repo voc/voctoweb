@@ -20,6 +20,12 @@ ActiveAdmin.register Event do
     column :poster_filename do |event|
       line_break_filename event.poster_filename
     end
+    column :timeline_filename do |event|
+      line_break_filename event.timeline_filename
+    end
+    column :thumbnails_filename do |event|
+      line_break_filename event.thumbnails_filename
+    end
     column :original_language
     column :conference
     column :promoted
@@ -38,6 +44,12 @@ ActiveAdmin.register Event do
       end
       row :poster_filename do
         div show_event_folder e, :poster_filename
+      end
+      row :timeline_filename do
+        div show_event_folder e, :timeline_filename
+      end
+      row :thumbnails_filename do
+        div show_event_folder e, :thumbnails_filename
       end
       row :conference
       row :original_language
@@ -102,6 +114,8 @@ ActiveAdmin.register Event do
       f.input :slug
       f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
+      f.input :timeline_filename, hint: event.try(:conference).try(:get_images_path)
+      f.input :thumbnails_filename, hint: event.try(:conference).try(:get_images_path)
     end
     f.actions
   end
@@ -139,7 +153,7 @@ ActiveAdmin.register Event do
 
   controller do
     def permitted_params
-      params.permit event: [:guid, :thumb_filename, :poster_filename,
+      params.permit event: [:guid, :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
                             :original_language,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]

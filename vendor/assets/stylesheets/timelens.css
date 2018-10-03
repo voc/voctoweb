@@ -1,0 +1,116 @@
+/* Common styles */
+
+.timelens {
+    position: relative;
+}
+
+.timelens img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    position: relative;
+}
+
+.timelens-thumbnail {
+    background: black;
+    border: solid rgba(28, 28, 28, 0.9) 3px !important;
+    border-radius: 3px;
+    background-clip: content-box;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s, z-index 0.2s;
+    transform: translateY(-100%) translateY(-7px);
+}
+
+.timelens-time {
+    font-size: 15px !important;
+    font-family: Arial, sans-serif !important;
+    color: #eee;
+    background: rgba(28, 28, 28, 0.9);
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: inline-block !important;
+    padding: 0 10px !important;
+    border-radius: 2px 2px 0 0;
+    height: 22px;
+    vertical-align: middle !important;
+    line-height: 25px !important;
+}
+
+.timelens img:hover + .timelens-thumbnail {
+    z-index: 999;
+    opacity: 1;
+}
+
+.timelens-marker {
+    width: 0px;
+    height: 0px;
+    border-top: 15px solid #eee !important;
+    border-left: 10px solid transparent !important;
+    border-right: 10px solid transparent !important;
+    position: absolute;
+    top: -20px;
+    z-index: 999;
+    transform: translateX(-50%);
+}
+
+.timelens-marker-border {
+    width: 0px;
+    height: 0px;
+    border-top: 23px solid rgba(28, 28, 28, 0.9) !important;
+    border-left: 15px solid transparent !important;
+    border-right: 15px solid transparent !important;
+    position: absolute;
+    top: -10px;
+    z-index: 999;
+    transform: translateX(-50%);
+}
+
+/* MediaElement.js */
+
+.mejs__time-slider.timelens {
+    height: 40px;
+    margin-top: -10px;
+    box-shadow: 0 0 0 2px #eee, 0 0 40px 2px rgba(0, 0, 0, 0.35);
+    border-radius: 0;
+}
+
+.timelens .mejs__time-buffering,
+.timelens .mejs__time-loaded,
+.timelens .mejs__time-current,
+.timelens .mejs__time-hovered,
+.timelens .mejs__time-handle,
+.timelens .mejs__time-float {
+    display: none !important;
+}
+
+/* Clappr */
+
+.media-control .bar-background {
+    height: 40px !important;
+    margin-top: -40px;
+    box-shadow: 0 0 0 2px #eee;
+}
+
+.media-control .seek-time,
+.media-control .bar-scrubber,
+.media-control .bar-hover {
+    display: none !important;
+}
+
+.media-control-hide {
+    bottom: -40px !important;
+}

@@ -23,7 +23,9 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     json += @conference.acronym
     json += '",'
     json += '"poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",'
-    json += '"thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg"'
+    json += '"thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",'
+    json += '"timeline_url":"http://koeln.ccc.de/images/chaosknoten.timeline.jpg",'
+    json += '"thumbnails_url":"http://koeln.ccc.de/images/chaosknoten.thumbnails.vtt"'
     json+= '}'
     json
   end

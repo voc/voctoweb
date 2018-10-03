@@ -48,6 +48,14 @@ module Frontend
       end
     end
 
+    def timeline_url
+      File.join(Settings.static_url, conference.images_path, timeline_filename).freeze if timeline_filename
+    end
+
+    def thumbnails_url
+      File.join(Settings.static_url, conference.images_path, thumbnails_filename).freeze if thumbnails_filename
+    end
+
     def tags
       self[:tags].compact.collect(&:to_s).collect(&:strip).map!(&:freeze)
     end
@@ -144,6 +152,10 @@ module Frontend
 
     def relive
       conference.metadata['relive']&.first { |r| r['guid'] == guid }
+    end
+
+    def timelens_present?
+        timeline_filename.present? and thumbnails_filename.present?
     end
 
     private
