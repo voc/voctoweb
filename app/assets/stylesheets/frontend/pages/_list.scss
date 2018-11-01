@@ -1,18 +1,6 @@
 body.page-list {
   .events-header {
     clear: both;
-    img {
-      float: left;
-      max-height: 40px;
-      margin-right: $padding-small-horizontal;
-    }
-    #sorting {
-      margin: $padding-large-vertical 0;
-      float: right;
-    }
-  }
-
-  .events-header {
     display: table-cell; 
     vertical-align: middle;
 
