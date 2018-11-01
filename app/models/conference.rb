@@ -70,8 +70,6 @@ class Conference < ApplicationRecord
   end
 
   def subtitles=(val)
-    puts 'subtitles?='
-    puts val
     if val == '1'
       self[:metadata]['subtitles'] = true
     else
