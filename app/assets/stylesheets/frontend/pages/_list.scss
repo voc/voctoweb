@@ -6,10 +6,11 @@ body.page-list {
 
     img {
       float: left;
-      max-height: 150px;
-      max-width: 150px;
+      max-height: 160px;
+      max-width: 300px;
 
       margin-right: $padding-small-horizontal;
+      margin-top: 16px;
     }
 
     #sorting {
