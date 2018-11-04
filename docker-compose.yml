@@ -27,6 +27,6 @@ services:
   postgres:
     image: postgres:alpine
   elasticsearch:
-    image: elasticsearch:alpine
+    image: elasticsearch:5-alpine
   redis:
     image: redis:alpine
