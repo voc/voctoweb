@@ -27,17 +27,17 @@ FactoryBot.define do
   end
 
   factory :api_key do
-    key '4'
-    description 'key'
+    key { '4' }
+    description { 'key' }
   end
 
   factory :conference do
     acronym { generate(:conference_acronym) }
-    title 'FrabCon'
-    recordings_path 'events/frabcon123'
-    images_path 'frabcon123'
+    title { 'FrabCon' }
+    recordings_path { 'events/frabcon123' }
+    images_path { 'frabcon123' }
     slug { generate(:conference_slug) }
-    aspect_ratio '16:9'
+    aspect_ratio { '16:9' }
 
     factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
   end
@@ -60,9 +60,9 @@ FactoryBot.define do
   end
 
   trait :has_schedule do
-    schedule_url 'http://localhost/schedule.xml'
-    schedule_state 'downloaded'
-    schedule_xml %{
+    schedule_url { 'http://localhost/schedule.xml' }
+    schedule_state { 'downloaded' }
+    schedule_xml { %{
     <?xml version="1.0" encoding="utf-8"?>
     <schedule>
         <version>1.3final</version>
@@ -96,73 +96,73 @@ FactoryBot.define do
             </room>
         </day>
     </schedule>
-    }
+    } }
   end
 
   factory :event do
     conference
     guid { generate(:event_guid) }
     title { generate(:event_title) }
-    thumb_filename 'frabcon123.jpg'
-    poster_filename 'frabcon123_logo.jpg'
-    timeline_filename 'frabcon123.timeline.jpg'
-    thumbnails_filename 'frabcon123.thumbnails.vtt'
-    subtitle 'subtitle'
+    thumb_filename { 'frabcon123.jpg' }
+    poster_filename { 'frabcon123_logo.jpg' }
+    timeline_filename { 'frabcon123.timeline.jpg' }
+    thumbnails_filename { 'frabcon123.thumbnails.vtt' }
+    subtitle { 'subtitle' }
 
-    original_language 'eng'
+    original_language { 'eng' }
     slug { generate(:event_slug) }
-    link 'http://localhost/ev_info'
-    description 'description'
-    persons ['Name']
-    tags ['tag']
-    date '2013-08-21'
-    release_date '2013-08-21'
+    link { 'http://localhost/ev_info' }
+    description { 'description' }
+    persons { ['Name'] }
+    tags { ['tag'] }
+    date { '2013-08-21' }
+    release_date { '2013-08-21' }
 
     factory :event_with_recordings, traits: [:event_recordings]
   end
 
   factory :recording do
     event
-    filename 'audio.mp3'
-    language 'eng'
-    folder ''
-    mime_type 'video/webm'
-    height 720
-    width 1024
-    size '12'
-    length '5'
-    state 'downloaded'
-    html5 true
+    filename { 'audio.mp3' }
+    language { 'eng' }
+    folder { '' }
+    mime_type { 'video/webm' }
+    height { 720 }
+    width { 1024 }
+    size { '12' }
+    length { '5' }
+    state { 'downloaded' }
+    html5 { true }
   end
 
   factory :recording_view do
     recording
-    identifier '1234'
-    user_agent 'browser/1.0'
+    identifier { '1234' }
+    user_agent { 'browser/1.0' }
   end
 
   factory :admin_user do
     email { generate :email }
-    password 'admin123'
+    password { 'admin123' }
   end
 
   factory :news do
-    title 'MyString'
-    body 'MyText <b>bold</b> most html allowed.'
-    date '2014-05-03'
+    title { 'MyString' }
+    body { 'MyText <b>bold</b> most html allowed.' }
+    date { '2014-05-03' }
   end
 
   factory :import_template do
     acronym { generate(:conference_acronym) }
-    title 'FrabCon'
-    recordings_path 'events/frabcon123'
-    images_path 'frabcon123'
+    title { 'FrabCon' }
+    recordings_path { 'events/frabcon123' }
+    images_path { 'frabcon123' }
     slug { generate(:conference_slug) }
-    aspect_ratio '16:9'
-    logo 'logo.jpg'
-    date '2013-08-21'
-    release_date '2013-08-21'
-    folder 'webm'
-    mime_type 'video/webm'
+    aspect_ratio { '16:9' }
+    logo { 'logo.jpg' }
+    date { '2013-08-21' }
+    release_date { '2013-08-21' }
+    folder { 'webm' }
+    mime_type { 'video/webm' }
   end
 end
