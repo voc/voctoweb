@@ -28,5 +28,9 @@ services:
     image: postgres:alpine
   elasticsearch:
     image: elasticsearch:5-alpine
+    ports:
+      - 9200:9200
   redis:
     image: redis:alpine
+    ports:
+      - 6379:6379
