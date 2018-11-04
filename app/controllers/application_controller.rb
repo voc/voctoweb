@@ -18,8 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_api_key!
-    keys = ApiKey.find_by key: params['api_key']
     redirect_to admin_dashboard_path if keys.nil?
+    if params['api_key']
+      keys = ApiKey.find_by(key: params['api_key'])
+    else
+      authenticate_with_http_token do |token, options|
+        keys = ApiKey.find_by(key: token)
+      end
+    end
   end
 
 end
