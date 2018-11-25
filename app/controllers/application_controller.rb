@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
       end
     end
     render json: { errors: 'No or invalid API key. Please add "Authorization: Token token=xxx" header or api_key=xxx param in URL or JSON request body.' }, :status => :forbidden if keys.nil?
-    #redirect_to admin_dashboard_path if keys.nil?
   end
 
 end
