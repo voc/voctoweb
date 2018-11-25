@@ -37,7 +37,7 @@
           =@conference.title
       %h1
         = @event.title
-      - unless @event.subtitle.nil? || @event.subtitle.empty?
+      - unless @event.subtitle.blank?
         %h2
           = @event.subtitle
 
