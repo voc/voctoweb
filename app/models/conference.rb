@@ -63,7 +63,7 @@ class Conference < ApplicationRecord
     acronym || id
   end
 
-  store_accessor :metadata, [ :subtitles, :logo_does_not_contain_title ]
+  store_accessor :metadata, %i[subtitles logo_does_not_contain_title]
 
   def subtitles?
     @conference&.metadata&.fetch('subtitles', false)
