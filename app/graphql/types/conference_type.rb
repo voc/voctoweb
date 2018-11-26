@@ -1,7 +1,7 @@
 
 module Types
   class ConferenceType < Types::BaseObject
-    description "This entity is groups multiple lecutres together, e.g. a Confernece or Lecture Series"
+    description "This entity groups multiple lectures together, e.g. a Conference or Lecture Series"
     field :id, ID, null: false 
     field :title, String, null: false
     field :slug, String, null: false 
