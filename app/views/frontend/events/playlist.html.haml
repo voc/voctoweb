@@ -11,16 +11,19 @@
 
 - cache([@playlist.playlist]) do
   .container-fluid
-    .playlist-header
+    .player-header
       - if @conference&.logo_url
-        %img{src: @conference.logo_url, alt: 'conference logo'}
+        %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
+          %img{src: @conference.logo_url, alt: 'conference logo'}
+          - if @conference.logo_does_not_contain_title
+            .caption
+              = @conference.title
+      - else 
+        =@conference.title
 
       %h1
-        Playlist for
+        Playlist
         = %("#{@playlist.title}")
-
-    %p.persons
-      = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }
 
     - if @playlist.audio?
       .player.audio
@@ -31,11 +34,11 @@
         .kiosk
         = render partial: 'frontend/shared/player_playlist_video', locals: video_player_ivars(playlist: @playlist)
 
-
-    %ul.metadata
-      %li
-        %span.event_title
-          = @playlist.lead_event.title
-
+    %h2.event_title
+      = @playlist.lead_event.title
+  
+    %p.persons
+      = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }
+      
     %p
       = simple_format(@playlist.lead_event.description, class: :description)

@@ -25,11 +25,21 @@
 
 - cache([@event.conference, @event]) do
   .container-fluid
-    %h1
-      = @event.title
-    - unless @event.subtitle.nil? || @event.subtitle.empty?
-      %h2
-        = @event.subtitle
+    .player-header
+      .conference
+        - if @conference&.logo_url
+          %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
+            %img{src: @conference.logo_url, alt: 'conference logo'}
+            - if @conference.logo_does_not_contain_title
+              .caption
+                = @conference.title
+        - else 
+          =@conference.title
+      %h1
+        = @event.title
+      - unless @event.subtitle.blank?
+        %h2
+          = @event.subtitle
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
@@ -81,13 +91,13 @@
       %p.description
         = simple_format @event.description
 
-    - if @event.metadata['related'].present?
-      %h3 Related
-      = render partial: 'frontend/shared/related', locals: { events: Frontend::Event.find(@event.related_event_ids(10)) }
-
     %h3 Download
     .download
       = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
+
+    - if @event.metadata['related'].present?
+      %h3 Related
+      = render partial: 'frontend/shared/related', locals: { events: Frontend::Event.find(@event.related_event_ids(10)) }
 
     /%h3 Embed/Share
     .share
