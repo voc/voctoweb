@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/voctoweb
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
       - ELASTICSEARCH_URL=elasticsearch:9200
       - REDIS_URL=redis://redis:6379/1
@@ -14,6 +14,7 @@ services:
       - sidekiq
       - postgres
       - elasticsearch
+      - ssh-server
   sidekiq:
     build: .
     command: bundle exec sidekiq
@@ -26,11 +27,20 @@ services:
       - redis
   postgres:
     image: postgres:alpine
+    volumes:
+      - ./docker/db:/var/lib/postgresql/data:rw
   elasticsearch:
     image: elasticsearch:5-alpine
     ports:
-      - 9200:9200
+      - "9200:9200"
   redis:
     image: redis:alpine
     ports:
-      - 6379:6379
+      - "6379:6379"
+  ssh-server:
+    image: panubo/sshd
+    volumes:
+      - .:/voctoweb
+      - ./docker/ssh:/root/.ssh
+    ports:
+      - "2222:22"
