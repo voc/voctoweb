@@ -19,7 +19,7 @@ services:
     build: .
     command: bundle exec sidekiq
     volumes:
-      - .:/voctoweb
+      - ".:/voctoweb"
     environment:
       - REDIS_URL=redis://redis:6379/1
     depends_on:
@@ -28,7 +28,7 @@ services:
   postgres:
     image: postgres:alpine
     volumes:
-      - ./docker/db:/var/lib/postgresql/data:rw
+      - "./docker/db:/var/lib/postgresql/data:rw"
   elasticsearch:
     image: elasticsearch:5-alpine
     ports:
@@ -40,7 +40,7 @@ services:
   ssh-server:
     image: panubo/sshd
     volumes:
-      - .:/voctoweb
-      - ./docker/ssh:/root/.ssh
+      - ".:/voctoweb"
+      - "./docker/ssh:/root/.ssh"
     ports:
       - "2222:22"
