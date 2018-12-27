@@ -138,20 +138,17 @@ A convenient way to set up an environment for developing voctoweb is [Docker](ht
 
 First, install Docker and [Docker Compose](https://docs.docker.com/compose/) – you will probably find them in your distribution's package manager.
 
-Then, clone this repository, make it your working directory, and run the following commands:
+Then, clone this repository, make it your working directory, and run the following command:
 
 ```
-cp config/database.yml.docker config/database.yml
-cp config/settings.yml.template config/settings.yml
-docker-compose build
-docker-compose run voctoweb rake db:setup
-docker-compose run voctoweb bin/update-data
-docker-compose up
+bin/docker-dev-up
 ```
 
-You can now reach the voctoweb frontend at `http://localhost:3000`. The backend is at `http://localhost:3000/admin/`, with the default username `admin@example.org` and the password `media123`. You can stop the running containers using *Ctrl-C*. To start them again, just run `docker-compose up`.
+You can now reach the voctoweb frontend at `http://localhost.c3voc.de/`. The backend is at `http://localhost.c3voc.de/admin`, with the default username `admin@example.org` and the password `media123`. You can stop the running containers using *Ctrl-C*. To start them again, just run `docker-compose up`.
 
 The whole application directory is mounted into the containers, so all changes you make to the files are reflected inside the application automatically. To run commands inside the voctoweb container, run `docker-compose run voctoweb $COMMAND`. If you ever need to rebuild the containers (because of new dependencies, for example), run the `docker-compose build` command again.
+
+Image and video files in `docker/content` are tried first, if missing live data from media.ccc.de is used.
 
 ## Install for Production
 
