@@ -151,7 +151,7 @@ module Frontend
     end
 
     def relive
-      conference.metadata['relive']&.first { |r| r['guid'] == guid }
+      conference.metadata['relive']&.find { |r| r['guid'] == guid }
     end
 
     def timelens_present?
