@@ -20,5 +20,5 @@
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
 
-- if event.timelens_present?
+  - if event.timelens_present?
     %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}
