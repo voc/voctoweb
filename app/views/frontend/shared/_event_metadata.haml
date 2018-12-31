@@ -1,7 +1,4 @@
 .caption
-  - if event.timelens_present?
-    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}
-
   %h3
     %a{href: event_path(slug: event.slug)}
       = truncate(event.title, length: 90, separator: ' ', omission: '…')
@@ -22,3 +19,6 @@
       = event.view_count
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
+
+  - if event.timelens_present?
+    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}
