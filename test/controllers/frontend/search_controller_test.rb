@@ -6,11 +6,13 @@ class Frontend::SearchControllerTest < ActionController::TestCase
     create_list(:conference_with_recordings, 5)
   end
 
-  test 'should get index' do
-    Event.import
-    Event.__elasticsearch__.refresh_index!
-    get :index, params: { q: 'FrabCon' }
-    assert_response :success
-    assert_equal 25, assigns(:events).count
+  unless ENV['SKIP_ELASTICSEARCH']
+    test 'should get index' do
+      Event.import
+      Event.__elasticsearch__.refresh_index!
+      get :index, params: { q: 'FrabCon' }
+      assert_response :success
+      assert_equal 25, assigns(:events).count
+    end
   end
 end

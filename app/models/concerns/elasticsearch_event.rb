@@ -5,7 +5,7 @@ module ElasticsearchEvent
 
   included do
     include Elasticsearch::Model
-    include Elasticsearch::Model::Callbacks
+    include Elasticsearch::Model::Callbacks unless ENV['SKIP_ELASTICSEARCH']
 
     index_name "media-event-#{Rails.env}"
     document_type 'event'

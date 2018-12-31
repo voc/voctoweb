@@ -38,27 +38,29 @@ class Public::EventsControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
-  test 'search for events' do
-    get :search, params: { q: 'not-existing' }, format: :json
-    assert_response :success
-    json = JSON.parse(response.body)
-    assert_empty json['events']
-  end
+  unless ENV['SKIP_ELASTICSEARCH']
+    test 'search for events' do
+      get :search, params: { q: 'not-existing' }, format: :json
+      assert_response :success
+      json = JSON.parse(response.body)
+      assert_empty json['events']
+    end
 
-  test 'search for events return multiple results' do
-    Event.__elasticsearch__.create_index! force: true
-    create_list(:event, 26, title: 'fake-event')
-    Event.import
-    Event.__elasticsearch__.refresh_index!
+    test 'search for events return multiple results' do
+      Event.__elasticsearch__.create_index! force: true
+      create_list(:event, 26, title: 'fake-event')
+      Event.import
+      Event.__elasticsearch__.refresh_index!
 
-    get :search, params: { q: 'fake-event' }, format: :json
-    assert_response :success
-    json = JSON.parse(response.body)
-    assert_equal 25, json['events'].count
+      get :search, params: { q: 'fake-event' }, format: :json
+      assert_response :success
+      json = JSON.parse(response.body)
+      assert_equal 25, json['events'].count
 
-    get :search, params: { q: 'fake-event', page: '2' }, format: :json
-    assert_response :success
-    json = JSON.parse(response.body)
-    assert_equal 1, json['events'].count
+      get :search, params: { q: 'fake-event', page: '2' }, format: :json
+      assert_response :success
+      json = JSON.parse(response.body)
+      assert_equal 1, json['events'].count
+    end
   end
 end
