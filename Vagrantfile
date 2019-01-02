@@ -155,5 +155,7 @@ server {
 NGINX
     systemctl enable --now nginx
 
+    echo "cd /vagrant" >> .profile
+
   SHELL
 end
