@@ -1,6 +1,11 @@
 .postroll
   %h4 continue…
   .container-fluid
+    - if @event.link
+      .row
+        .col-xs-12.event
+          %b
+            = @event.link
     .row
       - @events.each do |event|
         .col-xs-4.event
