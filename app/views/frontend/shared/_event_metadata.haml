@@ -1,7 +1,7 @@
 .caption
   %h3
     %a{href: event_path(slug: event.slug)}
-      = truncate(event.title, length: 90, separator: ' ', omission: '…')
+      = truncate(event.title, length: 75, separator: ' ', omission: '…')
 
   - if event.subtitle.present?
     %h4{title: event.subtitle}
