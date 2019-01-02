@@ -11,11 +11,11 @@ module Frontend
           view_context,
           title: "recent events feed (#{FeedQuality.display_name(params[:quality])})",
           channel_summary: 'This feed contains events from the last two years',
-          logo_image: logo_image_url,
+          logo_image: logo_image_url
         )
-        feed.generate(downloaded_events.newer(events_max_age)) {
-          |event| EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
-        }
+        feed.generate(downloaded_events.newer(events_max_age)) do |event|
+          EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
+        end
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -50,9 +50,9 @@ module Frontend
           channel_summary: 'This feed contains events older than two years',
           logo_image: logo_image_url
         )
-        feed.generate(downloaded_events.older(events_min_age)) {
-          |event| EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
-        }
+        feed.generate(downloaded_events.older(events_min_age)) do |event|
+          EventRecordingFilter.by_quality_string(params[:quality]).filter(event)
+        end
       end
       respond_to do |format|
         format.xml { render xml: xml }
@@ -83,18 +83,18 @@ module Frontend
         quality_display_name = FeedQuality.display_name(params[:quality])
         feed = Feeds::PodcastGenerator.new(
           view_context,
-          title: "#{@conference.title} ("+[quality_display_name, mime_display_name].reject(&:empty?).join(" ")+")",
+          title: "#{@conference.title} (#{[quality_display_name, mime_display_name].reject(&:empty?).join(' ')})",
           channel_summary: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           channel_description: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           base_url: view_context.conference_url(acronym: @conference.acronym),
           logo_image: @conference.logo_url
         )
-        feed.generate(@conference.events.includes(:conference)) {
-          |event| EventRecordingFilter
-              .by_quality_string(params[:quality])
-              .with_mime_type(@mime_type)
-              .filter(event)
-        }
+        feed.generate(@conference.events.includes(:conference)) do |event|
+          EventRecordingFilter
+            .by_quality_string(params[:quality])
+            .with_mime_type(@mime_type)
+            .filter(event)
+        end
       end
       respond_to do |format|
         format.xml { render xml: xml }

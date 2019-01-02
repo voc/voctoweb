@@ -1,11 +1,9 @@
 module Frontend
   class EventRecordingFilter
     def self.by_quality_string(quality)
-      if quality.nil? || quality.empty?
-        return EventRecordingFilter.new
-      end
+      return EventRecordingFilter.new if quality.nil? || quality.empty?
 
-      return FeedQuality.eventRecordingFilter(quality)
+      FeedQuality.eventRecordingFilter(quality)
     end
 
     @target_mime_type = nil
@@ -16,11 +14,12 @@ module Frontend
     end
 
     def filter(event)
-      if @target_mime_type
-        @recordings = event.recordings.by_mime_type(@target_mime_type)
-      else
-        @recordings = event.recordings.video
-      end
+      recordings = event.recordings.video_without_slides
+      @recordings = if @target_mime_type
+                      recordings.by_mime_type(@target_mime_type)
+                    else
+                      recordings.video
+                    end
 
       @recordings = filter_by_quality(@recordings)
 
@@ -29,7 +28,7 @@ module Frontend
       if @target_mime_type != nil
         @recordings.first.freeze
       else
-        select_first_video_with_preferred_mime_type().freeze
+        select_first_video_with_preferred_mime_type.freeze
       end
     end
 
@@ -39,7 +38,7 @@ module Frontend
       recordings
     end
 
-    def select_first_video_with_preferred_mime_type()
+    def select_first_video_with_preferred_mime_type
       MimeType::PREFERRED_VIDEO.each { |mime_type|
         found = @recordings.find { |recording| recording.mime_type == mime_type }
         return found if found != nil
