@@ -2,6 +2,15 @@
   %h4 continue…
   .container-fluid
     .row
+      .col-xs-12
+        %b
+          Related to
+          - if @event.link
+            = link_to @event.title, @event.link
+          - else
+            = @event.title
+
+    .row
       - @events.each do |event|
         .col-xs-4.event
           = render partial: 'frontend/shared/event_title', locals: { event: event }
