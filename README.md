@@ -11,7 +11,7 @@ media.ccc.de webfrontend, meta data editor and API.
 
 ### Public JSON API
 
-The public API provides a programatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different eco systems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
+The public API provides a programmatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different ecosystems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
 
     /public/conferences
     /public/conferences/:acronym
@@ -94,7 +94,7 @@ To add event (e.g. a talk or lecture) the conference it is part of via `acronym`
 
 #### Create recording
 
-Recordings are added by specifiying the parent events `guid`, an URL and a `filename`.
+Recordings are added by specifying the parent events `guid`, an URL and a `filename`.
 The recording length is specified in seconds.
   * other available methods: https://github.com/voc/media.ccc.de/blob/master/app/controllers/api/recordings_controller.rb
   * Available fields: https://github.com/voc/media.ccc.de/blob/master/db/schema.rb#L120-L135
