@@ -28,6 +28,8 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
+  gem 'ed25519',            require: false
+  gem 'bcrypt_pbkdf',       require: false
 end
 
 gem 'haml'
