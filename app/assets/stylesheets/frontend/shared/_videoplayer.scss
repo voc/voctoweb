@@ -34,7 +34,7 @@
 @include video-player-size(1280px);
 @include video-player-size(1920px);
 
-.video.player {
+.video.player, div[data-player] {
   height: 54.5vw;
   max-height: 576px;
 }
