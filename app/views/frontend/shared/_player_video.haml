@@ -16,6 +16,7 @@
 :javascript
   $(function() {
     var stamp = window.location.hash.split('#t=')[1] || window.location.hash.split('&t=')[1],
+        lang = (window.location.hash.split('#l=')[1] || '').split('&')[0],
         $video = $('video'),
         promises = [];
 
@@ -36,7 +37,8 @@
         stretching: '#{stretching}',
         features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll', 'timelens'],
         skipBackInterval: 15,
-        success: function (mediaElement) {
+        startLanguage: lang,
+        success: function (mediaElement, originalNode, instance) {
           mediaElement.addEventListener('canplay', function () {
             if(stamp) {
               mediaElement.setCurrentTime(stamp);
@@ -50,7 +52,8 @@
             $.post("/public/recordings/count", {event_id: $video.data('id'), src: mediaElement.src});
           }, false);
           mediaElement.addEventListener('pause', function() {
-            var hash = '#t='+Math.round(mediaElement.currentTime);
+            var l = instance.options.startLanguage || '';
+            var hash =  (l ? '#l='+l+'&t=' : '#t=') + Math.round(mediaElement.currentTime);
             window.location.replaceHash(hash);
           }, false);
         }

@@ -47,10 +47,23 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		t.addControlElement(player.sourcechooserButton, 'sourcechooser');
 
+		if ( t.options.startLanguage ) {
+			for (var _i = 0, _total = sources.length; _i < _total; _i++) {
+				var src = sources[_i];
+				if (src.type !== undefined && 
+					typeof media.canPlayType === 'function' && 
+					t.options.startLanguage === src.dataset.lang) 
+				{
+					t.setSource(media, src.src)
+					break;
+				}
+			}
+		}
+
 		for (var _i = 0, _total = sources.length; _i < _total; _i++) {
 			var src = sources[_i];
 			if (src.type !== undefined && typeof media.canPlayType === 'function') {
-				player.addSourceButton(src.src, src.title, src.type, media.src === src.src);
+				player.addSourceButton(src.src, src.title, src.type, src.dataset.lang, media.src === src.src);
 			}
 		}
 
@@ -109,6 +122,11 @@ Object.assign(MediaElementPlayer.prototype, {
 				this.setAttribute('aria-selected', true);
 				this.checked = true;
 
+				// store language selection for url hash back to options for single language tracks
+				if ( this.dataset.lang.indexOf('-') == -1 ) {
+					t.options.startLanguage = this.dataset.lang;
+				}
+
 				var otherRadios = this.closest('.' + t.options.classPrefix + 'sourcechooser-selector').querySelectorAll('input[type=radio]');
 
 				for (var j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {
@@ -121,21 +139,7 @@ Object.assign(MediaElementPlayer.prototype, {
 				var src = this.value;
 
 				if (media.getSrc() !== src) {
-					var currentTime = media.currentTime;
-
-					var paused = media.paused,
-					    canPlayAfterSourceSwitchHandler = function canPlayAfterSourceSwitchHandler() {
-						if (!paused) {
-							media.setCurrentTime(currentTime);
-							media.play();
-						}
-						media.removeEventListener('canplay', canPlayAfterSourceSwitchHandler);
-					};
-
-					media.pause();
-					media.setSrc(src);
-					media.load();
-					media.addEventListener('canplay', canPlayAfterSourceSwitchHandler);
+					t.setSource(media, src)
 				}
 			});
 		}
@@ -149,14 +153,34 @@ Object.assign(MediaElementPlayer.prototype, {
 			}
 		});
 	},
-	addSourceButton: function addSourceButton(src, label, type, isCurrent) {
+	setSource: function setSource(media, src) {
+		var t = this;
+		if (media.getSrc() !== src) {
+			var currentTime = media.currentTime;
+
+			var paused = media.paused;
+			var canPlayAfterSourceSwitchHandler = function canPlayAfterSourceSwitchHandler() {
+				media.setCurrentTime(currentTime);
+				if (!paused) {
+					media.play();
+				}
+				media.removeEventListener('canplay', canPlayAfterSourceSwitchHandler);
+			};
+
+			media.pause();
+			media.setSrc(src);
+			media.load();
+			media.addEventListener('canplay', canPlayAfterSourceSwitchHandler);
+		}
+	},
+	addSourceButton: function addSourceButton(src, label, type, lang, isCurrent) {
 		var t = this;
 		if (label === '' || label === undefined) {
 			label = src;
 		}
 		type = type.split('/')[1];
 
-		t.sourcechooserButton.querySelector('ul').innerHTML += '<li>' + ('<input type="radio" name="' + t.id + '_sourcechooser" id="' + t.id + '_sourcechooser_' + label + type + '" ') + ('role="menuitemradio" value="' + src + '" ' + (isCurrent ? 'checked="checked"' : '') + ' aria-selected="' + isCurrent + '"/>') + ('<label for="' + t.id + '_sourcechooser_' + label + type + '" aria-hidden="true">' + label + ' (' + type + ')</label>') + '</li>';
+		t.sourcechooserButton.querySelector('ul').innerHTML += '<li>' + ('<input type="radio" name="' + t.id + '_sourcechooser" id="' + t.id + '_sourcechooser_' + label + type + '" ') + ('role="menuitemradio" value="' + src + '" ' + (isCurrent ? 'checked="checked"' : '') + ' aria-selected="' + isCurrent + '"  data-lang="' + lang + '"/>') + ('<label for="' + t.id + '_sourcechooser_' + label + type + '" aria-hidden="true">' + label + ' (' + type + ')</label>') + '</li>';
 
 		t.adjustSourcechooserBox();
 	},
