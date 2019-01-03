@@ -4,13 +4,17 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
-      .mejs__container.video, div[data-player] {
+      .mejs__container.video, >video, div[data-player] {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
 
         &.mejs__container-fullscreen {
           margin-left: 0 !important;
         }
       }
+    }
+
+    .video.player, div[data-player] {
+      max-height: $h !important;
     }
 
     .kiosk {
@@ -30,11 +34,10 @@
 @include video-player-size(1280px);
 @include video-player-size(1920px);
 
-// relive player fix
-.video.player, div[data-player] {
-  max-height: 720px;
+.video.player {
+  height: 54.5vw;
+  max-height: 576px;
 }
-
 
 /* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
 /*

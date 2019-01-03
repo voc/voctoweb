@@ -106,6 +106,15 @@ module Frontend
       end
     end
 
+    def aspect_ratio_height_vw(high = true)
+      case @conference.aspect_ratio
+      when /16:9/
+        '56.25vw'
+      when /4:3/
+        '75vw'
+      end
+    end
+
     def parse_url_host(_urlish)
       URI.parse(@event.link).host
     rescue URI::InvalidURIError
@@ -140,8 +149,8 @@ module Frontend
 
     def video_player_ivars(args={})
       {
-        height: aspect_ratio_height,
-        width: aspect_ratio_width,
+        height: '100%',
+        width: '100%',
         event: @event
       }.merge(args)
     end
