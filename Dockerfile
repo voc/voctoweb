@@ -9,4 +9,4 @@ WORKDIR /voctoweb
 
 # Install required gems
 COPY Gemfile Gemfile.lock /voctoweb/
-RUN gem install bundler && bundle install
+RUN gem update --system && gem install bundler && bundle install
