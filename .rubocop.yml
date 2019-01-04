@@ -1,6 +1,10 @@
 AllCops:
   TargetRubyVersion: 2.4
 
+# loading order actually matters
+Bundler/OrderedGems:
+  Enabled: false
+
 # old ruby style syntax may still be needed
 Style/HashSyntax:
   Enabled: false

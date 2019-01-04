@@ -20,6 +20,9 @@ gem 'exception_notification'
 gem 'puma'
 gem 'puma_worker_killer'
 
+# Simplified production logging
+gem 'lograge'
+
 group :development do
   gem 'bullet'
   gem 'capistrano', '~> 3.5.0', group: :capistrano, require: false
