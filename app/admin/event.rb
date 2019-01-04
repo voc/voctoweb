@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
   filter :guid
   filter :title
   filter :link
-  filter :conference
+  filter :conference, collection: proc { Conference.order(:acronym) }
   filter :promoted
   filter :slug
   filter :tags
