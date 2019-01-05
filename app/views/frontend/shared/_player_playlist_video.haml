@@ -48,7 +48,7 @@
             var ev = $('video source[src="' + mediaElement.src + '"');
             $('video').first().attr('poster', ev.data('poster'));
             $('.description').html(ev.data('mepDescription'));
-            $('span.event_title').html(ev.data('title'));
+            $('h2.event_title').html(ev.data('title'));
             $('p.persons').html(ev.data('persons'));
             if (mediaElement.src.indexOf('://cdn.media.ccc.de') > 0) {
               MirrorbrainFix.selectMirror(mediaElement.src, function(mirror) {
