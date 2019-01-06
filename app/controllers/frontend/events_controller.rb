@@ -3,6 +3,7 @@ module Frontend
     before_action :load_event
 
     def show
+      @playlist = Playlist.for_conference(@conference, lead_event: @event)
       respond_to { |format| format.html }
     end
 

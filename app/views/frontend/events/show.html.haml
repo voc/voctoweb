@@ -33,12 +33,12 @@
             - if @conference.logo_does_not_contain_title
               .caption
                 = @conference.title
-        - else 
+        - else
           =@conference.title
-      %h1
+      %h1.event_title
         = @event.title
       - unless @event.subtitle.blank?
-        %h2
+        %h2.event_subtitle
           = @event.subtitle
 
     %p.persons
@@ -47,11 +47,13 @@
     - if @event.recordings.video.present?
       .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
         .kiosk
-        = render partial: 'frontend/shared/player_video', locals: video_player_ivars
+        - if @playlist.empty?
+          = render partial: 'frontend/shared/player_video', locals: video_player_ivars
+        - else
+          = render partial: 'frontend/shared/player_playlist_video', locals: video_player_ivars(playlist: @playlist)
 
-      Playlists:
-      = link_to "'#{@conference.acronym}' videos starting here", playlist_conference_path(slug: @event.slug)
       - if @conference.audio_recordings?
+        Playlists:
         \/
         = link_to 'audio', audio_playlist_conference_path(slug: @event.slug), method: :get
       - if @event.metadata['related'].present?

@@ -1,5 +1,5 @@
 
--# be aware that this partial is used for the event page AND for the oembed code
+-# be aware that this partial is used for the event page AND for the oembed code, but not for playlists
 
 %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'auto', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
   - event.videos_sorted_by_language.each do |recording|

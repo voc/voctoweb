@@ -20,6 +20,14 @@ module Frontend
       video_playlist
     end
 
+    def count
+      @playlist_events.count
+    end
+
+    def empty?
+      count == 0
+    end
+
     def audio?
       @audio
     end
