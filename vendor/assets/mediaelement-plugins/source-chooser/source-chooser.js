@@ -49,10 +49,11 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		if ( t.options.startLanguage ) {
 			for (var _i = 0, _total = sources.length; _i < _total; _i++) {
-				var src = sources[_i];
+				var src = sources[_i],
+					lang = src['data-lang'] || src.dataset.lang;
 				if (src.type !== undefined && 
 					typeof media.canPlayType === 'function' && 
-					t.options.startLanguage === src.dataset.lang) 
+					t.options.startLanguage === lang) 
 				{
 					t.setSource(media, src.src)
 					break;
@@ -63,7 +64,7 @@ Object.assign(MediaElementPlayer.prototype, {
 		for (var _i = 0, _total = sources.length; _i < _total; _i++) {
 			var src = sources[_i];
 			if (src.type !== undefined && typeof media.canPlayType === 'function') {
-				player.addSourceButton(src.src, src.title, src.type, src.dataset.lang, media.src === src.src);
+				player.addSourceButton(src.src, src.title, src.type, src['data-lang'] || src.dataset.lang, media.src === src.src);
 			}
 		}
 
