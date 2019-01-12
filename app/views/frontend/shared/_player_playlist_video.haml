@@ -45,7 +45,7 @@
         skipBackInterval: 15,
         success: function (mediaElement) {
           mediaElement.addEventListener('play', function () {
-            var ev = $('video source[src="' + mediaElement.src + '"');
+            var ev = $('video source[src="' + mediaElement.src + '"]');
             $('video').first().attr('poster', ev.data('poster'));
             $('.description').html(ev.data('mepDescription'));
             $('h2.event_title').html(ev.data('title'));
@@ -58,7 +58,7 @@
             }
           }, false);
           mediaElement.addEventListener('playing', function () {
-            var eventId = $('video source[src="' + mediaElement.src + '"').data('id');
+            var eventId = $('video source[src="' + mediaElement.src + '"]').data('id');
             $.post("/public/recordings/count", {event_id: eventId, src: mediaElement.src});
           }, false);
         }

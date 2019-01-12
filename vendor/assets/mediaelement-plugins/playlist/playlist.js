@@ -309,12 +309,16 @@ Object.assign(MediaElementPlayer.prototype, {
 			for (var i = 0, total = children.length; i < total; i++) {
 				var childNode = children[i];
 
-				if (childNode.tagName.toLowerCase() === 'source') {
+				if (typeof childNode === 'object' || childNode.tagName.toLowerCase() === 'source') {
 					(function () {
 						var elements = {};
-						Array.prototype.slice.call(childNode.attributes).forEach(function (item) {
-							elements[item.name] = item.value;
-						});
+						if ( typeof childNode === 'object' ) {
+							elements = childNode;
+						} else {
+							Array.prototype.slice.call(childNode.attributes).forEach(function (item) {
+								elements[item.name] = item.value;
+							});
+						}
 
 						if (elements.src && elements.type && elements.title) {
 							elements.type = mejs.Utils.formatType(elements.src, elements.type);
