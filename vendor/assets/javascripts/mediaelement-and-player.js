@@ -3569,13 +3569,10 @@ var config = exports.config = {
 	keyActions: [{
 		keys: [32, 179],
 		action: function action(player) {
-
-			if (!_constants.IS_FIREFOX) {
-				if (player.paused || player.ended) {
-					player.play();
-				} else {
-					player.pause();
-				}
+			if (player.paused || player.ended) {
+				player.play();
+			} else {
+				player.pause();
 			}
 		}
 	}]
