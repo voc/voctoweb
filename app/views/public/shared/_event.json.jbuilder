@@ -8,8 +8,8 @@ json.thumbnails_url event.get_thumbnails_url
 json.frontend_link frontend_event_url(slug: event.slug)
 json.url public_event_url(id: event.guid, format: :json)
 json.conference_url public_conference_url(id: event.conference.acronym, format: :json)
-json.related(event.metadata['related']) do |id, weight|
-  json.event_id id
-  json.event_guid Event.find(id)&.guid
-  json.weight weight
+json.related(event.related_events) do |related_event|
+  json.event_id related_event.id
+  json.event_guid related_event.guid
+  json.weight event.metadata['related'][related_event.id.to_s]
 end

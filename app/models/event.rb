@@ -134,6 +134,13 @@ class Event < ApplicationRecord
     end
   end
 
+  def related_events
+    unless self.metadata['related'].nil?
+      ids = self.metadata['related'].keys
+      Event.find(ids)
+    end
+  end
+
   # for elastic search
   def remote_id
     metadata['remote_id']
