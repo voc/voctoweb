@@ -3499,11 +3499,13 @@ var config = exports.config = {
 	defaultAudioHeight: 40,
 
 	defaultSeekBackwardInterval: function defaultSeekBackwardInterval(media) {
-		return media.getDuration() * 0.05;
+		//return media.getDuration() * 0.05;
+		return 15;
 	},
 
 	defaultSeekForwardInterval: function defaultSeekForwardInterval(media) {
-		return media.getDuration() * 0.05;
+		//return media.getDuration() * 0.05;
+		return 30;
 	},
 
 	setDimensions: true,
