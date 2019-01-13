@@ -48,11 +48,15 @@
           mediaElement.addEventListener('playing', function () {
             $.post("/public/recordings/count", {event_id: $video.data('id'), src: mediaElement.src});
           }, false);
-          mediaElement.addEventListener('pause', function() {
-            var l = instance.options.startLanguage || '';
+
+          function updateHash() {
+            var l = player.options.startLanguage || '';
             var hash =  (l ? '#l='+l+'&t=' : '#t=') + Math.round(mediaElement.currentTime);
             window.location.replaceHash(hash);
-          }, false);
+          }          
+          mediaElement.addEventListener('pause', updateHash, false);
+          mediaElement.addEventListener('seeked', updateHash, false);
+
           document.addEventListener('keypress', function (event) {
             // do not capturke events from input fields
             if ( event.target.tagName == 'INPUT' ) {
