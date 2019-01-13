@@ -43,9 +43,6 @@
             if(stamp) {
               mediaElement.setCurrentTime(stamp);
               stamp = null;
-              // Toggle play on/off so that the preview image is correct:
-              mediaElement.play();
-              mediaElement.pause();
             }
           });
           mediaElement.addEventListener('playing', function () {

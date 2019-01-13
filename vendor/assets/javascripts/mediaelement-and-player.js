@@ -4856,6 +4856,10 @@ var MediaElementPlayer = function () {
 				poster.style.display = 'none';
 			});
 
+			media.addEventListener('seeked', function () {
+				poster.style.display = 'none';
+			});
+
 			if (player.options.showPosterWhenEnded && player.options.autoRewind) {
 				media.addEventListener('ended', function () {
 					poster.style.display = '';
