@@ -1,7 +1,7 @@
 
 -# be aware that this partial is used for the event page AND for the oembed code
 
-%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'auto', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
+%video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
   - event.videos_sorted_by_language.each do |recording|
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
 
