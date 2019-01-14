@@ -9,7 +9,7 @@
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
 
   - if event.timelens_present?
-    %track{kind: "metadata", label: "thumbnails", src: event.thumbnails_url, srclang: "unknown"}
+    %track{kind: "metadata", label: "thumbnails", src: event.thumbnails_url, srclang: ""}
 
   %link{rel: "postroll", href: postroll_path(slug: event.slug)}
 
@@ -35,12 +35,13 @@
         usePluginFullScreen: true,
         enableAutosize: true,
         stretching: '#{stretching}',
-        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll', 'timelens'],
+        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 
+          'tracks', 'volume', 'speed', 'sourcechooser', 'fullscreen', 'postroll', 'timelens'],
         skipBackInterval: 15,
         startLanguage: lang,
         success: function (mediaElement, originalNode, player) {
           mediaElement.addEventListener('canplay', function () {
-            if(stamp) {
+            if (stamp) {
               mediaElement.setCurrentTime(stamp);
               stamp = null;
             }
@@ -59,10 +60,9 @@
 
           document.addEventListener('keypress', function (event) {
             // do not capturke events from input fields
-            if ( event.target.tagName == 'INPUT' ) {
+            if (event.target.tagName === 'INPUT') {
               return;
             }
-            console.log(event);
             switch(event.key) {
               case 'k':
               case ' ':
@@ -74,6 +74,7 @@
                 //event.preventDefault();   
                 break; 
               default:
+                // forward other events to player
                 mediaElement.dispatchEvent(event);
                 console.log(event);
             }
