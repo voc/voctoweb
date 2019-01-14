@@ -4,7 +4,7 @@ class Public::EventsController < ActionController::Base
   respond_to :json
 
   def index
-    @events = paginate(Event.all.includes(:conference), per_page: 50, max_per_page: 256)
+    @events = paginate Event.all.includes(:conference)
   end
 
   # GET /public/events/1
@@ -28,10 +28,9 @@ class Public::EventsController < ActionController::Base
   end
 
   def search
-    results = Frontend::Event.query(params[:q]).page(params[:page])
-    # calling this just to set headers
-    paginate(results)
-    @events = results.records.includes(recordings: :conference)
-    respond_to { |format| format.json }
+    @events = paginate Frontend::Event
+      .query(params[:q])
+      .records
+      .includes(recordings: :conference)
   end
 end

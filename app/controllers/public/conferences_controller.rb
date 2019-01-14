@@ -1,8 +1,17 @@
 module Public
   class ConferencesController < InheritedResources::Base
     include ApiErrorResponses
+    include Rails::Pagination
     respond_to :json
-    actions :index
+
+    def index
+      # stay backwards-compatible
+      if params[:page] or params[:per_page]
+        @conferences = paginate Conference.all
+      else
+        @conferences = Conference.all
+      end
+    end
 
     # GET /public/conferences/54
     # GET /public/conferences/54.json
