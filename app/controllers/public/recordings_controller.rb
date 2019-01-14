@@ -5,7 +5,7 @@ class Public::RecordingsController < ActionController::Base
   respond_to :json
 
   def index
-    @recordings = paginate(Recording.all.includes(:event, :conference), per_page: 50, max_per_page: 256)
+    @recordings = paginate Recording.all.includes(:event, :conference)
   end
 
   # GET /public/recordings/1.json
