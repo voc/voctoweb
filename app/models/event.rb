@@ -136,8 +136,8 @@ class Event < ApplicationRecord
   end
 
   def related_events
-    unless self.metadata['related'].nil?
-      ids = self.metadata['related'].keys
+    unless metadata['related'].nil?
+      ids = metadata['related'].keys
       Event.find(ids)
     end
   end

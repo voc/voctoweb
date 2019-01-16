@@ -21,7 +21,7 @@ class Public::EventsController < ActionController::Base
         .where(guid: params[:id])
         .or(Event.where(slug: params[:id]))
         .includes(recordings: :conference)
-        .first
+        .take
     end
 
     fail ActiveRecord::RecordNotFound unless @event
