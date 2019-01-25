@@ -20,6 +20,7 @@ class Recording < ApplicationRecord
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
   scope :slides, -> { where("folder LIKE '%slides%'") }
+  scope :without_slides, -> { where("folder NOT LIKE '%slides%'") }
   scope :video_without_slides, -> { video.where("folder NOT LIKE '%slides%'") }
   scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
