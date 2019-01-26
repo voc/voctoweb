@@ -163,4 +163,12 @@ class EventTest < ActiveSupport::TestCase
     @event.update(release_date: release_date)
     assert_equal release_date, @event.conference.event_last_released_at
   end
+
+  test 'should resolve related_events from metadata' do
+    e = create(:event)
+    e.metadata = {'related': Hash[@event.id, 1] }
+    e.save!
+
+    assert_includes e.related_events, @event
+  end
 end

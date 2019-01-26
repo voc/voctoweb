@@ -18,12 +18,13 @@ class Event < ApplicationRecord
   serialize :persons, Array
   serialize :tags, Array
 
-  # events with recordings of any type for a given conference
+  # get all Events of a Conference with at least one Recording
   scope :recorded_at, ->(conference) {
-    joins(:recordings, :conference)
-      .where(conferences: { id: conference })
-      .where(recordings: { mime_type: MimeType.all })
-      .group(:id)
+    # reuse conference so using event.conference does not trigger a query
+    conference
+      .events
+      .includes(:recordings)
+      .where.not(recordings: { id: nil })
   }
   scope :recent, ->(n) { order('release_date desc').limit(n) }
 
@@ -131,6 +132,13 @@ class Event < ApplicationRecord
     else
       persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
       persons.join(', ')
+    end
+  end
+
+  def related_events
+    unless metadata['related'].nil?
+      ids = metadata['related'].keys
+      Event.find(ids)
     end
   end
 
