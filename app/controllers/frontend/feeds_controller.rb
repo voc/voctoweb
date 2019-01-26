@@ -10,7 +10,7 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "recent events feed (#{FeedQuality.display_name(params[:quality])})",
-          channel_summary: 'This feed contains events from the last two years',
+          channel_summary: ' This feed contains events from the last two years',
           logo_image: logo_image_url
         )
         feed.generate(downloaded_events.newer(events_max_age)) do |event|
@@ -29,7 +29,7 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent events feed',
-          channel_summary: 'This feed contains events from the last two years',
+          channel_summary: ' This feed contains events from the last two years',
           logo_image: logo_image_url
         )
         # Leave filter method like this to not change the results of the feed
@@ -47,7 +47,7 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "archive feed (#{FeedQuality.display_name(params[:quality])})",
-          channel_summary: 'This feed contains events older than two years',
+          channel_summary: ' This feed contains events older than two years',
           logo_image: logo_image_url
         )
         feed.generate(downloaded_events.older(events_min_age)) do |event|
@@ -66,7 +66,7 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'archive feed',
-          channel_summary: 'This feed contains events older than two years',
+          channel_summary: ' This feed contains events older than two years',
           logo_image: logo_image_url
         )
         feed.generate(downloaded_events.older(events_min_age), &:preferred_recording)
@@ -84,8 +84,8 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "#{@conference.title} (#{[quality_display_name, mime_display_name].reject(&:empty?).join(' ')})",
-          channel_summary: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
-          channel_description: "This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
+          channel_summary: " This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
+          channel_description: " This feed contains all events from #{@conference.acronym} as #{mime_display_name}",
           base_url: view_context.conference_url(acronym: @conference.acronym),
           logo_image: @conference.logo_url
         )
@@ -107,7 +107,7 @@ module Frontend
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent audio-only feed',
-          channel_summary: 'This feed contains audio files from the last year',
+          channel_summary: ' This feed contains audio files from the last year',
           logo_image: logo_image_url
         )
         feed.generate(downloaded_events.newer(events_max_age), &:audio_recording)
@@ -125,7 +125,7 @@ module Frontend
           view_context: view_context,
           config: {
              title: 'last 100 events feed',
-             channel_summary: 'This feed the most recent 100 events',
+             channel_summary: ' This feed the most recent 100 events',
              logo: logo_image_url
           }
         )
