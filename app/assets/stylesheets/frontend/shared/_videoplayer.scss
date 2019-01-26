@@ -73,32 +73,3 @@
   }
 }
 */
-.mejs__captions-layer  {
-  line-height: 1.15em !important;
-  font-size: 2em !important;
-}
-
-
-.postroll {
-  width: 100% !important;
-  height: 100% !important;
-  padding: 1%;
-  color: #fff;
-}
-.postroll .video-thumbnail {
-  width: 80%;
-}
-.postroll .row {
-  padding-bottom: 1.5em;
-}
-
-@media all and (min-width: 550px) {
-  .postroll h4 {
-    height: 30%;
-  }
-}
-@media all and (max-width: 550px) {
-  .postroll h4 {
-    height: 10%;
-  }
-}
