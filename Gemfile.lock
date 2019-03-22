@@ -68,9 +68,9 @@ GEM
       execjs
     bcrypt (3.1.12)
     bcrypt_pbkdf (1.0.0)
-    bootstrap-sass (3.3.7)
+    bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
+      sassc (>= 2.0.0)
     builder (3.2.3)
     bullet (5.8.1)
       activesupport (>= 3.0.0)
@@ -298,6 +298,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.0.1)
+      ffi (~> 1.9)
+      rake
     sdoc (1.0.0)
       rdoc (>= 5.0)
     sidekiq (5.2.2)
@@ -343,7 +346,7 @@ DEPENDENCIES
   activeadmin
   api-pagination
   bcrypt_pbkdf
-  bootstrap-sass (~> 3.3.5)
+  bootstrap-sass (~> 3.4.1)
   bullet
   capistrano (~> 3.5.0)
   capistrano-bundler
