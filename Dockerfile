@@ -1,5 +1,5 @@
 # Use the the official Ruby image as a base
-FROM ruby:2.4.1
+FROM ruby:2.6.0
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem
