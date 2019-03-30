@@ -5,10 +5,10 @@ class EventsApiTest < ActionDispatch::IntegrationTest
   setup do
     @key = create(:api_key)
     @conference = create(:conference)
-    @json = get_json
+    @json = json_text
   end
 
-  def get_json
+  def json_text
     json = '{'
     json += '"api_key":"'
     json += @key.key
@@ -42,5 +42,4 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     assert_equal 'chaosknoten.jpg', event.thumb_filename
     assert_equal %w[a b c], event.persons
   end
-
 end

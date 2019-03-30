@@ -4,10 +4,10 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
 
   setup do
     @key = create(:api_key)
-    @json = get_json
+    @json = json_text
   end
 
-  def get_json
+  def json_text
     json = '{'
     json += '"api_key":"'
     json += @key.key

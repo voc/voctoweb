@@ -25,8 +25,10 @@ Rails.application.routes.draw do
     get :index, path: '/', defaults: { format: 'json' }
     get :oembed
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
-    resources :events, only: %i(index show), defaults: { format: 'json' } do
-      get :search, defaults: { format: 'json' }, on: :collection
+    constraints(id: %r'[^/]+') do
+      resources :events, only: %i(index show), defaults: { format: 'json' } do
+        get :search, defaults: { format: 'json' }, on: :collection
+      end
     end
     resources :recordings, only: %i(index show), defaults: { format: 'json' } do
       collection do

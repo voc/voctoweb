@@ -4,10 +4,10 @@ class RecordingsApiTest < ActionDispatch::IntegrationTest
   setup do
     @key = create(:api_key)
     @event = create(:event)
-    @json = get_json
+    @json = json_text
   end
 
-  def get_json
+  def json_text
     json = '{'
     json += '"api_key":"'
     json += @key.key
