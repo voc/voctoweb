@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -68,10 +68,23 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    set -ev
     echo "nameserver 9.9.9.9" | tee /etc/resolv.conf
+
     export DEBIAN_FRONTEND="noninteractive"
+    wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
     apt-get update
-    apt-get install -y redis-server elasticsearch ruby2.3 ruby2.3-dev postgresql-9.5 nodejs libssl-dev build-essential libpq-dev libsqlite3-dev nginx
+    apt-get install -y apt-transport-https
+    apt-get install -y redis-server postgresql nodejs libssl-dev build-essential libpq-dev libsqlite3-dev nginx
+    apt-get install -y --no-install-recommends openjdk-11-jre
+    apt-get install -y elasticsearch
+
+    # ruby
+    if [ ! -x "$(command -v ruby)" ]; then
+      gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+      curl -sSL https://get.rvm.io | bash -s stable --ruby
+    fi
 
     # postgresql
     echo "create role voctoweb with createdb login password 'voctoweb';" | sudo -u postgres psql
@@ -79,9 +92,18 @@ Vagrant.configure(2) do |config|
     # elasticsearch
     sed -i -e 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
     systemctl restart elasticsearch
+
+    # rails
+    chown vagrant -R /usr/local/rvm/gems/ruby-2.6.0/
+    set +v
+    sudo -u vagrant -i <<EOF
     cd /vagrant
+    source /usr/local/rvm/scripts/rvm
+    rvm use 2.6.0 --default
+    rvm use 2.6.0@voctoweb --default
     gem install bundler
-    sudo -u ubuntu -H bin/setup
+    bin/setup
+EOF
 
     # Puma
     tee /etc/systemd/system/voctoweb-puma.service <<UNIT
@@ -93,7 +115,7 @@ Depends=vagrant.mount
 [Service]
 WorkingDirectory=/vagrant
 Environment=RAILS_ENV=development
-User=ubuntu
+User=vagrant
 PIDFile=/vagrant/tmp/pids/puma.pid
 ExecStart=/usr/local/bin/bundle exec rails s -b 0.0.0.0
 Restart=always
@@ -115,7 +137,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/vagrant
-User=ubuntu
+User=vagrant
 ExecStart=/usr/local/bin/bundle exec sidekiq --index 0 --environment development
 Restart=always
 StandardOutput=syslog
