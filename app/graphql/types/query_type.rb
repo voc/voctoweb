@@ -14,9 +14,11 @@ module Types
 
     field :allConferences, [ConferenceType], null: true do
       description "All conferences"
+      argument :offset, Integer, default_value: 0, required: false
+      argument :first, Integer, default_value: 5, prepare: ->(limit, ctx) {[limit, 30].min}, required: false
     end
-    def all_conferences
-      Conference.order('event_last_released_at DESC')
+    def all_conferences(offset:, first:)
+      Conference.order('event_last_released_at DESC').offset(offset).limit(first)
     end
 
     field :lecture, LectureType, null: true do
