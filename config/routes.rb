@@ -37,6 +37,12 @@ Rails.application.routes.draw do
     end
   end
 
+  # GRAPHQL
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
+
   # FRONTEND
   scope module: 'frontend' do
     root to: 'home#index'
@@ -92,4 +98,5 @@ Rails.application.routes.draw do
     # deprecated 2017-04
     get '/podcast-archive.xml', to: 'feeds#podcast_archive_legacy', defaults: { format: 'xml' }
   end
+
 end

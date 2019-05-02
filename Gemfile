@@ -74,6 +74,10 @@ gem 'rack-cors', :require => 'rack/cors'
 # API pagination
 gem 'api-pagination'
 
+# GraphQL
+gem 'graphql'
+gem 'graphiql-rails', group: :development
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
