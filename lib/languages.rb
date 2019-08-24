@@ -10,6 +10,7 @@ class Languages
     'chi' => ['zh', 'Chinese'],
     'ara' => ['ar', 'Arabic'],
     'hrv' => ['hr', 'Croatian'],
+    'pol' => ['pl', 'Polish'],
     'orig' => ['', 'Original (different presenters using not the same languages, text not translated)'] # use only for subtiltes and not for audio or video recordings!
   }.freeze
 
