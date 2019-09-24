@@ -13,12 +13,7 @@ module Frontend
 
       @recent_conferences = Frontend::Conference.with_recent_events(CONFERENCE_LIMIT)
 
-      if Date.today == Date.parse("20.09.2019")
-        @events = Frontend::Event.find([4889,7371,7594,7424,7423,7449,6272,7481,6567,7409].shuffle)
-        render :template => 'frontend/home/index_klimastreik'
-      else
-        respond_to { |format| format.html }
-      end
+      respond_to { |format| format.html }
     end
 
     def page_not_found
