@@ -117,6 +117,10 @@ body.page-start {
           width: 110px;
           float: left;
           margin: 0 12px 12px 0;
+          background-color: #333333;
+          img {
+            max-height: 62px;
+          }
         }
 
         .date {
