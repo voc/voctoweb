@@ -11,6 +11,7 @@
   %meta{property: 'og:image', content: @event.poster_url}
   %meta{property: 'og:video', content: opengraph_video(@event.videos_sorted_by_language)}
   %meta{property: 'og:description', content: @event.short_description}
+  %link{rel: 'canonical', href: event_path(slug: @event.slug)}
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
