@@ -1,7 +1,7 @@
 module Frontend
   class HomeController < FrontendController
     helper_method :recent_events_for_conference
-    CONFERENCE_LIMIT = 3
+    CONFERENCE_LIMIT = 9
     EVENT_LIMIT = 3
 
     def index
