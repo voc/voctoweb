@@ -109,6 +109,11 @@
           %span.icon.icon-external-link
           %a{href: @event.link}
             = parse_url_host(@event)
+      - if @event.doi.present?
+        %li
+          %span.icon.icon-external-link
+          %a{href: @event.doi_url}
+            = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
 
     - if @event.description.present?
       /%h3 About
