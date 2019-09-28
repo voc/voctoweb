@@ -1,0 +1,21 @@
+.clappr-player
+  .video-wrap{ | 
+    style: "width 100%; height: 56.25vw;", |
+    data: { width: '100%', height: '56.25vw', 
+      sources: event.clappr_sources, 
+      poster: event.poster_url, 
+      timeline: (event.timelens_present? ? event.timeline_url : nil), 
+      thumbnails: (event.timelens_present? ? event.thumbnails_url : nil) } }
+
+-#.video-wrap
+    %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
+      -# event.videos_sorted_by_language.each do |recording|
+        %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
+      %source{type: 'application/dash+xml', src: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd'}
+
+
+      - event.recordings.subtitle.each do |track|
+        %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+
+      - if event.timelens_present?
+        %track{kind: "metadata", label: "thumbnails", src: event.thumbnails_url, srclang: ""}

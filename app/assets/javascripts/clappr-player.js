@@ -12,53 +12,46 @@ $(function() {
     return result;
   }
 
-  var $relivePlayer = $('.relive-player .video-wrap');
-  if($relivePlayer.length > 0) {
+  var $clapprPlayer = $('.clappr-player .video-wrap');
+  if($clapprPlayer.length > 0) {
     var sprites = [];
 
-		if($relivePlayer.data("sprites")) {
-			sprites = ClapprThumbnailsPlugin.buildSpriteConfig(
-				$relivePlayer.data("sprites"),
-				$relivePlayer.data("sprites-n"),
-				160, 90,
-				$relivePlayer.data("sprites-cols"),
-				$relivePlayer.data("sprites-interval")
-			);
-		}
 
-		var player = new Clappr.Player({
-			baseUrl: 'assets/clapprio/',
-			plugins: {
-				core: [ClapprThumbnailsPlugin, PlaybackRatePlugin]
-			},
+    var player = new Clappr.Player({
+      baseUrl: 'assets/clapprio/',
+      plugins: [
+        ClapprThumbnailsPlugin, DashShakaPlayback, PlaybackRatePlugin, Timelens
+      ],
 
-			source: $relivePlayer.data('m3u8'),
-			height: $relivePlayer.data('height'),
-			width: $relivePlayer.data('width'),
-			autoPlay: true,
-			scrubThumbnails: {
-				backdropHeight: 64,
-				spotlightHeight: 84,
-				thumbs: sprites
-			},
-			events: {
-				onReady: function() {
-					var playback = player.core.getCurrentContainer().playback;
-					var params = deserialize(location.href)
+      sources: $clapprPlayer.data('sources'),
+      //sources: $clapprPlayer.find('video').find('source').toArray().map(x => x.src),
+      height: $clapprPlayer.data('height'),
+      width: $clapprPlayer.data('width'),
+      poster: $clapprPlayer.data('poster'),
+      timelens: {
+        timeline: $clapprPlayer.data('timeline'),
+        thumbnails: $clapprPlayer.data('thumbnails')
+      },
+      scrubThumbnails: {
+        backdropHeight: 64,
+        spotlightHeight: 84,
+        thumbs: sprites
+      },
+      events: {
+        onReady: function() {
+          var playback = player.core.getCurrentContainer().playback;
+          var params = deserialize(location.href)
 
-					playback.once(Clappr.Events.PLAYBACK_PLAY, function() {
-						var seek = parseFloat(params.t);
-						if (!isNaN(seek)) {
-							player.seek(seek);
-						} else if (playback.getPlaybackType() == 'vod') {
-							// skip forward to scheduled beginning of the talk at ~ 0:14:30  (30 sec offset, if speaker starts on time)
-							player.seek(14 * 60 + 30);
-						}
-					});
-				}
-			}
-		});
-
-    player.attachTo($relivePlayer.get(0));
+          playback.once(Clappr.Events.PLAYBACK_PLAY, function() {
+            var seek = parseFloat(params.t);
+            if (!isNaN(seek)) {
+              player.seek(seek);
+            } 
+          });
+        }
+      }
+    });
+    console.log(player);
+    player.attachTo($clapprPlayer.get(0));
   }
 });

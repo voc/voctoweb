@@ -132,6 +132,13 @@ module Frontend
       return conference.events.ids unless metadata.key?('related')
       metadata['related'].keys.shuffle[0..n-1]
     end
+    
+    def clappr_sources
+      mpd = by_mime_type(mime_type: 'application/dash+xml')
+      other = videos_sorted_by_language.map{|recording| recording.url}
+
+      mpd.nil? ? other : [mpd] + other
+    end
 
     def next_from_conference(n)
       events = conference.events.to_a
