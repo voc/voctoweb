@@ -4,6 +4,7 @@ module MediaBackend
       allow do
         origins '*'
         resource '/public/*', :headers => :any, :methods => :get
+        resource '/graphql', :headers => :any, :methods =>  [:get, :delete, :put, :post, :options]
       end
     end
   end
