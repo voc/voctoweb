@@ -44,6 +44,10 @@ module Frontend
     def load_event
       @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
+      @player = ''
+      if params[:player] && /\A[a-z]+\Z/.match(params[:player])
+        @player = '_' + params[:player]
+      end
     end
   end
 end
