@@ -47,7 +47,7 @@ module Frontend
       @player = ''
       if params[:player]
         # TODO input sanitation/validation?
-        @player = '_' + params[:player]
+        @player = '_' + params[:player] if params[:player]
       end
     end
   end
