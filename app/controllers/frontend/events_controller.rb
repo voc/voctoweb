@@ -45,8 +45,8 @@ module Frontend
       @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
       @player = ''
-      if params[:player] && /^[a-z]+$/.match(params[:player])
-        @player = '_' + params[:player] if params[:player]
+      if params[:player] && /\A[a-z]+\Z/.match(params[:player])
+        @player = '_' + params[:player]
       end
     end
   end
