@@ -32,7 +32,7 @@ module Frontend
     end
 
     def poster_url
-      File.join(Settings.static_url, conference.images_path, poster_filename).freeze if poster_filename
+      File.join(Settings.static_url, conference.images_path, poster_filename).freeze if poster_filename.present?
     end
 
     def short_description
@@ -49,11 +49,11 @@ module Frontend
     end
 
     def timeline_url
-      File.join(Settings.static_url, conference.images_path, timeline_filename).freeze if timeline_filename
+      File.join(Settings.static_url, conference.images_path, timeline_filename).freeze if timelens_present?
     end
 
     def thumbnails_url
-      File.join(Settings.static_url, conference.images_path, thumbnails_filename).freeze if thumbnails_filename
+      File.join(Settings.static_url, conference.images_path, thumbnails_filename).freeze if thumb_filename_exists?
     end
 
     def tags
@@ -138,6 +138,16 @@ module Frontend
       other = videos_sorted_by_language.map{|recording| recording.url}
 
       mpd.nil? ? other : [mpd] + other
+    end
+
+    def clappr_subtitles
+      self.recordings.subtitle.map do |track|
+        {
+            lang: track.language_iso_639_1,
+            label: track.language_label,
+            src: track.cors_url,
+        }
+      end
     end
 
     def next_from_conference(n)

@@ -39,7 +39,6 @@
 //= require clappr-playback-rate-plugin
 //= require clappr-dash-shaka-playback
 
-//= require clappr-player
 //= require relive-seek
 
 //= require timelens

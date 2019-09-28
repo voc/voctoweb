@@ -1,21 +1,62 @@
 .clappr-player
-  .video-wrap{ | 
-    style: "width 100%; height: 56.25vw;", |
-    data: { width: '100%', height: '56.25vw', 
-      sources: event.clappr_sources, 
-      poster: event.poster_url, 
-      timeline: (event.timelens_present? ? event.timeline_url : nil), 
-      thumbnails: (event.timelens_present? ? event.thumbnails_url : nil) } }
-
--#.video-wrap
-    %video.video{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata', 'data-timeline' => (event.timelens_present? ? event.timeline_url : nil)}
-      -# event.videos_sorted_by_language.each do |recording|
-        %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording_quality(recording) }, title: recording_title(recording)}
-      %source{type: 'application/dash+xml', src: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd'}
+  .video-wrap{ style: "width 100%; height: 56.25vw;" }
 
 
-      - event.recordings.subtitle.each do |track|
-        %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+:javascript
+  $(function() {
+    function deserialize(string) {
+      var result = {};
+      if (string) {
+        var parts = string.split(/&|\?/);
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i].split("=");
+          if (part.length === 2)
+            result[decodeURIComponent(part[0])] = decodeURIComponent(part[1]);
+        }
+      }
+      return result;
+    }
 
-      - if event.timelens_present?
-        %track{kind: "metadata", label: "thumbnails", src: event.thumbnails_url, srclang: ""}
+    var $clapprPlayer = $('.clappr-player .video-wrap');
+    if($clapprPlayer.length > 0) {
+      var sprites = [];
+
+
+      var player = new Clappr.Player({
+        baseUrl: 'assets/clapprio/',
+        plugins: [
+          ClapprThumbnailsPlugin, DashShakaPlayback, PlaybackRatePlugin, Timelens
+        ],
+        sources:  #{@event.clappr_sources.to_json.html_safe},
+        height: '56.25vw',
+        width: '100%',
+        poster: "#{@event.poster_url}",
+        timelens: {
+          timeline: "#{@event.timeline_url}",
+          thumbnails: "#{@event.thumbnails_url}"
+        },
+        scrubThumbnails: {
+          backdropHeight: 64,
+          spotlightHeight: 84,
+          thumbs: sprites
+        },
+        playback: {
+          externalTracks: #{@event.clappr_subtitles.to_json.html_safe}
+        },
+        events: {
+          onReady: function() {
+            var playback = player.core.getCurrentContainer().playback;
+            var params = deserialize(location.href);
+
+            playback.once(Clappr.Events.PLAYBACK_PLAY, function() {
+              var seek = parseFloat(params.t);
+              if (!isNaN(seek)) {
+                player.seek(seek);
+              }
+            });
+          }
+        }
+      });
+      player.attachTo($clapprPlayer.get(0));
+    }
+  });
