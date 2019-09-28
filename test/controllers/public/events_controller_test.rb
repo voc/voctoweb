@@ -55,7 +55,7 @@ class Public::EventsControllerTest < ActionController::TestCase
       get :search, params: { q: 'fake-event' }, format: :json
       assert_response :success
       json = JSON.parse(response.body)
-      assert_equal 25, json['events'].count
+      assert_equal 10, json['events'].count
 
       get :search, params: { q: 'fake-event', page: '2' }, format: :json
       assert_response :success
