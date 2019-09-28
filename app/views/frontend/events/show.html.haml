@@ -33,7 +33,7 @@
           }
         },
         "contentUrl": "#{@event.preferred_recording.filename}",
-        "embedUrl": "#{oembed_api_event_url(@event)}",
+        "embedUrl": "#{oembed_api_event_url(@event)}"
       }
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
