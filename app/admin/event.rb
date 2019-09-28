@@ -56,7 +56,9 @@ ActiveAdmin.register Event do
       row :promoted
       row :subtitle
       row :link
-      row :slug
+      row :slug do
+        link_to e.slug, event_path(slug: e.slug)
+      end
       row :description
       row :persons
       row :tags
