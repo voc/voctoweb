@@ -64,6 +64,9 @@ ActiveAdmin.register Event do
       row :tags
       row :date
       row :release_date
+      row :doi do
+        link_to e.doi, e.doi_url
+      end
       row :metadata
     end
     table_for e.recordings.video.order('filename ASC') do
@@ -111,6 +114,7 @@ ActiveAdmin.register Event do
       f.input :tags_raw, as: :text
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
+      f.input :doi, hint: 'Digital Object Identifier (DOI) e.g. 10.5446/19566'
     end
     f.inputs 'Files' do
       f.input :slug

@@ -14,6 +14,7 @@ class Event < ApplicationRecord
   validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
   validate :original_language_valid
+  validates :doi, format: { with: /\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\z/, message: "doi format not valid" }, :allow_blank => true
 
   serialize :persons, Array
   serialize :tags, Array
@@ -145,6 +146,12 @@ class Event < ApplicationRecord
   # for elastic search
   def remote_id
     metadata['remote_id']
+  end
+
+  def doi_url
+    if doi
+      "https://doi.org/#{doi}"
+    end
   end
 
   private

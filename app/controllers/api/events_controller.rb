@@ -97,6 +97,7 @@ class Api::EventsController < ApiController
       :conference_id,
       :metadata,
       :description, :date,
+      :doi,
       { persons: [] }, { tags: [] },
       :promoted, :release_date)
   end
