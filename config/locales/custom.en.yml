@@ -9,6 +9,6 @@ en:
         lastyears: media.ccc.de - Podcast feed of the last two years
         podcast_archive: media.ccc.de - Podcast archive feed
     header:
-      author: CCC
+      publisher: CCC
       description: Video Streaming Portal des Chaos Computer Clubs
       keywords: Chaos Computer Club, Video, Media, Streaming, TV, Hacker
