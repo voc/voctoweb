@@ -45,8 +45,7 @@ module Frontend
       @event = Frontend::Event.find_by!(slug: params[:slug])
       @conference = @event.conference
       @player = ''
-      if params[:player]
-        # TODO input sanitation/validation?
+      if params[:player] && /^[a-z]+$/.match(params[:player])
         @player = '_' + params[:player] if params[:player]
       end
     end
