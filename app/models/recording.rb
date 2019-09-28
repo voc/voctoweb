@@ -108,6 +108,10 @@ class Recording < ApplicationRecord
     Languages.to_iso_639_1(language)
   end
 
+  def language_label
+    Languages.to_string(language)
+  end
+
   def languages
     language.split('-')
   end
