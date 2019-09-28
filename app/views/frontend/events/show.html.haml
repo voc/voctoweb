@@ -15,29 +15,30 @@
   - @event.persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
-  %script{type: 'application/ld+json'}
-    :plain 
-      {
-        "@context": "https://schema.org",
-        "@type": "VideoObject",
-        "name": "#{@event.title}",
-        "description": "#{@event.short_description}",
-        "thumbnailUrl": "#{@event.poster_url}",
-        "uploadDate": "#{@event.release_date}",
-        "duration": "PT#{@event.duration}S",
-        "publisher": {
-          "@type": "Organization",
-          "name": "media.ccc.de",
-            "logo": {
-            "@type": "ImageObject",
-            "url": "/apple-touch-icon.png",
-            "width": 180,
-            "height": 180
-          }
-        },
-        "contentUrl": "#{@event.preferred_recording.filename}",
-        "embedUrl": "#{oembed_api_event_url(@event)}"
-      }
+  - if @event.recordings.video.present?  
+    %script{type: 'application/ld+json'}
+      :plain 
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "#{@event.title}",
+          "description": "#{@event.short_description}",
+          "thumbnailUrl": "#{@event.poster_url}",
+          "uploadDate": "#{@event.release_date}",
+          "duration": "PT#{@event.duration}S",
+          "publisher": {
+            "@type": "Organization",
+            "name": "media.ccc.de",
+              "logo": {
+              "@type": "ImageObject",
+              "url": "/apple-touch-icon.png",
+              "width": 180,
+              "height": 180
+            }
+          },
+          "contentUrl": "#{@event.preferred_recording.filename}",
+          "embedUrl": "#{oembed_api_event_url(@event)}"
+        }
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
 
@@ -126,6 +127,11 @@
     %h3 Download
     .download
       = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
+
+      - if !@event.recordings.video.present? && @event.relive_present?
+        Downloads will appear here, once final recordings are released.
+
+
 
     - if @event.metadata['related'].present?
       %h3 Related
