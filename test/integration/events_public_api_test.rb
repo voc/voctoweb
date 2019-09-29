@@ -9,5 +9,6 @@ class EventsPublicApiTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert JSON.parse(response.body)
     assert response.body.include?(event.guid)
+    assert_equal 'application/json', response.headers['Content-Type']
   end
 end
