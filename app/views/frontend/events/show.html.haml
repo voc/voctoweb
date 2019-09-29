@@ -15,9 +15,9 @@
   - @event.persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
-  - if @event.recordings.video.present?  
+  - if @event.recordings.video.present?
     %script{type: 'application/ld+json'}
-      :plain 
+      :plain
         {
           "@context": "https://schema.org",
           "@type": "VideoObject",
@@ -51,7 +51,7 @@
 - content_for :description do
   %meta{name: 'description', content: @event.short_description}
 
-- cache([@event.conference, @event]) do
+- cache([@event.conference, @event, @player, current_admin_user]) do
   .container-fluid
     .player-header
       .conference
@@ -61,7 +61,7 @@
             - if @conference.logo_does_not_contain_title
               .caption
                 = @conference.title
-        - else 
+        - else
           =@conference.title
       %h1
         = @event.title
@@ -111,8 +111,7 @@
       - if @event.link.present?
         %li
           %span.icon.icon-external-link
-          %a{href: @event.link}
-            = parse_url_host(@event)
+          %a{href: @event.link} Fahrplan
       - if @event.doi.present?
         %li
           %span.icon.icon-external-link
