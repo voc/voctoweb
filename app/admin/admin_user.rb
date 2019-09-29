@@ -1,4 +1,6 @@
 ActiveAdmin.register AdminUser do
+  menu :parent => "Misc"
+  config.comments = false
 
   index do
     column :email

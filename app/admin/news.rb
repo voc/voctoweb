@@ -1,4 +1,5 @@
 ActiveAdmin.register News do
+    menu :parent => "Misc"
 
   index do
     column :date

@@ -93,7 +93,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'dashboard#index'
+  config.root_to = 'conferences#index'
 
 
   # == Batch Actions
@@ -194,6 +194,8 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
+  config.comments_menu = false
 
 end
 

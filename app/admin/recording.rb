@@ -1,4 +1,5 @@
 ActiveAdmin.register Recording do
+  menu :parent => "Misc"
 
   filter :state
   filter :mime_type, collection: proc { MimeType.all }

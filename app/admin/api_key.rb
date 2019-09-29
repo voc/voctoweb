@@ -1,4 +1,5 @@
 ActiveAdmin.register ApiKey do
+  menu :parent => "Misc"
 
   index do
     column :key
