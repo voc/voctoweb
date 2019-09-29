@@ -22,7 +22,7 @@ module Types
     def lectures
       object.events
     end
-    def logoUrl
+    def logo_url
       object.logo
     end
   end

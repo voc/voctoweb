@@ -28,12 +28,12 @@ module Types
     field :viewCount, Integer, "The amount of views of this event", null: true
     field :link, UrlType, "A URL pointing to the event's website", null: true
 
-    field :videoPreferred, Types::AssetType, null: false
-    field :videos, [Types::AssetType], null: false
-    field :audioPreferred, Types::AssetType, null: true
-    field :audios, [Types::AssetType], null: true
-    field :slides, [Types::AssetType], null: true
-    field :files, [Types::AssetType], null: false
+    field :videoPreferred, AssetType, null: false
+    field :videos, [AssetType], null: false
+    field :audioPreferred, AssetType, null: true
+    field :audios, [AssetType], null: true
+    field :slides, [AssetType], null: true
+    field :files, [AssetType], null: false
 
     #field :thumbnail, Types::ImageType, null: true
 
@@ -64,7 +64,7 @@ module Types
       object.recordings
     end
 
-    def videos(args)
+    def videos
       object.videos_sorted_by_language
     end
 
