@@ -13,25 +13,26 @@ ActiveAdmin.register Event do
   index do
     selectable_column
     column :guid
-    column :title
-    column :thumb_filename do |event|
-      line_break_filename event.thumb_filename
-    end
-    column :poster_filename do |event|
-      line_break_filename event.poster_filename
-    end
-    column :timeline_filename do |event|
-      line_break_filename event.timeline_filename
-    end
-    column :thumbnails_filename do |event|
-      line_break_filename event.thumbnails_filename
-    end
-    column :original_language
     column :conference
-    column :promoted
+    column :title
+    column :persons_raw
+    #column :thumb_filename do |event|
+    #  line_break_filename event.thumb_filename
+    #end
+    #column :poster_filename do |event|
+    #  line_break_filename event.poster_filename
+    #end
+    #column :timeline_filename do |event|
+    #  line_break_filename event.timeline_filename
+    #end
+    #column :thumbnails_filename do |event|
+    #  line_break_filename event.thumbnails_filename
+    #end
+    #column :original_language
     column :created_at do |event|
       l(event.created_at, format: :pretty_datetime)
     end
+    column :promoted
     actions
   end
 
@@ -65,7 +66,7 @@ ActiveAdmin.register Event do
       row :date
       row :release_date
       row :doi do
-        link_to e.doi, e.doi_url
+        link_to e.doi, e.doi_url unless doi.nil?
       end
       row :metadata
     end

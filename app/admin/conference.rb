@@ -10,9 +10,8 @@ ActiveAdmin.register Conference do
   index do
     selectable_column
     column :acronym
-    column :schedule_state
-    column :recordings_path
     column :slug
+    column :recordings_path
     column :created_at do |conference|
       l(conference.created_at, format: :pretty_datetime)
     end

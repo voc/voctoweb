@@ -16,14 +16,14 @@ ActiveAdmin.register Recording do
     column :filename do |recording|
       line_break_filename recording.filename
     end
-    column :folder
+    #column :folder
     column :mime_type
     column :html5
     column :high_quality
     column :language
-    column :size
-    column :length
-    column :state
+    #column :size
+    #column :length
+    #column :state
     column :updated_at do |recording|
       l(recording.updated_at, format: :pretty_datetime)
     end
