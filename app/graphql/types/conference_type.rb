@@ -8,10 +8,10 @@ module Types
     field :lectures, [Types::LectureType], null: true
 
     #field :logo, Types::ImageType, null: true
-    field :logoUrl, String, "A URL pointing to the conference's logo", null: true
+    field :logoUrl, UrlType, "A URL pointing to the conference's logo", null: true
     field :aspectRatio, String, "The aspect ratio of the conference's recordings", null: false # TODO: Enum
-    field :recordingsUrl, String,  "A URL pointing to the root of all recording files of this conference", null: false
-    field :scheduleUrl, String,  "A URL pointing to the conference's frab xml schedule", null: true
+    field :recordingsUrl, UrlType,  "A URL pointing to the root of all recording files of this conference", null: false
+    field :scheduleUrl, UrlType,  "A URL pointing to the conference's frab xml schedule", null: true
     field :updatedAt, DateTimeType, "Identifies the date and time when the object was last updated", null: false
     field :eventLastReleasedAt, DateTimeType, "Identifies the date and time when a event was last released", null: true
 
