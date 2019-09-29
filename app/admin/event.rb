@@ -39,7 +39,15 @@ ActiveAdmin.register Event do
   show do |e|
     attributes_table do
       row :guid
+      row :conference
       row :title
+      row :subtitle
+      row :original_language
+      row :promoted
+      row :link
+      row :slug do
+        link_to e.slug, event_path(slug: e.slug)
+      end
       row :thumb_filename do
         div show_event_folder e, :thumb_filename
       end
@@ -52,21 +60,15 @@ ActiveAdmin.register Event do
       row :thumbnails_filename do
         div show_event_folder e, :thumbnails_filename
       end
-      row :conference
-      row :original_language
-      row :promoted
-      row :subtitle
-      row :link
-      row :slug do
-        link_to e.slug, event_path(slug: e.slug)
-      end
       row :description
-      row :persons
+      row :persons do
+        e.persons_raw
+      end 
       row :tags
       row :date
       row :release_date
       row :doi do
-        link_to e.doi, e.doi_url unless doi.nil?
+        link_to e.doi, e.doi_url unless e.doi.nil?
       end
       row :metadata
     end
