@@ -2,6 +2,7 @@
 class MimeType
   AUDIO = %w(audio/ogg audio/mpeg audio/opus).freeze
   VIDEO = %w(video/mp4 video/ogg video/webm).freeze
+  STREAM = %w(application/dash+xml application/vnd.apple.mpegurl).freeze
 
   PREFERRED_VIDEO = %w(video/mp4 video/webm video/ogg).freeze
 
@@ -10,7 +11,7 @@ class MimeType
 
   class << self
     def all
-      (VIDEO + AUDIO + SLIDES + SUBTITLE).uniq.freeze
+      (VIDEO + AUDIO + SLIDES + SUBTITLE + STREAM).uniq.freeze
     end
 
     def mime_type_slug(mime_type)
@@ -29,6 +30,10 @@ class MimeType
         'mp3'
       when 'application/x-subrip'
         'srt'
+      when 'application/dash+xml'
+        'mpd'
+      when 'application/vnd.apple.mpegurl'
+        'hls'
       else
         mime_type.split('/'.freeze)[1]
       end

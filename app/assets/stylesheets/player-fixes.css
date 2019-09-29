@@ -16,6 +16,10 @@
   padding-bottom: 1.5em;
 }
 
+.playback_rate {
+  margin-top: 9px !important;
+}
+
 @media all and (min-width: 550px) {
   .postroll h4 {
     height: 30%;
