@@ -4,7 +4,7 @@ module ApiErrorResponses
   included do
     include ActionController::MimeResponds
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    after_action { |controller| set_header(controller) }
+    before_action { |controller| set_header(controller) }
 
   end
 
