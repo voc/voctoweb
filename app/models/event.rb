@@ -13,8 +13,11 @@ class Event < ApplicationRecord
 
   validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
+  validates :doi, format: { with: /\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\z/, message: "doi format not valid" }, allow_blank: true
   validate :original_language_valid
-  validates :doi, format: { with: /\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\z/, message: "doi format not valid" }, :allow_blank => true
+
+  before_validation :strip_prefix, :only => [:doi]
+
 
   serialize :persons, Array
   serialize :tags, Array
@@ -205,6 +208,10 @@ class Event < ApplicationRecord
     timeline_filename.strip! unless timeline_filename.blank?
     thumbnails_filename.strip! unless thumbnails_filename.blank?
     link.strip! unless link.blank?
+  end
+
+  def strip_prefix
+    self.doi = doi.sub(/^https?:\/\/doi\.org\//, '') unless doi.nil?
   end
 
   def delete_related_from_other_events(id)

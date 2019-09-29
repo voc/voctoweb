@@ -117,7 +117,7 @@ ActiveAdmin.register Event do
       f.input :tags_raw, as: :text
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
-      f.input :doi, hint: 'Digital Object Identifier (DOI) e.g. 10.5446/19566'
+      f.input :doi, hint: 'Digital Object Identifier (DOI) e.g. 10.5446/19566 – prefixes are stripped automatically'
     end
     f.inputs 'Files' do
       f.input :slug
@@ -164,7 +164,7 @@ ActiveAdmin.register Event do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
                             :conference_id, :promoted, :title, :subtitle, :link, :slug,
-                            :original_language,
+                            :original_language, :doi,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end
