@@ -21,6 +21,8 @@ module Types
       Conference.order('event_last_released_at DESC').offset(offset).limit(first)
     end
 
+    field :allConferencesRelay, ConferenceType.connection_type, null: true
+
     field :lecture, LectureType, null: true do
       description "Find a lecture by guid"
       argument :guid, ID, required: true

@@ -5,7 +5,7 @@ module Types
     field :id, ID, null: false 
     field :title, String, "The title of this conference", null: false
     field :slug, String, "The URL slug of this conference", null: false 
-    field :lectures, [Types::LectureType], null: true
+    field :lectures, LectureType.connection_type, null: true
 
     #field :logo, Types::ImageType, null: true
     field :logoUrl, UrlType, "A URL pointing to the conference's logo", null: true
