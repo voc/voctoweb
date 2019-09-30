@@ -3,6 +3,7 @@
 # alternate Name: Lecture, Talk?
 module Types
   class LectureType < Types::BaseObject
+    
     description "This entity is an Event with multiple Files e.g. Video and Audio recordings, as well as PDFs e.g. the lecture slides"
     field :guid, ID, null: false 
     field :localId, Integer, null: false
@@ -28,9 +29,9 @@ module Types
     field :viewCount, Integer, "The amount of views of this event", null: true
     field :link, UrlType, "A URL pointing to the event's website", null: true
 
-    field :videoPreferred, AssetType, null: false
+    #field :videoPreferred, AssetType, null: false
     field :videos, [AssetType], null: false
-    field :audioPreferred, AssetType, null: true
+    #field :audioPreferred, AssetType, null: true
     field :audios, [AssetType], null: true
     field :slides, [AssetType], null: true
     field :files, [AssetType], null: false

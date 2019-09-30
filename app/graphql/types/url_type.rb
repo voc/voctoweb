@@ -1,5 +1,5 @@
 module Types
-  class Types::UrlType < Types::BaseObject
+  class UrlType < GraphQL::Types::String
     description "A valid URL, transported as a string"
     graphql_name 'URL'
   
