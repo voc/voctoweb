@@ -124,13 +124,23 @@ function timelens2(container, vtt, options) {
 
 // Convert a WebVTT timestamp (which has the format [HH:]MM:SS.mmm) to seconds.
 function from_timestamp(timestamp) {
-    const matches = timestamp.match(/(.*):(.*)\.(.*)/);
+    var matches = timestamp.match(/(.*):(.*):(.*)\.(.*)/);
+    if (matches === null)
+        matches = timestamp.match(/(.*):(.*)\.(.*)/);
 
-    const minutes = parseInt(matches[1]);
-    const seconds = parseInt(matches[2]);
-    const mseconds = parseInt(matches[3]);
+    if (matches.length == 5) {
+        var hours = parseInt(matches[1]);
+        var minutes = parseInt(matches[2]);
+        var seconds = parseInt(matches[3]);
+        var mseconds = parseInt(matches[4]);
+    } else {
+        var hours = 0;
+        var minutes = parseInt(matches[1]);
+        var seconds = parseInt(matches[2]);
+        var mseconds = parseInt(matches[3]);
+    }
 
-    const seconds_total = mseconds / 1000 + seconds + 60 * minutes;
+    const seconds_total = mseconds / 1000 + seconds + 60 * minutes + 3600 * hours;
 
     return seconds_total;
 }
