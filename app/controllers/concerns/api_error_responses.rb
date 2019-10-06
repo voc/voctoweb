@@ -21,7 +21,6 @@ module ApiErrorResponses
   end
 
   def error(error)
-    
     if error.respond_to?(:status)
       status = error.status
     else
