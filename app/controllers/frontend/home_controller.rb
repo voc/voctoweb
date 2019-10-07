@@ -13,6 +13,8 @@ module Frontend
 
       @recent_conferences = Frontend::Conference.with_recent_events(CONFERENCE_LIMIT)
 
+      @currently_streaming = Frontend::Conference.currently_streaming
+
       respond_to { |format| format.html }
     end
 
