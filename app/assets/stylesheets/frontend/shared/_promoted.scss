@@ -132,3 +132,10 @@
     }
   }
 }
+
+body.page-show .related .bx-wrapper .bx-controls .bx-pager { 
+  a:hover, a.active {
+    background: #00a356 !important;
+  }
+}
+
