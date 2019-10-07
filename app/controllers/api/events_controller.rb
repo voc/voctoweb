@@ -41,6 +41,8 @@ class Api::EventsController < ApiController
   # PATCH/PUT /api/events/1.json
   # PATCH/PUT /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def update
+    fail ActiveRecord::RecordNotFound unless @event
+    
     respond_to do |format|
       if @event.update(event_params)
         format.json { render :show, status: :ok }

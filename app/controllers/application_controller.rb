@@ -18,8 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_api_key!
-    keys = ApiKey.find_by key: params['api_key']
-    redirect_to admin_dashboard_path if keys.nil?
+    if params['api_key']
+      keys = ApiKey.find_by(key: params['api_key'])
+    else
+      authenticate_with_http_token do |token, options|
+        keys = ApiKey.find_by(key: token)
+      end
+    end
+    render json: { errors: 'No or invalid API key. Please add "Authorization: Token token=xxx" header or api_key=xxx param in URL or JSON request body.' }, :status => :forbidden if keys.nil?
   end
 
 end
