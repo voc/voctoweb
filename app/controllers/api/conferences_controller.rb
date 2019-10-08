@@ -37,8 +37,6 @@ class Api::ConferencesController < ApiController
 
   # PATCH/PUT /api/conferences/1.json
   def update
-    fail ActiveRecord::RecordNotFound unless @conference
-
     respond_to do |format|
       if @conference.update(conference_params)
         format.json { render :show, status: :ok }

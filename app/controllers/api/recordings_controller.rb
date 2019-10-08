@@ -38,8 +38,6 @@ class Api::RecordingsController < ApiController
 
   # PATCH/PUT /api/recordings/1
   def update
-    fail ActiveRecord::RecordNotFound unless @recording
-
     respond_to do |format|
       if @recording.update(recording_params)
         format.json { render :show, status: :ok }

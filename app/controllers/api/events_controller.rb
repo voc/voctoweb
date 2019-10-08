@@ -41,8 +41,6 @@ class Api::EventsController < ApiController
   # PATCH/PUT /api/events/1.json
   # PATCH/PUT /api/events/654331ae-1710-42e5-bdf4-65a03a80c614.json
   def update
-    fail ActiveRecord::RecordNotFound unless @event
-    
     respond_to do |format|
       if @event.update(event_params)
         format.json { render :show, status: :ok }
@@ -78,7 +76,7 @@ class Api::EventsController < ApiController
     if params[:id] =~ /\A[0-9]+\z/
       @event = Event.find(params[:id])
     else
-      @event = Event.find_by(guid: params[:id])
+      @event = Event.find_by!(guid: params[:id])
     end
   end
 
