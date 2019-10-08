@@ -33,10 +33,8 @@ module Frontend
       Conference.currently_streaming.first
     end
 
-    def self.live
-      conferences = Conference.currently_streaming
-      groups = conferences.map { |c| c.streaming['groups'].first }.compact
-      groups.map { |g| g['rooms'] }.flatten
+    def live
+      streaming['groups'].first['rooms']
     end
 
     def audio_recordings?

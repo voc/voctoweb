@@ -1,8 +1,15 @@
 .promoted.themed-banner.live
-  %h2= "Live now – " + Frontend::Conference.first_live.title
+  %h2= "Live now – " + @currently_streaming.map{|a| a.title}.join(", ")
   .titlebar
   .slider
-    - Frontend::Conference.live.each_with_index do |event, i|
-      .slide
-        %a.item{href: event['link'], 'class' => (i == 0 and 'active')}
-          %img{src: h(event['thumb']), alt: event['display'], title: event['display']}
+    / Declare Variable
+    - first = true
+    - @currently_streaming.each do |c|
+      - c.live.each_with_index do |event, i|
+        .slide
+          %a.item{href: event['link'], 'class' => (first and 'active')}
+            %img{src: h(event['thumb']), 
+                 alt: event['display'], 
+                 title: ( @currently_streaming.length != 1 ? c.title + '<br/>' : '') + event['display']}
+        / Declare Variable
+        - first = false
