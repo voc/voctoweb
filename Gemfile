@@ -20,6 +20,8 @@ gem 'exception_notification'
 gem 'puma'
 gem 'puma_worker_killer'
 
+gem 'utf8-cleaner'
+
 # Simplified production logging
 gem 'lograge'
 
