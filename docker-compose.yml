@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - ELASTICSEARCH_URL=elasticsearch:9200
+      - ELASTICSEARCH_URL=elasticsearch
       - REDIS_URL=redis://redis:6379/1
     depends_on:
       - sidekiq
