@@ -2,7 +2,7 @@ version: "2"
 services:
   voctoweb:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: dumb-init bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/voctoweb
       - "./docker/database.yml:/voctoweb/config/database.yml"
@@ -19,7 +19,7 @@ services:
       - ssh-server
   sidekiq:
     build: .
-    command: bundle exec sidekiq
+    command: dumb-init bundle exec sidekiq
     volumes:
       - ".:/voctoweb"
       - "./docker/database.yml:/voctoweb/config/database.yml"

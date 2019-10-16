@@ -3,7 +3,7 @@ FROM ruby:2.6.0
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem
-RUN apt-get update -qq && apt-get install -y nodejs
+RUN apt-get update -qq && apt-get install -y nodejs dumb-init
 
 WORKDIR /voctoweb
 
