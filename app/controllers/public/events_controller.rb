@@ -28,8 +28,7 @@ class Public::EventsController < ActionController::Base
   end
 
   def search
-    @events = paginate Frontend::Event
-      .query(params[:q])
+    @events = paginate(Frontend::Event.query(params[:q]))
       .records
       .includes(recordings: :conference)
   end

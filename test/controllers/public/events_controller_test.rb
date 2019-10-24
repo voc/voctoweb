@@ -16,6 +16,20 @@ class Public::EventsControllerTest < ActionController::TestCase
     assert_equal ['Name'], json['events'][0]['persons']
   end
 
+  test "index should paginate" do
+    create_list(:event, 100)
+
+    get :index, params: { page: '2' }, format: :json
+    assert_response :success
+    json = JSON.parse(response.body)
+    assert_equal 50, json['events'].count
+
+    get :index, params: { per_page: '10' }, format: :json
+    assert_response :success
+    json = JSON.parse(response.body)
+    assert_equal 10, json['events'].count
+  end
+
   test 'should get show' do
     get :show, params: { id: @event.id }, format: :json
     assert_response :success
@@ -48,14 +62,14 @@ class Public::EventsControllerTest < ActionController::TestCase
 
     test 'search for events return multiple results' do
       Event.__elasticsearch__.create_index! force: true
-      create_list(:event, 26, title: 'fake-event')
+      create_list(:event, 51, title: 'fake-event')
       Event.import
       Event.__elasticsearch__.refresh_index!
 
       get :search, params: { q: 'fake-event' }, format: :json
       assert_response :success
       json = JSON.parse(response.body)
-      assert_equal 25, json['events'].count
+      assert_equal 50, json['events'].count
 
       get :search, params: { q: 'fake-event', page: '2' }, format: :json
       assert_response :success
