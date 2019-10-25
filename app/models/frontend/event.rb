@@ -31,20 +31,31 @@ module Frontend
       date && date.to_date === release_date.to_date
     end
 
-    def poster_url
-      File.join(Settings.static_url, conference.images_path, poster_filename).freeze if poster_filename.present?
-    end
-
     def short_description
       return unless description
       description.truncate(140)
+    end
+
+
+    def poster_url
+      if poster_filename.present?
+        File.join(Settings.static_url, conference.images_path, poster_filename).freeze 
+      else 
+        if relive_present? 
+          relive['thumbnail'].freeze
+        end
+      end
     end
 
     def thumb_url
       if thumb_filename_exists?
         File.join(Settings.static_url, conference.images_path, thumb_filename).freeze
       else
-        conference.logo_url.freeze
+        if relive_present? 
+          relive['thumbnail'].freeze
+        else
+          conference.logo_url.freeze
+        end
       end
     end
 
