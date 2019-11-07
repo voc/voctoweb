@@ -39,9 +39,9 @@ module Frontend
 
     def poster_url
       if poster_filename.present?
-        File.join(Settings.static_url, conference.images_path, poster_filename).freeze 
-      else 
-        if relive_present? 
+        File.join(Settings.static_url, conference.images_path, poster_filename).freeze
+      else
+        if relive_present?
           relive['thumbnail'].freeze
         end
       end
@@ -51,7 +51,7 @@ module Frontend
       if thumb_filename_exists?
         File.join(Settings.static_url, conference.images_path, thumb_filename).freeze
       else
-        if relive_present? 
+        if relive_present?
           relive['thumbnail'].freeze
         else
           conference.logo_url.freeze
@@ -129,6 +129,7 @@ module Frontend
     def preferred_recording(order: MimeType::PREFERRED_VIDEO)
       video_recordings = recordings.html5.video
       return if video_recordings.empty?
+
       seen = Hash[video_recordings.map { |r| [r.mime_type, r] }]
       order.each { |mt| return seen[mt] if seen.key?(mt) }
       seen.first[1]
@@ -143,7 +144,7 @@ module Frontend
       return conference.events.ids unless metadata.key?('related')
       metadata['related'].keys.shuffle[0..n-1]
     end
-    
+
     def clappr_sources
       mpd = by_mime_type(mime_type: 'application/dash+xml')
       other = videos_sorted_by_language.map{|recording| recording.url}

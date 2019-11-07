@@ -15,7 +15,7 @@
   - @event.persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
-  - if @event.recordings.video.present?
+  - if @event.preferred_recording
     %script{type: 'application/ld+json'}
       :plain
         {
