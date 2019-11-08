@@ -1,8 +1,7 @@
 language: ruby
 rvm:
-  - 2.4.4
   - 2.5.4
-  - 2.6.3
+  - 2.6.5
 env:
   - DATABASE_URL=postgresql://localhost/travis_ci_test
 services:
