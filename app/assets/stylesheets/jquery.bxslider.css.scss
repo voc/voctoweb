@@ -2,8 +2,8 @@
  * bxSlider v4.2.5
  * Copyright 2013-2015 Steven Wanderski
  * Written while drinking Belgian ales and listening to jazz
-
  * Licensed under MIT (http://opensource.org/licenses/MIT)
+ * Modified to remove unnecessary code segment mentioned in https://github.com/voc/voctoweb/issues/371
  */
 
 /** VARIABLES
@@ -79,11 +79,6 @@ ul.bxslider {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-}
-.bx-wrapper .bx-pager.bx-default-pager a:hover,
-.bx-wrapper .bx-pager.bx-default-pager a.active,
-.bx-wrapper .bx-pager.bx-default-pager a:focus {
-  background: #000;
 }
 .bx-wrapper .bx-pager-item,
 .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
