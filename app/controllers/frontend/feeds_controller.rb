@@ -5,8 +5,9 @@ module Frontend
 
     def podcast
       events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
+      key = downloaded_events.newer(events_max_age).pluck(:updated_at).max
 
-      xml = cache_fetch(:podcast, params[:quality], events_max_age.to_i) do
+      xml = cache_fetch(:podcast, params[:quality], key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "recent events feed (#{FeedQuality.display_name(params[:quality])})",
@@ -24,8 +25,9 @@ module Frontend
 
     def podcast_legacy
       events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
+      key = downloaded_events.newer(events_max_age).pluck(:updated_at).max
 
-      xml = cache_fetch(:podcast_legacy, events_max_age.to_i) do
+      xml = cache_fetch(:podcast_legacy, key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent events feed',
@@ -42,8 +44,9 @@ module Frontend
 
     def podcast_archive
       events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
+      key = downloaded_events.older(events_min_age).pluck(:updated_at).max
 
-      xml = cache_fetch(:podcast_archive, params[:quality], events_min_age.to_i) do
+      xml = cache_fetch(:podcast_archive, params[:quality], key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "archive feed (#{FeedQuality.display_name(params[:quality])})",
@@ -61,8 +64,9 @@ module Frontend
 
     def podcast_archive_legacy
       events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
+      key = downloaded_events.older(events_min_age).pluck(:updated_at).max
 
-      xml = cache_fetch(:podcast_archive_legacy, events_min_age.to_i) do
+      xml = cache_fetch(:podcast_archive_legacy, key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'archive feed',
@@ -103,7 +107,8 @@ module Frontend
 
     def podcast_audio
       events_max_age = round_to_quarter_hour(Time.now.ago(1.years))
-      xml = cache_fetch(:podcast_audio, events_max_age.to_i) do
+      key = downloaded_events.older(events_max_age).pluck(:updated_at).max
+      xml = cache_fetch(:podcast_audio, key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent audio-only feed',
@@ -119,7 +124,8 @@ module Frontend
 
     # rss 1.0 last 100 feed
     def updates
-      xml = cache_fetch(:rdftop100) do
+      key = downloaded_events.recent(100).pluck(:updated_at).max
+      xml = cache_fetch(:rdftop100, key) do
         events = downloaded_events.recent(100)
         feed = Feeds::RDFGenerator.new(
           view_context: view_context,
@@ -139,7 +145,7 @@ module Frontend
     private
 
     def cache_fetch(*key)
-      Rails.cache.fetch(key, expires_in: FEEDS_EXPIRY_DURATION) do
+      Rails.cache.fetch(key, expires_in: FEEDS_EXPIRY_DURATION, race_condition_ttl: 300) do
         yield if block_given?
       end
     end
