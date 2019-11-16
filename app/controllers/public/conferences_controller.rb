@@ -1,8 +1,17 @@
 module Public
-  class ConferencesController < InheritedResources::Base
+  class ConferencesController < ActionController::Base
     include ApiErrorResponses
     respond_to :json
-    actions :index
+
+    # GET /public/conferences
+    # GET /public/conferences.json
+    def index
+      key = Conference.all.pluck(:updated_at).max
+      @conferences = Rails.cache.fetch([:public, :conferences, key], race_condition_ttl: 10) do
+        Conference.all
+      end
+      respond_to { |format| format.json }
+    end
 
     # GET /public/conferences/54
     # GET /public/conferences/54.json
@@ -15,6 +24,7 @@ module Public
         @conference = Conference.find_by(acronym: params[:id])
       end
       fail ActiveRecord::RecordNotFound unless @conference
+      respond_to { |format| format.json }
     end
   end
 end

@@ -1,4 +1,4 @@
-json.cache! json_cached_key(:event_oembed, @event), expires_in: 10.minutes do
+json.cache! json_cached_key(:event_oembed, @event), race_condition_ttl: 30 do
   json.version '1.0'
   json.type 'video'
   json.provider_name 'media.ccc.de'
