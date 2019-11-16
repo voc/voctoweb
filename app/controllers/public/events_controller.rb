@@ -3,8 +3,18 @@ class Public::EventsController < ActionController::Base
   include Rails::Pagination
   respond_to :json
 
+  # GET /public/events
+  # GET /public/events.json
   def index
     @events = paginate(Event.all.includes(:conference), per_page: 50, max_per_page: 256)
+    respond_to { |format| format.json }
+  end
+
+  # GET /public/events/recent
+  # GET /public/events/recent.json
+  def recent
+    @events = Frontend::Event.includes(:conference).recent(100)
+    respond_to { |format| format.json { render :index } }
   end
 
   # GET /public/events/1
@@ -25,6 +35,7 @@ class Public::EventsController < ActionController::Base
     end
 
     fail ActiveRecord::RecordNotFound unless @event
+    respond_to { |format| format.json }
   end
 
   def search

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :conferences, only: [:index, :show], defaults: { format: 'json' }
     constraints(id: %r'[^/]+') do
       resources :events, only: %i(index show), defaults: { format: 'json' } do
+        get :recent, defaults: { format: 'json' }, on: :collection
         get :search, defaults: { format: 'json' }, on: :collection
       end
     end
