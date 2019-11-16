@@ -5,7 +5,7 @@ module Frontend
 
     def podcast
       events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
-      key = downloaded_events.newer(events_max_age).pluck(:updated_at).max
+      key = Frontend::Event.newer(events_max_age).maximum(:updated_at)
 
       xml = cache_fetch(:podcast, params[:quality], key) do
         feed = Feeds::PodcastGenerator.new(
@@ -25,7 +25,7 @@ module Frontend
 
     def podcast_legacy
       events_max_age = round_to_quarter_hour(Time.now.ago(2.years))
-      key = downloaded_events.newer(events_max_age).pluck(:updated_at).max
+      key = Frontend::Event.newer(events_max_age).maximum(:updated_at)
 
       xml = cache_fetch(:podcast_legacy, key) do
         feed = Feeds::PodcastGenerator.new(
@@ -44,7 +44,7 @@ module Frontend
 
     def podcast_archive
       events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
-      key = downloaded_events.older(events_min_age).pluck(:updated_at).max
+      key = Frontend::Event.older(events_min_age).maximum(:updated_at)
 
       xml = cache_fetch(:podcast_archive, params[:quality], key) do
         feed = Feeds::PodcastGenerator.new(
@@ -64,7 +64,7 @@ module Frontend
 
     def podcast_archive_legacy
       events_min_age = round_to_quarter_hour(Time.now.ago(2.years))
-      key = downloaded_events.older(events_min_age).pluck(:updated_at).max
+      key = Frontend::Event.older(events_min_age).maximum(:updated_at)
 
       xml = cache_fetch(:podcast_archive_legacy, key) do
         feed = Feeds::PodcastGenerator.new(
@@ -107,7 +107,7 @@ module Frontend
 
     def podcast_audio
       events_max_age = round_to_quarter_hour(Time.now.ago(1.years))
-      key = downloaded_events.older(events_max_age).pluck(:updated_at).max
+      key = Frontend::Event.older(events_max_age).maximum(:updated_at)
       xml = cache_fetch(:podcast_audio, key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
@@ -124,7 +124,7 @@ module Frontend
 
     # rss 1.0 last 100 feed
     def updates
-      key = downloaded_events.recent(100).pluck(:updated_at).max
+      key = Frontend::Event.recent(100).maximum(:updated_at)
       xml = cache_fetch(:rdftop100, key) do
         events = downloaded_events.recent(100)
         feed = Feeds::RDFGenerator.new(

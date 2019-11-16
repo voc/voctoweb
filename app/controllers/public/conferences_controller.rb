@@ -6,7 +6,7 @@ module Public
     # GET /public/conferences
     # GET /public/conferences.json
     def index
-      key = Conference.all.pluck(:updated_at).max
+      key = Conference.all.maximum(:updated_at)
       @conferences = Rails.cache.fetch([:public, :conferences, key], race_condition_ttl: 10) do
         Conference.all
       end
