@@ -145,7 +145,8 @@ module Frontend
     private
 
     def cache_fetch(*key)
-      Rails.cache.fetch(key, expires_in: FEEDS_EXPIRY_DURATION, race_condition_ttl: 300) do
+      locked_key = Rails.cache.fetch("/cache-keys/#{key[0]}", expires_in: 5, race_condition_ttl: 20) { key }
+      Rails.cache.fetch(locked_key, expires_in: FEEDS_EXPIRY_DURATION, race_condition_ttl: 300) do
         yield if block_given?
       end
     end
