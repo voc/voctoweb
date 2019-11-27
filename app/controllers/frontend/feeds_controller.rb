@@ -8,7 +8,7 @@ module Frontend
       events_max_age = round_to_quarter_hour(Time.now.ago(FEEDS_TIMESPAN))
       key = Frontend::Event.newer(events_max_age).maximum(:updated_at)
 
-      xml = cache_fetch(:podcast, params[:quality], key) do
+      xml = cache_fetch(:podcast, params[:quality], time: key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "recent events feed (#{FeedQuality.display_name(params[:quality])})",
@@ -28,7 +28,7 @@ module Frontend
       events_max_age = round_to_quarter_hour(Time.now.ago(FEEDS_TIMESPAN))
       key = Frontend::Event.newer(events_max_age).maximum(:updated_at)
 
-      xml = cache_fetch(:podcast_legacy, key) do
+      xml = cache_fetch(:podcast_legacy, time: key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent events feed',
@@ -47,7 +47,7 @@ module Frontend
       events_min_age = round_to_quarter_hour(Time.now.ago(FEEDS_TIMESPAN))
       key = Frontend::Event.older(events_min_age).maximum(:updated_at)
 
-      xml = cache_fetch(:podcast_archive, params[:quality], key) do
+      xml = cache_fetch(:podcast_archive, params[:quality], time: key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: "archive feed (#{FeedQuality.display_name(params[:quality])})",
@@ -67,7 +67,7 @@ module Frontend
       events_min_age = round_to_quarter_hour(Time.now.ago(FEEDS_TIMESPAN))
       key = Frontend::Event.older(events_min_age).maximum(:updated_at)
 
-      xml = cache_fetch(:podcast_archive_legacy, key) do
+      xml = cache_fetch(:podcast_archive_legacy, time: key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'archive feed',
@@ -82,7 +82,7 @@ module Frontend
     end
 
     def podcast_folder
-      xml = cache_fetch(:podcast_folder, params[:quality], @conference, @mime_type) do
+      xml = cache_fetch(:podcast_folder, params[:quality], @conference, @mime_type, time: '') do
         mime_display_name = MimeType.humanized_mime_type(@mime_type)
         quality_display_name = FeedQuality.display_name(params[:quality])
         feed = Feeds::PodcastGenerator.new(
@@ -108,7 +108,7 @@ module Frontend
     def podcast_audio
       events_max_age = round_to_quarter_hour(Time.now.ago(1.years))
       key = Frontend::Event.older(events_max_age).maximum(:updated_at)
-      xml = cache_fetch(:podcast_audio, key) do
+      xml = cache_fetch(:podcast_audio, time: key) do
         feed = Feeds::PodcastGenerator.new(
           view_context,
           title: 'recent audio-only feed',
@@ -125,7 +125,7 @@ module Frontend
     # rss 1.0 last 100 feed
     def updates
       key = Frontend::Event.recent(100).maximum(:updated_at)
-      xml = cache_fetch(:rdftop100, key) do
+      xml = cache_fetch(:rdftop100, time: key) do
         events = downloaded_events.recent(100)
         feed = Feeds::RDFGenerator.new(
           view_context: view_context,
@@ -144,8 +144,8 @@ module Frontend
 
     private
 
-    def cache_fetch(*key)
-      locked_key = Rails.cache.fetch("/cache-keys/#{key[0]}", expires_in: 60, race_condition_ttl: 120) { key }
+    def cache_fetch(*key, opts)
+      locked_key = Rails.cache.fetch(['/cache-keys/', key], expires_in: 60, race_condition_ttl: 120) { [key, opts[:time]] }
       Rails.cache.fetch(locked_key, expires_in: FEEDS_EXPIRY_DURATION, race_condition_ttl: 300) do
         yield if block_given?
       end
