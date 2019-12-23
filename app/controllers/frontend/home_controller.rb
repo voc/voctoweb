@@ -29,7 +29,7 @@ module Frontend
     private
 
     def recent_events_for_conference(conference)
-      conference.events.includes(:conference).limit(EVENT_LIMIT)
+      conference.events.released.includes(:conference).limit(EVENT_LIMIT)
     end
   end
 end

@@ -84,7 +84,6 @@ class Api::EventsController < ApiController
 
   def create_event(params)
     @event.transaction do
-      @event.release_date = Time.now unless @event.release_date
       @event.set_image_filenames(params[:thumb_url], params[:poster_url], params[:timeline_url], params[:thumbnails_url])
       return @event.save
     end

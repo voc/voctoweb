@@ -11,7 +11,7 @@ class Event < ApplicationRecord
     where(html5: true, mime_type: MimeType::VIDEO)
   }, class_name: 'Recording'
 
-  validates :conference, :release_date, :slug, :title, :guid, :original_language, presence: true
+  validates :conference, :slug, :title, :guid, :original_language, presence: true
   validates :guid, :slug, uniqueness: true
   validates :doi, format: { with: /\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\z/, message: "doi format not valid" }, allow_blank: true
   validate :original_language_valid

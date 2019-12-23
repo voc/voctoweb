@@ -11,6 +11,8 @@ module Frontend
     scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
     scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
     scope :older, ->(date) { where('release_date < ?', date).order('release_date desc') }
+    scope :released, -> { where('release_date IS NOT NULL').order('release_date desc') }
+    scope :recent, ->(n) { where('release_date IS NOT NULL').order('release_date desc').limit(n) }
 
     def title
       self[:title].strip
@@ -28,7 +30,7 @@ module Frontend
     end
 
     def released_on_event_day?
-      date && date.to_date === release_date.to_date
+      date && release_date && date.to_date === release_date.to_date
     end
 
     def short_description

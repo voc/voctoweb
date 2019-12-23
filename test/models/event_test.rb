@@ -69,7 +69,7 @@ class EventTest < ActiveSupport::TestCase
     assert_nil conference.event_last_released_at
   end
 
-  test 'should update event_last_released_at when newer event is added' do
+  test 'should update event_last_released_at when newer event with a release_date is added' do
     conference = create(:conference)
     assert_nil conference.event_last_released_at
 
@@ -116,6 +116,11 @@ class EventTest < ActiveSupport::TestCase
     event3.release_date = Time.new(2015, 03, 01)
     conference.events << event3
 
+    # unreleased event with only relive recording
+    event4 = create(:event_with_recordings)
+    event4.release_date = nil
+    conference.events << event4
+
     # event2
     assert_equal event2.release_date, conference.event_last_released_at
 
@@ -155,6 +160,49 @@ class EventTest < ActiveSupport::TestCase
     # now event1
     assert_equal event1.release_date, conference.event_last_released_at
   end
+
+
+  test 'should not update event_last_released_at when unreleased event is added' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+
+    # unreleased event, maybe with relive recording
+    event1 = create(:event_with_recordings)
+    event1.release_date = nil
+    conference.events << event1
+
+    assert_nil conference.event_last_released_at
+  end
+
+  test 'should not update event_last_released_at when unreleased event is added, more complex' do
+    conference = create(:conference)
+    assert_nil conference.event_last_released_at
+
+    # unreleased event, maybe with relive recording
+    event1 = create(:event_with_recordings)
+    event1.release_date = nil
+    conference.events << event1
+
+    assert_nil conference.event_last_released_at
+
+
+    # normal event with rel
+    event2 = create(:event_with_recordings)
+    event2.release_date = Time.new(2016, 01, 13)
+    conference.events << event2
+
+    assert_equal conference.event_last_released_at, event2.release_date
+
+
+    # unreleased event, maybe with relive recording
+    event3 = create(:event_with_recordings)
+    event3.release_date = nil
+    conference.events << event3
+
+    assert_equal conference.event_last_released_at, event2.release_date
+
+  end
+
 
   test 'should trigger callback to update conferences event_last_released_at' do
     assert @event.conference
