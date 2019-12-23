@@ -12,7 +12,8 @@ class ConferenceReliveDownloadWorkerTest < ActiveSupport::TestCase
       {
         project: 'djangocon2018',
         media_conference_id: @old_conference.id,
-        index_url: '//live.ber.c3voc.de/relive/djangocon2018/index.json',
+        #index_url: '//live.ber.c3voc.de/relive/djangocon2018/index.json',
+        index_url: '//c3voc.de/share/api-examples/relive.json',
         updated_at: Time.now.ago(3.days).to_i
       },
       {
