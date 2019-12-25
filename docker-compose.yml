@@ -16,6 +16,7 @@ services:
       - sidekiq
       - postgres
       - elasticsearch
+      - redis
       - ssh-server
   sidekiq:
     build: .
