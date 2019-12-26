@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'minitest/pride'
 require 'sidekiq/testing'
 require 'tilt/redcarpet'
+require "rexml/document"
 
 Sidekiq::Logging.logger = nil
 
@@ -34,5 +35,12 @@ class ActiveSupport::TestCase
     FileUtils.copy source, target
 
     File.join(Rails.root, target)
+  end
+
+  def xml_rss_items(xml)
+    doc = REXML::Document.new(xml)
+    items = []
+    doc.elements.each("/rss/channel/item") { |ev| items << ev }
+    items
   end
 end

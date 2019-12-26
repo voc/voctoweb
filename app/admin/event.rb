@@ -51,7 +51,7 @@ ActiveAdmin.register Event do
       row :description
       row :persons do
         e.persons_raw
-      end 
+      end
       row :tags
       row :date
       row :release_date

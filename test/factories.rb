@@ -40,6 +40,7 @@ FactoryBot.define do
     aspect_ratio { '16:9' }
 
     factory :conference_with_recordings, traits: [:conference_recordings, :has_schedule]
+    factory :conference_with_audio_recordings, traits: [:conference_audio_recordings]
   end
 
   factory :frontend_conference, parent: :conference, class: Frontend::Conference do
@@ -52,10 +53,23 @@ FactoryBot.define do
     end
   end
 
+  trait :conference_audio_recordings do
+    after(:create) do |conference|
+      conference.events << create(:event_with_recordings)
+      conference.events << create(:event_with_audio_recordings)
+    end
+  end
+
   trait :event_recordings do
     after(:create) do |event|
       event.recordings << create(:recording)
       event.recordings << create(:recording, filename: 'video.webm')
+    end
+  end
+
+  trait :event_audio_recording do
+    after(:create) do |event|
+      event.recordings << create(:recording, mime_type: 'audio/mpeg')
     end
   end
 
@@ -119,6 +133,7 @@ FactoryBot.define do
     release_date { '2013-08-21' }
 
     factory :event_with_recordings, traits: [:event_recordings]
+    factory :event_with_audio_recordings, traits: [:event_audio_recording]
   end
 
   factory :recording do
@@ -133,6 +148,10 @@ FactoryBot.define do
     length { '5' }
     state { 'downloaded' }
     html5 { true }
+
+    factory :audio_recording do
+      mime_type { 'audio/mpeg' }
+    end
   end
 
   factory :recording_view do
@@ -164,5 +183,21 @@ FactoryBot.define do
     release_date { '2013-08-21' }
     folder { 'webm' }
     mime_type { 'video/webm' }
+  end
+
+  factory :web_feed do
+    key { 'podcast_audio' }
+    kind { '' }
+    last_build { '2014-05-03' }
+    content { '<xml/>' }
+
+    factory :web_feed_folder do
+      key { 'podcast_folder' }
+      kind { 'frabcon1lqwebm' }
+    end
+    factory :web_feed_podcast do
+      key { 'podcast' }
+      kind { 'hq' }
+    end
   end
 end

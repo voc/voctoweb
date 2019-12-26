@@ -42,8 +42,12 @@ module Frontend
     end
 
     def mime_types
-      return enum_for(:mime_types) unless block_given?
-      recordings.pluck(:mime_type).uniq.map { |mime_type|
+      recordings.pluck(:mime_type).uniq
+    end
+
+    def mime_type_names
+      return enum_for(:mime_type_names) unless block_given?
+      mime_types.map { |mime_type|
         yield mime_type.freeze, MimeType.mime_type_slug(mime_type)
       }
     end

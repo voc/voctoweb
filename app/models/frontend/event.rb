@@ -9,10 +9,6 @@ module Frontend
     has_many :recordings, class_name: 'Frontend::Recording'
 
     scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
-    scope :newer, ->(date) { where('release_date > ?', date).order('release_date desc') }
-    scope :older, ->(date) { where('release_date < ?', date).order('release_date desc') }
-    scope :released, -> { where('release_date IS NOT NULL').order('release_date desc') }
-    scope :recent, ->(n) { where('release_date IS NOT NULL').order('release_date desc').limit(n) }
 
     def title
       self[:title].strip

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       collection do
         post 'update_promoted'
         post 'update_view_counts'
+        post 'update_feeds'
       end
     end
     resources :recordings, :defaults => { :format => 'json' }

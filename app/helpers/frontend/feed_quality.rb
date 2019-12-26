@@ -4,6 +4,14 @@ module Frontend
     LQ = 'lq'
     MASTER = 'master'
 
+    def self.all
+      [HQ, LQ, MASTER]
+    end
+
+    def self.valid?(quality)
+      all.include?(quality)
+    end
+
     def self.display_name(quality)
       case quality&.downcase
         when HQ
@@ -17,7 +25,7 @@ module Frontend
       end
     end
 
-    def self.eventRecordingFilter(quality)
+    def self.event_recording_filter(quality)
       case quality&.downcase
         when HQ then EventRecordingFilterHighQuality.new
         when LQ then EventRecordingFilterLowQuality.new

@@ -30,7 +30,10 @@ class Event < ApplicationRecord
       .includes(:recordings)
       .where.not(recordings: { id: nil })
   }
-  scope :recent, ->(n) { order('release_date desc').limit(n) }
+  scope :released, -> { where('release_date IS NOT NULL').order('release_date desc') }
+  scope :newer, ->(date) { released.where('release_date > ?', date) }
+  scope :older, ->(date) { released.where('release_date < ?', date) }
+  scope :recent, ->(n) { released.limit(n) }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
@@ -45,6 +48,7 @@ class Event < ApplicationRecord
   after_save { conference.update_last_released_at_column if saved_change_to_release_date? }
   after_save { update_conference_downloaded_count if saved_change_to_conference_id? }
   after_save { conference.touch unless saved_change_to_view_count? }
+  after_save { update_feeds unless saved_change_to_view_count? }
   after_touch { conference.touch }
   after_destroy { |record| delete_related_from_other_events(record.id.to_s) }
   after_destroy { conference.update_last_released_at_column }
@@ -155,6 +159,24 @@ class Event < ApplicationRecord
     if doi
       "https://doi.org/#{doi}"
     end
+  end
+
+  def update_feeds
+    return unless release_date
+
+    # also update these daily
+    if release_date > WebFeed.last_year
+      Feed::PodcastWorker.perform_async
+      Feed::LegacyWorker.perform_async
+      Feed::AudioWorker.perform_async
+    elsif release_date < WebFeed.last_year
+      Feed::ArchiveWorker.perform_async
+      Feed::ArchiveLegacyWorker.perform_async
+    end
+
+    # these don't need to be re-created periodically
+    Feed::FolderWorker.perform_async conference.id
+    Feed::RecentWorker.perform_async
   end
 
   private
