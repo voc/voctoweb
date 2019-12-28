@@ -25,7 +25,7 @@ module Frontend
 
     def add_feeds_for_conference_recordings(conference)
       sub_menu = []
-      sorted_mime_types = conference.mime_types.sort_by(& MimeType::RELEVANCE_COMPARATOR)
+      sorted_mime_types = conference.mime_type_names.sort_by(&MimeType::RELEVANCE_COMPARATOR)
       sorted_mime_types.each do |mime_type, mime_type_name|
         if MimeType.is_video(mime_type)
           sub_menu.push({

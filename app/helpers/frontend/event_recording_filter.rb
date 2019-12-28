@@ -3,7 +3,7 @@ module Frontend
     def self.by_quality_string(quality)
       return EventRecordingFilter.new if quality.nil? || quality.empty?
 
-      FeedQuality.eventRecordingFilter(quality)
+      FeedQuality.event_recording_filter(quality)
     end
 
     @target_mime_type = nil

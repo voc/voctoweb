@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190928125825) do
+ActiveRecord::Schema.define(version: 20191226021730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,14 @@ ActiveRecord::Schema.define(version: 20190928125825) do
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
     t.index ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type"
     t.index ["state"], name: "index_recordings_on_state"
+  end
+
+  create_table "web_feeds", force: :cascade do |t|
+    t.string "key"
+    t.string "kind"
+    t.datetime "last_build"
+    t.text "content"
+    t.index ["key", "kind"], name: "index_web_feeds_on_key_and_kind", unique: true
   end
 
 end

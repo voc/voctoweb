@@ -16,6 +16,7 @@ services:
       - sidekiq
       - postgres
       - elasticsearch
+      - redis
       - ssh-server
   sidekiq:
     build: .
@@ -47,7 +48,7 @@ services:
       - ".:/voctoweb"
       - "./docker/ssh:/root/.ssh"
     ports:
-      - "2222:22"
+      - "2202:22"
   nginx:
     image: nginx
     volumes:

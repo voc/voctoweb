@@ -7,5 +7,7 @@ docker-compose.yml
 *.txt
 *.md
 
-tmp
-log
+docker/
+log/
+test/
+tmp/

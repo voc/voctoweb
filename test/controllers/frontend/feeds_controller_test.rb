@@ -6,48 +6,51 @@ module Frontend
       @conference = create :conference_with_recordings
     end
 
-    test 'should get podcast' do
-      get :podcast, format: :xml
-      assert_response :success
-    end
-
     test 'should get podcast low quality' do
+      create(:web_feed_podcast, kind: 'lq')
       get :podcast, params: { quality: FeedQuality::LQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast high quality' do
+      create(:web_feed_podcast)
       get :podcast, params: { quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_archive_legacy' do
+      create(:web_feed, key: :podcast_archive_legacy)
       get :podcast_archive_legacy, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_archive in low quality' do
+      create(:web_feed, key: :podcast_archive, kind: 'lq')
       get :podcast_archive, params: { quality: FeedQuality::LQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_archive in high quality' do
+      create(:web_feed, key: :podcast_archive, kind: 'hq')
       get :podcast_archive, params: { quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast audio only' do
+      create(:web_feed)
       get :podcast_audio, format: :xml
       assert_response :success
     end
 
     test 'should get updates' do
+      create(:web_feed, key: :rdftop100)
       get :updates, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_folder legacy' do
-      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm' }, format: :xml
+      create(:web_feed_folder, key: :podcast_legacy)
+      get :podcast_legacy, params: { acronym: @conference.acronym, mime_type: 'webm' }, format: :xml
       assert_response :success
     end
 
@@ -57,25 +60,28 @@ module Frontend
       end
     end
 
+    test 'should raise if podcast is not found' do
+      assert_raise ActiveRecord::RecordNotFound do
+        get :podcast_audio, format: :xml
+      end
+    end
+
+    test 'should get podcast_folder' do
+      create(:web_feed_folder, kind: WebFeed.folder_key(@conference, '', 'webm'))
+      get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm' }, format: :xml
+      assert_response :success
+    end
+
     test 'should get podcast_folder hq' do
+      create(:web_feed_folder, kind: WebFeed.folder_key(@conference, 'hq', 'webm'))
       get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: FeedQuality::HQ }, format: :xml
       assert_response :success
     end
 
     test 'should get podcast_folder lq' do
+      create(:web_feed_folder, kind: WebFeed.folder_key(@conference, 'lq', 'webm'))
       get :podcast_folder, params: { acronym: @conference.acronym, mime_type: 'webm', quality: FeedQuality::LQ }, format: :xml
       assert_response :success
-    end
-
-    test 'round_to_next_quarter_hour' do
-      time = @controller.send(:round_to_quarter_hour, Time.parse('2017-02-12 14:21:42 +00000'))
-      assert_equal Time.parse('2017-02-12 14:15:00 +0000'), time
-
-      time = @controller.send(:round_to_quarter_hour, Time.parse('2017-02-12 17:38:10 +00000'))
-      assert_equal Time.parse('2017-02-12 17:30:00 +0000'), time
-
-      time = @controller.send(:round_to_quarter_hour, Time.parse('2017-02-12 17:46:10 +00000'))
-      assert_equal Time.parse('2017-02-12 17:45:00 +0000'), time
     end
   end
 end
