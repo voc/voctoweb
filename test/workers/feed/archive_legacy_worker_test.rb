@@ -19,5 +19,7 @@ class Feed::ArchiveLegacyWorkerTest < ActiveSupport::TestCase
     items = xml_rss_items(f.content)
     assert_equal 2, items.size
     assert_includes items[0].elements['link'].text, Settings.frontend_url
+
+    refute @worker.perform
   end
 end

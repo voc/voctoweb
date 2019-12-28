@@ -25,7 +25,7 @@ class WebFeed < ApplicationRecord
 
   def newer?(date)
     return unless last_build && date
-    last_build > date
+    last_build >= date
   end
 
   private
