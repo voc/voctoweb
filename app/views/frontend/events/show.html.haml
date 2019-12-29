@@ -144,4 +144,8 @@
       %h3 Tags
       .tags
         - @event.tags.each do |tag|
-          != link_for(tag)
+          - if tag =~ /^[0-9]+/
+            != link_for_global(tag)
+          - else
+            != link_for(@conference, tag)
+

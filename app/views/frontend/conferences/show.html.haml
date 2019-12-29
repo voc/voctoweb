@@ -9,6 +9,8 @@
     .logo
       %img{src: @conference.logo_url, alt: 'conference logo'}
     %h1= @conference.title or @conference.acronym.gsub(/[\-_]/,' ')
+    -if @tag
+      %h2= @tag
 
     - if @events.present?
       Full playlist:

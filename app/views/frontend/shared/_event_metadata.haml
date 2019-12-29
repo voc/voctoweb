@@ -7,7 +7,15 @@
     %h4{title: event.subtitle}
       = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
 
+  - if event.timelens_present?
+    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}
+
   %ul.metadata
+    - if !event.tags.nil? && event.tags.length > 3 
+      %li.tags
+        %span.tags
+        - event.tags[3,1].each do |tag|
+          != link_for(event.conference, tag)
     %li.duration
       %span.icon.icon-clock-o
       = duration_in_minutes(event.duration)
@@ -19,6 +27,3 @@
       = event.view_count
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
-
-  - if event.timelens_present?
-    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}

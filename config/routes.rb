@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     get '/v/:slug/related', to: 'events#playlist_related', as: :playlist_related, :constraints => { slug: %r'[^/]+' }
 
     get '/c/:acronym', to: 'conferences#show', as: :conference
+    get '/c/:acronym/:tag', to: 'conferences#show', as: :conference_tag
 
     get '/a', to: 'conferences#all', as: :all_conferences
     get '/b', to: 'conferences#browse', as: :browse_start

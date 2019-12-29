@@ -50,6 +50,8 @@ module Frontend
         parts += ['playlist']
       elsif @event
         parts += ['event']
+      elsif @tag
+        parts += [@tag]
       end
       current = parts.pop
       yield parts.map!(&:freeze), current.freeze

@@ -28,7 +28,13 @@ module Frontend
 
     def show
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
-      @events = @conference.events.includes(:conference).reorder(sort_param)
+      if params[:tag]
+        @tag = params[:tag]
+        @events = @conference.events.includes(:conference).reorder(sort_param).select { |event| event.tags.include? @tag }
+      else
+        @events = @conference.events.includes(:conference).reorder(sort_param)
+      end
+
       respond_to do |format|
         format.html { render :show }
       end
