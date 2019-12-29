@@ -63,7 +63,6 @@ $(function() {
       player.attachTo($relivePlayer.get(0));
     }
   }
-  tryInitRelivePlayer();
 
   $(document).on('turbolinks:load', function() {
     tryInitRelivePlayer();
