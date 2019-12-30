@@ -8,11 +8,19 @@ class Feed::FolderWorker < Feed::Base
 
     conference = Frontend::Conference.find(args[0])
     conference.mime_type_names.each do |mime_type, mime_type_name|
-      Frontend::FeedQuality.all.each do |quality|
-        kind = WebFeed.folder_key(conference, quality, mime_type_name)
+      if MimeType.is_audio(mime_type)
+        kind = WebFeed.folder_key(conference, '', mime_type_name)
 
         WebFeed.update_with_lock(start_time, key: key, kind: kind) do |feed|
-          feed.content = build(conference, mime_type, mime_type_name, quality)
+          feed.content = build(conference, mime_type, mime_type_name, '')
+        end
+      elsif MimeType.is_video(mime_type)
+        Frontend::FeedQuality.all.each do |quality|
+          kind = WebFeed.folder_key(conference, quality, mime_type_name)
+
+          WebFeed.update_with_lock(start_time, key: key, kind: kind) do |feed|
+            feed.content = build(conference, mime_type, mime_type_name, quality)
+          end
         end
       end
     end
