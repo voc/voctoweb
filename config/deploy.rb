@@ -26,6 +26,10 @@ set :puma_pid,        -> { "#{shared_path}/tmp/pids/puma.pid" }
 set :puma_env,        -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
 set :puma_conf,       -> { "#{shared_path}/config/puma.rb" }
 
+# sidekiq
+set :init_system, :systemd
+set :service_unit_name, "voctoweb-sidekiq.service"
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
