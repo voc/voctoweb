@@ -22,9 +22,9 @@
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date view_count}.each do |sorting|
         - if @sorting == sorting
-          %a.btn.btn-primary.active{ href: conference_path(acronym: @conference.acronym, sort: sorting) }= sorting.gsub(/_/, ' ')
+          %a.btn.btn-primary.active{ href: conference_path(acronym: @conference.acronym, tag: @tag, sort: sorting) }= sorting.gsub(/_/, ' ')
         - else
-          %a.btn.btn-primary{ href: conference_path(acronym: @conference.acronym, sort: sorting) }= sorting.gsub(/_/, ' ')
+          %a.btn.btn-primary{ href: conference_path(acronym: @conference.acronym, tag: @tag, sort: sorting) }= sorting.gsub(/_/, ' ')
 
   - if @events.present?
     .event-previews
