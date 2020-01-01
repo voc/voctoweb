@@ -14,7 +14,7 @@
     - if !event.tags.nil? && event.tags.length > 3 
       %li.tags
         %span.tags
-        - event.tags[3,1].each do |tag|
+        - event.tags[3,2].each do |tag|
           != link_for(event.conference, tag)
     %li.duration
       %span.icon.icon-clock-o
