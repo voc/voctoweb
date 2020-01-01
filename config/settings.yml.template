@@ -3,7 +3,7 @@ defaults: &defaults
   frontend_host: media.ccc.de
   cdn_url: http://cdn.media.ccc.de
   static_url: https://static.media.ccc.de/media
-  cors_url: https://koeln.ftp.media.ccc.de
+  cors_url: https://media.ccc.de/srt/
   folders:
     recordings_webroot: ''
     images_webroot: ""
