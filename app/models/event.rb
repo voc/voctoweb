@@ -12,12 +12,12 @@ class Event < ApplicationRecord
   }, class_name: 'Recording'
 
   validates :conference, :slug, :title, :guid, :original_language, presence: true
+  validates :slug, format: { with: %r{\A[^/]+\z} }
   validates :guid, :slug, uniqueness: true
-  validates :doi, format: { with: /\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*\/(?:(?!["&\'<>])\S)+)\z/, message: "doi format not valid" }, allow_blank: true
+  validates :doi, format: { with: %r{\A\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\z}, message: 'doi format not valid' }, allow_blank: true
   validate :original_language_valid
 
   before_validation :strip_prefix, :only => [:doi]
-
 
   serialize :persons, Array
   serialize :tags, Array
