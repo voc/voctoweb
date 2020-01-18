@@ -92,7 +92,7 @@ class Api::EventsControllerTest < ActionController::TestCase
     end
     msg = JSON.parse(response.body)
     assert_equal ['slug'], msg.keys
-    assert_equal ["can't be blank"], msg['slug']
+    assert_equal ["can't be blank", "is invalid"], msg['slug']
     assert_response 422
 
     args = Conference.last.events.first.attributes

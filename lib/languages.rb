@@ -136,7 +136,6 @@ class Languages
     'gla' => ['gd', 'Scottish Gaelic'],
     'dzo' => ['dz', 'Dzongkha'],
     'sot' => ['sot', 'Sotho'],
-    'ful' => ['ful', 'Fula'],
     'bre' => ['br', 'Breton'],
     'kaz' => ['kk', 'Kazakh'],
     'sgn' => ['sgn', 'Sign Languages'],
