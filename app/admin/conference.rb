@@ -36,9 +36,9 @@ ActiveAdmin.register Conference do
         div c.schedule_xml.try(:truncate,200)
       end
       row :schedule_state
-      row :metadata
       row :created_at
       row :updated_at
+      #row :metadata
     end
     table_for c.events.order('slug ASC') do
       column "Events" do |event|

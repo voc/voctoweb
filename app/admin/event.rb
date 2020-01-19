@@ -52,7 +52,7 @@ ActiveAdmin.register Event do
       row :persons do
         e.persons_raw
       end
-      row :tags
+      row :tags_raw
       row :date
       row :release_date
       row :doi do

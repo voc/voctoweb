@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
 
 # loading order actually matters
 Bundler/OrderedGems:
@@ -47,7 +47,7 @@ Style/CommentAnnotation:
   Enabled: false
 
 # Vim prefers fixed indent, avoid manual vertical alignment
-Style/AlignParameters:
+Layout/AlignParameters:
   Enabled: true
   EnforcedStyle: with_fixed_indentation
 
@@ -63,5 +63,5 @@ Metrics/AbcSize:
 Style/Documentation:
   Enabled: false
 
-Style/AlignHash:
+Layout/AlignHash:
   Enabled: false
