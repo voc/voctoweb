@@ -19,6 +19,15 @@
         \/
         = link_to 'Audio', audio_playlist_conference_path(slug: @conference.first_slug), method: :get
 
+    - if @conference.description.present?
+      %br{ clear: 'all' }
+      %br
+      .description
+        = @conference.description.html_safe
+
+    - if @conference.link.present?
+      %a{ href: @conference.link }= @conference.link
+
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date view_count}.each do |sorting|
         - if @sorting == sorting

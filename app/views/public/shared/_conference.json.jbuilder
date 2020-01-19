@@ -1,4 +1,4 @@
-json.extract! conference, :acronym, :aspect_ratio, :updated_at, :title, :schedule_url, :slug, :event_last_released_at
+json.extract! conference, :acronym, :aspect_ratio, :updated_at, :title, :schedule_url, :slug, :event_last_released_at, :link, :description
 json.webgen_location conference.slug
 json.logo_url conference.logo_url
 json.images_url conference.get_images_url

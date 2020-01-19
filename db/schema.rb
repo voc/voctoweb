@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20200119002951) do
     t.jsonb "metadata", default: {}
     t.datetime "event_last_released_at"
     t.jsonb "streaming", default: {}
+    t.text "description"
+    t.string "link", limit: 255
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
   end
