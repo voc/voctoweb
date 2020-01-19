@@ -20,5 +20,9 @@ module Types
     def url
       object.get_recording_url
     end
+
+    def duration
+      object.length
+    end
   end
 end
