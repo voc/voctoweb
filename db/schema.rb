@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191226021730) do
+ActiveRecord::Schema.define(version: 20200119002951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20191226021730) do
     t.string "logo", limit: 255
     t.integer "downloaded_events_count", default: 0, null: false
     t.jsonb "metadata", default: {}
-    t.date "event_last_released_at"
+    t.datetime "event_last_released_at"
     t.jsonb "streaming", default: {}
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20191226021730) do
     t.string "slug", limit: 255
     t.string "subtitle", limit: 255
     t.text "tags"
-    t.date "release_date"
+    t.datetime "release_date"
     t.boolean "promoted"
     t.integer "view_count", default: 0
     t.integer "duration", default: 0

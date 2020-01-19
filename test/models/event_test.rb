@@ -207,9 +207,10 @@ class EventTest < ActiveSupport::TestCase
   test 'should trigger callback to update conferences event_last_released_at' do
     assert @event.conference
     assert_equal @event.conference.event_last_released_at, @event.release_date
-    release_date = Time.now.since(2.days).to_date
+    release_date = Time.now.since(2.days)
     @event.update(release_date: release_date)
-    assert_equal release_date, @event.conference.event_last_released_at
+    # compare timestamps to fix timezone comparison problems
+    assert_equal release_date.to_i, @event.conference.event_last_released_at.to_i
   end
 
   test 'should resolve related_events from metadata' do
