@@ -80,6 +80,10 @@
                 console.log(event);
             }
           });
+
+          mediaElement.addEventListener('dblclick', function() {
+            player.fullscreen();
+          });
         }
       });
     });
