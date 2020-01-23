@@ -44,8 +44,8 @@ gem 'redcarpet'
 gem 'kaminari'
 
 gem 'pg', group: :postgresql
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch-model', '~> 6.0.0'
+gem 'elasticsearch-rails', '~> 6.1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
