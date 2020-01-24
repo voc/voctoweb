@@ -26,7 +26,8 @@
         = @conference.description.html_safe
 
     - if @conference.link.present?
-      %a{ href: @conference.link }= @conference.link
+      .link
+        %a{ href: @conference.link }= @conference.link
 
     #sorting.btn-group.btn-group-sm.btn-group-justified
       - %w{name duration date view_count}.each do |sorting|

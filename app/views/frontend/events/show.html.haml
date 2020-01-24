@@ -108,7 +108,7 @@
       - if ! @event.released_on_event_day?
         %li
           %span.icon.icon-upload{title: 'release date'}
-          = @event.release_date
+          = @event.release_date.to_date
       %li
         %span.icon.icon-eye
         = @event.view_count

@@ -26,7 +26,7 @@ module Frontend
     end
 
     def released_on_event_day?
-      date && release_date && date.to_date === release_date.to_date
+      date && release_date && (date.to_date == release_date.to_date)
     end
 
     def short_description
