@@ -1,5 +1,5 @@
 module Frontend
-  require "date"
+  require 'date'
 
   class Event < ::Event
     index_name "media-event-#{Rails.env}"
@@ -16,6 +16,7 @@ module Frontend
 
     def short_title
       return unless title
+
       # Truncate title e.g. for slider, value was determined experimentally
       title.truncate(40, omission: '…')
     end
@@ -31,29 +32,25 @@ module Frontend
 
     def short_description
       return unless description
+
       description.truncate(140)
     end
-
 
     def poster_url
       if poster_filename.present?
         File.join(Settings.static_url, conference.images_path, poster_filename).freeze
-      else
-        if relive_present?
-          relive['thumbnail'].freeze
-        end
+      elsif relive_present?
+        relive['thumbnail'].freeze
       end
     end
 
     def thumb_url
       if thumb_filename_exists?
         File.join(Settings.static_url, conference.images_path, thumb_filename).freeze
+      elsif relive_present?
+        relive['thumbnail'].freeze
       else
-        if relive_present?
-          relive['thumbnail'].freeze
-        else
-          conference.logo_url.freeze
-        end
+        conference.logo_url.freeze
       end
     end
 
@@ -70,13 +67,13 @@ module Frontend
     end
 
     def has_translation
-      self.recordings.select { |x| x.languages.length > 1 }.present?
+      recordings.select { |x| x.languages.length > 1 }.present?
     end
 
     def filetypes(mime_type)
-      self.recordings.by_mime_type(mime_type)
-        .map { |x| [x.filetype, x.display_filetype] }
-        .uniq.to_h.sort
+      recordings.by_mime_type(mime_type)
+                .map { |x| [x.filetype, x.display_filetype] }
+                .uniq.to_h.sort
     end
 
     # used by player
@@ -92,39 +89,40 @@ module Frontend
 
     # used for the hd and sd download buttons
     def video_for_download(filetype, high_quality: true)
-      self.recordings.video_without_slides
-        .select { |x| x.filetype == filetype && x.high_quality == !!high_quality }
-        .sort_by { |x| x.html5 ? 1 : 0 }
-        .first
+      recordings.video_without_slides
+                .select { |x| x.filetype == filetype && x.high_quality == high_quality }
+                .min_by { |x| x.html5 ? 1 : 0 }
     end
 
     def audio_recordings_for_download(filetype)
-      self.recordings.audio
-        .select { |x| x.filetype == filetype }
-        .sort_by { |x| x.language == self.original_language ? '' : x.language }
-        .map { |x| [x.language, x] }
-        .to_h
+      recordings.audio
+                .select { |x| x.filetype == filetype }
+                .sort_by { |x| x.language == original_language ? '' : x.language }
+                .map { |x| [x.language, x] }
+                .to_h
     end
 
     def audio_recording
       audio_recordings = recordings.original_language.where(mime_type: MimeType::AUDIO)
       return if audio_recordings.empty?
+
       seen = Hash[audio_recordings.map { |r| [r.mime_type, r] }]
       MimeType::AUDIO.each { |mt| return seen[mt] if seen.key?(mt) }
       seen.first[1]
     end
 
     def slides_for_download(filetype)
-      self.recordings.slides
-        .select { |x| x.filetype == filetype }
-        .sort_by { |x| x.language == self.original_language ? '' : x.language }
-        .map { |x| [x.language, x] }
-        .to_h
+      recordings.slides
+                .select { |x| x.filetype == filetype }
+                .sort_by { |x| x.language == original_language ? '' : x.language }
+                .map { |x| [x.language, x] }
+                .to_h
     end
 
     def slide
       slides = recordings.slides
       return if slides.empty?
+
       seen = Hash[slides.map { |r| [r.mime_type, r] }]
       MimeType::SLIDES.each { |mt| return seen[mt] if seen.key?(mt) }
       seen.first[1]
@@ -141,11 +139,12 @@ module Frontend
 
     # @return [Array(Recording)]
     def by_mime_type(mime_type: 'video/mp4')
-        recordings.by_mime_type(mime_type).first.freeze
+      recordings.by_mime_type(mime_type).first.freeze
     end
 
     def related_event_ids(n)
       return conference.events.ids unless metadata.key?('related')
+
       metadata['related'].keys.shuffle[0..n-1]
     end
 
@@ -157,11 +156,11 @@ module Frontend
     end
 
     def clappr_subtitles
-      self.recordings.subtitle.map do |track|
+      recordings.subtitle.map do |track|
         {
-            lang: track.language_iso_639_1,
-            label: track.language_label,
-            src: track.cors_url,
+          lang: track.language_iso_639_1,
+          label: track.language_label,
+          src: track.cors_url,
         }
       end
     end
@@ -180,6 +179,7 @@ module Frontend
 
     def relive_present?
       return unless conference.metadata['relive'].present?
+
       conference.metadata['relive'].any? { |r| r['guid'] == guid }
     end
 
@@ -188,13 +188,14 @@ module Frontend
     end
 
     def timelens_present?
-        timeline_filename.present? and thumbnails_filename.present?
+      timeline_filename.present? and thumbnails_filename.present?
     end
 
     private
 
     def thumb_filename_exists?
       return if thumb_filename.blank?
+
       true
     end
   end
