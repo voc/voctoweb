@@ -83,7 +83,7 @@ module Frontend
                 .sort_by { |x|
                   (x.language == original_language ? -5 : 0) +
                     (x.html5 ? -2 : 0) -
-                    (x.width / 500)
+                    ((x.width || 500) / 500)
                 }
     end
 
