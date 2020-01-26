@@ -61,6 +61,35 @@ module ElasticsearchEvent
       }
     end
 
+    def query_persons(term)
+      term ||= ''
+      search_for query: {
+        function_score:  {
+          query:  {
+            bool:  {
+              disable_coord:  1,
+              should:  [
+                {
+                  multi_match:  {
+                    query:  term,
+                    fields:  [
+                      'persons^3'
+                    ],
+                    type:  'best_fields',
+                  }
+                },
+                { prefix:  { 'conference.persons' => { value:  term} } }
+              ]
+            }
+          },
+          boost:  1.2,
+          functions:  [
+            { gauss:  { date:  { scale:  '730d', decay:  0.9 } } }
+          ]
+        }
+      }
+    end
+
     # avoid conflict with active admins ransack #search method
     def search_for(*args, &block)
       __elasticsearch__.search(*args, &block)

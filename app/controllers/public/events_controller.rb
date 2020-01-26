@@ -38,6 +38,7 @@ class Public::EventsController < ActionController::Base
     respond_to { |format| format.json }
   end
 
+  # GET /public/events/search?q=foo
   def search
     results = Frontend::Event.query(params[:q]).page(params[:page])
     # calling this just to set headers
