@@ -16,8 +16,10 @@
 
 :javascript
   $(function() {
-    var stamp = window.location.hash.split('#t=')[1] || window.location.hash.split('&t=')[1],
-        lang = (window.location.hash.split('#l=')[1] || '').split('&')[0],
+    var params = new URLSearchParams(window.location.hash && window.location.hash.split('#')[1]);
+    var stamp = params.get('t'),
+        lang = params.get('l'),
+        srt = params.get('s'),
         $video = $('video'),
         promises = [];
 
@@ -41,10 +43,20 @@
         skipBackInterval: 15,
         startLanguage: lang,
         success: function (mediaElement, originalNode, player) {
+          window.player = player;
+
           mediaElement.addEventListener('canplay', function () {
             if (stamp) {
               mediaElement.setCurrentTime(stamp);
               stamp = null;
+            }
+            console.log('srt', srt);
+            if (srt) {
+              var track = player.tracks.filter(x => x.srclang === 'srt')[0]
+              if (track) {
+                player.setTrack(track.trackId);
+              }
+              player.displayCaptions();
             }
           });
           mediaElement.addEventListener('playing', function () {
