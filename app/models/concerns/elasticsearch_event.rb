@@ -34,7 +34,7 @@ module ElasticsearchEvent
                     fields:  [
                       'title^4',
                       'subtitle^3',
-                      'persons^3',
+                      'persons^4',
                       'slug^2',
                       'remote_id^2',
                       'conference.acronym^2',
@@ -49,7 +49,7 @@ module ElasticsearchEvent
                 { prefix:  { 'title' => { value:  term, boost:  12 } } },
                 { prefix:  { 'subtitle' => { value:  term, boost:  3 } } },
                 { prefix:  { 'conference.acronym' => { value:  term, boost:  2 } } },
-                { prefix:  { 'conference.persons' => { value:  term, boost:  1 } } }
+                { prefix:  { 'conference.persons' => { value:  term, boost:  12 } } }
               ]
             }
           },
