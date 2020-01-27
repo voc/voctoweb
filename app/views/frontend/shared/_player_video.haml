@@ -43,20 +43,24 @@
         skipBackInterval: 15,
         startLanguage: lang,
         success: function (mediaElement, originalNode, player) {
+          window.mediaElement = mediaElement;
           window.player = player;
+
+          if (srt || srt === "") {
+            var subtitles = player.tracks.filter(x => x.kind === 'subtitles');
+            var track = subtitles.filter(x => x.srclang === srt);
+            console.log(track);
+            if (track) {
+              player.setTrack(track[0].trackId);
+            } else {
+              player.setTrack(subtitles[0].trackId);
+            }
+          }
 
           mediaElement.addEventListener('canplay', function () {
             if (stamp) {
               mediaElement.setCurrentTime(stamp);
               stamp = null;
-            }
-            console.log('srt', srt);
-            if (srt) {
-              var track = player.tracks.filter(x => x.srclang === 'srt')[0]
-              if (track) {
-                player.setTrack(track.trackId);
-              }
-              player.displayCaptions();
             }
           });
           mediaElement.addEventListener('playing', function () {
@@ -66,6 +70,9 @@
           function updateHash() {
             var l = player.options.startLanguage || '';
             var hash =  (l ? '#l='+l+'&t=' : '#t=') + Math.round(mediaElement.currentTime);
+            if (srt) {
+              hash += '&s=' + srt;
+            }
             window.location.replaceHash(hash);
           }          
           mediaElement.addEventListener('pause', updateHash, false);
