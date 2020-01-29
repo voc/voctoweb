@@ -3,6 +3,7 @@ class Languages
     'eng' => ['en', 'English'],
     'deu' => ['de', 'German'],
     'gsw' => ['de-ch', 'Swiss German'],
+    'swg' => ['swg', 'Swabian'],
     'fra' => ['fr', 'French'],
     'spa' => ['es', 'Spanish'],
     'jpn' => ['ja', 'Japanese'],
