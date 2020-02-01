@@ -39,6 +39,9 @@ services:
     image: elasticsearch:5-alpine
     ports:
       - "9200:9200"
+    volumes:
+#      - esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   redis:
     image: redis:5-alpine
     ports:
