@@ -142,6 +142,7 @@ class Recording < ApplicationRecord
     begin 
       URI.open(url).read if subtitle?
     rescue OpenURI::HTTPError
+      puts '   failed with HTTP Error'
       ''
     end
   end

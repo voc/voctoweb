@@ -3,7 +3,7 @@ module Frontend
     def index
       @searchtype = ''
       @searchquery = params[:q] || params[:p]
-      if params[:q] 
+      if params[:q]
         @events = Frontend::Event.query(params[:q]).page(params[:page]).records
       else
         @searchtype = 'person'
