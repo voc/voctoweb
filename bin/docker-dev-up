@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker-compose build
-docker-compose up postgres
+docker-compose up -d postgres
 docker-compose run voctoweb rake db:setup
 docker-compose run voctoweb bin/update-data
-docker-compose up
+docker-compose up voctoweb

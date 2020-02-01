@@ -2,7 +2,7 @@ defaults: &defaults
   frontend_proto: http
   frontend_host: localhost.c3voc.de
   cdn_url: https://cdn.media.ccc.de
-  static_url: https://static.cdn.media.ccc.de
+  static_url: https://static.media.ccc.de
   cors_url: https://media.ccc.de/srt
   folders:
     recordings_webroot: ''
