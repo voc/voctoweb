@@ -181,10 +181,19 @@ class Event < ApplicationRecord
   end
 
   def doi_url
-    if doi
-      "https://doi.org/#{doi}"
-    end
+    "https://doi.org/#{doi}" if doi
   end
+
+  def video_master
+    recordings.video_without_slides
+              .select { |x| x.filetype == 'video/mp4' && x.high_quality == true }
+              .min_by { |x| x.html5 ? 1 : 0 }
+  end
+
+  def translations
+    video_master.languages - [ original_language ]
+  end
+
 
   def update_feeds
     return unless release_date

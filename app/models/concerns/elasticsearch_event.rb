@@ -12,12 +12,12 @@ module ElasticsearchEvent
 
     def as_indexed_json(_options = {})
       as_json(
-        only: %i[title subtitle description persons length release_date date updated_at slug],
+        only: %i[title subtitle description persons length release_date date updated_at slug original_language translations],
         methods: :remote_id,
         id: :guid,
         include: { 
           conference: { only: %i[title acronym] },
-          subtitles: { only: %i[language], methods: :fulltext } 
+          subtitles: { only: %i[language], methods: :fulltext }
         }
       )
     end
