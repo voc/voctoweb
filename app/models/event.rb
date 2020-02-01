@@ -175,6 +175,11 @@ class Event < ApplicationRecord
     recordings.video.sort_by { |x| (x.language == original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
   end
 
+  # for elastic search
+  def subtitles
+    recordings.subtitle
+  end
+
   def doi_url
     if doi
       "https://doi.org/#{doi}"

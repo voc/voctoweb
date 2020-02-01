@@ -12,10 +12,14 @@ module ElasticsearchEvent
 
     def as_indexed_json(_options = {})
       as_json(
-        only: %i(title subtitle description persons length release_date date updated_at slug),
+        only: %i[title subtitle description persons length release_date date updated_at slug],
+        methods: :remote_id,
         id: :guid,
-        include: { conference: { only: %i(title acronym) }
-      })
+        include: { 
+          conference: { only: %i[title acronym] },
+          subtitles: { only: %i[language], methods: :fulltext } 
+        }
+      )
     end
   end
 
@@ -54,13 +58,14 @@ module ElasticsearchEvent
                     query:  term,
                     fields:  [
                       'title^20',
-                      'subtitle^3',
-                      'persons^4',
-                      'slug^2',
-                      'remote_id^2',
-                      'conference.acronym^2',
-                      'conference.title^2',
-                      'description^1'
+                      'subtitle^4',
+                      'persons^5',
+                      'slug^3',
+                      'remote_id^3',
+                      'conference.acronym^3',
+                      'conference.title^3',
+                      'description^2',
+                      'subtitles.fulltext^1'
                     ],
                     type:  'best_fields',
                     operator:  'and',

@@ -52,10 +52,6 @@ module Frontend
       }
     end
 
-    def recordings_url
-      File.join(Settings.cdn_url, recordings_path).freeze
-    end
-
     def playlist(event = nil)
       return events.includes(:conference) unless event
       n = events.index(event)
