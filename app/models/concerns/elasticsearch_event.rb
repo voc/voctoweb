@@ -30,7 +30,6 @@ module ElasticsearchEvent
         function_score:  {
           query:  {
             bool:  {
-              disable_coord:  true,
               should:  [
                 {
                   multi_match: {
@@ -90,7 +89,6 @@ module ElasticsearchEvent
         function_score:  {
           query:  {
             bool:  {
-              disable_coord:  true,
               should:  [
                 {
                   multi_match:  {
