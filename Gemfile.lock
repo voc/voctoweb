@@ -155,7 +155,9 @@ GEM
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.9.4)
+    graphql (1.10.2)
+    graphql-query-resolver (0.2.0)
+      graphql (~> 1.0, >= 1.0.0)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -310,6 +312,10 @@ GEM
       rake
     sdoc (1.0.0)
       rdoc (>= 5.0)
+    search_object (1.2.3)
+    search_object_graphql (0.3.1)
+      graphql (~> 1.8)
+      search_object (~> 1.2.2)
     sidekiq (5.2.2)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
@@ -372,7 +378,8 @@ DEPENDENCIES
   factory_bot_rails
   foreman
   graphiql-rails
-  graphql
+  graphql (= 1.10.2)
+  graphql-query-resolver
   haml
   jbuilder
   jquery-rails
@@ -392,6 +399,8 @@ DEPENDENCIES
   ruby-graphviz
   sass-rails
   sdoc
+  search_object (= 1.2.3)
+  search_object_graphql (= 0.3.1)
   sidekiq
   tinymce-rails
   turbolinks
