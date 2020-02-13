@@ -1,7 +1,8 @@
-
 # This entity is an Event with multiple Files e.g. Video and Audio recordings, as well as PDFs e.g. the lecture slides
 # alternate Name: Lecture, Talk?
+
 module Types
+
   class LectureType < Types::BaseObject
     description 'This entity is an Event with multiple Files e.g. Video and Audio recordings, subtitles (SRT) as well as PDFs e.g. the lecture slides'
 
@@ -14,6 +15,8 @@ module Types
     field :description, String, "The event's description", null: true
 
     field :slug, UrlType, "The URL slug of this event", null: false
+    field :url, UrlType, "A URL pointing to this lecture's page in vocotweb frontend", null: false
+
     field :originalLanguage, String, "The event's original language, encoded as ISO 639-2", null: true
     field :duration, Integer, "The lecture recording duration in seconds", null: true
 
@@ -93,8 +96,8 @@ module Types
       object.recordings.subtitle
     end
 
-    #def share_url
-    #  public_event_url(object)
-    #end
+    def url
+      Rails.application.routes.url_helpers.event_url(slug: object.slug)
+    end
   end
 end
