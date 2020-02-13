@@ -155,6 +155,12 @@ class Event < ApplicationRecord
     metadata['remote_id']
   end
 
+  # used by player and graphql
+  def videos_sorted_by_language
+    self.recordings.video.sort_by { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+  end
+  
+
   def doi_url
     if doi
       "https://doi.org/#{doi}"

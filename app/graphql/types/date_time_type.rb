@@ -1,13 +1,6 @@
 module Types
-  class DateTimeType < Types::BaseScalar
+  class DateTimeType < GraphQL::Types::ISO8601DateTime
     graphql_name 'DateTime'
   
-    def self.coerce_input(input_value, context)
-      Time.zone.parse(input_value)
-    end
-  
-    def self.coerce_result(ruby_value, context)
-      ruby_value.value.utc.iso8601
-    end
   end
 end
