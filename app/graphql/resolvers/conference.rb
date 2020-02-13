@@ -6,7 +6,7 @@ require 'graphql/query_resolver'
 class Resolvers::Conference
   include SearchObject.module(:graphql)
 
-  scope { Frontent::Conference.all }
+  scope { Conference.all }
 
   type types[Types::ConferenceType]
 
@@ -52,11 +52,11 @@ class Resolvers::Conference
     scope.offset(value)
   end
 
-  def apply_orderBy_with_created_at_asc(scope) # rubocop:disable Style/MethodName
+  def apply_order_by_with_created_at_asc(scope)
     scope.order('created_at ASC')
   end
 
-  def apply_orderBy_with_created_at_desc(scope) # rubocop:disable Style/MethodName
+  def apply_order_by_with_created_at_desc(scope)
     scope.order('created_at DESC')
   end
 
@@ -64,7 +64,7 @@ class Resolvers::Conference
     # NOTE: Don't run QueryResolver during tests
     return super unless context.present?
 
-    GraphQL::QueryResolver.run(Frontend::Conference, context, Types::ConferenceType) do
+    GraphQL::QueryResolver.run(Conference, context, Types::ConferenceType) do
       super
     end
   end
