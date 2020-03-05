@@ -29,6 +29,7 @@
     top: 0;
     z-index: -1;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.2s, z-index 0.2s;
     transform: translateY(-100%) translateY(-7px);
 }
