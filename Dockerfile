@@ -1,9 +1,9 @@
 # Use the the official Ruby image as a base
-FROM ruby:2.6.0
+FROM ruby:2.6-alpine
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem
-RUN apt-get update -qq && apt-get install -y nodejs dumb-init
+RUN apk add --no-cache nodejs dumb-init curl git build-base libxml2-dev libxslt-dev postgresql-dev tzdata
 
 WORKDIR /voctoweb
 
