@@ -4,7 +4,7 @@
 - content_for :body_class do
   page-start
 
-- if Frontend::Conference.has_live?
+- if Frontend::Conference.has_live? or params[:forceopen]
   = render 'frontend/shared/live'
 - else
   = render 'frontend/shared/promoted'
