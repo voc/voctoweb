@@ -105,7 +105,7 @@
       %li
         %span.icon.icon-calendar-o{title: display_release_date_title(@event)}
         = @event.display_date
-      - if ! @event.released_on_event_day?
+      - if !@event.release_date.nil? && ! @event.released_on_event_day?
         %li
           %span.icon.icon-upload{title: 'release date'}
           = @event.release_date.to_date
