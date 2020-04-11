@@ -11,6 +11,10 @@
 
     = yield :head
 
+    - unless @conference.nil? ||  @conference.custom_css.nil?
+      %style
+        = @conference.try(:custom_css).html_safe
+
   %body{:class => content_for(:body_class)}
     = render partial: 'frontend/shared/navbar'
 

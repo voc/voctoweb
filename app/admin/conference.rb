@@ -43,6 +43,9 @@ ActiveAdmin.register Conference do
       row :metadata do
         div c.metadata.try(:truncate, 200)
       end
+      row :custom_css do
+        div c.custom_css.try(:truncate, 200)
+      end
     end
     table_for c.events.order('slug ASC') do
       column "Events" do |event|
@@ -58,7 +61,7 @@ ActiveAdmin.register Conference do
       f.input :schedule_url
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
       f.input :slug
-      f.input :description, input_html: { class: 'tinymce' }
+      f.input :description #, input_html: { class: 'tinymce' }
       f.input :link
     end
     f.inputs "Paths" do
@@ -71,6 +74,8 @@ ActiveAdmin.register Conference do
     end
     f.inputs "Meta" do
       f.input :subtitles, :as => :boolean, label: 'Conference has subtitles', hint: 'displays subtitle appeal below player'
+      f.input :custom_css
+
     end
     f.actions
   end
@@ -108,7 +113,9 @@ ActiveAdmin.register Conference do
                                   :logo_does_not_contain_title,
                                   :slug,
                                   :aspect_ratio,
-                                  :subtitles ]
+                                  :subtitles,
+                                  :custom_css,
+                                ]
     end
   end
 
