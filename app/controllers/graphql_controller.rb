@@ -8,9 +8,10 @@ class GraphqlController < ApplicationController
     context = {
       # Query context goes here, for example:
       # current_user: current_user,
+      tracing_enabled: ApolloFederation::Tracing.should_add_traces(headers)
     }
     result = MediaBackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    render json: result
+    render json: ApolloFederation::Tracing.attach_trace_to_result(result)
   rescue => e
     raise e unless Rails.env.development?
     handle_error_in_development e
