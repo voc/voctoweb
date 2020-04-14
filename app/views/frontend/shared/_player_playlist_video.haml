@@ -13,7 +13,7 @@
                     poster: event.poster_url,
                     persons: event.persons.join(', '),
                     lang: recording.language,
-                    quality: recording_quality(recording),
+                    quality: recording.quality_label,
                     mep: { description: event.description } }}
 
 :javascript

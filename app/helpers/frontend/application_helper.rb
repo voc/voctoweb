@@ -2,18 +2,6 @@ module Frontend
   module ApplicationHelper
     require 'uri'
 
-    def recording_quality(recording)
-      recording.high_quality ? 'high' : 'low'
-    end
-
-    def recording_title(recording)
-      if recording.slides?
-        "slides #{recording.language} #{recording.height}p"
-      else
-        "#{recording.language} #{recording.height}p"
-      end
-    end
-
     def oembed_api_event_url(event)
       (public_oembed_url(url: event_url(slug: event.slug))).freeze
     end

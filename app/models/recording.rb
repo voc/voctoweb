@@ -86,6 +86,18 @@ class Recording < ApplicationRecord
     end
   end
 
+  def label
+    if slides?
+      "slides #{language} #{height}p"
+    else
+      "#{language} #{height}p"
+    end
+  end
+
+  def quality_label
+    high_quality ? 'high' : 'low'
+  end
+
   def min_width(maxwidth = nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width
