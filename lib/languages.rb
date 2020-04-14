@@ -234,11 +234,11 @@ class Languages
     end
 
     def to_iso_639_1(lang)
-      LANGUAGES[lang][0]
+      LANGUAGES[lang].nil? ? lang : LANGUAGES[lang][0]
     end
 
     def to_string(lang)
-      LANGUAGES[lang][1]
+      LANGUAGES[lang].nil? ? lang : LANGUAGES[lang][1]
     end
   end
 end
