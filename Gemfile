@@ -82,6 +82,7 @@ gem 'graphql-query-resolver'
 gem 'search_object', '1.2.3'
 gem 'search_object_graphql', '0.3.1'
 gem 'graphiql-rails', group: :development
+gem 'apollo-federation'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
