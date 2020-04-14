@@ -34,5 +34,20 @@ module Types
       Frontend::Event.find_by(guid: guid)
     end
 
+    field :lectureBySlug, LectureType, null: true do
+      description 'Find a lecture by slug'
+      argument :slug, ID, required: true
+    end
+    def lecture_by_slug(slug:)
+      Frontend::Event.find_by(slug: slug)
+    end
+
+    field :lecturesRelatedTo, LectureType.connection_type, null: true do
+      description 'A list of related lectures, ordered by decreasing relevance.'
+      argument :guid, ID, required: true
+    end
+    def lectures_related_to(guid:)
+      Frontend::Event.find_by(guid: guid).related_events
+    end
   end
 end

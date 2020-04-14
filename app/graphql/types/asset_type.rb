@@ -2,6 +2,7 @@ module Types
   class AssetType < Types::BaseObject
     description "Files like videos, audios, SRTs or PDFs"
 
+    field :label, String, null: false
     field :filename, String, null: false
     field :url, String, "A URL pointing to the CDN location of this recording", null: false
     field :mime_type, String, null: false
