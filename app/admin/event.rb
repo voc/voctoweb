@@ -109,9 +109,8 @@ ActiveAdmin.register Event do
       f.input :conference, collection: Conference.order(:acronym)
       f.input :title
       f.input :subtitle
-      f.input :description, input_html: { class: 'tinymce' }
+      f.input :description #, input_html: { class: 'tinymce' }
       f.input :link
-      f.input :promoted
       f.input :original_language, hint: 'ISO-639-2 codes', collection: Languages.all
       f.input :persons_raw, as: :text
       f.input :tags_raw, as: :text
@@ -125,6 +124,10 @@ ActiveAdmin.register Event do
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :timeline_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :thumbnails_filename, hint: event.try(:conference).try(:get_images_path)
+    end
+    f.inputs 'Meta' do
+      f.input :promoted
+      f.input :promotion_disabled, :as => :boolean, label: 'Disable promotion', hint: 'blacklist event, so it does not get promoted to the start page'
     end
     f.actions
   end
@@ -163,8 +166,8 @@ ActiveAdmin.register Event do
   controller do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
-                            :conference_id, :promoted, :title, :subtitle, :link, :slug,
-                            :original_language, :doi,
+                            :conference_id, :title, :subtitle, :link, :slug,
+                            :original_language, :doi, :promoted, :promotion_disabled,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end

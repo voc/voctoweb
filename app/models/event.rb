@@ -66,7 +66,9 @@ class Event < ApplicationRecord
     connection.execute %( UPDATE events SET promoted = 'false' )
     popular_event_ids.each do |event_id|
       event = Event.find event_id['id']
-      event.update_column :promoted, true
+      unless event.promotion_disabled
+        event.update_column :promoted, true
+      end
     end
   end
 
@@ -133,7 +135,7 @@ class Event < ApplicationRecord
   end
 
   def persons_text
-    if persons.length == 0
+    if persons.length.zero?
       'n/a'
     elsif persons.length == 1
       persons[0]
@@ -150,6 +152,19 @@ class Event < ApplicationRecord
     end
   end
 
+  # we can not use promotion_disabled? as method name, due to activeadmin
+  def promotion_disabled
+    self&.metadata&.fetch('promotion_disabled', false)
+  end
+
+  def promotion_disabled=(val)
+    if val == '1'
+      self[:metadata]['promotion_disabled'] = true
+    else
+      self[:metadata].delete('promotion_disabled')
+    end
+  end
+
   # for elastic search
   def remote_id
     metadata['remote_id']
@@ -157,9 +172,8 @@ class Event < ApplicationRecord
 
   # used by player and graphql
   def videos_sorted_by_language
-    self.recordings.video.sort_by { |x| (x.language == self.original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+    recordings.video.sort_by { |x| (x.language == original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
   end
-  
 
   def doi_url
     if doi
@@ -218,6 +232,7 @@ class Event < ApplicationRecord
 
   def original_language_valid
     return unless original_language
+
     languages = original_language.split('-')
     errors.add(:original_language, 'not a valid language') unless languages.all? { |l| Languages.all.include?(l) }
   end
