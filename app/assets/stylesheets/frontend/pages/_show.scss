@@ -124,7 +124,7 @@ body.page-show {
       }
     }
 
-    .tab-content {
+    .tab-content, .content {
       background-color: $gray-lighter;
       border-bottom: 1px solid #e3e3e3;
       border-left: 1px solid #e3e3e3;
@@ -145,7 +145,8 @@ body.page-show {
           width: 25%;
         }
       }
-
+    }
+    .tab-content {
       .btn {
         $btn-height: 55px;
 
@@ -163,25 +164,6 @@ body.page-show {
           font-weight: lighter;
           font-size: 13px;
         }
-        .language {
-          $language-height: 32px;
-
-          color: $gray-darker;
-          background: white;
-          border: 1px solid $gray;
-
-          border-radius: 4px;
-
-          position: absolute;
-
-          text-align: center;
-          line-height: $language-height;
-
-          height: $language-height;
-          width: $language-height;
-          left: ($btn-height - $language-height) / 2;
-          top: ($btn-height - $language-height) / 2;
-        }
       }
     }
 
@@ -196,21 +178,18 @@ body.page-show {
     }
 
     .subtitle {
-      .dropdown {
-        display: block;
-        float: left;
-      }
-      .onlyone {
-        float: left;
+      h4 {
+        -webkit-hyphens: none;
       }
       .improve {
         display: block;
         float: left;
-        margin-left: 15px;
+        margin-left: 10px;
         line-height: 34px;
       }
       .btn {
-        margin-top: 3px;
+        float: left;
+        margin: 5px;
       }
     }
   }
