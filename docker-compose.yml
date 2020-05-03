@@ -43,6 +43,13 @@ services:
     image: redis:5-alpine
     ports:
       - "6379:6379"
+  ssh-server:
+      image: panubo/sshd
+      volumes:
+        - ".:/voctoweb"
+        - "./docker/ssh:/root/.ssh"
+      ports:
+        - "2202:22"
   nginx:
     image: nginx:stable-alpine
     volumes:
