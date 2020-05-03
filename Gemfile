@@ -77,11 +77,11 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'api-pagination'
 
 # GraphQL
-gem 'graphql', '1.10.2'
+gem 'graphql'
 gem 'graphql-query-resolver'
-gem 'search_object', '1.2.3'
-gem 'search_object_graphql', '0.3.1'
-gem 'graphiql-rails', group: :development
+gem 'search_object'
+gem 'search_object_graphql'
+gem 'graphiql-rails'
 gem 'apollo-federation'
 
 group :doc do
