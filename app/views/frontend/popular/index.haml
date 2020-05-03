@@ -6,13 +6,13 @@
 
 .container-fluid
   %h1 Popular Events
-  -if @year == "0"
+  -if @year === 0
     %b All
   - else
     %a{:href => popular_path} All
-  - for year in @firstyear..Time.new.year
+  - for year in (@firstyear..Time.new.year).to_a.reverse
     %span -
-    - if @year.to_i != year
+    - if @year != year
       %a{:href => popular_path + "/#{year}"} #{year}
     - else
       %b #{year}
