@@ -14,26 +14,15 @@
         .tab-content
           - event.filetypes(MimeType::VIDEO).each_with_index do |(type, display), idx|
             .tab-pane{role: "tabpanel", class: if idx == 0 then 'active' else '' end, id: type}
-              - hq = event.video_for_download(type, high_quality: true)
-              - lq = event.video_for_download(type, high_quality: false)
-
-              - unless hq.nil?
+              - event.videos_for_download(type).each do |file|
                 .btn-wrap
-                  %a.btn.btn-default.download.hq{href: hq.url}
-                    .title= 'Download ' + hq.height.to_s + 'p'
-                    - if hq.size
-                      .size= hq.size.to_s+' MB'
+                  %a.btn.btn-default.download.hq{href: file.url}
+                    .title= 'Download ' + file.height.to_s + 'p'
+                    %span.language= file.language
+                    - if file.size
+                      %span.size= file.size.to_s+' MB'
                     - else
-                      .codec= display
-
-              - unless lq.nil?
-                .btn-wrap
-                  %a.btn.btn-default.download.video.lq{href: lq.url}
-                    .title= 'Download ' + lq.height.to_s + 'p'
-                    - if lq.size
-                      .size= lq.size.to_s+' MB'
-                    - else
-                      .codec= display
+                      %span.codec= display
 
   - if event.has_translation
     .row.multiaudio-warning

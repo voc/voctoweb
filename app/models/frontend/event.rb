@@ -72,23 +72,37 @@ module Frontend
 
     def filetypes(mime_type)
       recordings.by_mime_type(mime_type)
-        .map { |x| [x.filetype, x.display_filetype] }
-        .uniq.to_h.sort
+                .map { |x| [x.filetype, x.display_filetype] }
+                .uniq.to_h.sort
     end
 
-    # used for the hd and sd download buttons
+    # returns one video, used for the hd and sd download buttons
+    # prefering files with multiple audio tracks (html5=0) 
     def video_for_download(filetype, high_quality: true)
       recordings.video_without_slides
                 .select { |x| x.filetype == filetype && x.high_quality == high_quality }
                 .min_by { |x| x.html5 ? 1 : 0 }
     end
 
+    # returns list of videos, one per quality aka resolution
+    # prefering files with multiple audio tracks (html5=0)
+    def videos_for_download(filetype)
+      recordings.video_without_slides
+                .select   { |x| x.filetype == filetype }
+                .group_by { |x| x.height }
+                .sort
+                .reverse
+                .map { |_height, group| 
+                  group.min_by { |x| x.html5 ? 1 : 0 }
+                }
+    end
+
     def audio_recordings_for_download(filetype)
       recordings.audio
-        .select { |x| x.filetype == filetype }
+                .select  { |x| x.filetype == filetype }
                 .sort_by { |x| x.language == original_language ? '' : x.language }
-        .map { |x| [x.language, x] }
-        .to_h
+                .map     { |x| [x.language, x] }
+                .to_h
     end
 
     def audio_recording
@@ -102,9 +116,9 @@ module Frontend
 
     def slides_for_download(filetype)
       recordings.slides
-        .select { |x| x.filetype == filetype }
-                .sort_by { |x| x.language == original_language ? '' : x.language }
-        .map { |x| [x.language, x] }
+        .select  { |x| x.filetype == filetype }
+        .sort_by { |x| x.language == original_language ? '' : x.language }
+        .map     { |x| [x.language, x] }
         .to_h
     end
 
