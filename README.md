@@ -8,6 +8,31 @@ media.ccc.de webfrontend, meta data editor and API.
 ## APIs
 
  Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
+ 
+
+### Public GraphQL API
+
+The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetch in a single request. We tried to clean up the type names and call talks `lecture` and files `assets` (previously known as recordings). Please create issues if you are missing anything.
+
+Example query: https://graphqlbin.com/v2/nOWBC7
+``` graphql
+query LectureQueryExample {
+  lectureBySlug(slug: "36c3-10652-bahnmining_-_punktlichkeit_ist_eine_zier") {
+    guid
+    title
+    subtitle
+    persons
+    slug
+    originalLanguage
+    videos {
+      label
+      url
+      mimeType
+    }
+  }
+}
+```
+ 
 
 ### Public JSON API
 
