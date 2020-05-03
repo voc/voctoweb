@@ -28,7 +28,7 @@ class Feed::Base
   end
 
   def downloaded_events
-    Frontend::Event.includes(:conference)
+    Frontend::Event.published.includes(:conference)
   end
 
   def last_year
