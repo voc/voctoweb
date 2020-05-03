@@ -15,7 +15,11 @@ module FahrplanUpdater
     self.title = info.delete(:title)
     id = info.delete(:id)
     self.metadata[:remote_id] = id
-    self.link = get_event_url(id)
+    # fallback to link schedule url based link generation, when not set in fahrplan
+    if info.key?('link')
+      info.delete(:link)
+      self.link = get_event_url(id)
+    end
     update_attributes info
   end
 

@@ -94,6 +94,7 @@ FactoryBot.define do
                     <duration>01:00</duration>
                     <room>Saal (MP7 OG)</room>
                     <slug>saal_mp7_og_-_2013-07-05_11:00_-_side_effect_-_mlp_-_5060</slug>
+                    <url>http://localhost/events/5060.html</url>
                     <title>Nearly Everything That Matters is a Side Effect</title>
                     <subtitle/>
                     <track>Hacking</track>
