@@ -14,7 +14,7 @@ ActiveAdmin.register News do
     f.inputs "News Details" do
       f.input :date
       f.input :title
-      f.input :body, input_html: { class: 'tinymce' }
+      f.input :body #, input_html: { class: 'tinymce' }
     end
     f.actions
   end
