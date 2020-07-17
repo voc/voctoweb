@@ -2,3 +2,24 @@
     height: 2em;
     cursor: pointer;
 }
+
+/* Undo Timelens styles from timelens.css for Clappr players inside of relive-player classes.
+ *
+ * To avoid this, we would need to set it up in a way so that timelens.css is only loaded for pages
+ * with a Clappr player where a visual timeline is desired. */
+
+.relive-player .media-control .bar-background {
+    height: 1px !important;
+    margin-top: 0 !important;
+    box-shadow: none !important;
+}
+
+.relive-player .media-control .seek-time,
+.relive-player .media-control .bar-scrubber,
+.relive-player .media-control .bar-hover {
+    display: block !important;
+}
+
+.relive-player .media-control-hide {
+    bottom: 0 !important;
+}
