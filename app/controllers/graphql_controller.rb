@@ -11,8 +11,9 @@ class GraphqlController < ApplicationController
       tracing_enabled: ApolloFederation::Tracing.should_add_traces(headers)
     }
     result = MediaBackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    render json: result
   rescue => e
-    raise e unless Rails.env.development?
+    handle_error e unless Rails.env.development?
     handle_error_in_development e
   end
 
@@ -41,5 +42,11 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
+  end
+
+  def handle_error(e)
+    logger.error e.message
+
+    render json: { errors: [{ message: e.message }], data: {} }, status: 500
   end
 end
