@@ -148,7 +148,7 @@ class Event < ApplicationRecord
   def related_events
     unless metadata['related'].nil?
       ids = metadata['related'].keys
-      Event.find(ids)
+      Frontend::Event.includes([:conference]).find(ids)
     end
   end
 
