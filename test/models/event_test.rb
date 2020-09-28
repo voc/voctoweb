@@ -218,6 +218,6 @@ class EventTest < ActiveSupport::TestCase
     e.metadata = {'related': Hash[@event.id, 1] }
     e.save!
 
-    assert_includes e.related_events, @event
+    assert_includes e.related_events, @event.becomes(Frontend::Event)
   end
 end
