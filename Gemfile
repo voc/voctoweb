@@ -5,6 +5,7 @@ gem 'rails', '~> 5.2.0'
 gem 'dotenv-rails'
 
 gem 'activeadmin'
+gem 'goldiloader'
 
 gem 'tinymce-rails'
 gem 'devise'
