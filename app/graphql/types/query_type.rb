@@ -13,7 +13,7 @@ module Types
 
     field :conferences, function: Resolvers::Conference
 
-    field :conferencesRecent, [ConferenceType], null: true do
+    field :conferences_recent, [ConferenceType], null: true do
       description 'All conferences as List, recent first'
       argument :first, Integer, default_value: 5, prepare: ->(limit) { [limit, 30].min }, required: true
       argument :offset, Integer, default_value: 0, required: false
@@ -22,7 +22,7 @@ module Types
       Frontend::Conference.with_recent_events(first).offset(offset)
     end
 
-    field :allConferences, ConferenceType.connection_type, null: true do
+    field :all_conferences, ConferenceType.connection_type, null: true do
       description 'All conferences as Connection'
     end
 
@@ -34,7 +34,7 @@ module Types
       Frontend::Event.find_by(guid: guid)
     end
 
-    field :lectureBySlug, LectureType, null: true do
+    field :lecture_by_slug, LectureType, null: true do
       description 'Find a lecture by slug'
       argument :slug, ID, required: true
     end
@@ -42,7 +42,7 @@ module Types
       Frontend::Event.find_by(slug: slug)
     end
 
-    field :lecturesRelatedTo, LectureType.connection_type, null: true do
+    field :lectures_related_to, LectureType.connection_type, null: true do
       description 'A list of related lectures, ordered by decreasing relevance.'
       argument :guid, ID, required: true
     end
