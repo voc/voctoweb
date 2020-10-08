@@ -103,4 +103,5 @@ Rails.application.routes.draw do
     get '/podcast-archive.xml', to: 'feeds#podcast_archive_legacy', defaults: { format: 'xml' }
   end
 
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
