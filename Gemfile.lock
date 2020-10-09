@@ -314,7 +314,9 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    ruby-graphviz (1.2.3)
+    rexml (3.2.4)
+    ruby-graphviz (1.2.5)
+      rexml
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
