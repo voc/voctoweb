@@ -291,7 +291,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rdoc (6.0.4)
-    redcarpet (3.4.0)
+    redcarpet (3.5.0)
     redis (4.0.3)
     redis-actionpack (5.0.2)
       actionpack (>= 4.0, < 6)
