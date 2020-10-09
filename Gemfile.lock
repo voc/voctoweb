@@ -246,8 +246,8 @@ GEM
       get_process_mem (~> 0.2)
       puma (>= 2.7, < 5)
     rack (2.2.3)
-    rack-cors (1.0.5)
-      rack (>= 1.6.0)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
