@@ -3,6 +3,10 @@ require 'json'
 
 class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
 
+  setup do
+    @conference = create :conference_with_recordings
+  end
+
   test 'load lecture by guid' do
     query_string = <<-GRAPHQL
       query($id: ID!) {
@@ -48,8 +52,8 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
 
   test 'load newest conference' do
     query_string = <<-GRAPHQL
-      query {
-        lecturesRelatedTo(guid: "12345") {
+      query($id: ID!) {
+        lecturesRelatedTo(guid: $id) {
           nodes {
             title
             images {
@@ -61,7 +65,8 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
       }
     GRAPHQL
 
-    result = MediaBackendSchema.execute(query_string)
+    @event = create :event
+    result = MediaBackendSchema.execute(query_string, variables: { id: @event.id })
     assert_nil result['errors']
 
   end

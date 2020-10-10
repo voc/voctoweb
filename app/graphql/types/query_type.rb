@@ -47,7 +47,8 @@ module Types
       argument :guid, ID, required: true
     end
     def lectures_related_to(guid:)
-      Frontend::Event.find_by(guid: guid).related_events
+      event = Frontend::Event.find_by(guid: guid)
+      event.related_events unless event.nil?
     end
   end
 end
