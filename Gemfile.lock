@@ -137,7 +137,7 @@ GEM
       activesupport (> 3)
       elasticsearch (> 1)
       hashie
-    elasticsearch-rails (6.0.0)
+    elasticsearch-rails (6.1.1)
     elasticsearch-transport (6.1.0)
       faraday
       multi_json
@@ -203,6 +203,9 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     lograge (0.11.2)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -246,8 +249,8 @@ GEM
       get_process_mem (~> 0.2)
       puma (>= 2.7, < 5)
     rack (2.2.3)
-    rack-cors (1.0.5)
-      rack (>= 1.6.0)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
@@ -314,7 +317,9 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    ruby-graphviz (1.2.3)
+    rexml (3.2.4)
+    ruby-graphviz (1.2.5)
+      rexml
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -402,8 +407,8 @@ DEPENDENCIES
   devise
   dotenv-rails
   ed25519
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-model (~> 6.0.0)
+  elasticsearch-rails (~> 6.1.0)
   exception_notification
   factory_bot_rails
   foreman
@@ -414,6 +419,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
+  listen
   lograge
   mqtt!
   pg

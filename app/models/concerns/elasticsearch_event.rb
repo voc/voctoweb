@@ -26,13 +26,34 @@ module ElasticsearchEvent
         function_score:  {
           query:  {
             bool:  {
-              disable_coord:  1,
+              disable_coord:  true,
               should:  [
+                {
+                  multi_match: {
+                    query: term,
+                    fields: [
+                      'title',
+                      'conference.title'
+                    ],
+                    type: 'phrase',
+                    boost: 9000
+                  }
+                },
+                {
+                  multi_match: {
+                    query: term,
+                    fields: [
+                      'title'
+                    ],
+                    operator: 'and',
+                    boost: 4000
+                  }
+                },
                 {
                   multi_match:  {
                     query:  term,
                     fields:  [
-                      'title^4',
+                      'title^20',
                       'subtitle^3',
                       'persons^4',
                       'slug^2',
@@ -45,17 +66,14 @@ module ElasticsearchEvent
                     operator:  'and',
                     fuzziness:  1
                   }
-                },
-                { prefix:  { 'title' => { value:  term, boost:  12 } } },
-                { prefix:  { 'subtitle' => { value:  term, boost:  3 } } },
-                { prefix:  { 'conference.acronym' => { value:  term, boost:  2 } } },
-                { prefix:  { 'conference.persons' => { value:  term, boost:  12 } } }
+                }
               ]
             }
           },
           boost:  1.2,
-          functions:  [
-            { gauss:  { date:  { scale:  '730d', decay:  0.5 } } }
+          boost_mode: 'avg',
+          functions: [
+            { gauss: { date: { scale: '730d', decay: 0.5 } } }
           ]
         }
       }
@@ -67,7 +85,7 @@ module ElasticsearchEvent
         function_score:  {
           query:  {
             bool:  {
-              disable_coord:  1,
+              disable_coord:  true,
               should:  [
                 {
                   multi_match:  {
@@ -77,8 +95,7 @@ module ElasticsearchEvent
                     ],
                     type:  'best_fields',
                   }
-                },
-                { prefix:  { 'conference.persons' => { value:  term} } }
+                }
               ]
             }
           },
