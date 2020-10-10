@@ -8,12 +8,12 @@ module Types
 
     field :url, UrlType, "A URL pointing to the conference page in vocotweb frontend", null: false
     #field :logo, Types::ImageType, null: true
-    field :logoUrl, UrlType, "A URL pointing to the conference's logo", null: true
-    field :aspectRatio, String, "The aspect ratio of the conference's recordings", null: false # TODO: Enum
-    #field :recordingsUrl, UrlType,  "A URL pointing to the root of all recording files of this conference", null: false
-    field :scheduleUrl, UrlType,  "A URL pointing to the conference's frab xml schedule", null: true
-    field :updatedAt, DateTimeType, "Identifies the date and time when the object was last updated", null: false
-    field :eventLastReleasedAt, DateTimeType, "Identifies the date and time when a event was last released", null: true
+    field :logo_url, UrlType, "A URL pointing to the conference's logo", null: true
+    field :aspect_ratio, String, "The aspect ratio of the conference's recordings", null: false # TODO: Enum
+    #field :recordings_url, UrlType,  "A URL pointing to the root of all recording files of this conference", null: false
+    field :schedule_url, UrlType,  "A URL pointing to the conference's frab xml schedule", null: true
+    field :updated_at, DateTimeType, "Identifies the date and time when the object was last updated", null: false
+    field :event_last_released_at, DateTimeType, "Identifies the date and time when a event was last released", null: true
 
     def id
       object.acronym

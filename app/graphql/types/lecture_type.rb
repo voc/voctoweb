@@ -7,7 +7,7 @@ module Types
     description 'This entity is an Event with multiple Files e.g. Video and Audio recordings, subtitles (SRT) as well as PDFs e.g. the lecture slides'
 
     field :guid, ID, null: false 
-    field :localId, Integer, null: false
+    field :local_id, Integer, null: false
     # field :conference, Types::ConferenceType, "The conference this event belongs to", null: false
 
     field :title, String,  "The title of this event", null: false
@@ -17,7 +17,7 @@ module Types
     field :slug, UrlType, "The URL slug of this event", null: false
     field :url, UrlType, "A URL pointing to this lecture's page in vocotweb frontend", null: false
 
-    field :originalLanguage, String, "The event's original language, encoded as ISO 639-2", null: true
+    field :original_language, String, "The event's original language, encoded as ISO 639-2", null: true
     field :duration, Integer, "The lecture recording duration in seconds", null: true
 
     field :persons, [String], "Names of persons that held the event", null: true
@@ -25,16 +25,16 @@ module Types
     field :tags, [String], "Tags/keywords describing the event", null: true
 
     field :date, DateTimeType, "Identifies the date and time when the event took place", null: true
-    field :releaseDate, DateTimeType, "Identifies the date when the event got released", null: true
-    field :updatedAt, DateTimeType, "Identifies the date and time when the object was last updated", null: true
-    field :viewCount, Integer, "The amount of views of this event", null: true
+    field :release_date, DateTimeType, "Identifies the date when the event got released", null: true
+    field :updated_at, DateTimeType, "Identifies the date and time when the object was last updated", null: true
+    field :view_count, Integer, "The amount of views of this event", null: true
 
-    #field :shareUrl, UrlType, "URL pointing to the voctoweb page representing this entity", null: true
+    #field :share_url, UrlType, "URL pointing to the voctoweb page representing this entity", null: true
     field :link, UrlType, "URL pointing to the conference event website", null: true
-    field :doiUrl, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
+    field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
 
-    field :videoPreferred, AssetType, null: false
+    field :video_preferred, AssetType, null: false
     field :videos, [AssetType], null: false
     field :audios, [AssetType], null: true
     field :subtitles, [AssetType], null: true
@@ -43,8 +43,8 @@ module Types
 
     # field :thumbnail, Types::ImageType, null: true
     class LectureImageType < Types::BaseObject    
-      field :posterUrl, UrlType, 'URL pointing to a preview/poster image of the event', null: true
-      field :thumbUrl, UrlType, 'URL pointing to a smaller version of the poster image', null: true
+      field :poster_url, UrlType, 'URL pointing to a preview/poster image of the event', null: true
+      field :thumb_url, UrlType, 'URL pointing to a smaller version of the poster image', null: true
     end
     field :images, LectureImageType, null: true
     def images 
@@ -52,8 +52,8 @@ module Types
     end
 
     class LectureTimelensType < Types::BaseObject    
-      field :timelineUrl, UrlType, 'URL pointing timelens timline image of the event', null: true
-      field :thumbnailsUrl, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
+      field :timeline_url, UrlType, 'URL pointing timelens timline image of the event', null: true
+      field :thumbnails_url, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
     end
     field :timelens, LectureTimelensType, null: true
     def timelens 
@@ -83,7 +83,7 @@ module Types
       object.videos_sorted_by_language
     end
 
-    # is defined in fronend model
+    # is defined in frontend model
     def video_preferred
       object.preferred_recording
     end

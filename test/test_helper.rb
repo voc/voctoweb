@@ -4,9 +4,10 @@ require 'rails/test_help'
 require 'minitest/pride'
 require 'sidekiq/testing'
 require 'tilt/redcarpet'
-require "rexml/document"
+require 'rexml/document'
+require 'sidekiq/testing'
 
-Sidekiq::Logging.logger = nil
+Sidekiq.logger.level = Logger::FATAL
 
 class ActionController::TestCase
   include Devise::Test::ControllerHelpers
