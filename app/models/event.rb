@@ -175,11 +175,25 @@ class Event < ApplicationRecord
     recordings.video.sort_by { |x| (x.language == original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
   end
 
-  def doi_url
-    if doi
-      "https://doi.org/#{doi}"
-    end
+  # for elastic search
+  def subtitles
+    recordings.subtitle
   end
+
+  def doi_url
+    "https://doi.org/#{doi}" if doi
+  end
+
+  def video_master
+    recordings.video_without_slides
+              .select { |x| x.filetype == 'video/mp4' && x.high_quality == true }
+              .min_by { |x| x.html5 ? 1 : 0 }
+  end
+
+  def translations
+    video_master.languages - [ original_language ]
+  end
+
 
   def update_feeds
     return unless release_date

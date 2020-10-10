@@ -94,6 +94,10 @@ class Conference < ApplicationRecord
     update_column :downloaded_events_count, Event.recorded_at(self).to_a.size
   end
 
+  def recordings_url
+    File.join(Settings.cdn_url, recordings_path).freeze
+  end
+
   private
 
   def logo_exists?

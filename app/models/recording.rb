@@ -128,6 +128,25 @@ class Recording < ApplicationRecord
     language.split('-')
   end
 
+  def url
+    File.join(event.conference.recordings_url, folder || '', filename).freeze
+  end
+
+  def cors_url
+    File.join(Settings.cors_url, event.conference.recordings_path, folder || '', filename).freeze
+  end
+
+  # for elastic search
+  def fulltext
+    puts ' downloading ' + url
+    begin 
+      URI.open(url).read if subtitle?
+    rescue OpenURI::HTTPError
+      puts '   failed with HTTP Error'
+      ''
+    end
+  end
+
   private
 
   def language_valid

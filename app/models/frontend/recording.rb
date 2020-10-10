@@ -3,14 +3,6 @@ module Frontend
     belongs_to :event, class_name: 'Frontend::Event'
     scope :by_mime_type, ->(mime_type) { where(mime_type: mime_type) }
 
-    def url
-      File.join(event.conference.recordings_url, folder || '', filename).freeze
-    end
-
-    def cors_url
-      File.join(Settings.cors_url, event.conference.recordings_path, folder || '', filename).freeze
-    end
-
     def resolution
       return '' unless height
       if height < 720

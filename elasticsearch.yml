@@ -1,0 +1,5 @@
+http.host: 0.0.0.0
+
+# for http://splainer.io/
+http.cors.allow-origin: "/https?:\\/\\/(.*?\\.)?(quepid\\.com|splainer\\.io)/"
+http.cors.enabled: true

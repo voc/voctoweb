@@ -36,9 +36,32 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
   elasticsearch:
-    image: elasticsearch:5-alpine
+    image: elasticsearch:6.8.6
     ports:
       - "9200:9200"
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+#      - esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  # kibana:
+  #   image: 'docker.elastic.co/kibana/kibana:6.8.6'
+  #   container_name: kibana
+  #   environment:
+  #     SERVER_NAME: kibana.local
+  #     ELASTICSEARCH_URL: http://elasticsearch:9200
+  #   ports:
+  #     - '5601:5601'
+  #   depends_on:
+  #     - elasticsearch
   redis:
     image: redis:5-alpine
     ports:
