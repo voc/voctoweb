@@ -11,6 +11,7 @@ gem 'devise'
 gem 'aasm'
 gem 'sidekiq'
 gem 'foreman'
+gem 'listen'
 
 # rails cache
 gem 'redis-rails'
