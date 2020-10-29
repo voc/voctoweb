@@ -13,7 +13,7 @@ Voctoweb is a rails application that provides a “YouTube like” user interfac
 
 ### Public GraphQL API
 
-The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetch in a single request. We tried to clean up the type names and call talks `lecture` and files `assets` (previously known as recordings). Please create issues if you are missing anything.
+The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetched in a single request. We tried to clean up the type names and call talks `lecture` and files `assets` (previously known as recordings). Please create issues if you are missing anything.
 
 Example query: https://graphqlbin.com/v2/nOWBC7
 ``` graphql
