@@ -45,6 +45,7 @@ The public API provides a programmatic access to the data behind media.ccc.de. C
     /public/events
     /public/events/:guid
     /public/events/:id
+    /public/events/recent
     /public/events/search?q=:term
     /public/recordings
     /public/recordings/:id
