@@ -34,7 +34,7 @@ module Frontend
     end
 
     def live
-      streaming['groups'].first['rooms']
+      streaming['groups'].map { |x| x['rooms'] }.flatten
     end
 
     def audio_recordings?
