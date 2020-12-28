@@ -60,6 +60,16 @@ module Types
       object
     end
 
+    field :player_config, JsonType, null: true
+    def player_config 
+       { sources: object.clappr_sources, subtitles: object.clappr_subtitles }
+    end
+
+    field :relive, JsonType, null:true
+    def relive
+       object.relive if object.relive_present? and !object.recordings.video.present?
+    end
+
     '''
     # A list of related events, ordered by decreasing relevance.
     relatedLectures(
