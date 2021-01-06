@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :events, only: %i(index show), defaults: { format: 'json' } do
         get :recent, defaults: { format: 'json' }, on: :collection
         get :search, defaults: { format: 'json' }, on: :collection
+        get :popular, defaults: { format: 'json' }, on: :collection
       end
     end
     resources :recordings, only: %i(index show), defaults: { format: 'json' } do

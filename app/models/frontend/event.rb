@@ -8,8 +8,9 @@ module Frontend
     belongs_to :conference, class_name: 'Frontend::Conference'
     has_many :recordings, class_name: 'Frontend::Recording'
 
-    scope :promoted, ->(n) { where(promoted: true).order('updated_at desc').limit(n) }
+    scope :promoted, ->(n) { where(promoted: true).order('updated_at DESC').limit(n) }
     scope :published, -> { where('release_date IS NOT NULL') }
+    scope :popular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count DESC') }
 
     def title
       self[:title].strip
