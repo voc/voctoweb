@@ -39,4 +39,5 @@
   - if @events.present?
     .event-previews
       - @events.each do |event|
-        = render event
+        - if event.release_date or event.relive_present?
+          = render event
