@@ -98,6 +98,11 @@ module Frontend
                 }
     end
 
+    def audio_recordings
+      recordings.where(mime_type: MimeType::AUDIO)
+                .sort_by { |x| x.language == original_language ? '' : x.language }
+    end
+
     def audio_recordings_for_download(filetype)
       recordings.audio
                 .select  { |x| x.filetype == filetype }

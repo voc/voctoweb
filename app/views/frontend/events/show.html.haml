@@ -95,6 +95,11 @@
         .kiosk
         = render partial: 'frontend/shared/player_relive', locals: video_player_ivars
 
+    - elsif @event.recordings.audio.present?
+      .player.audio
+        = render partial: 'frontend/shared/player_audio', locals: video_player_ivars
+
+
     - else
       No content found (yet?).
 

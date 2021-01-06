@@ -1,0 +1,96 @@
+<!-- Mediaelement Player -->
+
+%audio.audio{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata' }
+  - event.audio_recordings.each do |recording|
+    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }, title: recording.filetype}
+
+  - event.recordings.subtitle.each do |track|
+    %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+
+  %link{rel: "postroll", href: postroll_path(slug: event.slug)}
+
+:javascript
+  $(function() {
+    var params = new URLSearchParams(window.location.hash && window.location.hash.split('#')[1]);
+    var stamp = params.get('t'),
+        lang = params.get('l'),
+        srt = params.get('s'),
+        $audio = $('audio'),
+        promises = [];
+
+    $('audio source').each(function() {
+      var $source = $(this);
+      // Prop always presents the fully resolved URL
+      promises.push(
+        MirrorbrainFix.selectMirror($source.prop('src'), function(mirror) {
+          $source.attr('src', mirror);
+        })
+      );
+    });
+
+    $.when.apply($, promises).done(function() {
+      $('audio').mediaelementplayer({
+        usePluginFullScreen: true,
+        enableAutosize: true,
+        stretching: '#{stretching}',
+        features: ['skipback', 'playpause', 'jumpforward', 'progress', 'current', 'duration', 
+          'tracks', 'volume', 'speed', 'sourcechooser', 'postroll'],
+        skipBackInterval: 15,
+        startLanguage: lang,
+        success: function (mediaElement, originalNode, player) {
+          window.mediaElement = mediaElement;
+          window.player = player;
+
+          if (srt || srt === "") {
+            var subtitles = player.tracks.filter(x => x.kind === 'subtitles');
+            var track = subtitles.filter(x => x.srclang === srt);
+            console.log(track);
+            if (track) {
+              player.setTrack(track[0].trackId);
+            } else {
+              player.setTrack(subtitles[0].trackId);
+            }
+          }
+
+          mediaElement.addEventListener('canplay', function () {
+            if (stamp) {
+              mediaElement.setCurrentTime(stamp);
+              stamp = null;
+            }
+          });
+          mediaElement.addEventListener('playing', function () {
+            $.post("/public/recordings/count", {event_id: $audio.data('id'), src: mediaElement.src});
+          }, false);
+
+          function updateHash() {
+            var l = player.options.startLanguage || '';
+            var hash =  (l ? '#l='+l+'&t=' : '#t=') + Math.round(mediaElement.currentTime);
+            if (srt) {
+              hash += '&s=' + srt;
+            }
+            window.location.replaceHash(hash);
+          }
+          mediaElement.addEventListener('pause', updateHash, false);
+          mediaElement.addEventListener('seeked', updateHash, false);
+
+          document.addEventListener('keypress', function (event) {
+            // do not capture events from input fields
+            if (event.target.tagName === 'INPUT') {
+              return;
+            }
+            switch(event.key) {
+              case 'k':
+              case ' ':
+                event.preventDefault();
+                player.paused ? player.play() : player.pause();
+                break; 
+              default:
+                // forward other events to player
+                mediaElement.dispatchEvent(event);
+                console.log(event);
+            }
+          });
+        }
+      });
+    });
+  })
