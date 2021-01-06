@@ -7,6 +7,7 @@ json.timeline_url event.get_timeline_url
 json.thumbnails_url event.get_thumbnails_url
 json.frontend_link frontend_event_url(slug: event.slug)
 json.url public_event_url(id: event.guid, format: :json)
+json.conference_title event.conference.title
 json.conference_url public_conference_url(id: event.conference.acronym, format: :json)
 json.related(event.related_events) do |related_event|
   json.event_id related_event.id
