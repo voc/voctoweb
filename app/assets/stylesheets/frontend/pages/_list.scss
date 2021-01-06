@@ -23,7 +23,7 @@ body.page-list {
     margin: 16px 0;
     display: block;
     clear: both;
-    height: 120px;
+    min-height: 120px;
     background-color: $gray-lightest;
     position: relative;
 
@@ -83,14 +83,14 @@ body.page-list {
       }
     }
 
+    .metadata {
+      position: static;
+      padding-top: 10px;
+     }
+
     @media #{$sm-or-smaller} {
       height: auto;
       min-height: 120px;
-
-      .metadata {
-        position: static;
-        padding-top: 10px;
-       }
     }
 
     @media #{$xs-or-smaller} {
@@ -108,7 +108,6 @@ body.page-list {
       }
 
       .metadata {
-        position: static;
         li { display: block; }
         li.duration { display: block; }
         li.date { display: none; }
