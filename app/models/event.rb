@@ -172,7 +172,13 @@ class Event < ApplicationRecord
 
   # used by player and graphql
   def videos_sorted_by_language
-    recordings.video.sort_by { |x| (x.language == original_language ? 0 : 2) + (x.html5 ? 0 : 1) }
+    recordings.video
+              .sort_by(&:mime_type)
+              .sort_by { |x|
+                (x.language == original_language ? -5 : 0) +
+                  (x.html5 ? -2 : 0) -
+                  (x.width)
+              }
   end
 
   # for elastic search
