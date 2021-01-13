@@ -78,6 +78,11 @@
           mediaElement.addEventListener('pause', updateHash, false);
           mediaElement.addEventListener('seeked', updateHash, false);
 
+          // see https://github.com/voc/voctoweb/pull/447
+          mediaElement.firstChild.addEventListener('dblclick', function() {
+            player.enterFullScreen()
+          });
+
           document.addEventListener('keypress', function (event) {
             // do not capture events from input fields
             if (event.target.tagName === 'INPUT') {
