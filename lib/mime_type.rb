@@ -7,7 +7,7 @@ class MimeType
   PREFERRED_VIDEO = %w(video/mp4 video/webm video/ogg).freeze
 
   SLIDES = %w(application/pdf video/mp4).freeze
-  SUBTITLE = %w(application/x-subrip).freeze
+  SUBTITLE = %w(application/x-subrip text/vtt).freeze
 
   class << self
     def all
@@ -30,6 +30,8 @@ class MimeType
         'mp3'
       when 'application/x-subrip'
         'srt'
+      when 'text/vtt'
+        'vtt'
       when 'application/dash+xml'
         'mpd'
       when 'application/vnd.apple.mpegurl'

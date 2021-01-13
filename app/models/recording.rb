@@ -77,6 +77,7 @@ class Recording < ApplicationRecord
       'opus' => 'Opus',
       'pdf' => 'PDF',
       'srt' => 'SRT',
+      'vtt' => 'WebVTT',
     }
 
     if display_filetypes.key?(filetype)
