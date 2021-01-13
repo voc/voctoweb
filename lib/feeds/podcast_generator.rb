@@ -37,7 +37,7 @@ module Feeds
       maker.channel.generator =  'media.ccc.de / RSS ' + RSS::VERSION
       maker.channel.link =  @config.base_url
       maker.channel.description = @config.channel_description
-      maker.channel.copyright = 'mostly cc-by-nc'
+      maker.channel.copyright = 'see video outro'
       maker.channel.lastBuildDate = Time.now.utc.to_s
 
       # see http://www.apple.com/itunes/podcasts/specs.html#category
