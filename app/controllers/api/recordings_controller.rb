@@ -23,15 +23,26 @@ class Api::RecordingsController < ApiController
   # POST /api/recordings/
   def create
     event = Event.find_by! guid: params['guid']
+
     @recording = Recording.new(recording_params)
     @recording.event = event
 
     respond_to do |format|
       if @recording.save
-        format.json { render json: @recording, status: :created }
+        format.json { render :show, status: :created }
       else
-        Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
-        format.json { render json: @recording.errors.messages, status: :unprocessable_entity }
+        if @recording.dupe.present?
+          @recording = @recording.dupe[0]
+          
+          if @recording.update(recording_params)
+            format.json { render :show, status: :ok }
+          else
+            format.json { render json: @recording.errors, status: :unprocessable_entity }
+          end
+        else
+          Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
+          format.json { render json: @recording.errors.messages, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -61,10 +72,10 @@ class Api::RecordingsController < ApiController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_recording
-    @recording = Recording.find(params[:id])
+    @recording = Recording.includes([:conference]).find(params[:id])
   end
 
   def recording_params
-    params.require(:recording).permit(:folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length)
+    params.require(:recording).permit(:folder, :filename, :mime_type, :language, :high_quality, :html5, :size, :width, :height, :length, :state)
   end
 end

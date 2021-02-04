@@ -17,6 +17,8 @@ class Recording < ApplicationRecord
   validate :unique_recording
   validate :filename_without_path
 
+  attr_accessor :dupe
+
   scope :video, -> { where(mime_type: MimeType::VIDEO) }
   scope :audio, -> { where(mime_type: MimeType::AUDIO) }
   scope :slides, -> { where("folder LIKE '%slides%'") }
@@ -130,7 +132,11 @@ class Recording < ApplicationRecord
   end
 
   def url
-    File.join(event.conference.recordings_url, folder || '', filename).freeze
+    if self.subtitle?
+      return File.join(Settings.static_url, event.conference.images_path, filename).freeze 
+    else
+      File.join(event.conference.recordings_url, folder || '', filename).freeze
+    end
   end
 
   def cors_url
@@ -139,7 +145,7 @@ class Recording < ApplicationRecord
 
   # for elastic search
   def fulltext
-    puts ' downloading ' + url
+    puts ' downloading ' + cors_url
     begin 
       URI.open(url).read if subtitle?
     rescue OpenURI::HTTPError
@@ -165,10 +171,20 @@ class Recording < ApplicationRecord
       errors.add :event, 'missing event on recording'
       return
     end
-    dupe = event.recordings.select { |recording|
-      recording.filename == filename && recording.folder == folder
-    }.delete_if { |dupe| dupe == self }
-    errors.add :event, 'recording already exist on event' if dupe.present?
+
+    if self.subtitle?
+      self.dupe = event.recordings.select { |recording|
+        recording.language == language && recording.folder == folder
+      }.delete_if { |dupe| dupe == self }
+    else
+      self.dupe = event.recordings.select { |recording|
+        recording.filename == filename && recording.folder == folder
+      }.delete_if { |dupe| dupe == self }
+    end 
+
+    if self.dupe.present?
+      errors.add :event, 'recording already exist on event'
+    end
   end
 
   def update_event_downloaded_count
