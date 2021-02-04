@@ -45,6 +45,7 @@ function timelens2(container, vtt, options) {
 
     // Create .timeline img, which displays the visual timeline.
     const timeline = document.createElement("img");
+    timeline.setAttribute("loading", "lazy");
     timeline.src = options.timeline;
     // Prevent the timeline image to be dragged
     timeline.setAttribute("draggable", "false");
