@@ -15,10 +15,10 @@ module Types
 
     field :conferences_recent, [ConferenceType], null: true do
       description 'All conferences as List, recent first'
-      argument :first, Integer, default_value: 5, prepare: ->(limit) { [limit, 30].min }, required: true
+      argument :first, Integer, default_value: 5, prepare: ->(limit, ctx) { [limit, 30].min }, required: true
       argument :offset, Integer, default_value: 0, required: false
     end
-    def conferences(offset:, first:)
+    def conferences_recent(offset:, first:)
       Frontend::Conference.with_recent_events(first).offset(offset)
     end
 

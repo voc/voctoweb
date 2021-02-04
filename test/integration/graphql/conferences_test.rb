@@ -65,4 +65,31 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_nil result['errors']
   end
 
+  test 'load most recent conference' do
+    query_string = <<-GRAPHQL
+      query {
+        conferencesRecent(first: 1) {
+          id
+          title
+          slug
+          logoUrl
+          aspectRatio
+          scheduleUrl
+          updatedAt
+          eventLastReleasedAt
+          lectures(first: 1) {
+            nodes {
+              title
+            }
+          }
+        }
+      }
+    GRAPHQL
+
+    create(:conference_with_recordings)
+    result = MediaBackendSchema.execute(query_string)
+    assert_nil result['errors']
+    assert result['data']['conferencesRecent'].length == 1
+  end
+
 end
