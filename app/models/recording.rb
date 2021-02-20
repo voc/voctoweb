@@ -92,6 +92,12 @@ class Recording < ApplicationRecord
   def label
     if slides?
       "slides #{language} #{height}p"
+    elsif subtitle?
+      if state != 'complete'
+        "#{language} (#{state})"
+      else
+        "#{language}"
+      end
     else
       "#{language} #{height}p"
     end
