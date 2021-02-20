@@ -132,15 +132,19 @@ class Recording < ApplicationRecord
   end
 
   def url
-    if self.subtitle?
-      return File.join(Settings.static_url, event.conference.images_path, filename).freeze 
+    if self.mime_type == 'text/vtt' 
+      File.join(Settings.static_url, event.conference.images_path, filename).freeze 
     else
       File.join(event.conference.recordings_url, folder || '', filename).freeze
     end
   end
 
   def cors_url
-    File.join(Settings.cors_url, event.conference.recordings_path, folder || '', filename).freeze
+    if self.mime_type == 'text/vtt' 
+      File.join(Settings.static_url, event.conference.images_path, filename).freeze 
+    else
+      File.join(Settings.cors_url, event.conference.recordings_path, folder || '', filename).freeze
+    end
   end
 
   # for elastic search

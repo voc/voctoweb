@@ -184,6 +184,7 @@ class Event < ApplicationRecord
   # for elastic search
   def subtitles
     recordings.subtitle
+              .sort_by { |x| (x.language == original_language ? -5 : 0)}
   end
 
   def doi_url
