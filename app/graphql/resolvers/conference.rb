@@ -1,14 +1,14 @@
 require 'search_object/plugin/graphql'
 require 'graphql/query_resolver'
 
-# based on https://github.com/howtographql/graphql-ruby/blob/master/app/graphql/resolvers/Conferences_search.rb
+# based on https://github.com/howtographql/graphql-ruby/blob/master/app/graphql/resolvers/links_search.rb
 
 class Resolvers::Conference
   include SearchObject.module(:graphql)
 
   scope { Conference.all }
 
-  type types[Types::ConferenceType]
+  type [Types::ConferenceType]
 
   class ConferenceFilter < ::Types::BaseInputObject
     argument :OR, [self], required: false

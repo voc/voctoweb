@@ -11,7 +11,7 @@ module Types
       Frontend::Conference.find_by(acronym: id)
     end
 
-    field :conferences, function: Resolvers::Conference
+    field :conferences, resolver: Resolvers::Conference
 
     field :conferences_recent, [ConferenceType], null: true do
       description 'All conferences as List, recent first'
