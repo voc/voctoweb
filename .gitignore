@@ -56,3 +56,10 @@ config/settings.yml
 
 # vim
 *.swp
+*~
+/.byebug_history
+/.direnv
+/.envrc
+/.powenv
+/.powrc
+/esdata
