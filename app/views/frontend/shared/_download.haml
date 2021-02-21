@@ -46,15 +46,18 @@
       .col-sm-10.col-md-11
         - if event.recordings.subtitle.present?
           .content
-            - event.subtitles.each do |recording|
-              %a.btn.btn-default.download.subtitle{href: recording.url, id: recording.language, class: recording.state, title: recording.state}
-                .title= recording.language
-            %a.subtitle.improve{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid, target: '_blank'}
+            - event.subtitles.each do |track|
+              %a.btn.btn-default.download.subtitle{href: (track.state == 'todo' \
+                  ? "#{event.subtitle_edit_url}##{track.language}" 
+                  : track.url), 
+                id: track.language, class: track.state, title: track.state}
+                .title= track.language
+            %a.subtitle.improve{href: event.subtitle_edit_url, target: '_blank'}
               Help us to improve these subtitles!
 
         - else
           - if ( @conference.metadata && @conference.metadata['subtitles'].present? )
-            %a.subtitle.improve{href: 'https://www.c3subtitles.de/talk/guid/' +  @event.guid, target: '_blank'}
+            %a.subtitle.improve{href: event.subtitle_edit_url, target: '_blank'}
               Help us to subtitle this talk!
 
 

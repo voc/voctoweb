@@ -181,10 +181,13 @@ class Event < ApplicationRecord
               }
   end
 
-  # for elastic search
   def subtitles
     recordings.subtitle
               .sort_by { |x| (x.language == original_language ? -5 : 0)}
+  end
+
+  def subtitle_edit_url
+    'https://www.c3subtitles.de/talk/guid/' + guid
   end
 
   def doi_url
