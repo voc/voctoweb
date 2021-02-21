@@ -37,7 +37,7 @@ class Api::RecordingsController < ApiController
           if @recording.update(recording_params)
             format.json { render :show, status: :ok }
           else
-            format.json { render json: @recording.errors, status: :unprocessable_entity }
+            format.json { render :show, status: :unprocessable_entity }
           end
         else
           Rails.logger.info("JSON: failed to create recording: #{@recording.errors.inspect}")
@@ -55,7 +55,7 @@ class Api::RecordingsController < ApiController
       if @recording.update(recording_params)
         format.json { render :show, status: :ok }
       else
-        format.json { render json: @recording.errors, status: :unprocessable_entity }
+        format.json { render :show, status: :unprocessable_entity }
       end
     end
   end
