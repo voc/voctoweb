@@ -27,3 +27,7 @@
 %link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.last100'), href: '/updates.rdf'}
 %link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.last100'), href: '/podcast.xml'}
 %link{rel: 'alternate', type: 'application/rss+xml', title: I18n.t('rss.title.podcast_archive'), href: '/podcast-archive.xml'}
+
+- if Rails.configuration.custom_css
+  %style
+    = @config.custom_css.html_safe
