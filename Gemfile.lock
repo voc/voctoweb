@@ -326,7 +326,7 @@ GEM
       tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
-    sdoc (2.0.3)
+    sdoc (2.0.4)
       rdoc (>= 5.0)
     search_object (1.2.4)
     search_object_graphql (0.3.2)
