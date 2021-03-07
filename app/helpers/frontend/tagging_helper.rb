@@ -8,7 +8,7 @@ module Frontend
     end
 
     def link_for(conference, tag, css: '')
-      %[<a href="/c/#{h conference.acronym}/#{h tag.gsub '.', '%2E'}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
+      %[<a href="/c/#{h conference.acronym}/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
     end
 
     #
