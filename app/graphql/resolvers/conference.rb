@@ -60,11 +60,11 @@ class Resolvers::Conference
     scope.order('created_at DESC')
   end
 
-  def fetch_results
+  def resolve(obj, args, ctx)
     # NOTE: Don't run QueryResolver during tests
-    return super unless context.present?
+    return super unless ctx.present?
 
-    GraphQL::QueryResolver.run(Conference, context, Types::ConferenceType) do
+    GraphQL::QueryResolver.run(Conference, ctx, Types::ConferenceType) do
       super
     end
   end
