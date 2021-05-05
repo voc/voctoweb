@@ -17,7 +17,7 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'ic
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += [/\.(?:eot|otf|svg|ttf|woff|swf|svg|gif|png)/]
+Rails.application.config.assets.precompile << ["*.svg", "*.eot", "*.woff", "*.ttf", "*.otf"] # [/\.(?:eot|otf|svg|ttf|woff|swf|svg|gif|png)/]
 
 # for oembed layout
 Rails.application.config.assets.precompile += %w[embed.css]
