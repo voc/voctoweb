@@ -181,7 +181,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 2.6.0
+ruby 2.6.5
 
 ### Dependencies
 
@@ -214,8 +214,8 @@ gpg --verify rvm-installer.asc rvm-installer
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 2.6.0
-rvm install ruby-2.6.0
+# install ruby 2.6.5
+rvm install ruby-2.6.5
 
 # install bundler
 gem install bundler
