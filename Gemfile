@@ -20,7 +20,6 @@ gem 'exception_notification'
 
 # Bundle puma application server
 gem 'puma'
-gem 'puma_worker_killer'
 
 gem 'utf8-cleaner'
 
