@@ -120,18 +120,18 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     ed25519 (1.2.4)
-    elasticsearch (6.1.0)
-      elasticsearch-api (= 6.1.0)
-      elasticsearch-transport (= 6.1.0)
-    elasticsearch-api (6.1.0)
+    elasticsearch (6.8.3)
+      elasticsearch-api (= 6.8.3)
+      elasticsearch-transport (= 6.8.3)
+    elasticsearch-api (6.8.3)
       multi_json
-    elasticsearch-model (6.0.0)
+    elasticsearch-model (6.1.1)
       activesupport (> 3)
-      elasticsearch (> 1)
+      elasticsearch (~> 6)
       hashie
     elasticsearch-rails (6.1.1)
-    elasticsearch-transport (6.1.0)
-      faraday
+    elasticsearch-transport (6.8.3)
+      faraday (~> 1)
       multi_json
     erubi (1.10.0)
     exception_notification (4.4.3)
@@ -143,12 +143,16 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (1.4.1)
+    faraday (1.4.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
@@ -388,7 +392,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   ed25519
-  elasticsearch-model (~> 6.0.0)
+  elasticsearch-model (~> 6.1.1)
   elasticsearch-rails (~> 6.1.0)
   exception_notification
   factory_bot_rails
