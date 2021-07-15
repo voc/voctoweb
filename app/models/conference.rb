@@ -24,6 +24,7 @@ class Conference < ApplicationRecord
     url: Settings.cdn_url,
     url_path: Settings.folders['recordings_webroot']
 
+  after_initialize :set_defaults, unless: :persisted?    
   before_save { trim_paths }
 
   aasm column: :schedule_state do
@@ -43,6 +44,10 @@ class Conference < ApplicationRecord
     event :finish_download do
       transitions from: :downloading, to: :downloaded
     end
+  end
+
+  def set_defaults
+    self.aspect_ratio ||= '16:9'
   end
 
   def download!
