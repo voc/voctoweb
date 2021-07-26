@@ -1,7 +1,7 @@
 # voctoweb
 Voctoweb is a rails application that provides a “YouTube like” user interface to video, audio and pdf files; a meta data editor; and APIs. For more infomation about relations to other components see [c3voc Wiki](http://c3voc.de/wiki/software:voctoweb).
 
-[![Build Status](https://travis-ci.org/voc/voctoweb.svg?branch=master)](https://travis-ci.org/voc/voctoweb)
+[![Tests](https://github.com/voc/voctoweb/actions/workflows/ci.yml/badge.svg)](https://github.com/voc/voctoweb/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/voc/media.ccc.de.png)](https://codeclimate.com/github/voc/media.ccc.de)
 
 ![Architecture overview](docs/architecture-overview.png)
