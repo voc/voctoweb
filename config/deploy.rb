@@ -44,7 +44,7 @@ namespace :puma do
     on roles(:app) do
       within current_path do
         with rack_env: fetch(:puma_env) do
-          execute :bundle, 'exec', :puma, "-C #{fetch(:puma_conf)} --daemon"
+          execute :bundle, 'exec', :puma, "-C #{fetch(:puma_conf)}"
         end
       end
     end

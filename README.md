@@ -1,7 +1,7 @@
 # voctoweb
 Voctoweb is a rails application that provides a “YouTube like” user interface to video, audio and pdf files; a meta data editor; and APIs. For more infomation about relations to other components see [c3voc Wiki](http://c3voc.de/wiki/software:voctoweb).
 
-[![Build Status](https://travis-ci.org/voc/voctoweb.svg?branch=master)](https://travis-ci.org/voc/voctoweb)
+[![Tests](https://github.com/voc/voctoweb/actions/workflows/ci.yml/badge.svg)](https://github.com/voc/voctoweb/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/voc/media.ccc.de.png)](https://codeclimate.com/github/voc/media.ccc.de)
 
 ![Architecture overview](docs/architecture-overview.png)
@@ -181,7 +181,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 2.6.0
+ruby 2.6.5
 
 ### Dependencies
 
@@ -214,8 +214,8 @@ gpg --verify rvm-installer.asc rvm-installer
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 2.6.0
-rvm install ruby-2.6.0
+# install ruby 2.6.5
+rvm install ruby-2.6.5
 
 # install bundler
 gem install bundler

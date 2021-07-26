@@ -36,3 +36,7 @@ updates:
   - dependency-name: foreman
     versions:
     - 0.87.2
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "monthly"
