@@ -177,7 +177,7 @@ GEM
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.12.14)
+    graphql (1.12.16)
     graphql-query-resolver (0.2.0)
       graphql (~> 1.0, >= 1.0.0)
     haml (5.2.1)
