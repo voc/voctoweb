@@ -169,7 +169,7 @@ GEM
       ffi (~> 1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    goldiloader (4.1.0)
+    goldiloader (4.1.1)
       activerecord (>= 5.2, < 7.1)
       activesupport (>= 5.2, < 7.1)
     google-protobuf (3.17.3-universal-darwin)
