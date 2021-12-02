@@ -54,13 +54,17 @@ The id's are internal database ids, not to be confused with remote talk ids (ali
 
 Example:
 
-    curl -H "CONTENT-TYPE: application/json" http://localhost:3000/public/conferences
+``` bash
+curl -H "CONTENT-TYPE: application/json" http://localhost:3000/public/conferences
+```
 
 The resulting JSON will contain URLs to each of the individual conferences.
 
 Additionally the API for events and recordings uses RFC-5988 HTTP header based pagination to reduce the server load.
 
-    curl -H "CONTENT-TYPE: application/json" "http://localhost:3000/public/events?page=10"
+``` bash
+curl -H "CONTENT-TYPE: application/json" "http://localhost:3000/public/events?page=10"
+```
 
 ### Private REST API
 
@@ -73,49 +77,52 @@ Most REST operations work as expected. Examples for resource creation are listed
 You can use the API to register a new conference. The conference `acronym` and the URL of the `schedule.xml` are required.
 However folders and access rights need to be setup manually, before you can upload images and videos.
 
-    curl -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"4",
-        "acronym":"frab123",
-        "conference":{
-          "recordings_path":"conference/frab123",
-          "images_path":"events/frab",
-          "slug":"event/frab/frab123",
-          "aspect_ratio":"16:9",
-          "title":null,
-          "schedule_url":"http://progam.tld/schedule.xml"
-        }
-      }' "http://localhost:3000/api/conferences"
-
+``` bash
+curl -H "CONTENT-TYPE: application/json" -d '{
+    "api_key":"4",
+    "acronym":"frab123",
+    "conference":{
+      "recordings_path":"conference/frab123",
+      "images_path":"events/frab",
+      "slug":"event/frab/frab123",
+      "aspect_ratio":"16:9",
+      "title":null,
+      "schedule_url":"http://progam.tld/schedule.xml"
+    }
+  }' "http://localhost:3000/api/conferences"
+```
 
 #### Create event
 
 
 To add event (e.g. a talk or lecture) the conference it is part of via `acronym`, and define generate a random `guid`. You can add images to an event, like the poster image.  For an explanation what the `timeline_url` and `thumbnails_url` parameters are, see <https://timelens.io>.
 
-    curl -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"4",
-        "acronym": "frab123"
-        "event":{
-          "guid":"1c4d8ad8-e072-11e8-981a-6c400891b752",
-          "slug":"fra123-22-qwerty",
-          "title":"qwerty",
-          "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
-          "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
-          "timeline_url":"http://koeln.ccc.de/images/chaosknoten.timeline.jpg",
-          "thumbnails_url":"http://koeln.ccc.de/images/chaosknoten.thumbnails.vtt",
-        }
-      }' "http://localhost:3000/api/events"
-
-
+``` bash
+curl -H "CONTENT-TYPE: application/json" -d '{
+    "api_key":"4",
+    "acronym": "frab123"
+    "event":{
+      "guid":"1c4d8ad8-e072-11e8-981a-6c400891b752",
+      "slug":"fra123-22-qwerty",
+      "title":"qwerty",
+      "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
+      "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
+      "timeline_url":"http://koeln.ccc.de/images/chaosknoten.timeline.jpg",
+      "thumbnails_url":"http://koeln.ccc.de/images/chaosknoten.thumbnails.vtt",
+    }
+  }' "http://localhost:3000/api/events"
+```
 
 #### Update event
 
-    curl  -i -X PATCH -H "CONTENT-TYPE: application/json" -d '{
-        "api_key":"XXX",
-        "event":{
-          "tags": ["foo", "bar", "baz", "2018"]
-        }
-      }' "http://localhost:3000/api/events/1c4d8ad8-e072-11e8-981a-6c400891b752"
+``` bash
+curl  -i -X PATCH -H "CONTENT-TYPE: application/json" -d '{
+    "api_key":"XXX",
+    "event":{
+      "tags": ["foo", "bar", "baz", "2018"]
+    }
+  }' "http://localhost:3000/api/events/1c4d8ad8-e072-11e8-981a-6c400891b752"
+```
 
 
 
@@ -129,7 +136,7 @@ The recording length is specified in seconds.
   * Allowed languages: https://github.com/voc/media.ccc.de/blob/master/lib/languages.rb
   * Example implementation: https://github.com/voc/publishing/
 
-```
+``` bash
 curl -H "CONTENT-TYPE: application/json" -d '{
     "api_key":"4",
     "guid":"123",
@@ -192,7 +199,7 @@ ruby 2.6.5
 
 ### Quickstart / Development Notes
 
-```
+``` bash
 ## for ubuntu 15.10
 
 # install deps for ruby
@@ -235,7 +242,7 @@ rake db:fixtures:load
 
 ### Run Development-Server manually
 
-```
+``` bash
 source ~/.rvm/scripts/rvm
 rails server -b 0.0.0.0
 
