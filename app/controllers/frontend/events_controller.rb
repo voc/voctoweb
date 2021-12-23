@@ -42,7 +42,15 @@ module Frontend
     end
 
     def load_event
-      @event = Frontend::Event.find_by!(slug: params[:slug])
+      @event = Frontend::Event.find_by!(
+        "slug = ? OR guid = ? OR slug ILIKE ?", 
+        params[:slug], params[:slug], params[:slug] + '%'
+      )
+
+      if params[:slug] != @event.slug
+        redirect_to event_url(slug: @event.slug)
+      end
+
       @conference = @event.conference
       @player = ''
       if params[:player] && /\A[a-z]+\Z/.match(params[:player])
