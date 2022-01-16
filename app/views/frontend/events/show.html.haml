@@ -45,7 +45,7 @@
 - if current_admin_user
   - content_for :navbar do
     .nav.navbar-form.navbar-right.button-wrapper
-      %a.form-control.btn.btn-default{href: edit_admin_event_path(@event), data: { turbolinks: false  }}
+      %a.form-control.btn.btn-default{href: edit_admin_event_path(@event), data: { turbolinks: "false" }}
         %span.icon.icon-edit
 
 - content_for :description do
