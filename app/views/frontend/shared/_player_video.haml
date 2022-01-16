@@ -7,7 +7,8 @@
     %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language, quality: recording.quality_label }, title: recording.label}
 
   - event.subtitles.each do |track|
-    - if track.state != 'todo'
+    // hide placehoder vtt files for now
+    - unless track.state == 'todo' and track.mime_type == 'text/vtt'
       %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1(), label: track.label}
 
   - if event.timelens_present?
