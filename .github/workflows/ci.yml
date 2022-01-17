@@ -63,3 +63,19 @@ jobs:
         run: |
           bundle exec rake db:setup
           bundle exec rake
+
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cleanup
+        run: docker system prune --all --force --volumes
+
+      - name: Build Docker image
+        run: docker build --tag voctoweb:$(date +%s) .
+
+      - name: Show images
+        run: docker images
