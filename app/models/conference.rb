@@ -17,14 +17,14 @@ class Conference < ApplicationRecord
   has_attached_directory :images,
     via: :images_path,
     url: Settings.static_url,
-    url_path: Settings.folders['images_webroot']
+    url_path: Settings.folders[:images_webroot]
 
   has_attached_directory :recordings,
     via: :recordings_path,
     url: Settings.cdn_url,
-    url_path: Settings.folders['recordings_webroot']
+    url_path: Settings.folders[:recordings_webroot]
 
-  after_initialize :set_defaults, unless: :persisted?    
+  after_initialize :set_defaults, unless: :persisted?
   before_save { trim_paths }
 
   aasm column: :schedule_state do
@@ -81,7 +81,7 @@ class Conference < ApplicationRecord
       self[:metadata].delete('subtitles')
     end
   end
-  
+
   def logo_does_not_contain_title=(val)
     if val == '1'
       self[:metadata]['logo_does_not_contain_title'] = true

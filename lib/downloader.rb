@@ -10,11 +10,11 @@ module Downloader
   def download(url)
     content = ''
     uri = URI(url)
-    if uri.scheme == 'file'
+    if uri.scheme.nil? || uri.scheme == 'file'
       path = absolute_path(uri)
       File.open(path, 'r:UTF-8') { |f| content = f.read }
     else
-      content = open(url).read
+      content = URI.parse(url).open.read
     end
     return content.to_s
   end

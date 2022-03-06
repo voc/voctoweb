@@ -65,3 +65,14 @@ Style/Documentation:
 
 Layout/HashAlignment:
   Enabled: false
+
+# adapt rubocop to existing code "style"
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/RedundantReturn:
+  Enabled: false
+

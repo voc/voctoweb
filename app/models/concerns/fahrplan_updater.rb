@@ -20,7 +20,7 @@ module FahrplanUpdater
       info.delete(:link)
       self.link = get_event_url(id)
     end
-    update_attributes info
+    update info
   end
 
   private

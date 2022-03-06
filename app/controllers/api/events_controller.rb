@@ -92,10 +92,9 @@ class Api::EventsController < ApiController
   end
 
   def create_event(params)
-    @event.transaction do
-      @event.set_image_filenames(params[:thumb_url], params[:poster_url], params[:timeline_url], params[:thumbnails_url])
-      return @event.save
-    end
+    @event.set_image_filenames(params[:thumb_url], params[:poster_url], params[:timeline_url], params[:thumbnails_url])
+    @event.save!
+  rescue ActiveRecord::RecordInvalid
     false
   end
 
