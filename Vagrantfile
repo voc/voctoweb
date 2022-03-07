@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
   #   vb.gui = true
   #
      # Customize the amount of memory on the VM:
-     vb.memory = "4096"
+     vb.memory = "8172"
      vb.cpus = 4
      vb.name = "voctoweb-dev"
   end
@@ -69,7 +69,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     set -ev
-    echo "nameserver 9.9.9.9" | tee /etc/resolv.conf
+    echo "nameserver 1.1.1.1" | tee /etc/resolv.conf
 
     export DEBIAN_FRONTEND="noninteractive"
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
@@ -82,7 +82,8 @@ Vagrant.configure(2) do |config|
 
     # ruby
     if [ ! -x "$(command -v ruby)" ]; then
-      gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+      curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+      curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
       curl -sSL https://get.rvm.io | bash -s stable --ruby
     fi
 
@@ -94,13 +95,12 @@ Vagrant.configure(2) do |config|
     systemctl restart elasticsearch
 
     # rails
-    chown vagrant -R /usr/local/rvm/gems/ruby-2.6.0/
+    chown vagrant -R /usr/local/rvm/gems/ruby-*
     set +v
     sudo -u vagrant -i <<EOF
     cd /vagrant
     source /usr/local/rvm/scripts/rvm
-    rvm use 2.6.0 --default
-    rvm use 2.6.0@voctoweb --default
+    rvm use 3.0.0 --default
     gem install bundler
     bin/setup
 EOF
@@ -115,9 +115,10 @@ Depends=vagrant.mount
 [Service]
 WorkingDirectory=/vagrant
 Environment=RAILS_ENV=development
+Environment=DEV_DOMAIN=media.ccc.vm
 User=vagrant
 PIDFile=/vagrant/tmp/pids/puma.pid
-ExecStart=/usr/local/bin/bundle exec rails s -b 0.0.0.0
+ExecStart=/usr/local/rvm/wrappers/default/bundle exec rails s -b 0.0.0.0
 Restart=always
 SyslogIdentifier=voctoweb-puma
 RestartSec=5s
@@ -138,7 +139,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/vagrant
 User=vagrant
-ExecStart=/usr/local/bin/bundle exec sidekiq --environment development
+ExecStart=/usr/local/rvm/wrappers/default/bundle exec sidekiq --environment development
 Restart=always
 StandardOutput=syslog
 StandardError=syslog

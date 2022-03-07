@@ -189,6 +189,7 @@ GEM
     goldiloader (4.1.1)
       activerecord (>= 5.2, < 7.1)
       activesupport (>= 5.2, < 7.1)
+    google-protobuf (3.17.3)
     google-protobuf (3.17.3-universal-darwin)
     google-protobuf (3.17.3-x86_64-linux)
     graphiql-rails (1.8.0)
@@ -245,6 +246,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.7.1)
     minitest (5.15.0)
     multi_json (1.15.0)
     multipart-post (2.1.1)
@@ -252,6 +254,9 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.8)
+    nokogiri (1.13.0)
+      mini_portile2 (~> 2.7.0)
+      racc (~> 1.4)
     nokogiri (1.13.0-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.0-x86_64-linux)
@@ -340,6 +345,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rss (0.2.9)
+      rexml
     ruby-graphviz (1.2.5)
       rexml
     ruby2_keywords (0.0.4)
@@ -397,6 +404,7 @@ GEM
     zeitwerk (2.5.3)
 
 PLATFORMS
+  ruby
   x86_64-darwin-18
   x86_64-darwin-20
   x86_64-linux
@@ -444,6 +452,7 @@ DEPENDENCIES
   rails-controller-testing
   redcarpet
   redis-rails
+  rss
   ruby-graphviz
   sass-rails
   sdoc
@@ -457,4 +466,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   2.2.11
+   2.3.8

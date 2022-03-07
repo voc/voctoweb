@@ -41,6 +41,7 @@ end
 
 gem 'haml'
 gem 'redcarpet'
+gem 'rss'
 
 # kaminari must be listed before elasticsearch and api-pagination
 gem 'kaminari'
