@@ -11,7 +11,7 @@ set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 # set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '2.6.5@media-site'
+set :rvm_ruby_version, '3.0.3@voctoweb'
 
 set :use_sudo,        false
 set :stage,           :production
