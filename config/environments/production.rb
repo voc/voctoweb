@@ -101,6 +101,8 @@ Rails.application.configure do
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  else
+    config.lograge.enabled = true
   end
 
   # Do not dump schema after migrations.
