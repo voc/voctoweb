@@ -186,9 +186,9 @@ GEM
       ffi (~> 1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    goldiloader (4.1.1)
-      activerecord (>= 5.2, < 7.1)
-      activesupport (>= 5.2, < 7.1)
+    goldiloader (4.2.0)
+      activerecord (>= 5.2, < 7.2)
+      activesupport (>= 5.2, < 7.2)
     google-protobuf (3.17.3)
     google-protobuf (3.17.3-universal-darwin)
     google-protobuf (3.17.3-x86_64-linux)
@@ -205,7 +205,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashie (4.1.0)
-    i18n (1.8.11)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.13.0)
       actionpack (>= 5.2, < 6.2)
@@ -401,7 +401,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     yajl-ruby (1.4.1)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
