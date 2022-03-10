@@ -9,7 +9,7 @@ Voctoweb is a rails application that provides a “YouTube like” user interfac
 ## APIs
 
  Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
- 
+
 
 ### Public GraphQL API
 
@@ -33,7 +33,7 @@ query LectureQueryExample {
   }
 }
 ```
- 
+
 
 ### Public JSON API
 
@@ -188,7 +188,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 2.6.5
+ruby 3.0.3
 
 ### Dependencies
 
@@ -221,8 +221,8 @@ gpg --verify rvm-installer.asc rvm-installer
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 2.6.5
-rvm install ruby-2.6.5
+# install ruby 3.0.3
+rvm install ruby-3.0.3
 
 # install bundler
 gem install bundler

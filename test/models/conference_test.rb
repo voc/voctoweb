@@ -32,7 +32,7 @@ class ConferenceTest < ActiveSupport::TestCase
 
   test 'should get images url' do
     @conference = create(:conference_with_recordings)
-    assert_equal "#{Settings.folders['images_webroot']}/#{@conference.images_path}", @conference.get_images_url_path
+    assert_equal "#{Settings.folders[:images_webroot]}/#{@conference.images_path}", @conference.get_images_url_path
   end
 
   test 'should get logo url' do

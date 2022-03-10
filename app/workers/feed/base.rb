@@ -37,7 +37,7 @@ class Feed::Base
 
   def view_context
     # conference_url, event_url, image_url
-    view = ActionView::Base.new
+    view = ActionView::Base.new(ActionController::Base.view_paths, {}, nil)
     view.class.include Rails.application.routes.url_helpers
     view.class.include ApplicationHelper
     Rails.application.routes.default_url_options[:host] = Settings.frontend_host

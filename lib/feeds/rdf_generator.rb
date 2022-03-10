@@ -1,7 +1,7 @@
 # # frozen_string_literal: true
 # generate rssfeed from svn log
 module Feeds
-  class RDFGenerator
+  class RdfGenerator
     require 'rss'
     require 'rss/1.0'
     require 'rss/maker'

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.5'
+gem 'rails', '~> 6.1.4'
 gem 'dotenv-rails'
 
 gem 'activeadmin'
@@ -41,6 +41,7 @@ end
 
 gem 'haml'
 gem 'redcarpet'
+gem 'rss'
 
 # kaminari must be listed before elasticsearch and api-pagination
 gem 'kaminari'
