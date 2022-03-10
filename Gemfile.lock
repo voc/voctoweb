@@ -189,9 +189,9 @@ GEM
     goldiloader (4.1.1)
       activerecord (>= 5.2, < 7.1)
       activesupport (>= 5.2, < 7.1)
-    google-protobuf (3.17.3)
-    google-protobuf (3.17.3-universal-darwin)
-    google-protobuf (3.17.3-x86_64-linux)
+    google-protobuf (3.19.4)
+    google-protobuf (3.19.4-x86_64-darwin)
+    google-protobuf (3.19.4-x86_64-linux)
     graphiql-rails (1.8.0)
       railties
       sprockets-rails
