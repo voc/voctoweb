@@ -80,7 +80,7 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     api-pagination (5.0.0)
-    apollo-federation (2.2.1)
+    apollo-federation (2.2.3)
       google-protobuf (~> 3.19)
       graphql (>= 1.10.14)
     arbre (1.5.0)
