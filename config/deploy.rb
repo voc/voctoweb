@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.16.0'
+lock '3.17.0'
 
 set :application, 'media-site'
 set :repo_url, ENV['CAP_REPO']
@@ -11,7 +11,7 @@ set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 # set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '3.0.3@voctoweb'
+set :rvm_ruby_version, '3.0.3'
 
 set :use_sudo,        false
 set :stage,           :production
