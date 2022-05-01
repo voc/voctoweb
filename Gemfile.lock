@@ -278,6 +278,8 @@ GEM
       pry (~> 0.13.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    psych (4.0.3)
+      stringio
     puma (5.6.4)
       nio4r (~> 2.0)
     puma_worker_killer (0.3.1)
@@ -327,7 +329,8 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdoc (6.3.3)
+    rdoc (6.4.0)
+      psych (>= 4.0.0)
     redcarpet (3.5.1)
     redis (4.6.0)
     redis-actionpack (5.3.0)
@@ -367,8 +370,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.3.1)
-      rdoc (>= 5.0, < 6.4.0)
+    sdoc (2.3.2)
+      rdoc (>= 5.0)
     search_object (1.2.5)
     search_object_graphql (1.0.3)
       graphql (> 1.8)
@@ -387,6 +390,7 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stringio (3.0.1)
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
