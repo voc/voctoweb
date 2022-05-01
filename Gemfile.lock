@@ -373,7 +373,7 @@ GEM
     search_object_graphql (1.0.3)
       graphql (> 1.8)
       search_object (~> 1.2.2)
-    sidekiq (6.4.1)
+    sidekiq (6.4.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
