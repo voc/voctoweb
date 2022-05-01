@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 7.0.2'
 gem 'dotenv-rails'
 
 gem 'activeadmin'
