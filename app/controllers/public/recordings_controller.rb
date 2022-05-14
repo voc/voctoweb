@@ -2,6 +2,7 @@ class Public::RecordingsController < ActionController::Base
   include ApiErrorResponses
   include Rails::Pagination
   include ThrottleConnections
+  skip_forgery_protection
   respond_to :json
 
   def index
