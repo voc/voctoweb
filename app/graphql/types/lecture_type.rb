@@ -34,12 +34,12 @@ module Types
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
 
-    field :video_preferred, AssetType, null: false
-    field :videos, [AssetType], null: false
-    field :audios, [AssetType], null: true
-    field :subtitles, [AssetType], null: true
-    field :slides, [AssetType], null: true
-    field :files, AssetType.connection_type, null: false
+    field :video_preferred, ResourceType, null: false
+    field :videos, [ResourceType], null: false
+    field :audios, [ResourceType], null: true
+    field :subtitles, [ResourceType], null: true
+    field :slides, [ResourceType], null: true
+    field :files, ResourceType.connection_type, null: false
 
     # field :thumbnail, Types::ImageType, null: true
     class LectureImageType < Types::BaseObject    
@@ -51,7 +51,7 @@ module Types
       object
     end
 
-    class LectureTimelensType < Types::BaseObject    
+    class LectureTimelensType < Types::BaseObject
       field :timeline_url, UrlType, 'URL pointing timelens timline image of the event', null: true
       field :thumbnails_url, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
     end

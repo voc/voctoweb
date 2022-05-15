@@ -1,5 +1,5 @@
 module Types
-  class AssetType < Types::BaseObject
+  class ResourceType < Types::BaseObject
     description "Files like videos, audios, SRTs or PDFs"
 
     field :label, String, null: false
