@@ -394,7 +394,7 @@ GEM
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
-    tinymce-rails (5.10.3)
+    tinymce-rails (6.0.2)
       railties (>= 3.1.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
