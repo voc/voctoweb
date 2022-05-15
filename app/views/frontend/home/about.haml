@@ -9,6 +9,27 @@
 
   =render 'frontend/shared/short_about'
 
+  %h2{id: 'license'} Licenses
+  %p
+    The license displayed in the actual video file applies, typically the corresponding logo and licence URL are displayed as part of the outro or intro, or the file's metadata. If there is no license encoded in the video file we suggest you ask the event organizers, reachable via the "Fahrplan" link below the individual video. 
+
+  %p
+    E.g. for a 
+    %a{href: 'https://creativecommons.org/licenses/by/4.0/'} CC BY 4.0
+    licenced video this means:
+
+  %p
+    You are free to
+    %ul
+      %li Share — copy and redistribute the material in any medium or format
+      %li Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+
+    Under the following terms
+    %ul
+      %li Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+      %li No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+  %h2{id: 'contact'}  Contact
   %p
     If you are anyhow related to the Chaos Computer Club and would like us to convert and publish your video material on this website, feel free to contact us.
 
@@ -21,6 +42,7 @@
     %li 
       %a{href: 'irc://irc.hackint.org:9999/#voc-lounge'} #voc-lounge
       %a{href: 'https://webirc.hackint.org/#ircs://irc.hackint.org/#voc-lounge'} [Web-IRC]
+      %a{href: 'https://matrix.to/#/#voc-lounge:hackint.org'} [Matrix]
   %p Contact for other questions about this site:
   %ul
     %li 
@@ -33,21 +55,16 @@
   %p
     Please use the
     %a{href: 'https://github.com/voc/voctoweb/issues'} issue tracker
-    on github to let us know about errors
+    on GitHub to let us know about errors
     %a{href: '//media.ccc.de'} media.ccc.de
     \. The latest source code version of this platform is also hosted on
-    %a{href: 'https://github.com/voc/voctoweb'} github
+    %a{href: 'https://github.com/voc/voctoweb'} GitHub
     and ready to expect your pull-requests.
 
   %h2 Direct Download
 
   :markdown
-    You can download all files directly from our [CDN](https://cdn.media.ccc.de).
-
-  %h2 Licenses
-
-  The license displayed in the actual video file applies. If there is no license encoded in the video file we suggest you ask the
-  organizers of the recordings event.
+    You can download all files directly from our [CDN](https://cdn.media.ccc.de). The MP4 files might contain multiple audio tracks when we were provided live translations e.g. from [c3lingo](https://c3lingo.org). Some files even contain an additional video track with only the slides. Most desktop video players allow you to choose between them. Please look for the "tracks selection" in your desktop video player e.g. VLC. Subtitles are provided by [c3subtitles](https://c3subtitles.de) and should be automatically found, when you drop them beside the video files. 
 
   %h2{id: 'privacy'} Privacy Policy
 
@@ -64,12 +81,12 @@
     %li and the referring URL
 
   %p
-    If a connection to port 80 fails, an error log will be created. It contains the IP address of the host causing the error and the website containing the faulty hyperlink. This error log will only be used to fix the error and will not be used in any other way.
+    If a connection to port 80 or 443 fails, an error log will be created. It contains the IP address of the host causing the error and the website containing the faulty hyperlink. This error log will only be used to fix the error and will not be used in any other way.
 
   %p
     Video and audio files are often provided by mirrors and are not covered by this policy.
 
-  %h2 Current Mirrors
+  %h3 Current Mirrors
 
   #status
 
@@ -107,7 +124,7 @@
     <th>Monthly TB (estimate)</th>
     <th>Monthly Downloads</th>
     <th>File Count</th>
-    <th>Stats</th>
+    <th>Stats / Sponsor</th>
     </tr>
     {{#each MirrorList}}
     {{#if this.HttpURL}}
@@ -121,7 +138,7 @@
     <td>{{gb this.MonthBytes}}</td>
     <td>{{this.MonthDownloads}}</td>
     <td>{{this.FileCount}}</td>
-    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{/if}}
+    <td>{{#if this.SponsorURL}}<a href="{{this.SponsorURL}}">{{this.SponsorName}}</a>{{else}}{{this.SponsorName}}{{/if}}
     </tr>
     {{/each}}
     </table>
