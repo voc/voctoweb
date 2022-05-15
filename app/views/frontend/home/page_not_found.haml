@@ -9,7 +9,7 @@
 
   %form.search{role: 'search', action: '/search/', method: 'get'}
     .form-group.input-group
-      %input.form-control{type: 'search', name: 'q', placeholder: 'Search…'}
+      %input.form-control{type: 'search', name: 'q', placeholder: 'Search…', value: @slug}
       %span.input-group-btn
         %button.btn.btn-default{type: 'submit'}
           %span.icon.icon-search

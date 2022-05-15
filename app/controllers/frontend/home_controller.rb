@@ -22,7 +22,7 @@ module Frontend
       respond_to do |format|
         format.json { head :no_content }
         format.xml { render xml: { status: :error } }
-        format.all { render :page_not_found, status: 404 }
+        format.all { render :page_not_found, status: 404, slug: params[:slug] }
       end
     end
 
