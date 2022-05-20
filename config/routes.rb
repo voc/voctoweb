@@ -76,6 +76,8 @@ Rails.application.routes.draw do
     get '/recent', to: 'recent#index'
     get '/popular', to: 'popular#index'
     get '/popular/:year', to: 'popular#index'
+    get '/unpopular', to: 'unpopular#index'
+    get '/unpopular/:year', to: 'unpopular#index'
 
     get '/tags/:tag', to: 'tags#show', as: :tag
 

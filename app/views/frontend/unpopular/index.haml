@@ -1,0 +1,23 @@
+- content_for :title do
+  Unpopular Events
+
+- content_for :body_class do
+  page-list
+
+.container-fluid
+  %h1 Unpopular Events
+  -if @year === 0
+    %b All
+  - else
+    %a{:href => unpopular_path} All
+  - for year in (@firstyear..Time.new.year).to_a.reverse
+    %span -
+    - if @year != year
+      %a{:href => unpopular_path + "/#{year}"} #{year}
+    - else
+      %b #{year}
+  - if @events.present?
+    .event-previews
+      - @events.each do |event|
+        = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
+  %a{:href => "?page=" + "#{@page + 1}" } next
