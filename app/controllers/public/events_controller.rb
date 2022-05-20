@@ -23,6 +23,11 @@ class Public::EventsController < ActionController::Base
     respond_to { |format| format.json { render :index } }
   end
 
+  # GET /public/events/unpopular?year=2020
+  def unpopular
+    @events = paginate(Frontend::Event.includes(:conference).unpopular(params[:year] || Time.current.year), per_page: 50, max_per_page: 256)
+    respond_to { |format| format.json { render :index } }
+  end
 
   # GET /public/events/1
   # GET /public/events/1.json

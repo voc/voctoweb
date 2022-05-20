@@ -11,6 +11,7 @@ module Frontend
     scope :promoted, ->(n) { where(promoted: true).order('updated_at DESC').limit(n) }
     scope :published, -> { where('release_date IS NOT NULL') }
     scope :popular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count DESC') }
+    scope :unpopular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count ASC') }
 
     def title
       self[:title].strip
@@ -79,7 +80,7 @@ module Frontend
     end
 
     # returns one video, used for the hd and sd download buttons
-    # prefering files with multiple audio tracks (html5=0) 
+    # prefering files with multiple audio tracks (html5=0)
     def video_for_download(filetype, high_quality: true)
       recordings.video_without_slides
                 .select { |x| x.filetype == filetype && x.high_quality == high_quality }
@@ -94,7 +95,7 @@ module Frontend
                 .group_by { |x| x.height }
                 .sort
                 .reverse
-                .map { |_height, group| 
+                .map { |_height, group|
                   group.min_by { |x| x.html5 ? 1 : 0 }
                 }
     end
