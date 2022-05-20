@@ -90,8 +90,10 @@ namespace :deploy do
 
   desc 'Notify IRC about deployment'
   task :notify do
-    MQTT::Client.connect(ENV['MQTT_URL']) do |c|
-      c.publish('/voc/alert', %'{"component": "media-deploy", "msg": "#{revision_log_message} on #{ENV['CAP_HOST']}", "level": "info"}')
+    if ENV['MQTT_URL']
+      MQTT::Client.connect(ENV['MQTT_URL']) do |c|
+        c.publish('/voc/alert', %'{"component": "media-deploy", "msg": "#{revision_log_message} on #{ENV['CAP_HOST']}", "level": "info"}')
+      end
     end
   end
 
