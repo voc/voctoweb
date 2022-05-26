@@ -411,7 +411,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    yajl-ruby (1.4.2)
+    yajl-ruby (1.4.3)
     zeitwerk (2.5.4)
 
 PLATFORMS
