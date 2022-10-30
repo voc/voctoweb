@@ -1,0 +1,16 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: voctoweb-public-api
+  description: |
+    The public API provides a programmatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different ecosystems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences
+  annotations:
+    github.com/project-slug: voc/voctoweb
+spec:
+  type: openapi
+  lifecycle: production
+  owner: media
+  system: voctoweb
+  definition: |
+    {}

@@ -1,10 +1,14 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: Location
 metadata:
   name: voctoweb
   annotations:
     github.com/project-slug: voc/voctoweb
 spec:
-  type: other
-  lifecycle: unknown
-  owner: media
+  type: url
+  targets:
+    - ./system.yaml
+    - ./app/backstage.yml
+    - ./app/controllers/public/backstage.yml
+    - ./app/controllers/api/backstage.yml
+    - ./app/graphql/backstage.yml

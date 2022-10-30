@@ -1,0 +1,14 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: voctoweb-graphql-api
+  description: |
+    The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetched in a single request. We tried to clean up the type names and call talks lecture and files resources (previously known as recordings). Please create issues if you are missing anything.
+spec:
+  type: graphql
+  lifecycle: experimental
+  owner: media
+  system: voctoweb
+  definition: |
+    {}

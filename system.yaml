@@ -1,0 +1,10 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: voctoweb
+  annotations:
+    github.com/project-slug: voc/voctoweb
+spec:
+  type: service
+  owner: media

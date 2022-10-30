@@ -1,0 +1,15 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: voctoweb-private-rest-api
+  description: |
+    The private API is used by our (video) production teams. They manage the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example API client can be found as part of our publishing-script repository: https://github.com/voc/publishing/ . The api_key has to be added as query variable, or in the JSON request body.
+    Most REST operations work as expected. Examples for resource creation are listed on the applications dashboard page.
+spec:
+  type: openapi
+  lifecycle: production
+  owner: media
+  system: voctoweb
+  definition: |
+    {}

@@ -1,0 +1,20 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: voctoweb
+  description: | 
+    Voctoweb is a rails application that provides a “YouTube like” user interface to video, audio and pdf files; a meta data editor; and APIs. For more infomation about relations to other components see c3voc Wiki.
+  annotations:
+    github.com/project-slug: voc/voctoweb
+spec:
+  type: website
+  lifecycle: production
+  owner: media
+  system: voctoweb
+  providesApis:
+    - voctoweb-public-api
+    - voctoweb-graphql-api
+    - voctoweb-private-rest-api
+  consumesApis:
+    - streaming-website-api
