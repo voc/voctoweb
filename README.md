@@ -66,6 +66,11 @@ Additionally the API for events and recordings uses RFC-5988 HTTP header based p
 curl -H "CONTENT-TYPE: application/json" "http://localhost:3000/public/events?page=10"
 ```
 
+### Public Data Dump
+
+If you want to do statistics or simular use-cases and the GraphQL API does not provide the necessary resolvers you can also download the full data dump which is also used as database fixtures for local development (see ./bin/setup or ./bin/update-data). So you can either setup a local postgres database, or parse the yaml files inside of https://media.ccc.de/system/voctoweb.dump.tar.gz yourself.
+
+
 ### Private REST API
 
 The private API is used by our (video) production teams. They manage the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example API client can be found as part of our publishing-script repository: https://github.com/voc/publishing/ . The `api_key` has to be added as query variable, or in the JSON request body.
