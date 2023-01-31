@@ -198,8 +198,3 @@ ActiveAdmin.setup do |config|
   config.comments_menu = false
 
 end
-
-module ActiveAdmin::ViewHelpers
-  include ApplicationHelper
-  include ViewHelper
-end

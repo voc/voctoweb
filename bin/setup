@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require "fileutils"
-include FileUtils
 
 # path to your application root.
 APP_ROOT = File.expand_path('..', __dir__)
@@ -20,12 +19,12 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Copying sample files =="
   unless File.exist?('config/database.yml')
-    cp 'config/database.yml.template', 'config/database.yml'
+    FileUtils.cp 'config/database.yml.template', 'config/database.yml'
   end
   unless File.exist?('config/settings.yml')
-    cp 'config/settings.yml.template', 'config/settings.yml'
+    FileUtils.cp 'config/settings.yml.template', 'config/settings.yml'
   end
-  cp 'env.example', '.env.production' unless File.exist?('.env.production')
+  FileUtils.cp 'env.example', '.env.production' unless File.exist?('.env.production')
 
   puts "\n== Preparing database =="
   system! 'bin/rails db:setup'
