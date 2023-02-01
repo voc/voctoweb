@@ -22,11 +22,11 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.56.42", virtualbox__intnet: true
+  config.vm.network "private_network", ip: "192.168.56.42" # , virtualbox__intnet: true
   config.vm.hostname = "media.ccc.vm"
 
   # Create a public network, which generally matched to bridged network.
@@ -85,13 +85,6 @@ Vagrant.configure(2) do |config|
     apt-get install -y --no-install-recommends openjdk-11-jre
     apt-get install -y elasticsearch redis
 
-    # ruby
-    if [ ! -x "$(command -v ruby)" ]; then
-      curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-      curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
-      curl -sSL https://get.rvm.io | bash -s stable --ruby
-    fi
-
     # postgresql
     echo "create role voctoweb with createdb login password 'voctoweb';" | sudo -u postgres psql
 
@@ -99,13 +92,21 @@ Vagrant.configure(2) do |config|
     sed -i -e 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
     systemctl restart elasticsearch
 
-    # rails
-    chown vagrant -R /usr/local/rvm/gems/ruby-*
+    # ruby rvm single-user
     set +v
     sudo -u vagrant -i <<EOF
+    if [ ! -x "$(command -v ruby)" ]; then
+      curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+      curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+      curl -sSL https://get.rvm.io | bash -s stable
+    fi
+
     cd /vagrant
-    source /usr/local/rvm/scripts/rvm
-    rvm use 3.0.0 --default
+    source /home/vagrant/.rvm/scripts/rvm
+    rvm install "ruby-3.1.3"
+    rvm use "ruby-3.1.3" --default --create
+
+    # rails
     gem install bundler
     bin/setup
 EOF
@@ -123,7 +124,7 @@ Environment=RAILS_ENV=development
 Environment=DEV_DOMAIN=media.ccc.vm
 User=vagrant
 PIDFile=/vagrant/tmp/pids/puma.pid
-ExecStart=/usr/local/rvm/wrappers/default/bundle exec rails s -b 0.0.0.0
+ExecStart=/home/vagrant/.rvm/wrappers/default/bundle exec rails s -b 0.0.0.0
 Restart=always
 SyslogIdentifier=voctoweb-puma
 RestartSec=5s
@@ -144,7 +145,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/vagrant
 User=vagrant
-ExecStart=/usr/local/rvm/wrappers/default/bundle exec sidekiq --environment development
+ExecStart=/home/vagrant/.rvm/wrappers/default/bundle exec sidekiq --environment development
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
