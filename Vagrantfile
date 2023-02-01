@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.23.42"
+  config.vm.network "private_network", ip: "192.168.56.42", virtualbox__intnet: true
   config.vm.hostname = "media.ccc.vm"
 
   # Create a public network, which generally matched to bridged network.
@@ -71,14 +71,19 @@ Vagrant.configure(2) do |config|
     set -ev
     echo "nameserver 1.1.1.1" | tee /etc/resolv.conf
 
-    export DEBIAN_FRONTEND="noninteractive"
+    # needs elasticsearch 6
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
     echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+    # needs redis 6
+    curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+    export DEBIAN_FRONTEND="noninteractive"
     apt-get update
     apt-get install -y apt-transport-https
-    apt-get install -y redis-server postgresql nodejs libssl-dev build-essential libpq-dev libsqlite3-dev nginx
+    apt-get install -y postgresql nodejs libssl-dev build-essential libpq-dev libsqlite3-dev nginx
     apt-get install -y --no-install-recommends openjdk-11-jre
-    apt-get install -y elasticsearch
+    apt-get install -y elasticsearch redis
 
     # ruby
     if [ ! -x "$(command -v ruby)" ]; then

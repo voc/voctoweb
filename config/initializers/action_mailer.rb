@@ -1,3 +1,5 @@
+require 'settings'
+
 MediaBackend::Application.configure do
   config.action_mailer.default_url_options = {
     host: Settings.frontend_host,
