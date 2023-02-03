@@ -1,0 +1,41 @@
+<!-- Podlove Player -->
+
+= javascript_include_tag "podlove"
+
+
+%div#podlove-player{style: "height: 200px"}
+  %noscript
+    %audio.audio{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata' }
+      - event.audio_recordings.each do |recording|
+        %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }, title: recording.filetype}
+
+      - event.recordings.subtitle.each do |track|
+        %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}
+
+:javascript
+    window
+      .podlovePlayer("#podlove-player", #{event.podlove_episode.to_json.html_safe}, { 
+        base: "/assets/@podlove/web-player/",
+        activeTab: "chapters", // default active tab, can be set to [chapters, files, share, playlist]
+        theme: {
+          tokens: {
+            brand: "#166255",
+            brandDark: "#166255",
+            brandDarkest: "#1A3A4A",
+            brandLightest: "#E5EAECFF",
+            shadeDark: "#807E7C",
+            shadeBase: "#807E7C",
+            contrast: "#000",
+            alt: "#fff"
+          },
+        },
+        /*"subscribe-button": {
+          feed: "#{podcast_folder_feed_url(acronym: event.conference.acronym, mime_type: 'mp3')}",
+        } */
+       }).then(store => {
+        store.subscribe(() => {
+          console.log(store.getState());
+        });
+      });
+
+

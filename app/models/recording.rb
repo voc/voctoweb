@@ -107,6 +107,10 @@ class Recording < ApplicationRecord
     high_quality ? 'high' : 'low'
   end
 
+  def size_in_bytes
+    size * 1024 * 1024
+  end
+
   def min_width(maxwidth = nil)
     width = 1280
     width = [width, self.width.to_i].min if self.width

@@ -176,6 +176,36 @@ module Frontend
       end
     end
 
+    def podlove_episode
+      {
+        title: title,
+        subtitle: subtitle,
+        summary: description,
+        # ISO 8601 DateTime format, this is capable of adding a time offset, see https://en.wikipedia.org/wiki/ISO_8601
+        publicationDate: release_date.strftime("%FT%T"),
+        # ISO 8601 Duration format ([hh]:[mm]:[ss].[sss]), capable of add ing milliseconds, see https://en.wikipedia.org/wiki/ISO_8601
+        duration: ActiveSupport::Duration.build(duration).iso8601(),
+        poster: poster_url,
+        link: link,
+        audio: audio_recordings.map { |audio|
+          {
+            url: audio.cors_url,
+            size: audio.size_in_bytes,
+            title: audio.display_name,
+            mimeType: audio.mime_type,
+          }
+        },
+        show: {
+          title: conference.title,
+          summary: conference.description,
+          poster: conference.logo_url,
+          link: conference.link,
+        },
+        version: 5
+      }
+    end
+
+
     def next_from_conference(n)
       events = conference.events.to_a
       pos = events.index(self) + 1
