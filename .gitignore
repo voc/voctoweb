@@ -63,3 +63,5 @@ config/settings.yml
 /.powenv
 /.powrc
 /esdata
+/rvm-installer
+/.vscode
