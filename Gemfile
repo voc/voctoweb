@@ -29,7 +29,7 @@ gem 'lograge'
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', '~> 3.17.0', group: :capistrano, require: false
+  gem 'capistrano', '~> 3.17.2', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
