@@ -298,7 +298,7 @@ GEM
       pry (>= 0.13, < 0.15)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (5.0.2)
+    psych (5.1.0)
       stringio
     puma (6.0.2)
       nio4r (~> 2.0)
@@ -392,7 +392,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.6.0)
+    sdoc (2.6.1)
       rdoc (>= 5.0)
     search_object (1.2.5)
     search_object_graphql (1.0.4)
@@ -413,7 +413,7 @@ GEM
     sshkit (1.21.3)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    stringio (3.0.4)
+    stringio (3.0.5)
     temple (0.10.0)
     thor (1.2.1)
     tilt (2.0.11)
