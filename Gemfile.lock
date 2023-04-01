@@ -300,7 +300,7 @@ GEM
       pry (>= 0.10.4)
     psych (5.0.2)
       stringio
-    puma (6.0.2)
+    puma (6.2.1)
       nio4r (~> 2.0)
     puma_worker_killer (0.3.1)
       get_process_mem (~> 0.2)
