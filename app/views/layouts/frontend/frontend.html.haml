@@ -3,11 +3,11 @@
   %head
     = render 'frontend/shared/header'
     %title
-      = t('custom.title')
       - if content_for?(:title)
         = yield :title
       - else
         = @event.try(:title) || @conference.try(:title)
+      = t('custom.title')
 
     = yield :head
 
