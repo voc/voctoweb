@@ -18,6 +18,7 @@ ENV BUNDLE_WITHOUT "development:test:doc"
 ENV MAKEFLAGS "-j$(nproc)"
 COPY Gemfile Gemfile.lock /voctoweb/
 RUN set -eux; \
+	apk add curl; \
 	apk add --no-cache --virtual .build-deps \
 		g++ \
 		git \
