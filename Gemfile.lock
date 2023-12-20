@@ -452,7 +452,7 @@ DEPENDENCIES
   bcrypt_pbkdf
   bootstrap-sass (~> 3.4.1)
   bullet
-  capistrano (~> 3.17.0)
+  capistrano (~> 3.17.1)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
