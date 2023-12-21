@@ -19,3 +19,14 @@
   font-weight: normal;
   font-style: normal;
 }
+/* fonts for 37C3 headings */
+@font-face {
+    font-family: 'Mona Sans';
+    src: font-url('Mona-Sans.woff2') format('woff2');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'VCR OCD Faux';
+    src: font-url('VCROCDFaux.woff2') format('woff2'), font-url('VCROCDFaux.woff') format('woff'), font-url('VCROCDFaux.ttf') format('truetype');
+    font-weight: normal;
+}
