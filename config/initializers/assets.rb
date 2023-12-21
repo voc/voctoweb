@@ -7,6 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'images', 'frontend')
+Rails.application.config.assets.paths << Rails.root.join("app", "assets", "fonts")
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement-plugins')
