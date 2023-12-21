@@ -21,6 +21,12 @@
 }
 /* fonts for 37C3 headings */
 @font-face {
+    font-family: 'Gabriella';
+    src: font-url('GabriellaHeavy.otf') format('opentype');
+    font-weight: heavy;
+    font-style: normal;
+}
+@font-face {
     font-family: 'Mona Sans';
     src: font-url('Mona-Sans.woff2') format('woff2');
     font-weight: normal;
