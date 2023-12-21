@@ -29,6 +29,7 @@ RUN set -eux; \
 		musl-dev \
 		patch \
 		postgresql-dev \
+		build-base \
 	; \
 	\
 	gem install -v 2.3.9 bundler; \
