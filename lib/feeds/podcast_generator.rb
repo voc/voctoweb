@@ -51,7 +51,7 @@ module Feeds
       maker.image.title = @config.channel_title
       maker.channel.itunes_author = @config.channel_owner
       maker.channel.itunes_owner.itunes_name = @config.channel_owner
-      maker.channel.itunes_owner.itunes_email = 'media@koeln.ccc.de'
+      maker.channel.itunes_owner.itunes_email = 'media@c3voc.de'
       maker.channel.itunes_keywords = @config.channel_keywords
       maker.channel.itunes_subtitle = @config.channel_subtitle
       maker.channel.itunes_summary = @config.channel_summary
