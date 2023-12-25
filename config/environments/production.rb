@@ -25,7 +25,10 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = Uglifier.new(harmony: true, compress: { keep_fnames: true }) if defined? Uglifier
+  config.assets.configure do |env|
+    env.js_compressor  = :uglifier # or :closure, :yui
+    env.css_compressor = :sass   # or :yui
+  end
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
