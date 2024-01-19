@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'openssl'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0'
 gem 'dotenv-rails'

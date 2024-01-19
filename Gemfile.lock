@@ -7,6 +7,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    openssl (3.1.0)
     aasm (5.4.0)
       concurrent-ruby (~> 1.0)
     actioncable (7.0.8)
@@ -140,6 +141,7 @@ GEM
       responders
       warden (~> 1.2.3)
     dotenv (2.8.1)
+    openssl (3.1.0)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
@@ -462,6 +464,7 @@ DEPENDENCIES
   coffee-rails
   devise
   dotenv-rails
+  openssl
   ed25519
   elasticsearch-model (~> 6.1.1)
   elasticsearch-rails (~> 6.1.0)
