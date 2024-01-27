@@ -42,6 +42,8 @@ module Types
       Frontend::Event.find_by(slug: slug)
     end
 
+    field :lecture_search, resolver: Resolvers::SearchLectures
+
     field :lectures_related_to, LectureType.connection_type, null: true do
       description 'A list of related lectures, ordered by decreasing relevance.'
       argument :guid, ID, required: true
