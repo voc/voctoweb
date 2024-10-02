@@ -46,6 +46,11 @@ class Conference < ApplicationRecord
     end
   end
 
+  # keep this in sync with filters in app/admin/conference.rb
+  def self.ransackable_attributes(*)
+    %w[acronym title slug recordings_path images_path updated_at]
+  end
+
   def set_defaults
     self.aspect_ratio ||= '16:9'
   end

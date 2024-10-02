@@ -57,6 +57,15 @@ class Event < ApplicationRecord
   # active admin and serialized fields workaround:
   attr_accessor :persons_raw, :tags_raw
 
+  # keep this in sync with filters in app/admin
+  def self.ransackable_attributes(*)
+    %w[guid title link conference_id promoted slug tags date release_date updated_at]
+  end
+
+  def self.ransackable_associations(*)
+    %w[conference recordings video_recordings]
+  end
+
   def generate_guid
     self.guid ||= SecureRandom.uuid
   end

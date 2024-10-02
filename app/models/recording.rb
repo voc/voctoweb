@@ -39,6 +39,15 @@ class Recording < ApplicationRecord
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
+  # keep this in sync with filters in app/admin
+  def self.ransackable_attributes(*)
+    %w[state mime_type language filename folder html5 high_quality conference_id event_id updated_at]
+  end
+
+  def self.ransackable_associations(*)
+    %w[conference event]
+  end
+
   def video?
     mime_type.in? MimeType::VIDEO
   end
