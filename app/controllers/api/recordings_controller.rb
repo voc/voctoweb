@@ -1,5 +1,5 @@
 class Api::RecordingsController < ApiController
-  protect_from_forgery except: %i(create download)
+  protect_from_forgery except: %i(create)
   before_action :set_recording, only: [:show, :edit, :update, :destroy]
 
   # GET /api/recordings/

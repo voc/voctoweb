@@ -19,8 +19,8 @@ class Event < ApplicationRecord
 
   before_validation :strip_prefix, :only => [:doi]
 
-  serialize :persons, Array
-  serialize :tags, Array
+  serialize :persons, type: Array
+  serialize :tags, type: Array
 
   # get all Events of a Conference with at least one Recording
   scope :recorded_at, ->(conference) {
