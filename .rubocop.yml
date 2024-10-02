@@ -27,9 +27,9 @@ Style/Not:
 #Style/RedundantSelf:
 # Enabled: false
 
-# Good cop, but to spammy
-#Style/StringLiterals:
-#Enabled: false
+# I give up, the readability/security benefit is too small. Just use whatever quotes.
+Style/StringLiterals:
+  Enabled: false
 
 # use { only for single line blocks, but allow block content on its own line to keep line length short
 # each { |l|
@@ -51,12 +51,18 @@ Layout/ParameterAlignment:
   Enabled: true
   EnforcedStyle: with_fixed_indentation
 
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
 # Do not write 1234 as 1_234
 Style/NumericLiterals:
   Enabled: false
 
 # Relax for controllers with multiple formats
 Metrics/AbcSize:
+  Max: 40
+
+Metrics/MethodLength:
   Max: 40
 
 # too spammy
@@ -75,4 +81,5 @@ Style/NumericPredicate:
   Enabled: false
 Style/RedundantReturn:
   Enabled: false
-
+Style/StringConcatenation:
+  Enabled: false

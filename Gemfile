@@ -39,6 +39,7 @@ group :development do
   gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
   gem 'ed25519',            require: false
   gem 'bcrypt_pbkdf',       require: false
+  gem 'solargraph',         require: false
 end
 
 gem 'haml'
