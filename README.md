@@ -190,7 +190,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 3.0.3
+ruby 3.1
 
 ### Dependencies
 
@@ -223,8 +223,8 @@ gpg --verify rvm-installer.asc rvm-installer
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 3.0.3
-rvm install ruby-3.0.3
+# install ruby
+rvm install ruby-3.1
 
 # install bundler
 gem install bundler

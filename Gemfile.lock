@@ -561,6 +561,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.0)
   rails-controller-testing
+  rbs
   redcarpet
   redis-rails
   rss

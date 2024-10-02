@@ -40,6 +40,7 @@ group :development do
   gem 'ed25519',            require: false
   gem 'bcrypt_pbkdf',       require: false
   gem 'solargraph',         require: false
+  gem 'rbs',                require: false
 end
 
 gem 'haml'
