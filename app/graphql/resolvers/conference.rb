@@ -60,12 +60,8 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
     scope.order('created_at DESC')
   end
 
-  def resolve(obj, args, ctx)
-    # NOTE: Don't run QueryResolver during tests
-    return super unless ctx.present?
-
-    GraphQL::QueryResolver.run(Conference, ctx, Types::ConferenceType) do
-      super
-    end
+  # TODO this should be converted into a plain ruby class? https://graphql-ruby.org/fields/resolvers.html
+  def resolve(args)
+    super
   end
 end
