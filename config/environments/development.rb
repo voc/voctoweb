@@ -84,6 +84,7 @@ Rails.application.configure do
   end
 
   if ENV['DEV_DOMAIN']
+    config.hosts << 'voctoweb-docker'
     config.hosts << ENV['DEV_DOMAIN']
   end
 end

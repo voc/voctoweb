@@ -11,6 +11,7 @@ services:
     environment:
       - ELASTICSEARCH_URL=elasticsearch
       - REDIS_URL=redis://redis:6379/1
+      - DEV_DOMAIN=${DEV_DOMAIN}
     depends_on:
       - sidekiq
       - postgres
@@ -81,6 +82,8 @@ services:
     volumes:
       - "./docker/nginx.conf:/etc/nginx/conf.d/default.conf"
       - "./docker/content:/usr/share/nginx/html:ro"
+    environment:
+      - NGINX_HOST=${DEV_DOMAIN}
     ports:
       - "80:80"
     depends_on:
