@@ -7,9 +7,9 @@ module Feeds
     require 'rss/maker'
     require 'rss/content'
     include Feeds::Helper
+    include Rails.application.routes.url_helpers
 
-    def initialize(config: {}, view_context: nil)
-      @view_context = view_context
+    def initialize(config: {})
       @config = OpenStruct.new Settings.feeds
       merge_config(config)
     end
@@ -49,7 +49,7 @@ module Feeds
       item.content_encoded = <<EOF
 <div align="center">
       #{item.description}<br/>
-    <a href="#{@view_context.event_url(slug: event.slug)}"><img src="#{event.thumb_url}" /></a><br/>
+    <a href="#{event_url(slug: event.slug)}"><img src="#{event.thumb_url}" /></a><br/>
     <b>Video:</b><a href="#{recording.url}">#{recording.filename}</a>
 </div>
 EOF

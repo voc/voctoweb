@@ -7,9 +7,9 @@ module Feeds
     require 'rss/maker'
     require 'rss/content'
     include Feeds::Helper
+    include Rails.application.routes.url_helpers
 
-    def initialize(view_context, config = {})
-      @view_context = view_context
+    def initialize(config = {})
       @config = OpenStruct.new Settings.feeds
       merge_config(config)
     end
@@ -62,7 +62,7 @@ module Feeds
 
     def fill_item(item, event, recording)
       item.title = get_item_title(event)
-      item.link = @view_context.event_url(slug: event.slug)
+      item.link = event_url(slug: event.slug)
       item.itunes_keywords = event.try(:tags).join(',')
       item.guid.content = recording.url + '?' + recording.created_at.to_i.to_s
       item.guid.isPermaLink = true
