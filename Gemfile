@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'openssl'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.2.0'
 gem 'dotenv-rails'
 
 gem 'activeadmin'
@@ -23,8 +23,6 @@ gem 'exception_notification'
 # Bundle puma application server
 gem 'puma'
 gem 'puma_worker_killer'
-
-gem 'utf8-cleaner'
 
 group :development do
   gem 'bullet'
