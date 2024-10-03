@@ -30,8 +30,8 @@ class PublicController < ActionController::Base
     fail ActiveRecord::RecordNotFound unless recording
 
     @conference = @event.conference
-    @width = recording.min_width(params[:maxwidth] || view_context.aspect_ratio_width)
-    @height = recording.min_height(params[:maxheight] || view_context.aspect_ratio_height)
+    @width = recording.min_width(params[:maxwidth] || @event.conference.aspect_ratio_width)
+    @height = recording.min_height(params[:maxheight] || @event.conference.aspect_ratio_height)
     true
   rescue URI::InvalidURIError
     false

@@ -108,6 +108,33 @@ class Conference < ApplicationRecord
     File.join(Settings.cdn_url, recordings_path).freeze
   end
 
+  def aspect_ratio_width(high = true)
+    case aspect_ratio
+    when /16:9/
+      high ? '640' : '188'
+    when /4:3/
+      high ? '400' : '120'
+    end
+  end
+
+  def aspect_ratio_height(high = true)
+    case aspect_ratio
+    when /16:9/
+      high ? '360' : '144'
+    when /4:3/
+      high ? '300' : '90'
+    end
+  end
+
+  def aspect_ratio_height_vw
+    case aspect_ratio
+    when /16:9/
+      '56.25vw'
+    when /4:3/
+      '75vw'
+    end
+  end
+
   private
 
   def logo_exists?
