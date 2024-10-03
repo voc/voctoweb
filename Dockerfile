@@ -1,5 +1,5 @@
 # Use the the official Ruby image as a base
-FROM ruby:3.1-alpine
+FROM ruby:3.3-alpine
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem
@@ -33,7 +33,7 @@ RUN set -eux; \
 	; \
 	\
   bundle config set --local with development \
-	gem install -v 2.3.9 bundler; \
+	gem install -v 2.5.20 bundler; \
 	bundle install --jobs=$(nproc); \
 	rm -r ~/.bundle; \
 	\
