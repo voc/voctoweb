@@ -85,6 +85,7 @@ class Event < ApplicationRecord
   def self.update_view_counts
     event_ids = recently_viewed_event_ids
     return unless event_ids.present?
+
     view_count_updated_at = EventViewCount.updated_at
     connection.execute %{
       UPDATE events
@@ -212,7 +213,6 @@ class Event < ApplicationRecord
   def translations
     video_master.languages - [ original_language ]
   end
-
 
   def update_feeds
     return unless release_date

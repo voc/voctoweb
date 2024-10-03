@@ -13,7 +13,7 @@ module Frontend
           { :left => { :content => 'Podcast audio feed of the last year', :href => '/podcast-audio-only.xml' } },
           { :left => { :content => 'Podcast archive feed, everything older than two years', :href => '/podcast-archive-hq.xml' },
                 :right =>
-                    { :content => SD_LABEL, :href => '/podcast-archive-lq.xml', :title =>  'Podcast archive feed, everything older than two years (SD)'} } ]
+                    { :content => SD_LABEL, :href => '/podcast-archive-lq.xml', :title => 'Podcast archive feed, everything older than two years (SD)'} } ]
 
       if @conference && @conference.downloaded_events_count > 0
         menu += add_feeds_for_conference_recordings(@conference)
@@ -51,7 +51,6 @@ module Frontend
             }
           })
         end
-
       end
 
       unless sub_menu.empty?
@@ -60,6 +59,5 @@ module Frontend
 
       sub_menu
     end
-
   end
 end

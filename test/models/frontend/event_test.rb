@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-
   setup do
     @event = create(:event)
   end

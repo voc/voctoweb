@@ -57,6 +57,7 @@ class Conference < ApplicationRecord
 
   def download!
     return unless schedule_url
+
     ScheduleDownloadWorker.perform_async(id)
   end
 
@@ -139,16 +140,19 @@ class Conference < ApplicationRecord
 
   def logo_exists?
     return if logo.blank?
+
     true
   end
 
   def slug_reachable
     return unless Conference.pluck(:slug).any? { |s| s.starts_with?(slug + '/') }
+
     errors.add :slug, "can't add conference below another conference"
   end
 
   def schedule_url_valid
     return unless schedule_url
+
     URI.parse(schedule_url)
   rescue URI::Exception
     errors.add :schedule_url, 'not a valid url'

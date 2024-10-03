@@ -10,6 +10,6 @@ class NewsTest < ActiveSupport::TestCase
     r = News.new
     r.title = 'a'
     r.body = 'b'
-    assert_raises(ActiveRecord::RecordInvalid) { r.save!  }
+    assert_raises(ActiveRecord::RecordInvalid) { r.save! }
   end
 end

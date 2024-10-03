@@ -71,7 +71,6 @@ namespace :puma do
   before :start, :make_dirs
 end
 
-
 namespace :deploy do
   desc 'Initial Deploy'
   task :initial do

@@ -60,7 +60,7 @@ class Api::RecordingsControllerTest < ActionController::TestCase
 
   test 'should update recording' do
     recording = Recording.last
-    args =  {
+    args = {
       recording: {
         filename: 'fake-filename',
         length: '236',

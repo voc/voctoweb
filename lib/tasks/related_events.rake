@@ -21,4 +21,3 @@ namespace :voctoweb do
     end
   end
 end
-

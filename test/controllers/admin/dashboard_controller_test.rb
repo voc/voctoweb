@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::DashboardControllerTest < ActionController::TestCase
-
   setup do
     @user = create :admin_user
     sign_in @user
@@ -17,5 +16,4 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
-
 end

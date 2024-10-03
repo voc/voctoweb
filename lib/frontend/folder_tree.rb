@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Frontend
   class FolderNode
     def initialize(name = '', path = '')
@@ -12,6 +13,7 @@ module Frontend
     def add(name)
       if @childs.key? name
         fail 'rejected: trying to add on a conference nodes, but they are always terminal' if @childs[name].conference_id
+
         @childs[name]
       else
         @childs[name] = FolderNode.new(name, @path)
@@ -33,6 +35,7 @@ module Frontend
 
     def parent_path
       return '' if path == name
+
       pos = path.rindex(name) - 2
       path[0..pos]
     end
@@ -61,6 +64,7 @@ module Frontend
         return unless start
       end
       return unless start
+
       start.childs.values
     end
 

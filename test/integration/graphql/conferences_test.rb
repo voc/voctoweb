@@ -2,7 +2,6 @@ require 'test_helper'
 require 'json'
 
 class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
-
   test 'load conference by acronym/id' do
     query_string = <<-GRAPHQL
       query($id: ID!) {
@@ -37,7 +36,6 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_equal 'frabcon', conference['id']
     assert_nil result['errors']
   end
-
 
   test 'load newest conference' do
     query_string = <<-GRAPHQL
@@ -91,5 +89,4 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_nil result['errors']
     assert result['data']['conferencesRecent'].length == 1
   end
-
 end

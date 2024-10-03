@@ -15,7 +15,7 @@ module ElasticsearchEvent
         only: %i[title subtitle description persons length release_date date updated_at slug original_language translations],
         methods: :remote_id,
         id: :guid,
-        include: { 
+        include: {
           conference: { only: %i[title acronym] },
           subtitles: { only: %i[language], methods: :fulltext }
         }
@@ -104,7 +104,7 @@ module ElasticsearchEvent
           },
           boost:  1.2,
           functions:  [
-            { gauss:  { date:  { scale:  '730d', decay:  0.9 } } }
+            { gauss:  { date: { scale: '730d', decay: 0.9 } } }
           ]
         }
       }

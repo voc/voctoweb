@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-
   setup do
     @event = create(:event)
   end
@@ -15,7 +14,7 @@ class EventTest < ActiveSupport::TestCase
 
   test "should not save without a conference" do
     @event.conference = nil
-    assert_raises (ActiveRecord::RecordInvalid) { @event.save!  }
+    assert_raises (ActiveRecord::RecordInvalid) { @event.save! }
   end
 
   test "should fill info from xml" do
@@ -79,7 +78,6 @@ class EventTest < ActiveSupport::TestCase
 
     assert_equal event1.release_date, conference.event_last_released_at
 
-
     # newer
     event2 = create(:event_with_recordings)
     event2.release_date = Time.new(2016, 01, 13)
@@ -87,7 +85,6 @@ class EventTest < ActiveSupport::TestCase
 
     # now event2
     assert_equal event2.release_date, conference.event_last_released_at
-
 
     # older
     event3 = create(:event_with_recordings)
@@ -161,7 +158,6 @@ class EventTest < ActiveSupport::TestCase
     assert_equal event1.release_date, conference.event_last_released_at
   end
 
-
   test 'should not update event_last_released_at when unreleased event is added' do
     conference = create(:conference)
     assert_nil conference.event_last_released_at
@@ -185,7 +181,6 @@ class EventTest < ActiveSupport::TestCase
 
     assert_nil conference.event_last_released_at
 
-
     # normal event with rel
     event2 = create(:event_with_recordings)
     event2.release_date = Time.new(2016, 01, 13)
@@ -193,16 +188,13 @@ class EventTest < ActiveSupport::TestCase
 
     assert_equal conference.event_last_released_at, event2.release_date
 
-
     # unreleased event, maybe with relive recording
     event3 = create(:event_with_recordings)
     event3.release_date = nil
     conference.events << event3
 
     assert_equal conference.event_last_released_at, event2.release_date
-
   end
-
 
   test 'should trigger callback to update conferences event_last_released_at' do
     assert @event.conference

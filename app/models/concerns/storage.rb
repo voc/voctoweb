@@ -23,6 +23,7 @@ module Storage
       def for_url(symbol)
         "get_#{symbol}_url".freeze
       end
+
       def for_url_path(symbol)
         "get_#{symbol}_url_path".freeze
       end
@@ -33,6 +34,7 @@ module Storage
     def validate_each(record, attribute, value)
       return if value.nil? or value.blank?
       return if File.join('/test'.freeze, value) == File.absolute_path(value, '/test'.freeze)
+
       record.errors.add(attribute, 'not a valid path')
     end
   end

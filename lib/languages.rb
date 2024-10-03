@@ -12,7 +12,7 @@ class Languages
     'ara' => ['ar', 'Arabic'],
     'hrv' => ['hr', 'Croatian'],
     'pol' => ['pl', 'Polish'],
-    
+
     'glg' => ['gl', 'Galician'],
     'mlt' => ['mt', 'Maltese'],
     'uzb' => ['uz', 'Uzbek'],

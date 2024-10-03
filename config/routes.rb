@@ -48,7 +48,6 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
   get "/graphql", to: "graphql#execute"
 
-
   # FRONTEND
   scope module: 'frontend' do
     root to: 'home#index'

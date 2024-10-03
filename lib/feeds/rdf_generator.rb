@@ -22,9 +22,9 @@ module Feeds
         events.each do |event|
           recording = event.preferred_recording
           next if recording.nil?
+
           fill_item(maker.items.new_item, event, recording)
         end
-
       end
       rss.to_s
     end

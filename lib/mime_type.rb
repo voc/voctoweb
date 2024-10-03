@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class MimeType
   AUDIO = %w(audio/ogg audio/mpeg audio/opus).freeze
   VIDEO = %w(video/mp4 video/ogg video/webm).freeze
@@ -59,5 +60,4 @@ class MimeType
       a <=> b
     end
   }
-
 end

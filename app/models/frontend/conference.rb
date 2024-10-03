@@ -47,6 +47,7 @@ module Frontend
 
     def mime_type_names
       return enum_for(:mime_type_names) unless block_given?
+
       mime_types.map { |mime_type|
         yield mime_type.freeze, MimeType.mime_type_slug(mime_type)
       }
@@ -54,8 +55,10 @@ module Frontend
 
     def playlist(event = nil)
       return events.includes(:conference) unless event
+
       n = events.index(event)
       return events.includes(:conference) unless n.positive?
+
       events[n..-1]
     end
 

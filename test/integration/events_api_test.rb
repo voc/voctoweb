@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EventsApiTest < ActionDispatch::IntegrationTest
-
   setup do
     @key = create(:api_key)
     @conference = create(:conference)

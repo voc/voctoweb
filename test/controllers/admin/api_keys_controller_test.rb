@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::ApiKeysControllerTest < ActionController::TestCase
-
   setup do
     @user = create :admin_user
     sign_in @user
@@ -23,5 +22,4 @@ class Admin::ApiKeysControllerTest < ActionController::TestCase
     get 'show', params: { id: api_key.id }
     assert_response :success
   end
-
 end

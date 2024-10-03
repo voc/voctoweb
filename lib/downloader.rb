@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 require 'net/http'
 
@@ -42,6 +43,7 @@ module Downloader
   # URI does not distinguish between file:// and file:///, so fallback to readable?
   def absolute_path(uri)
     return uri.path if File.readable?(uri.path)
+
     File.join(Rails.root, uri.path)
   end
 
@@ -66,13 +68,11 @@ module Downloader
     request = Net::HTTP::Get.new uri
 
     result = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-
       http.request request do |response|
         response.read_body do |buffer|
           fileio.write buffer
         end
       end
-
     end
 
     result.is_a? Net::HTTPSuccess

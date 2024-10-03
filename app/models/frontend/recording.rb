@@ -5,6 +5,7 @@ module Frontend
 
     def resolution
       return '' unless height
+
       if height < 720
         'sd'
       elsif height < 1080

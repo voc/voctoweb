@@ -15,6 +15,7 @@ class ConferenceStreamingDownloadWorker
       streaming.each do |conference_data|
         conference = Conference.find_by(acronym: conference_data['slug'])
         next unless conference
+
         logger.info "updating streaming config for #{conference.acronym}"
         conference.update(streaming: conference_data)
       end

@@ -33,7 +33,7 @@ class Api::RecordingsController < ApiController
       else
         if @recording.dupe.present?
           @recording = @recording.dupe[0]
-          
+
           if @recording.update(recording_params)
             format.json { render :show, status: :ok }
           else

@@ -1,5 +1,4 @@
 class ApiKey < ApplicationRecord
-
   before_create :generate_guid
 
   def generate_guid
@@ -14,5 +13,4 @@ class ApiKey < ApplicationRecord
   def self.ransackable_associations(*)
     []
   end
-
 end

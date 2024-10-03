@@ -34,6 +34,7 @@ module Frontend
              end
       parts = path.split('/')
       return if parts.blank?
+
       if @playlist
         parts += ['playlist']
       elsif @event

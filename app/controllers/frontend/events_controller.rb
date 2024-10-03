@@ -38,12 +38,13 @@ module Frontend
 
     def related_events(n)
       return Event.find(@event.related_event_ids(n)) if @event.metadata['related'].present?
+
       @event.next_from_conference(n)
     end
 
     def load_event
       @event = Frontend::Event.find_by!(
-        "slug = ? OR guid = ? OR slug ILIKE ?", 
+        "slug = ? OR guid = ? OR slug ILIKE ?",
         params[:slug], params[:slug], params[:slug] + '%'
       )
 

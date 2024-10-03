@@ -1,7 +1,6 @@
 require "test_helper"
 
 class SchemaTest < ActiveSupport::TestCase
-
 # disabled due to NoMethodError: undefined method `visible?' for nil:NilClass
 #
 #  def test_printout_is_up_to_date

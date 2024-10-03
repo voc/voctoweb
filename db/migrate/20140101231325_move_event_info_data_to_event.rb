@@ -1,5 +1,4 @@
 class MoveEventInfoDataToEvent < ActiveRecord::Migration[4.2]
-
 =begin
   def up
     EventInfo.all.each do |ei|
