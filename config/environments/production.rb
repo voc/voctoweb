@@ -76,7 +76,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
   # https://guides.rubyonrails.org/caching_with_rails.html#activesupport-cache-rediscachestore
-  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 7.days }
+  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0' }
   config.active_record.cache_versioning = false
 
   # Use a real queuing backend for Active Job (and separate queues per environment).

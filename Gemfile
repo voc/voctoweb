@@ -17,7 +17,7 @@ gem 'foreman'
 gem 'listen'
 
 # rails cache
-gem 'redis-rails'
+gem 'redis'
 gem 'exception_notification'
 
 # Bundle puma application server
