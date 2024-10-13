@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'openssl'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0'
+gem 'rails', '~> 7.2.0'
 gem 'dotenv-rails'
 
 gem 'activeadmin'
@@ -17,17 +17,12 @@ gem 'foreman'
 gem 'listen'
 
 # rails cache
-gem 'redis-rails'
+gem 'redis'
 gem 'exception_notification'
 
 # Bundle puma application server
 gem 'puma'
 gem 'puma_worker_killer'
-
-gem 'utf8-cleaner'
-
-# Simplified production logging
-gem 'lograge'
 
 group :development do
   gem 'bullet'
@@ -39,6 +34,8 @@ group :development do
   gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt.git'
   gem 'ed25519',            require: false
   gem 'bcrypt_pbkdf',       require: false
+  gem 'solargraph',         require: false
+  gem 'rbs',                require: false
 end
 
 gem 'haml'

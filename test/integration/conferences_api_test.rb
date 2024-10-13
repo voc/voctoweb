@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ConferencesApiTest < ActionDispatch::IntegrationTest
-
   setup do
     @key = create(:api_key)
     @json = json_text
@@ -30,6 +29,4 @@ class ConferencesApiTest < ActionDispatch::IntegrationTest
       end
     end
   end
-
 end
-

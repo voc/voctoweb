@@ -1,10 +1,10 @@
 # frozen_string_literal: true
+
 require 'rss/maker'
 
 module Feeds
   # Atom news feed generator.
   class NewsFeedGenerator
-
     # Generate atom feed for given news.
     #
     # @example Generate atom feed for given news
@@ -47,8 +47,6 @@ module Feeds
             assign_item_options(item, news)
           end
         end
-
-
       end
     end
 

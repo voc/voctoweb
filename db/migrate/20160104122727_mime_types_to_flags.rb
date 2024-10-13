@@ -3,6 +3,7 @@ class MimeTypesToFlags < ActiveRecord::Migration[4.2]
     html5 = %w(vnd.voc/mp4-web vnd.voc/webm-web)
     Recording.find_each do |recording|
       next unless recording.valid?
+
       recording.hd_quality = hd?(recording.mime_type)
       recording.html5 = html5.include?(recording.mime_type)
       recording.mime_type = display_mime_type(recording.mime_type)

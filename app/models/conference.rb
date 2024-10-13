@@ -46,12 +46,18 @@ class Conference < ApplicationRecord
     end
   end
 
+  # keep this in sync with filters in app/admin/conference.rb
+  def self.ransackable_attributes(*)
+    %w[acronym title slug recordings_path images_path updated_at]
+  end
+
   def set_defaults
     self.aspect_ratio ||= '16:9'
   end
 
   def download!
     return unless schedule_url
+
     ScheduleDownloadWorker.perform_async(id)
   end
 
@@ -103,20 +109,50 @@ class Conference < ApplicationRecord
     File.join(Settings.cdn_url, recordings_path).freeze
   end
 
+  def aspect_ratio_width(high = true)
+    case aspect_ratio
+    when /16:9/
+      high ? '640' : '188'
+    when /4:3/
+      high ? '400' : '120'
+    end
+  end
+
+  def aspect_ratio_height(high = true)
+    case aspect_ratio
+    when /16:9/
+      high ? '360' : '144'
+    when /4:3/
+      high ? '300' : '90'
+    end
+  end
+
+  def aspect_ratio_height_vw
+    case aspect_ratio
+    when /16:9/
+      '56.25vw'
+    when /4:3/
+      '75vw'
+    end
+  end
+
   private
 
   def logo_exists?
     return if logo.blank?
+
     true
   end
 
   def slug_reachable
     return unless Conference.pluck(:slug).any? { |s| s.starts_with?(slug + '/') }
+
     errors.add :slug, "can't add conference below another conference"
   end
 
   def schedule_url_valid
     return unless schedule_url
+
     URI.parse(schedule_url)
   rescue URI::Exception
     errors.add :schedule_url, 'not a valid url'

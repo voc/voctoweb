@@ -24,6 +24,7 @@ module Public
         @conference = Conference.find_by(acronym: params[:id])
       end
       fail ActiveRecord::RecordNotFound unless @conference
+
       respond_to { |format| format.json }
     end
   end

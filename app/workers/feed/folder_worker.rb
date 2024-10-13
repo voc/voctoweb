@@ -1,5 +1,6 @@
 class Feed::FolderWorker < Feed::Base
   include Sidekiq::Worker
+  include Rails.application.routes.url_helpers
 
   key :podcast_folder
 
@@ -31,11 +32,10 @@ class Feed::FolderWorker < Feed::Base
   def build(conference, mime_type, mime_type_name, quality)
     quality_display_name = Frontend::FeedQuality.display_name(quality)
     generator = Feeds::PodcastGenerator.new(
-      view_context,
       title: "#{conference.title} (#{[quality_display_name, mime_type_name].reject(&:empty?).join(' ')})",
       channel_summary: " This feed contains all events from #{conference.acronym} as #{mime_type_name}",
       channel_description: " This feed contains all events from #{conference.acronym} as #{mime_type_name}",
-      base_url: view_context.conference_url(acronym: conference.acronym),
+      base_url: conference_url(acronym: conference.acronym),
       logo_image: conference.logo_url
     )
     generator.generate(conference.events.released.includes(:conference)) do |event|

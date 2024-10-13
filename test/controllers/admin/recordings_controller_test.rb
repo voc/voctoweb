@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::RecordingsControllerTest < ActionController::TestCase
-
   setup do
     @user = create :admin_user
     sign_in @user
@@ -22,5 +21,4 @@ class Admin::RecordingsControllerTest < ActionController::TestCase
     get 'show', params: { id: recording.id }
     assert_response :success
   end
-
 end

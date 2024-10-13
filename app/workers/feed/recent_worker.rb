@@ -10,7 +10,6 @@ class Feed::RecentWorker < Feed::Base
     start_time = events.maximum(:updated_at)
 
     generator = Feeds::RdfGenerator.new(
-      view_context: view_context,
       config: {
         title: self.class.get_title,
         channel_summary: self.class.get_summary,

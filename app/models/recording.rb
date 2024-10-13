@@ -6,7 +6,7 @@ class Recording < ApplicationRecord
   has_one :conference, through: :event
   has_many :recording_views, dependent: :delete_all
 
-  validates :event, :filename, :mime_type,  :language, presence: true
+  validates :event, :filename, :mime_type, :language, presence: true
   validates :length, presence: true, if: :requires_length
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
@@ -39,6 +39,15 @@ class Recording < ApplicationRecord
 
   has_attached_file :recording, via: :filename, folder: :folder, belongs_into: :recordings, on: :conference
 
+  # keep this in sync with filters in app/admin
+  def self.ransackable_attributes(*)
+    %w[state mime_type language filename folder html5 high_quality conference_id event_id updated_at]
+  end
+
+  def self.ransackable_associations(*)
+    %w[conference event]
+  end
+
   def video?
     mime_type.in? MimeType::VIDEO
   end
@@ -67,6 +76,7 @@ class Recording < ApplicationRecord
           end
 
     return id if str.empty?
+
     str
   end
 
@@ -138,16 +148,16 @@ class Recording < ApplicationRecord
   end
 
   def url
-    if self.mime_type == 'text/vtt' 
-      File.join(Settings.static_url, event.conference.images_path, filename).freeze 
+    if self.mime_type == 'text/vtt'
+      File.join(Settings.static_url, event.conference.images_path, filename).freeze
     else
       File.join(event.conference.recordings_url, folder || '', filename).freeze
     end
   end
 
   def cors_url
-    if self.mime_type == 'text/vtt' 
-      File.join(Settings.static_url, event.conference.images_path, filename).freeze 
+    if self.mime_type == 'text/vtt'
+      File.join(Settings.static_url, event.conference.images_path, filename).freeze
     else
       File.join(Settings.cors_url, event.conference.recordings_path, folder || '', filename).freeze
     end
@@ -156,7 +166,7 @@ class Recording < ApplicationRecord
   # for elastic search
   def fulltext
     puts ' downloading ' + cors_url
-    begin 
+    begin
       URI.open(url).read if subtitle?
     rescue OpenURI::HTTPError
       puts '   failed with HTTP Error'
@@ -168,11 +178,13 @@ class Recording < ApplicationRecord
 
   def language_valid
     return unless language
+
     errors.add(:language, 'not a valid language') unless languages.all? { |l| Languages.all.include?(l) }
   end
 
   def filename_without_path
     return unless filename
+
     errors.add :filename, 'not allowed to contain a path' if File.basename(filename) != filename
   end
 
@@ -190,7 +202,7 @@ class Recording < ApplicationRecord
       self.dupe = event.recordings.select { |recording|
         recording.filename == filename && recording.folder == folder
       }.delete_if { |dupe| dupe == self }
-    end 
+    end
 
     if self.dupe.present?
       errors.add :event, 'recording already exist on event'

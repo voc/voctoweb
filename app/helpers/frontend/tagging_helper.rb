@@ -1,7 +1,6 @@
 module Frontend
   # Set the tags attribute on items to use this helper
   module TaggingHelper
-
     # link to tag page
     def link_for_global(tag, css: '')
       %[<a href="/tags/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
@@ -11,9 +10,9 @@ module Frontend
       %[<a href="/c/#{h conference.acronym}/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
     end
 
-    #
     def tag_cloud
       return [] if @tags.empty?
+
       tags_hash.map { |tag, count|
         link_for tag, css: css_class_by_size(count)
       }
@@ -39,6 +38,7 @@ module Frontend
       tags = {}
       @tags.each do |tag, events|
         next unless tag
+
         tags[tag] = events.count
       end
       tags

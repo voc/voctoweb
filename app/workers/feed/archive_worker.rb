@@ -18,7 +18,6 @@ class Feed::ArchiveWorker < Feed::Base
 
   def build(events, quality)
     generator = Feeds::PodcastGenerator.new(
-      view_context,
       title: "archive feed (#{Frontend::FeedQuality.display_name(quality)})",
       channel_summary: ' This feed contains events older than two years',
       logo_image: logo_image_url

@@ -1,5 +1,5 @@
 class Api::RecordingsController < ApiController
-  protect_from_forgery except: %i(create download)
+  protect_from_forgery except: %i(create)
   before_action :set_recording, only: [:show, :edit, :update, :destroy]
 
   # GET /api/recordings/
@@ -33,7 +33,7 @@ class Api::RecordingsController < ApiController
       else
         if @recording.dupe.present?
           @recording = @recording.dupe[0]
-          
+
           if @recording.update(recording_params)
             format.json { render :show, status: :ok }
           else

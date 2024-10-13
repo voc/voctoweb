@@ -2,7 +2,6 @@ require 'test_helper'
 require 'json'
 
 class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
-
   setup do
     @conference = create :conference_with_recordings
   end
@@ -20,7 +19,7 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
             thumbUrl
             posterUrl
           }
-          timelens { 
+          timelens {
             timelineUrl
             thumbnailsUrl
           }
@@ -49,7 +48,6 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_nil result['errors']
   end
 
-
   test 'load newest conference' do
     query_string = <<-GRAPHQL
       query($id: ID!) {
@@ -68,7 +66,6 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
     @event = create :event
     result = MediaBackendSchema.execute(query_string, variables: { id: @event.id })
     assert_nil result['errors']
-
   end
 
   unless ENV['SKIP_ELASTICSEARCH']
@@ -124,5 +121,4 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
       assert_equal 1, result['data']['lectureSearch'].count
     end
   end
-
 end

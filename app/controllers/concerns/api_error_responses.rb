@@ -7,7 +7,6 @@ module ApiErrorResponses
     rescue_from ActionController::RoutingError, with: :record_not_found
 
     before_action { |controller| set_header(controller) }
-
   end
 
   private
@@ -37,4 +36,3 @@ module ApiErrorResponses
     end
   end
 end
-

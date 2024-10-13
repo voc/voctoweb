@@ -17,6 +17,7 @@ module Frontend
 
     def playlist
       return audio_playlist if @audio
+
       video_playlist
     end
 
@@ -34,6 +35,7 @@ module Frontend
 
     def title
       return @conference.title if @conference
+
       lead_event.title
     end
 
@@ -50,6 +52,5 @@ module Frontend
         [event, event.preferred_recording]
       end
     end
-
   end
 end

@@ -7,9 +7,9 @@ module Feeds
     require 'rss/maker'
     require 'rss/content'
     include Feeds::Helper
+    include Rails.application.routes.url_helpers
 
-    def initialize(view_context, config = {})
-      @view_context = view_context
+    def initialize(config = {})
       @config = OpenStruct.new Settings.feeds
       merge_config(config)
     end
@@ -34,8 +34,8 @@ module Feeds
 
     def create_channel(maker)
       maker.channel.title = @config.channel_title
-      maker.channel.generator =  'media.ccc.de / RSS ' + RSS::VERSION
-      maker.channel.link =  @config.base_url
+      maker.channel.generator = 'media.ccc.de / RSS ' + RSS::VERSION
+      maker.channel.link = @config.base_url
       maker.channel.description = @config.channel_description
       maker.channel.copyright = 'see video outro'
       maker.channel.lastBuildDate = Time.now.utc.to_s
@@ -62,7 +62,7 @@ module Feeds
 
     def fill_item(item, event, recording)
       item.title = get_item_title(event)
-      item.link = @view_context.event_url(slug: event.slug)
+      item.link = event_url(slug: event.slug)
       item.itunes_keywords = event.try(:tags).join(',')
       item.guid.content = recording.url + '?' + recording.created_at.to_i.to_s
       item.guid.isPermaLink = true

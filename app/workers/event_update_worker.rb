@@ -14,8 +14,10 @@ class EventUpdateWorker
 
         fahrplan = fahrplan_for_conference(conference)
         next unless fahrplan
+
         info = event_info(fahrplan, event.guid)
         next unless info.present?
+
         event.update_event_info(info)
       end
     end

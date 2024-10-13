@@ -1,5 +1,4 @@
 class FillRecordingsFolderFromMimeTypes < ActiveRecord::Migration[4.2]
-
   def up
     mappings = {
       'application/ogg'   => 'ogg',
@@ -17,9 +16,10 @@ class FillRecordingsFolderFromMimeTypes < ActiveRecord::Migration[4.2]
       'video/x-matroska'  => 'mkv',
       'video/x-msvideo'   => 'avi',
     }
-   
+
     Recording.all.each do |r|
       next if r.mime_type.empty?
+
       r.folder = mappings[r.mime_type] || ""
       r.save!
     end

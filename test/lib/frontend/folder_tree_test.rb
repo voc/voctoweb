@@ -20,7 +20,6 @@ module Frontend
       assert_includes paths, 'a'
       assert_includes paths, 'h'
 
-
       folders = tree.folders_at('a')
       assert_equal 3, folders.length
 
@@ -28,7 +27,6 @@ module Frontend
       assert_includes paths, 'a/b'
       assert_includes paths, 'a/e'
       assert_includes paths, 'a/g'
-
 
       folders = tree.folders_at('a/b')
       assert_equal 2, folders.length

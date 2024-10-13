@@ -65,3 +65,11 @@ config/settings.yml
 /esdata
 /rvm-installer
 /.vscode
+
+/.bundle/config
+/.envrc
+/vendor/cache
+/contrib
+/Session.vim
+/.bundle
+/.solargraph.yml

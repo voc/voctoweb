@@ -13,6 +13,7 @@ class WebFeed < ApplicationRecord
     feed = WebFeed.find_or_create_by(selector)
     feed.with_lock do
       return if feed.newer?(time)
+
       feed.last_build = time || Time.now
       yield feed
       feed.save
@@ -25,6 +26,7 @@ class WebFeed < ApplicationRecord
 
   def newer?(date)
     return unless last_build && date
+
     last_build >= date
   end
 

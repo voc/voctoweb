@@ -47,6 +47,7 @@ class Public::EventsController < ActionController::Base
     end
 
     fail ActiveRecord::RecordNotFound unless @event
+
     respond_to { |format| format.json }
   end
 

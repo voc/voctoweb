@@ -22,6 +22,7 @@ class PublicController < ActionController::Base
 
   def parse_url_param
     return unless params[:url]
+
     uri = URI.parse(params[:url])
     return unless allowed_url?(uri)
 
@@ -30,8 +31,8 @@ class PublicController < ActionController::Base
     fail ActiveRecord::RecordNotFound unless recording
 
     @conference = @event.conference
-    @width = recording.min_width(params[:maxwidth] || view_context.aspect_ratio_width)
-    @height = recording.min_height(params[:maxheight] || view_context.aspect_ratio_height)
+    @width = recording.min_width(params[:maxwidth] || @event.conference.aspect_ratio_width)
+    @height = recording.min_height(params[:maxheight] || @event.conference.aspect_ratio_height)
     true
   rescue URI::InvalidURIError
     false
@@ -41,6 +42,7 @@ class PublicController < ActionController::Base
     return true unless Rails.env.production?
     return if uri.host != Settings.frontend_host
     return unless uri.path.starts_with?('/v/')
+
     true
   end
 

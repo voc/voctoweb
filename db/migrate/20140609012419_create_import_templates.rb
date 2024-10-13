@@ -1,7 +1,6 @@
 class CreateImportTemplates < ActiveRecord::Migration[4.2]
   def change
     create_table :import_templates do |t|
-
       #conference
 
       t.string   "acronym"
