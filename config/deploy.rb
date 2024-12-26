@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.17.1'
+lock '3.17.3'
 
 set :application, 'media-site'
 set :repo_url, ENV['CAP_REPO']
