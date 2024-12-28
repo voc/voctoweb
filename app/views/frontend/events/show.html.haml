@@ -67,14 +67,24 @@
                 = @conference.title
         - else
           =@conference.title
-      %h1
-        = @event.title
+      - if not @event.recordings.video.present? and @event.relive_present?
+        %h1
+          = @event.title
+          = '(Relive)'
+      - else
+        %h1
+          = @event.title
       - unless @event.subtitle.blank?
         %h2
           = @event.subtitle
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
+
+    - if not @event.recordings.video.present? and @event.relive_present?
+      .alert.alert-info
+        %b
+          = "This is just a stream recording, the final release of this talk is still being worked on."
 
     - if @event.recordings.video.present?
       .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
