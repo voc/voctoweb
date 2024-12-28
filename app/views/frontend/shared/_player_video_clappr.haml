@@ -21,11 +21,10 @@
     if($clapprPlayer.length > 0) {
       var sprites = [];
 
-
-      var player = new Clappr.Player({
+      var player = new VOCPlayer.Player({
         baseUrl: 'assets/clapprio/',
         plugins: [
-          ClapprThumbnailsPlugin, DashShakaPlayback, PlaybackRatePlugin, Timelens
+          ClapprThumbnailsPlugin, PlaybackRatePlugin, Timelens
         ],
         sources:  #{@event.clappr_sources.to_json.html_safe},
         height: '56.25vw',

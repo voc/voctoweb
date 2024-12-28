@@ -34,10 +34,9 @@
 //= require playlist/playlist
 // when adding plugins here, also add them to oembed-player.js
 
-//= require clappr.min
+//= require player.umd
 //= require clappr-thumbnails-plugin
 //= require clappr-playback-rate-plugin
-//= require clappr-dash-shaka-playback
 
 //= require relive-seek
 
