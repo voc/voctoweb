@@ -14,6 +14,8 @@
   %meta{property: 'og:description', content: @event.short_description}
   %meta{property: 'twitter:card', content: 'player'}
   %meta{property: 'twitter:player', content: oembed_api_event_url(@event)}
+  %meta{property: 'twitter:player:height', content: '480'}
+  %meta{property: 'twitter:player:width', content: '854'}
   - @event.persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
