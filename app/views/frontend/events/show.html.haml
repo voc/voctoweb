@@ -82,12 +82,11 @@
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
 
     - if not @event.recordings.video.present? and @event.relive_present?
-      .alert.alert-info
+      .alert.alert-info.relive-notice
         %h4
           %span.icon.icon-cog
           = 'Stream Recording'
-        %b
-          = 'This is just a preliminary release of the stream recording, the final release of this talk is still being worked on.'
+        = 'This is just a preliminary release of the stream recording, the final release of this talk is still being worked on.'
 
     - if @event.recordings.video.present?
       .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
@@ -143,6 +142,11 @@
           %span.icon.icon-external-link
           %a{href: @event.doi_url}
             = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
+
+    - if @event.notes
+      .alert.alert-info.event-notes
+        %span.icon.icon-info-circle
+        = @event.notes
 
     - if @event.description.present?
       /%h3 About
