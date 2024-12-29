@@ -44,6 +44,7 @@
         },
         events: {
           onReady: function() {
+            var player = this;
             var playback = player.core.getCurrentContainer().playback;
             var params = deserialize(location.href);
 
