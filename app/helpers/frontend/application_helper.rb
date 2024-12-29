@@ -7,7 +7,7 @@ module Frontend
     end
 
     def mastodon_url(title, url)
-      'javascript:window.location.href = "https://" + prompt("Please enter the domain of your mastodon instance, e.g. chaos.social") + "/share?url='.freeze + URI.encode_www_form_component(url) + '&text='.freeze + URI.encode_www_form_component(title)
+      'javascript:window.location.href = "https://" + prompt("Please enter the domain of your mastodon instance, e.g. chaos.social") + "/share?url='.freeze + URI.encode_www_form_component(url) + '&text='.freeze + URI.encode_www_form_component(title) + '"'.freeze
     end
 
     def facebook_url(title, url)
