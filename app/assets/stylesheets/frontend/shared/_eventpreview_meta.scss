@@ -30,7 +30,7 @@
     }
   }
 
-  .duration-container {
+  .thumbnail-badge-container {
     position: relative;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@
       display: block;
     }
 
-    .duration {
+    .duration, .relive {
       position: absolute;
       right: 0;
       bottom: 0;
