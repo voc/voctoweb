@@ -10,8 +10,8 @@
 
     %ul.share
       %li
-        %a.popup{:href => twitter_url(event.title, event_url(slug: event.slug)), :title => 'via Twitter'}
-          %i{:class => "icon-twitter"}
+        %a.popup{:href => mastodon_url(event.title, event_url(slug: event.slug)), :title => 'via Mastodon'}
+          %i{:class => "icon-mastodon"}
 
       %li
         %a.popup{:href => facebook_url(event.title, event_url(slug: event.slug)), :title => 'via Facebook'}

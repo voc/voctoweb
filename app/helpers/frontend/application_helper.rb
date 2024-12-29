@@ -6,8 +6,8 @@ module Frontend
       (public_oembed_url(url: event_url(slug: event.slug))).freeze
     end
 
-    def twitter_url(title, url)
-      'https://twitter.com/home?status='.freeze + URI.encode_www_form_component(title + ': ' + url)
+    def mastodon_url(title, url)
+      'javascript:self.location.href("https://" + prompt("Please enter the domain of your mastodon instance, e.g. chaos.social") + "/share?url='.freeze + URI.encode_www_form_component(url) + '&text='.freeze + URI.encode_www_form_component(title)
     end
 
     def facebook_url(title, url)
