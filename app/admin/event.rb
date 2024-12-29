@@ -58,6 +58,7 @@ ActiveAdmin.register Event do
       row :doi do
         link_to e.doi, e.doi_url unless e.doi.nil?
       end
+      row :notes
       row :thumb_filename do
         div show_event_folder e, :thumb_filename unless e.thumb_filename.nil?
       end
@@ -117,6 +118,7 @@ ActiveAdmin.register Event do
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
       f.input :doi, hint: 'Digital Object Identifier (DOI) e.g. 10.5446/19566 – prefixes are stripped automatically'
+      f.input :notes, hint: 'Notes to be shown as a notice on the event page'
     end
     f.inputs 'Files' do
       f.input :slug
@@ -167,7 +169,7 @@ ActiveAdmin.register Event do
     def permitted_params
       params.permit event: [:guid, :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
                             :conference_id, :title, :subtitle, :link, :slug,
-                            :original_language, :doi, :promoted, :promotion_disabled,
+                            :original_language, :doi, :notes, :promoted, :promotion_disabled,
                             :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
     end
   end

@@ -9,6 +9,10 @@ body.page-show {
     margin-top: 10px;
   }
 
+  .relive-notice {
+    font-size: 1.5em;
+  }
+
   .player-header {
     clear: both;
 
@@ -50,7 +54,19 @@ body.page-show {
     }
   }
 
+  .event-notes {
+    font-size: 1.2em;
+
+    .icon {
+      margin-right: $padding-xs-horizontal;
+    }
+  }
+
   .description {
+    margin-top: 12px;
+  }
+
+  .event-notes {
     margin-top: 12px;
   }
 
