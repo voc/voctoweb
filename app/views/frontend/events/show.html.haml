@@ -143,8 +143,13 @@
           %a{href: @event.doi_url}
             = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
 
+    - if @conference.global_event_notes.present?
+      .alert.alert-info.event-notes.conference--global-event-notes
+        %span.icon.icon-info-circle
+        = @conference.global_event_notes
+      
     - if @event.notes.present?
-      .alert.alert-info.event-notes
+      .alert.alert-info.event-notes.event--notes
         %span.icon.icon-info-circle
         = @event.notes
 

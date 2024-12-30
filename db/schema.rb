@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_29_193141) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_30_111051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_29_193141) do
     t.text "description"
     t.string "link"
     t.text "custom_css"
+    t.string "global_event_notes"
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
   end
