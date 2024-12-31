@@ -21,6 +21,7 @@
 //= require jquery.bxslider-v4.2.1d-ssfrontend
 //= require slider
 //= require feed_toggle
+//= require mastodon-share
 
 //= require mirrorbrain-fix
 //= require mediaelement-and-player

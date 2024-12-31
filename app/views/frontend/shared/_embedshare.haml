@@ -10,7 +10,7 @@
 
     %ul.share
       %li
-        %a{:href => mastodon_url(event.title, event_url(slug: event.slug)), :title => 'via Mastodon'}
+        %button{data: {share: 'mastodon', text: event.title, url: event_url(slug: event.slug)}}
           %i{:class => "icon-mastodon"}
 
       %li
@@ -35,4 +35,9 @@
     $("textarea.share").on('focus', function() {
       $(this).select();
     });
+    $('.share').on('click', '[data-share=mastodon]', function (e) {
+      e.stopPropagation();
+      mastodonShare(this.dataset.text, this.dataset.url);
+      e.preventDefault();
+    })
   });

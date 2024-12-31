@@ -6,10 +6,6 @@ module Frontend
       (public_oembed_url(url: event_url(slug: event.slug))).freeze
     end
 
-    def mastodon_url(title, url)
-      'javascript:window.location.href = "https://" + prompt("Please enter the domain of your mastodon instance, e.g. chaos.social") + "/share?url='.freeze + URI.encode_www_form_component(url) + '&text='.freeze + URI.encode_www_form_component(title) + '"'.freeze
-    end
-
     def facebook_url(title, url)
       'https://www.facebook.com/sharer/sharer.php?t='.freeze + URI.encode_www_form_component(title) + '&u=' + URI.encode_www_form_component(url)
     end
