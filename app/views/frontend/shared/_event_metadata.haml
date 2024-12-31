@@ -8,7 +8,7 @@
       = truncate(event.subtitle, length: 60, separator: ' ', omission: '…')
 
   - if event.timelens_present?
-    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration}}
+    %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration, lazy: "yes"}}
 
   %ul.metadata
     - if !event.tags.nil? && event.tags.length > 3 
