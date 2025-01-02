@@ -13,7 +13,7 @@
   %meta{property: 'og:video:release_date', content: @event.release_date}
   %meta{property: 'og:description', content: @event.short_description}
   %meta{property: 'twitter:card', content: 'player'}
-  %meta{property: 'twitter:player', content: oembed_event_url(@event)}
+  %meta{property: 'twitter:player', content: oembed_event_url(slug: event.slug)}
   %meta{property: 'twitter:player:height', content: '480'}
   %meta{property: 'twitter:player:width', content: '854'}
   - @event.persons.each do |speaker|
@@ -41,7 +41,7 @@
             }
           },
           "contentUrl": "#{@event.preferred_recording.filename}",
-          "embedUrl": "#{oembed_event_url(@event)}"
+          "embedUrl": "#{oembed_event_url(slug: event.slug)}"
         }
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
