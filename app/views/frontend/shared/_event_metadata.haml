@@ -27,3 +27,7 @@
       = event.view_count
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
+    - if show_conference && event.conference.present?
+      .conference
+        %a{href: conference_path(acronym: event.conference.acronym)}
+          = event.conference.title

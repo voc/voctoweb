@@ -1,5 +1,5 @@
 .breadcrumb {
-  background-color: $gray;
+  background-color: var(--surface-300);
   font-size: 16px;
   padding: 0;
   margin-bottom: 0;
@@ -16,8 +16,12 @@
 
     .icon {
       font-size: 9px;
-      color: #eee;
+      color: var(--text-secondary);
       padding: 0 3px;
+    }
+
+    a {
+      color: var(--text-primary);
     }
   }
 
