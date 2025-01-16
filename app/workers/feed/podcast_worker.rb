@@ -18,7 +18,6 @@ class Feed::PodcastWorker < Feed::Base
 
   def build(events, quality)
     generator = Feeds::PodcastGenerator.new(
-      view_context,
       title: "recent events feed (#{Frontend::FeedQuality.display_name(quality)})",
       channel_summary: ' This feed contains events from the last two years',
       logo_image: logo_image_url

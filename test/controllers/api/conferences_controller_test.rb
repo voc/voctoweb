@@ -13,7 +13,7 @@ class Api::ConferencesControllerTest < ActionController::TestCase
   end
 
   test 'should update conference' do
-    args =  {
+    args = {
       conference: {
         logo: 'fake-logo',
         title: 'fake-title'

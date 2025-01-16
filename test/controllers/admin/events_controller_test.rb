@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::EventsControllerTest < ActionController::TestCase
-
   setup do
     @user = create :admin_user
     sign_in @user
@@ -28,5 +27,4 @@ class Admin::EventsControllerTest < ActionController::TestCase
       get 'show', params: { id: 1234 }
     end
   end
-
 end

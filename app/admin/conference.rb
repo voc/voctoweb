@@ -1,5 +1,4 @@
 ActiveAdmin.register Conference do
-
   filter :acronym
   filter :title
   filter :slug
@@ -32,6 +31,7 @@ ActiveAdmin.register Conference do
       row :logo
       row :description
       row :link
+      row :global_event_notes
       row :aspect_ratio
       row :schedule_url
       row :schedule_xml do
@@ -63,6 +63,7 @@ ActiveAdmin.register Conference do
       f.input :slug
       f.input :description #, input_html: { class: 'tinymce' }
       f.input :link
+      f.input :global_event_notes, hint: 'Notes to be shown as a notice on the page of every lecture in this conference'
     end
     f.inputs "Paths" do
       f.input :recordings_path, hint: conference.get_recordings_url
@@ -75,7 +76,6 @@ ActiveAdmin.register Conference do
     f.inputs "Meta" do
       f.input :subtitles, :as => :boolean, label: 'Conference has subtitles', hint: 'displays subtitle appeal below player'
       f.input :custom_css
-
     end
     f.actions
   end
@@ -91,7 +91,7 @@ ActiveAdmin.register Conference do
   action_item(:add_event, only: [:show, :edit]) do
     link_to 'View', conference_path(acronym: conference.acronym), method: :get
   end
-  
+
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
   end
@@ -106,6 +106,7 @@ ActiveAdmin.register Conference do
                                   :title,
                                   :description,
                                   :link,
+                                  :global_event_notes,
                                   :schedule_url,
                                   :recordings_path,
                                   :images_path,
@@ -118,7 +119,4 @@ ActiveAdmin.register Conference do
                                 ]
     end
   end
-
-
-
 end

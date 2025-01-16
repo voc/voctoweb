@@ -1,6 +1,10 @@
 %a{href: event_path(slug: event.slug)}
-  .duration-container
+  .thumbnail-badge-container
     %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title), loading: 'lazy'}
-    .duration
-      %span.icon.icon-clock-o
-      = duration_in_minutes(event.duration)
+    - if event.duration > 0
+      .duration
+        %span.icon.icon-clock-o
+        = duration_in_minutes(event.duration)
+    - if not event.recordings.video.present? and event.relive_present?
+      .relive
+        %span.icon.icon-cog{title: 'This is just a stream recording, the final release of this talk is still being worked on.'}

@@ -12,6 +12,10 @@
   %meta{property: 'og:video', content: opengraph_video(@event.videos_sorted_by_language)}
   %meta{property: 'og:video:release_date', content: @event.release_date}
   %meta{property: 'og:description', content: @event.short_description}
+  %meta{property: 'twitter:card', content: 'player'}
+  %meta{property: 'twitter:player', content: oembed_event_url(slug: @event.slug)}
+  %meta{property: 'twitter:player:height', content: '480'}
+  %meta{property: 'twitter:player:width', content: '854'}
   - @event.persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
@@ -37,7 +41,7 @@
             }
           },
           "contentUrl": "#{@event.preferred_recording.filename}",
-          "embedUrl": "#{oembed_api_event_url(@event)}"
+          "embedUrl": "#{oembed_event_url(slug: @event.slug)}"
         }
   = render partial: 'frontend/shared/folder_feeds', locals: { conference: @conference }
   != "<link href='#{oembed_api_event_url(@event)}' rel='alternate' title='media.ccc.de oembed profile' type='application/json+oembed'>"
@@ -63,14 +67,26 @@
                 = @conference.title
         - else
           =@conference.title
-      %h1
-        = @event.title
+      - if not @event.recordings.video.present? and @event.relive_present?
+        %h1
+          = @event.title
+          = '(Relive)'
+      - else
+        %h1
+          = @event.title
       - unless @event.subtitle.blank?
         %h2
           = @event.subtitle
 
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
+
+    - if not @event.recordings.video.present? and @event.relive_present?
+      .alert.alert-info.relive-notice
+        %h4
+          %span.icon.icon-cog
+          = 'Stream Recording'
+        = 'This is just a preliminary release of the stream recording, the final release of this talk is still being worked on.'
 
     - if @event.recordings.video.present?
       .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
@@ -126,6 +142,16 @@
           %span.icon.icon-external-link
           %a{href: @event.doi_url}
             = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
+
+    - if @conference.global_event_notes.present?
+      .alert.alert-info.event-notes.conference--global-event-notes
+        %span.icon.icon-info-circle
+        = @conference.global_event_notes
+      
+    - if @event.notes.present?
+      .alert.alert-info.event-notes.event--notes
+        %span.icon.icon-info-circle
+        = @event.notes
 
     - if @event.description.present?
       /%h3 About

@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.17.0'
+lock '3.17.3'
 
 set :application, 'media-site'
 set :repo_url, ENV['CAP_REPO']
@@ -11,12 +11,12 @@ set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 # set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '3.0.3'
+set :rvm_ruby_version, '3.3'
 
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_to,       "/srv/media/#{fetch(:application)}"
-set :ssh_options,     forward_agent: true, user: fetch(:user)
+set :ssh_options,     forward_agent: false, user: fetch(:user)
 set :bundle_without,  %w(development test sqlite3).join(' ')
 set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.yml .env.production .ruby-version)
 set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
@@ -70,7 +70,6 @@ namespace :puma do
 
   before :start, :make_dirs
 end
-
 
 namespace :deploy do
   desc 'Initial Deploy'

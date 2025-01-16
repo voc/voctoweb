@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Feeds
   module Helper
     def merge_config(config)
@@ -8,6 +9,7 @@ module Feeds
 
       config.each { |k, v|
         next if keep.include? k
+
         @config[k] = v
       }
     end

@@ -2,16 +2,15 @@
 # alternate Name: Lecture, Talk?
 
 module Types
-
   class LectureType < Types::BaseObject
     description 'This entity is an Event with multiple Files e.g. Video and Audio recordings, subtitles (SRT) as well as PDFs e.g. the lecture slides'
 
-    field :guid, ID, null: false 
+    field :guid, ID, null: false
     field :local_id, Integer, null: false
     # field :conference, Types::ConferenceType, "The conference this event belongs to", null: false
 
-    field :title, String,  "The title of this event", null: false
-    field :subtitle, String,  "The event's subtitle that may be displayed below the title", null: true
+    field :title, String, "The title of this event", null: false
+    field :subtitle, String, "The event's subtitle that may be displayed below the title", null: true
     field :description, String, "The event's description", null: true
 
     field :slug, UrlType, "The URL slug of this event", null: false
@@ -33,7 +32,6 @@ module Types
     field :link, UrlType, "URL pointing to the conference event website", null: true
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
-
     field :video_preferred, ResourceType, null: false
     field :videos, [ResourceType], null: false
     field :audios, [ResourceType], null: true
@@ -42,12 +40,12 @@ module Types
     field :files, ResourceType.connection_type, null: false
 
     # field :thumbnail, Types::ImageType, null: true
-    class LectureImageType < Types::BaseObject    
+    class LectureImageType < Types::BaseObject
       field :poster_url, UrlType, 'URL pointing to a preview/poster image of the event', null: true
       field :thumb_url, UrlType, 'URL pointing to a smaller version of the poster image', null: true
     end
     field :images, LectureImageType, null: true
-    def images 
+    def images
       object
     end
 
@@ -56,12 +54,12 @@ module Types
       field :thumbnails_url, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
     end
     field :timelens, LectureTimelensType, null: true
-    def timelens 
+    def timelens
       object
     end
 
     field :player_config, JsonType, null: true
-    def player_config 
+    def player_config
        { sources: object.clappr_sources, subtitles: object.clappr_subtitles }
     end
 

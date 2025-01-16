@@ -5,7 +5,7 @@ module Frontend
     def setup
       @conference = create :conference, slug: '123'
       @event = create :event, conference: @conference, slug: 'abc'
-      @recording  = create :recording, event: @event, filename: 'abc', mime_type: 'video/mp4', language: 'eng'
+      @recording = create :recording, event: @event, filename: 'abc', mime_type: 'video/mp4', language: 'eng'
     end
 
     test 'should get show with slug' do

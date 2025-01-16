@@ -4,9 +4,11 @@ module FahrplanUpdater
 
   def fill_event_info
     return unless conference.downloaded?
+
     fahrplan = FahrplanParser.new(conference.schedule_xml)
     info = fahrplan.event_info_by_guid[guid]
     return if info.empty?
+
     update_event_info(info)
   end
 
@@ -27,6 +29,7 @@ module FahrplanUpdater
 
   def get_event_url(id)
     return unless conference.schedule_url.present?
+
     conference.schedule_url.sub('schedule.xml', "events/#{id}.html").freeze
   end
 end

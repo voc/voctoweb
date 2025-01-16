@@ -73,7 +73,7 @@ If you want to do statistics or simular use-cases and the GraphQL API does not p
 
 ### Private REST API
 
-The private API is used by our (video) production teams. They manage the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example API client can be found as part of our publishing-script repository: https://github.com/voc/publishing/ . The `api_key` has to be added as query variable, or in the JSON request body.
+The private API is used by our (video) production teams. They manage the content by adding new conferences, events and other files (so called recordings). All API calls need to use the JSON format. An example API client can be found as part of our publishing-script repository: https://github.com/voc/publishing/ . The `api_key` has to be added either as header `Authorization: Token token=<api_key>`, via query variable, or in the JSON request body – the examples below use `1234` as a `api_key` placeholder value.
 
 Most REST operations work as expected. Examples for resource creation are listed on the applications dashboard page.
 
@@ -83,16 +83,16 @@ You can use the API to register a new conference. The conference `acronym` and t
 However folders and access rights need to be setup manually, before you can upload images and videos.
 
 ``` bash
-curl -H "CONTENT-TYPE: application/json" -d '{
-    "api_key":"4",
-    "acronym":"frab123",
+curl -H "CONTENT-TYPE: application/json" -H "Authorization: Token token=1234" -d '{
+    "acronym":"37c3",
     "conference":{
-      "recordings_path":"conference/frab123",
-      "images_path":"events/frab",
-      "slug":"event/frab/frab123",
+      "title": "37C3: Unlocked",
+	     "description": "The 37th Chaos Communication Congress (37C3) takes place in Hamburg, 27.-30.12.2023, and is the 2023 edition of the annual four-day conference on technology, society and utopia organised by the Chaos Computer Club (CCC) and volunteers.\r\n\r\nCongress offers lectures and workshops and various events on a multitude of topics including (but not limited to) information technology and generally a critical-creative attitude towards technology and the discussion about the effects of technological advances on society.",
+      "slug": "congress/2023",
+      "recordings_path":"congress/37c3",
+      "images_path":"congress/37c3",
       "aspect_ratio":"16:9",
-      "title":null,
-      "schedule_url":"http://progam.tld/schedule.xml"
+      "schedule_url":"https://fahrplan.events.ccc.de/congress/2023/fahrplan/schedule.xml"
     }
   }' "http://localhost:3000/api/conferences"
 ```
@@ -103,12 +103,11 @@ curl -H "CONTENT-TYPE: application/json" -d '{
 To add event (e.g. a talk or lecture) the conference it is part of via `acronym`, and define generate a random `guid`. You can add images to an event, like the poster image.  For an explanation what the `timeline_url` and `thumbnails_url` parameters are, see <https://timelens.io>.
 
 ``` bash
-curl -H "CONTENT-TYPE: application/json" -d '{
-    "api_key":"4",
-    "acronym": "frab123"
+curl -H "CONTENT-TYPE: application/json" -H "Authorization: Token token=1234" -d '{
+    "acronym": "37c3"
     "event":{
       "guid":"1c4d8ad8-e072-11e8-981a-6c400891b752",
-      "slug":"fra123-22-qwerty",
+      "slug":"37c3-22-qwerty",
       "title":"qwerty",
       "poster_url":"http://koeln.ccc.de/images/chaosknoten_preview.jpg",
       "thumb_url":"http://koeln.ccc.de/images/chaosknoten.jpg",
@@ -121,8 +120,7 @@ curl -H "CONTENT-TYPE: application/json" -d '{
 #### Update event
 
 ``` bash
-curl  -i -X PATCH -H "CONTENT-TYPE: application/json" -d '{
-    "api_key":"XXX",
+curl -i -X PATCH -H "CONTENT-TYPE: application/json" -H "Authorization: Token token=1234" -d '{
     "event":{
       "tags": ["foo", "bar", "baz", "2018"]
     }
@@ -142,9 +140,8 @@ The recording length is specified in seconds.
   * Example implementation: https://github.com/voc/publishing/
 
 ``` bash
-curl -H "CONTENT-TYPE: application/json" -d '{
-    "api_key":"4",
-    "guid":"123",
+curl -H "CONTENT-TYPE: application/json" -H "Authorization: Token token=1234" -d '{
+    "guid":"1c4d8ad8-e072-11e8-981a-6c400891b752",
     "recording":{
       "filename":"some.mp4",
       "folder":"h264-hd",
@@ -152,7 +149,7 @@ curl -H "CONTENT-TYPE: application/json" -d '{
       "language":"deu"
       "size":"12",
       "length":"3600"
-      }
+    }
   }' "http://localhost:3000/api/recordings"
 ```
 
@@ -179,7 +176,7 @@ First, install Docker and [Docker Compose](https://docs.docker.com/compose/) –
 
 Then, clone this repository, make it your working directory, and run the following command:
 
-```
+```bash
 bin/docker-dev-up
 ```
 
@@ -193,7 +190,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 3.0.3
+ruby 3.3
 
 ### Dependencies
 
@@ -226,8 +223,8 @@ gpg --verify rvm-installer.asc rvm-installer
 bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
-# install ruby 3.0.3
-rvm install ruby-3.0.3
+# install ruby
+rvm install ruby-3.3.5
 
 # install bundler
 gem install bundler

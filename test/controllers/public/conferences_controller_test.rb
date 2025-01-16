@@ -29,7 +29,6 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     refute_empty json['acronym']
   end
 
-
   test "should return 404 error" do
     get :show, params: { id: 123 }, format: :json
     assert_response :not_found

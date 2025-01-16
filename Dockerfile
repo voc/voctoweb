@@ -1,5 +1,5 @@
 # Use the the official Ruby image as a base
-FROM ruby:3.0-alpine
+FROM ruby:3.3-alpine
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem
@@ -19,6 +19,7 @@ ENV MAKEFLAGS "-j$(nproc)"
 COPY Gemfile Gemfile.lock /voctoweb/
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN set -eux; \
+	apk add curl; \
 	apk add --no-cache --virtual .build-deps \
 		g++ \
 		git \
@@ -29,9 +30,11 @@ RUN set -eux; \
 		musl-dev \
 		patch \
 		postgresql-dev \
+		build-base \
 	; \
 	\
-	gem install -v 2.3.9 bundler; \
+  bundle config set --local with development \
+	gem install -v 2.5.20 bundler; \
 	bundle install --jobs=$(nproc); \
 	rm -r ~/.bundle; \
 	\

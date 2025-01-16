@@ -35,7 +35,7 @@ body.page-list {
       background-color: $gray-even-lighter;
     }
 
-    .duration-container {
+    .thumbnail-badge-container {
       float: left;
       height: 117px;
       width: 208px;
@@ -96,7 +96,7 @@ body.page-list {
       height: auto;
 
       > a { display: none; }
-      .duration-container { display: none; }
+      .thumbnail-badge-container { display: none; }
 
       .caption {
         margin-left: 0;

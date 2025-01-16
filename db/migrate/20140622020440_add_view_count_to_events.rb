@@ -1,5 +1,4 @@
 class AddViewCountToEvents < ActiveRecord::Migration[4.2]
-
   def up
     add_column :events, :view_count, :integer, default: 0
 
@@ -11,5 +10,4 @@ class AddViewCountToEvents < ActiveRecord::Migration[4.2]
   def down
     remove_column :events, :view_count
   end
-
 end

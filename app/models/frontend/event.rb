@@ -44,18 +44,18 @@ module Frontend
         File.join(Settings.static_url, conference.images_path, poster_filename).freeze
       elsif relive_present?
           relive['thumbnail'].freeze
-        end
       end
+    end
 
     def thumb_url
       if thumb_filename_exists?
         File.join(Settings.static_url, conference.images_path, thumb_filename).freeze
       elsif relive_present?
           relive['thumbnail'].freeze
-        else
+      else
           conference.logo_url.freeze
-        end
       end
+    end
 
     def timeline_url
       File.join(Settings.static_url, conference.images_path, timeline_filename).freeze if timelens_present?

@@ -5,6 +5,7 @@ module ViewHelper
 
   def show_folder(label: 'Path', path: '/')
     return nil if label.empty?
+
     "#{label} (#{path})"
   end
 

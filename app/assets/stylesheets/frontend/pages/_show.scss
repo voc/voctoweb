@@ -9,6 +9,13 @@ body.page-show {
     margin-top: 10px;
   }
 
+  .relive-notice {
+    font-size: 1.25em;
+    h3, h4 {
+      font-size: 1.25em;
+    }
+  }
+
   .player-header {
     clear: both;
 
@@ -50,6 +57,15 @@ body.page-show {
     }
   }
 
+  .event-notes {
+    font-size: 1.2em;
+    margin-top: 12px;
+
+    .icon {
+      margin-right: $padding-xs-horizontal;
+    }
+  }
+
   .description {
     margin-top: 12px;
   }
@@ -65,7 +81,7 @@ body.page-show {
       float: left;
       margin-right: 10px;
 
-      a {
+      a, button {
         display: block;
         color: white;
 
@@ -78,6 +94,8 @@ body.page-show {
 
         width: 48px;
         height: 48px;
+        padding: 0px;
+        border: 0px;
         border-radius: 5px;
 
         text-align: center;

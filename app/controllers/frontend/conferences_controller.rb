@@ -21,6 +21,7 @@ module Frontend
 
       @folders = conferences_folder_tree_at(params[:slug] || '')
       return redirect_to root_url if @folders.blank?
+
       respond_to do |format|
         format.html { render :browse }
       end
@@ -51,6 +52,7 @@ module Frontend
       tree.build(conferences_with_events.pluck(:id, :slug))
       folders = tree.folders_at(path)
       fail ActiveRecord::RecordNotFound unless folders
+
       tree.sort_folders(folders)
     end
 
@@ -60,12 +62,14 @@ module Frontend
 
     def sort_param
       return SORT_PARAM[@sorting] if @sorting
+
       'view_count desc'
     end
 
     def check_sort_param
       return unless params[:sort]
       return unless SORT_PARAM.keys.include?(params[:sort])
+
       @sorting = params[:sort]
     end
   end

@@ -1,6 +1,45 @@
 /* Common functionality */
 
 function timelens(container, options) {
+    // Use querySelector if a selector string is specified.
+    if (typeof container == "string")
+        container = document.querySelector(container);
+    container.className += " timelens";
+
+    // Create .timeline img, which displays the visual timeline.
+    const timeline = document.createElement("img");
+    timeline.className = "timelens-timeline";
+    timeline.setAttribute("loading", "lazy");
+    timeline.src = options.timeline;
+    // Prevent the timeline image to be dragged
+    timeline.setAttribute("draggable", "false");
+
+    // Create .marker div, which is used to display the current position.
+    if (options.position) {
+        const marker = document.createElement("div");
+        marker.className = "timelens-marker-border";
+        container.appendChild(marker);
+
+        const markerInner = document.createElement("div");
+        markerInner.className = "timelens-marker";
+        marker.appendChild(markerInner);
+        container.appendChild(marker);
+    }
+
+    container.appendChild(timeline);
+
+    if (!options.lazyThumbnails) {
+        loadThumbnails(container, options);
+    } else {
+        const once = function (event) {
+            loadThumbnails(container, options, { offsetX: event.offsetX, pageX: event.pageX });
+            timeline.removeEventListener("mousemove", once);
+        }
+        timeline.addEventListener("mousemove", once);
+    }
+}
+
+function loadThumbnails(container, options, event) {
     // Load VTT file asynchronously, then continue with the initialization.
     let vtt_url;
     if (options.thumbnails) {
@@ -10,71 +49,51 @@ function timelens(container, options) {
     const request = new XMLHttpRequest();
     request.open("GET", vtt_url, true);
     request.send(null);
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
             const type = request.getResponseHeader("Content-Type");
             if (type.indexOf("text") !== 1) {
-                timelens2(container, request.responseText, options);
+                initThumbnails(container, request.responseText, options, event);
             }
         }
     };
 }
 
 // Actually initialize Timelens.
-function timelens2(container, vtt, options) {
+function initThumbnails(container, vtt, options, event) {
     const thumbnails = parseVTT(vtt);
     const duration = thumbnails[thumbnails.length - 1].to;
-
-    // Use querySelector if a selector string is specified.
-    if (typeof container == "string")
-        container = document.querySelector(container);
-
-    // This will be our main .timelens div, which will contain all new elements.
-    if (container.className != "") {
-        container.className += " ";
-    }
-    container.className += "timelens";
-
-    // Create div which contains the preview thumbnails.
-    const thumbnail = document.createElement("div");
-    thumbnail.className = "timelens-thumbnail";
 
     // Create div which contains the thumbnail time.
     const time = document.createElement("div");
     time.className = "timelens-time";
 
-    // Create .timeline img, which displays the visual timeline.
-    const timeline = document.createElement("img");
-    timeline.setAttribute("loading", "lazy");
-    timeline.src = options.timeline;
-    // Prevent the timeline image to be dragged
-    timeline.setAttribute("draggable", "false");
+    // Create div which contains the preview thumbnails.
+    const thumbnail = document.createElement("div");
+    thumbnail.className = "timelens-thumbnail";
 
-    // Create .marker div, which is used to display the current position.
-    if (options.position) {
-        var marker = document.createElement("div");
-        marker.className = "timelens-marker-border";
-        container.appendChild(marker);
-
-        var markerInner = document.createElement("div");
-        markerInner.className = "timelens-marker";
-        marker.appendChild(markerInner);
-    }
-
-    // Assemble everything together.
-    container.appendChild(timeline);
-    container.appendChild(thumbnail);
     thumbnail.appendChild(time);
+    container.appendChild(thumbnail);
+
+    const timeline = container.querySelector(".timelens-timeline");
+    const marker = container.querySelector(".timelens-marker-border");
+
+    if (options.position) {
+        setInterval(function () {
+            marker.style.marginLeft =
+                (options.position() / duration) * timeline.offsetWidth + "px";
+        }, 1);
+    }
 
     // When clicking the timeline, seek to the respective position.
     if (options.seek) {
-        timeline.onclick = function(event) {
+        timeline.onclick = function (event) {
             const progress = progressAtMouse(event, timeline);
             options.seek(progress * duration);
         };
     }
 
-    timeline.onmousemove = function(event) {
+    const mouseMove = function (event) {
         // Calculate click position in seconds.
         const progress = progressAtMouse(event, timeline);
         const seconds = progress * duration;
@@ -114,12 +133,9 @@ function timelens2(container, vtt, options) {
 
         time.innerHTML = to_timestamp(seconds);
     };
-
-    if (options.position) {
-        setInterval(function() {
-            marker.style.marginLeft =
-                (options.position() / duration) * timeline.offsetWidth + "px";
-        }, 1);
+    timeline.onmousemove = mouseMove;
+    if (event) {
+        mouseMove(event);
     }
 }
 
@@ -163,7 +179,7 @@ function to_timestamp(seconds_total) {
 
 // How far is the mouse into the timeline, in a range from 0 to 1?
 function progressAtMouse(event, timeline) {
-    const x = event.offsetX ? event.offsetX : event.pageX - timeline.offsetLeft;
+    const x = typeof event.offsetX === "number" ? event.offsetX : event.pageX - timeline.offsetLeft;
     return x / timeline.offsetWidth;
 }
 
@@ -235,7 +251,7 @@ if (typeof MediaElementPlayer !== "undefined") {
             timelens(slider, {
                 timeline: timeline,
                 thumbnails: thumbnails,
-                position: function() {
+                position: function () {
                     return player.currentTime;
                 }
             });
@@ -274,7 +290,7 @@ if (typeof Clappr !== "undefined") {
             timelens(bar, {
                 timeline: this.core.options.timelens.timeline,
                 thumbnails: this.core.options.timelens.thumbnails,
-                position: function() {
+                position: function () {
                     return t.core.containers[0].getCurrentTime();
                 }
             });

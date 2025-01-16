@@ -10,5 +10,4 @@ class AddViewCountToRecordings < ActiveRecord::Migration[4.2]
   def down
     remove_column :recordings, :view_count
   end
-
 end

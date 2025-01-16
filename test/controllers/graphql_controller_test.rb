@@ -6,7 +6,7 @@ class GraphqlControllerTest < ActionController::TestCase
   end
 
   test 'should list conferences' do
-    post 'execute', params: { 
+    post 'execute', params: {
       query: " {
         allConferences(first:10) {id, title}
       } "

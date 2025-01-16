@@ -14,6 +14,7 @@ class ConferenceReliveDownloadWorker
 
     relive_toc.each do |r|
       next unless r.key?('media_conference_id')
+
       conference = Conference.find_by(acronym: r['project'])
       next unless conference
 
@@ -48,6 +49,7 @@ class ConferenceReliveDownloadWorker
 
   def protocol_relative_url(url)
     return url if url.start_with?('http') || url.start_with?('file')
+
     'https:' + url
   end
 end

@@ -21,6 +21,5 @@ module Frontend
 
       respond_to { |format| format.html }
     end
-
   end
 end

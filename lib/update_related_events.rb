@@ -66,6 +66,7 @@ class UpdateRelatedEvents
     @graph.each do |_id, edges|
       weights = edges.values
       next if weights.count < 2
+
       limit = percentile(weights, 0.95)
       edges.delete_if { |_k, v| v < limit.to_i }
     end

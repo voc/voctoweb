@@ -5,6 +5,7 @@ class AddOriginalLanguageToEvent < ActiveRecord::Migration[4.2]
     Event.find_each do |event|
       languages = event.recordings.pluck(:language).uniq
       next if languages.empty?
+
       event.original_language = languages.max_by(&:length).split(/-/).first
       event.save
     end

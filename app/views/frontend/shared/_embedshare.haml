@@ -10,8 +10,8 @@
 
     %ul.share
       %li
-        %a.popup{:href => twitter_url(event.title, event_url(slug: event.slug)), :title => 'via Twitter'}
-          %i{:class => "icon-twitter"}
+        %button{data: {share: 'mastodon', text: event.title, url: event_url(slug: event.slug)}}
+          %i{:class => "icon-mastodon"}
 
       %li
         %a.popup{:href => facebook_url(event.title, event_url(slug: event.slug)), :title => 'via Facebook'}
@@ -35,4 +35,9 @@
     $("textarea.share").on('focus', function() {
       $(this).select();
     });
+    $('.share').on('click', '[data-share=mastodon]', function (e) {
+      e.stopPropagation();
+      mastodonShare(this.dataset.text, this.dataset.url);
+      e.preventDefault();
+    })
   });

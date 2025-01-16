@@ -2,13 +2,8 @@ require 'test_helper'
 
 module Feeds
   class PodcastGeneratorTest < ActiveSupport::TestCase
-    class ViewContext
-      def event_url(*args)
-        ""
-      end
-    end
     test 'handles invalid recording.duration' do
-      feed = PodcastGenerator.new(ViewContext.new, title: 'some-title', channel_summary: 'some-summary', logo_image: 'some-url')
+      feed = PodcastGenerator.new(title: 'some-title', channel_summary: 'some-summary', logo_image: 'some-url')
 
       create_list(:event_with_recordings, 5)
       Recording.update_all(length: nil)

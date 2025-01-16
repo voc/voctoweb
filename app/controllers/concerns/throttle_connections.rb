@@ -5,6 +5,7 @@ module ThrottleConnections
 
   def throttle?(recording_view)
     return false if Rails.env.test?
+
     Rails.cache.exist?(cache_key(recording_view))
   end
 

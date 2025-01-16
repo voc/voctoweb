@@ -21,6 +21,7 @@
 //= require jquery.bxslider-v4.2.1d-ssfrontend
 //= require slider
 //= require feed_toggle
+//= require mastodon-share
 
 //= require mirrorbrain-fix
 //= require mediaelement-and-player
@@ -34,10 +35,9 @@
 //= require playlist/playlist
 // when adding plugins here, also add them to oembed-player.js
 
-//= require clappr.min
+//= require player.umd
 //= require clappr-thumbnails-plugin
 //= require clappr-playback-rate-plugin
-//= require clappr-dash-shaka-playback
 
 //= require relive-seek
 

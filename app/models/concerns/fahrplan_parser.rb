@@ -45,6 +45,5 @@ module FahrplanParser
       }
       persons
     end
-
   end
 end

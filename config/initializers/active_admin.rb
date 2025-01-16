@@ -1,5 +1,4 @@
 ActiveAdmin.setup do |config|
-
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -57,7 +56,6 @@ ActiveAdmin.setup do |config|
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
 
-
   # == Current User
   #
   # Active Admin will associate actions with the current
@@ -66,7 +64,6 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # to return the currently logged in user.
   config.current_user_method = :current_admin_user
-
 
   # == Logging Out
   #
@@ -86,7 +83,6 @@ ActiveAdmin.setup do |config|
   # Default:
   # config.logout_link_method = :get
 
-
   # == Root
   #
   # Set the action to call for the root path. You can set different
@@ -95,13 +91,11 @@ ActiveAdmin.setup do |config|
   # Default:
   config.root_to = 'conferences#index'
 
-
   # == Batch Actions
   #
   # Enable and disable Batch Actions
   #
   config.batch_actions = true
-
 
   # == Controller Filters
   #
@@ -111,11 +105,9 @@ ActiveAdmin.setup do |config|
   # config.before_filter :do_something_awesome
   config.before_action :deny_request, if: :ssl_configured?
 
-
   # == Setting a Favicon
   #
   # config.favicon = '/assets/favicon.ico'
-
 
   # == Register Stylesheets & Javascripts
   #
@@ -129,7 +121,6 @@ ActiveAdmin.setup do |config|
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
 
-
   # == CSV options
   #
   # Set the CSV builder separator
@@ -137,7 +128,6 @@ ActiveAdmin.setup do |config|
   #
   # Force the use of quotes
   # config.csv_options = { :force_quotes => true }
-
 
   # == Menu System
   #
@@ -160,7 +150,6 @@ ActiveAdmin.setup do |config|
   #     end
   #   end
 
-
   # == Download Links
   #
   # You can disable download links on resource listing pages,
@@ -178,14 +167,12 @@ ActiveAdmin.setup do |config|
   #
   #   end
 
-
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
   config.default_per_page = 20
-
 
   # == Filters
   #
@@ -196,5 +183,4 @@ ActiveAdmin.setup do |config|
   # config.filters = true
 
   config.comments_menu = false
-
 end
