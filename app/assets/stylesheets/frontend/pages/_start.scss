@@ -38,7 +38,7 @@ body.page-start {
 
     .tagline {
       text-align: center;
-      color: $gray-light;
+      color: var(--text-muted);
       font-size: 18px;
     }
   }
@@ -50,7 +50,6 @@ body.page-start {
 
     .btn-lg {
       margin: $padding-small-vertical $padding-small-horizontal;
-
       padding: 5px 25px;
 
       @media #{$xs-or-smaller} {
@@ -105,7 +104,7 @@ body.page-start {
       }
 
       .date {
-        color: $gray-light;
+        color: var(--text-muted);
         .icon {
           margin-right: 3px;
         }
@@ -113,14 +112,9 @@ body.page-start {
 
       // left/right view
       @media #{$sm-or-bigger} {
-        .event-preview {
+        .event-preview .thumbnail-badge-container {
+          height: 62px;
           width: 110px;
-          float: left;
-          margin: 0 12px 12px 0;
-          background-color: #333333;
-          img {
-            max-height: 62px;
-          }
         }
 
         .date {
@@ -144,7 +138,8 @@ body.page-start {
         padding: 6px;
 
         &:nth-child(odd) {
-          background-color: $gray-even-lighter;
+          background-color: var(--surface-100);
+          border-radius: .5em;
         }
 
         > a {
@@ -162,8 +157,9 @@ body.page-start {
 
     .conferences .conference {
       margin-bottom: 25px;
+
       h3 {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid var(--border-divider);
       }
 
 
@@ -178,19 +174,15 @@ body.page-start {
 
       @media #{$md-or-bigger} {
         position: relative;
-        height: 375px;
+        height: 400px;
 
         &:nth-child(odd) {
-          background-color: $gray-even-lighter;
+          background-color: var(--surface-100);
+          border-radius: .5em;
         }
 
         a.more {
-          position: absolute;
-          bottom: 0;
-          left: 15px;
-          right: 0;
-
-          border-top: 1px solid #ccc;
+          border-top: 1px solid var(--border-divider);
           padding-top: 10px;
           display: block;
         }

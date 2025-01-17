@@ -17,8 +17,8 @@ body.page-browse {
     }
 
     &.folder {
-      background-color: $brand-primary;
-      color: white;
+      background-color: var(--primary-200);
+      color: var(--text-primary);
 
       .header {
         margin-bottom: $padding-large-vertical;
@@ -30,7 +30,7 @@ body.page-browse {
       }
 
       &:hover, &:focus, &:active {
-        background-color: $gray-dark;
+        background-color: var(--primary-100);
       }
 
       .caption {

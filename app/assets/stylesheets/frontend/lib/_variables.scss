@@ -412,13 +412,13 @@ $nav-link-hover-bg:                         #fff;
 // $nav-open-link-hover-color:                 #fff
 
 //== Tabs
-$nav-tabs-border-color:                     #e3e3e3;
+$nav-tabs-border-color:                     none;
 
-// $nav-tabs-link-hover-border-color:          $gray-lighter
+$nav-tabs-link-hover-border-color:          var(--border-500);
 
 // $nav-tabs-active-link-hover-bg:             $body-bg
-// $nav-tabs-active-link-hover-color:          $gray
-// $nav-tabs-active-link-hover-border-color:   #ddd
+$nav-tabs-active-link-hover-color:          var(--text-primary);
+$nav-tabs-active-link-hover-border-color:   var(--border-300);
 
 // $nav-tabs-justified-link-border-color:            #ddd
 // $nav-tabs-justified-active-link-border-color:     $body-bg
@@ -729,8 +729,8 @@ $thumbnail-border-radius:     $border-radius-base;
 //
 //##
 
-// $well-bg:                     #f5f5f5
-// $well-border:                 darken($well-bg, 7%)
+$well-bg:                     var(--surface-100);
+$well-border:                 var(--border-300);
 
 //== Badges
 //

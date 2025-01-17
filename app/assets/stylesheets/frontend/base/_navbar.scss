@@ -24,14 +24,12 @@
   }
 
   .btn.btn-default {
+    /* the button is always white, so no theme-dependent color is needed here */
+    color: var(--neutral-800);
+
     padding: 0.2em;
     height: 1.8em;
     max-width: 2em;
-    &:hover, &:focus, &:active {
-      color: $brand-primary;
-      background-color: #fff;
-      border-color: #fff;
-    }
   }
 
   .navbar-form {
@@ -39,7 +37,7 @@
     margin-top: 0.8em;
     margin-bottom: 0.8em;
 
-    &.dropdown {
+    &.compact {
       padding-right: 0.0em;
     }
   }
@@ -54,4 +52,8 @@
     font-size: 1.3em;
     display: inline-block;
   }
+}
+
+.navbar-default {
+  background-color: var(--surface-200);
 }

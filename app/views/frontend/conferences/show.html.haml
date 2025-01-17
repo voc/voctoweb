@@ -6,21 +6,22 @@
 
 .container-fluid
   .events-header
-    .logo
-      %img{src: @conference.logo_url, alt: 'conference logo'}
-    %h1= @conference.title or @conference.acronym.gsub(/[\-_]/,' ')
-    -if @tag
-      %h2= @tag
+    .conference-title-container
+      %img.logo{src: @conference.logo_url, alt: 'conference logo'}
+      %div
+        %h1= @conference.title or @conference.acronym.gsub(/[\-_]/,' ')
+        -if @tag
+          %h2= @tag
+        - if @events.present?
+          Full playlist:
+          = link_to 'Video', playlist_conference_path(slug: @conference.first_slug), method: :get
+          - if @conference.audio_recordings?
+            \/
+            = link_to 'Audio', audio_playlist_conference_path(slug: @conference.first_slug), method: :get
 
-    - if @events.present?
-      Full playlist:
-      = link_to 'Video', playlist_conference_path(slug: @conference.first_slug), method: :get
-      - if @conference.audio_recordings?
-        \/
-        = link_to 'Audio', audio_playlist_conference_path(slug: @conference.first_slug), method: :get
 
+    
     - if @conference.description.present?
-      %br{ clear: 'all' }
       %br
       .description
         = @conference.description.html_safe
