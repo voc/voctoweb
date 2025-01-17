@@ -23,8 +23,8 @@
       %span.icon.icon-calendar-o
       = event.display_date
     %li.view-count
-      %span.icon.icon-eye
-      = event.view_count
+      %span.icon.icon-eye{title: "#{delimited_views_count(event.view_count)} views"}
+      = human_readable_views_count(event.view_count)
     %li.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
     - if show_conference && event.conference.present?

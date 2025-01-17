@@ -131,8 +131,8 @@
           %span.icon.icon-upload{title: 'release date'}
           = @event.release_date.to_date
       %li
-        %span.icon.icon-eye
-        = @event.view_count
+        %span.icon.icon-eye{title: "#{delimited_views_count(@event.view_count)} views"}
+        = human_readable_views_count(@event.view_count)
       - if @event.link.present?
         %li
           %span.icon.icon-external-link
