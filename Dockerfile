@@ -13,9 +13,9 @@ RUN set -eux; \
 WORKDIR /voctoweb
 
 # Install required gems
-ENV BUNDLE_FORCE_RUBY_PLATFORM 1
-ENV BUNDLE_WITHOUT "development:test:doc"
-ENV MAKEFLAGS "-j$(nproc)"
+ENV BUNDLE_FORCE_RUBY_PLATFORM=1
+ENV BUNDLE_WITHOUT="development:test:doc"
+ENV MAKEFLAGS="-j$(nproc)"
 COPY Gemfile Gemfile.lock /voctoweb/
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN set -eux; \
