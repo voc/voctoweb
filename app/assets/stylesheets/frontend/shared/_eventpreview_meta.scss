@@ -1,5 +1,10 @@
 .event-preview {
-  position: relative;
+  display: flex;
+  gap: 1em;
+
+  .caption {
+    flex-grow: 1;
+  }
 
   .metadata {
     text-align: left;
@@ -17,10 +22,9 @@
 
       padding: $padding-xs-vertical;
       padding-right: $padding-xs-horizontal;
-      color: $gray-dark;
       min-width: inherit;
 
-      color: lighten(#333333, 25%);
+      color: var(--text-muted);
 
       &.duration { display: none; }
 
@@ -32,12 +36,17 @@
 
   .thumbnail-badge-container {
     position: relative;
-    top: 0;
-    left: 0;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: var(--neutral-700);
 
     img.video-thumbnail {
-      width: 100%;
+      width: auto;
       height: auto;
+      max-height: 100%;
       max-width: 100%;
       display: block;
     }
