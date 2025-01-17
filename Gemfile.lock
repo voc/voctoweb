@@ -487,7 +487,7 @@ GEM
     thor (1.3.2)
     tilt (2.4.0)
     timeout (0.4.3)
-    tinymce-rails (7.3.0)
+    tinymce-rails (7.6.0)
       railties (>= 3.1.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
