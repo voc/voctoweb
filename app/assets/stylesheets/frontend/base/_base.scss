@@ -29,3 +29,7 @@ body {
 .btn-secondary {
   @include button-variant(white, $gray, $gray-dark);
 }
+
+.alert {
+  border-radius: .5em;
+}

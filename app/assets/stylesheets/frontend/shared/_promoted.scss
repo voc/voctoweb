@@ -72,7 +72,7 @@
         background: none;
         margin-bottom: 0;
         span {
-          color: #000;
+          color: var(--text-primary);
         }
       }
     }
@@ -113,8 +113,11 @@
 }
 
 .themed-banner {
+  /* Black fallback background */
+  background-color: #000;
   background-image: url('https://static.media.ccc.de/media/promoted_bg.png');
   background-position: center; 
+  
   .bx-wrapper .bx-viewport .bx-caption {
     font-size: 25px;
 

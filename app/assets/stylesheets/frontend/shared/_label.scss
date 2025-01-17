@@ -1,4 +1,4 @@
-.label {
+a.label {
   display: inline-block;
 
   border-radius: $border-radius-base;
@@ -12,4 +12,14 @@
 
   margin-right: 2px;
   margin-bottom: $padding-small-vertical;
+
+  &.label-default {
+    background-color: var(--neutral-700);
+    /* white color here as the background is always dark */
+    color: white;
+
+    &:hover, &:focus, &:active {
+      background-color: var(--neutral-600);
+    }
+  }
 }

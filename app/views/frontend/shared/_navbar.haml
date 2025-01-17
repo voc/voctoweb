@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-fixed-top(role="navigation")
+.navbar.navbar-default.navbar-fixed-top.dark(role="navigation")
   .container-fluid
     .navbar-header
       %a.navbar-brand(href='/')
@@ -7,12 +7,18 @@
 
     - if content_for?(:navbar)
       = yield :navbar
+    
+    
 
     .nav.navbar-form.navbar-right.button-wrapper
       %a.form-control.btn.btn-default{href: '/about.html'}
         %span.icon.icon-info
+    
+    .nav.navbar-form.navbar-right.compact.button-wrapper
+      %a.form-control.btn.btn-default{onclick: 'toggleTheme()'}
+        %span.icon.icon-moon-o
 
-    .nav.navbar-form.navbar-right.dropdown
+    .nav.navbar-form.navbar-right.compact.dropdown
       %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
         %span.icon.icon-rss
       %div.dropdown-menu.feeds_dropdown{"aria-labelledby" => "feedMenu"}
@@ -30,7 +36,7 @@
 
 
 - breadcrumbs_trail do |parts, last|
-  .breadcrumb
+  .breadcrumb.dark
     %ol.container-fluid.breadcrumb
       %li
         %a.inverted{href: browse_start_path}

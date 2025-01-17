@@ -1,7 +1,4 @@
 - cache([event.conference, event], expires_in: 2.hours) do
   .event-preview.has-conference
     = render partial: 'frontend/shared/event_thumb', locals: { event: event }
-    = render partial: 'frontend/shared/event_metadata', locals: { event: event }
-    .conference
-      %a{href: conference_path(acronym: event.conference.acronym)}
-        = event.conference.title
+    = render partial: 'frontend/shared/event_metadata', locals: { event: event, show_conference: true }
