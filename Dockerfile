@@ -24,12 +24,14 @@ RUN set -eux; \
 		g++ \
 		git \
 		gcc \
+		libffi-dev \
 		libxml2-dev \
-		libxslt-dev \
+		libxslt-dev \  
 		make \
 		musl-dev \
 		patch \
 		postgresql-dev \
+  		yaml-dev \
 		build-base \
 	; \
 	\
