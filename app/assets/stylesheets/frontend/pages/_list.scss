@@ -4,13 +4,20 @@ body.page-list {
     display: table-cell; 
     vertical-align: middle;
 
-    img {
-      float: left;
+    .conference-title-container {
+      display: flex;
+      gap: 1em;
+    }
+
+    .logo {
+      box-sizing: content-box;
+      background: white;
+      padding: .5em;
+      border-radius: .5em;
+      margin-top: .5em;
+      
       max-height: 160px;
       max-width: 300px;
-
-      margin-right: $padding-small-horizontal;
-      margin-top: 16px;
     }
 
     #sorting {
@@ -20,35 +27,34 @@ body.page-list {
   }
 
   .event-preview {
-    margin: 16px 0;
-    display: block;
-    clear: both;
     min-height: 120px;
-    background-color: $gray-lightest;
-    position: relative;
+
+    margin: .5em 0;
+    padding: .5em;
+    border-radius: .5em;
+
+    clear: both;
+    background-color: var(--surface-100);
 
     &:nth-child(odd) {
-      background-color: #ffffff;
+      background-color: var(--surface-50);
     }
 
     &:hover {
-      background-color: $gray-even-lighter;
+      background-color: var(--surface-200);
     }
 
     .thumbnail-badge-container {
-      float: left;
       height: 117px;
       width: 208px;
 
-      background-color: $gray-dark;
-      display: flex;
+      /* neutral background here, not depending on theme */
       align-items: center;
       justify-content: center;
 
       img.video-thumbnail {
         width: auto;
         height: 100%;
-        display: block;
       }
     }
 
@@ -56,7 +62,7 @@ body.page-list {
       float: right;
 
       &, a {
-        color: lighten(#333333, 25%);
+        color: var(--text-muted);
       }
     }
 
@@ -69,15 +75,12 @@ body.page-list {
       margin-top: 4px;
     }
 
-    color: black;
-
     .caption {
-      margin-left: 208px;
-      padding-left: $padding-large-horizontal;
+      flex-grow: 1;
+      
       h3 {
         margin-top: 0;
         padding-top: 3px;
-        color: black;
       }
     }
 

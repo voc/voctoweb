@@ -1,0 +1,89 @@
+:root {
+    --neutral-950: #0a0a0a;
+    --neutral-900: #171717;
+    --neutral-800: #262626;
+    --neutral-700: #404040;
+    --neutral-600: #525252;
+    --neutral-500: #737373;
+    --neutral-400: #a3a3a3;
+    --neutral-300: #d4d4d4;
+    --neutral-200: #e5e5e5;
+    --neutral-100: #f5f5f5;
+    --neutral-50: #fafafa;
+  
+    --indigo-950: #1e1b4b;
+    --indigo-900: #312e81;
+    --indigo-800: #3730a3;
+    --indigo-700: #4338ca;
+    --indigo-600: #4f46e5;
+    --indigo-500: #6366f1;
+    --indigo-400: #818cf8;
+}
+  
+html {
+    --primary-100: var(--indigo-700);
+    --primary-200: var(--indigo-600);
+    --primary-300: var(--indigo-500);
+    --primary-400: var(--indigo-400);
+
+    --surface-50: var(--neutral-50);
+    --surface-100: var(--neutral-100);
+    --surface-200: var(--neutral-200);
+    --surface-300: var(--neutral-300);
+    --surface-400: var(--neutral-400);
+    --surface-500: var(--neutral-500);
+
+
+    --text-primary: rgb(0, 0, 0);
+    --text-secondary: rgba(0, 0, 0, 0.80);
+    --text-muted: rgba(0, 0, 0, 0.65);
+    --text-link: var(--primary-400);
+    --text-visited: var(--primary-300);
+    --text-heading: var(--text-secondary);
+
+    --border-50: var(--surface-50);
+    --border-100: var(--surface-100);
+    --border-200: var(--surface-200);
+    --border-300: var(--surface-300);
+    --border-400: var(--surface-400);
+    --border-500: var(--surface-500);
+    --border-divider: var(--text-secondary);
+}
+
+.dark {
+    --primary-100: var(--indigo-700);
+    --primary-200: var(--indigo-600);
+    --primary-300: var(--indigo-500);
+    --primary-400: var(--indigo-400);
+    
+    --surface-50: var(--neutral-950);
+    --surface-100: var(--neutral-900);
+    --surface-200: var(--neutral-800);
+    --surface-300: var(--neutral-700);
+    --surface-400: var(--neutral-600);
+    --surface-400: var(--neutral-500);
+
+    --text-primary: rgb(255, 255, 255);
+    --text-secondary: rgba(255, 255, 255, 0.80);
+    --text-muted: rgba(255, 255, 255, 0.65);
+}
+
+body {
+    background-color: var(--surface-50);
+    color: var(--text-primary);
+}
+
+a:link { color: var(--text-link); }
+a:visited { color: var(--text-visited); }
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+}
+
+/* we don't want link colors to apply to button style links */
+a.btn {
+    color: var(--text-primary);
+}
+.btn.btn-primary, .btn.btn-secondary {
+    color: white;
+}

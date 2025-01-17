@@ -1,6 +1,6 @@
 body.page-show {
   h3 {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-divider);
     margin-top: 50px;
     margin-bottom: 12px;
   }
@@ -27,6 +27,7 @@ body.page-show {
       } 
       margin-left: $padding-small-horizontal;
       margin-top: -$padding-large-horizontal;
+      border-radius: .5em;
     }
   }
 
@@ -38,7 +39,7 @@ body.page-show {
     list-style: none;
     padding: $padding-small-vertical 0;
     text-align: center;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid var(--border-divider);
     font-size: 16px;
 
     li {
@@ -85,11 +86,11 @@ body.page-show {
         display: block;
         color: white;
 
-        background: $gray-light;
+        background-color: var(--neutral-500);
         text-decoration: none;
 
         &:hover {
-          background-color: $gray;
+          background-color: var(--neutral-600);
         }
 
         width: 48px;
@@ -113,8 +114,8 @@ body.page-show {
     padding: 5px;
     line-height: 130%;
 
-    background-color: $gray-lighter;
-    border: 1px solid #e3e3e3;
+    background-color: var(--surface-100);
+    border: 1px solid var(--border-500);
   }
 
   .downloads {
@@ -131,22 +132,20 @@ body.page-show {
       li > a {
         padding: 10px 20px;
 
-        background-color: $gray;
-        color: $gray-lighter;
+        background-color: var(--surface-300);
+        color: var(--text-muted);
 
         font-size: 16px;
       }
       li.active a {
-        background-color: $gray-lighter;
-        color: $gray-dark;
+        background-color: var(--surface-100);
+        color: var(--text-primary);
       }
     }
 
     .tab-content, .content {
-      background-color: $gray-lighter;
-      border-bottom: 1px solid #e3e3e3;
-      border-left: 1px solid #e3e3e3;
-      border-right: 1px solid #e3e3e3;
+      background-color: var(--surface-100);
+      border: 1px solid var(--border-300);
       padding: 10px;
 
       overflow: hidden;
@@ -197,7 +196,7 @@ body.page-show {
 
     .subtitle {
       h4 {
-        -webkit-hyphens: none;
+        hyphens: none;
       }
       .improve {
         display: block;

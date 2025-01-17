@@ -20,6 +20,7 @@
 //= require handlebars.min-latest
 //= require jquery.bxslider-v4.2.1d-ssfrontend
 //= require slider
+//= require theme
 //= require feed_toggle
 //= require mastodon-share
 

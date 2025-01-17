@@ -1,4 +1,4 @@
-%a{href: event_path(slug: event.slug)}
+%a.thumbnail-link{href: event_path(slug: event.slug)}
   .thumbnail-badge-container
     %img.video-thumbnail{src: h(event.thumb_url), alt: h(event.title), loading: 'lazy'}
     - if event.duration > 0
