@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+name: Deploy staging
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  #push:
+  #  branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.6 # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - uses: miloserdow/capistrano-deploy@v3 # you can use miloserdow/capistrano-deploy@master for the cuurent stable dev version
+        with:
+          target: staging 
+          deploy_key: ${{ secrets.SSH_PRIVATE_KEY }} # Name of the variable configured in Settings/Secrets of your github project/organisation
