@@ -26,7 +26,7 @@ gem 'puma_worker_killer'
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', '~> 3.17.1', group: :capistrano, require: false
+  gem 'capistrano', '~> 3.19.2', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
