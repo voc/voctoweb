@@ -9,6 +9,8 @@
         = @event.try(:title) || @conference.try(:title)
       = t('custom.title')
 
+    = render partial: 'frontend/shared/noscript'
+
     = yield :head
 
     - unless @conference.nil? ||  @conference.custom_css.nil?
