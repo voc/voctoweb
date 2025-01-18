@@ -12,13 +12,17 @@ body.page-browse {
       text-align: left;
     }
 
+    .caption {
+      color: var(--text-inverted);
+    }
+
     &:hover, &:focus, &:active {
       text-decoration: none;
     }
 
     &.folder {
       background-color: var(--primary-200);
-      color: var(--text-primary);
+      color: var(--text-inverted);
 
       .header {
         margin-bottom: $padding-large-vertical;
@@ -32,14 +36,10 @@ body.page-browse {
       &:hover, &:focus, &:active {
         background-color: var(--primary-100);
       }
-
-      .caption {
-        color: white;
-      }
     }
 
     &.conference {
-      color: $gray-dark;
+      color: var(--neutral-800);
 
       img {
         height: 64px;
@@ -47,17 +47,16 @@ body.page-browse {
       }
 
       .caption {
-        color: white;
-        background-color: $gray-dark;
+        background-color: var(--neutral-800);
         -webkit-transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
       }
 
       &:hover, &:focus, &:active {
-        color: $brand-primary;
+        color: var(--primary-200);
         .caption {
-          background-color: $brand-primary;
+          background-color: var(--primary-200);
         }
       }
     }

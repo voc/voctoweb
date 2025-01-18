@@ -1,10 +1,9 @@
-let currentTheme = localStorage.getItem('theme') || 'light';
+let currentTheme = localStorage.getItem('color-theme') || 'system';
 
-function toggleTheme(theme) {
-    const newTheme = theme || (currentTheme === 'light' ? 'dark' : 'light');
-    localStorage.setItem('theme', newTheme);
+function toggleTheme(newTheme) {
+    localStorage.setItem('color-theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    document.documentElement.classList.toggle('light', newTheme === 'light');
     currentTheme = newTheme;
 }
-
 toggleTheme(currentTheme);

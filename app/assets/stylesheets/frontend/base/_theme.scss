@@ -19,8 +19,8 @@
     --indigo-500: #6366f1;
     --indigo-400: #818cf8;
 }
-  
-html {
+
+@mixin light-variables {
     --primary-100: var(--indigo-700);
     --primary-200: var(--indigo-600);
     --primary-300: var(--indigo-500);
@@ -40,6 +40,7 @@ html {
     --text-link: var(--primary-400);
     --text-visited: var(--primary-300);
     --text-heading: var(--text-secondary);
+    --text-inverted: white;
 
     --border-50: var(--surface-50);
     --border-100: var(--surface-100);
@@ -50,7 +51,7 @@ html {
     --border-divider: var(--text-secondary);
 }
 
-.dark {
+@mixin dark-variables {
     --primary-100: var(--indigo-700);
     --primary-200: var(--indigo-600);
     --primary-300: var(--indigo-500);
@@ -66,6 +67,23 @@ html {
     --text-primary: rgb(255, 255, 255);
     --text-secondary: rgba(255, 255, 255, 0.80);
     --text-muted: rgba(255, 255, 255, 0.65);
+}
+
+html {
+    @include light-variables;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        @include dark-variables;
+    }
+}
+
+.light {
+    @include light-variables;
+}
+.dark {
+    @include dark-variables;
 }
 
 body {
@@ -85,5 +103,5 @@ a.btn {
     color: var(--text-primary);
 }
 .btn.btn-primary, .btn.btn-secondary {
-    color: white;
+    color: var(--text-inverted);
 }

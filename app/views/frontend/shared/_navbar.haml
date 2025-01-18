@@ -14,14 +14,22 @@
       %a.form-control.btn.btn-default{href: '/about.html'}
         %span.icon.icon-info
     
-    .nav.navbar-form.navbar-right.compact.button-wrapper.script-only
-      %a.form-control.btn.btn-default{onclick: 'toggleTheme()'}
+    .nav.navbar-form.navbar-right.compact.dropdown.script-only
+      %button#theme-menu.form-control.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
         %span.icon.icon-moon-o
+      .dropdown-menu.themes-dropdown{"aria-labelledby" => "theme-menu"}
+        %li
+          %a{href: '#', onclick: 'toggleTheme(\'system\')', role: 'button', data: { turbolinks: 'false' }} System
+        %li
+          %a{href: '#', onclick: 'toggleTheme(\'light\')', role: 'button', data: { turbolinks: 'false' }} Light
+        %li
+          %a{href: '#', onclick: 'toggleTheme(\'dark\')', role: 'button', data: { turbolinks: 'false' }} Dark
+
 
     .nav.navbar-form.navbar-right.compact.dropdown.script-only
-      %button#feedMenu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %button#feed-menu.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
         %span.icon.icon-rss
-      %div.dropdown-menu.feeds_dropdown{"aria-labelledby" => "feedMenu"}
+      .dropdown-menu.feeds_dropdown{"aria-labelledby" => "feed-menu"}
         = render 'frontend/shared/navbar_feeds', locals: { conference: @conference }
 
     %form.navbar-form.navbar-right{role: 'search', action: '/search/', method: 'get', id: 'media-search'}

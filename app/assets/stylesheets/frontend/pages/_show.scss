@@ -84,9 +84,10 @@ body.page-show {
 
       a, button {
         display: block;
-        color: white;
-
+        
         background-color: var(--neutral-500);
+        color: var(--text-inverted);
+
         text-decoration: none;
 
         &:hover {
