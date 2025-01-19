@@ -16,13 +16,13 @@
         %span.tags
         - event.tags[3,2].each do |tag|
           != link_for(event.conference, tag)
-    %li.duration
+    %li.duration.digits
       %span.icon.icon-clock-o
       = duration_in_minutes(event.duration)
-    %li.date
+    %li.date.digits
       %span.icon.icon-calendar-o
       = event.display_date
-    %li.view-count
+    %li.view-count.digits
       %span.icon.icon-eye{title: "#{delimited_views_count(event.view_count)} views"}
       = human_readable_views_count(event.view_count)
     %li.persons

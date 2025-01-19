@@ -26,5 +26,5 @@ p {
 }
 
 a.inverted {
-  color: $gray-lighter;
+  color: var(--text-inverted);
 }

@@ -18,6 +18,11 @@
     --indigo-600: #4f46e5;
     --indigo-500: #6366f1;
     --indigo-400: #818cf8;
+
+    --font-sans-serif: "Estrangelo Edessa", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-body: var(--font-sans-serif);
+    --font-heading: var(--font-sans-serif);
+    --font-digits: var(--font-sans-serif);
 }
 
 @mixin light-variables {
@@ -35,11 +40,11 @@
 
 
     --text-primary: rgb(0, 0, 0);
+    --text-heading: rgba(0, 0, 0, 0.95);
     --text-secondary: rgba(0, 0, 0, 0.80);
     --text-muted: rgba(0, 0, 0, 0.65);
     --text-link: var(--primary-400);
     --text-visited: var(--primary-300);
-    --text-heading: var(--text-secondary);
     --text-inverted: white;
 
     --border-50: var(--surface-50);
@@ -65,11 +70,12 @@
     --surface-400: var(--neutral-500);
 
     --text-primary: rgb(255, 255, 255);
+    --text-heading: rgba(255, 255, 255, 0.95);
     --text-secondary: rgba(255, 255, 255, 0.80);
     --text-muted: rgba(255, 255, 255, 0.65);
 }
 
-html {
+html, .light {
     @include light-variables;
 }
 
@@ -78,10 +84,6 @@ html {
         @include dark-variables;
     }
 }
-
-.light {
-    @include light-variables;
-}
 .dark {
     @include dark-variables;
 }
@@ -89,6 +91,7 @@ html {
 body {
     background-color: var(--surface-50);
     color: var(--text-primary);
+    font-family: var(--font-body);
 }
 
 a:link { color: var(--text-link); }
@@ -96,6 +99,11 @@ a:visited { color: var(--text-visited); }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-heading);
+    font-family: var(--font-heading);
+}
+
+.digits {
+    font-family: var(--font-digits);
 }
 
 /* we don't want link colors to apply to button style links */
