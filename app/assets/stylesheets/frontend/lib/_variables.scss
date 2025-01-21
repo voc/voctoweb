@@ -133,9 +133,9 @@ $border-radius-small:       0;
 // $table-condensed-cell-padding:  5px
 
 //* Default background color used for all tables.
-// $table-bg:                      transparent
+$table-bg:                      transparent;
 //* Background color used for `.table-striped`.
-// $table-bg-accent:               #f9f9f9
+$table-bg-accent:               var(--surface-100);
 //* Background color used for `.table-hover`.
 // $table-bg-hover:                #f5f5f5
 // $table-bg-active:               $table-bg-hover
