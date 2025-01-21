@@ -56,7 +56,7 @@
   %meta{name: 'description', content: @event.short_description}
 
 - cache([@event.conference, @event, @player, current_admin_user]) do
-  .container-fluid
+  %main.container-fluid
     .player-header
       .conference
         - if @conference&.logo_url

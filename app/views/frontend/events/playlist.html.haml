@@ -10,7 +10,7 @@
     = render partial: 'frontend/shared/folder_feeds', locals: { conference: @playlist.conference }
 
 - cache([@playlist.playlist]) do
-  .container-fluid
+  %main.container-fluid
     .player-header
       - if @conference&.logo_url
         %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}

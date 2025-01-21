@@ -1,4 +1,5 @@
 html {
+  height: 100%;
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
@@ -17,9 +18,17 @@ body {
     padding-top: 0;
   }
 
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100%;
   width: 100%;
   overflow: hidden;
   overflow-y: initial;
+
+  > main {
+    flex-grow: 1;
+  }
 }
 
 .container, .container-fluid {
