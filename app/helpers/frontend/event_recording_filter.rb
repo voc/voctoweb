@@ -14,7 +14,7 @@ module Frontend
     end
 
     def filter(event)
-      recordings = event.recordings
+      recordings = event.recordings.where(translated: false)
       @recordings = if @target_mime_type
                       if MimeType.is_video(@target_mime_type)
                         recordings.without_slides.by_mime_type(@target_mime_type)

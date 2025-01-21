@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_30_111051) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -150,6 +150,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_30_111051) do
     t.boolean "high_quality", default: true, null: false
     t.boolean "html5", default: false, null: false
     t.string "state", limit: 255, default: "new", null: false
+    t.boolean "translated", default: false, null: false
     t.index ["event_id"], name: "index_recordings_on_event_id"
     t.index ["filename"], name: "index_recordings_on_filename"
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
