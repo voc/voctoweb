@@ -22,6 +22,7 @@ ActiveAdmin.register Recording do
     column :html5
     column :high_quality
     column :language
+    column :translated
     #column :size
     #column :length
     #column :state
@@ -42,6 +43,7 @@ ActiveAdmin.register Recording do
       row :html5
       row :high_quality
       row :language
+      row :translated
       row :size
       row :length
       row :width
@@ -56,6 +58,7 @@ ActiveAdmin.register Recording do
       f.input :mime_type, collection: MimeType.all
       f.input :html5
       f.input :language, hint: 'ISO-639-2 codes (deu, eng), delimeted by -'
+      f.input :translated
       f.input :size, label: 'file size in mb'
       f.input :length, label: 'run-time in seconds'
       f.input :high_quality
