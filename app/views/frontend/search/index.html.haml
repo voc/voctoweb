@@ -1,4 +1,4 @@
-- title = @searchquery.present? ? "Search for #{@searchtype} \"#{@searchquery}\"" : "Search"
+- title = @searchquery.present? ? "Search for #{@searchtype} \"#{@searchquery}\" returned #{@number_of_results} result#{'s' if @number_of_results > 1}" : "Search"
 
 - content_for :title do
   = title
@@ -8,16 +8,35 @@
 
 %main.container-fluid
   %h1= title
-  .events-header
+
+  .row
+    .col-md-4
+      = link_to_prev_page @events, 'Previous Page', class: 'btn btn-primary'
+      = link_to_next_page @events, 'Next Page', class: 'btn btn-primary'
+
+    .col-md-4.col-md-offset-4.text-right
+      .dropdown
+        %button.btn.btn-default.dropdown-toggle{ type: "button", id: "dropdown-menu-sort-options", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
+          Sort by
+          %span.caret
+
+        %ul.dropdown-menu.dropdown-menu-right{ "aria-labelledby" => "dropdown-menu-sort-options" }
+          %li
+            = link_to "Sort by Date (desc)", request.params.merge(sort: 'desc')
+          %li
+            = link_to "Sort by Date (asc)", request.params.merge(sort: 'asc')
+          %li
+            = link_to "Do not sort", request.params.merge(sort: 'none')
 
   - if @events.present?
-    = link_to_prev_page @events, 'prev'
-    = link_to_next_page @events, 'next'
     .event-previews
       - @events.each do |event|
         = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
-    = link_to_prev_page @events, 'prev'
-    = link_to_next_page @events, 'next'
+
+    .row.justify-content-between.align-items-center.mt-3
+      .col-auto
+        = link_to_prev_page @events, 'Prev', class: 'btn btn-primary'
+        = link_to_next_page @events, 'Next', class: 'btn btn-primary'
   - else
     %p
       The Search for "#{@searchquery}" did not return any results.
