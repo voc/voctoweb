@@ -24,9 +24,12 @@ module ElasticsearchEvent
   end
 
   class_methods do
-    def query(term)
+
+    def query(term, sort = nil)
       term ||= ''
-      search_for query: {
+
+      search_definition = { query: {} }
+      search_definition[:query] = {
         function_score:  {
           query:  {
             bool:  {
@@ -81,11 +84,22 @@ module ElasticsearchEvent
           ]
         }
       }
+        
+      # only add the sort field if the parameter is given
+      if sort == 'desc'
+        search_definition[:sort]  = { date: { order: 'desc'} }
+      elsif sort == 'asc'
+        search_definition[:sort]  = { date: { order: 'asc'} }
+      end
+
+      search_for search_definition
     end
 
-    def query_persons(term)
+    def query_persons(term, sort)
       term ||= ''
-      search_for query: {
+
+      search_definition = { query: {} }
+      search_definition[:query] = {
         function_score:  {
           query:  {
             bool:  {
@@ -108,6 +122,15 @@ module ElasticsearchEvent
           ]
         }
       }
+
+      # only add the sort field if the parameter is given
+      if sort == 'desc'
+        search_definition[:sort]  = { date: { order: 'desc'} }
+      elsif sort == 'asc'
+        search_definition[:sort]  = { date: { order: 'asc'} }
+      end
+
+      search_for search_definition
     end
 
     # avoid conflict with active admins ransack #search method
