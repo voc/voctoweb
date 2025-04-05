@@ -5,7 +5,7 @@ namespace :db do
       fixtures_dir = ENV['FIXTURES_PATH'] || 'test/fixtures'
       sql = 'SELECT * FROM %s'
 
-      skip_tables = %w(schema_info schema_migrations sessions recording_views active_admin_comments ar_internal_metadata)
+      skip_tables = %w(schema_info schema_migrations sessions recording_views active_admin_comments ar_internal_metadata web_feeds)
       skip_tables += %w(api_keys admin_users) unless args[:include_private]
 
       ActiveRecord::Base.establish_connection
