@@ -14,7 +14,8 @@ WORKDIR /voctoweb
 
 # Install required gems
 ENV BUNDLE_FORCE_RUBY_PLATFORM=1
-ENV BUNDLE_WITHOUT="development:test:doc"
+# do not remove the test dependencies to run test within docker container
+# ENV BUNDLE_WITHOUT="development:test:doc"
 ENV MAKEFLAGS="-j$(nproc)"
 COPY Gemfile Gemfile.lock /voctoweb/
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]

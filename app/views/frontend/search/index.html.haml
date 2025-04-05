@@ -10,10 +10,9 @@
   %h1= title
 
   .row
-    .col-md-4
+    .col-md-6.col-xs-6.text-left
       = link_to_prev_page @events, 'previous page', class: 'btn btn-primary'
-
-    .col-md-4.col-md-offset-4.text-right
+    .col-md-6.col-xs-6.text-right
       %button.btn.btn-default.dropdown-toggle{ type: "button", id: "dropdown-menu-sort-options", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
         Sort by
         %span.caret
@@ -33,10 +32,10 @@
       - @events.each do |event|
         = render partial: 'frontend/shared/event_with_conference', locals: { event: event }
 
-    .row.mt-3
-      .col-md-6.text-left
+    .row
+      .col-md-6.col-xs-6.text-left
         = link_to_prev_page @events, 'previous page', class: 'btn btn-primary'
-      .col-md-6.text-right
+      .col-md-6.col-xs-6.text-right
         = link_to_next_page @events, 'next page', class: 'btn btn-primary'
   - else
     %p
