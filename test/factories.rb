@@ -22,6 +22,11 @@ FactoryBot.define do
     "some event#{n}"
   end
 
+  sequence :person_names do |n|
+    # select something different but not random for each entry
+    [['Alice'], ['Bob', 'Charlie'], ['David', 'Eve']][n % 3]
+  end
+
   sequence :tags do |n|
     "tags#{n}"
   end
@@ -128,9 +133,9 @@ FactoryBot.define do
     slug { generate(:event_slug) }
     link { 'http://localhost/ev_info' }
     description { 'description' }
-    persons { ['Name'] }
+    persons { generate(:person_names) }
     tags { ['tag'] }
-    date { '2013-08-21' }
+    date { "2013-08-#{rand(1..30)}" } # needed to test proper sorting
     release_date { '2013-08-21' }
 
     factory :event_with_recordings, traits: [:event_recordings]
