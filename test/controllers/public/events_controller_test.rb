@@ -13,7 +13,7 @@ class Public::EventsControllerTest < ActionController::TestCase
     json = JSON.parse(response.body)
     refute_empty json
     refute_empty json['events'][0]['url']
-    assert_equal ['Name'], json['events'][0]['persons']
+    assert_equal ['Alice'], json['events'][0]['persons']
   end
 
   test 'should get show' do
