@@ -408,7 +408,7 @@ GEM
     redcarpet (3.6.0)
     redis (5.3.0)
       redis-client (>= 0.22.0)
-    redis-client (0.23.2)
+    redis-client (0.24.0)
       connection_pool
     regexp_parser (2.10.0)
     reline (0.6.1)
@@ -456,12 +456,12 @@ GEM
       graphql (> 1.8)
       search_object (~> 1.2.5)
     securerandom (0.4.1)
-    sidekiq (7.3.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
+    sidekiq (8.0.2)
+      connection_pool (>= 2.5.0)
+      json (>= 2.9.0)
+      logger (>= 1.6.2)
+      rack (>= 3.1.0)
+      redis-client (>= 0.23.2)
     solargraph (0.53.4)
       backport (~> 1.2)
       benchmark
