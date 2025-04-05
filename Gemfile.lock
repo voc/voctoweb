@@ -226,7 +226,7 @@ GEM
     google-protobuf (3.25.5-x86_64-linux)
     graphiql-rails (1.10.1)
       railties
-    graphql (1.13.23)
+    graphql (1.13.24)
       base64
     graphql-query-resolver (0.2.0)
       graphql (~> 1.0, >= 1.0.0)
