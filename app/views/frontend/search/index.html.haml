@@ -22,11 +22,11 @@
 
         %ul.dropdown-menu.dropdown-menu-right{ "aria-labelledby" => "dropdown-menu-sort-options" }
           %li
-            = link_to "Sort by Date (desc)", request.params.merge(sort: 'desc')
+            = link_to "Newest first", request.params.merge(sort: 'desc')
           %li
-            = link_to "Sort by Date (asc)", request.params.merge(sort: 'asc')
+            = link_to "Oldest first", request.params.merge(sort: 'asc')
           %li
-            = link_to "Do not sort", request.params.merge(sort: 'none')
+            = link_to "Relevance", request.params.merge(sort: 'none')
 
   - if @events.present?
     .event-previews
