@@ -93,9 +93,9 @@ GEM
     airbrussh (1.5.3)
       sshkit (>= 1.6.1, != 1.7.0)
     api-pagination (6.0.0)
-    apollo-federation (3.8.5)
-      google-protobuf (~> 3.22)
-      graphql (>= 1.10.14)
+    apollo-federation (3.10.1)
+      google-protobuf (< 5)
+      graphql
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
@@ -221,9 +221,15 @@ GEM
     goldiloader (5.4.0)
       activerecord (>= 6.1, < 8.1)
       activesupport (>= 6.1, < 8.1)
-    google-protobuf (3.25.5)
-    google-protobuf (3.25.5-x86_64-darwin)
-    google-protobuf (3.25.5-x86_64-linux)
+    google-protobuf (4.30.2)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.2-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.30.2-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     graphiql-rails (1.10.1)
       railties
     graphql (1.13.24)
