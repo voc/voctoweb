@@ -167,7 +167,7 @@ class Recording < ApplicationRecord
   def fulltext
     puts ' downloading ' + cors_url
     begin
-      URI.open(url).read if subtitle?
+      URI.open(url).read if subtitle? unless ENV['SKIP_ELASTICSEARCH_SUBTITLES']
     rescue OpenURI::HTTPError
       puts '   failed with HTTP Error'
       ''

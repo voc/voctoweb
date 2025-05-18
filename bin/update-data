@@ -21,5 +21,5 @@ chdir APP_ROOT do
 
   puts "\n== Updating Elasticsearch =="
   puts "\n(does not really matter when it fails)"
-  system! 'bin/rails runner "Event.__elasticsearch__.create_index! force: true; Event.import"'
+  system! 'SKIP_ELASTICSEARCH_SUBTITLES=1 bin/rails runner "Event.__elasticsearch__.create_index! force: true; Event.import"'
 end
