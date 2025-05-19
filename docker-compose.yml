@@ -41,6 +41,7 @@ services:
       - "5432:5432"
   elasticsearch:
     image: elasticsearch:6.8.6
+    platform: linux/amd64
     ports:
       - "9200:9200"
     environment:
