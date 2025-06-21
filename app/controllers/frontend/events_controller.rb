@@ -3,7 +3,12 @@ module Frontend
     before_action :load_event
 
     def show
-      respond_to { |format| format.html }
+      respond_to do |format|
+        format.html
+        format.activity_json do
+          render json: @event, serializer: ActivityPub::EventSerializer, content_type: 'application/activity+json'
+        end
+      end
     end
 
     def playlist_related

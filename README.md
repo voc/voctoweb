@@ -224,7 +224,7 @@ bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
 # install ruby
-rvm install ruby-3.3.5
+rvm install ruby-3.3.6
 
 # install bundler
 gem install bundler
