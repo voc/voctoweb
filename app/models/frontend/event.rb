@@ -75,7 +75,7 @@ module Frontend
 
     def filetypes(mime_type)
       recordings.by_mime_type(mime_type)
-                .map { |x| [x.filetype, x.display_filetype] }
+                .map { |x| [(x.folder == "av1-hd") ? "AV1" : x.filetype, x.display_filetype] }
                 .uniq.to_h.sort
     end
 
@@ -91,8 +91,8 @@ module Frontend
     # prefering files with multiple audio tracks (html5=0)
     def videos_for_download(filetype)
       recordings.video_without_slides
-                .select   { |x| x.filetype == filetype }
-                .group_by { |x| x.height }
+        .select   { |x| (x.filetype != "webm" && x.filetype == filetype) || (x.filetype == filetype && x.filetype == "webm" && x.folder != "av1-hd") || (filetype == "AV1" && x.filetype == "webm" && x.folder == "av1-hd") }
+                .group_by { |x| x.folder } # was: x.height (TEST CHANGE TODO)
                 .sort
                 .reverse
                 .map { |_height, group|
