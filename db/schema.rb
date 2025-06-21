@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
     t.integer "size"
     t.integer "length"
     t.string "mime_type"
+    t.string "video_codec"
     t.integer "event_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -154,6 +155,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
     t.index ["event_id"], name: "index_recordings_on_event_id"
     t.index ["filename"], name: "index_recordings_on_filename"
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
+    t.index ["video_codec"], name: "index_recordings_on_video_codec"
   end
 
   create_table "web_feeds", force: :cascade do |t|

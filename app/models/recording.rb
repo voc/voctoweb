@@ -6,11 +6,12 @@ class Recording < ApplicationRecord
   has_one :conference, through: :event
   has_many :recording_views, dependent: :delete_all
 
-  validates :event, :filename, :mime_type, :language, presence: true
+  validates :event, :filename, :mime_type, :video_codec, :language, presence: true
   validates :length, presence: true, if: :requires_length
   validates :width, :height, presence: true, if: :video?
   validates :folder, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
   validates :mime_type, inclusion: { in: MimeType.all }
+  validates :video_codec, presence: false
   validates :language, inclusion: { in: Languages.all }, if: :html5?
   validates :language, exclusion: { in: %w(orig) }, unless: :subtitle?
   validate :language_valid, unless: :html5?

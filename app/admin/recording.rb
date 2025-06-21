@@ -3,6 +3,7 @@ ActiveAdmin.register Recording do
 
   filter :state
   filter :mime_type, collection: proc { MimeType.all }
+  filter :video_codec, collection: proc { Codec.all }
   filter :language
   filter :filename
   filter :folder
@@ -19,6 +20,7 @@ ActiveAdmin.register Recording do
     end
     #column :folder
     column :mime_type
+    column :video_codec
     column :html5
     column :high_quality
     column :language
@@ -40,6 +42,7 @@ ActiveAdmin.register Recording do
       row :folder
       row :event
       row :mime_type
+      row :video_codec
       row :html5
       row :high_quality
       row :language
@@ -56,6 +59,7 @@ ActiveAdmin.register Recording do
     f.inputs "Recording Details" do
       f.input :event
       f.input :mime_type, collection: MimeType.all
+      f.input :video_codec, collection: Codec.all, include_blank: true
       f.input :html5
       f.input :language, hint: 'ISO-639-2 codes (deu, eng), delimeted by -'
       f.input :translated
@@ -74,7 +78,7 @@ ActiveAdmin.register Recording do
 
   controller do
     def permitted_params
-      params.permit recording: [:folder, :filename, :mime_type, :language, :translated, :html5, :high_quality, :size, :length, :width, :height, :state, :event_id]
+      params.permit recording: [:folder, :filename, :mime_type, :video_codec, :language, :translated, :html5, :high_quality, :size, :length, :width, :height, :state, :event_id]
     end
   end
 end
