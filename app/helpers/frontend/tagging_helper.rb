@@ -3,11 +3,11 @@ module Frontend
   module TaggingHelper
     # link to tag page
     def link_for_global(tag, css: '')
-      %[<a href="/tags/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
+      %[<a href="/tags/#{u tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
     end
 
     def link_for(conference, tag, css: '')
-      %[<a href="/c/#{h conference.acronym}/#{h tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
+      %[<a href="/c/#{u conference.acronym}/#{u tag}" rel="tag" class="#{css} label label-default">#{h tag}</a>]
     end
 
     def tag_cloud
