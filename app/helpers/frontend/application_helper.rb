@@ -107,7 +107,7 @@ module Frontend
     end
 
     def stretching
-      'responsive'
+      'none'
     end
   end
 end
