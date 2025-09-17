@@ -426,7 +426,7 @@ GEM
       railties (>= 5.2)
     reverse_markdown (3.0.0)
       nokogiri
-    rexml (3.4.1)
+    rexml (3.4.2)
     rss (0.3.1)
       rexml
     rubocop (1.75.4)
