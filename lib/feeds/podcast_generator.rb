@@ -46,8 +46,8 @@ module Feeds
       # category.new_category.text = "Technology"
       maker.channel.itunes_categories.new_category.text = 'Technology'
 
-      # TODO png/jpg?
-      maker.image.url = @config.logo_image
+      # channel artwork
+      maker.image.url = @config.logo_image.sub(/\.svg$/, '.png')
       maker.image.title = @config.channel_title
       maker.channel.itunes_author = @config.channel_owner
       maker.channel.itunes_owner.itunes_name = @config.channel_owner
@@ -79,6 +79,9 @@ module Feeds
       item.itunes_subtitle = event.subtitle if event.subtitle.present?
       item.itunes_author = event.persons.join(', ') if event.persons.present?
       item.pubDate = event.date.to_s if event.date.present?
+
+      # Add episode artwork for podcast clients (supports PNG/JPG)
+      item.itunes_image = event.thumb_url if event.thumb_url.present?
 
       item.enclosure.url = recording.url
       item.enclosure.length = size_to_bytes(recording.size || 0)
