@@ -80,27 +80,6 @@ class Recording < ApplicationRecord
     str
   end
 
-  def display_filetype
-    display_filetypes = {
-      'webm' => 'WebM',
-      'mp4' => 'MP4',
-      'mp3' => 'MP3',
-      'ogg' => 'Ogg',
-      'opus' => 'Opus',
-      'pdf' => 'PDF',
-      'srt' => 'SRT',
-      'vtt' => 'WebVTT',
-    }
-
-    if folder == "av1-hd"
-      "AV1"
-    elsif display_filetypes.key?(filetype)
-      display_filetypes[filetype]
-    else
-      filetype
-    end
-  end
-
   def label
     if slides?
       "slides #{language} #{height}p"
@@ -111,7 +90,7 @@ class Recording < ApplicationRecord
         "#{language}"
       end
     else
-      "#{language} #{height}p #{folder}"
+      "#{language} #{height}p"
     end
   end
 
@@ -169,7 +148,7 @@ class Recording < ApplicationRecord
   def fulltext
     puts ' downloading ' + cors_url
     begin
-      URI.open(url).read if subtitle?
+      URI.open(url).read if subtitle? unless ENV['SKIP_ELASTICSEARCH_SUBTITLES']
     rescue OpenURI::HTTPError
       puts '   failed with HTTP Error'
       ''
