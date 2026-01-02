@@ -98,6 +98,8 @@ group :development, :test do
 end
 
 group :test do
+  # minitest must match rails version
+  gem 'minitest', '~> 5.1'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
