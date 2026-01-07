@@ -73,9 +73,9 @@ module Frontend
       recordings.select { |x| x.languages.length > 1 }.present?
     end
 
-    def filetypes(mime_type)
-      recordings.by_mime_type(mime_type)
-                .map { |x| [(x.folder == "av1-hd") ? "AV1" : x.filetype, x.display_filetype] }
+    def filetypes(mime_types)
+      recordings.by_mime_type(mime_types)
+                .map { |x| [MimeType.humanized(x.mime_type), MimeType.display(x.mime_type)] }
                 .uniq.to_h.sort
     end
 
@@ -83,7 +83,7 @@ module Frontend
     # prefering files with multiple audio tracks (html5=0)
     def video_for_download(filetype, high_quality: true)
       recordings.video_without_slides
-                .select { |x| x.filetype == filetype && x.high_quality == high_quality }
+                .select { |x| MimeType.humanized(x.mime_type) == filetype && x.high_quality == high_quality }
                 .min_by { |x| x.html5 ? 1 : 0 }
     end
 
@@ -91,8 +91,8 @@ module Frontend
     # prefering files with multiple audio tracks (html5=0)
     def videos_for_download(filetype)
       recordings.video_without_slides
-        .select   { |x| (x.filetype != "webm" && x.filetype == filetype) || (x.filetype == filetype && x.filetype == "webm" && x.folder != "av1-hd") || (filetype == "AV1" && x.filetype == "webm" && x.folder == "av1-hd") }
-                .group_by { |x| x.folder } # was: x.height (TEST CHANGE TODO)
+                .select   { |x| MimeType.humanized(x.mime_type) == filetype }
+                .group_by { |x| x.height }
                 .sort
                 .reverse
                 .map { |_height, group|
@@ -107,7 +107,7 @@ module Frontend
 
     def audio_recordings_for_download(filetype)
       recordings.audio
-                .select  { |x| x.filetype == filetype }
+                .select  { |x| MimeType.humanized(x.mime_type) == filetype }
                 .sort_by { |x| x.language == original_language ? '' : x.language }
                 .map     { |x| [x.language, x] }
                 .to_h
@@ -124,7 +124,7 @@ module Frontend
 
     def slides_for_download(filetype)
       recordings.slides
-        .select  { |x| x.filetype == filetype }
+        .select  { |x| MimeType.humanized(x.mime_type) == filetype }
         .sort_by { |x| x.language == original_language ? '' : x.language }
         .map     { |x| [x.language, x] }
         .to_h
@@ -148,11 +148,6 @@ module Frontend
       seen.first[1]
     end
 
-    # @return [Array(Recording)]
-    def by_mime_type(mime_type: 'video/mp4')
-        recordings.by_mime_type(mime_type).first.freeze
-    end
-
     def related_event_ids(n)
       return conference.events.ids unless metadata.key?('related')
 
@@ -160,7 +155,7 @@ module Frontend
     end
 
     def clappr_sources
-      mpd = by_mime_type(mime_type: 'application/dash+xml')
+      mpd = recordings.by_mime_type('application/dash+xml').first
       other = videos_sorted_by_language.map{|recording| recording.url}
 
       mpd.nil? ? other : [mpd] + other

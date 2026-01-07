@@ -16,9 +16,5 @@ module Frontend
         '4k'
       end
     end
-
-    def filetype
-      MimeType.humanized_mime_type(mime_type)
-    end
   end
 end

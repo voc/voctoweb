@@ -31,23 +31,23 @@ module Frontend
           sub_menu.push({
             :left => {
               :indented => 'indented',
-              :content  => MimeType.humanized_mime_type(mime_type),
+              :content  => MimeType.humanized(mime_type),
               :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: FeedQuality::HQ),
-              :title => MimeType.humanized_mime_type(mime_type)
+              :title => MimeType.humanized(mime_type)
             },
             :right => {
               :content => SD_LABEL,
               :href => podcast_folder_video_feed_url(acronym: conference.acronym, mime_type: mime_type_name, quality: FeedQuality::LQ),
-              :title => MimeType.humanized_mime_type(mime_type) + ' (SD)'
+              :title => MimeType.humanized(mime_type) + ' (SD)'
             }
           })
         else
           sub_menu.push({
             :left => {
               :indented => 'indented',
-              :content  => MimeType.humanized_mime_type(mime_type),
+              :content  => MimeType.humanized(mime_type),
               :href => podcast_folder_feed_url(acronym: conference.acronym, mime_type: mime_type_name),
-              :title => MimeType.humanized_mime_type(mime_type)
+              :title => MimeType.humanized(mime_type)
             }
           })
         end
