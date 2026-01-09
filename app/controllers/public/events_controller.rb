@@ -13,7 +13,7 @@ class Public::EventsController < ActionController::Base
   # GET /public/events/recent
   # GET /public/events/recent.json
   def recent
-    @events = Frontend::Event.includes(:conference).recent(100)
+    @events = paginate(Frontend::Event.includes(:conference).released, per_page: 100, max_per_page: 256)
     respond_to { |format| format.json { render :index } }
   end
 
