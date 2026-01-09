@@ -34,6 +34,7 @@ class Event < ApplicationRecord
   scope :newer, ->(date) { released.where('release_date > ?', date) }
   scope :older, ->(date) { released.where('release_date < ?', date) }
   scope :recent, ->(n) { released.limit(n) }
+  scope :promoted, ->(n) { released.where('promoted = TRUE').limit(n) }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
