@@ -56,7 +56,7 @@ class Frontend::SearchControllerTest < ActionController::TestCase
       assert_response :success
       
       assigns(:events).each do |event|
-        assert_includes event.persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
+        assert_includes event.structured_persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
       end
     end
 
@@ -67,7 +67,7 @@ class Frontend::SearchControllerTest < ActionController::TestCase
       assert_response :success
       events = assigns(:events)
       events.each do |event|
-        assert_includes event.persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
+        assert_includes event.structured_persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
       end
       events.map(&:date).each_cons(2) do |a, b|
         assert a <= b, "Dates are not in ascending order: #{a} should be before #{b}"
@@ -81,7 +81,7 @@ class Frontend::SearchControllerTest < ActionController::TestCase
       assert_response :success
       events = assigns(:events)
       events.each do |event|
-        assert_includes event.persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
+        assert_includes event.structured_persons, 'Alice', "Expected 'Alice' to be in the persons array for event #{event.title}"
       end
       events.map(&:date).each_cons(2) do |a, b|
         assert a >= b, "Dates are not in ascending order: #{a} should be before #{b}"

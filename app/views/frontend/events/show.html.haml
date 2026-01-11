@@ -16,7 +16,7 @@
   %meta{property: 'twitter:player', content: oembed_event_url(slug: @event.slug)}
   %meta{property: 'twitter:player:height', content: '480'}
   %meta{property: 'twitter:player:width', content: '854'}
-  - @event.persons.each do |speaker|
+  - @event.structured_persons.each do |speaker|
     %meta{property: 'author', content: speaker}
   %link{rel: 'canonical', href: event_path(slug: @event.slug)}
   - if @event.preferred_recording
@@ -79,7 +79,7 @@
           = @event.subtitle
 
     %p.persons
-      = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
+      = render partial: 'frontend/shared/event_persons', locals: { persons: @event.structured_persons }
 
     - if not @event.recordings.video.present? and @event.relive_present?
       .alert.alert-info.relive-notice
@@ -93,8 +93,8 @@
         .kiosk
         = render partial: 'frontend/shared/player_video' + @player, locals: video_player_ivars
 
-      - if !@event.tags.nil? && @event.tags.length > 3 
-        - @event.tags[3,2].reverse.each do |tag|
+      - if !@event.structured_tags.nil? && @event.structured_tags.length > 3
+        - @event.structured_tags[3,2].reverse.each do |tag|
           != link_for(@conference, tag)
 
       Playlists:
@@ -175,10 +175,10 @@
     .share
       = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
-    - if @event.tags.present?
+    - if @event.structured_tags.present?
       %h3 Tags
       .tags
-        - @event.tags.each do |tag|
+        - @event.structured_tags.each do |tag|
           - if tag =~ /^[0-9]+/
             != link_for_global(tag)
           - else
