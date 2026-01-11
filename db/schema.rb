@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_11_131000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,10 +93,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
     t.datetime "date", precision: nil
     t.text "description"
     t.string "link"
-    t.text "persons"
     t.string "slug"
     t.string "subtitle"
-    t.text "tags"
     t.datetime "release_date", precision: nil
     t.boolean "promoted"
     t.integer "view_count", default: 0
@@ -108,6 +106,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
     t.string "thumbnails_filename", default: ""
     t.string "doi"
     t.string "notes"
+    t.string "structured_tags", default: [], null: false, array: true
+    t.string "structured_persons", default: [], null: false, array: true
     t.index ["conference_id"], name: "index_events_on_conference_id"
     t.index ["guid"], name: "index_events_on_guid"
     t.index ["metadata"], name: "index_events_on_metadata", using: :gin
