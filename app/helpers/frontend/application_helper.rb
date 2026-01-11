@@ -48,8 +48,8 @@ module Frontend
     end
 
     def keywords
-      if @event&.tags
-        [@event.tags, I18n.t('custom.header.keywords')].join(', ')
+      if @event&.structured_tags
+        [@event.structured_tags, I18n.t('custom.header.keywords')].join(', ')
       else
         I18n.t('custom.header.keywords')
       end

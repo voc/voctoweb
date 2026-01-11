@@ -108,6 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_233533) do
     t.string "thumbnails_filename", default: ""
     t.string "doi"
     t.string "notes"
+    t.string "structured_tags", default: [], null: false, array: true
     t.index ["conference_id"], name: "index_events_on_conference_id"
     t.index ["guid"], name: "index_events_on_guid"
     t.index ["metadata"], name: "index_events_on_metadata", using: :gin

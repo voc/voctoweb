@@ -119,13 +119,13 @@ class Event < ApplicationRecord
 
   # active admin and serialized fields workaround:
   def tags_raw
-    tags.join("\n") unless tags.nil?
+    structured_tags.join("\n") unless structured_tags.nil?
   end
 
   # active admin and serialized fields workaround:
   def tags_raw=(values)
-    self.tags = []
-    self.tags = values.split("\n").map(&:strip)
+    self.structured_tags = []
+    self.structured_tags = values.split("\n").map(&:strip)
   end
 
   def duration_from_recordings
