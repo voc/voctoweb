@@ -39,6 +39,6 @@ class EventsApiTest < ActionDispatch::IntegrationTest
     event = Event.where(guid: '12345').first
     assert_equal 'http://link.to', event.link
     assert_equal 'chaosknoten.jpg', event.thumb_filename
-    assert_equal %w[a b c], event.persons
+    assert_equal %w[a b c], event.structured_persons
   end
 end
