@@ -23,8 +23,8 @@ class Feed::PodcastWorkerTest < ActiveSupport::TestCase
   def test_hq_feed_selects_highest_resolution
     event = create(:event, release_date: Time.now, conference: @conference)
 
-    rec_480p = create(:recording, event: event, mime_type: 'video/webm', width: 854, height: 480, filename: '480p.webm')
-    rec_1080p = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: '1080p.webm')
+    rec_480p = create(:recording, :video_480p, event: event, filename: '480p.webm')
+    rec_1080p = create(:recording, :video_1080p, event: event, filename: '1080p.webm')
 
     @worker.perform
 
@@ -38,10 +38,10 @@ class Feed::PodcastWorkerTest < ActiveSupport::TestCase
     event2 = create(:event, release_date: Time.now, conference: @conference)
 
     # Event1: only high-res
-    create(:recording, event: event1, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'hd.webm')
+    create(:recording, :video_1080p, event: event1, filename: 'hd.webm')
 
     # Event2: has low-res
-    create(:recording, event: event2, mime_type: 'video/webm', width: 854, height: 480, filename: 'sd.webm')
+    create(:recording, :video_480p, event: event2, filename: 'sd.webm')
 
     @worker.perform
 
@@ -56,10 +56,8 @@ class Feed::PodcastWorkerTest < ActiveSupport::TestCase
   def test_excludes_translated_recordings
     event = create(:event, release_date: Time.now, conference: @conference)
 
-    rec_orig = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                      filename: 'orig.webm', translated: false)
-    rec_trans = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                       filename: 'trans.webm', translated: true)
+    rec_orig = create(:recording, :video_1080p, event: event, filename: 'orig.webm')
+    rec_trans = create(:recording, :video_1080p, :translated, event: event, filename: 'trans.webm')
 
     @worker.perform
 
@@ -71,8 +69,8 @@ class Feed::PodcastWorkerTest < ActiveSupport::TestCase
   def test_prefers_mp4_over_webm_when_both_available
     event = create(:event, release_date: Time.now, conference: @conference)
 
-    rec_mp4 = create(:recording, event: event, mime_type: 'video/mp4', width: 1920, height: 1080, filename: 'video.mp4')
-    rec_webm = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'video.webm')
+    rec_mp4 = create(:recording, :video_1080p, :mp4, event: event, filename: 'video.mp4')
+    rec_webm = create(:recording, :video_1080p, :webm, event: event, filename: 'video.webm')
 
     @worker.perform
 
@@ -85,10 +83,8 @@ class Feed::PodcastWorkerTest < ActiveSupport::TestCase
   def test_master_feed_prefers_multilingual
     event = create(:event, release_date: Time.now, conference: @conference)
 
-    rec_single = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                        filename: 'single.webm', language: 'eng', html5: false)
-    rec_multi = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                       filename: 'multi.webm', language: 'eng-deu', html5: false)
+    rec_single = create(:recording, :video_1080p, event: event, filename: 'single.webm', language: 'eng', html5: false)
+    rec_multi = create(:recording, :video_1080p, :multilingual, event: event, filename: 'multi.webm')
 
     @worker.perform
 

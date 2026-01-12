@@ -154,9 +154,58 @@ FactoryBot.define do
     length { '5' }
     state { 'downloaded' }
     html5 { true }
+    translated { false }
 
     factory :audio_recording do
       mime_type { 'audio/mpeg' }
+    end
+
+    # Video resolution traits
+    trait :video_1080p do
+      width { 1920 }
+      height { 1080 }
+      mime_type { 'video/webm' }
+    end
+
+    trait :video_720p do
+      width { 1280 }
+      height { 720 }
+      mime_type { 'video/webm' }
+    end
+
+    trait :video_480p do
+      width { 854 }
+      height { 480 }
+      mime_type { 'video/webm' }
+    end
+
+    # MIME type traits
+    trait :mp4 do
+      mime_type { 'video/mp4' }
+    end
+
+    trait :webm do
+      mime_type { 'video/webm' }
+    end
+
+    trait :mp3 do
+      mime_type { 'audio/mpeg' }
+      width { nil }
+      height { nil }
+    end
+
+    # Other traits
+    trait :translated do
+      translated { true }
+    end
+
+    trait :slides do
+      folder { 'slides' }
+    end
+
+    trait :multilingual do
+      language { 'eng-deu' }
+      html5 { false }
     end
   end
 

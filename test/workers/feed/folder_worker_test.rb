@@ -39,10 +39,10 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     @conference = create(:conference)
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
-    # Create recordings with different resolutions (same MIME type)
-    rec_480p = create(:recording, event: event, mime_type: 'video/webm', width: 854, height: 480, filename: '480p.webm')
-    rec_720p = create(:recording, event: event, mime_type: 'video/webm', width: 1280, height: 720, filename: '720p.webm')
-    rec_1080p = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: '1080p.webm')
+    # Create recordings with different resolutions
+    rec_480p = create(:recording, :video_480p, event: event, filename: '480p.webm')
+    rec_720p = create(:recording, :video_720p, event: event, filename: '720p.webm')
+    rec_1080p = create(:recording, :video_1080p, event: event, filename: '1080p.webm')
 
     @worker.perform @conference.id
 
@@ -62,11 +62,11 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event2 = create(:event, conference: @conference, release_date: '2024-01-02')
 
     # Event1: only 1080p (should be excluded from LQ feed)
-    create(:recording, event: event1, mime_type: 'video/webm', width: 1920, height: 1080, filename: '1080p.webm')
+    create(:recording, :video_1080p, event: event1, filename: '1080p.webm')
 
     # Event2: has 480p (should be included)
-    create(:recording, event: event2, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'event2_1080p.webm')
-    create(:recording, event: event2, mime_type: 'video/webm', width: 854, height: 480, filename: 'event2_480p.webm')
+    create(:recording, :video_1080p, event: event2, filename: 'event2_1080p.webm')
+    create(:recording, :video_480p, event: event2, filename: 'event2_480p.webm')
 
     @worker.perform @conference.id
 
@@ -84,11 +84,9 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
     # Original recording
-    rec_original = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                          filename: 'original.webm', translated: false, language: 'eng')
+    rec_original = create(:recording, :video_1080p, event: event, filename: 'original.webm', language: 'eng')
     # Translated recording (simultaneous interpretation)
-    rec_translated = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                            filename: 'translated.webm', translated: true, language: 'deu')
+    rec_translated = create(:recording, :video_1080p, :translated, event: event, filename: 'translated.webm', language: 'deu')
 
     @worker.perform @conference.id
 
@@ -104,11 +102,9 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
     # Regular video
-    rec_video = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                       filename: 'talk.webm', folder: 'webm-hd')
+    rec_video = create(:recording, :video_1080p, :webm, event: event, filename: 'talk.webm', folder: 'webm-hd')
     # Slides (should be excluded)
-    rec_slides = create(:recording, event: event, mime_type: 'video/mp4', width: 1920, height: 1080,
-                        filename: 'slides.mp4', folder: 'slides')
+    rec_slides = create(:recording, :video_1080p, :mp4, :slides, event: event, filename: 'slides.mp4')
 
     @worker.perform @conference.id
 
@@ -123,8 +119,8 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
     # Both same resolution, different MIME types
-    rec_webm = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'video.webm')
-    rec_mp4 = create(:recording, event: event, mime_type: 'video/mp4', width: 1920, height: 1080, filename: 'video.mp4')
+    rec_webm = create(:recording, :video_1080p, :webm, event: event, filename: 'video.webm')
+    rec_mp4 = create(:recording, :video_1080p, :mp4, event: event, filename: 'video.mp4')
 
     @worker.perform @conference.id
 
@@ -142,11 +138,9 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
     # Single language recording
-    rec_single = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                        filename: 'single_lang.webm', language: 'eng', html5: false)
+    rec_single = create(:recording, :video_1080p, event: event, filename: 'single_lang.webm', language: 'eng', html5: false)
     # Multi-language recording (e.g., original + dubbed) - must be html5: false
-    rec_multi = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                       filename: 'multi_lang.webm', language: 'eng-deu', html5: false)
+    rec_multi = create(:recording, :video_1080p, :multilingual, event: event, filename: 'multi_lang.webm')
 
     @worker.perform @conference.id
 
@@ -162,9 +156,9 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
     event = create(:event, conference: @conference, release_date: '2024-01-01')
 
     # Different MIME types
-    rec_mp4 = create(:recording, event: event, mime_type: 'video/mp4', width: 1920, height: 1080, filename: 'video.mp4')
-    rec_webm = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'video.webm')
-    rec_mp3 = create(:recording, event: event, mime_type: 'audio/mpeg', filename: 'audio.mp3')
+    rec_mp4 = create(:recording, :video_1080p, :mp4, event: event, filename: 'video.mp4')
+    rec_webm = create(:recording, :video_1080p, :webm, event: event, filename: 'video.webm')
+    rec_mp3 = create(:recording, :mp3, event: event, filename: 'audio.mp3')
 
     @worker.perform @conference.id
 

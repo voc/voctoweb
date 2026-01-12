@@ -23,8 +23,8 @@ class Feed::ArchiveWorkerTest < ActiveSupport::TestCase
   def test_hq_feed_selects_highest_resolution
     event = create(:event, release_date: 3.years.ago, conference: @conference)
 
-    rec_480p = create(:recording, event: event, mime_type: 'video/webm', width: 854, height: 480, filename: '480p.webm')
-    rec_1080p = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080, filename: '1080p.webm')
+    rec_480p = create(:recording, :video_480p, event: event, filename: '480p.webm')
+    rec_1080p = create(:recording, :video_1080p, event: event, filename: '1080p.webm')
 
     @worker.perform
 
@@ -37,8 +37,8 @@ class Feed::ArchiveWorkerTest < ActiveSupport::TestCase
     event1 = create(:event, release_date: 3.years.ago, conference: @conference)
     event2 = create(:event, release_date: 3.years.ago, conference: @conference)
 
-    create(:recording, event: event1, mime_type: 'video/webm', width: 1920, height: 1080, filename: 'hd.webm')
-    create(:recording, event: event2, mime_type: 'video/webm', width: 640, height: 480, filename: 'sd.webm')
+    create(:recording, :video_1080p, event: event1, filename: 'hd.webm')
+    create(:recording, :video_480p, event: event2, filename: 'sd.webm')
 
     @worker.perform
 
@@ -51,10 +51,8 @@ class Feed::ArchiveWorkerTest < ActiveSupport::TestCase
   def test_excludes_translated_recordings
     event = create(:event, release_date: 3.years.ago, conference: @conference)
 
-    rec_orig = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                      filename: 'orig.webm', translated: false)
-    rec_trans = create(:recording, event: event, mime_type: 'video/webm', width: 1920, height: 1080,
-                       filename: 'trans.webm', translated: true)
+    rec_orig = create(:recording, :video_1080p, event: event, filename: 'orig.webm')
+    rec_trans = create(:recording, :video_1080p, :translated, event: event, filename: 'trans.webm')
 
     @worker.perform
 
@@ -67,8 +65,8 @@ class Feed::ArchiveWorkerTest < ActiveSupport::TestCase
     old_event = create(:event, release_date: 3.years.ago, conference: @conference)
     recent_event = create(:event, release_date: 1.month.ago, conference: @conference)
 
-    create(:recording, event: old_event, mime_type: 'video/webm', filename: 'old.webm')
-    create(:recording, event: recent_event, mime_type: 'video/webm', filename: 'recent.webm')
+    create(:recording, :video_1080p, event: old_event, filename: 'old.webm')
+    create(:recording, :video_1080p, event: recent_event, filename: 'recent.webm')
 
     @worker.perform
 

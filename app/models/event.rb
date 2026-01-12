@@ -2,6 +2,8 @@ class Event < ApplicationRecord
   include FahrplanUpdater
   include Storage
   include ElasticsearchEvent
+  include FeedRecordingSelection
+  include EventPresentation
 
   MAX_PROMOTED = 10
 
