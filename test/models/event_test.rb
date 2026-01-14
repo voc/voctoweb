@@ -212,4 +212,64 @@ class EventTest < ActiveSupport::TestCase
 
     assert_includes e.related_events, @event.becomes(Frontend::Event)
   end
+
+  test 'videos_sorted_by_language should prioritize by original language and width (html5 is negligible)' do
+    event = create(:event, original_language: 'eng')
+
+    # Create recordings with different combinations of language, html5, and width
+    # Scoring: (original_lang ? -5 : 0) + (html5 ? -2 : 0) - width
+    # Since html5 bonus is only -2 and width is in hundreds/thousands, width dominates!
+    # Expected order:
+    # 1. eng + 1920: -5 + -2 - 1920 = -1927 (html5)
+    # 2. eng + 1920: -5 + 0 - 1920 = -1925 (no html5, but same original lang + width)
+    # 3. deu + 1920: 0 + -2 - 1920 = -1922
+    # 4. eng + 1280: -5 + -2 - 1280 = -1287
+    # 5. deu + 1280: 0 + 0 - 1280 = -1280
+
+    rec1 = create(:recording, event: event, language: 'eng', html5: true, width: 1920, height: 1080, filename: 'eng_html5_1920.webm')
+    rec2 = create(:recording, event: event, language: 'eng', html5: false, width: 1920, height: 1080, filename: 'eng_nohtml5_1920.webm')
+    rec3 = create(:recording, event: event, language: 'deu', html5: true, width: 1920, height: 1080, filename: 'deu_html5_1920.webm')
+    rec4 = create(:recording, event: event, language: 'eng', html5: true, width: 1280, height: 720, filename: 'eng_html5_1280.webm')
+    rec5 = create(:recording, event: event, language: 'deu', html5: false, width: 1280, height: 720, filename: 'deu_nohtml5_1280.webm')
+
+    sorted = event.videos_sorted_by_language
+
+    # Verify the sorted order
+    assert_equal 5, sorted.length
+    assert_equal rec1, sorted[0], "Expected eng+html5+1920 to be first"
+    assert_equal rec2, sorted[1], "Expected eng+nohtml5+1920 to be second (html5 bonus is tiny)"
+    assert_equal rec3, sorted[2], "Expected deu+html5+1920 to be third"
+    assert_equal rec4, sorted[3], "Expected eng+html5+1280 to be fourth"
+    assert_equal rec5, sorted[4], "Expected deu+nohtml5+1280 to be fifth"
+  end
+
+  test 'videos_sorted_by_language should sort by mime_type first' do
+    event = create(:event, original_language: 'eng')
+
+    # Create recordings with different mime types
+    rec_webm = create(:recording, event: event, mime_type: 'video/webm', width: 1920, filename: 'video.webm')
+    rec_mp4 = create(:recording, event: event, mime_type: 'video/mp4', width: 1920, filename: 'video.mp4')
+
+    sorted = event.videos_sorted_by_language
+
+    # WebM should come before MP4 due to alphabetical mime_type sort
+    assert_equal 2, sorted.length
+    assert_equal 'video/mp4', sorted[0].mime_type
+    assert_equal 'video/webm', sorted[1].mime_type
+  end
+
+  test 'videos_sorted_by_language should only include video recordings' do
+    event = create(:event)
+
+    # Create various recording types
+    video = create(:recording, event: event, mime_type: 'video/webm', filename: 'video.webm')
+    audio = create(:recording, event: event, mime_type: 'audio/mpeg', filename: 'audio.mp3')
+    subtitle = create(:recording, event: event, mime_type: 'text/vtt', filename: 'subtitle.vtt', width: nil, height: nil, length: nil)
+
+    sorted = event.videos_sorted_by_language
+
+    # Should only include video recording
+    assert_equal 1, sorted.length
+    assert_equal video, sorted[0]
+  end
 end

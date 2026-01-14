@@ -27,6 +27,7 @@ class Recording < ApplicationRecord
   scope :subtitle, -> { where(mime_type: MimeType::SUBTITLE) }
   scope :html5, -> { where(html5: true) }
   scope :original_language, -> { joins(:event).where('events.original_language = recordings.language') }
+  scope :by_mime_type, ->(mime_type) { where(mime_type: mime_type) }
 
   after_save { conference.update_downloaded_count! }
   after_save { update_event_downloaded_count }

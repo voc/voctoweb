@@ -2,6 +2,7 @@ class Conference < ApplicationRecord
   include Recent
   include Storage
   include AASM
+  include ConferenceFeedHelpers
 
   ASPECT_RATIO = ['4:3', '16:9']
 

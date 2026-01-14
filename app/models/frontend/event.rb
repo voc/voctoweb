@@ -183,26 +183,8 @@ module Frontend
       [self] + Event.where(id: related_ids).includes(:conference).to_a
     end
 
-    def relive_present?
-      return unless conference.metadata['relive'].present?
-
-      conference.metadata['relive'].any? { |r| r['guid'] == guid }
-    end
-
-    def relive
-      conference.metadata['relive']&.find { |r| r['guid'] == guid }
-    end
-
     def timelens_present?
         timeline_filename.present? and thumbnails_filename.present?
-    end
-
-    private
-
-    def thumb_filename_exists?
-      return if thumb_filename.blank?
-
-      true
     end
   end
 end
