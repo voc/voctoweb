@@ -4,11 +4,6 @@
     "config:recommended"
     // "config:best-practices"
   ],
-  "enabledManagers": [
-    "bundler",
-    "dockerfile",
-    "github-actions"
-  ],
   "schedule": [
     "before 1pm on Thursday"
   ],
@@ -16,27 +11,33 @@
   "automergeType": "pr",
   "automergeStrategy": "squash",
   "rebaseWhen": "behind-base-branch",
+  "separateMajorMinor": false,
   "packageRules": [
     {
-      "matchPackageNames": ["ruby"],
+      "matchPackageNames": ["ruby", "elasticsearch"],
       "enabled": false
     },
     {
-      "matchPackageNames": ["rails", "elasticsearch", "elasticsearch-rails", "elasticsearch-model"],
+      "matchPackageNames": ["rails", "elasticsearch-rails", "elasticsearch-model"],
       "matchUpdateTypes": ["major"],
       "enabled": false
     },
     {
       "matchManagers": ["bundler"],
-      "groupName": "ruby dependencies"
+      "groupName": "ruby dependencies",
+      "groupSlug": "ruby"
+
     },
     {
       "matchManagers": ["github-actions"],
-      "groupName": "action dependencies"
+      "groupName": "action dependencies",
+      "groupSlug": "actions"
     },
     {
-      "matchManagers": ["dockerfile"],
-      "groupName": "docker dependencies"
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "docker dependencies",
+      "groupSlug": "docker",
+      "enabled": false
     }/*,
     {
       "matchPackagePatterns": ["*"],
