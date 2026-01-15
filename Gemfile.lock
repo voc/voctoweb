@@ -120,7 +120,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (12.0.0)
-    capistrano (3.19.2)
+    capistrano (3.20.0)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -242,7 +242,7 @@ GEM
       base64
     graphql-query-resolver (0.2.0)
       graphql (~> 1.0, >= 1.0.0)
-    haml (7.1.0)
+    haml (7.2.0)
       temple (>= 0.8.2)
       thor
       tilt
@@ -307,7 +307,8 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.25.5)
+    minitest (6.0.1)
+      prism (~> 1.5)
     multi_json (1.19.1)
     multipart-post (2.4.1)
     net-imap (0.6.2)
@@ -347,7 +348,7 @@ GEM
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
-    prism (1.7.0)
+    prism (1.8.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -524,8 +525,8 @@ GEM
       ostruct
     stringio (3.2.0)
     temple (0.10.4)
-    thor (1.4.0)
-    tilt (2.6.1)
+    thor (1.5.0)
+    tilt (2.7.0)
     timeout (0.6.0)
     tinymce-rails (8.3.1)
       railties (>= 3.1.1)
@@ -570,7 +571,7 @@ DEPENDENCIES
   bcrypt_pbkdf
   bootstrap-sass (~> 3.4.1)
   bullet
-  capistrano (~> 3.19.2)
+  capistrano (~> 3.20.0)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
@@ -593,7 +594,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen
-  minitest (~> 5.1)
+  minitest (~> 6.0)
   mqtt!
   openssl
   pg

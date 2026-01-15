@@ -26,7 +26,7 @@ gem 'puma_worker_killer'
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', '~> 3.19.2', group: :capistrano, require: false
+  gem 'capistrano', '~> 3.20.0', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
@@ -99,7 +99,7 @@ end
 
 group :test do
   # minitest must match rails version
-  gem 'minitest', '~> 5.1'
+  gem 'minitest', '~> 6.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
