@@ -1,0 +1,64 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+    // "config:best-practices"
+  ],
+  "schedule": [
+    "before 1pm on Thursday"
+  ],
+  "timezone": "Europe/Berlin",
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "rebaseWhen": "behind-base-branch",
+  "separateMajorMinor": false,
+  "packageRules": [
+    {
+      "matchPackageNames": ["ruby", "elasticsearch"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["rails", "elasticsearch-rails", "elasticsearch-model"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["bundler"],
+      "groupName": "ruby dependencies",
+      "groupSlug": "ruby"
+
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "action dependencies",
+      "groupSlug": "actions"
+    },
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "docker dependencies",
+      "groupSlug": "docker",
+      "enabled": false
+    }/*,
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    } */
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": [
+    "dependencies"
+  ],
+  "prBodyColumns": [
+    "Package",
+    "Type",
+    "Update",
+    "Change"
+  ],
+  "suppressNotifications": [
+    "prIgnoreNotification"
+  ],
+  "prCreation": "immediate"
+}
