@@ -2338,9 +2338,12 @@ Object.assign(_player2.default.prototype, {
 			}
 
 			for (var _i4 = 0, _total2 = outEvents.length; _i4 < _total2; _i4++) {
-				player.captionsButton.addEventListener(outEvents[_i4], function () {
-					(0, _dom.addClass)(this.querySelector('.' + t.options.classPrefix + 'captions-selector'), t.options.classPrefix + 'offscreen');
-				});
+				// add a small timeout so mobile devices can activate the buttons before focus is lost
+          		setTimeout(function () {
+					player.captionsButton.addEventListener(outEvents[_i4], function () {
+						(0, _dom.addClass)(this.querySelector('.' + t.options.classPrefix + 'captions-selector'), t.options.classPrefix + 'offscreen');
+					});
+				}, 20);
 			}
 
 			for (var _i5 = 0, _total3 = captions.length; _i5 < _total3; _i5++) {
@@ -2376,7 +2379,10 @@ Object.assign(_player2.default.prototype, {
 
 		for (var _i8 = 0, _total6 = outEvents.length; _i8 < _total6; _i8++) {
 			player.chaptersButton.addEventListener(outEvents[_i8], function () {
-				(0, _dom.addClass)(this.querySelector('.' + t.options.classPrefix + 'chapters-selector'), t.options.classPrefix + 'offscreen');
+				// add a small timeout so mobile devices can activate the buttons before focus is lost
+				setTimeout(function () {
+					(0, _dom.addClass)(this.querySelector('.' + t.options.classPrefix + 'chapters-selector'), t.options.classPrefix + 'offscreen');
+				}, 20);
 			});
 		}
 
