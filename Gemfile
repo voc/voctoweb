@@ -19,6 +19,7 @@ gem 'listen'
 # rails cache
 gem 'redis'
 gem 'exception_notification'
+gem 'connection_pool', '< 3'
 
 # Bundle puma application server
 gem 'puma'
