@@ -79,7 +79,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'api-pagination'
 
 # GraphQL
-gem 'graphql'
+gem 'graphql', '< 2'
 gem 'graphql-query-resolver'
 gem 'search_object'
 gem 'search_object_graphql'
