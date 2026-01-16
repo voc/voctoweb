@@ -19,6 +19,7 @@ gem 'listen'
 # rails cache
 gem 'redis'
 gem 'exception_notification'
+gem 'connection_pool', '< 3'
 
 # Bundle puma application server
 gem 'puma'
@@ -26,7 +27,7 @@ gem 'puma_worker_killer'
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', '~> 3.19.2', group: :capistrano, require: false
+  gem 'capistrano', '~> 3.20.0', group: :capistrano, require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
@@ -79,7 +80,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'api-pagination'
 
 # GraphQL
-gem 'graphql'
+gem 'graphql', '< 2'
 gem 'graphql-query-resolver'
 gem 'search_object'
 gem 'search_object_graphql'
