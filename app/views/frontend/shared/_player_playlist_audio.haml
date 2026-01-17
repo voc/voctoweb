@@ -5,7 +5,7 @@
             title: event.title,
             data: { id: event.id,
                     title: event.title.truncate(30),
-                    persons: event.persons.join(', '),
+                    persons: event.structured_persons.join(', '),
                     lang: recording.language,
                     mep: { description: event.description } }}
 

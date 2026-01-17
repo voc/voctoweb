@@ -11,7 +11,7 @@
             data: { id: event.id,
                     title: event.title,
                     poster: event.poster_url,
-                    persons: event.persons.join(', '),
+                    persons: event.structured_persons.join(', '),
                     lang: recording.language,
                     quality: recording.quality_label,
                     mep: { description: event.description } }}
