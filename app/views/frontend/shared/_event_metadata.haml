@@ -1,7 +1,7 @@
 .caption
   %h3
     %a{href: event_path(slug: event.slug)}
-      = truncate(event.title, length: 90, separator: ' ', omission: '…')
+      = truncate(event.title_clean, length: 90, separator: ' ', omission: '…')
 
   - if event.subtitle.present?
     %h4{title: event.subtitle}
@@ -11,10 +11,10 @@
     %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration, lazy: "yes"}}
 
   %ul.metadata
-    - if !event.tags.nil? && event.tags.length > 3 
+    - if !event.tags_clean.nil? && event.tags_clean.length > 3 
       %li.tags
         %span.tags
-        - event.tags[3,2].each do |tag|
+        - event.tags_clean[3,2].each do |tag|
           != link_for(event.conference, tag)
     %li.duration.digits
       %span.icon.icon-clock-o

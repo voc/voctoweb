@@ -6,9 +6,9 @@
         %b
           Related to
           - if @event.link
-            = link_to @event.title, @event.link
+            = link_to @event.title_clean, @event.link
           - else
-            = @event.title
+            = @event.title_clean
 
     .row
       - @events.each do |event|

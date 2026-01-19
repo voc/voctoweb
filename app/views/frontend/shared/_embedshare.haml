@@ -10,19 +10,19 @@
 
     %ul.share
       %li
-        %button{data: {share: 'mastodon', text: event.title, url: event_url(slug: event.slug)}}
+        %button{data: {share: 'mastodon', text: event.title_clean, url: event_url(slug: event.slug)}}
           %i{:class => "icon-mastodon"}
 
       %li
-        %a.popup{:href => facebook_url(event.title, event_url(slug: event.slug)), :title => 'via Facebook'}
+        %a.popup{:href => facebook_url(event.title_clean, event_url(slug: event.slug)), :title => 'via Facebook'}
           %i{:class => "icon-facebook"}
 
       %li
-        %a.popup{:href => diaspora_url(event.title, event_url(slug: event.slug)), :title => 'via Diaspora'}
+        %a.popup{:href => diaspora_url(event.title_clean, event_url(slug: event.slug)), :title => 'via Diaspora'}
           %i{:class => "icon-diaspora"}
 
       %li
-        %a{:href => mail_url(event.title, event_url(slug: event.slug)), :title => 'by Mail'}
+        %a{:href => mail_url(event.title_clean, event_url(slug: event.slug)), :title => 'by Mail'}
           %i{:class => "icon-envelope"}
 
 

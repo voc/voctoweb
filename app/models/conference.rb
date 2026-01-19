@@ -3,10 +3,11 @@ class Conference < ApplicationRecord
   include Storage
   include AASM
   include ConferenceFeedHelpers
+  include ConferencePresentation
 
   ASPECT_RATIO = ['4:3', '16:9']
 
-  has_many :events, dependent: :destroy
+  has_many :events, -> { order(release_date: :desc, id: :desc) }, dependent: :destroy
   has_many :recordings, through: :events
 
   validates :acronym, :slug, presence: true
@@ -14,6 +15,28 @@ class Conference < ApplicationRecord
   validates :slug, format: { with: %r{\A\w[\w-]*(?:/[\w-]+)*\z} }
   validate :schedule_url_valid
   validate :slug_reachable
+
+  scope :with_events, -> {
+    where('event_last_released_at IS NOT NULL')
+  }
+  scope :with_recent_events, ->(n) {
+    where('event_last_released_at IS NOT NULL')
+      .order('event_last_released_at DESC')
+      .limit(n)
+  }
+  scope :with_events_newer, ->(date) {
+    where('event_last_released_at IS NOT NULL')
+      .order('event_last_released_at DESC')
+      .where('event_last_released_at > ?', date)
+  }
+  scope :with_events_older, ->(date) {
+    where('event_last_released_at IS NOT NULL')
+      .order('event_last_released_at DESC')
+      .where('event_last_released_at < ?', date)
+  }
+  scope :currently_streaming, -> {
+    where('(streaming ->> :key)::boolean', key: 'isCurrentlyStreaming')
+  }
 
   has_attached_directory :images,
     via: :images_path,

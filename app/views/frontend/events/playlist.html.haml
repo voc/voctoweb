@@ -35,7 +35,7 @@
         = render partial: 'frontend/shared/player_playlist_video', locals: video_player_ivars(playlist: @playlist)
 
     %h2.event_title
-      = @playlist.lead_event.title
+      = @playlist.lead_event.title_clean
   
     %p.persons
       = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }

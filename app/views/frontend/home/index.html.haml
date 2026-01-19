@@ -68,8 +68,8 @@
                       .event-preview
                         = render partial: 'frontend/shared/event_thumb', locals: { event: event }
                         .caption
-                          %a.title{href: event_path(slug: event.slug), title: event.title.length > 55 ? event.title : ''}
-                            = truncate(event.title, length: 55, separator: ' ', omission: '…')
+                          %a.title{href: event_path(slug: event.slug), title: event.title_clean.length > 55 ? event.title_clean : ''}
+                            = truncate(event.title_clean, length: 55, separator: ' ', omission: '…')
                           .date
                             %span.icon.icon-calendar-o{title: display_release_date_title(event)}
                             = event.display_date

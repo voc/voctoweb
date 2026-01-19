@@ -1,11 +1,11 @@
 - content_for :title do
-  = @event.title
+  = @event.title_clean
 
 - content_for :body_class do
   page-show
 
 - content_for :head do
-  %meta{property: 'og:title', content: @event.title}
+  %meta{property: 'og:title', content: @event.title_clean}
   %meta{property: 'og:type', content: 'video.other'}
   %meta{property: 'og:url', content: event_path(slug: @event.slug)}
   %meta{property: 'og:image', content: @event.poster_url}
@@ -25,7 +25,7 @@
         {
           "@context": "https://schema.org",
           "@type": "VideoObject",
-          "name": "#{@event.title}",
+          "name": "#{@event.title_clean}",
           "description": "#{@event.short_description}",
           "thumbnailUrl": "#{@event.poster_url}",
           "uploadDate": "#{@event.release_date}",
@@ -69,11 +69,11 @@
           =@conference.title
       - if not @event.recordings.video.present? and @event.relive_present?
         %h1
-          = @event.title
+          = @event.title_clean
           = '(Relive)'
       - else
         %h1
-          = @event.title
+          = @event.title_clean
       - unless @event.subtitle.blank?
         %h2
           = @event.subtitle
@@ -93,8 +93,8 @@
         .kiosk
         = render partial: 'frontend/shared/player_video' + @player, locals: video_player_ivars
 
-      - if !@event.tags.nil? && @event.tags.length > 3 
-        - @event.tags[3,2].reverse.each do |tag|
+      - if !@event.tags_clean.nil? && @event.tags_clean.length > 3 
+        - @event.tags_clean[3,2].reverse.each do |tag|
           != link_for(@conference, tag)
 
       Playlists:
@@ -175,10 +175,10 @@
     .share
       = render partial: 'frontend/shared/embedshare', locals: { event: @event }
 
-    - if @event.tags.present?
+    - if @event.tags_clean.present?
       %h3 Tags
       .tags
-        - @event.tags.each do |tag|
+        - @event.tags_clean.each do |tag|
           - if tag =~ /^[0-9]+/
             != link_for_global(tag)
           - else

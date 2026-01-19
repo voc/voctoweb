@@ -6,6 +6,8 @@ class Event < ApplicationRecord
   include EventPresentation
 
   MAX_PROMOTED = 10
+  index_name "media-event-#{Rails.env}"
+  document_type 'event'
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
@@ -37,6 +39,11 @@ class Event < ApplicationRecord
   scope :older, ->(date) { released.where('release_date < ?', date) }
   scope :recent, ->(n) { released.limit(n) }
   scope :promoted, ->(n) { released.where('promoted = TRUE').limit(n) }
+
+  scope :promoted, ->(n) { where(promoted: true).order('updated_at DESC').limit(n) }
+  scope :published, -> { where('release_date IS NOT NULL') }
+  scope :popular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count DESC') }
+  scope :unpopular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count ASC') }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 

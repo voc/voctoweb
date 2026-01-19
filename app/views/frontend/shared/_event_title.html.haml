@@ -1,2 +1,2 @@
-%a.title{href: event_path(slug: event.slug), title: event.title.length > 55 ? event.title : ''}
-  = truncate(event.title, length: 55, separator: ' ', omission: '…')
+%a.title{href: event_path(slug: event.slug), title: event.title_clean.length > 55 ? event.title_clean : ''}
+  = truncate(event.title_clean, length: 55, separator: ' ', omission: '…')

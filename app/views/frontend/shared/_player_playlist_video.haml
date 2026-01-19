@@ -7,9 +7,9 @@
   - playlist.playlist.each do |event, recording|
     %source{type: recording.mime_type,
             src: h(recording.url),
-            title: event.title.truncate(30),
+            title: event.title_clean.truncate(30),
             data: { id: event.id,
-                    title: event.title,
+                    title: event.title_clean,
                     poster: event.poster_url,
                     persons: event.persons.join(', '),
                     lang: recording.language,
