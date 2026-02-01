@@ -100,7 +100,7 @@ end
 
 group :test do
   # minitest must match rails version
-  gem 'minitest', '~> 5.1'
+  gem 'minitest', '~> 6.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
