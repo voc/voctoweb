@@ -2,7 +2,7 @@
 
 %audio.audio{controls: 'controls', 'data-id' => event.id, poster: event.poster_url, width: width, height: height, preload: 'metadata' }
   - event.audio_recordings.each do |recording|
-    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }, title: recording.filetype}
+    %source{type: recording.mime_type, src: h(recording.url), data: { lang: recording.language }, title: recording.label}
 
   - event.recordings.subtitle.each do |track|
     %track{kind: "subtitles", src: h(track.cors_url), srclang: track.language_iso_639_1()}

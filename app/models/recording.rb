@@ -90,8 +90,10 @@ class Recording < ApplicationRecord
       else
         "#{language}"
       end
-    else
+    elsif height?
       "#{language} #{height}p"
+    else
+      "#{language}"
     end
   end
 
