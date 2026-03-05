@@ -88,12 +88,53 @@ ActiveAdmin.register Conference do
     redirect_to action: :show
   end
 
+  member_action :duplicate, method: :post do
+    original = Conference.find(params[:id])
+    copy = original.dup
+
+    current_year = Time.current.year.to_s
+    previous_year = (Time.current.year - 1).to_s
+
+    if original.acronym&.include?(previous_year) or original.recordings_path&.include?(previous_year)
+
+      %i[slug title link recordings_path images_path schedule_url acronym].each do |field|
+        value = original.public_send(field)
+        next if value.blank?
+
+        copy.public_send("#{field}=", value.gsub(previous_year, current_year))
+      end
+
+      if not original.acronym&.include?(previous_year) and original.acronym&.match?(/\d+/)
+        num = original.acronym[/\d+/].to_i
+        copy.acronym = original.acronym.gsub(num.to_s, (num + 1).to_s)
+
+        if not original.title&.include?(previous_year) and original.title&.include?(num.to_s)
+          copy.title = original.title.gsub(num.to_s, (num + 1).to_s)
+        end
+      end
+
+    else
+      copy.acronym = "duplicate-of-#{original.slug}"
+      copy.title = "Duplicate of #{original.title}"
+      copy.slug = "#{original.slug}+1"
+    end
+    if copy.save
+      redirect_to edit_admin_conference_path(copy), notice: 'Conference duplicated successfully.'
+    else
+      redirect_to admin_conference_path(original), alert: "Failed to duplicate conference as #{copy.acronym}."
+    end
+  end
+
   action_item(:add_event, only: [:show, :edit]) do
     link_to 'View', conference_path(acronym: conference.acronym), method: :get
   end
 
   action_item(:download_schedule, only: :show) do
     link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+  end
+
+  action_item(:duplicate, only: [:show, :edit]) do
+    link_to 'Duplicate', duplicate_admin_conference_path(conference), method: :post, data: { confirm: 'Are you sure you want to duplicate this conference?' }
   end
 
   action_item(:add_event, only: [:show, :edit]) do
