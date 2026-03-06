@@ -3,6 +3,7 @@ export CAP_REPO=https://github.com/voc/voctoweb.git
 export CAP_USER=media
 export CAP_BRANCH=staging
 #export CAP_BRANCH=main
+export SKIP_TAG=true
 
 export CAP_HOST=app.media.test.c3voc.de
 export CAP_PORT=22

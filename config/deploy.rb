@@ -14,6 +14,7 @@ set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 set :rvm_ruby_version, '3.3'
 
 set :use_sudo,        false
+set :environment,     fetch(:stage).to_s
 set :stage,           :production
 set :deploy_to,       "/srv/media/#{fetch(:application)}"
 set :ssh_options,     forward_agent: false, user: fetch(:user)
@@ -96,10 +97,60 @@ namespace :deploy do
     end
   end
 
+  desc 'Tag deployment and update production branch'
+  task :tag_release do
+    run_locally do
+      current_revision = fetch(:current_revision) || `git rev-parse HEAD`.strip
+      release_name = fetch(:release_timestamp)
+
+      execute :git, "tag -a #{release_name} #{current_revision} -m 'Production deployment release #{release_name} by #{ENV['USER']}'"
+      execute :git, "branch -f production #{current_revision}"
+      execute :git, "push origin #{release_name}"
+      execute :git, "push origin production --force"
+
+      info "Created tag #{release_name} and updated production branch to #{current_revision}"
+    end
+  end
+
+  desc 'Create GitHub deployment'
+  task :github_deployment do
+    run_locally do
+      if ENV['GITHUB_TOKEN']
+        require 'octokit'
+
+        client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
+        repo = fetch(:repo_url).match(%r{github\.com[:/](.+?)(\.git)?$})[1]
+        current_revision = fetch(:current_revision) || `git rev-parse HEAD`.strip
+        environment = fetch(:environment).to_s
+
+        deployment = client.create_deployment(
+          repo,
+          current_revision,
+          environment: environment,
+          description: "Deploy #{fetch(:release_timestamp)}",
+          auto_merge: false,
+          required_contexts: []
+        )
+
+        client.create_deployment_status(
+          deployment.url,
+          'success',
+          {
+            environment_url: "https://#{ENV['CAP_HOST']}"
+          }
+        )
+
+        info "Created GitHub deployment for #{environment} environment"
+      end
+    end
+  end
+
   after :finishing,    :compile_assets
   after :finishing,    :cleanup
   after :finishing,    :restart
   after :finishing,    :notify
+  after :finishing,    :tag_release unless ENV['SKIP_TAG']
+  after :finishing,    :github_deployment
 end
 
 namespace :fixtures do
