@@ -1,4 +1,6 @@
-json.extract! event, :guid, :title, :subtitle, :slug, :link, :description, :original_language, :persons, :tags, :view_count, :promoted, :date, :release_date, :updated_at
+json.extract! event, :guid, :title, :subtitle, :slug, :link, :description, :original_language, :view_count, :promoted, :date, :release_date, :updated_at
+json.tags event.structured_tags
+json.persons event.structured_persons
 json.length event.duration
 json.duration event.duration
 json.thumb_url event.get_thumb_url

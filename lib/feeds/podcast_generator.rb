@@ -77,7 +77,7 @@ module Feeds
       item.pubDate = event.created_at.to_s
 
       item.itunes_subtitle = event.subtitle if event.subtitle.present?
-      item.itunes_author = event.persons.join(', ') if event.persons.present?
+      item.itunes_author = event.structured_persons.join(', ') if event.structured_persons.present?
       item.pubDate = event.date.to_s if event.date.present?
 
       # Add episode artwork for podcast clients (supports PNG/JPG)
