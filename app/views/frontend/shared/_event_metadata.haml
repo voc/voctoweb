@@ -11,10 +11,10 @@
     %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration, lazy: "yes"}}
 
   %ul.metadata
-    - if !event.structured_tags.nil? && event.structured_tags.length > 3
+    - if !event.tags.nil? && event.tags.length > 3
       %li.tags
         %span.tags
-        - event.structured_tags[3,2].each do |tag|
+        - event.tags[3,2].each do |tag|
           != link_for(event.conference, tag)
     %li.duration.digits
       %span.icon.icon-clock-o

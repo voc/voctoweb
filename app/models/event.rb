@@ -22,7 +22,6 @@ class Event < ApplicationRecord
   before_validation :strip_prefix, :only => [:doi]
 
   serialize :persons, type: Array, coder: YAML
-  serialize :tags, type: Array, coder: YAML
 
   # get all Events of a Conference with at least one Recording
   scope :recorded_at, ->(conference) {
@@ -119,13 +118,13 @@ class Event < ApplicationRecord
 
   # active admin and serialized fields workaround:
   def tags_raw
-    structured_tags.join("\n") unless structured_tags.nil?
+    tags.join("\n") unless tags.nil?
   end
 
   # active admin and serialized fields workaround:
   def tags_raw=(values)
-    self.structured_tags = []
-    self.structured_tags = values.split("\n").map(&:strip)
+    self.tags = []
+    self.tags = values.split("\n").map(&:strip)
   end
 
   def duration_from_recordings

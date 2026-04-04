@@ -1,5 +1,5 @@
 json.extract! event, :guid, :title, :subtitle, :slug, :link, :description, :original_language, :persons, :view_count, :promoted, :date, :release_date, :updated_at
-json.tags event.structured_tags
+json.tags event.tags
 json.length event.duration #deprecated, use duration instead
 json.duration event.duration
 json.thumb_url event.get_thumb_url
