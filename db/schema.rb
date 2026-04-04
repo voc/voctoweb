@@ -139,7 +139,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_04_090000) do
   create_table "recordings", id: :serial, force: :cascade do |t|
     t.integer "size", comment: "approximate file size in megabytes"
     t.integer "length", comment: "duration in seconds"
-    t.string "mime_type", limit: 255
+    t.string "mime_type"
     t.integer "event_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
