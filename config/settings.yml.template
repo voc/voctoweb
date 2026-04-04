@@ -26,7 +26,7 @@ development:
   <<: *defaults
 test:
   <<: *defaults
-  static_url: http://static.media.ccc.de/media
+  static_url: https://static.media.ccc.de/media
   folders:
     recordings_webroot: ''
     images_webroot: ''
