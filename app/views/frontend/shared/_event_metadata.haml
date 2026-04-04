@@ -11,10 +11,10 @@
     %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration, lazy: "yes"}}
 
   %ul.metadata
-    - if !event.tags.nil? && event.tags.length > 3 
+    - if !event.structured_tags.nil? && event.structured_tags.length > 3
       %li.tags
         %span.tags
-        - event.tags[3,2].each do |tag|
+        - event.structured_tags[3,2].each do |tag|
           != link_for(event.conference, tag)
     %li.duration.digits
       %span.icon.icon-clock-o
@@ -26,7 +26,7 @@
       %span.icon.icon-eye{title: "#{delimited_views_count(event.view_count)} views"}
       = human_readable_views_count(event.view_count)
     %li.persons
-      = render partial: 'frontend/shared/event_persons', locals: { persons: event.persons }
+      = render partial: 'frontend/shared/event_persons', locals: { persons: event.structured_persons }
     - if show_conference && event.conference.present?
       .conference
         %a{href: conference_path(acronym: event.conference.acronym)}

@@ -28,8 +28,8 @@ class EventTest < ActiveSupport::TestCase
   test "should save event with persons" do
     e = build(:event)
     e.subtitle = "subtitle"
-    e.persons << "name1"
-    e.persons << "name2"
+    e.structured_persons << "name1"
+    e.structured_persons << "name2"
 
     assert_difference 'Event.count' do
       e.save!

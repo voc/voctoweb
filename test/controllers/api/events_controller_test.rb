@@ -74,8 +74,8 @@ class Api::EventsControllerTest < ActionController::TestCase
     assert_equal 'qwerty', event.guid
     assert_equal 'best_event', event.slug
     assert_equal 'Event?', event.title
-    assert_equal %w(p q r), event.persons
-    assert_equal %w(t u v), event.tags
+    assert_equal %w(p q r), event.structured_persons
+    assert_equal %w(t u v), event.structured_tags
   end
 
   test 'when event create fails it should return json errors' do

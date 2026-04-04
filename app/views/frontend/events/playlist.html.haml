@@ -38,7 +38,7 @@
       = @playlist.lead_event.title
   
     %p.persons
-      = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.persons }
+      = render partial: 'frontend/shared/event_persons', locals: { persons: @playlist.lead_event.structured_persons }
       
     %p
       = simple_format(@playlist.lead_event.description, class: :description)

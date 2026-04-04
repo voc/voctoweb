@@ -108,24 +108,24 @@ class Event < ApplicationRecord
 
   # active admin and serialized fields workaround:
   def persons_raw
-    persons.join("\n") unless persons.nil?
+    structured_persons.join("\n") unless structured_persons.nil?
   end
 
   # active admin and serialized fields workaround:
   def persons_raw=(values)
-    self.persons = []
-    self.persons = values.split("\n").map(&:strip)
+    self.structured_persons = []
+    self.structured_persons = values.split("\n").map(&:strip)
   end
 
   # active admin and serialized fields workaround:
   def tags_raw
-    tags.join("\n") unless tags.nil?
+    structured_tags.join("\n") unless structured_tags.nil?
   end
 
   # active admin and serialized fields workaround:
   def tags_raw=(values)
-    self.tags = []
-    self.tags = values.split("\n").map(&:strip)
+    self.structured_tags = []
+    self.structured_tags = values.split("\n").map(&:strip)
   end
 
   def duration_from_recordings
@@ -148,12 +148,12 @@ class Event < ApplicationRecord
   end
 
   def persons_text
-    if persons.length.zero?
+    if structured_persons.length.zero?
       'n/a'
-    elsif persons.length == 1
-      persons[0]
+    elsif structured_persons.length == 1
+      structured_persons[0]
     else
-      persons = self.persons[0..-3] + [self.persons[-2..-1].join(' and ')]
+      persons = self.structured_persons[0..-3] + [self.structured_persons[-2..-1].join(' and ')]
       persons.join(', ')
     end
   end

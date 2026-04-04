@@ -31,7 +31,7 @@ module Frontend
       @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
       if params[:tag]
         @tag = params[:tag]
-        @events = @conference.events.includes(:conference).reorder(sort_param).select { |event| event.tags.include? @tag }
+        @events = @conference.events.includes(:conference).reorder(sort_param).select { |event| event.structured_tags.include? @tag }
       else
         @events = @conference.events.includes(:conference).reorder(sort_param)
       end
