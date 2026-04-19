@@ -1,7 +1,7 @@
 ActiveAdmin.register Conference do
   filter :acronym
   filter :title
-  filter :slug
+  filter :slug, label: 'UI Path'
   filter :recordings_path
   filter :images_path
   filter :updated_at
@@ -9,8 +9,9 @@ ActiveAdmin.register Conference do
   index do
     selectable_column
     column :acronym
-    column :slug
+    column 'UI Path', :slug
     column :recordings_path
+    column :images_path
     column :created_at do |conference|
       l(conference.created_at, format: :pretty_datetime)
     end
@@ -27,7 +28,7 @@ ActiveAdmin.register Conference do
       row :images_path do
         div show_folder label: c.images_path, path: c.get_images_url
       end
-      row :slug
+      row('UI Path') { |conference| conference.slug }
       row :logo
       row :description
       row :link
@@ -60,7 +61,7 @@ ActiveAdmin.register Conference do
       f.input :title
       f.input :schedule_url
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
-      f.input :slug
+      f.input :slug, label: 'UI Path'
       f.input :description #, input_html: { class: 'tinymce' }
       f.input :link
       f.input :global_event_notes, hint: 'Notes to be shown as a notice on the page of every lecture in this conference'
