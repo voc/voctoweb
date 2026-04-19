@@ -11,7 +11,7 @@
     %div.timelens{data: {timeline: event.timeline_url, thumbnails: event.thumbnails_url, slug: event.slug, duration: event.duration, lazy: "yes"}}
 
   %ul.metadata
-    - if !event.tags.nil? && event.tags.length > 3 
+    - if !event.tags.nil? && event.tags.length > 3
       %li.tags
         %span.tags
         - event.tags[3,2].each do |tag|

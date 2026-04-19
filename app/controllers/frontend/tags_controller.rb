@@ -4,8 +4,7 @@ module Frontend
       @tag = params[:tag]
       raise ActiveRecord::RecordNotFound unless @tag
 
-      # TODO native postgresql query?
-      @events = Frontend::Event.all.select { |event| event.tags.include? @tag }
+      @events = Frontend::Event.where("? = ANY (tags)", @tag)
       respond_to { |format| format.html }
     end
   end

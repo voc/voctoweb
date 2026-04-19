@@ -22,7 +22,6 @@ class Event < ApplicationRecord
   before_validation :strip_prefix, :only => [:doi]
 
   serialize :persons, type: Array, coder: YAML
-  serialize :tags, type: Array, coder: YAML
 
   # get all Events of a Conference with at least one Recording
   scope :recorded_at, ->(conference) {
@@ -111,13 +110,13 @@ class Event < ApplicationRecord
     persons.join("\n") unless persons.nil?
   end
 
-  # active admin and serialized fields workaround:
+  # ActiveAdmin workaround: edit array as newline-separated text
   def persons_raw=(values)
     self.persons = []
     self.persons = values.split("\n").map(&:strip)
   end
 
-  # active admin and serialized fields workaround:
+  # ActiveAdmin workaround: edit array as newline-separated text
   def tags_raw
     tags.join("\n") unless tags.nil?
   end

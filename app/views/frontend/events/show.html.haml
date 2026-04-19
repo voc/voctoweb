@@ -93,7 +93,7 @@
         .kiosk
         = render partial: 'frontend/shared/player_video' + @player, locals: video_player_ivars
 
-      - if !@event.tags.nil? && @event.tags.length > 3 
+      - if !@event.tags.nil? && @event.tags.length > 3
         - @event.tags[3,2].reverse.each do |tag|
           != link_for(@conference, tag)
 
