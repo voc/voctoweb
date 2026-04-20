@@ -19,7 +19,7 @@ gem 'listen'
 # rails cache
 gem 'redis'
 gem 'exception_notification'
-gem 'connection_pool', '< 3'
+gem 'connection_pool', '< 4'
 
 # Bundle puma application server
 gem 'puma'
@@ -81,7 +81,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'api-pagination'
 
 # GraphQL
-gem 'graphql', '< 2'
+gem 'graphql', '< 3'
 gem 'graphql-query-resolver'
 gem 'search_object'
 gem 'search_object_graphql'
@@ -101,7 +101,7 @@ end
 
 group :test do
   # minitest must match rails version
-  gem 'minitest', '~> 5.1'
+  gem 'minitest', '~> 6.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
