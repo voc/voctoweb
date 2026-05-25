@@ -1,4 +1,4 @@
-.promoted.themed-banner.live
+.promoted.themed-banner.live{style: SiteSettings.current.live_banner_style}
   %h2= "Live now – " + @currently_streaming.map{|a| a.title}.join(", ")
   .titlebar
   .slider

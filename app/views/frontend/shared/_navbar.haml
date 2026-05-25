@@ -3,7 +3,7 @@
     .navbar-header
       %a.navbar-brand(href='/')
         %span
-          %img{src: image_path('frontend/voctocat-header.svg'), alt: 'media.ccc.de logo, a lucky cat holding a play icon'}
+          %img{src: SiteSettings.current.logo_url_or_default, alt: SiteSettings.current.logo_alt_or_default}
 
     - if content_for?(:navbar)
       = yield :navbar

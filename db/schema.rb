@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_04_090000) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_24_223925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -155,6 +155,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_04_090000) do
     t.index ["event_id"], name: "index_recordings_on_event_id"
     t.index ["filename"], name: "index_recordings_on_filename"
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
+  end
+
+  create_table "site_settings", force: :cascade do |t|
+    t.string "promoted_banner_url"
+    t.string "live_banner_url"
+    t.string "logo_url"
+    t.string "logo_alt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "web_feeds", force: :cascade do |t|
