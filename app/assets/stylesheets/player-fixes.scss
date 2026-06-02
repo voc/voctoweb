@@ -1,0 +1,105 @@
+/* 
+ * MediaElement 7.x sizes its whole UI in rem, but Bootstrap 3 sets the root to
+ * have a font size of 10 px making every control for mediaelement come way too
+ * small. So we set the root to 16 px
+ */
+html {
+  font-size: 16px;
+}
+
+.mejs__captions-layer  {
+  line-height: 1.15em !important;
+  font-size: 2em !important;
+}
+
+// voctocat artwork — overrides the inline SVG icons that 7.x uses for the
+// big play overlay and the loading spinner
+.mejs__overlay-button {
+  background: image-url('bigplay.svg') no-repeat !important;
+  height: 100px !important;
+  width: 100px !important;
+}
+.mejs__overlay-button svg {
+  display: none !important;
+}
+.mejs__overlay:hover > .mejs__overlay-button,
+.mejs__overlay:hover .mejs__overlay-button {
+  background-position: 0 -100px !important;
+}
+
+.mejs__overlay-loading,
+.mejs__overlay-loading svg {
+  height: 80px !important;
+  width: 80px !important;
+}
+.mejs__overlay-loading-bg-img {
+  animation: none !important;
+  background: transparent image-url('loading.gif') 50% 50% no-repeat !important;
+  background-size: 100% !important;
+  height: 80px !important;
+  width: 80px !important;
+  opacity: 0.7;
+}
+.mejs__overlay-loading-bg-img svg {
+  display: none !important;
+}
+
+.postroll {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 1%;
+  color: #fff;
+}
+.postroll .video-thumbnail {
+  width: 80%;
+}
+.postroll .row {
+  padding-bottom: 1.5em;
+}
+
+.playback_rate {
+  margin-top: 9px !important;
+}
+
+@media all and (min-width: 550px) {
+  .postroll h4 {
+    height: 30%;
+  }
+}
+@media all and (max-width: 550px) {
+  .postroll h4 {
+    height: 10%;
+  }
+}
+
+/*
+ * Dark gradient behind the bottom controls so the white icons/timecodes stay
+ * legible over bright video.
+ */
+.mejs__video .mejs__controls:not([style*='display: none']) {
+  background: none;
+}
+.mejs__video .mejs__controls::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4rem; // taller than the 2.5rem bar for a smooth fade
+  z-index: -1;  // behind the buttons, still above the video
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+/**
+ * We need to fix the height of the video and object-fit to prevent portrait
+ * videos from overflowing the player frame.
+ */
+.mejs__container:not(.mejs__container-fullscreen) video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}

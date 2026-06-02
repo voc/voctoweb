@@ -1,0 +1,67 @@
+/*
+ * Feedback for player gestures (double-tap, hold, seek, speed).
+ */
+.mejs__container,
+.mejs__container video {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* let the page still pan/pinch, but stop double-tap-to-zoom as it interferes with double-tap seek */
+  touch-action: manipulation;
+}
+
+.mejs-gesture-fast,
+.mejs-gesture-seek,
+.mejs-gesture-rate {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+// top-centre pill, shared by the 2x hold badge and the rate toast
+.mejs-gesture-fast,
+.mejs-gesture-rate {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+}
+.mejs-gesture-fast.is-active,
+.mejs-gesture-rate.is-active {
+  opacity: 1;
+}
+.mejs-gesture-fast-icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+}
+
+.mejs-gesture-seek {
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 16px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+.mejs-gesture-seek.left {
+  left: 12%;
+}
+.mejs-gesture-seek.right {
+  right: 12%;
+}
+.mejs-gesture-seek.is-active {
+  opacity: 1;
+}

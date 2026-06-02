@@ -4,15 +4,28 @@
 
  *= require source-chooser/source-chooser
  *= require speed/speed
- *= require skip-back/skip-back
- *= require jump-forward/jump-forward
- 
+
  *= require timelens
 
  *= require player-fixes
+ *= require player-gestures
  */
 
 body {
   margin: 0;
   padding: 0;
+}
+
+/**
+ * Make the player fill the iframe properly to prevent weirdness with weird aspect
+ * ratios.
+ */
+.player.video {
+  width: 100%;
+  height: 100%;
+
+  .mejs__container {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }

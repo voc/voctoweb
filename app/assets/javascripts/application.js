@@ -25,14 +25,16 @@
 //= require mastodon-share
 
 //= require mirrorbrain-fix
+//= require subtitle-loader
+//= require player-deeplinks
 //= require mediaelement-and-player
+//= require mejs-player
+//= require player-gestures
 //= require source-chooser/source-chooser
 //= require speed/speed
 //= require postroll/postroll
 //= require skip-back/skip-back
 //= require jump-forward/jump-forward
-//= require chromecast/chromecast
-//= require airplay/airplay
 //= require playlist/playlist
 // when adding plugins here, also add them to oembed-player.js
 

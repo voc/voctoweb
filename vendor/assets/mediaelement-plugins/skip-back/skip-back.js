@@ -8,7 +8,7 @@
  * Copyright 2010-2017, John Dyer (http://j.hn/)
  * License: MIT
  *
- */(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+ */(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(_dereq_,module,exports){
 'use strict';
 
 mejs.i18n.en['mejs.time-skip-back'] = ['Skip back 1 second', 'Skip back %1 seconds'];
@@ -16,7 +16,9 @@ mejs.i18n.en['mejs.time-skip-back'] = ['Skip back 1 second', 'Skip back %1 secon
 Object.assign(mejs.MepDefaults, {
 	skipBackInterval: 30,
 
-	skipBackText: null
+	skipBackText: null,
+
+	iconSpritePathSkipBack: 'mejs-skip-back.svg'
 });
 
 Object.assign(MediaElementPlayer.prototype, {
@@ -27,7 +29,7 @@ Object.assign(MediaElementPlayer.prototype, {
 		    button = document.createElement('div');
 
 		button.className = t.options.classPrefix + 'button ' + t.options.classPrefix + 'skip-back-button';
-		button.innerHTML = '<button type="button" aria-controls="' + t.id + '" title="' + skipTitle + '" aria-label="' + skipTitle + '" tabindex="0">' + t.options.skipBackInterval + '</button>';
+		button.innerHTML = mejs.Utils.generateControlButton(t.id, skipTitle, skipTitle, t.media.options.iconSpritePathSkipBack, ['icon-skip-back'], t.options.classPrefix);
 
 		t.addControlElement(button, 'skipback');
 
@@ -36,7 +38,6 @@ Object.assign(MediaElementPlayer.prototype, {
 			if (duration) {
 				var current = media.currentTime === Infinity ? 0 : media.currentTime;
 				media.setCurrentTime(Math.max(current - t.options.skipBackInterval, 0));
-				this.querySelector('button').blur();
 			}
 		});
 	}

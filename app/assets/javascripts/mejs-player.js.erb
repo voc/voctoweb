@@ -1,0 +1,162 @@
+/*
+ * Shared mediaelement setup for the 3 different players that use it (video, audio, playlist).
+ * Holds the mediaelement-specific bits the partials would otherwise duplicate.
+ */
+class MejsPlayer {
+  /**
+   * Build the player options object by combining the defaults the provided extra options.
+   */
+  static options(extra) {
+    return Object.assign({
+      enableAutosize: true,
+      stretching: 'responsive', // matches the Ruby `stretching` helper
+      iconSprite: '<%= asset_path("mejs-controls.svg") %>',
+      iconSpritePathSkipBack: '<%= asset_path("mejs-skip-back.svg") %>',
+      iconSpritePathJumpForward: '<%= asset_path("mejs-jump-forward.svg") %>',
+      skipBackInterval: 15
+    }, extra);
+  }
+
+  /**
+   * Before the mejs player is built, the media has to be prepared. This is the
+   * pre-build counterpart to init(): it finds the <video>/<audio> node and
+   *  - applies deeplink source reordering
+   *  - pins sources to mirrors
+   *  - converts subtitle tracks to webvtt blobs
+   * Resolves to the node once all the async work is done; so you can await and use it
+   */
+  static async prepare() {
+    const node = document.querySelector('video, audio');
+
+    // Capture the default language before reordering moves the requested one to
+    // the front; init() reads it back (off the node) to keep the hash in sync.
+    node.mejsDefaultLang = PlayerDeepLinks.defaultLang(node);
+    PlayerDeepLinks.prepare(node);
+
+    const promises = [];
+    node.querySelectorAll('source').forEach(function (source) {
+      promises.push(MejsPlayer.pinMirror(source));
+    });
+    // SubtitleLoader returns one promise per subtitle track
+    Array.prototype.push.apply(promises, SubtitleLoader.prepare(node));
+
+    await Promise.all(promises);
+    return node;
+  }
+
+  /**
+   * Pin a single <source> to a CDN mirror, rewriting its src in place. Returns
+   * the pending request so callers can await it. Best-effort — on failure the
+   * original src is left untouched (see mirrorbrain-fix.js).
+   * @param source a <source> element
+   */
+  static pinMirror(source) {
+    return MirrorbrainFix.selectMirror(source.src, function (mirror) {
+      source.setAttribute('src', mirror);
+    });
+  }
+
+  /**
+   * After the mejs player is built, we need to take care of some other things
+   * This is currently:
+   *  - deep links
+   *  - view counting
+   *  - a fix for a bug in mejs that causes the player to resize incorrectly exiting fullscreen
+   * @param player the MediaElement player object
+   * @param media the MediaElement media object
+   * @param node the underlying video/audio node
+   */
+  static init(player, media, node) {
+    window.player = player;
+    window.mediaElement = media;
+    MejsPlayer.wireDeepLinks(player, media, node, node.mejsDefaultLang);
+    MejsPlayer.countViews(media, node);
+    MejsPlayer.fixFullscreenExitResize();
+  }
+
+  /**
+   * Under some circumstances fullscreen will have some weirdness with stale height
+   * we do this to dirty fix it by making MediaElement recompute it's size
+   */
+  static fixFullscreenExitResize() {
+    if (MejsPlayer.fullscreenResizeBound) { return; }
+    MejsPlayer.fullscreenResizeBound = true;
+    const onChange = function () {
+      const inFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+      if (!inFullscreen) {
+        // defer so the browser has finished restoring the normal layout first
+        setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 0);
+      }
+    };
+    document.addEventListener('fullscreenchange', onChange);
+    document.addEventListener('webkitfullscreenchange', onChange);
+  }
+
+  /**
+   * Wire up the deep linking functionality, used to apply the time, language, and subtitles.
+   * @param player the MediaElement player object
+   * @param media 
+   * @param node 
+   * @param defaultLang 
+   */
+  static wireDeepLinks(player, media, node, defaultLang) {
+    let stamp = PlayerDeepLinks.param('t'); // cleared after the first seek
+    const srt = PlayerDeepLinks.param('s');
+
+    // #s= picks a subtitle track (empty value = first available)
+    if (srt !== null) {
+      const subtitles = player.tracks.filter(function (t) { return t.kind === 'subtitles'; });
+      if (subtitles.length) {
+        const match = subtitles.filter(function (t) { return t.srclang === srt; });
+        player.setTrack((match.length ? match[0] : subtitles[0]).trackId);
+      }
+    }
+
+    // #t= seeks once the media is ready, first time only
+    if (stamp) {
+      media.addEventListener('canplay', function () {
+        if (stamp !== null) {
+          media.currentTime = parseFloat(stamp);
+          stamp = null;
+        }
+      });
+    }
+
+    // Keep the hash pointing at the current position (and language, once it's
+    // been changed from the default).
+    function updateHash() {
+      window.location.replaceHash(PlayerDeepLinks.buildHash(node, media, srt, defaultLang));
+    }
+    media.addEventListener('pause', updateHash);
+    media.addEventListener('seeked', updateHash);
+  }
+
+  /**
+   * Report a play to the recordings view counter whenever playback starts,
+   * server will ensure it's not double counted.
+   * 
+   * @param media the MediaElement media object
+   * @param node the original <video>/<audio> element (carries data-id)
+   */
+  static countViews(media, node) {
+    media.addEventListener('playing', function () {
+      MejsPlayer.count(node.dataset.id, media.src);
+    });
+  }
+
+  /**
+   * Count a view for the event, server will ensure it's not double counted.
+   * @param eventId the recording's event id
+   * @param src the media source that started playing
+   */
+  static count(eventId, src) {
+    const token = document.querySelector('meta[name="csrf-token"]');
+    return fetch('/public/recordings/count', {
+      method: 'POST',
+      headers: token ? { 'X-CSRF-Token': token.content } : {},
+      body: new URLSearchParams({ event_id: eventId, src: src })
+    }).catch(function () { /* counting is best-effort */ });
+  }
+}
+
+window.MejsPlayer = MejsPlayer;

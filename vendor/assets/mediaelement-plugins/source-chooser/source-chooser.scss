@@ -16,11 +16,11 @@
     border-radius: 0;
     bottom: 40px;
     height: 100px;
-    overflow: hidden;
-    padding: 0;
+    overflow: visible;
+    padding: 0 8px; // horizontal only — vertical padding would desync the JS height
     position: absolute;
     right: -10px;
-    width: 130px;
+    width: max-content; // size to the widest source label instead of a fixed box
 }
 
 .mejs__sourcechooser-selector ul,
@@ -28,17 +28,19 @@
     display: block;
     list-style-type: none !important;
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     padding: 0;
 }
 
 .mejs__sourcechooser-selector li,
 .mejs-sourcechooser-selector li {
+    align-items: center;
     color: #fff;
-    display: block;
+    display: flex;
+    gap: 6px;
     list-style-type: none !important;
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     padding: 5px 0;
 }
 .mejs__sourcechooser-selector li:hover,
@@ -49,17 +51,13 @@
 
 .mejs__sourcechooser-selector input,
 .mejs-sourcechooser-selector input {
-    clear: both;
-    float: left;
-    margin: 3px 3px 0 0;
+    margin: 0;
 }
 
 .mejs__sourcechooser-selector label,
 .mejs-sourcechooser-selector label {
     display: inline-block;
-    float: left;
     font-size: 12px;
     line-height: 15px;
-    padding: 4px 0 0;
-    /* width: 100px; */
+    white-space: nowrap; // one line per source so the menu can size to it
 }

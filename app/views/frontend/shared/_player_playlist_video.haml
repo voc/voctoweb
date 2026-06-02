@@ -17,51 +17,68 @@
                     mep: { description: event.description } }}
 
 :javascript
-  $(function() {
-    var promises = [];
+  (async function() {
+    const video = document.querySelector('video'),
+          sources = video.querySelectorAll('source');
 
-    var $source = $('video source').first();
-    promises.push(
-      MirrorbrainFix.selectMirror($source.prop('src'), function(mirror) {
-        $source.attr('src', mirror);
-      })
-    );
+    // Empty playlist; don't build the player, would only be a waste of time and error
+    if (!sources.length) { return; }
 
-    $.when.apply($, promises).done(function() {
-      $('video').mediaelementplayer({
-        usePluginFullScreen: true,
-        enableAutosize: true,
-        stretching: '#{stretching}',
-        showPlaylist: true,
-        playlistTitle: "#{playlist.title}",
-        autoClosePlaylist: true,
-        features: [
+    // mediaelement's playlist plugin needs >= 2 tracks, so we guard against that
+    const multitrack = sources.length > 1;
+
+    // Find the <source> for the currently playing track
+    function sourceFor(src) {
+      const sources = video.querySelectorAll('source');
+      for (let i = 0; i < sources.length; i++) {
+        if (sources[i].src === src || sources[i].getAttribute('src') === src) { return sources[i]; }
+      }
+      return null;
+    }
+    function setText(selector, text) {
+      const el = document.querySelector(selector);
+      if (el) { el.textContent = text; }
+    }
+
+    // Pin the first track's source to a CDN mirror up front (see mejs-player.js).
+    await MejsPlayer.pinMirror(sources[0]);
+
+    new MediaElementPlayer(video, MejsPlayer.options({
+      showPlaylist: multitrack,
+      playlistTitle: "#{playlist.title}",
+      autoClosePlaylist: true,
+      features: multitrack? [
           'playlistfeature',
           'skipback', 'prevtrack', 'playpause', 'nexttrack', 'jumpforward', 'progress', 'current',
           'duration', 'tracks', 'volume', 'speed',
           'playlist',
           'fullscreen'
-          ],
-        skipBackInterval: 15,
-        success: function (mediaElement) {
-          mediaElement.addEventListener('play', function () {
-            var ev = $('video source[src="' + mediaElement.src + '"]');
-            $('video').first().attr('poster', ev.data('poster'));
-            $('.description').html(ev.data('mepDescription'));
-            $('h2.event_title').html(ev.data('title'));
-            $('p.persons').html(ev.data('persons'));
-            if (mediaElement.src.indexOf('://cdn.media.ccc.de') > 0) {
-              MirrorbrainFix.selectMirror(mediaElement.src, function(mirror) {
-                mediaElement.setSrc(mirror);
-                mediaElement.play();
-              });
-            }
-          }, false);
-          mediaElement.addEventListener('playing', function () {
-            var eventId = $('video source[src="' + mediaElement.src + '"]').data('id');
-            $.post("/public/recordings/count", {event_id: eventId, src: mediaElement.src});
-          }, false);
-        }
-      });
-    });
-  })
+        ] :
+        [
+          'skipback', 'playpause', 'jumpforward', 'progress', 'current',
+          'duration', 'tracks', 'volume', 'speed',
+          'fullscreen'
+        ],
+      success: function (mediaElement) {
+        mediaElement.addEventListener('play', function () {
+          const ev = sourceFor(mediaElement.src);
+          if (ev) {
+            video.setAttribute('poster', ev.dataset.poster);
+            setText('.description', ev.dataset.mepDescription);
+            setText('h2.event_title', ev.dataset.title);
+            setText('p.persons', ev.dataset.persons);
+          }
+          if (mediaElement.src.indexOf('://cdn.media.ccc.de') > 0) {
+            MirrorbrainFix.selectMirror(mediaElement.src, function(mirror) {
+              mediaElement.setSrc(mirror);
+              mediaElement.play();
+            });
+          }
+        }, false);
+        mediaElement.addEventListener('playing', function () {
+          const ev = sourceFor(mediaElement.src);
+          if (ev) { MejsPlayer.count(ev.dataset.id, mediaElement.src); }
+        }, false);
+      }
+    }));
+  })();

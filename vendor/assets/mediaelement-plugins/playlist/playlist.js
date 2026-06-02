@@ -8,7 +8,7 @@
  * Copyright 2010-2017, John Dyer (http://j.hn/)
  * License: MIT
  *
- */(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+ */(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(_dereq_,module,exports){
 'use strict';
 
 mejs.i18n.en['mejs.playlist'] = 'Toggle Playlist';
@@ -53,7 +53,7 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		player.endedCallback = function () {
 			if (player.currentPlaylistItem < player.listItems.length) {
-				player.setSrc(player.playlist[++player.currentPlaylistItem].src);
+				player.setSrc(player.playlist[++player.currentPlaylistItem]);
 				player.load();
 				setTimeout(function () {
 					player.play();
@@ -71,7 +71,7 @@ Object.assign(MediaElementPlayer.prototype, {
 					currentItem.innerHTML += '<img tabindex="-1" src="' + player.playlist[player.currentPlaylistItem]['data-playlist-thumbnail'] + '">';
 				}
 
-				currentItem.innerHTML += '<p>' + player.options.currentMessage + ' <span class="' + player.options.classPrefix + 'playlist-current-title">' + player.playlist[player.currentPlaylistItem].title + '</span>';
+				currentItem.innerHTML += '<p>' + (player.options.currentMessage || '') + ' <span class="' + player.options.classPrefix + 'playlist-current-title">' + player.playlist[player.currentPlaylistItem].title + '</span>';
 				if (typeof player.playlist[player.currentPlaylistItem].description !== 'undefined') {
 					currentItem.innerHTML += ' - <span class="' + player.options.classPrefix + 'playlist-current-description">' + player.playlist[player.currentPlaylistItem].description + '</span>';
 				}
@@ -301,24 +301,20 @@ Object.assign(MediaElementPlayer.prototype, {
 	createPlayList_: function createPlayList_() {
 		var t = this;
 
-		t.playlist = t.options.playlist.length ? t.options.playlist : [];
+		t.playlist = t.options.playlist.length ? t.options.playlist : t.mediaFiles && t.mediaFiles.length ? t.mediaFiles : [];
 
 		if (!t.playlist.length) {
-			var children = t.mediaFiles || t.media.originalNode.children;
+			var children = t.media.originalNode.children;
 
 			for (var i = 0, total = children.length; i < total; i++) {
 				var childNode = children[i];
 
-				if (typeof childNode === 'object' || childNode.tagName.toLowerCase() === 'source') {
+				if (childNode.tagName.toLowerCase() === 'source') {
 					(function () {
 						var elements = {};
-						if ( typeof childNode === 'object' ) {
-							elements = childNode;
-						} else {
-							Array.prototype.slice.call(childNode.attributes).forEach(function (item) {
-								elements[item.name] = item.value;
-							});
-						}
+						Array.prototype.slice.call(childNode.attributes).forEach(function (item) {
+							elements[item.name] = item.value;
+						});
 
 						if (elements.src && elements.type && elements.title) {
 							elements.type = mejs.Utils.formatType(elements.src, elements.type);
