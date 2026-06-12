@@ -38,6 +38,9 @@ module Frontend
 
       respond_to do |format|
         format.html { render :show }
+        format.activity_json do
+          render json: @conference, serializer: ActivityPub::ConferenceSerializer, content_type: 'application/activity+json'
+        end
       end
     end
 
