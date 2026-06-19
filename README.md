@@ -189,7 +189,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 3.3
+ruby 3.4
 
 ### Dependencies
 
