@@ -13,10 +13,11 @@
  *                     time, survives Turbolinks visits
  *
  * Gestures and keys:
+ *  - click (mouse) ................... play / pause (deferred briefly to spot a double-click)
  *  - double-click (mouse) ............ toggle fullscreen
- *  - tap (touch) ..................... play / pause
- *  - double-tap left/right (touch) ... seek -/+ SEEK seconds, then resume play
- *  - double-tap centre (touch) ....... no-op (fullscreen is disabled on touch)
+ *  - tap (touch) ..................... show / hide controls; tap the play button to resume
+ *  - double-tap left/right (touch) ... seek -/+ SEEK seconds (keep tapping to keep seeking)
+ *  - double-tap centre (touch) ....... play / pause
  *  - space / k ....................... play / pause
  *  - space (hold) .................... temporary 2x playback while held
  *  - click / tap and hold ............ temporary 2x playback while held
@@ -282,8 +283,8 @@ class PointerGestures {
   constructor(host) {
     this.host = host;
     this.pointerType = 'mouse';
-    this.lastTapAt = 0;
-    this.lastTapX = 0;
+    this.clickTimer = null; // mouse: pending deferred single-click (see mouseTap)
+    this.tapTimer = null;   // touch: open double-tap / seek-streak window (see touchTap)
   }
 
   /**
@@ -298,50 +299,79 @@ class PointerGestures {
    * @param {boolean} wasHold if the press turned into a 2x hold rather than a tap
    */
   release(e, wasHold) {
-    if (wasHold) { this.lastTapAt = 0; return; } // a hold is not a tap
+    if (wasHold) { this.reset(); return; } // a hold is not a tap
 
-    var now = Date.now();
-    var x = e.clientX;
-    var isDouble = now - this.lastTapAt < 300 && Math.abs(x - this.lastTapX) < 60;
-
-    if (isDouble) {
-      this.lastTapAt = 0;
-      this.onDoublePress(x);
+    // we differentiate between mouse and touch here so we can
+    // handle them differently
+    if (this.pointerType === 'mouse') {
+      this.mouseTap();
     } else {
-      // single tap/click: toggle now; a second press within 300ms upgrades it
-      this.lastTapAt = now;
-      this.lastTapX = x;
-      this.host.controls.togglePlay();
+      this.touchTap(e);
     }
   }
 
   /**
-   * Handle a double tap/click event. Resulting in fullscreen toggle or seeking.
+   * We slightly defer the the single click (play/pause) so we can tell a single
+   * click from a double-click (fullscreen)
    */
-  onDoublePress(x) {
-    if (this.pointerType === 'mouse') {
+  mouseTap() {
+    if (this.clickTimer) {
+      // timer was still active so this is a double-click
+      // drop the buffered single click so we don't toggle pause
+      clearTimeout(this.clickTimer);
+      this.clickTimer = null;
       this.host.controls.toggleFullScreen();
-      this.host.controls.togglePlay();
       return;
     }
-    var rect = this.host.container.getBoundingClientRect();
-    var rel = (x - rect.left) / rect.width;
-    if (rel < 0.4) {
-      this.host.seek(-this.host.seekSeconds);
-      this.host.controls.play();   // resume after the seek (undoes the first tap)
-    } else if (rel > 0.6) {
-      this.host.seek(this.host.seekSeconds);
-      this.host.controls.play();
-    } else {
-      this.host.controls.togglePlay(); // centre on touch: just undo the first tap
-    }
+    this.clickTimer = setTimeout(() => {
+      this.clickTimer = null;
+      this.host.controls.togglePlay();
+    }, this.host.doubleClickMs);
   }
 
   /**
-   * press cancelled or focus lost, forget the in-progress timer for double tapping
+   * Detect double tapping using a timer.
+   * Double tapping the left/right seeks, the center toggles play/pause
+   */
+  touchTap(e) {
+    var inWindow = this.tapTimer !== null;
+    var zone = this.zoneOf(e.clientX); // -1 left, +1 right, 0 center
+
+    // clear the ongoing timer
+    if (this.tapTimer) { clearTimeout(this.tapTimer); this.tapTimer = null; }
+
+    if (inWindow) {
+      // handle double-tap
+      if (zone === 0) {
+        // center was double-tapped: toggle play/pause
+        this.host.controls.togglePlay();
+        return; // we don't need a third tap to toggle again so return early
+      } else {
+        // direction was double-tapped: seek
+        this.host.seek(zone * this.host.seekSeconds);
+      }
+    }
+
+    // start a timer that is used to detect the double tap or any subsequent multi-tap after seek
+    this.tapTimer = setTimeout(() => { this.tapTimer = null; }, this.host.doubleTapMs);
+  }
+
+  /** Which third of the player an x coordinate falls in: -1 left, +1 right, 0 center. */
+  zoneOf(x) {
+    var rect = this.host.container.getBoundingClientRect();
+    var rel = (x - rect.left) / rect.width;
+    if (rel < 0.4) { return -1; }
+    if (rel > 0.6) { return 1; }
+    return 0;
+  }
+
+  /**
+   * press cancelled or focus lost: forget the touch double-tap window and drop any
+   * pending deferred mouse click (so it doesn't fire after we've navigated away).
    */
   reset() {
-    this.lastTapAt = 0;
+    if (this.clickTimer) { clearTimeout(this.clickTimer); this.clickTimer = null; }
+    if (this.tapTimer) { clearTimeout(this.tapTimer); this.tapTimer = null; }
   }
 }
 
@@ -362,9 +392,15 @@ class PlayerGestures {
     this.hotkeys = new Hotkeys(this);
     this.pointer = new PointerGestures(this);
 
-    this.seekSeconds = opts.seekSeconds; // double-tap / j-l skip distance
-    this.frameTime = opts.frameTime;     // approx frame for , / . stepping
-    this.pressing = false;               // a primary pointer press is in progress
+    this.seekSeconds = opts.seekSeconds;
+    this.frameTime = opts.frameTime;
+    this.doubleClickMs = opts.doubleClickMs;
+    this.doubleTapMs = opts.doubleTapMs;
+    this.pressing = false;
+
+    // mediaelement's big centre play button (when present): toggle playback on click,
+    // and swallow the press so the region gestures below never see it.
+    this.bigPlay = container.querySelector('.mejs__overlay-button');
 
     // keyboard goes straight to Hotkeys; raw pointer events are decoded here and
     // fanned out to HoldToSpeed and PointerGestures (see the pointer section)
@@ -376,6 +412,12 @@ class PlayerGestures {
       pointerup: this.onPointerUp.bind(this),
       pointercancel: this.onPointerCancel.bind(this),
       contextmenu: this.onContextMenu.bind(this)
+    };
+    this.bigPlayHandlers = {
+      // stop the press at the button so the container gestures (hold-to-speed, the
+      // mouse/touch tap handlers) never fire for it
+      pointerdown: function (e) { e.stopPropagation(); },
+      click: this.onBigPlay.bind(this)
     };
   }
 
@@ -390,6 +432,12 @@ class PlayerGestures {
 
   isOnControlsBar(target) {
     return target && target.closest && target.closest('.mejs__controls');
+  }
+
+  /** The big centre play/pause button toggles playback (only shown while paused). */
+  onBigPlay(e) {
+    e.stopPropagation();
+    this.controls.togglePlay();
   }
 
   onPointerDown(e) {
@@ -445,6 +493,10 @@ class PlayerGestures {
     c.addEventListener('pointerup', h.pointerup);
     c.addEventListener('pointercancel', h.pointercancel);
     c.addEventListener('contextmenu', h.contextmenu);
+    if (this.bigPlay) {
+      this.bigPlay.addEventListener('pointerdown', this.bigPlayHandlers.pointerdown);
+      this.bigPlay.addEventListener('click', this.bigPlayHandlers.click);
+    }
   }
 
   /** remove event handlers from the container */
@@ -457,6 +509,10 @@ class PlayerGestures {
     c.removeEventListener('pointerup', h.pointerup);
     c.removeEventListener('pointercancel', h.pointercancel);
     c.removeEventListener('contextmenu', h.contextmenu);
+    if (this.bigPlay) {
+      this.bigPlay.removeEventListener('pointerdown', this.bigPlayHandlers.pointerdown);
+      this.bigPlay.removeEventListener('click', this.bigPlayHandlers.click);
+    }
   }
 
   /**
@@ -479,7 +535,9 @@ class PlayerGestures {
       seekSeconds: options.seekSeconds || 10,
       holdMs: options.holdThreshold || 500,
       frameTime: options.frameTime || (1 / 30),
-      fastRate: options.fastRate || 2
+      fastRate: options.fastRate || 2,
+      doubleClickMs: options.doubleClickMs || 250,
+      doubleTapMs: options.doubleTapMs || 300
     });
     PlayerGestures.active = instance;
     instance.bindContainer();
