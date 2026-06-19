@@ -4,11 +4,11 @@
     %lastmod= News.maximum(:updated_at).try(:strftime, '%Y-%m-%d')
     %loc= about_url
     %lastmod= File.mtime(Rails.root.join('app', 'views','frontend', 'home', 'about.haml')).strftime('%Y-%m-%d')
-  - Frontend::Conference.find_each do |conference|
+  - Conference.find_each do |conference|
     %url
       %loc= browse_url(conference.slug)
       %lastmod= conference.events.maximum(:updated_at).try(:strftime, '%Y-%m-%d')
-  - Frontend::Event.find_each do |event|
+  - Event.find_each do |event|
     %url
       %loc= event_url(slug: event.slug)
       %lastmod= event.updated_at.strftime('%Y-%m-%d')

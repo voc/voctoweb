@@ -13,26 +13,26 @@ class Public::EventsController < ActionController::Base
   # GET /public/events/recent
   # GET /public/events/recent.json
   def recent
-    @events = paginate(Frontend::Event.includes(:conference).released, per_page: 100, max_per_page: 256)
+    @events = paginate(Event.includes(:conference).released, per_page: 100, max_per_page: 256)
     respond_to { |format| format.json { render :index } }
   end
 
   # GET /public/events/promoted
   # GET /public/events/promoted.json
   def promoted
-    @events = Frontend::Event.includes(:conference).promoted(100)
+    @events = Event.includes(:conference).promoted(100)
     respond_to { |format| format.json { render :index } }
   end
 
   # GET /public/events/popular?year=2020
   def popular
-    @events = paginate(Frontend::Event.includes(:conference).popular(params[:year] || Time.current.year), per_page: 50, max_per_page: 256)
+    @events = paginate(Event.includes(:conference).popular(params[:year] || Time.current.year), per_page: 50, max_per_page: 256)
     respond_to { |format| format.json { render :index } }
   end
 
   # GET /public/events/unpopular?year=2020
   def unpopular
-    @events = paginate(Frontend::Event.includes(:conference).unpopular(params[:year] || Time.current.year), per_page: 50, max_per_page: 256)
+    @events = paginate(Event.includes(:conference).unpopular(params[:year] || Time.current.year), per_page: 50, max_per_page: 256)
     respond_to { |format| format.json { render :index } }
   end
 
@@ -60,7 +60,7 @@ class Public::EventsController < ActionController::Base
 
   # GET /public/events/search?q=foo
   def search
-    results = Frontend::Event.query(params[:q]).page(params[:page])
+    results = Event.query(params[:q]).page(params[:page])
     # calling this just to set headers
     paginate(results)
     @events = results.records.includes(recordings: :conference)

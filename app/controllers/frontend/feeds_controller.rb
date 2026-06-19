@@ -65,9 +65,9 @@ module Frontend
 
     def set_conference
       @conference = if params[:acronym]
-                      Frontend::Conference.find_by!(acronym: params[:acronym])
+                      Conference.find_by!(acronym: params[:acronym])
                     elsif params[:slug]
-                      Frontend::Conference.find_by!(slug: params[:slug])
+                      Conference.find_by!(slug: params[:slug])
                     end
       fail ActiveRecord::RecordNotFound unless @conference
 

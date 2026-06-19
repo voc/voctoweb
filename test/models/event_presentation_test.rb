@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EventTest < ActiveSupport::TestCase
+class EventPresentationTest < ActiveSupport::TestCase
   setup do
     @event = create(:event)
   end
@@ -9,7 +9,7 @@ class EventTest < ActiveSupport::TestCase
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'audio.ogg', event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', folder: 'slides', filename: 'slides.mp4', event: @event)
     @event.recordings << create(:recording, mime_type: 'application/pdf', folder: 'slides', filename: 'slides.pdf', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
     assert_equal 'slides.pdf', @event.slide.filename
   end
 
@@ -17,14 +17,14 @@ class EventTest < ActiveSupport::TestCase
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio.mp3', event: @event)
     @event.recordings << create(:recording, mime_type: 'audio/ogg', filename: 'audio.ogg', event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
     assert_equal 'audio.ogg', @event.audio_recording.filename
     assert_equal 'video.mp4', @event.preferred_recording.filename
   end
 
   test "should not find preferred recordings" do
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
     assert_nil @event.audio_recording
   end
 
@@ -36,7 +36,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'should shorten titles using ellipsis character' do
-    @event = Frontend::Event.new
+    @event = Event.new
     @event.title = "regular title"
     assert_equal "regular title", @event.short_title
 
@@ -48,7 +48,7 @@ class EventTest < ActiveSupport::TestCase
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', event: @event)
     @event.recordings << create(:recording, mime_type: 'video/webm', filename: 'video.webm', event: @event)
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio.mp3', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     filetypes = @event.filetypes(['video/mp4', 'video/webm', 'audio/mpeg'])
     assert_equal 3, filetypes.length
@@ -61,7 +61,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'filetypes supports AV1 mime type' do
     @event.recordings << create(:recording, mime_type: 'video/webm;codecs=av01', filename: 'video-av1.webm', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     filetypes = @event.filetypes(['video/webm;codecs=av01'])
     assert_equal 1, filetypes.length
@@ -73,7 +73,7 @@ class EventTest < ActiveSupport::TestCase
   test 'video_for_download returns high quality video by filetype' do
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'hd.mp4', height: 1080, high_quality: true, event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'sd.mp4', height: 720, high_quality: false, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     video = @event.video_for_download('mp4', high_quality: true)
     assert_equal 'hd.mp4', video.filename
@@ -82,7 +82,7 @@ class EventTest < ActiveSupport::TestCase
   test 'video_for_download returns low quality video by filetype' do
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'hd.mp4', height: 1080, high_quality: true, event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'sd.mp4', height: 720, high_quality: false, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     video = @event.video_for_download('mp4', high_quality: false)
     assert_equal 'sd.mp4', video.filename
@@ -90,7 +90,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'video_for_download returns AV1 video by filetype' do
     @event.recordings << create(:recording, mime_type: 'video/webm;codecs=av01', filename: 'av1.webm', height: 1080, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     video = @event.video_for_download('av1', high_quality: true)
     assert_equal 'av1.webm', video.filename
@@ -100,7 +100,7 @@ class EventTest < ActiveSupport::TestCase
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'hd.mp4', height: 1080, event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'sd.mp4', height: 720, event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'hd2.mp4', height: 1080, html5: false, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     videos = @event.videos_for_download('mp4')
     assert_equal 2, videos.length
@@ -112,7 +112,7 @@ class EventTest < ActiveSupport::TestCase
   test 'videos_for_download returns AV1 videos' do
     @event.recordings << create(:recording, mime_type: 'video/webm;codecs=av01', filename: 'av1-hd.webm', height: 1080, event: @event)
     @event.recordings << create(:recording, mime_type: 'video/webm;codecs=av01', filename: 'av1-sd.webm', height: 720, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     videos = @event.videos_for_download('av1')
     assert_equal 2, videos.length
@@ -123,7 +123,7 @@ class EventTest < ActiveSupport::TestCase
   test 'audio_recordings_for_download returns audio by filetype' do
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio-eng.mp3', language: 'eng', event: @event)
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio-deu.mp3', language: 'deu', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     audio = @event.audio_recordings_for_download('mp3')
     assert_equal 2, audio.length
@@ -135,7 +135,7 @@ class EventTest < ActiveSupport::TestCase
     @event.original_language = 'deu'
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio-eng.mp3', language: 'eng', event: @event)
     @event.recordings << create(:recording, mime_type: 'audio/mpeg', filename: 'audio-deu.mp3', language: 'deu', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     audio = @event.audio_recordings_for_download('mp3')
     assert_equal 'audio-deu.mp3', audio.values.first.filename
@@ -143,7 +143,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'audio_recordings_for_download returns opus audio' do
     @event.recordings << create(:recording, mime_type: 'audio/opus', filename: 'audio.opus', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     audio = @event.audio_recordings_for_download('opus')
     assert_equal 1, audio.length
@@ -152,7 +152,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'slides_for_download returns slides by filetype' do
     @event.recordings << create(:recording, mime_type: 'application/pdf', filename: 'slides.pdf', folder: 'slides', event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     slides = @event.slides_for_download('pdf')
     assert_equal 1, slides.length
@@ -162,16 +162,16 @@ class EventTest < ActiveSupport::TestCase
   test 'clappr_sources returns mpd first if available' do
     @event.recordings << create(:recording, mime_type: 'application/dash+xml', filename: 'stream.mpd', event: @event)
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', html5: true, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     sources = @event.clappr_sources
-    assert sources.first.is_a?(Frontend::Recording)
+    assert sources.first.is_a?(Recording)
     assert_equal 'stream.mpd', sources.first.filename
   end
 
   test 'clappr_sources returns only videos when mpd not available' do
     @event.recordings << create(:recording, mime_type: 'video/mp4', filename: 'video.mp4', html5: true, event: @event)
-    @event = Frontend::Event.find(@event.id)
+    @event.reload
 
     sources = @event.clappr_sources
     assert sources.all? { |s| s.is_a?(String) }

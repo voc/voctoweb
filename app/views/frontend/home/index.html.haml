@@ -4,7 +4,7 @@
 - content_for :body_class do
   page-start
 
-- if Frontend::Conference.has_live? or params[:forceopen]
+- if Conference.has_live? or params[:forceopen]
   = render 'frontend/shared/live'
 - else
   = render 'frontend/shared/promoted'
@@ -75,9 +75,9 @@
                             = event.display_date
 
 
-              - if conference.events.count > Frontend::HomeController::EVENT_LIMIT
+              - if conference.events.count > HomeController::EVENT_LIMIT
                 %a.more{href: conference_path(acronym: conference.acronym)}
-                  Show #{conference.events.count - Frontend::HomeController::EVENT_LIMIT} more videos from #{conference.display_name}
+                  Show #{conference.events.count - HomeController::EVENT_LIMIT} more videos from #{conference.display_name}
 
   .row
     - if @news.present?

@@ -4,7 +4,7 @@ module Frontend
       @tag = params[:tag]
       raise ActiveRecord::RecordNotFound unless @tag
 
-      @events = Frontend::Event.where("? = ANY (tags)", @tag)
+      @events = Event.where("? = ANY (tags)", @tag)
       respond_to { |format| format.html }
     end
   end

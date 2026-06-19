@@ -32,10 +32,13 @@ class Event < ApplicationRecord
       .where.not(recordings: { id: nil })
   }
   scope :released, -> { where('release_date IS NOT NULL').order('release_date desc') }
+  scope :published, -> { where('release_date IS NOT NULL') }
   scope :newer, ->(date) { released.where('release_date > ?', date) }
   scope :older, ->(date) { released.where('release_date < ?', date) }
   scope :recent, ->(n) { released.limit(n) }
-  scope :promoted, ->(n) { released.where('promoted = TRUE').limit(n) }
+  scope :promoted, ->(n) { where(promoted: true).order('updated_at DESC').limit(n) }
+  scope :popular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count DESC') }
+  scope :unpopular, ->(year) { where('date between ? and ?', "#{year}-01-01", "#{year}-12-31").order('view_count ASC') }
 
   has_attached_file :thumb, via: :thumb_filename, belongs_into: :images, on: :conference
 
@@ -160,7 +163,7 @@ class Event < ApplicationRecord
   def related_events
     unless metadata['related'].nil?
       ids = metadata['related'].keys
-      Frontend::Event.includes([:conference]).find(ids)
+      Event.includes([:conference]).find(ids)
     end
   end
 

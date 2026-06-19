@@ -43,7 +43,7 @@ module Frontend
     end
 
     def load_event
-      @event = Frontend::Event.find_by!("slug = ? OR guid = ?", params[:slug], params[:slug])
+      @event = Event.find_by!("slug = ? OR guid = ?", params[:slug], params[:slug])
 
       if params[:slug] != @event.slug
         redirect_to event_url(slug: @event.slug)
