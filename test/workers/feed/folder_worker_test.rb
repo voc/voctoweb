@@ -25,13 +25,14 @@ class Feed::FolderWorkerTest < ActiveSupport::TestCase
 
   def test_perform_audio
     @conference = create(:conference_with_audio_recordings)
+    audio_event = @conference.events.joins(:recordings).where(recordings: { mime_type: 'audio/mpeg' }).first
 
     assert_difference('WebFeed.count', 4) do
       assert @worker.perform @conference.id
     end
 
     f = WebFeed.find_by!(kind: @conference.acronym+'mp3', key: 'podcast_folder')
-    assert_includes f.content, "<link>https://media.ccc.de/v/#{@conference.events.last.slug}</link>"
+    assert_includes f.content, "<link>https://media.ccc.de/v/#{audio_event.slug}</link>"
     refute_empty f.content
   end
 

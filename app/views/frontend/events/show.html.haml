@@ -169,7 +169,7 @@
 
     - if @event.metadata['related'].present?
       %h3 Related
-      = render partial: 'frontend/shared/related', locals: { events: Frontend::Event.find(@event.related_event_ids(10)) }
+      = render partial: 'frontend/shared/related', locals: { events: Event.find(@event.related_event_ids(10)) }
 
     /%h3 Embed/Share
     .share

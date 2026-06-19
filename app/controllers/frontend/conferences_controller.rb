@@ -28,7 +28,7 @@ module Frontend
     end
 
     def show
-      @conference = Frontend::Conference.find_by!(acronym: params[:acronym]) unless @conference
+      @conference = Conference.find_by!(acronym: params[:acronym]) unless @conference
       if params[:tag]
         @tag = params[:tag]
         @events = @conference.events.includes(:conference).reorder(sort_param).select { |event| event.tags.include? @tag }
@@ -44,7 +44,7 @@ module Frontend
     private
 
     def slug_matches_conference
-      @conference = Frontend::Conference.find_by(slug: params[:slug])
+      @conference = Conference.find_by(slug: params[:slug])
     end
 
     def conferences_folder_tree_at(path)

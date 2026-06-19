@@ -48,7 +48,7 @@ FactoryBot.define do
     factory :conference_with_audio_recordings, traits: [:conference_audio_recordings]
   end
 
-  factory :frontend_conference, parent: :conference, class: Frontend::Conference do
+  factory :frontend_conference, parent: :conference, class: Conference do
   end
 
   trait :conference_recordings do

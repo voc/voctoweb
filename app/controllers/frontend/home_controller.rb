@@ -5,15 +5,15 @@ module Frontend
     EVENT_LIMIT = 3
 
     def index
-      @news = Frontend::News.recent(1).first
-      @hours_count = Frontend::Event.sum(:duration)/(60*60)
-      @recordings_count = Frontend::Recording.count
-      @events_count = Frontend::Event.count
-      @conferences_count = Frontend::Conference.count
+      @news = News.recent(1).first
+      @hours_count = Event.sum(:duration)/(60*60)
+      @recordings_count = Recording.count
+      @events_count = Event.count
+      @conferences_count = Conference.count
 
-      @recent_conferences = Frontend::Conference.with_recent_events(CONFERENCE_LIMIT)
+      @recent_conferences = Conference.with_recent_events(CONFERENCE_LIMIT)
 
-      @currently_streaming = Frontend::Conference.currently_streaming
+      @currently_streaming = Conference.currently_streaming
 
       respond_to { |format| format.html }
     end

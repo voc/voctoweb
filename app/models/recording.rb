@@ -1,6 +1,7 @@
 class Recording < ApplicationRecord
   include Recent
   include Storage
+  include RecordingPresentation
 
   belongs_to :event
   has_one :conference, through: :event

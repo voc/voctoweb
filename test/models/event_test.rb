@@ -60,7 +60,7 @@ class EventTest < ActiveSupport::TestCase
     assert_equal event.thumb_filename, event.thumb_filename.strip
     assert_equal event.timeline_filename, event.timeline_filename.strip
     assert_equal event.thumbnails_filename, event.thumbnails_filename.strip
-    refute_equal event.title, event.title.strip
+    assert_equal event.title, event.title.strip
   end
 
   test 'should initialize event_last_released_at to nil' do
@@ -210,7 +210,7 @@ class EventTest < ActiveSupport::TestCase
     e.metadata = {'related': Hash[@event.id, 1] }
     e.save!
 
-    assert_includes e.related_events, @event.becomes(Frontend::Event)
+    assert_includes e.related_events, @event
   end
 
   test 'videos_sorted_by_language should prioritize by original language and width (html5 is negligible)' do

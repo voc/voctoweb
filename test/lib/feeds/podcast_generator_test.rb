@@ -7,7 +7,7 @@ module Feeds
 
       create_list(:event_with_recordings, 5)
       Recording.update_all(length: nil)
-      events = Frontend::Event.all
+      events = Event.all
       assert_nothing_raised {
         output = feed.generate(events, &:preferred_recording)
       }
@@ -18,7 +18,7 @@ module Feeds
 
       event = create(:event_with_recordings)
       event.update(thumb_filename: 'test-thumb.png')
-      events = Frontend::Event.where(id: event.id)
+      events = Event.where(id: event.id)
 
       output = feed.generate(events, &:preferred_recording)
 

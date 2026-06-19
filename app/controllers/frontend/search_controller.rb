@@ -7,14 +7,14 @@ module Frontend
       # reqular search by keyword
       if params[:q]
         # query the index
-        result_set = Frontend::Event.query(params[:q], params[:sort])
+        result_set = Event.query(params[:q], params[:sort])
         # paginate the results
         @events = result_set.page(params[:page]).records
       # search for a person by string
       else
         @searchtype = 'person'
         # query the index
-        result_set = Frontend::Event.query_persons(params[:p], params[:sort])
+        result_set = Event.query_persons(params[:p], params[:sort])
         # paginate the results
         @events = result_set.page(params[:page]).records
       end

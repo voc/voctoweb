@@ -8,7 +8,7 @@ module Types
       argument :id, ID, required: true
     end
     def conference(id:)
-      Frontend::Conference.find_by(acronym: id)
+      Conference.find_by(acronym: id)
     end
 
     field :conferences, resolver: Resolvers::Conference
@@ -19,7 +19,7 @@ module Types
       argument :offset, Integer, default_value: 0, required: false
     end
     def conferences_recent(offset:, first:)
-      Frontend::Conference.with_recent_events(first).offset(offset)
+      Conference.with_recent_events(first).offset(offset)
     end
 
     field :all_conferences, ConferenceType.connection_type, null: true do
@@ -31,7 +31,7 @@ module Types
       argument :guid, ID, required: true
     end
     def lecture(guid:)
-      Frontend::Event.find_by(guid: guid)
+      Event.find_by(guid: guid)
     end
 
     field :lecture_by_slug, LectureType, null: true do
@@ -39,7 +39,7 @@ module Types
       argument :slug, ID, required: true
     end
     def lecture_by_slug(slug:)
-      Frontend::Event.find_by(slug: slug)
+      Event.find_by(slug: slug)
     end
 
     field :lecture_search, resolver: Resolvers::SearchLectures
@@ -49,7 +49,7 @@ module Types
       argument :guid, ID, required: true
     end
     def lectures_related_to(guid:)
-      event = Frontend::Event.find_by(guid: guid)
+      event = Event.find_by(guid: guid)
       event.related_events unless event.nil?
     end
   end
