@@ -1,6 +1,7 @@
 import { getRouteApi } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { eq } from 'drizzle-orm'
+import { Downloads } from '#/components/talk/Downloads.tsx'
 import { db } from '#/db/index.ts'
 import { conferences, events, recordings } from '#/db/schema.ts'
 import { mapRecording } from '#/lib/media.ts'
@@ -42,6 +43,7 @@ export const getTalk = createServerFn({ method: 'GET' })
         language: recordings.language,
         width: recordings.width,
         height: recordings.height,
+        size: recordings.size,
         html5: recordings.html5,
       })
       .from(recordings)
@@ -87,7 +89,7 @@ export function TalkPage() {
           ))}
         </div>
       )}
-      <section>[Downloads]</section>
+      <Downloads />
       <section>[Share]</section>
       <section>[Tags]</section>
     </main>

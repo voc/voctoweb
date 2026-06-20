@@ -26,6 +26,7 @@ type RawRecording = {
   language: string | null
   width: number | null
   height: number | null
+  size: number | null
   html5: boolean
 }
 
@@ -37,6 +38,7 @@ export interface Recording {
   language: string
   width: number | null
   height: number | null
+  size: number | null
   html5: boolean
   kind: RecordingKind
 }
@@ -54,6 +56,7 @@ export function mapRecording(r: RawRecording, conf: ConfPaths): Recording {
     language: r.language ?? '',
     width: r.width,
     height: r.height,
+    size: r.size,
     html5: r.html5,
     kind,
   }
