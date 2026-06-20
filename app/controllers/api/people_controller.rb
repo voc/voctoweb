@@ -61,6 +61,9 @@ class Api::PeopleController < ApiController
   end
 
   def person_params
-    params.require(:person).permit(:name, :public_name, :email, :avatar_url, :description, { links: [] })
+    params.require(:person).permit(
+      :name, :public_name, :email, :avatar_url, :description,
+      links_attributes: [:id, :url, :name, :link_type, :service, :_destroy]
+    )
   end
 end
