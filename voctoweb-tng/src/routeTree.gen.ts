@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VSlugRouteImport } from './routes/v.$slug'
 import { Route as CAcronymRouteImport } from './routes/c.$acronym'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VSlugRoute = VSlugRouteImport.update({
+  id: '/v/$slug',
+  path: '/v/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CAcronymRoute = CAcronymRouteImport.update({
@@ -26,27 +32,31 @@ const CAcronymRoute = CAcronymRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/c/$acronym': typeof CAcronymRoute
+  '/v/$slug': typeof VSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/c/$acronym': typeof CAcronymRoute
+  '/v/$slug': typeof VSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/c/$acronym': typeof CAcronymRoute
+  '/v/$slug': typeof VSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/c/$acronym'
+  fullPaths: '/' | '/c/$acronym' | '/v/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/c/$acronym'
-  id: '__root__' | '/' | '/c/$acronym'
+  to: '/' | '/c/$acronym' | '/v/$slug'
+  id: '__root__' | '/' | '/c/$acronym' | '/v/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CAcronymRoute: typeof CAcronymRoute
+  VSlugRoute: typeof VSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v/$slug': {
+      id: '/v/$slug'
+      path: '/v/$slug'
+      fullPath: '/v/$slug'
+      preLoaderRoute: typeof VSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/c/$acronym': {
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CAcronymRoute: CAcronymRoute,
+  VSlugRoute: VSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
