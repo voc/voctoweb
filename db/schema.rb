@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_131255) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,7 +140,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_131255) do
   end
 
   create_table "recordings", id: :serial, force: :cascade do |t|
-    t.integer "size", comment: "approximate file size in megabytes"
+    t.bigint "size", comment: "file size in bytes"
     t.integer "length", comment: "duration in seconds"
     t.string "mime_type"
     t.integer "event_id"
