@@ -1,4 +1,5 @@
 ActiveAdmin.register Event do
+  menu priority: 3
   filter :guid
   filter :title
   filter :link

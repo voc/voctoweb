@@ -1,4 +1,5 @@
 ActiveAdmin.register Conference do
+  menu priority: 2
   filter :acronym
   filter :title
   filter :slug, label: 'UI Path'

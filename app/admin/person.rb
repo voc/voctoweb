@@ -1,4 +1,5 @@
 ActiveAdmin.register Person do
+  menu priority: 4
   filter :name
   filter :email
   filter :person_identifiers_guid, as: :string, label: 'GUID'
