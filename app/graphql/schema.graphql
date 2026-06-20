@@ -3,15 +3,30 @@ This entity groups multiple lectures together, e.g. a Conference or Lecture Seri
 """
 type Conference {
   """
+  The acronym of this conference, used as its identifier
+  """
+  acronym: String!
+
+  """
   The aspect ratio of the conference's recordings
   """
   aspectRatio: String!
+
+  """
+  The conference's description
+  """
+  description: String
 
   """
   Identifies the date and time when a event was last released
   """
   eventLastReleasedAt: DateTime
   id: ID!
+
+  """
+  A URL pointing to the root of all image files of this conference
+  """
+  imagesUrl: URL!
   lectures(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -35,9 +50,19 @@ type Conference {
   ): LectureConnection
 
   """
+  A URL pointing to the conference's own website
+  """
+  link: URL
+
+  """
   A URL pointing to the conference's logo
   """
   logoUrl: URL
+
+  """
+  A URL pointing to the root of all recording files of this conference
+  """
+  recordingsUrl: URL!
 
   """
   A URL pointing to the conference's frab xml schedule
@@ -127,6 +152,11 @@ subtitles (SRT) as well as PDFs e.g. the lecture slides
 """
 type Lecture {
   audios: [Resource!]
+
+  """
+  The conference this event belongs to
+  """
+  conference: Conference!
 
   """
   Identifies the date and time when the event took place

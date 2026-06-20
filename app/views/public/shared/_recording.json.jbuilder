@@ -1,4 +1,4 @@
-json.extract! recording, :length, :mime_type, :language, :filename, :state, :folder, :high_quality, :width, :height, :updated_at
+json.extract! recording, :length, :mime_type, :language, :filename, :state, :folder, :high_quality, :width, :height, :updated_at, :label
 json.size recording.size_mb.round
 json.recording_url recording.get_recording_url
 json.url public_recording_url(recording, format: :json)

@@ -7,7 +7,7 @@ module Types
 
     field :guid, ID, null: false
     field :local_id, Integer, null: false
-    # field :conference, Types::ConferenceType, "The conference this event belongs to", null: false
+    field :conference, Types::ConferenceType, "The conference this event belongs to", null: false
 
     field :title, String, "The title of this event", null: false
     field :subtitle, String, "The event's subtitle that may be displayed below the title", null: true
