@@ -1,0 +1,24 @@
+# Dev Postgres for voctoweb-tng. Seeded from the live Rails DB (voctoweb-postgres-1)
+# and kept in sync via `drizzle-kit pull`. Port 5434 to avoid clashing with the
+# Rails stack (5432) / other local DBs.
+services:
+  db:
+    image: postgres:18.1-trixie
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: voctoweb
+      POSTGRES_PASSWORD: voctoweb
+      POSTGRES_DB: voctoweb
+    ports:
+      - "5434:5432"
+    volumes:
+      # postgres:18+ stores data in a major-version subdir; mount the parent.
+      - voctoweb_tng_pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U voctoweb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  voctoweb_tng_pgdata:
