@@ -1,5 +1,8 @@
 # Use the the official Ruby image as a base
-FROM ruby:3.3-alpine
+# Defaults to the version pinned in .ruby-version; CI overrides this build-arg
+# so the image always matches it.
+ARG RUBY_VERSION=3.4
+FROM ruby:${RUBY_VERSION}-alpine
 
 # Install runtime dependencies
 # Node.js is used for JavaScript compression via the uglifier gem

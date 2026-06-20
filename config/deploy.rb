@@ -11,7 +11,7 @@ set :tmp_dir, "/srv/media/#{fetch(:application)}/tmp"
 
 # https://github.com/capistrano/rvm/
 # set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '3.3'
+set :rvm_ruby_version, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip.sub(/\Aruby-/, '')
 
 set :use_sudo,        false
 set :environment,     fetch(:stage).to_s

@@ -14,7 +14,6 @@
 
 # Ignore dev files
 .gemrc
-.ruby-version
 .vagrant/
 /tags
 /Gemfile.lock.tags

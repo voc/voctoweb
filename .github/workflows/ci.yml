@@ -40,8 +40,6 @@ jobs:
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.4
 
       - name: Setup config
         run: |
@@ -79,7 +77,9 @@ jobs:
         run: docker system prune --all --force --volumes
 
       - name: Build Docker image
-        run: docker build --tag voctoweb:$(date +%s) .
+        run: |
+          ruby_version=$(sed -e 's/^ruby-//' -e 's/\.[0-9]*$//' .ruby-version)
+          docker build --build-arg RUBY_VERSION="$ruby_version" --tag voctoweb:$(date +%s) .
 
       - name: Show images
         run: docker images
