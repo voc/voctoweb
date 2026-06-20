@@ -2,6 +2,7 @@ import { getRouteApi } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { eq } from 'drizzle-orm'
 import { Downloads } from '#/components/talk/Downloads.tsx'
+import { Metadata } from '#/components/talk/Metadata.tsx'
 import { db } from '#/db/index.ts'
 import { conferences, events, recordings } from '#/db/schema.ts'
 import { mapRecording } from '#/lib/media.ts'
@@ -15,6 +16,12 @@ export const getTalk = createServerFn({ method: 'GET' })
         title: events.title,
         description: events.description,
         conferenceId: events.conferenceId,
+        duration: events.duration,
+        date: events.date,
+        releaseDate: events.releaseDate,
+        viewCount: events.viewCount,
+        link: events.link,
+        doi: events.doi,
       })
       .from(events)
       .where(eq(events.slug, slug))
@@ -53,6 +60,12 @@ export const getTalk = createServerFn({ method: 'GET' })
       id: talk.id,
       title: talk.title,
       description: talk.description,
+      duration: talk.duration,
+      date: talk.date,
+      releaseDate: talk.releaseDate,
+      viewCount: talk.viewCount,
+      link: talk.link,
+      doi: talk.doi,
       conference: conference
         ? { acronym: conference.acronym, title: conference.title }
         : null,
@@ -80,7 +93,7 @@ export function TalkPage() {
       ) : (
         <section>[no video recording]</section>
       )}
-      <section>[Metadata]</section>
+      <Metadata />
       {talk.description && (
         <div>
           {talk.description.split(/\n\n+/).map((para, i) => (
