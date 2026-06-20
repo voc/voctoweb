@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CAcronymRouteImport } from './routes/c.$acronym'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CAcronymRoute = CAcronymRouteImport.update({
+  id: '/c/$acronym',
+  path: '/c/$acronym',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/c/$acronym': typeof CAcronymRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/c/$acronym': typeof CAcronymRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/c/$acronym': typeof CAcronymRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/c/$acronym'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/c/$acronym'
+  id: '__root__' | '/' | '/c/$acronym'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CAcronymRoute: typeof CAcronymRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/c/$acronym': {
+      id: '/c/$acronym'
+      path: '/c/$acronym'
+      fullPath: '/c/$acronym'
+      preLoaderRoute: typeof CAcronymRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CAcronymRoute: CAcronymRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
