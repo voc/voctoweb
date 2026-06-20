@@ -19,7 +19,7 @@ set :stage,           :production
 set :deploy_to,       "/srv/media/#{fetch(:application)}"
 set :ssh_options,     forward_agent: false, user: fetch(:user)
 set :bundle_without,  %w(development test sqlite3).join(' ')
-set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.yml .env.production .ruby-version)
+set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.yml .env.production)
 set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 
 # puma
