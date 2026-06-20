@@ -2,61 +2,65 @@ namespace :voctoweb do
   namespace :recordings do
     desc 'Update recordings sizes by fetching content-length using HEAD requests'
     task update_sizes: :environment do
-      require 'net/http'
-      require 'uri'
+      require 'parallel'
+      require 'faraday'
+      require 'faraday/follow_redirects'
+      require 'httpx/adapters/faraday'
 
-      def fetch_content_length(url, limit = 10)
-        return nil if limit == 0
+      def fetch_content_length(url)
+        retries = 3
+        begin
+          conn = (Thread.current[:faraday_connection] ||= Faraday.new do |f|
+            f.response :follow_redirects, limit: 10
+            f.options.timeout = 5
+            f.options.open_timeout = 5
+            f.adapter :httpx
+          end)
 
-        uri = URI.parse(url)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == 'https')
-        http.open_timeout = 5
-        http.read_timeout = 5
+          response = conn.head(url)
 
-        response = http.request_head(uri.request_uri)
-
-        case response
-        when Net::HTTPSuccess
-          response['content-length']&.to_i
-        when Net::HTTPRedirection
-          location = response['location']
-          if location
-            new_url = URI.join(url, location).to_s
-            fetch_content_length(new_url, limit - 1)
+          if response.success?
+            response.headers['content-length']&.to_i
+          elsif response.status == 404
+            nil
           else
+            raise "HTTP status #{response.status}"
+          end
+        rescue => e
+          if retries > 0
+            retries -= 1
+            puts "Retrying fetch for #{url} (remaining retries: #{retries}) due to error: #{e.message}"
+            sleep(0.5)
+            retry
+          else
+            puts "Error fetching #{url}: #{e.message}"
             nil
           end
-        else
-          nil
         end
-      rescue => e
-        puts "Error fetching #{url}: #{e.message}"
-        nil
       end
 
-      recordings = Recording.all
+      recordings = Recording.all.to_a
       total = recordings.count
       puts "Starting update of #{total} recordings..."
-      
-      updated = 0
-      failed = 0
 
-      recordings.each_with_index do |recording, index|
-        url = recording.url
-        print "[#{index + 1}/#{total}] Querying size for #{recording.filename}... "
-        
-        content_length = fetch_content_length(url)
+      results = Parallel.map_with_index(recordings, in_threads: 10) do |recording, index|
+        ActiveRecord::Base.connection_pool.with_connection do
+          url = recording.url
+          content_length = fetch_content_length(url)
 
-        if content_length && content_length > 0
-          recording.update_column(:size, content_length)
-          puts "Success: #{content_length} bytes"
-          updated += 1
-        else
-          puts "Failed"
-          failed += 1
+          if content_length && content_length > 0
+            recording.update_column(:size, content_length)
+            puts "[#{index + 1}/#{total}] Querying size for #{recording.filename}... Success: #{content_length} bytes"
+            true
+          else
+            puts "[#{index + 1}/#{total}] Querying size for #{recording.filename}... Failed"
+            false
+          end
         end
       end
+
+      updated = results.count(true)
+      failed = results.count(false)
 
       puts "Update completed. #{updated} updated, #{failed} failed."
     end
