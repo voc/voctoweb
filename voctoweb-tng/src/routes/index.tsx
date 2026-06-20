@@ -1,11 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { PromotedSection, getPromotedTalks } from '#/components/home/PromotedSection.tsx'
+import { RecentlyAdded, getRecentConferences } from '#/components/home/RecentlyAdded.tsx'
 import { Stats, getStats } from '#/components/home/Stats.tsx'
 
 export const Route = createFileRoute('/')({
   loader: async () => {
-    const [stats, promoted] = await Promise.all([getStats(), getPromotedTalks()])
-    return { stats, promoted }
+    const [stats, promoted, recent] = await Promise.all([
+      getStats(),
+      getPromotedTalks(),
+      getRecentConferences(),
+    ])
+    return { stats, promoted, recent }
   },
   component: Home,
 })
@@ -17,7 +22,7 @@ function Home() {
       <section>[Search]</section>
       <PromotedSection />
       <Stats />
-      <section>[RecentlyAdded]</section>
+      <RecentlyAdded />
     </main>
   )
 }
