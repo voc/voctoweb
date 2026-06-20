@@ -40,12 +40,14 @@ services:
     ports:
       - "5432:5432"
   elasticsearch:
-    image: elasticsearch:6.8.6
+    image: elasticsearch:8.19.16
     platform: linux/amd64
     ports:
       - "9200:9200"
     environment:
       - cluster.name=docker-cluster
+      - discovery.type=single-node
+      - xpack.security.enabled=false
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - http.cors.enabled=true

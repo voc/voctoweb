@@ -30,7 +30,10 @@ jobs:
         ports:
           - 5432:5432
       elasticsearch:
-        image: elasticsearch:6.8.17
+        image: elasticsearch:8.19.16
+        env:
+          discovery.type: single-node
+          xpack.security.enabled: false
         ports:
           - 9200:9200
 
