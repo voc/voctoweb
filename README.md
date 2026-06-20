@@ -193,7 +193,7 @@ Image and video files in `docker/content` are tried first, if missing live data 
 
 ### Ruby Version
 
-ruby 3.4
+See [`.ruby-version`](.ruby-version) for the required Ruby version.
 
 ### Dependencies
 
@@ -227,7 +227,7 @@ bash rvm-installer stable
 source ~/.rvm/scripts/rvm
 
 # install ruby
-rvm install ruby-3.3.5
+rvm install "$(cat .ruby-version)"
 
 # install bundler
 gem install bundler
