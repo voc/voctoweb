@@ -21,7 +21,7 @@ gem 'listen'
 # rails cache
 gem 'redis'
 gem 'exception_notification'
-gem 'connection_pool', '< 3'
+gem 'connection_pool', '< 4'
 
 # Bundle puma application server
 gem 'puma'
@@ -103,7 +103,7 @@ end
 
 group :test do
   # minitest must match rails version
-  gem 'minitest', '~> 5.1'
+  gem 'minitest', '~> 6.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
