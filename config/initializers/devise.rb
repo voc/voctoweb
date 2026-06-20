@@ -226,6 +226,19 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :authentik, {
+    name: :authentik,
+    strategy_class: OmniAuth::Strategies::OpenIDConnect,
+    issuer: ENV['AUTHENTIK_ISSUER'],
+    discovery: true,
+    scope: [:openid, :email, :profile],
+    response_type: :code,
+    client_options: {
+      identifier: ENV['AUTHENTIK_CLIENT_ID'],
+      secret: ENV['AUTHENTIK_CLIENT_SECRET'],
+      redirect_uri: ENV['AUTHENTIK_REDIRECT_URI']
+    }
+  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
