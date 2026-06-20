@@ -39,6 +39,7 @@ query LectureQueryExample {
 The public API provides a programmatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different ecosystems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
 
     /public/conferences
+    /public/conferences?include_empty=true
     /public/conferences/:acronym
     /public/conferences/:id
     /public/events
@@ -57,7 +58,10 @@ Example:
 curl -H "CONTENT-TYPE: application/json" http://localhost:3000/public/conferences
 ```
 
-The resulting JSON will contain URLs to each of the individual conferences.
+The resulting JSON will contain URLs to each of the individual conferences. By
+default only conferences that have at least one recorded event are listed
+(matching what media.ccc.de shows). Pass `?include_empty=true` to also include
+conferences that do not have any associated events yet.
 
 Additionally the API for events and recordings uses RFC-5988 HTTP header based pagination to reduce the server load.
 

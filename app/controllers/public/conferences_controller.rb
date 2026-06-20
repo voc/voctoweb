@@ -5,10 +5,21 @@ module Public
 
     # GET /public/conferences
     # GET /public/conferences.json
+    #
+    # By default only conferences that have at least one recorded event are
+    # returned (matching what the web frontend shows). Pass ?include_empty=true
+    # to also include conferences without any associated events.
     def index
-      key = Conference.all.maximum(:updated_at)
-      @conferences = Rails.cache.fetch([:public, :conferences, key], race_condition_ttl: 10) do
-        Conference.all
+      include_empty = ActiveModel::Type::Boolean.new.cast(params[:include_empty])
+      conferences = include_empty ? Conference.all : Conference.with_recorded_events
+
+      # The listed set can change without any conference row changing: recording
+      # an event updates downloaded_events_count via update_column, which skips
+      # updated_at. The result count busts the cache when a conference gains or
+      # loses events; include_empty keeps the two variants cached separately.
+      key = [:public, :conferences, include_empty, conferences.maximum(:updated_at), conferences.count]
+      @conferences = Rails.cache.fetch(key, race_condition_ttl: 10) do
+        conferences.to_a
       end
       respond_to { |format| format.json }
     end
