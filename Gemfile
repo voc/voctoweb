@@ -50,6 +50,8 @@ gem 'rss'
 gem 'kaminari'
 
 gem 'pg', group: :postgresql
+
+# needs to match server version
 gem 'elasticsearch-model', '~> 6.1.1'
 gem 'elasticsearch-rails', '~> 6.1.0'
 
