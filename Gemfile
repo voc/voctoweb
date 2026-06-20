@@ -50,8 +50,10 @@ gem 'rss'
 gem 'kaminari'
 
 gem 'pg', group: :postgresql
-gem 'elasticsearch-model', '~> 6.1.1'
-gem 'elasticsearch-rails', '~> 6.1.0'
+
+# needs to match server version
+gem 'elasticsearch-model', '~> 8.0'
+gem 'elasticsearch-rails', '~> 8.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

@@ -8,7 +8,6 @@ module ElasticsearchEvent
     include Elasticsearch::Model::Callbacks unless ENV['SKIP_ELASTICSEARCH']
 
     index_name "media-event-#{Rails.env}"
-    document_type 'event'
 
     def as_indexed_json(_options = {})
       as_json(
