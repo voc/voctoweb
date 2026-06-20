@@ -6,6 +6,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://media.test.c3voc.de
 
     steps:
       - uses: actions/checkout@v6
