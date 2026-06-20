@@ -3,7 +3,10 @@ import { z } from 'zod'
 
 export const env = createEnv({
   server: {
-    SERVER_URL: z.string().url().optional(),
+    SERVER_URL: z.url().optional(),
+    // Public media.ccc.de CDNs urls
+    CDN_URL: z.url(),
+    STATIC_URL: z.url(),
   },
 
   /**
@@ -20,7 +23,12 @@ export const env = createEnv({
    * What object holds the environment variables at runtime. This is usually
    * `process.env` or `import.meta.env`.
    */
-  runtimeEnv: import.meta.env,
+  // Server vars come from process.env (server-side); client VITE_ vars from
+  // import.meta.env. Guard keeps it from throwing if imported on the client.
+  runtimeEnv: {
+    ...import.meta.env,
+    ...(typeof process !== 'undefined' ? process.env : {}),
+  },
 
   /**
    * By default, this library will feed the environment variables directly to
