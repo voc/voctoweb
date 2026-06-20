@@ -18,6 +18,8 @@ export const getConference = createServerFn({ method: 'GET' })
       .limit(1)
     if (!conference) return null
 
+    // TODO: user-selectable sort (name / date / duration / views) like prod.
+    // Probably TanStack Table once we want sortable column headers.
     const talks = await db
       .select({ id: events.id, slug: events.slug, title: events.title })
       .from(events)

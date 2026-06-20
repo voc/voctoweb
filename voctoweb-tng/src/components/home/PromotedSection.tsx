@@ -4,6 +4,9 @@ import { and, desc, eq, isNotNull } from 'drizzle-orm'
 import { db } from '#/db/index.ts'
 import { events } from '#/db/schema.ts'
 
+// TODO: also surface currently-live streams here (conference `streaming` data),
+// and make this a carousel (Embla / shadcn) that degrades to a scroll-snap row
+// without JS.
 export const getPromotedTalks = createServerFn({ method: 'GET' }).handler(
   async () => {
     return db

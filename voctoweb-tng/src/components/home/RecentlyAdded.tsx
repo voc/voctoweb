@@ -1,10 +1,12 @@
 import { getRouteApi } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import { and, desc, eq, isNotNull } from 'drizzle-orm'
+import { and, count, desc, eq, isNotNull } from 'drizzle-orm'
 import { db } from '#/db/index.ts'
 import { conferences, events } from '#/db/schema.ts'
 
-// Mirrors prod: 9 conferences with the most recent releases, 3 talks each.
+const TALK_LIMIT = 3
+
+// Mirrors the original: 9 conferences with the most recent releases, a few talks each.
 export const getRecentConferences = createServerFn({ method: 'GET' }).handler(
   async () => {
     const confs = await db
@@ -19,15 +21,22 @@ export const getRecentConferences = createServerFn({ method: 'GET' }).handler(
       .limit(9)
 
     return Promise.all(
-      confs.map(async (c) => ({
-        ...c,
-        talks: await db
-          .select({ id: events.id, slug: events.slug, title: events.title })
-          .from(events)
-          .where(and(eq(events.conferenceId, c.id), isNotNull(events.releaseDate)))
-          .orderBy(desc(events.releaseDate), desc(events.id))
-          .limit(3),
-      })),
+      confs.map(async (c) => {
+        const released = and(
+          eq(events.conferenceId, c.id),
+          isNotNull(events.releaseDate),
+        )
+        const [talks, totals] = await Promise.all([
+          db
+            .select({ id: events.id, slug: events.slug, title: events.title })
+            .from(events)
+            .where(released)
+            .orderBy(desc(events.releaseDate), desc(events.id))
+            .limit(TALK_LIMIT),
+          db.select({ total: count() }).from(events).where(released),
+        ])
+        return { ...c, talks, total: totals[0]?.total ?? 0 }
+      }),
     )
   },
 )
@@ -39,20 +48,24 @@ export function RecentlyAdded() {
   return (
     <section>
       <h2>Recently added</h2>
-      {conferences.map((c) => (
-        <div key={c.id}>
-          <h3>
-            <a href={`/c/${c.acronym}`}>{c.title}</a>
-          </h3>
-          <ul>
-            {c.talks.map((t) => (
-              <li key={t.id}>
-                <a href={`/v/${t.slug}`}>{t.title}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {conferences.map((c) => {
+        const more = c.total - c.talks.length
+        return (
+          <div key={c.id}>
+            <h3>
+              <a href={`/c/${c.acronym}`}>{c.title}</a>
+            </h3>
+            <ul>
+              {c.talks.map((t) => (
+                <li key={t.id}>
+                  <a href={`/v/${t.slug}`}>{t.title}</a>
+                </li>
+              ))}
+            </ul>
+            {more > 0 && <a href={`/c/${c.acronym}`}>+{more} more</a>}
+          </div>
+        )
+      })}
     </section>
   )
 }
