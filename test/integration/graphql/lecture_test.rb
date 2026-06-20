@@ -100,6 +100,23 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_empty result['data']['lectures']
   end
 
+  test 'sort lectures by view count' do
+    popular = create(:event, tags: ['view-count-sort-test'], view_count: 1000)
+    unpopular = create(:event, tags: ['view-count-sort-test'], view_count: 1)
+
+    query_string = <<-GRAPHQL
+      query($tags: [String!]) {
+        lectures(filter: { tagsContains: $tags }, orderBy: viewCount_DESC) {
+          guid
+        }
+      }
+    GRAPHQL
+
+    result = MediaBackendSchema.execute(query_string, variables: { tags: ['view-count-sort-test'] })
+    assert_nil result['errors']
+    assert_equal [popular.guid, unpopular.guid], result['data']['lectures'].map { |l| l['guid'] }
+  end
+
   test 'load newest conference' do
     query_string = <<-GRAPHQL
       query($id: ID!) {

@@ -89,4 +89,31 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_nil result['errors']
     assert result['data']['conferencesRecent'].length == 1
   end
+
+  test 'filter conferences by url and currently streaming' do
+    matching = create(:conference, link: 'https://example.org/match', streaming: { 'isCurrentlyStreaming' => true })
+    create(:conference, link: 'https://example.org/other')
+
+    query_string = <<-GRAPHQL
+      query {
+        conferences(filter: { urlContains: "match" }) {
+          acronym
+        }
+      }
+    GRAPHQL
+    result = MediaBackendSchema.execute(query_string)
+    assert_nil result['errors']
+    assert_equal [matching.acronym], result['data']['conferences'].map { |c| c['acronym'] }
+
+    query_string = <<-GRAPHQL
+      query {
+        conferences(filter: { currentlyStreaming: true }) {
+          acronym
+        }
+      }
+    GRAPHQL
+    result = MediaBackendSchema.execute(query_string)
+    assert_nil result['errors']
+    assert_equal [matching.acronym], result['data']['conferences'].map { |c| c['acronym'] }
+  end
 end

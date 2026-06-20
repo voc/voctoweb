@@ -29,7 +29,9 @@ Rails.application.routes.draw do
   namespace :public do
     get :index, path: '/', defaults: { format: 'json' }
     get :oembed
-    resources :conferences, only: [:index, :show], defaults: { format: 'json' }
+    resources :conferences, only: [:index, :show], defaults: { format: 'json' } do
+      get :recent, defaults: { format: 'json' }, on: :collection
+    end
     constraints(id: %r'[^/]+') do
       resources :events, only: %i(index show), defaults: { format: 'json' } do
         get :recent, defaults: { format: 'json' }, on: :collection
