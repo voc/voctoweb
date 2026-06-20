@@ -1,2 +1,2 @@
 branch: 'master'
-schema: 'schema.graphql'
+schema: 'app/graphql/schema.graphql'

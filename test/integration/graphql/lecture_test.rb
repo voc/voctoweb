@@ -75,6 +75,31 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_equal 1_073_741_824, video['sizeByte']
   end
 
+  test 'filter lectures by tag' do
+    create(:event, tags: ['ruby', 'rails'])
+    create(:event, tags: ['python'])
+
+    query_string = <<-GRAPHQL
+      query($tags: [String!]) {
+        lectures(filter: { tagsContains: $tags }) {
+          title
+          tags
+        }
+      }
+    GRAPHQL
+
+    result = MediaBackendSchema.execute(query_string, variables: { tags: ['ruby'] })
+    assert_nil result['errors']
+    assert_equal 1, result['data']['lectures'].count
+    assert_includes result['data']['lectures'].first['tags'], 'ruby'
+
+    result = MediaBackendSchema.execute(query_string, variables: { tags: ['python'] })
+    assert_equal 1, result['data']['lectures'].count
+
+    result = MediaBackendSchema.execute(query_string, variables: { tags: ['nonexistent'] })
+    assert_empty result['data']['lectures']
+  end
+
   test 'load newest conference' do
     query_string = <<-GRAPHQL
       query($id: ID!) {

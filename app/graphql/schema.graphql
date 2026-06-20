@@ -1,55 +1,4 @@
 """
-Files like videos, audios, SRTs or PDFs
-"""
-type Asset {
-  """
-  The recordings's duration in seconds
-  """
-  duration: Int!
-  filename: String!
-
-  """
-  The height of this recording in px, if it is a video
-  """
-  height: Int!
-
-  """
-  Whether this recording is a video with at least 720p resolution
-  """
-  highQuality: Boolean!
-
-  """
-  The recordings's language, encoded as ISO 639-2
-  """
-  language: String
-
-  """
-  The recordings's mime type, e.g. video/mp4
-  """
-  mimeType: String!
-
-  """
-  The recording's approximate size in megabytes
-  """
-  size: Int!
-
-  """
-  Identifies the date and time when the object was last updated
-  """
-  updatedAt: DateTime!
-
-  """
-  A URL pointing to the CDN location of this recording
-  """
-  url: String!
-
-  """
-  The width of this recording in px, if it is a video
-  """
-  width: Int!
-}
-
-"""
 This entity groups multiple lectures together, e.g. a Conference or Lecture Series
 """
 type Conference {
@@ -109,6 +58,11 @@ type Conference {
   Identifies the date and time when the object was last updated
   """
   updatedAt: DateTime!
+
+  """
+  A URL pointing to the conference page in vocotweb frontend
+  """
+  url: URL!
 }
 
 """
@@ -146,16 +100,33 @@ type ConferenceEdge {
   node: Conference
 }
 
+input ConferenceFilter {
+  OR: [ConferenceFilter!]
+  currentlyStreaming: Boolean
+  urlContains: String
+}
+
+enum ConferenceOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+}
+
 """
 An ISO 8601-encoded datetime
 """
 scalar DateTime
 
 """
-This entity is an Event with multiple Files e.g. Video and Audio recordings, as well as PDFs e.g. the lecture slides
+A untyped JSON document
+"""
+scalar JSON
+
+"""
+This entity is an Event with multiple Files e.g. Video and Audio recordings,
+subtitles (SRT) as well as PDFs e.g. the lecture slides
 """
 type Lecture {
-  audios: [Asset!]
+  audios: [Resource!]
 
   """
   Identifies the date and time when the event took place
@@ -166,11 +137,42 @@ type Lecture {
   The event's description
   """
   description: String
-  files: [Asset!]!
-  guid: ID!
 
   """
-  A URL pointing to the event's website
+  Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566
+  """
+  doiUrl: URL
+
+  """
+  The lecture recording duration in seconds
+  """
+  duration: Int
+  files(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): ResourceConnection!
+  guid: ID!
+  images: LectureImage
+
+  """
+  URL pointing to the conference event website
   """
   link: URL
   localId: Int!
@@ -184,11 +186,7 @@ type Lecture {
   Names of persons that held the event
   """
   persons: [String!]
-
-  """
-  A URL pointing to a preview/poster image of the event
-  """
-  posterUrl: URL
+  playerConfig: JSON
 
   """
   Whether the event is promoted right now
@@ -199,7 +197,8 @@ type Lecture {
   Identifies the date when the event got released
   """
   releaseDate: DateTime
-  slides: [Asset!]
+  relive: JSON
+  slides: [Resource!]
 
   """
   The URL slug of this event
@@ -210,16 +209,13 @@ type Lecture {
   The event's subtitle that may be displayed below the title
   """
   subtitle: String
+  subtitles: [Resource!]
 
   """
   Tags/keywords describing the event
   """
   tags: [String!]
-
-  """
-  A URL pointing to a thumbnail describing the event
-  """
-  thumbUrl: URL
+  timelens: LectureTimelens
 
   """
   The title of this event
@@ -230,7 +226,13 @@ type Lecture {
   Identifies the date and time when the object was last updated
   """
   updatedAt: DateTime
-  videos: [Asset!]!
+
+  """
+  A URL pointing to this lecture's page in vocotweb frontend
+  """
+  url: URL!
+  videoPreferred: Resource!
+  videos: [Resource!]!
 
   """
   The amount of views of this event
@@ -273,6 +275,40 @@ type LectureEdge {
   node: Lecture
 }
 
+input LectureFilter {
+  OR: [LectureFilter!]
+  tagsContains: [String!]
+}
+
+type LectureImage {
+  """
+  URL pointing to a preview/poster image of the event
+  """
+  posterUrl: URL
+
+  """
+  URL pointing to a smaller version of the poster image
+  """
+  thumbUrl: URL
+}
+
+enum LectureOrderBy {
+  date_ASC
+  date_DESC
+}
+
+type LectureTimelens {
+  """
+  URL pointing to scrubbing thumbnails for timelens/timeline
+  """
+  thumbnailsUrl: URL
+
+  """
+  URL pointing timelens timline image of the event
+  """
+  timelineUrl: URL
+}
+
 """
 Information about pagination in a connection.
 """
@@ -299,11 +335,12 @@ type PageInfo {
 }
 
 type Query {
+  _service: _Service!
+
   """
-  All conferences
+  All conferences as Connection
   """
-  allConferences(first: Int = 5, offset: Int = 0): [Conference!]
-  allConferencesRelay(
+  allConferences(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -329,14 +366,174 @@ type Query {
   Find a conference by acronym
   """
   conference(id: ID!): Conference
+  conferences(filter: ConferenceFilter, first: Int, offset: Int, orderBy: ConferenceOrderBy = createdAt_DESC): [Conference!]!
+
+  """
+  All conferences as List, recent first
+  """
+  conferencesRecent(first: Int! = 5, offset: Int = 0): [Conference!]
 
   """
   Find a lecture by guid
   """
   lecture(guid: ID!): Lecture
+
+  """
+  Find a lecture by slug
+  """
+  lectureBySlug(slug: ID!): Lecture
+  lectureSearch(page: Int, query: String!): [Lecture!]!
+  lectures(filter: LectureFilter, first: Int, offset: Int, orderBy: LectureOrderBy = date_DESC): [Lecture!]!
+
+  """
+  A list of related lectures, ordered by decreasing relevance.
+  """
+  lecturesRelatedTo(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+    guid: ID!
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): LectureConnection
+}
+
+"""
+Files like videos, audios, SRTs or PDFs
+"""
+type Resource {
+  """
+  The recordings's duration in seconds
+  """
+  duration: Int!
+  filename: String!
+
+  """
+  The height of this recording in px, if it is a video
+  """
+  height: Int!
+
+  """
+  Whether this recording is a video with at least 720p resolution
+  """
+  highQuality: Boolean!
+  label: String!
+
+  """
+  The recordings's language, encoded as ISO 639-2
+  """
+  language: String
+
+  """
+  The recordings's mime type, e.g. video/mp4
+  """
+  mimeType: String!
+
+  """
+  The recording's approximate size, in the unit given by `unit` (defaults to megabytes)
+  """
+  size(
+    """
+    The unit to express the size in
+    """
+    unit: SizeUnit = MB
+  ): Int!
+
+  """
+  Identifies the date and time when the object was last updated
+  """
+  updatedAt: DateTime!
+
+  """
+  A URL pointing to the CDN location of this recording
+  """
+  url: String!
+
+  """
+  The width of this recording in px, if it is a video
+  """
+  width: Int!
+}
+
+"""
+The connection type for Resource.
+"""
+type ResourceConnection {
+  """
+  A list of edges.
+  """
+  edges: [ResourceEdge]
+
+  """
+  A list of nodes.
+  """
+  nodes: [Resource]
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+"""
+type ResourceEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: Resource
+}
+
+"""
+The unit a recording's size is expressed in
+"""
+enum SizeUnit {
+  """
+  Bytes
+  """
+  BYTE
+
+  """
+  Gigabytes
+  """
+  GB
+
+  """
+  Megabytes
+  """
+  MB
 }
 
 """
 A valid URL, transported as a string
 """
 scalar URL
+
+"""
+The sdl representing the federated service capabilities. Includes federation
+directives, removes federation types, and includes rest of full schema after
+schema directives have been applied
+"""
+type _Service {
+  sdl: String
+}
