@@ -119,7 +119,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_131255) do
     t.index ["slug", "id"], name: "index_events_on_slug_and_id"
     t.index ["slug"], name: "index_events_on_slug"
     t.index ["state"], name: "index_events_on_state"
-    t.index ["tags"], name: "index_events_on_tags", using: :gin
     t.index ["title"], name: "index_events_on_title"
   end
 
@@ -141,8 +140,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_131255) do
   end
 
   create_table "recordings", id: :serial, force: :cascade do |t|
-    t.integer "size"
-    t.integer "length"
+    t.integer "size", comment: "approximate file size in megabytes"
+    t.integer "length", comment: "duration in seconds"
     t.string "mime_type"
     t.integer "event_id"
     t.datetime "created_at", precision: nil
