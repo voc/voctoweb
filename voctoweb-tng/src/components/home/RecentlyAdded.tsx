@@ -1,4 +1,4 @@
-import { getRouteApi } from '@tanstack/react-router'
+import { Link, getRouteApi } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { and, count, desc, eq, isNotNull } from 'drizzle-orm'
 import { db } from '#/db/index.ts'
@@ -53,16 +53,24 @@ export function RecentlyAdded() {
         return (
           <div key={c.id}>
             <h3>
-              <a href={`/c/${c.acronym}`}>{c.title}</a>
+              <Link to="/c/$acronym" params={{ acronym: c.acronym ?? '' }}>
+                {c.title}
+              </Link>
             </h3>
             <ul>
               {c.talks.map((t) => (
                 <li key={t.id}>
-                  <a href={`/v/${t.slug}`}>{t.title}</a>
+                  <Link to="/v/$slug" params={{ slug: t.slug ?? '' }}>
+                    {t.title}
+                  </Link>
                 </li>
               ))}
             </ul>
-            {more > 0 && <a href={`/c/${c.acronym}`}>+{more} more</a>}
+            {more > 0 && (
+              <Link to="/c/$acronym" params={{ acronym: c.acronym ?? '' }}>
+                +{more} more
+              </Link>
+            )}
           </div>
         )
       })}

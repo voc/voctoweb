@@ -1,4 +1,4 @@
-import { getRouteApi } from '@tanstack/react-router'
+import { Link, getRouteApi } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { and, desc, eq, isNotNull } from 'drizzle-orm'
 import { db } from '#/db/index.ts'
@@ -39,7 +39,9 @@ export function ConferencePage() {
       <ul>
         {conference.talks.map((t) => (
           <li key={t.id}>
-            <a href={`/v/${t.slug}`}>{t.title}</a>
+            <Link to="/v/$slug" params={{ slug: t.slug ?? '' }}>
+              {t.title}
+            </Link>
           </li>
         ))}
       </ul>
