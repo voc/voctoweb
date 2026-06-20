@@ -44,6 +44,8 @@ module Types
 
     field :lecture_search, resolver: Resolvers::SearchLectures
 
+    field :lectures, resolver: Resolvers::Lectures
+
     field :lectures_related_to, LectureType.connection_type, null: true do
       description 'A list of related lectures, ordered by decreasing relevance.'
       argument :guid, ID, required: true

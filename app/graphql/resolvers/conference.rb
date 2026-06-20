@@ -12,7 +12,6 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
 
   class ConferenceFilter < ::Types::BaseInputObject
     argument :OR, [self], required: false
-    #argument :description_contains, String, required: false
     argument :url_contains, String, required: false
     argument :currently_streaming, Boolean, required: false
   end
@@ -23,8 +22,8 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
   end
 
   option :filter, type: ConferenceFilter, with: :apply_filter
-  option :first, type: types.Int, with: :apply_first
-  option :offset, type: types.Int, with: :apply_offset
+  option :first, type: Integer, with: :apply_first
+  option :offset, type: Integer, with: :apply_offset
   option :orderBy, type: ConferenceOrderBy, default: 'createdAt_DESC'
 
   def apply_filter(scope, value)
@@ -34,7 +33,6 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
 
   def normalize_filters(value, branches = [])
     scope = Conference.all
-    scope = scope.where('description LIKE ?', "%#{value[:description_contains]}%") if value[:description_contains]
     scope = scope.where('url LIKE ?', "%#{value[:url_contains]}%") if value[:url_contains]
 
     branches << scope
