@@ -20,7 +20,7 @@
                     .title= 'Download ' + file.height.to_s + 'p'
                     %span.language= file.language
                     - if file.size
-                      %span.size= file.size.to_s+' MB'
+                      %span.size= file.size_mb.to_s+' MB'
                     - else
                       %span.codec= display
 
@@ -75,7 +75,7 @@
                   .title= 'Download ' + type
                   %span.language= language
                   - if recording.size
-                    %span.size= recording.size.to_s+' MB'
+                    %span.size= recording.size_mb.to_s+' MB'
                   - else
                     %span.codec= display
 
@@ -93,6 +93,6 @@
                   .title= 'Download ' + type
                   %span.language= language
                   - if recording.size
-                    %span.size= recording.size.to_s+' MB'
+                    %span.size= recording.size_mb.to_s+' MB'
                   - else
                     %span.codec= display

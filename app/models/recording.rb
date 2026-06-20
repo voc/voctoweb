@@ -159,6 +159,11 @@ class Recording < ApplicationRecord
     end
   end
 
+  def size_mb
+    return nil unless size
+    (size / 1024.0 / 1024.0).round(1)
+  end
+
   private
 
   def language_valid

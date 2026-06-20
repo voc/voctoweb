@@ -84,12 +84,8 @@ module Feeds
       item.itunes_image = event.thumb_url if event.thumb_url.present?
 
       item.enclosure.url = recording.url
-      item.enclosure.length = size_to_bytes(recording.size || 0)
+      item.enclosure.length = recording.size || 0
       item.enclosure.type = recording.mime_type
-    end
-
-    def size_to_bytes(size)
-      size * 1024 * 1024
     end
   end
 end
