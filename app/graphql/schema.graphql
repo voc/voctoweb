@@ -325,6 +325,8 @@ type LectureImage {
 enum LectureOrderBy {
   date_ASC
   date_DESC
+  viewCount_ASC
+  viewCount_DESC
 }
 
 type LectureTimelens {

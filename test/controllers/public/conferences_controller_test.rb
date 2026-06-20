@@ -32,6 +32,38 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     assert_includes acronyms, without_events.acronym
   end
 
+  test "index filters by url_contains" do
+    matching = create :conference_with_recordings, link: 'https://example.org/match'
+    other = create :conference_with_recordings, link: 'https://example.org/other'
+
+    get :index, params: { url_contains: 'match' }, format: :json
+    assert_response :success
+    acronyms = JSON.parse(response.body)['conferences'].map { |c| c['acronym'] }
+    assert_includes acronyms, matching.acronym
+    refute_includes acronyms, other.acronym
+  end
+
+  test "index filters by currently_streaming" do
+    streaming = create :conference_with_recordings, streaming: { 'isCurrentlyStreaming' => true }
+    not_streaming = create :conference_with_recordings
+
+    get :index, params: { currently_streaming: 'true' }, format: :json
+    assert_response :success
+    acronyms = JSON.parse(response.body)['conferences'].map { |c| c['acronym'] }
+    assert_includes acronyms, streaming.acronym
+    refute_includes acronyms, not_streaming.acronym
+  end
+
+  test "should get recent" do
+    conference = create :conference_with_recordings
+    conference.update_column(:event_last_released_at, Time.current)
+
+    get :recent, params: { limit: 1 }, format: :json
+    assert_response :success
+    acronyms = JSON.parse(response.body)['conferences'].map { |c| c['acronym'] }
+    assert_includes acronyms, conference.acronym
+  end
+
   test "should get show" do
     conference = create :conference_with_recordings
     get :show, params: { id: conference.id }, format: :json

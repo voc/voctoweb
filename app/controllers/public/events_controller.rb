@@ -58,11 +58,12 @@ class Public::EventsController < ActionController::Base
     respond_to { |format| format.json }
   end
 
-  # GET /public/events/search?q=foo
+  # GET /public/events/search?q=foo&page=1&per_page=25
   def search
-    results = Event.query(params[:q]).page(params[:page])
+    per_page = (params[:per_page] || 25).to_i.clamp(1, 256)
+    results = Event.query(params[:q]).page(params[:page]).per(per_page)
     # calling this just to set headers
-    paginate(results)
+    paginate(results, per_page: per_page)
     @events = results.records.includes(recordings: :conference)
     respond_to { |format| format.json }
   end

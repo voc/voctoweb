@@ -24,7 +24,11 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
   option :filter, type: ConferenceFilter, with: :apply_filter
   option :first, type: Integer, with: :apply_first
   option :offset, type: Integer, with: :apply_offset
-  option :orderBy, type: ConferenceOrderBy, default: 'createdAt_DESC'
+  # `as: :orderBy` keeps the Ruby keyword matching the GraphQL argument name
+  # verbatim; graphql-ruby would otherwise auto-underscore it to :order_by,
+  # which silently drops the value (search_object_graphql looks it up by the
+  # literal option name "orderBy").
+  option :orderBy, type: ConferenceOrderBy, default: 'createdAt_DESC', argument_options: { as: :orderBy }
 
   def apply_filter(scope, value)
     branches = normalize_filters(value).reduce { |a, b| a.or(b) }
@@ -33,7 +37,8 @@ class Resolvers::Conference < GraphQL::Schema::Resolver
 
   def normalize_filters(value, branches = [])
     scope = Conference.all
-    scope = scope.where('url LIKE ?', "%#{value[:url_contains]}%") if value[:url_contains]
+    scope = scope.where('link LIKE ?', "%#{value[:url_contains]}%") if value[:url_contains]
+    scope = scope.merge(Conference.currently_streaming) if value[:currently_streaming]
 
     branches << scope
 

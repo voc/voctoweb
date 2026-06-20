@@ -18,12 +18,18 @@ class Resolvers::Lectures < GraphQL::Schema::Resolver
   class LectureOrderBy < ::Types::BaseEnum
     value 'date_ASC'
     value 'date_DESC'
+    value 'viewCount_ASC'
+    value 'viewCount_DESC'
   end
 
   option :filter, type: LectureFilter, with: :apply_filter
   option :first, type: Integer, with: :apply_first
   option :offset, type: Integer, with: :apply_offset
-  option :orderBy, type: LectureOrderBy, default: 'date_DESC'
+  # `as: :orderBy` keeps the Ruby keyword matching the GraphQL argument name
+  # verbatim; graphql-ruby would otherwise auto-underscore it to :order_by,
+  # which silently drops the value (search_object_graphql looks it up by the
+  # literal option name "orderBy").
+  option :orderBy, type: LectureOrderBy, default: 'date_DESC', argument_options: { as: :orderBy }
 
   def apply_filter(scope, value)
     branches = normalize_filters(value).reduce { |a, b| a.or(b) }
@@ -55,5 +61,13 @@ class Resolvers::Lectures < GraphQL::Schema::Resolver
 
   def apply_order_by_with_date_desc(scope)
     scope.reorder('date DESC')
+  end
+
+  def apply_order_by_with_view_count_asc(scope)
+    scope.reorder('view_count ASC')
+  end
+
+  def apply_order_by_with_view_count_desc(scope)
+    scope.reorder('view_count DESC')
   end
 end
