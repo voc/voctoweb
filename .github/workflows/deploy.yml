@@ -12,7 +12,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - uses: webfactory/ssh-agent@v0.9.0
+      - uses: webfactory/ssh-agent@v0.10.0
         with:
           # Name of the variable configured in Secrets of our GitHub organisation
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
