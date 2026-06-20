@@ -3,8 +3,12 @@ updates:
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: monthly
+    interval: weekly
   open-pull-requests-limit: 10
+  groups:
+    gems:
+      patterns:
+        - "*"
   ignore:
   - dependency-name: elasticsearch-model
     versions:
@@ -39,4 +43,4 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: "monthly"
+    interval: "weekly"
