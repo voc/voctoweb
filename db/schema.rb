@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_24_223925) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_20_131255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_24_223925) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
@@ -116,6 +119,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_24_223925) do
     t.index ["slug", "id"], name: "index_events_on_slug_and_id"
     t.index ["slug"], name: "index_events_on_slug"
     t.index ["state"], name: "index_events_on_state"
+    t.index ["tags"], name: "index_events_on_tags", using: :gin
     t.index ["title"], name: "index_events_on_title"
   end
 
@@ -137,8 +141,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_24_223925) do
   end
 
   create_table "recordings", id: :serial, force: :cascade do |t|
-    t.integer "size", comment: "approximate file size in megabytes"
-    t.integer "length", comment: "duration in seconds"
+    t.integer "size"
+    t.integer "length"
     t.string "mime_type"
     t.integer "event_id"
     t.datetime "created_at", precision: nil

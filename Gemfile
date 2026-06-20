@@ -11,6 +11,8 @@ gem 'goldiloader'
 
 gem 'tinymce-rails'
 gem 'devise'
+gem 'omniauth_openid_connect'
+gem 'omniauth-rails_csrf_protection'
 gem 'aasm'
 gem 'sidekiq'
 gem 'foreman'
