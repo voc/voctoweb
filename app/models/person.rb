@@ -5,7 +5,8 @@ class Person < ApplicationRecord
   validates :name, presence: true
 
   # Add associations to events through a join table
-  has_many :events, through: :participans
+  has_many :participants
+  has_many :events, through: :participants
 
   # Find or create a person by name
   def self.find_or_create_by_name(name)

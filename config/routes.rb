@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
     resources :recordings, :defaults => { :format => 'json' }
     resources :news, :defaults => { :format => 'json' }
+    resources :people, :defaults => { :format => 'json' }
   end
 
   # PUBLIC JSON API
