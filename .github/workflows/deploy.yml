@@ -26,4 +26,5 @@ jobs:
           CAP_HOST: app.media.test.c3voc.de
           CAP_PORT: 22
           SKIP_TAG: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bundle exec cap staging deploy
