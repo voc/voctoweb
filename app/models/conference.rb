@@ -32,6 +32,11 @@ class Conference < ApplicationRecord
     where('(streaming ->> :key)::boolean', key: 'isCurrentlyStreaming')
   }
 
+  # Conferences that have at least one recorded event (i.e. with a recording).
+  # Note: distinct from .with_events above, which filters on released events
+  # (event_last_released_at) which may not have any associated recordings.
+  scope :with_recorded_events, -> { where('downloaded_events_count > 0') }
+
   validates :acronym, :slug, presence: true
   validates :acronym, :slug, uniqueness: true
   validates :slug, format: { with: %r{\A\w[\w-]*(?:/[\w-]+)*\z} }

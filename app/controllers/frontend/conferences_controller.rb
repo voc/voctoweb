@@ -56,8 +56,11 @@ module Frontend
       tree.sort_folders(folders)
     end
 
+    # Note: this filters on recorded events (with a recording), distinct from
+    # Conference.with_events, which filters on released events
+    # (event_last_released_at) which may not have any associated recordings.
     def conferences_with_events
-      Conference.where('downloaded_events_count > 0')
+      Conference.with_recorded_events
     end
 
     def sort_param

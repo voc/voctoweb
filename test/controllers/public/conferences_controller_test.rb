@@ -10,6 +10,28 @@ class Public::ConferencesControllerTest < ActionController::TestCase
     refute_empty json['conferences'][0]['url']
   end
 
+  test "index excludes conferences without events by default" do
+    with_events = create :conference_with_recordings
+    without_events = create :conference
+
+    get :index, format: :json
+    assert_response :success
+    acronyms = JSON.parse(response.body)['conferences'].map { |c| c['acronym'] }
+    assert_includes acronyms, with_events.acronym
+    refute_includes acronyms, without_events.acronym
+  end
+
+  test "index includes empty conferences with include_empty=true" do
+    with_events = create :conference_with_recordings
+    without_events = create :conference
+
+    get :index, params: { include_empty: 'true' }, format: :json
+    assert_response :success
+    acronyms = JSON.parse(response.body)['conferences'].map { |c| c['acronym'] }
+    assert_includes acronyms, with_events.acronym
+    assert_includes acronyms, without_events.acronym
+  end
+
   test "should get show" do
     conference = create :conference_with_recordings
     get :show, params: { id: conference.id }, format: :json
