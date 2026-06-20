@@ -7,4 +7,4 @@ export CAP_USER=media
 export CAP_HOST=app.media.ccc.de
 export CAP_PORT=22
 
-bundle exec cap production deploy
+bundle exec cap production "${1:-deploy}"

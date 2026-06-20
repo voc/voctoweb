@@ -306,3 +306,18 @@ end
 
 Login as user `admin@example.org` with password `media123`. Change these values after the first login.
 
+#### Authentik SSO for the admin backend
+
+ActiveAdmin login also supports SSO via [Authentik](https://goauthentik.io) using OpenID Connect. To enable it:
+
+1. In Authentik, create an **OAuth2/OpenID Provider** (confidential client) with redirect URI `https://<your-voctoweb-host>/admin_users/auth/authentik/callback` and scopes `openid email profile`.
+2. Create an **Application** pointing to that provider.
+3. Set the following environment variables for the voctoweb process:
+
+       AUTHENTIK_ISSUER=https://authentik.example.com/application/o/<app-slug>/
+       AUTHENTIK_CLIENT_ID=<client id from the provider>
+       AUTHENTIK_CLIENT_SECRET=<client secret from the provider>
+       AUTHENTIK_REDIRECT_URI=https://<your-voctoweb-host>/admin_users/auth/authentik/callback
+
+On first SSO login a new `AdminUser` is created automatically (matched by email if one already exists), see `AdminUser.from_omniauth`.
+

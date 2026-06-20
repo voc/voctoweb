@@ -1,3 +1,8 @@
+# NOTE: This is a template, not the live config — deployment-specific settings
+# (workers, RAM threshold, etc.) differ per host, so the actual puma.rb belongs
+# in `shared/config/puma.rb` (kept across deploys), or be controlled via env
+# vars instead of a separate config file.
+
 # This configuration file will be evaluated by Puma. The top-level methods that
 # are invoked here are part of Puma's configuration DSL. For more information
 # about methods provided by the DSL, see https://puma.io/puma/Puma/DSL.html.
@@ -49,11 +54,24 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-# workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
-#
-# preload_app!
+preload_app!
+
+# Restart workers that exceed the RAM threshold, to work around memory
+# leaks/bloat (e.g. from Elasticsearch client, image processing) that would
+# otherwise accumulate across the lifetime of a long-running worker.
+before_fork do
+  require "puma_worker_killer"
+  PumaWorkerKiller.config do |config|
+    config.ram = 8196 # mb
+    config.frequency = 30 # seconds
+    config.percent_usage = 0.95
+    config.rolling_restart_frequency = false
+  end
+  PumaWorkerKiller.start
+end
