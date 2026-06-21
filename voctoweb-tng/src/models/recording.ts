@@ -49,10 +49,18 @@ function classify(mime: string | null): RecordingKind {
 
 export function toRecording(raw: RawRecording, conf: ConfPaths): Recording {
   const kind = classify(raw.mimeType)
+  // Only WebVTT lives on STATIC (next to images); everything else, including SRT
+  // subtitles, is served from the CDN recordings path. Matches Recording#url.
+  // VTT lives on STATIC (next to images). SRT (and any non-VTT subtitle) is
+  // fetched client-side by the player to parse captions, so it must be
+  // CORS-reachable — served via the CORS proxy. Everything else (video/audio)
+  // comes straight from the CDN.
   const url =
-    kind === 'subtitle'
+    raw.mimeType === 'text/vtt'
       ? `${env.STATIC_URL}/${join(conf.imagesPath, raw.filename)}`
-      : `${env.CDN_URL}/${join(conf.recordingsPath, raw.folder, raw.filename)}`
+      : kind === 'subtitle'
+        ? `${env.CORS_URL}/${join(conf.recordingsPath, raw.folder, raw.filename)}`
+        : `${env.CDN_URL}/${join(conf.recordingsPath, raw.folder, raw.filename)}`
   return {
     id: raw.id,
     url,

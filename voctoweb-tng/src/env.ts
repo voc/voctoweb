@@ -7,6 +7,10 @@ export const env = createEnv({
     // Public media.ccc.de CDNs urls
     CDN_URL: z.url(),
     STATIC_URL: z.url(),
+    // CORS-enabled host for subtitle track fetches. The player fetches caption
+    // files client-side to parse them, which needs CORS; the CDN doesn't send
+    // CORS headers, so SRT tracks are served through this proxy instead.
+    CORS_URL: z.url(),
   },
 
   /**

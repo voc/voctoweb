@@ -234,6 +234,9 @@ export function VideoPlayer({ talk }: { talk: Talk }) {
             key={String(t.id)}
             kind="subtitles"
             src={t.url}
+            // Vidstack's caption parser defaults to vtt and ignores the file
+            // extension, so SRT must be flagged explicitly or it parses to nothing.
+            type={t.mimeType === "application/x-subrip" ? "srt" : "vtt"}
             language={t.language}
             label={t.languageLabel}
           />
