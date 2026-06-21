@@ -15,9 +15,12 @@ module Public
 
       # The listed set can change without any conference row changing: recording
       # an event updates downloaded_events_count via update_column, which skips
-      # updated_at. The result count busts the cache when a conference gains or
-      # loses events; include_empty keeps the two variants cached separately.
-      key = [:public, :conferences, include_empty, conferences.maximum(:updated_at), conferences.count]
+      # updated_at. cache_key_with_version's count+max(updated_at) version string
+      # (microsecond precision) busts the cache when a conference gains or loses
+      # events, unlike a plain Time, whose to_param truncates to whole seconds
+      # and could collide with another request's key; include_empty keeps the
+      # two variants cached separately.
+      key = [:public, :conferences, include_empty, conferences.cache_key_with_version]
       @conferences = Rails.cache.fetch(key, race_condition_ttl: 10) do
         conferences.to_a
       end
