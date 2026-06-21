@@ -86,7 +86,6 @@ gem 'api-pagination'
 
 # GraphQL
 gem 'graphql', '< 2'
-gem 'httpx'
 gem 'graphql-query-resolver'
 gem 'search_object'
 gem 'search_object_graphql'
