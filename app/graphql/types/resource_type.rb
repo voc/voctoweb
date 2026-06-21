@@ -11,7 +11,9 @@ module Types
     field :width, Integer, "The width of this recording in px, if it is a video", null: false
     field :height, Integer, "The height of this recording in px, if it is a video", null: false
     field :high_quality, Boolean, "Whether this recording is a video with at least 720p resolution", null: false
-    field :size, Integer, description: "The recording's approximate size in megabytes", null: false
+    field :size, Integer, description: "The recording's approximate size, in the unit given by `unit` (defaults to megabytes)", null: false do
+      argument :unit, SizeUnitType, "The unit to express the size in", required: false, default_value: 'MB'
+    end
     field :updated_at, DateTimeType, "Identifies the date and time when the object was last updated", null: false
 
     #field :conference, Conference, "The conference this event belongs to"
@@ -19,6 +21,17 @@ module Types
 
     def url
       object.get_recording_url
+    end
+
+    def size(unit:)
+      case unit
+      when 'GB'
+        (object.size_gb || 0).round
+      when 'BYTE'
+        object.size || 0
+      else
+        (object.size_mb || 0).round
+      end
     end
 
     def duration
