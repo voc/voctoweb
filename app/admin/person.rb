@@ -40,6 +40,20 @@ ActiveAdmin.register Person do
       div { link_to 'Add identifier', new_admin_person_identifier_path(person_identifier: { person_id: p.id }) }
     end
 
+    panel 'Links' do
+      table_for p.links.order(Arel.sql('"links"."order" NULLS LAST'), :name) do
+        column :order
+        column :url
+        column :name
+        column :link_type
+        column :service
+        column '' do |link|
+          link_to 'Delete', [:admin, link], method: :delete, data: { confirm: 'Remove this link?' }
+        end
+      end
+      div { link_to 'Add link', new_admin_link_path(link: { linkable_type: 'Person', linkable_id: p.id }) }
+    end
+
     panel 'Events' do
       table_for p.participations.includes(:event).order('events.date DESC') do
         column 'Event' do |participation|
@@ -66,6 +80,16 @@ ActiveAdmin.register Person do
         pi.input :guid
         pi.input :source, hint: 'e.g. pretalx, frab, penta'
         pi.input :origin
+      end
+    end
+
+    f.inputs 'Links' do
+      f.has_many :links, allow_destroy: true, new_record: 'Add link' do |li|
+        li.input :order, as: :number
+        li.input :url
+        li.input :name
+        li.input :link_type, as: :select, collection: Link::ALL_TYPES, include_blank: '— auto-detect —'
+        li.input :service,   as: :select, collection: Link::SERVICES,  include_blank: '— auto-detect —'
       end
     end
 
