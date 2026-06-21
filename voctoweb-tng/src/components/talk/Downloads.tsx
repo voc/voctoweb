@@ -3,7 +3,13 @@ import { getRouteApi } from '@tanstack/react-router'
 const route = getRouteApi('/v/$slug')
 
 export function Downloads() {
-  const recordings = route.useLoaderData({ select: (d) => d.recordings })
+  const media = route.useLoaderData({ select: (d) => d.media })
+  const recordings = [
+    ...media.video,
+    ...media.audio,
+    ...media.subtitle,
+    ...media.other,
+  ]
   if (recordings.length === 0) return null
 
   const sorted = [...recordings].sort((a, b) =>
@@ -17,12 +23,7 @@ export function Downloads() {
         {sorted.map((r) => (
           <li key={r.id}>
             <a href={r.url}>
-              {[
-                r.mimeType,
-                r.language || null,
-                r.width ? `${r.height}p` : null,
-                r.size ? `${r.size} MB` : null,
-              ]
+              {[r.mimeType, r.language || null, r.resolution, r.sizeLabel]
                 .filter(Boolean)
                 .join(' · ')}
             </a>

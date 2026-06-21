@@ -8,7 +8,7 @@ import { db } from "#/db/index.ts";
 import { events, recordings } from "#/db/schema.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
 import { loadConference } from "#/lib/server/conference.ts";
-import { mapRecording } from "#/lib/media.ts";
+import { toTalk } from "#/models/talk.ts";
 
 export const getTalk = createServerFn({ method: "GET" })
 	.validator((slug: string) => slug)
@@ -26,6 +26,7 @@ export const getTalk = createServerFn({ method: "GET" })
 					viewCount: events.viewCount,
 					link: events.link,
 					doi: events.doi,
+					posterFilename: events.posterFilename,
 				})
 				.from(events)
 				.where(eq(events.slug, slug))
@@ -51,23 +52,7 @@ export const getTalk = createServerFn({ method: "GET" })
 				.from(recordings)
 				.where(eq(recordings.eventId, talk.id));
 
-			return {
-				id: talk.id,
-				title: talk.title,
-				description: talk.description,
-				duration: talk.duration,
-				date: talk.date,
-				releaseDate: talk.releaseDate,
-				viewCount: talk.viewCount,
-				link: talk.link,
-				doi: talk.doi,
-				conference: conference
-					? { acronym: conference.acronym, title: conference.title }
-					: null,
-				recordings: conference
-					? raw.map((r) => mapRecording(r, conference))
-					: [],
-			};
+			return toTalk(talk, conference, raw);
 		}),
 	);
 
@@ -81,7 +66,7 @@ export function TalkPage() {
 			<section>[ConferenceHeader]</section>
 			<h1>{talk.title}</h1>
 			<section>[Speakers]</section>
-			<VideoPlayer recordings={talk.recordings} />
+			<VideoPlayer talk={talk} />
 			<Metadata />
 			{talk.description && (
 				<div>

@@ -10,6 +10,28 @@ export function formatDuration(seconds: number | null): string {
   return h > 0 ? `${h}:${mm}:${ss}` : `${m}:${ss}`
 }
 
+// Recording language codes are ISO 639-2 (e.g. `deu`), sometimes joined for
+// multi-language tracks (`deu-eng-fra`). Map the common ones; fall back to the
+// uppercased code so an unknown language still reads sensibly.
+const LANGUAGE_NAMES: Record<string, string> = {
+  deu: 'German',
+  eng: 'English',
+  fra: 'French',
+  spa: 'Spanish',
+  ita: 'Italian',
+  nld: 'Dutch',
+  rus: 'Russian',
+  gsw: 'Swiss German',
+}
+
+export function languageLabel(code: string | null): string {
+  if (!code) return ''
+  return code
+    .split('-')
+    .map((c) => LANGUAGE_NAMES[c] ?? c.toUpperCase())
+    .join(' / ')
+}
+
 export function formatViews(n: number | null): string {
   const v = n ?? 0
   if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`
