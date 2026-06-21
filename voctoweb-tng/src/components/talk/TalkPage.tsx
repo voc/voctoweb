@@ -1,4 +1,4 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 import { Downloads } from "#/components/talk/Downloads.tsx";
@@ -62,14 +62,25 @@ export function TalkPage() {
 	const talk = route.useLoaderData();
 
 	return (
-		<main>
-			<section>[ConferenceHeader]</section>
-			<h1>{talk.title}</h1>
-			<section>[Speakers]</section>
-			<VideoPlayer talk={talk} />
+		<main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+			{talk.conference && (
+				<Link
+					to="/c/$acronym"
+					params={{ acronym: talk.conference.acronym ?? "" }}
+					className="text-sm font-medium text-muted-foreground hover:text-primary"
+				>
+					{talk.conference.title ?? talk.conference.acronym}
+				</Link>
+			)}
+			<div className="overflow-hidden rounded-xl border border-border">
+				<VideoPlayer talk={talk} />
+			</div>
+			<h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+				{talk.title}
+			</h1>
 			<Metadata />
 			{talk.description && (
-				<div>
+				<div className="space-y-4 leading-relaxed">
 					{talk.description.split(/\n\n+/).map((para, i) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: static, non-reordering list
 						<p key={i}>{para}</p>
@@ -77,8 +88,7 @@ export function TalkPage() {
 				</div>
 			)}
 			<Downloads />
-			<section>[Share]</section>
-			<section>[Tags]</section>
+			{/* TODO: Speakers (after persons→array migration), Share, Tags */}
 		</main>
 	);
 }

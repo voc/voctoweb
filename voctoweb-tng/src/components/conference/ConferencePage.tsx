@@ -1,9 +1,9 @@
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { and, desc, eq, isNotNull } from "drizzle-orm";
+import { TalkGrid } from "#/components/TalkCard.tsx";
 import { db } from "#/db/index.ts";
 import { conferences, events } from "#/db/schema.ts";
-import { Card } from "#/components/ui/Card.tsx";
 import { thumbUrl } from "#/lib/media.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
 
@@ -69,33 +69,7 @@ export function ConferencePage() {
 					{conference.talks.length} talks
 				</p>
 			</header>
-			<ul className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
-				{conference.talks.map((t) => (
-					<li key={t.id}>
-						<Link
-							to="/v/$slug"
-							params={{ slug: t.slug ?? "" }}
-							className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-						>
-							<Card className="h-full">
-								<div className="aspect-video bg-muted">
-									{t.thumbUrl && (
-										<img
-											src={t.thumbUrl}
-											alt=""
-											loading="lazy"
-											className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-										/>
-									)}
-								</div>
-								<h2 className="line-clamp-2 p-3 text-sm font-medium leading-snug">
-									{t.title}
-								</h2>
-							</Card>
-						</Link>
-					</li>
-				))}
-			</ul>
+			<TalkGrid talks={conference.talks} />
 		</main>
 	);
 }

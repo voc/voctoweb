@@ -1,6 +1,7 @@
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { and, desc, eq, isNotNull } from "drizzle-orm";
+import { TalkCard } from "#/components/TalkCard.tsx";
 import { db } from "#/db/index.ts";
 import { conferences, events } from "#/db/schema.ts";
 import { thumbUrl } from "#/lib/media.ts";
@@ -40,16 +41,11 @@ export function PromotedSection() {
 	if (talks.length === 0) return null;
 	return (
 		<section>
-			<h2>Featured</h2>
-			<ul>
+			<h2 className="mb-4 text-xl font-semibold tracking-tight">Featured</h2>
+			<ul className="flex snap-x gap-4 overflow-x-auto pb-2">
 				{talks.map((t) => (
-					<li key={t.id}>
-						<Link to="/v/$slug" params={{ slug: t.slug ?? "" }}>
-							{t.thumbUrl && (
-								<img src={t.thumbUrl} alt="" loading="lazy" width={240} />
-							)}
-							{t.title}
-						</Link>
+					<li key={t.id} className="w-64 shrink-0 snap-start">
+						<TalkCard slug={t.slug} title={t.title} thumbUrl={t.thumbUrl} />
 					</li>
 				))}
 			</ul>

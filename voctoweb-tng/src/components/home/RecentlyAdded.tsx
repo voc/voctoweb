@@ -1,6 +1,7 @@
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { and, count, desc, eq, isNotNull } from "drizzle-orm";
+import { TalkGrid } from "#/components/TalkCard.tsx";
 import { db } from "#/db/index.ts";
 import { conferences, events } from "#/db/schema.ts";
 import { thumbUrl } from "#/lib/media.ts";
@@ -67,34 +68,33 @@ const home = getRouteApi("/");
 export function RecentlyAdded() {
 	const conferences = home.useLoaderData({ select: (d) => d.recent });
 	return (
-		<section>
-			<h2>Recently added</h2>
+		<section className="space-y-8">
+			<h2 className="text-xl font-semibold tracking-tight">Recently added</h2>
 			{conferences.map((c) => {
 				const more = c.total - c.talks.length;
 				return (
 					<div key={c.id}>
-						<h3>
-							<Link to="/c/$acronym" params={{ acronym: c.acronym ?? "" }}>
-								{c.title}
-							</Link>
-						</h3>
-						<ul>
-							{c.talks.map((t) => (
-								<li key={t.id}>
-									<Link to="/v/$slug" params={{ slug: t.slug ?? "" }}>
-										{t.thumbUrl && (
-											<img src={t.thumbUrl} alt="" loading="lazy" width={240} />
-										)}
-										{t.title}
-									</Link>
-								</li>
-							))}
-						</ul>
-						{more > 0 && (
-							<Link to="/c/$acronym" params={{ acronym: c.acronym ?? "" }}>
-								+{more} more
-							</Link>
-						)}
+						<div className="mb-3 flex items-baseline justify-between gap-4">
+							<h3 className="font-medium">
+								<Link
+									to="/c/$acronym"
+									params={{ acronym: c.acronym ?? "" }}
+									className="hover:text-primary"
+								>
+									{c.title}
+								</Link>
+							</h3>
+							{more > 0 && (
+								<Link
+									to="/c/$acronym"
+									params={{ acronym: c.acronym ?? "" }}
+									className="shrink-0 text-sm text-muted-foreground hover:text-foreground"
+								>
+									+{more} more
+								</Link>
+							)}
+						</div>
+						<TalkGrid talks={c.talks} />
 					</div>
 				);
 			})}
