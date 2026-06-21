@@ -9,7 +9,6 @@ gem 'dotenv-rails'
 gem 'activeadmin'
 gem 'goldiloader'
 
-gem 'tinymce-rails'
 gem 'devise'
 gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection'
