@@ -9,6 +9,9 @@ class Event < ApplicationRecord
 
   belongs_to :conference
   has_many :recordings, dependent: :destroy
+  has_many :participations, dependent: :destroy
+  has_many :people, through: :participations, class_name: 'Person'
+  has_many :links, as: :linkable, dependent: :destroy
   has_many :video_recordings, -> {
     where(html5: true, mime_type: MimeType::VIDEO)
   }, class_name: 'Recording'
