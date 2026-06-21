@@ -61,3 +61,14 @@ export function mapRecording(r: RawRecording, conf: ConfPaths): Recording {
     kind,
   }
 }
+
+// Event thumbnail URL, or null if it has none. No logo fallback on purpose —
+// conference logos rarely work as thumbnails.
+export function thumbUrl(
+  thumbFilename: string | null,
+  imagesPath: string | null,
+): string | null {
+  return thumbFilename
+    ? `${env.STATIC_URL}/${join(imagesPath, thumbFilename)}`
+    : null
+}

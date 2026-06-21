@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { and, desc, eq, isNotNull } from "drizzle-orm";
 import { db } from "#/db/index.ts";
 import { conferences, events } from "#/db/schema.ts";
+import { thumbUrl } from "#/lib/media.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
 
 export const getConference = createServerFn({ method: "GET" })
@@ -14,6 +15,7 @@ export const getConference = createServerFn({ method: "GET" })
 					id: conferences.id,
 					acronym: conferences.acronym,
 					title: conferences.title,
+					imagesPath: conferences.imagesPath,
 				})
 				.from(conferences)
 				.where(eq(conferences.acronym, acronym))
@@ -22,8 +24,13 @@ export const getConference = createServerFn({ method: "GET" })
 
 			// TODO: user-selectable sort (name / date / duration / views) like prod.
 			// Probably TanStack Table once we want sortable column headers.
-			const talks = await db
-				.select({ id: events.id, slug: events.slug, title: events.title })
+			const talkRows = await db
+				.select({
+					id: events.id,
+					slug: events.slug,
+					title: events.title,
+					thumbFilename: events.thumbFilename,
+				})
 				.from(events)
 				.where(
 					and(
@@ -32,7 +39,18 @@ export const getConference = createServerFn({ method: "GET" })
 					),
 				)
 				.orderBy(desc(events.viewCount));
-			return { ...conference, talks };
+			const talks = talkRows.map((t) => ({
+				id: t.id,
+				slug: t.slug,
+				title: t.title,
+				thumbUrl: thumbUrl(t.thumbFilename, conference.imagesPath),
+			}));
+			return {
+				id: conference.id,
+				acronym: conference.acronym,
+				title: conference.title,
+				talks,
+			};
 		}),
 	);
 
@@ -48,6 +66,9 @@ export function ConferencePage() {
 				{conference.talks.map((t) => (
 					<li key={t.id}>
 						<Link to="/v/$slug" params={{ slug: t.slug ?? "" }}>
+							{t.thumbUrl && (
+								<img src={t.thumbUrl} alt="" loading="lazy" width={240} />
+							)}
 							{t.title}
 						</Link>
 					</li>

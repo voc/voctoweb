@@ -2,21 +2,35 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { and, desc, eq, isNotNull } from "drizzle-orm";
 import { db } from "#/db/index.ts";
-import { events } from "#/db/schema.ts";
+import { conferences, events } from "#/db/schema.ts";
+import { thumbUrl } from "#/lib/media.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
 
 // TODO: also surface currently-live streams here (conference `streaming` data),
 // and make this a carousel (Embla / shadcn) that degrades to a scroll-snap row
 // without JS.
 export const getPromotedTalks = createServerFn({ method: "GET" }).handler(() =>
-	cachedQuery(["promoted"], () =>
-		db
-			.select({ id: events.id, slug: events.slug, title: events.title })
+	cachedQuery(["promoted"], async () => {
+		const rows = await db
+			.select({
+				id: events.id,
+				slug: events.slug,
+				title: events.title,
+				thumbFilename: events.thumbFilename,
+				imagesPath: conferences.imagesPath,
+			})
 			.from(events)
+			.innerJoin(conferences, eq(events.conferenceId, conferences.id))
 			.where(and(eq(events.promoted, true), isNotNull(events.releaseDate)))
 			.orderBy(desc(events.updatedAt))
-			.limit(12),
-	),
+			.limit(12);
+		return rows.map((r) => ({
+			id: r.id,
+			slug: r.slug,
+			title: r.title,
+			thumbUrl: thumbUrl(r.thumbFilename, r.imagesPath),
+		}));
+	}),
 );
 
 const home = getRouteApi("/");
@@ -31,6 +45,9 @@ export function PromotedSection() {
 				{talks.map((t) => (
 					<li key={t.id}>
 						<Link to="/v/$slug" params={{ slug: t.slug ?? "" }}>
+							{t.thumbUrl && (
+								<img src={t.thumbUrl} alt="" loading="lazy" width={240} />
+							)}
 							{t.title}
 						</Link>
 					</li>
