@@ -11,6 +11,10 @@ export const env = createEnv({
     // files client-side to parse them, which needs CORS; the CDN doesn't send
     // CORS headers, so SRT tracks are served through this proxy instead.
     CORS_URL: z.url(),
+    // Elasticsearch (read-only, queried server-side). When both are set, search
+    // ranks via ES; otherwise it falls back to a basic SQL substring match.
+    ELASTICSEARCH_URL: z.url().optional(),
+    ELASTICSEARCH_INDEX: z.string().min(1).optional(),
   },
 
   /**

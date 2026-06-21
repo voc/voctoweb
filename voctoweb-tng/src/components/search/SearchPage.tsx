@@ -1,14 +1,76 @@
 import { getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { and, desc, eq, ilike, isNotNull, or } from "drizzle-orm";
+import { and, desc, eq, ilike, inArray, isNotNull, or } from "drizzle-orm";
 import { SearchForm } from "#/components/SearchForm.tsx";
 import { TalkGrid } from "#/components/TalkCard.tsx";
 import { db } from "#/db/index.ts";
 import { conferences, events } from "#/db/schema.ts";
 import { thumbUrl } from "#/lib/media.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
+import { searchEventSlugs } from "#/lib/server/elastic.ts";
 
 const LIMIT = 60;
+
+const cardColumns = {
+	id: events.id,
+	slug: events.slug,
+	title: events.title,
+	thumbFilename: events.thumbFilename,
+	imagesPath: conferences.imagesPath,
+} as const;
+
+type CardRow = {
+	id: number;
+	slug: string | null;
+	title: string | null;
+	thumbFilename: string | null;
+	imagesPath: string | null;
+};
+
+const toCard = (r: CardRow) => ({
+	id: r.id,
+	slug: r.slug,
+	title: r.title,
+	thumbUrl: thumbUrl(r.thumbFilename, r.imagesPath),
+});
+
+// Hydrate ES-ranked slugs into card data from Postgres, preserving ES order and
+// dropping any slug missing locally (ES may be ahead of the local DB dump).
+async function hydrate(slugs: string[]) {
+	if (slugs.length === 0) return [];
+	const rows = await db
+		.select(cardColumns)
+		.from(events)
+		.innerJoin(conferences, eq(events.conferenceId, conferences.id))
+		.where(inArray(events.slug, slugs));
+	const bySlug = new Map(rows.map((r) => [r.slug, r]));
+	return slugs.flatMap((slug) => {
+		const r = bySlug.get(slug);
+		return r ? [toCard(r)] : [];
+	});
+}
+
+// Fallback substring match when ES isn't configured/reachable.
+async function ilikeSearch(term: string) {
+	const pattern = `%${term.replace(/[\\%_]/g, "\\$&")}%`;
+	const rows = await db
+		.select(cardColumns)
+		.from(events)
+		.innerJoin(conferences, eq(events.conferenceId, conferences.id))
+		.where(
+			and(
+				isNotNull(events.releaseDate),
+				or(
+					ilike(events.title, pattern),
+					ilike(conferences.acronym, pattern),
+					ilike(conferences.title, pattern),
+				),
+			),
+		)
+		.orderBy(desc(events.viewCount))
+		.limit(LIMIT);
+	return rows.map(toCard);
+}
 
 export const searchTalks = createServerFn({ method: "GET" })
 	.validator((q: string) => q)
@@ -16,37 +78,8 @@ export const searchTalks = createServerFn({ method: "GET" })
 		cachedQuery(["search", q], async () => {
 			const term = q.trim();
 			if (!term) return [];
-			// Basic substring match on title + conference. Real full-text/relevance
-			// search is a later step. Escape LIKE wildcards so input is literal.
-			const pattern = `%${term.replace(/[\\%_]/g, "\\$&")}%`;
-			const rows = await db
-				.select({
-					id: events.id,
-					slug: events.slug,
-					title: events.title,
-					thumbFilename: events.thumbFilename,
-					imagesPath: conferences.imagesPath,
-				})
-				.from(events)
-				.innerJoin(conferences, eq(events.conferenceId, conferences.id))
-				.where(
-					and(
-						isNotNull(events.releaseDate),
-						or(
-							ilike(events.title, pattern),
-							ilike(conferences.acronym, pattern),
-							ilike(conferences.title, pattern),
-						),
-					),
-				)
-				.orderBy(desc(events.viewCount))
-				.limit(LIMIT);
-			return rows.map((r) => ({
-				id: r.id,
-				slug: r.slug,
-				title: r.title,
-				thumbUrl: thumbUrl(r.thumbFilename, r.imagesPath),
-			}));
+			const slugs = await searchEventSlugs(term);
+			return slugs ? hydrate(slugs) : ilikeSearch(term);
 		}),
 	);
 
