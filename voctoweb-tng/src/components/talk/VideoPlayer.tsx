@@ -147,6 +147,48 @@ export function VideoPlayer({ talk }: { talk: Talk }) {
   // Carries playback position across a source switch, restored on can-play.
   const resume = useRef<{ time: number; play: boolean } | null>(null);
 
+  // DASH/HLS: hand Vidstack the manifest (it loads dash.js/hls.js and exposes
+  // native Quality + Audio menus), so we skip the handrolled progressive menu.
+  // These need JS to play, so the no-JS state just shows the poster.
+  const manifest = talk.media.dash[0] ?? talk.media.hls[0];
+  if (manifest) {
+    if (!mounted) {
+      return (
+        <div className="aspect-video w-full bg-muted">
+          {poster && (
+            <img src={poster} alt="" className="h-full w-full object-cover" />
+          )}
+        </div>
+      );
+    }
+    return (
+      <MediaPlayer
+        className="aspect-video w-full"
+        src={manifest.url}
+        poster={poster ?? undefined}
+        title={title}
+        viewType="video"
+        streamType="on-demand"
+        playsInline
+      >
+        <MediaProvider>
+          {subtitles.map((t) => (
+            <Track
+              key={String(t.id)}
+              kind="subtitles"
+              src={t.url}
+              type={t.mimeType === "application/x-subrip" ? "srt" : "vtt"}
+              language={t.language}
+              label={t.languageLabel}
+            />
+          ))}
+        </MediaProvider>
+        <Poster className="vds-poster" />
+        <DefaultVideoLayout icons={defaultLayoutIcons} />
+      </MediaPlayer>
+    );
+  }
+
   const best = videos[0];
   if (!best) return <p>No video recording.</p>;
 

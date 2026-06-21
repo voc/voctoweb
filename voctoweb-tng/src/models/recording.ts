@@ -2,7 +2,13 @@ import { env } from '#/env.ts'
 import { languageLabel } from '#/lib/format.ts'
 import { join } from '#/lib/media.ts'
 
-export type RecordingKind = 'video' | 'audio' | 'subtitle' | 'other'
+export type RecordingKind =
+  | 'video'
+  | 'audio'
+  | 'subtitle'
+  | 'dash'
+  | 'hls'
+  | 'other'
 
 // The raw recording columns we select from the DB.
 export interface RawRecording {
@@ -41,6 +47,9 @@ export interface Recording {
 
 function classify(mime: string | null): RecordingKind {
   if (!mime) return 'other'
+  if (mime === 'application/dash+xml') return 'dash'
+  if (mime === 'application/vnd.apple.mpegurl' || mime === 'application/x-mpegurl')
+    return 'hls'
   if (mime.startsWith('video/')) return 'video'
   if (mime.startsWith('audio/')) return 'audio'
   if (mime === 'text/vtt' || mime === 'application/x-subrip') return 'subtitle'

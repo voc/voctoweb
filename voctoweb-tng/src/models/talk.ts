@@ -45,6 +45,8 @@ export interface Talk {
     video: Recording[]
     audio: Recording[]
     subtitle: Recording[]
+    dash: Recording[]
+    hls: Recording[]
     other: Recording[]
   }
 }
@@ -79,6 +81,8 @@ export function toTalk(
       video: byKind('video').sort((a, b) => (b.width ?? 0) - (a.width ?? 0)),
       audio: byKind('audio'),
       subtitle: byKind('subtitle'),
+      dash: byKind('dash'),
+      hls: byKind('hls'),
       other: byKind('other'),
     },
   }

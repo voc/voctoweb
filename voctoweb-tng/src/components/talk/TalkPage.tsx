@@ -89,6 +89,14 @@ export function TalkPage() {
 			)}
 			<Downloads />
 			{/* TODO: Speakers (after persons→array migration), Share, Tags */}
+			<details className="rounded-lg border border-border bg-card p-3">
+				<summary className="cursor-pointer text-sm font-medium text-muted-foreground">
+					Debug: talk JSON
+				</summary>
+				<pre className="mt-3 overflow-x-auto text-xs leading-relaxed">
+					{JSON.stringify(talk, null, 2)}
+				</pre>
+			</details>
 		</main>
 	);
 }
