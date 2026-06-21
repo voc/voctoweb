@@ -72,3 +72,4 @@ config/settings.yml
 /Session.vim
 /.bundle
 /.solargraph.yml
+/filesizes.json

@@ -245,9 +245,6 @@ GEM
     hashie (5.1.0)
       logger
     highline (3.0.1)
-    http-2 (1.2.0)
-    httpx (1.8.0)
-      http-2 (>= 1.2.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.14.0)
@@ -668,7 +665,6 @@ DEPENDENCIES
   graphql (< 2)
   graphql-query-resolver
   haml
-  httpx
   jbuilder
   jquery-rails
   kaminari
