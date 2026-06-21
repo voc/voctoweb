@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 import { Downloads } from "#/components/talk/Downloads.tsx";
 import { Metadata } from "#/components/talk/Metadata.tsx";
+import { VideoPlayer } from "#/components/talk/VideoPlayer.tsx";
 import { db } from "#/db/index.ts";
 import { events, recordings } from "#/db/schema.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
@@ -74,22 +75,13 @@ const route = getRouteApi("/v/$slug");
 
 export function TalkPage() {
 	const talk = route.useLoaderData();
-	const video = talk.recordings
-		.filter((r) => r.kind === "video" && r.html5)
-		.sort((a, b) => (b.width ?? 0) - (a.width ?? 0))[0];
 
 	return (
 		<main>
 			<section>[ConferenceHeader]</section>
 			<h1>{talk.title}</h1>
 			<section>[Speakers]</section>
-			{video ? (
-				<video controls preload="metadata">
-					<source src={video.url} type={video.mimeType} />
-				</video>
-			) : (
-				<section>[no video recording]</section>
-			)}
+			<VideoPlayer recordings={talk.recordings} />
 			<Metadata />
 			{talk.description && (
 				<div>
