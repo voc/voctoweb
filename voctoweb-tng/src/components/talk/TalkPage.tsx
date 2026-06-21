@@ -4,8 +4,9 @@ import { eq } from "drizzle-orm";
 import { Downloads } from "#/components/talk/Downloads.tsx";
 import { Metadata } from "#/components/talk/Metadata.tsx";
 import { db } from "#/db/index.ts";
-import { conferences, events, recordings } from "#/db/schema.ts";
+import { events, recordings } from "#/db/schema.ts";
 import { cachedQuery } from "#/lib/server/cache.ts";
+import { loadConference } from "#/lib/server/conference.ts";
 import { mapRecording } from "#/lib/media.ts";
 
 export const getTalk = createServerFn({ method: "GET" })
@@ -30,18 +31,9 @@ export const getTalk = createServerFn({ method: "GET" })
 				.limit(1);
 			if (!talk) return null;
 
-			const [conference] = talk.conferenceId
-				? await db
-						.select({
-							acronym: conferences.acronym,
-							title: conferences.title,
-							recordingsPath: conferences.recordingsPath,
-							imagesPath: conferences.imagesPath,
-						})
-						.from(conferences)
-						.where(eq(conferences.id, talk.conferenceId))
-						.limit(1)
-				: [];
+			const conference = talk.conferenceId
+				? await loadConference(talk.conferenceId)
+				: null;
 
 			const raw = await db
 				.select({
