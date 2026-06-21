@@ -18,6 +18,7 @@ ActiveAdmin.register Conference do
     column 'UI Path', :slug
     column :recordings_path
     column :images_path
+    column :schedule_url
     column :created_at do |conference|
       l(conference.created_at, format: :pretty_datetime)
     end
