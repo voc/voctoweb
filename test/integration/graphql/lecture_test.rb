@@ -48,6 +48,33 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
     assert_nil result['errors']
   end
 
+  test 'recording size defaults to megabytes and can be requested in other units' do
+    event = create(:event)
+    create(:recording, event: event, mime_type: 'video/webm', size: 1_073_741_824) # 1 GiB
+
+    query_string = <<-GRAPHQL
+      query($id: ID!) {
+        lecture(guid: $id) {
+          videos {
+            sizeDefault: size
+            sizeMb: size(unit: MB)
+            sizeGb: size(unit: GB)
+            sizeByte: size(unit: BYTE)
+          }
+        }
+      }
+    GRAPHQL
+
+    result = MediaBackendSchema.execute(query_string, variables: { id: event.guid })
+    assert_nil result['errors']
+
+    video = result['data']['lecture']['videos'].first
+    assert_equal 1024, video['sizeDefault']
+    assert_equal 1024, video['sizeMb']
+    assert_equal 1, video['sizeGb']
+    assert_equal 1_073_741_824, video['sizeByte']
+  end
+
   test 'load newest conference' do
     query_string = <<-GRAPHQL
       query($id: ID!) {
