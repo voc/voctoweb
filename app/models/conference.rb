@@ -7,8 +7,21 @@ class Conference < ApplicationRecord
 
   ASPECT_RATIO = ['4:3', '16:9']
 
+  TYPES = {
+    'Channel'          => 'Publisher or distribution grouping',
+    'Movie'            => 'Feature-length standalone event/publication',
+    'Grouping'         => 'Generic grouping',
+    'VideoSeries'      => 'Video-specific grouping',
+    'EventSeries'      => 'Generic recurring event',
+    'ConferenceSeries' => 'Recurring conference',
+    'Conference'       => 'Conference edition',
+    'Festival'         => 'Festival edition',
+    'Event'            => 'Generic event',
+  }.freeze
+
   has_many :events, -> { order(release_date: :desc, id: :desc) }, dependent: :destroy
   has_many :recordings, through: :events
+  has_and_belongs_to_many :organizers, class_name: 'Organisation', join_table: 'conferences_organizers'
 
   scope :with_events, -> {
     where('event_last_released_at IS NOT NULL')
