@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VSlugRouteImport } from './routes/v.$slug'
 import { Route as CAcronymRouteImport } from './routes/c.$acronym'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const CAcronymRoute = CAcronymRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/c/$acronym': typeof CAcronymRoute
   '/v/$slug': typeof VSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/c/$acronym': typeof CAcronymRoute
   '/v/$slug': typeof VSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/search': typeof SearchRoute
   '/c/$acronym': typeof CAcronymRoute
   '/v/$slug': typeof VSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/c/$acronym' | '/v/$slug'
+  fullPaths: '/' | '/search' | '/c/$acronym' | '/v/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/c/$acronym' | '/v/$slug'
-  id: '__root__' | '/' | '/c/$acronym' | '/v/$slug'
+  to: '/' | '/search' | '/c/$acronym' | '/v/$slug'
+  id: '__root__' | '/' | '/search' | '/c/$acronym' | '/v/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SearchRoute: typeof SearchRoute
   CAcronymRoute: typeof CAcronymRoute
   VSlugRoute: typeof VSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SearchRoute: SearchRoute,
   CAcronymRoute: CAcronymRoute,
   VSlugRoute: VSlugRoute,
 }
