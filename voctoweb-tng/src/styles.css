@@ -1,5 +1,51 @@
-
 @import "tailwindcss";
+
+/* Semantic color roles. Components reference these (bg-card, text-foreground,
+   border-border, …) rather than raw palette values, so retheming is one place.
+   Light by default; dark follows the OS with no JS (keeps the no-JS path clean). */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+}
+
+:root {
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.22 0.02 264);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 264);
+  --muted: oklch(0.96 0.004 264);
+  --muted-foreground: oklch(0.52 0.02 264);
+  --primary: oklch(0.55 0.17 264);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.68 0.13 200);
+  --accent-foreground: oklch(0.2 0.03 240);
+  --border: oklch(0.91 0.008 264);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.17 0.012 264);
+    --foreground: oklch(0.96 0.003 264);
+    --card: oklch(0.21 0.014 264);
+    --card-foreground: oklch(0.96 0.003 264);
+    --muted: oklch(0.27 0.014 264);
+    --muted-foreground: oklch(0.71 0.02 264);
+    --primary: oklch(0.67 0.16 264);
+    --primary-foreground: oklch(0.16 0.02 264);
+    --accent: oklch(0.72 0.13 200);
+    --accent-foreground: oklch(0.17 0.02 264);
+    --border: oklch(0.3 0.014 264);
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -13,5 +59,8 @@ body,
 
 body {
   margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
-

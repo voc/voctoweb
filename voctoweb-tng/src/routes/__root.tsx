@@ -35,6 +35,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <header className="sticky top-0 z-10 border-b border-border bg-card/80 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl items-center px-4 py-3">
+            <a href="/" className="font-semibold tracking-tight">
+              media.ccc.de
+            </a>
+          </div>
+        </header>
         {children}
         <TanStackDevtools
           config={{
