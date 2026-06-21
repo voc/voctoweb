@@ -1,21 +1,20 @@
 class EventUpdateWorker
   include Sidekiq::Worker
-  include FahrplanParser
 
-  # bulk update several events using the saved schedule.xml files
+  # bulk update several events using the saved schedule files
   def perform(ids)
-    logger.info "bulk updating events from XML for events: #{ids.join(', ')}"
-    @fahrplans = {}
+    logger.info "bulk updating events from schedule for events: #{ids.join(', ')}"
+    @parsers = {}
     @event_infos = {}
 
     ActiveRecord::Base.transaction do
       Event.where(id: ids).each do |event|
         conference = event.conference
 
-        fahrplan = fahrplan_for_conference(conference)
-        next unless fahrplan
+        parser = parser_for_conference(conference)
+        next unless parser
 
-        info = event_info(fahrplan, event.guid)
+        info = event_info(parser, event.guid)
         next unless info.present?
 
         event.update_event_info(info)
@@ -25,12 +24,15 @@ class EventUpdateWorker
 
   private
 
-  def fahrplan_for_conference(conference)
-    @fahrplans[conference.acronym] ||= FahrplanParser.new(conference.schedule_xml)
+  def parser_for_conference(conference)
+    @parsers[conference.acronym] ||= conference.schedule_parser
+  rescue StandardError => e
+    logger.error "could not build schedule parser for #{conference.acronym}: #{e.message}"
+    nil
   end
 
-  def event_info(fahrplan, guid)
-    @event_infos[fahrplan] ||= fahrplan.event_info_by_guid
-    @event_infos[fahrplan][guid]
+  def event_info(parser, guid)
+    @event_infos[parser] ||= parser.event_info_by_guid
+    @event_infos[parser][guid]
   end
 end

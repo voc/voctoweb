@@ -84,6 +84,17 @@ class Conference < ApplicationRecord
     self.aspect_ratio ||= '16:9'
   end
 
+  def schedule_parser
+    content = schedule_xml.to_s
+    if content.lstrip.start_with?('<')
+      FahrplanParser::FahrplanParser.new(content)
+    elsif JSON.parse(content).dig('schedule', 'events')
+      Schedule2JsonParser::Schedule2JsonParser.new(content)
+    else
+      Schedule1JsonParser::Schedule1JsonParser.new(content)
+    end
+  end
+
   def download!
     return unless schedule_url
 

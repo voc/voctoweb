@@ -1,0 +1,166 @@
+<div style="max-width:960px">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+    <h2 style="margin:0;font-size:20px">Schedule Import Preview — <%= @conference.acronym %></h2>
+    <div style="display:flex;gap:8px">
+      <%= link_to '← Back', admin_conference_path(@conference),
+            style: 'padding:7px 14px;border:1px solid #ccc;border-radius:3px;font-size:13px;text-decoration:none;color:#333;background:#f5f5f5' %>
+      <%= button_to 'Apply Import',
+            schedule_import_apply_admin_conference_path(@conference),
+            method: :post,
+            style: 'padding:7px 14px;background:#242424;color:#fff;border:none;border-radius:3px;font-size:13px;cursor:pointer',
+            data: { confirm: 'Apply all changes from the schedule? This will create/update persons and participations.' } %>
+    </div>
+  </div>
+
+  <%# ── Summary ──────────────────────────────────────────────────────────── %>
+  <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+    <% summary = [
+      { count: @preview[:person_changes].count { |c| c.status == :create }, label: 'new persons',   color: '#1a7a1a' },
+      { count: @preview[:person_changes].count { |c| c.status == :update && c.field_changes.any? }, label: 'person updates', color: '#b07800' },
+      { count: @preview[:participation_changes].size, label: 'new participations', color: '#38678b' },
+      { count: @preview[:event_changes].size,         label: 'event changes',       color: '#555' },
+    ] %>
+    <% summary.each do |s| %>
+      <div style="padding:10px 16px;border:1px solid <%= s[:color] %>22;border-radius:4px;background:<%= s[:color] %>0d;text-align:center;min-width:100px">
+        <div style="font-size:24px;font-weight:700;color:<%= s[:color] %>"><%= s[:count] %></div>
+        <div style="font-size:12px;color:#555;margin-top:2px"><%= s[:label] %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# ── Persons ──────────────────────────────────────────────────────────── %>
+  <% new_persons    = @preview[:person_changes].select { |c| c.status == :create } %>
+  <% update_persons = @preview[:person_changes].select { |c| c.status == :update && c.field_changes.any? } %>
+  <% if new_persons.any? || update_persons.any? %>
+    <details open style="margin-bottom:12px;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
+      <summary style="padding:10px 14px;background:#f5f5f5;cursor:pointer;font-weight:600;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px">
+        Persons
+        <% if new_persons.any? %><span style="font-size:11px;font-weight:700;color:#1a7a1a;border:1px solid #1a7a1a;border-radius:3px;padding:1px 6px"><%= new_persons.size %> new</span><% end %>
+        <% if update_persons.any? %><span style="font-size:11px;font-weight:700;color:#b07800;border:1px solid #b07800;border-radius:3px;padding:1px 6px"><%= update_persons.size %> updates</span><% end %>
+      </summary>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="background:#fafafa;border-bottom:1px solid #e0e0e0">
+            <th style="padding:8px 12px;text-align:left;font-weight:600;width:80px">Status</th>
+            <th style="padding:8px 12px;text-align:left">Name</th>
+            <th style="padding:8px 12px;text-align:left">Changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (new_persons + update_persons).each do |c| %>
+            <tr style="border-bottom:1px solid #f0f0f0">
+              <td style="padding:8px 12px">
+                <% if c.status == :create %>
+                  <span style="font-size:11px;font-weight:700;color:#1a7a1a">+ NEW</span>
+                <% else %>
+                  <span style="font-size:11px;font-weight:700;color:#b07800">↻ UPDATE</span>
+                <% end %>
+              </td>
+              <td style="padding:8px 12px">
+                <%= c.attrs[:name] %>
+                <% if c.existing %>
+                  <br><span style="font-size:11px;color:#999">matched: <%= link_to c.existing.name, admin_person_path(c.existing), style: 'color:#38678b' %></span>
+                <% end %>
+              </td>
+              <td style="padding:8px 12px;color:#555;font-size:12px">
+                <% if c.status == :create %>
+                  <% [:public_name, :avatar_url, :description].each do |f| %>
+                    <% val = c.attrs[f].presence %>
+                    <% if val %>
+                      <div><strong><%= f %>:</strong> <%= truncate(val, length: 80) %></div>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% c.field_changes.each do |field, (old_val, new_val)| %>
+                    <div>
+                      <strong><%= field %>:</strong>
+                      <span style="color:#932419"><%= truncate(old_val.to_s.presence || '(empty)', length: 60) %></span>
+                      →
+                      <span style="color:#1a7a1a"><%= truncate(new_val.to_s, length: 60) %></span>
+                    </div>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </details>
+  <% end %>
+
+  <%# ── Participations ───────────────────────────────────────────────────── %>
+  <% if @preview[:participation_changes].any? %>
+    <details style="margin-bottom:12px;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
+      <summary style="padding:10px 14px;background:#f5f5f5;cursor:pointer;font-weight:600;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px">
+        Participations
+        <span style="font-size:11px;font-weight:700;color:#38678b;border:1px solid #38678b;border-radius:3px;padding:1px 6px"><%= @preview[:participation_changes].size %> new</span>
+      </summary>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="background:#fafafa;border-bottom:1px solid #e0e0e0">
+            <th style="padding:8px 12px;text-align:left">Person</th>
+            <th style="padding:8px 12px;text-align:left">Event</th>
+            <th style="padding:8px 12px;text-align:left;width:100px">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @preview[:participation_changes].each do |c| %>
+            <tr style="border-bottom:1px solid #f0f0f0">
+              <td style="padding:8px 12px"><%= c.person_attrs[:name] %></td>
+              <td style="padding:8px 12px">
+                <%= link_to c.event.title.presence || c.event.slug, admin_event_path(c.event), style: 'color:#38678b' %>
+              </td>
+              <td style="padding:8px 12px;color:#555"><%= c.person_attrs[:role] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </details>
+  <% end %>
+
+  <%# ── Event metadata changes ───────────────────────────────────────────── %>
+  <% if @preview[:event_changes].any? %>
+    <details style="margin-bottom:12px;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
+      <summary style="padding:10px 14px;background:#f5f5f5;cursor:pointer;font-weight:600;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px">
+        Event metadata changes
+        <span style="font-size:11px;font-weight:700;color:#555;border:1px solid #aaa;border-radius:3px;padding:1px 6px"><%= @preview[:event_changes].size %></span>
+      </summary>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="background:#fafafa;border-bottom:1px solid #e0e0e0">
+            <th style="padding:8px 12px;text-align:left">Event</th>
+            <th style="padding:8px 12px;text-align:left">Field</th>
+            <th style="padding:8px 12px;text-align:left">Current</th>
+            <th style="padding:8px 12px;text-align:left">New</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @preview[:event_changes].each do |c| %>
+            <% first = true %>
+            <% c.field_changes.each do |field, (old_val, new_val)| %>
+              <tr style="border-bottom:1px solid #f0f0f0">
+                <td style="padding:8px 12px">
+                  <% if first %>
+                    <%= link_to c.event.slug, admin_event_path(c.event), style: 'color:#38678b' %>
+                    <% first = false %>
+                  <% end %>
+                </td>
+                <td style="padding:8px 12px;font-weight:600;color:#555"><%= field %></td>
+                <td style="padding:8px 12px;color:#932419;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><%= truncate(old_val.to_s, length: 80) %></td>
+                <td style="padding:8px 12px;color:#1a7a1a;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><%= truncate(new_val.to_s, length: 80) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </details>
+  <% end %>
+
+  <% if @preview.values.all?(&:empty?) %>
+    <div style="padding:24px;text-align:center;color:#666;border:1px solid #e0e0e0;border-radius:4px">
+      No changes detected — the database is already in sync with the schedule.
+    </div>
+  <% end %>
+
+</div>
