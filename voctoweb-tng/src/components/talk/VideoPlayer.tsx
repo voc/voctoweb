@@ -1,9 +1,12 @@
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import {
+  isDASHProvider,
+  isHLSProvider,
   MediaPlayer,
   type MediaPlayerInstance,
   MediaProvider,
+  type MediaProviderAdapter,
   Menu,
   Poster,
   Track,
@@ -19,6 +22,15 @@ import type { Recording } from "#/models/recording.ts";
 import type { Talk } from "#/models/talk.ts";
 
 const qualityKey = (r: Recording) => r.resolution ?? "Source";
+
+// Self-host the adaptive-streaming libraries instead of letting Vidstack fetch
+// them from a public CDN (jsdelivr) at runtime, which would leak every viewer's
+// IP to a third party. The dynamic import bundles each as a lazy chunk served
+// from our own origin, loaded only when an adaptive talk actually plays.
+function setLocalAdaptiveLibrary(provider: MediaProviderAdapter | null) {
+  if (isDASHProvider(provider)) provider.library = () => import("dashjs");
+  if (isHLSProvider(provider)) provider.library = () => import("hls.js");
+}
 
 // Two independent menus (Language + Quality) over the available progressive
 // recordings. The (language × quality) matrix is sparse, so options that don't
@@ -170,6 +182,7 @@ export function VideoPlayer({ talk }: { talk: Talk }) {
         viewType="video"
         streamType="on-demand"
         playsInline
+        onProviderChange={setLocalAdaptiveLibrary}
       >
         <MediaProvider>
           {subtitles.map((t) => (
