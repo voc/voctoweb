@@ -18,6 +18,7 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import { ChevronRight, Gauge, Languages } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { addCdnFallbackBaseUrl } from "#/lib/dash-failover.ts";
 import type { Recording } from "#/models/recording.ts";
 import type { Talk } from "#/models/talk.ts";
 
@@ -28,7 +29,15 @@ const qualityKey = (r: Recording) => r.resolution ?? "Source";
 // IP to a third party. The dynamic import bundles each as a lazy chunk served
 // from our own origin, loaded only when an adaptive talk actually plays.
 function setLocalAdaptiveLibrary(provider: MediaProviderAdapter | null) {
-  if (isDASHProvider(provider)) provider.library = () => import("dashjs");
+  if (isDASHProvider(provider)) {
+    // we also need specifically dashjs v5 for the resonse interceptor to work
+    // also some remapping to an object with { default: dashjs } is needed
+    // because that's the shape vidstack expects
+    provider.library = () => import("dashjs").then((m) => ({ default: m }));
+    // Add a CDN fallback BaseURL to each manifest so we can fall back to the CDN
+    // if the mirror is missing the file
+    provider.onInstance((dash) => dash.addResponseInterceptor(addCdnFallbackBaseUrl));
+  }
   if (isHLSProvider(provider)) provider.library = () => import("hls.js");
 }
 
