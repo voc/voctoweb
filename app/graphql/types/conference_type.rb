@@ -4,7 +4,7 @@ module Types
     field :id, ID, null: false
     field :acronym, String, "The acronym of this conference, used as its identifier", null: false
     field :title, String, "The title of this conference", null: false
-    field :slug, String, "The URL slug of this conference", null: false
+    field :slug, SlugType, "The URL slug of this conference", null: false
     field :lectures, LectureType.connection_type, null: true
 
     field :url, UrlType, "A URL pointing to the conference page in vocotweb frontend", null: false
