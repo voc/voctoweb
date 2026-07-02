@@ -14,32 +14,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "active_admin_comments", id: :serial, force: :cascade do |t|
+  create_table "active_admin_comments", force: :cascade do |t|
     t.integer "author_id"
-    t.string "author_type"
+    t.string "author_type", limit: 255
     t.text "body"
     t.datetime "created_at", precision: nil
-    t.string "namespace"
-    t.string "resource_id", null: false
-    t.string "resource_type", null: false
+    t.string "namespace", limit: 255
+    t.string "resource_id", limit: 255, null: false
+    t.string "resource_type", limit: 255, null: false
     t.datetime "updated_at", precision: nil
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", id: :serial, force: :cascade do |t|
+  create_table "admin_users", force: :cascade do |t|
     t.datetime "created_at", precision: nil
     t.datetime "current_sign_in_at", precision: nil
-    t.string "current_sign_in_ip"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "current_sign_in_ip", limit: 255
+    t.string "email", limit: 255, default: "", null: false
+    t.string "encrypted_password", limit: 255, default: "", null: false
     t.datetime "last_sign_in_at", precision: nil
-    t.string "last_sign_in_ip"
+    t.string "last_sign_in_ip", limit: 255
     t.string "provider"
     t.datetime "remember_created_at", precision: nil
     t.datetime "reset_password_sent_at", precision: nil
-    t.string "reset_password_token"
+    t.string "reset_password_token", limit: 255
     t.integer "sign_in_count", default: 0
     t.string "uid"
     t.datetime "updated_at", precision: nil
@@ -48,33 +48,33 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "api_keys", id: :serial, force: :cascade do |t|
-    t.string "key"
-    t.string "description"
+  create_table "api_keys", force: :cascade do |t|
     t.datetime "created_at", precision: nil
+    t.string "description", limit: 255
+    t.string "key", limit: 255
     t.datetime "updated_at", precision: nil
   end
 
-  create_table "conferences", id: :serial, force: :cascade do |t|
-    t.string "acronym"
-    t.string "aspect_ratio"
+  create_table "conferences", force: :cascade do |t|
+    t.string "acronym", limit: 255
+    t.string "aspect_ratio", limit: 255
     t.datetime "created_at", precision: nil
     t.text "custom_css"
     t.text "description"
     t.integer "downloaded_events_count", default: 0, null: false
     t.datetime "event_last_released_at", precision: nil
     t.string "global_event_notes"
-    t.string "images_path"
-    t.string "link"
-    t.string "logo"
+    t.string "images_path", limit: 255
+    t.string "link", limit: 255
+    t.string "logo", limit: 255
     t.jsonb "metadata", default: {}
-    t.string "recordings_path"
-    t.string "schedule_state", default: "not_present", null: false
-    t.string "schedule_url"
+    t.string "recordings_path", limit: 255
+    t.string "schedule_state", limit: 255, default: "not_present", null: false
+    t.string "schedule_url", limit: 255
     t.text "schedule_xml"
-    t.string "slug", default: ""
+    t.string "slug", limit: 255, default: ""
     t.jsonb "streaming", default: {}
-    t.string "title"
+    t.string "title", limit: 255
     t.datetime "updated_at", precision: nil
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
@@ -84,7 +84,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.datetime "last_updated_at", precision: nil
   end
 
-  create_table "events", id: :serial, force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.integer "conference_id"
     t.datetime "created_at", precision: nil
     t.datetime "date", precision: nil
@@ -92,24 +92,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.string "doi"
     t.integer "downloaded_recordings_count", default: 0
     t.integer "duration", default: 0
-    t.string "guid"
-    t.string "link"
+    t.string "guid", limit: 255
+    t.string "link", limit: 255
     t.jsonb "metadata", default: {}
     t.string "notes"
     t.string "original_language"
     t.text "persons"
-    t.string "poster_filename"
+    t.string "poster_filename", limit: 255
     t.boolean "promoted"
     t.datetime "release_date", precision: nil
-    t.string "slug"
-    t.string "state", default: "new", null: false
-    t.string "subtitle"
+    t.string "slug", limit: 255
+    t.string "subtitle", limit: 255
     t.string "tags", default: [], null: false, array: true
     t.text "tags_yaml"
-    t.string "thumb_filename"
+    t.string "thumb_filename", limit: 255
     t.string "thumbnails_filename", default: ""
     t.string "timeline_filename", default: ""
-    t.string "title"
+    t.string "title", limit: 255
     t.datetime "updated_at", precision: nil
     t.integer "view_count", default: 0
     t.index ["conference_id"], name: "index_events_on_conference_id"
@@ -118,19 +117,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.index ["release_date"], name: "index_events_on_release_date"
     t.index ["slug", "id"], name: "index_events_on_slug_and_id"
     t.index ["slug"], name: "index_events_on_slug"
-    t.index ["state"], name: "index_events_on_state"
+    t.index ["tags"], name: "index_events_on_tags", using: :gin
     t.index ["title"], name: "index_events_on_title"
   end
 
-  create_table "news", id: :serial, force: :cascade do |t|
+  create_table "news", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", precision: nil
     t.date "date"
-    t.string "title"
+    t.string "title", limit: 255
     t.datetime "updated_at", precision: nil
   end
 
-  create_table "recording_views", id: :serial, force: :cascade do |t|
+  create_table "recording_views", force: :cascade do |t|
     t.datetime "created_at", precision: nil
     t.string "identifier", default: ""
     t.integer "recording_id"
@@ -139,17 +138,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.index ["recording_id"], name: "index_recording_views_on_recording_id"
   end
 
-  create_table "recordings", id: :serial, force: :cascade do |t|
+  create_table "recordings", force: :cascade do |t|
     t.datetime "created_at", precision: nil
     t.integer "event_id"
-    t.string "filename"
-    t.string "folder"
+    t.string "filename", limit: 255
+    t.string "folder", limit: 255
     t.integer "height"
     t.boolean "high_quality", default: true, null: false
     t.boolean "html5", default: false, null: false
     t.string "language", default: "eng"
     t.integer "length", comment: "duration in seconds"
-    t.string "mime_type"
+    t.string "mime_type", limit: 255
     t.bigint "size", comment: "file size in bytes"
     t.string "state", limit: 255, default: "new", null: false
     t.boolean "translated", default: false, null: false
@@ -158,6 +157,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
     t.index ["event_id"], name: "index_recordings_on_event_id"
     t.index ["filename"], name: "index_recordings_on_filename"
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
+    t.index ["state", "mime_type"], name: "index_recordings_on_state_and_mime_type"
+    t.index ["state"], name: "index_recordings_on_state"
   end
 
   create_table "site_settings", force: :cascade do |t|
@@ -170,10 +171,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
   end
 
   create_table "web_feeds", force: :cascade do |t|
+    t.text "content"
     t.string "key"
     t.string "kind"
     t.datetime "last_build", precision: nil
-    t.text "content"
     t.index ["key", "kind"], name: "index_web_feeds_on_key_and_kind", unique: true
   end
 end
