@@ -1,0 +1,18 @@
+-# Experimental Vidstack player (opt-in via ?player=vidstack). Both the library
+-# AND the bootstrap glue are prebuilt offline into a self-contained, self-hosted
+-# blob by a separate repo:
+-#   https://forgejo.c3voc.de/voc/voctoweb-vidstack-player.git
+-# Only the built blob is vendored here, and it is NOT in the global
+-# application.js — it only loads on this partial. dash.js / hls.js are inlined
+-# (no CDN at runtime).
+
+- dash = event.recordings.by_mime_type('application/dash+xml').first
+- sources = dash ? { src: dash.url, type: 'application/dash+xml' } : event.videos_sorted_by_language.map { |r| { src: r.url, type: r.mime_type } }
+- tracks = event.subtitles.reject { |t| t.state == 'todo' && t.mime_type == 'text/vtt' }.map do |t|
+  - { src: t.cors_url, kind: 'subtitles', language: t.language_iso_639_1, label: t.label, type: (t.mime_type == 'application/x-subrip' ? 'srt' : 'vtt') }
+- config = { src: sources, poster: event.poster_url, title: event.title, tracks: tracks, thumbnails: (event.timelens_present? ? event.thumbnails_url : nil) }
+
+= stylesheet_link_tag 'vidstack-player'
+= javascript_include_tag 'vidstack-player'
+
+.vidstack-player{ data: { config: config.to_json } }

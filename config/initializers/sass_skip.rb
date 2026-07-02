@@ -2,7 +2,9 @@ require "sprockets/sass_compressor"
 
 # https://stackoverflow.com/a/77544219
 module SkipSassCompression
-  SEARCH = "graphiql-react".freeze
+  # Prebuilt, already-minified vendor blobs whose modern CSS libsass can't
+  # parse; "vds-" is the class prefix of the vendored vidstack-player.css.
+  SEARCH = ["graphiql-react", "vds-"].freeze
 
   def call(input)
     if skip_compression?(input[:data])
@@ -13,7 +15,7 @@ module SkipSassCompression
   end
 
   def skip_compression?(body)
-    body.include?(SEARCH)
+    SEARCH.any? { |marker| body.include?(marker) }
   end
 end
 

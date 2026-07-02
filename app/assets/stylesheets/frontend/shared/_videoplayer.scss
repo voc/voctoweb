@@ -5,7 +5,7 @@
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
-      .mejs__container.video, >video, div[data-player], .video-native {
+      .mejs__container.video, >video, div[data-player], .video-native, .vidstack-player {
         margin-left: -(($w - ($max-width - 30))/2)  !important;
 
         &.mejs__container-fullscreen {
@@ -51,7 +51,9 @@
   max-height: 576px;
 
   .mejs__container,
-  video {
+  video,
+  .vidstack-player,
+  .vidstack-player media-player {
     width: 100% !important;
     height: 100% !important;
   }
