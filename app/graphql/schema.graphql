@@ -151,7 +151,7 @@ This entity is an Event with multiple Files e.g. Video and Audio recordings,
 subtitles (SRT) as well as PDFs e.g. the lecture slides
 """
 type Lecture {
-  audios: [Resource!]
+  audios: [Resource!]!
 
   """
   The conference this event belongs to
@@ -199,7 +199,7 @@ type Lecture {
     last: Int
   ): ResourceConnection!
   guid: ID!
-  images: LectureImage
+  images: LectureImage!
 
   """
   URL pointing to the conference event website
@@ -228,7 +228,7 @@ type Lecture {
   """
   releaseDate: DateTime
   relive: JSON
-  slides: [Resource!]
+  slides: [Resource!]!
 
   """
   The URL slug of this event
@@ -239,13 +239,13 @@ type Lecture {
   The event's subtitle that may be displayed below the title
   """
   subtitle: String
-  subtitles: [Resource!]
+  subtitles: [Resource!]!
 
   """
   Tags/keywords describing the event
   """
   tags: [String!]
-  timelens: LectureTimelens
+  timelens: LectureTimelens!
 
   """
   The title of this event

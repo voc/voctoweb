@@ -34,9 +34,9 @@ module Types
 
     field :video_preferred, ResourceType, null: false
     field :videos, [ResourceType], null: false
-    field :audios, [ResourceType], null: true
-    field :subtitles, [ResourceType], null: true
-    field :slides, [ResourceType], null: true
+    field :audios, [ResourceType], null: false
+    field :subtitles, [ResourceType], null: false
+    field :slides, [ResourceType], null: false
     field :files, ResourceType.connection_type, null: false
 
     # field :thumbnail, Types::ImageType, null: true
@@ -44,7 +44,7 @@ module Types
       field :poster_url, UrlType, 'URL pointing to a preview/poster image of the event', null: true
       field :thumb_url, UrlType, 'URL pointing to a smaller version of the poster image', null: true
     end
-    field :images, LectureImageType, null: true
+    field :images, LectureImageType, null: false
     def images
       object
     end
@@ -53,7 +53,7 @@ module Types
       field :timeline_url, UrlType, 'URL pointing timelens timline image of the event', null: true
       field :thumbnails_url, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
     end
-    field :timelens, LectureTimelensType, null: true
+    field :timelens, LectureTimelensType, null: false
     def timelens
       object
     end
