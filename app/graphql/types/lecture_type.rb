@@ -33,6 +33,7 @@ module Types
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
     field :video_preferred, ResourceType, null: false
+    field :video_primary, ResourceType, null: false
     field :videos, [ResourceType], null: false
     field :audios, [ResourceType], null: false
     field :subtitles, [ResourceType], null: false
@@ -94,6 +95,10 @@ module Types
     # is defined in frontend model
     def video_preferred
       object.preferred_recording
+    end
+
+    def video_primary
+      object.recording_for_master_feed
     end
 
     def audios

@@ -262,6 +262,7 @@ type Lecture {
   """
   url: URL!
   videoPreferred: Resource!
+  videoPrimary: Resource!
   videos: [Resource!]!
 
   """
