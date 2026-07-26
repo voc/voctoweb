@@ -4,7 +4,7 @@ module Types
 
     field :label, String, null: false
     field :filename, String, null: false
-    field :url, String, "A URL pointing to the CDN location of this recording", null: false
+    field :url, UrlType, "A URL pointing to the CDN location of this recording", null: false
     field :language, String, "The recordings's language, encoded as ISO 639-2", null: true
     field :duration, Integer, "The recordings's duration in seconds", null: false
     field :mime_type, String, "The recordings's mime type, e.g. video/mp4", null: false

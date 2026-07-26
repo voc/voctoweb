@@ -233,7 +233,7 @@ type Lecture {
   """
   The URL slug of this event
   """
-  slug: URL!
+  slug: String!
 
   """
   The event's subtitle that may be displayed below the title
@@ -493,7 +493,7 @@ type Resource {
   """
   A URL pointing to the CDN location of this recording
   """
-  url: String!
+  url: URL!
 
   """
   The width of this recording in px, if it is a video

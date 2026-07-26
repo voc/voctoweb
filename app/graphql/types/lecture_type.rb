@@ -13,7 +13,7 @@ module Types
     field :subtitle, String, "The event's subtitle that may be displayed below the title", null: true
     field :description, String, "The event's description", null: true
 
-    field :slug, UrlType, "The URL slug of this event", null: false
+    field :slug, String, "The URL slug of this event", null: false
     field :url, UrlType, "A URL pointing to this lecture's page in vocotweb frontend", null: false
 
     field :original_language, String, "The event's original language, encoded as ISO 639-2", null: true
