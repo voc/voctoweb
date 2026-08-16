@@ -19,6 +19,9 @@ module Types
     field :updated_at, DateTimeType, "Identifies the date and time when the object was last updated", null: false
     field :event_last_released_at, DateTimeType, "Identifies the date and time when a event was last released", null: true
 
+    field :metadata_raw, JsonType, "The raw metadata for this conference, as stored in the database", null: true, deprecation_reason: "experimental"
+    field :streaming_raw, JsonType, "The raw streaming information for this conference, as provided by streaming v2 API", null: true, deprecation_reason: "experimental"
+
     def id
       object.acronym
     end
@@ -37,6 +40,14 @@ module Types
 
     def recordings_url
       object.get_recordings_url
+    end
+
+    def metadata_raw
+      object.metadata
+    end
+
+    def streaming_raw
+      object.streaming
     end
   end
 end
