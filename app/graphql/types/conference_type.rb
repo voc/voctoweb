@@ -2,7 +2,7 @@ module Types
   class ConferenceType < Types::BaseObject
     description "This entity groups multiple lectures together, e.g. a Conference or Lecture Series"
     field :id, ID, null: false
-    field :acronym, String, "The acronym of this conference, used as its identifier", null: false
+    field :acronym, SlugType, "The acronym of this conference, used as its identifier", null: false
     field :title, String, "The title of this conference", null: false
     field :slug, SlugType, "The URL slug of this conference", null: false
     field :lectures, LectureType.connection_type, null: true
