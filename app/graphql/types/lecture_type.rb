@@ -32,12 +32,12 @@ module Types
     field :link, UrlType, "URL pointing to the conference event website", null: true
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
-    field :video_preferred, ResourceType, null: false
-    field :video_primary, ResourceType, null: false
-    field :videos, [ResourceType], null: false
-    field :audios, [ResourceType], null: false
+    field :video_preferred, ResourceType, "simlified access to single language video in original language", null: false
+    field :video, ResourceType, "main MP4 video, possibly with multiple audio and video tracks", null: false
+    field :videos, [ResourceType], "all video recordings assigned to this item", null: false
+    field :audios, [ResourceType], "all audio recordings assigned to this item", null: false
     field :subtitles, [ResourceType], null: false
-    field :slides, [ResourceType], null: false
+    field :slides, [ResourceType], "PDF slides, if provided", null: false
     field :files, ResourceType.connection_type, null: false
 
     # field :thumbnail, Types::ImageType, null: true

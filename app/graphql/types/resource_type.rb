@@ -7,7 +7,7 @@ module Types
     field :url, UrlType, "A URL pointing to the CDN location of this recording", null: false
     field :language, String, "The recordings's language, encoded as ISO 639-2", null: true
     field :duration, Integer, "The recordings's duration in seconds", null: false
-    field :mime_type, String, "The recordings's mime type, e.g. video/mp4", null: false
+    field :mime_type, String, "The recordings's mime type, e.g. `video/mp4`", null: false
     field :width, Integer, "The width of this recording in px, if it is a video", null: false
     field :height, Integer, "The height of this recording in px, if it is a video", null: false
     field :high_quality, Boolean, "Whether this recording is a video with at least 720p resolution", null: false
