@@ -40,6 +40,26 @@ query LectureQueryExample {
 }
 ```
 
+#### Query a conference with images
+
+``` graphql
+query ConferenceQueryExample {
+  conference(id: "36c3") {
+    acronym
+    title
+    logo(prefer: SVG) {
+      url
+      mimeType
+      type
+    }
+    images {
+      url
+      mimeType
+      type
+    }
+  }
+}
+```
 
 #### Query promoted items/talks
 
