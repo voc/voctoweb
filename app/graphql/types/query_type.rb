@@ -3,6 +3,14 @@ module Types
     # add_field(GraphQL::Types::Relay::NodeField)
     # add_field(GraphQL::Types::Relay::NodesField)
 
+    field :promoted, LectureType.connection_type, null: true, max_page_size: 30 do
+      description 'Promoted lectures featured on the start page'
+      argument :offset, Integer, default_value: 0, required: false, description: 'Offset for pagination'
+    end
+    def promoted(offset:, first: nil)
+      Event.promoted(first || 10).offset(offset)
+    end
+
     field :conference, ConferenceType, null: true do
       description 'Find a conference by acronym'
       argument :id, ID, required: true

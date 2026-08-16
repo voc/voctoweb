@@ -190,4 +190,80 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
       assert_equal 1, result['data']['lectureSearch'].count
     end
   end
+  test 'load promoted lectures' do
+    query_string = <<-GRAPHQL
+      query($first: Int, $offset: Int) {
+        promoted(first: $first, offset: $offset) {
+          nodes {
+            title
+            guid
+            promoted
+          }
+        }
+      }
+    GRAPHQL
+
+    # Create some promoted and non-promoted events
+    create(:event, promoted: true, release_date: 2.days.ago)
+    create(:event, promoted: true, release_date: 1.day.ago)
+    create(:event, promoted: false)
+
+    result = MediaBackendSchema.execute(query_string, variables: { first: 10, offset: 0 })
+    assert_nil result['errors']
+    promoted_items = result['data']['promoted']['nodes']
+    assert_equal 2, promoted_items.count
+    assert(promoted_items.all? { |l| l['promoted'] })
+  end
+
+  test 'load promoted lectures with limit' do
+    query_string = <<-GRAPHQL
+      query($first: Int, $offset: Int) {
+        promoted(first: $first, offset: $offset) {
+          nodes {
+            guid
+          }
+        }
+      }
+    GRAPHQL
+
+    # Create 15 promoted events
+    create_list(:event, 15, promoted: true)
+
+    result = MediaBackendSchema.execute(query_string, variables: { first: 5, offset: 0 })
+    assert_nil result['errors']
+    assert_equal 5, result['data']['promoted']['nodes'].count
+  end
+
+  test 'load promoted lectures as connection with pagination' do
+    query_string = <<-GRAPHQL
+      query($first: Int, $offset: Int) {
+        promoted(first: $first, offset: $offset) {
+          nodes {
+            title
+            guid
+            promoted
+          }
+          edges {
+            cursor
+            node {
+              guid
+            }
+          }
+          pageInfo {
+            hasNextPage
+          }
+        }
+      }
+    GRAPHQL
+
+    create(:event, promoted: true)
+    create(:event, promoted: true)
+    create(:event, promoted: false)
+
+    result = MediaBackendSchema.execute(query_string, variables: { first: 10, offset: 0 })
+    assert_nil result['errors']
+    connection = result['data']['promoted']
+    assert_equal 2, connection['nodes'].count
+    assert(connection['nodes'].all? { |n| n['promoted'] })
+  end
 end

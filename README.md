@@ -41,6 +41,32 @@ query LectureQueryExample {
 ```
 
 
+#### Query promoted items/talks
+
+``` graphql
+query PromotedExample {
+  promoted(first: 10) {
+    nodes {
+      guid
+      title
+      promoted
+      conference {
+        acronym
+        title
+      }
+      video(prefer: MP4) {
+        url
+        mimeType
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+```
+
+
 ### Public JSON API
 
 The public API provides a programmatic access to the data behind media.ccc.de. Consumers of this API are typically player apps for different ecosystems, see https://media.ccc.de/about.html#apps for a 'full' list. The whole API is "discoverable" starting from https://api.media.ccc.de/public/conferences ; Available methods:
