@@ -1,11 +1,11 @@
 """
-This entity groups multiple lectures together, e.g. a Conference or Lecture Series
+This entity groups multiple items together, e.g. a Conference or Lecture Series
 """
 type Conference {
   """
   The acronym of this conference, used as its identifier
   """
-  acronym: String!
+  acronym: Slug!
 
   """
   The aspect ratio of the conference's recordings
@@ -18,16 +18,21 @@ type Conference {
   description: String
 
   """
-  Identifies the date and time when a event was last released
+  when was an item last added in this grouping
   """
   eventLastReleasedAt: DateTime
   id: ID!
 
   """
+  All images assigned to this conference, includes banner, logos in light & dark variants, etc.
+  """
+  images: [Image!]!
+
+  """
   A URL pointing to the root of all image files of this conference
   """
-  imagesUrl: URL!
-  lectures(
+  imagesUrl: URL! @deprecated(reason: "Use the `images` field instead")
+  items(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -48,6 +53,27 @@ type Conference {
     """
     last: Int
   ): LectureConnection
+  lectures(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): LectureConnection @deprecated(reason: "Use the `items` field instead, which is a more generic name for the same query")
 
   """
   A URL pointing to the conference's own website
@@ -55,9 +81,19 @@ type Conference {
   link: URL
 
   """
+  The conference's logo
+  """
+  logo(prefer: ImageMimeTypeEnum): Image
+
+  """
   A URL pointing to the conference's logo
   """
-  logoUrl: URL
+  logoUrl: URL @deprecated(reason: "Use the `logo` field instead")
+
+  """
+  The raw metadata for this conference, as stored in the database
+  """
+  metadataRaw: JSON @deprecated(reason: "experimental")
 
   """
   A URL pointing to the root of all recording files of this conference
@@ -72,7 +108,12 @@ type Conference {
   """
   The URL slug of this conference
   """
-  slug: String!
+  slug: Slug!
+
+  """
+  The raw streaming information for this conference, as provided by streaming v2 API
+  """
+  streamingRaw: JSON @deprecated(reason: "experimental")
 
   """
   The title of this conference
@@ -95,11 +136,6 @@ The connection type for Conference.
 """
 type ConferenceConnection {
   """
-  A list of edges.
-  """
-  edges: [ConferenceEdge]
-
-  """
   A list of nodes.
   """
   nodes: [Conference]
@@ -108,21 +144,6 @@ type ConferenceConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
-}
-
-"""
-An edge in a connection.
-"""
-type ConferenceEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: Conference
 }
 
 input ConferenceFilter {
@@ -142,6 +163,116 @@ An ISO 8601-encoded datetime
 scalar DateTime
 
 """
+An image e.g. logo or banner, with basic metadata
+"""
+type Image {
+  """
+  The MIME type of the image, e.g. `image/png` or `image/svg+xml`
+  """
+  mimeType: String!
+
+  """
+  The purpose or type of the image
+  """
+  type: ImageTypeEnum
+
+  """
+  The URL of the image
+  """
+  url: URL!
+
+  """
+  The variant of the image, e.g. `light` or `dark` for logos
+  """
+  variant: ImageVariantEnum
+}
+
+"""
+MIME type for images
+"""
+enum ImageMimeTypeEnum {
+  """
+  JPEG format
+  """
+  JPEG
+
+  """
+  PNG format
+  """
+  PNG
+
+  """
+  SVG format
+  """
+  SVG
+
+  """
+  WebP format
+  """
+  WEBP
+}
+
+"""
+Type or purpose of the image
+"""
+enum ImageTypeEnum {
+  """
+  Banner image
+  """
+  BANNER
+
+  """
+  Logo image
+  """
+  LOGO
+
+  """
+  Other image type
+  """
+  OTHER
+
+  """
+  Poster image
+  """
+  POSTER
+
+  """
+  Thumbnail image
+  """
+  THUMBNAIL
+}
+
+"""
+Variant of the image
+"""
+enum ImageVariantEnum {
+  """
+  Dark mode image
+  """
+  DARK
+
+  """
+  Light mode image
+  """
+  LIGHT
+}
+
+"""
+Lookup key for finding a single item. Provide exactly one of the fields below.
+"""
+input ItemLookupInput {
+  """
+  The item's guid
+  """
+  guid: ID
+
+  """
+  The item's URL slug
+  """
+  slug: ID
+}
+
+"""
 A untyped JSON document
 """
 scalar JSON
@@ -151,6 +282,9 @@ This entity is an Event with multiple Files e.g. Video and Audio recordings,
 subtitles (SRT) as well as PDFs e.g. the lecture slides
 """
 type Lecture {
+  """
+  all audio recordings assigned to this item
+  """
   audios: [Resource!]!
 
   """
@@ -228,12 +362,16 @@ type Lecture {
   """
   releaseDate: DateTime
   relive: JSON
+
+  """
+  PDF slides, if provided
+  """
   slides: [Resource!]!
 
   """
   The URL slug of this event
   """
-  slug: String!
+  slug: Slug!
 
   """
   The event's subtitle that may be displayed below the title
@@ -253,6 +391,11 @@ type Lecture {
   title: String!
 
   """
+  The languages this event has been translated into, encoded as ISO 639-2
+  """
+  translations: [String!]
+
+  """
   Identifies the date and time when the object was last updated
   """
   updatedAt: DateTime
@@ -261,8 +404,20 @@ type Lecture {
   A URL pointing to this lecture's page in vocotweb frontend
   """
   url: URL!
+
+  """
+  main MP4 video, possibly with multiple audio and video tracks
+  """
+  video(prefer: [VideoPreferenceEnum!], quality: VideoQualityEnum): Resource!
+
+  """
+  simlified access to single language video in original language
+  """
   videoPreferred: Resource!
-  videoPrimary: Resource!
+
+  """
+  all video recordings assigned to this item
+  """
   videos: [Resource!]!
 
   """
@@ -276,11 +431,6 @@ The connection type for Lecture.
 """
 type LectureConnection {
   """
-  A list of edges.
-  """
-  edges: [LectureEdge]
-
-  """
   A list of nodes.
   """
   nodes: [Lecture]
@@ -289,21 +439,6 @@ type LectureConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
-}
-
-"""
-An edge in a connection.
-"""
-type LectureEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: Lecture
 }
 
 input LectureFilter {
@@ -371,7 +506,7 @@ type Query {
   _service: _Service!
 
   """
-  All conferences as Connection
+  All conferences with pagination support
   """
   allConferences(
     """
@@ -396,30 +531,51 @@ type Query {
   ): ConferenceConnection
 
   """
-  Find a conference by acronym
+  Find a conference by acronym (e.g., `39c3`, `eh2010`)
   """
-  conference(id: ID!): Conference
+  conference(
+    """
+    The conference acronym
+    """
+    id: ID!
+  ): Conference
   conferences(filter: ConferenceFilter, first: Int, offset: Int, orderBy: ConferenceOrderBy = createdAt_DESC): [Conference!]!
 
   """
-  All conferences as List, recent first
+  Recently active conferences with recorded events, ordered by most recent first
   """
-  conferencesRecent(first: Int! = 5, offset: Int = 0): [Conference!]
+  conferencesRecent(
+    """
+    Number of conferences to return (max 30)
+    """
+    first: Int! = 5
+
+    """
+    Offset for pagination
+    """
+    offset: Int = 0
+  ): [Conference!]
+
+  """
+  Find a single item by guid or slug
+  """
+  item(by: ItemLookupInput!): Lecture
+  items(filter: LectureFilter, first: Int, offset: Int, orderBy: LectureOrderBy = date_DESC): [Lecture!]!
 
   """
   Find a lecture by guid
   """
-  lecture(guid: ID!): Lecture
+  lecture(guid: ID!): Lecture @deprecated(reason: "Use `item(by: {guid: \"<guid>\"})` instead, which is a more generic name for the same query")
 
   """
   Find a lecture by slug
   """
-  lectureBySlug(slug: ID!): Lecture
+  lectureBySlug(slug: ID!): Lecture @deprecated(reason: "Use `item(by: {slug: \"slug>\"})` instead, which is a more generic name for the same query")
   lectureSearch(page: Int, query: String!): [Lecture!]!
-  lectures(filter: LectureFilter, first: Int, offset: Int, orderBy: LectureOrderBy = date_DESC): [Lecture!]!
+  lectures(filter: LectureFilter, first: Int, offset: Int, orderBy: LectureOrderBy = date_DESC): [Lecture!]! @deprecated(reason: "Use items instead, which is a more generic name for the same query")
 
   """
-  A list of related lectures, ordered by decreasing relevance.
+  A list of related items
   """
   lecturesRelatedTo(
     """
@@ -442,6 +598,36 @@ type Query {
     Returns the last _n_ elements from the list.
     """
     last: Int
+  ): LectureConnection
+
+  """
+  Promoted lectures featured on the start page
+  """
+  promoted(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Offset for pagination
+    """
+    offset: Int = 0
   ): LectureConnection
 }
 
@@ -472,7 +658,7 @@ type Resource {
   language: String
 
   """
-  The recordings's mime type, e.g. video/mp4
+  The recordings's mime type, e.g. `video/mp4`
   """
   mimeType: String!
 
@@ -507,11 +693,6 @@ The connection type for Resource.
 """
 type ResourceConnection {
   """
-  A list of edges.
-  """
-  edges: [ResourceEdge]
-
-  """
   A list of nodes.
   """
   nodes: [Resource]
@@ -520,21 +701,6 @@ type ResourceConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
-}
-
-"""
-An edge in a connection.
-"""
-type ResourceEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: Resource
 }
 
 """
@@ -558,9 +724,59 @@ enum SizeUnit {
 }
 
 """
+A URL slug (no forward slashes)
+"""
+scalar Slug
+
+"""
 A valid URL, transported as a string
 """
 scalar URL
+
+"""
+Preferred video format
+"""
+enum VideoPreferenceEnum {
+  """
+  AV1 video codec (WebM container)
+  """
+  AV1
+
+  """
+  DASH streaming format
+  """
+  DASH
+
+  """
+  MPEG-4 video format
+  """
+  MP4
+
+  """
+  WebM video format
+  """
+  WEBM
+}
+
+"""
+Preferred video quality tier
+"""
+enum VideoQualityEnum {
+  """
+  High quality
+  """
+  HQ
+
+  """
+  Low quality
+  """
+  LQ
+
+  """
+  Original master quality, largest file size
+  """
+  ORIGINAL
+}
 
 """
 The sdl representing the federated service capabilities. Includes federation
