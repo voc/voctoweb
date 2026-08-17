@@ -243,12 +243,6 @@ class LectureGraphQLApiTest < ActionDispatch::IntegrationTest
             guid
             promoted
           }
-          edges {
-            cursor
-            node {
-              guid
-            }
-          }
           pageInfo {
             hasNextPage
           }
