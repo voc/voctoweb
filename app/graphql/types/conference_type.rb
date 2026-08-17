@@ -1,11 +1,12 @@
 module Types
   class ConferenceType < Types::BaseObject
-    description "This entity groups multiple lectures together, e.g. a Conference or Lecture Series"
+    description "This entity groups multiple items together, e.g. a Conference or Lecture Series"
     field :id, ID, null: false
     field :acronym, SlugType, "The acronym of this conference, used as its identifier", null: false
     field :title, String, "The title of this conference", null: false
     field :slug, SlugType, "The URL slug of this conference", null: false
-    field :lectures, LectureType.connection_type, null: true
+    field :lectures, LectureType.connection_type, null: true, deprecation_reason: "Use the `items` field instead, which is a more generic name for the same query"
+    field :items, LectureType.connection_type, null: true
 
     field :url, UrlType, "A URL pointing to the conference page in vocotweb frontend", null: false
     field :link, UrlType, "A URL pointing to the conference's own website", null: true
@@ -21,7 +22,7 @@ module Types
     field :recordings_url, UrlType, "A URL pointing to the root of all recording files of this conference", null: false
     field :schedule_url, UrlType, "A URL pointing to the conference's frab xml schedule", null: true
     field :updated_at, DateTimeType, "Identifies the date and time when the object was last updated", null: false
-    field :event_last_released_at, DateTimeType, "Identifies the date and time when a event was last released", null: true
+    field :event_last_released_at, DateTimeType, "when was an item last added in this grouping", null: true
 
     field :metadata_raw, JsonType, "The raw metadata for this conference, as stored in the database", null: true, deprecation_reason: "experimental"
     field :streaming_raw, JsonType, "The raw streaming information for this conference, as provided by streaming v2 API", null: true, deprecation_reason: "experimental"

@@ -74,8 +74,8 @@ module Types
     end
 
     '''
-    # A list of related events, ordered by decreasing relevance.
-    relatedLectures(
+    # A list of related items, ordered by decreasing relevance.
+    related(
       # Skip the first _n_ related events.
       offset: Integer
 
