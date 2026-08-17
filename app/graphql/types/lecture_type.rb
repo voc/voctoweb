@@ -17,6 +17,7 @@ module Types
     field :url, UrlType, "A URL pointing to this lecture's page in vocotweb frontend", null: false
 
     field :original_language, String, "The event's original language, encoded as ISO 639-2", null: true
+    field :translations, [String], "The languages this event has been translated into, encoded as ISO 639-2", null: true
     field :duration, Integer, "The lecture recording duration in seconds", null: true
 
     field :persons, [String], "Names of persons that held the event", null: true
