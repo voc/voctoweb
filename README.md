@@ -15,6 +15,8 @@ Voctoweb is a rails application that provides a “YouTube like” user interfac
 
 The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetched in a single request. We tried to clean up the type names and call talks `lecture` and files `resources` (previously known as recordings). Please create issues if you are missing anything.
 
+#### Query a lecture with video format preference
+
 ``` graphql
 query LectureQueryExample {
   lectureBySlug(slug: "36c3-10652-bahnmining_-_punktlichkeit_ist_eine_zier") {
@@ -24,6 +26,11 @@ query LectureQueryExample {
     persons
     slug
     originalLanguage
+    video(prefer: [AV1, WEBM]) {
+      label
+      url
+      mimeType
+    }
     videos {
       label
       url

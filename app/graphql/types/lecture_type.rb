@@ -33,7 +33,10 @@ module Types
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
     field :video_preferred, ResourceType, "simlified access to single language video in original language", null: false
-    field :video, ResourceType, "main MP4 video, possibly with multiple audio and video tracks", null: false
+    field :video, ResourceType, "main MP4 video, possibly with multiple audio and video tracks", null: false do
+      argument :prefer, [Types::VideoPreferenceEnum], required: false
+      argument :quality, Types::VideoQualityEnum, required: false
+    end
     field :videos, [ResourceType], "all video recordings assigned to this item", null: false
     field :audios, [ResourceType], "all audio recordings assigned to this item", null: false
     field :subtitles, [ResourceType], null: false
@@ -97,8 +100,13 @@ module Types
       object.preferred_recording
     end
 
-    def video_primary
-      object.recording_for_master_feed
+    def video(prefer: nil, quality: nil)
+      if prefer.present?
+        result = object.recordings.video.find_by(mime_type: prefer)
+        return result if result.present?
+      end
+      #object.recording_for_master_feed
+      object.video_master
     end
 
     def audios
