@@ -213,6 +213,13 @@ class EventTest < ActiveSupport::TestCase
     assert_includes e.related_events, @event
   end
 
+  test 'related_events and remote_id should not error when metadata is nil' do
+    e = create(:event, metadata: nil)
+
+    assert_nil e.related_events
+    assert_nil e.remote_id
+  end
+
   test 'videos_sorted_by_language should prioritize by original language and width (html5 is negligible)' do
     event = create(:event, original_language: 'eng')
 
