@@ -3,5 +3,6 @@ module Types
     include ApolloFederation::Object
 
     field_class BaseField
+    connection_type_class(BaseConnection)
   end
 end

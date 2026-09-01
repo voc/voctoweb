@@ -211,7 +211,7 @@ class Event < ApplicationRecord
 
   def video_master
     recordings.video_without_slides
-              .select { |x| x.filetype == 'video/mp4' && x.high_quality == true }
+              .select { |x| x.mime_type == 'video/mp4' && x.high_quality == true }
               .min_by { |x| x.html5 ? 1 : 0 }
   end
 

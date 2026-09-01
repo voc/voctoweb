@@ -8,12 +8,14 @@ Voctoweb is a rails application that provides a “YouTube like” user interfac
 
 ## APIs
 
- Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
+ Every talk (alias **event**, in other systems also called lecture, session or generic item) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
 
 
 ### Public GraphQL API
 
 The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetched in a single request. We tried to clean up the type names and call talks `lecture` and files `resources` (previously known as recordings). Please create issues if you are missing anything.
+
+#### Query a lecture with video format preference
 
 ``` graphql
 query LectureQueryExample {
@@ -24,10 +26,61 @@ query LectureQueryExample {
     persons
     slug
     originalLanguage
+    video(prefer: [AV1, WEBM]) {
+      label
+      url
+      mimeType
+    }
     videos {
       label
       url
       mimeType
+    }
+  }
+}
+```
+
+#### Query a conference with images
+
+``` graphql
+query ConferenceQueryExample {
+  conference(id: "36c3") {
+    acronym
+    title
+    logo(prefer: SVG) {
+      url
+      mimeType
+      type
+    }
+    images {
+      url
+      mimeType
+      type
+    }
+  }
+}
+```
+
+#### Query promoted items/talks
+
+``` graphql
+query PromotedExample {
+  promoted(first: 10) {
+    nodes {
+      guid
+      title
+      promoted
+      conference {
+        acronym
+        title
+      }
+      video(prefer: MP4) {
+        url
+        mimeType
+      }
+    }
+    pageInfo {
+      hasNextPage
     }
   }
 }

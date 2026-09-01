@@ -99,6 +99,24 @@ class Conference < ApplicationRecord
     end.freeze
   end
 
+  def logo_img
+    { type: 'logo', url: logo_url, mime_type: Marcel::MimeType.for(name: logo) } if logo_exists?
+  end
+
+  # list of all images assigned to this conference, includes banner, logos in light & dark variants, etc.
+  def images
+    images = []
+    # fist add the logo if it exists, then add all other images
+    images << logo_img if logo_exists?
+    # add other images from metadata, if any
+    images += metadata.fetch('images', []).map do |image|
+      rest = image.except('filename').transform_keys(&:to_sym)
+      mime_type = image['mime_type'].presence || Marcel::MimeType.for(name: image['filename'])
+      { url: File.join(Settings.static_url, images_path, image['filename']), mime_type: mime_type, **rest }
+    end
+    images
+  end
+
   def display_name
     acronym || id
   end
