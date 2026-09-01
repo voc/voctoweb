@@ -109,7 +109,7 @@ class Conference < ApplicationRecord
     # fist add the logo if it exists, then add all other images
     images << logo_img if logo_exists?
     # add other images from metadata, if any
-    images += metadata.fetch('images', []).map do |image|
+    images += (metadata || {}).fetch('images', []).map do |image|
       rest = image.except('filename').transform_keys(&:to_sym)
       mime_type = image['mime_type'].presence || Marcel::MimeType.for(name: image['filename'])
       { url: File.join(Settings.static_url, images_path, image['filename']), mime_type: mime_type, **rest }

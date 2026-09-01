@@ -40,6 +40,11 @@ class ConferenceTest < ActiveSupport::TestCase
     assert_equal "#{Settings.static_url}/frabcon123/test.png", @conference.logo_url
   end
 
+  test 'should build images list without error when metadata is nil' do
+    @conference = create(:conference, metadata: nil)
+    assert_equal [], @conference.images
+  end
+
   test 'should return unknown logo if missing' do
     @conference = create(:conference, logo: nil)
     assert_equal "#{Settings.static_url}/unknown.png", @conference.logo_url
