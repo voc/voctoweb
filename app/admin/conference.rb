@@ -1,6 +1,9 @@
 ActiveAdmin.register Conference do
   filter :acronym
   filter :title
+  filter :conference_type
+  filter :starts_at
+  filter :ends_at
   filter :slug, label: 'UI Path'
   filter :recordings_path
   filter :images_path
@@ -9,6 +12,9 @@ ActiveAdmin.register Conference do
   index do
     selectable_column
     column :acronym
+    column :conference_type
+    column :starts_at
+    column :ends_at
     column 'UI Path', :slug
     column :recordings_path
     column :images_path
@@ -22,6 +28,16 @@ ActiveAdmin.register Conference do
     attributes_table do
       row :acronym
       row :title
+      row :conference_type
+      row :starts_at
+      row :ends_at
+      row :languages do |c|
+        c.languages.join(', ')
+      end
+      row('Colors') { |c| c.metadata&.slice('colors') }
+      row :organizers do |c|
+        c.organizers.map { |o| link_to o.name, [:admin, o] }.join(', ').html_safe
+      end
       row :recordings_path do
         div show_folder label: c.recordings_path, path: c.get_recordings_url
       end
@@ -59,6 +75,11 @@ ActiveAdmin.register Conference do
     f.inputs "Conference Details" do
       f.input :acronym
       f.input :title
+      f.input :conference_type, as: :select, collection: Conference::TYPES.keys
+      f.input :starts_at, as: :datetime_picker
+      f.input :ends_at, as: :datetime_picker
+      f.input :languages, as: :check_boxes, collection: Settings.languages, label: 'Languages'
+      f.input :organizers, as: :check_boxes, collection: Organisation.order(:name)
       f.input :schedule_url
       f.input :aspect_ratio, collection: Conference::ASPECT_RATIO
       f.input :slug, label: 'UI Path'
@@ -158,6 +179,11 @@ ActiveAdmin.register Conference do
                                   :aspect_ratio,
                                   :subtitles,
                                   :custom_css,
+                                  :conference_type,
+                                  :starts_at,
+                                  :ends_at,
+                                  languages: [],
+                                  organizer_ids: [],
                                 ]
     end
   end
