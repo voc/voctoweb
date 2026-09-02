@@ -103,7 +103,7 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     GRAPHQL
     result = MediaBackendSchema.execute(query_string)
     assert_nil result['errors']
-    assert_equal [matching.acronym], result['data']['conferences'].map { |c| c['acronym'] }
+    assert_equal([matching.acronym], result['data']['conferences'].map { |c| c['acronym'] })
 
     query_string = <<-GRAPHQL
       query {
@@ -114,6 +114,62 @@ class ConferencesGraphQLApiTest < ActionDispatch::IntegrationTest
     GRAPHQL
     result = MediaBackendSchema.execute(query_string)
     assert_nil result['errors']
-    assert_equal [matching.acronym], result['data']['conferences'].map { |c| c['acronym'] }
+    assert_equal([matching.acronym], result['data']['conferences'].map { |c| c['acronym'] })
+  end
+
+  test 'query logo field with mime_type preference' do
+    query_string = <<-GRAPHQL
+      query($id: ID!) {
+        conference(id: $id) {
+          id
+          logo(prefer: PNG) {
+            url
+            mimeType
+            type
+          }
+        }
+      }
+    GRAPHQL
+
+    create :conference, acronym: 'testconf'
+    result = MediaBackendSchema.execute(query_string, variables: { id: 'testconf' })
+    assert_nil result['errors']
+  end
+  test 'query images field' do
+    query_string = <<-GRAPHQL
+      query($id: ID!) {
+        conference(id: $id) {
+          id
+          images {
+            url
+            mimeType
+            type
+          }
+        }
+      }
+    GRAPHQL
+
+    create :conference, acronym: 'testconf'
+    result = MediaBackendSchema.execute(query_string, variables: { id: 'testconf' })
+    assert_nil result['errors']
+  end
+
+  test 'query logo field without arguments' do
+    query_string = <<-GRAPHQL
+      query($id: ID!) {
+        conference(id: $id) {
+          id
+          logo {
+            url
+            mimeType
+            type
+          }
+        }
+      }
+    GRAPHQL
+
+    create :conference, acronym: 'testconf'
+    result = MediaBackendSchema.execute(query_string, variables: { id: 'testconf' })
+    assert_nil result['errors']
   end
 end
