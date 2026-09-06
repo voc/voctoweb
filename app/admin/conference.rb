@@ -161,10 +161,14 @@ ActiveAdmin.register Conference do
   end
 
   member_action :download_schedule, method: :post do
-    conference = Conference.find(params[:id])
-    url = params[:schedule_url].presence || conference.schedule_url
+    conference  = Conference.find(params[:id])
+    url         = params[:schedule_url].presence || conference.schedule_url
+    spk_url     = params[:speakers_json_url].presence
     if url.present?
-      conference.update!(schedule_url: url) if url != conference.schedule_url
+      attrs = {}
+      attrs[:schedule_url]     = url     if url     != conference.schedule_url
+      attrs[:speakers_json_url] = spk_url if spk_url != conference.speakers_json_url
+      conference.update!(attrs) if attrs.any?
       conference.url_changed!
     end
     redirect_to action: :show

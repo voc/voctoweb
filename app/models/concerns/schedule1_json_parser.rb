@@ -5,8 +5,9 @@
 # Person details live inline on each event's persons[].
 module Schedule1JsonParser
   class Schedule1JsonParser
-    def initialize(json)
+    def initialize(json, speakers_json: nil)
       @conference = JSON.parse(json).dig('schedule', 'conference')
+      @speakers_by_id = parse_speakers(speakers_json) if speakers_json.present?
     end
 
     def event_info_by_guid
@@ -33,18 +34,34 @@ module Schedule1JsonParser
 
     private
 
-    def parse_person(p)
-      public_name = p['public_name'].presence
-      public_name = nil if public_name == p['name']
+    def parse_person(person)
+      speaker     = @speakers_by_id&.fetch(person['id'], nil)
+      # frab inline has only id + public_name; pretalx inline has name + public_name + guid
+      full_name   = speaker&.dig(:full_name) || person['name'] || person['public_name']
+      public_name = person['public_name'].presence
+      public_name = nil if public_name == full_name
+      # use UUID guid when present (pretalx); fall back to stringified integer id (frab)
+      guid        = person['guid'].presence || person['id']&.to_s
       {
-        guid:        p['guid'],
-        name:        p['name'],
+        guid:        guid,
+        name:        full_name,
         public_name: public_name,
-        avatar_url:  p['avatar'],
-        description: p['biography'],
-        url:         p['url'],
+        avatar_url:  speaker&.dig(:image) || person['avatar'],
+        description: speaker&.dig(:description) || person['biography'],
+        url:         speaker&.dig(:url) || person['url'],
         role:        :speaker
       }
+    end
+
+    def parse_speakers(speakers_json)
+      JSON.parse(speakers_json).dig('schedule_speakers', 'speakers').each_with_object({}) do |speaker, hash|
+        hash[speaker['id']] = {
+          full_name:   speaker['full_public_name'],
+          image:       speaker['image'],
+          description: speaker['abstract'].presence || speaker['description'],
+          url:         speaker['links']&.first&.dig('url')
+        }
+      end
     end
 
     def all_events

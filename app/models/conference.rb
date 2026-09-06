@@ -41,6 +41,7 @@ class Conference < ApplicationRecord
   validates :acronym, :slug, uniqueness: true
   validates :slug, format: { with: %r{\A\w[\w-]*(?:/[\w-]+)*\z} }
   validate :schedule_url_valid
+  validate :speakers_json_url_valid
   validate :slug_reachable
 
   has_attached_directory :images,
@@ -91,7 +92,7 @@ class Conference < ApplicationRecord
     elsif JSON.parse(content).dig('schedule', 'events')
       Schedule2JsonParser::Schedule2JsonParser.new(content)
     else
-      Schedule1JsonParser::Schedule1JsonParser.new(content)
+      Schedule1JsonParser::Schedule1JsonParser.new(content, speakers_json: speakers_json.presence)
     end
   end
 
@@ -216,9 +217,18 @@ class Conference < ApplicationRecord
     errors.add :schedule_url, 'not a valid url'
   end
 
+  def speakers_json_url_valid
+    return unless speakers_json_url
+
+    URI.parse(speakers_json_url)
+  rescue URI::Exception
+    errors.add :speakers_json_url, 'not a valid url'
+  end
+
   def trim_paths
     logo.strip! unless logo.blank?
     schedule_url.strip! unless schedule_url.blank?
+    speakers_json_url.strip! unless speakers_json_url.blank?
     images_path.strip! unless images_path.blank?
     recordings_path.strip! unless recordings_path.blank?
   end

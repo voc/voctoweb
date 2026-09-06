@@ -23,6 +23,10 @@ class ScheduleProbe
 
   private
 
+  def speakers_variant(schedule_url)
+    schedule_url.sub(/schedule\.json(\?|$)/, 'speakers.json\1')
+  end
+
   # Replace the schedule filename suffix, or append if no known file is present.
   def variant(suffix)
     if @base_url.match?(/schedule\.(xml|json)(\?|$)/)
@@ -43,7 +47,14 @@ class ScheduleProbe
 
     snippet   = partial_get(url)
     id, label, upstream = classify_json(snippet)
-    { id: id, label: label, url: url, available: true, upstream: upstream }
+    result = { id: id, label: label, url: url, available: true, upstream: upstream }
+
+    if id == 'json1'
+      spk_url = speakers_variant(url)
+      result[:speakers_json_url] = spk_url if head_ok?(spk_url)
+    end
+
+    result
   end
 
   def head_ok?(url, hops = 3)

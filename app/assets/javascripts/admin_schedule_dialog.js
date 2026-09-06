@@ -125,6 +125,12 @@
         info.append(upLine);
       }
 
+      if (fmt.speakers_json_url) {
+        var spkLine = el('div', { style: 'font-size:11px;color:#1a7a1a;margin-top:3px' });
+        spkLine.textContent = '✓ speakers.json found — person details will be enriched';
+        info.append(spkLine);
+      }
+
       var urlLine = el('div', { style: 'font-size:11px;color:#999;margin-top:2px;word-break:break-all' });
       urlLine.textContent = fmt.url;
       info.append(urlLine);
@@ -145,7 +151,10 @@
     submitBtn.onclick = function () {
       var sel = body.querySelector('input[name="schedule_format"]:checked');
       if (!sel) return;
-      postTo(actionUrl, { schedule_url: sel.value });
+      var fmt = formats.find(function (f) { return f.url === sel.value; }) || {};
+      var fields = { schedule_url: sel.value };
+      if (fmt.speakers_json_url) fields.speakers_json_url = fmt.speakers_json_url;
+      postTo(actionUrl, fields);
     };
   }
 
