@@ -2,6 +2,17 @@ name: Deploy staging
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch to deploy
+        required: false
+        type: string
+  workflow_call:
+    inputs:
+      ref:
+        description: Branch to deploy
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -12,6 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -25,9 +38,65 @@ jobs:
         env:
           CAP_REPO: https://github.com/voc/voctoweb.git
           CAP_USER: media
-          CAP_BRANCH: ${{ github.ref_name }}
+          CAP_BRANCH: ${{ inputs.ref || github.ref_name }}
           CAP_HOST: app.media.test.c3voc.de
           CAP_PORT: 22
           SKIP_TAG: "true"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bundle exec cap staging deploy
+
+  clear-deploy-labels:
+    needs: deploy
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Remove deploy label from other PRs
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const currentPr = context.payload.pull_request.number;
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner, repo, state: "open", per_page: 100,
+            });
+            for (const pr of prs) {
+              if (pr.number === currentPr) continue;
+              if (pr.labels.some((l) => l.name === "deploy")) {
+                await github.rest.issues.removeLabel({
+                  owner, repo, issue_number: pr.number, name: "deploy",
+                });
+              }
+            }
+
+  sync-deploy-label:
+    needs: deploy
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Move deploy label to PR for the deployed branch
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const ref = ${{ toJSON(inputs.ref || github.ref_name) }};
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner, repo, state: "open", per_page: 100,
+            });
+            for (const pr of prs) {
+              const hasLabel = pr.labels.some((l) => l.name === "deploy");
+              if (pr.head.ref === ref) {
+                if (!hasLabel) {
+                  await github.rest.issues.addLabels({
+                    owner, repo, issue_number: pr.number, labels: ["deploy"],
+                  });
+                }
+              } else if (hasLabel) {
+                await github.rest.issues.removeLabel({
+                  owner, repo, issue_number: pr.number, name: "deploy",
+                });
+              }
+            }

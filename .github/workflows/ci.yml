@@ -7,6 +7,7 @@ on:
       - master
       - staging
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
 
 jobs:
   test:
@@ -86,3 +87,11 @@ jobs:
 
       - name: Show images
         run: docker images
+
+  deploy-staging:
+    needs: test
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy')
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+    secrets: inherit
