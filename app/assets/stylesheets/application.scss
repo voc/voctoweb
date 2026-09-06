@@ -1,0 +1,20 @@
+// This is the cssbundling-rails entry point, replacing the old Sprockets
+// application.css manifest. Mirrors its require order via @import.
+//
+// When adding plugins here, also add them to embed.scss.
+
+@import "frontend/styles";
+@import "icomoon-font";
+@import "jquery.bxslider";
+@import "mediaelementplayer";
+
+@import "timelens";
+@import "timelens-custom";
+
+@import "source-chooser/source-chooser";
+@import "speed/speed";
+@import "postroll/postroll";
+@import "playlist/playlist";
+
+@import "player-fixes";
+@import "player-gestures";

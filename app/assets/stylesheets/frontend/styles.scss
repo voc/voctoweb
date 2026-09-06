@@ -1,8 +1,8 @@
 // library setup
 @import "lib/fonts";
 @import "lib/variables";
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
 
 // general page layout
 @import "base/typography";

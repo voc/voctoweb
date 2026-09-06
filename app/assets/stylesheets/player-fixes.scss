@@ -15,7 +15,7 @@ html {
 // voctocat artwork — overrides the inline SVG icons that 7.x uses for the
 // big play overlay and the loading spinner
 .mejs__overlay-button {
-  background: image-url('bigplay.svg') no-repeat !important;
+  background: url('bigplay.svg') no-repeat !important;
   height: 100px !important;
   width: 100px !important;
 }
@@ -34,7 +34,7 @@ html {
 }
 .mejs__overlay-loading-bg-img {
   animation: none !important;
-  background: transparent image-url('loading.gif') 50% 50% no-repeat !important;
+  background: transparent url('loading.gif') 50% 50% no-repeat !important;
   background-size: 100% !important;
   height: 80px !important;
   width: 80px !important;

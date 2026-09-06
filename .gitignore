@@ -25,6 +25,9 @@ docker/ssh
 
 # Ignore assets
 public/assets
+/node_modules
+/app/assets/builds/*
+!/app/assets/builds/.keep
 
 # Ignore secret tokens and configs
 config/database.yml

@@ -7,12 +7,13 @@ class MejsPlayer {
    * Build the player options object by combining the defaults the provided extra options.
    */
   static options(extra) {
+    const svg = document.body.dataset;
     return Object.assign({
       enableAutosize: true,
       stretching: 'responsive', // matches the Ruby `stretching` helper
-      iconSprite: '<%= asset_path("mejs-controls.svg") %>',
-      iconSpritePathSkipBack: '<%= asset_path("mejs-skip-back.svg") %>',
-      iconSpritePathJumpForward: '<%= asset_path("mejs-jump-forward.svg") %>',
+      iconSprite: svg.mejsControlsSvg,
+      iconSpritePathSkipBack: svg.mejsSkipBackSvg,
+      iconSpritePathJumpForward: svg.mejsJumpForwardSvg,
       skipBackInterval: 15
     }, extra);
   }
