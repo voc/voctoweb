@@ -12,3 +12,4 @@ function mastodonShare(text, url) {
     const windowHandle = window.open(shareURL, "_blank");
     if (windowHandle) windowHandle.focus();
 }
+window.mastodonShare = mastodonShare;

@@ -4,9 +4,7 @@
 //
 // When adding plugins here, also add them to application.js.
 
-import jquery from 'jquery';
-window.jQuery = jquery;
-window.$ = jquery;
+import './vendor/jquery-global';
 
 import './replacehash';
 import './mirrorbrain-fix';
