@@ -66,6 +66,9 @@ gem 'yajl-ruby'
 # Cross origin resource sharing for public json api and ajax clients
 gem 'rack-cors', :require => 'rack/cors'
 
+# FASP (Fediverse Auxiliary Service Provider) client
+gem 'fasp_client'
+
 # API pagination
 gem 'api-pagination'
 
