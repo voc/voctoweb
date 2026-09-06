@@ -7,6 +7,6 @@
     = javascript_include_tag 'oembed-player'
     = stylesheet_link_tag 'embed'
 
-  %body{style: 'height: 100%; overflow: hidden;'}
+  %body{style: 'height: 100%; overflow: hidden;', data: {mejs_controls_svg: asset_path('mejs-controls.svg'), mejs_skip_back_svg: asset_path('mejs-skip-back.svg'), mejs_jump_forward_svg: asset_path('mejs-jump-forward.svg')}}
     .player.video
       = render partial: 'frontend/shared/player_video', locals: { height: '450', width: '800', event: @event }
