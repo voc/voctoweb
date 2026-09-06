@@ -298,4 +298,5 @@ if (typeof Clappr !== "undefined") {
     }
 
     window.Timelens = Timelens;
+    window.timelens = timelens;
 }

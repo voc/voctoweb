@@ -1,4 +1,4 @@
-var MirrorbrainFix = {
+window.MirrorbrainFix = {
   selectMirror: function (url, cb) {
     // Always request CDN via https
     url = url.replace(/^http:/, 'https:');
