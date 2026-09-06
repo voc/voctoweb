@@ -6,4 +6,5 @@ function toggleTheme(newTheme) {
     document.documentElement.classList.toggle('light', newTheme === 'light');
     currentTheme = newTheme;
 }
+window.toggleTheme = toggleTheme;
 toggleTheme(currentTheme);

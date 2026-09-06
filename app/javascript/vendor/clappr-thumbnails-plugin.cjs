@@ -1,13 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("clappr"));
-	else if(typeof define === 'function' && define.amd)
-		define(["clappr"], factory);
-	else if(typeof exports === 'object')
-		exports["ClapprThumbnailsPlugin"] = factory(require("clappr"));
-	else
-		root["ClapprThumbnailsPlugin"] = factory(root["Clappr"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_8__) {
+	// Original UMD preamble preferred a real `clappr` CommonJS/AMD module when
+	// available. We never have one - our Clappr is the vendored VOCPlayer
+	// fork on window.Clappr - and esbuild detects the require("clappr") call
+	// textually and synthesizes real module/exports objects for this file
+	// regardless of runtime environment, which forced that (unresolvable)
+	// branch every time and threw at runtime. Force the window-global branch.
+	root["ClapprThumbnailsPlugin"] = factory(root["Clappr"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};

@@ -3,14 +3,17 @@
 //
 // When adding plugins here, also add them to oembed.js.
 
-import jquery from 'jquery';
-window.jQuery = jquery;
-window.$ = jquery;
+import './vendor/jquery-global';
 
 import './replacehash';
 import 'jquery-ujs';
 import 'bootstrap-sass/assets/javascripts/bootstrap';
-import 'turbolinks';
+// turbolinks' UMD auto-start check does `window.Turbolinks === <module>`, but
+// under esbuild's CJS interop the module factory runs with `this` bound to
+// module.exports rather than window, so the auto-start's own `this.Turbolinks =`
+// assignment never reaches window and the check silently fails. Start explicitly.
+import Turbolinks from 'turbolinks';
+Turbolinks.start();
 
 import './vendor/purl.min';
 import './vendor/handlebars.min-latest';
