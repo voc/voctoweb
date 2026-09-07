@@ -16,6 +16,7 @@ class RecordingsTaskTest < ActiveSupport::TestCase
   end
 
   def with_filesizes(data)
+    FileUtils.mkdir_p(@filesizes_path.dirname)
     File.write(@filesizes_path, data.to_json)
     ENV['FILESIZES_PATH'] = @filesizes_path.to_s
   end
