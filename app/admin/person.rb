@@ -1,16 +1,14 @@
 ActiveAdmin.register Person do
   menu priority: 4
+  reorderable
   filter :name
   filter :email
+  filter :uuid
   filter :person_identifiers_guid, as: :string, label: 'GUID'
 
   index do
     selectable_column
     column :name
-    column :email
-    column 'GUIDs' do |person|
-      person.person_identifiers.count
-    end
     column :events do |person|
       person.events.count
     end
@@ -22,15 +20,14 @@ ActiveAdmin.register Person do
 
   show do |p|
     attributes_table do
+      row :uuid
       row :name
-      row :public_name
       row :email
       row :avatar_url
     end
 
     panel 'Identifiers' do
-      table_for p.person_identifiers.order(Arel.sql('"person_identifiers"."order" NULLS LAST'), :source, :guid) do
-        column :order
+      reorderable_table_for p.person_identifiers do
         column :guid
         column :source
         column :origin
@@ -38,30 +35,49 @@ ActiveAdmin.register Person do
           link_to 'Delete', [:admin, pi], method: :delete, data: { confirm: 'Remove this identifier?' }
         end
       end
-      div { link_to 'Add identifier', new_admin_person_identifier_path(person_identifier: { person_id: p.id }) }
+
+      active_admin_form_for PersonIdentifier.new(person_id: p.id), url: admin_person_identifiers_path do |f|
+        f.inputs do
+          f.input :person_id, as: :hidden
+          f.input :guid
+          f.input :source, hint: 'e.g. pretalx.c3voc.de, frab.cccv.de'
+          f.input :origin
+        end
+        f.actions
+      end
     end
 
     panel 'Links' do
-      table_for p.links.order(Arel.sql('"links"."order" NULLS LAST'), :name) do
-        column :order
-        column :url
-        column :name
+      reorderable_table_for p.links do
         column :link_type
+        column :name
+        column :url do |link|
+          link_to link.url, link.url, target: '_blank', rel: 'noopener'
+        end
         column :service
         column '' do |link|
           link_to 'Delete', [:admin, link], method: :delete, data: { confirm: 'Remove this link?' }
         end
       end
-      div { link_to 'Add link', new_admin_link_path(link: { linkable_type: 'Person', linkable_id: p.id }) }
+
+      active_admin_form_for Link.new(linkable_type: 'Person', linkable_id: p.id), url: admin_links_path do |f|
+        f.inputs do
+          f.input :linkable_type, as: :hidden
+          f.input :linkable_id, as: :hidden
+          f.input :url
+          f.input :name
+          f.input :link_type, as: :select, collection: Link::ALL_TYPES, include_blank: '— auto-detect —'
+          f.input :service,   as: :select, collection: Link::SERVICES,  include_blank: '— auto-detect —'
+        end
+        f.actions
+      end
     end
 
-    panel 'Events' do
-      table_for p.participations.includes(:event).order('events.date DESC') do
-        column 'Event' do |participation|
-          link_to participation.event.title, [:admin, participation.event]
-        end
-        column :role
-        column :url
+    table_for p.participations.includes(:event).order('events.date DESC') do
+      column :role
+      column 'Event' do |e|
+        link_to e.event.title, [:admin, e.event]
+        link_to e.event.conference.acronym, [:admin, e.event.conference]
       end
     end
   end
@@ -72,12 +88,11 @@ ActiveAdmin.register Person do
       f.input :public_name
       f.input :email
       f.input :avatar_url
-      f.input :description
+      f.input :description, as: :text, input_html: { rows: 5 }
     end
 
     f.inputs 'Identifiers' do
       f.has_many :person_identifiers, allow_destroy: true, new_record: 'Add identifier' do |pi|
-        pi.input :order, as: :number
         pi.input :guid
         pi.input :source, hint: 'e.g. pretalx, frab, penta'
         pi.input :origin
@@ -86,7 +101,6 @@ ActiveAdmin.register Person do
 
     f.inputs 'Links' do
       f.has_many :links, allow_destroy: true, new_record: 'Add link' do |li|
-        li.input :order, as: :number
         li.input :url
         li.input :name
         li.input :link_type, as: :select, collection: Link::ALL_TYPES, include_blank: '— auto-detect —'
@@ -99,13 +113,13 @@ ActiveAdmin.register Person do
 
   # GET /admin/people/:id/merge — select merge target
   member_action :merge, method: :get do
-    @person = Person.find(params[:id])
+    @person = Person.find_by_param!(params[:id])
     @candidates = Person.where.not(id: @person.id).order(:name)
   end
 
   # POST /admin/people/:id/merge — perform the merge
   member_action :do_merge, method: :post do
-    @person = Person.find(params[:id])
+    @person = Person.find_by_param!(params[:id])
     target = Person.find(params[:target_person_id])
     @person.merge_into!(target)
     redirect_to admin_person_path(target), notice: "Merged " #{@person.name}" into "#{target.name}"."
@@ -118,12 +132,16 @@ ActiveAdmin.register Person do
   end
 
   controller do
+    def find_resource
+      Person.find_by_param!(params[:id])
+    end
+
     def permitted_params
       params.permit person: [
         :name, :public_name, :email, :avatar_url, :description,
         {
-          links_attributes: [:id, :order, :url, :name, :link_type, :service, :_destroy],
-          person_identifiers_attributes: [:id, :order, :guid, :source, :origin, :_destroy]
+          links_attributes: [:id, :url, :name, :link_type, :service, :_destroy],
+          person_identifiers_attributes: [:id, :guid, :source, :origin, :_destroy]
         }
       ]
     end

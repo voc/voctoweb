@@ -11,6 +11,8 @@ class Link < ApplicationRecord
 
   belongs_to :linkable, polymorphic: true
 
+  acts_as_list scope: %i[linkable_type linkable_id], column: :order
+
   validates :url,       presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: 'must be a valid URL' }
   validates :link_type, inclusion: { in: ALL_TYPES,  allow_blank: true }
   validates :service,   inclusion: { in: SERVICES,   allow_blank: true }

@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   has_many :video_recordings, -> {
     where(html5: true, mime_type: MimeType::VIDEO)
   }, class_name: 'Recording'
+  accepts_nested_attributes_for :participations, allow_destroy: true, reject_if: :all_blank
 
   validates :conference, :slug, :title, :guid, :original_language, presence: true
   validates :slug, format: { with: %r{\A[^/]+\z} }

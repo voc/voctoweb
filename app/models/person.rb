@@ -11,6 +11,13 @@ class Person < ApplicationRecord
   accepts_nested_attributes_for :person_identifiers, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :links, allow_destroy: true, reject_if: :all_blank
 
+  # Resolve a URL param that may be either an internal id or a person_identifier guid.
+  def self.find_by_param!(param)
+    return find(param) if param.to_s.match?(/\A\d+\z/)
+
+    joins(:person_identifiers).find_by!(person_identifiers: { guid: param })
+  end
+
   # Merge this person into target: moves identifiers and participations, then destroys self.
   # Skips participant records that would duplicate an existing (target, event) pair.
   def merge_into!(target)

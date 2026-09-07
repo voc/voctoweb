@@ -85,6 +85,19 @@ class Conference < ApplicationRecord
     self.aspect_ratio ||= '16:9'
   end
 
+  # True while a ScheduleApplyWorker job for this conference is queued, retrying, or
+  # currently being processed — checked live in Sidekiq instead of a DB flag, so it
+  # can never get stuck out of sync with reality.
+  def schedule_importing?
+    require 'sidekiq/api'
+
+    matches = ->(klass, args) { klass == 'ScheduleApplyWorker' && args.first.to_i == id }
+
+    Sidekiq::Queue.new.any? { |job| matches.call(job.klass, job.args) } ||
+      Sidekiq::RetrySet.new.any? { |job| matches.call(job.klass, job.args) } ||
+      Sidekiq::Workers.new.any? { |_pid, _tid, work| matches.call(work.job.klass, work.job.args) }
+  end
+
   def schedule_parser
     content = schedule_xml.to_s
     if content.lstrip.start_with?('<')
