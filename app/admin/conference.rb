@@ -1,4 +1,5 @@
 ActiveAdmin.register Conference do
+  menu priority: 2
   filter :acronym
   filter :title
   filter :slug, label: 'UI Path'
@@ -36,10 +37,58 @@ ActiveAdmin.register Conference do
       row :global_event_notes
       row :aspect_ratio
       row :schedule_url
-      row :schedule_xml do
+      row 'Schedule (last fetch)' do
         div c.schedule_xml.try(:truncate, 200)
       end
-      row :schedule_state
+      row :schedule_state do |conference|
+        state = conference.schedule_state
+        colors = { 'not_present' => '#999', 'new' => '#b07800', 'downloading' => '#38678b', 'downloaded' => '#1a7a1a' }
+        color  = colors[state] || '#666'
+        active = %w[downloading new].include?(state)
+
+        badge_html = <<~HTML
+          <span id="sched-state-badge" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid #{color};border-radius:4px;color:#{color};font-size:12px;font-weight:600;background:#{color}18">
+            #{'<span class="sched-spinner"></span>' if active}
+            #{state}
+          </span>
+        HTML
+        text_node badge_html.html_safe
+
+        if active
+          text_node <<~HTML.html_safe
+            <script>
+              (function() {
+                var pollUrl = #{schedule_status_admin_conference_path(conference).to_json};
+                var badge   = document.getElementById('sched-state-badge');
+                var labels  = { not_present: 'not present', new: 'queued', downloading: 'downloading…', downloaded: 'downloaded ✓' };
+                var colors  = { not_present: '#999', new: '#b07800', downloading: '#38678b', downloaded: '#1a7a1a' };
+
+                var timer = setInterval(function() {
+                  fetch(pollUrl, { headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' } })
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                      var s = data.state;
+                      var c = colors[s] || '#666';
+                      badge.style.borderColor = c;
+                      badge.style.color       = c;
+                      badge.style.background  = c + '18';
+                      var spinner = badge.querySelector('.sched-spinner');
+                      if (s !== 'downloading' && s !== 'new') {
+                        if (spinner) spinner.remove();
+                        badge.lastChild.textContent = ' ' + (labels[s] || s);
+                        clearInterval(timer);
+                        if (s === 'downloaded') setTimeout(function() { window.location.reload(); }, 800);
+                      } else {
+                        badge.lastChild.textContent = ' ' + (labels[s] || s);
+                      }
+                    })
+                    .catch(function() {});
+                }, 2000);
+              })();
+            </script>
+          HTML
+        end
+      end
       row :created_at
       row :updated_at
       row :metadata do
@@ -82,9 +131,44 @@ ActiveAdmin.register Conference do
     f.actions
   end
 
-  member_action :download_schedule, method: :post do
+  member_action :schedule_import_preview, method: :get do
+    @conference = Conference.find(params[:id])
+    @preview    = ScheduleImportPreview.new(@conference).run
+    render 'schedule_import_preview', layout: 'active_admin'
+  end
+
+  member_action :schedule_import_apply, method: :post do
+    conference  = Conference.find(params[:id])
+    event_ids   = conference.event_ids
+    PersonImportWorker.perform_async(conference.id)
+    EventUpdateWorker.perform_async(event_ids) if event_ids.any?
+    redirect_to admin_conference_path(conference),
+                notice: "Import queued — persons, participations and event metadata will be updated in the background."
+  end
+
+  member_action :schedule_status, method: :get do
     conference = Conference.find(params[:id])
-    unless conference.schedule_url.empty?
+    render json: { state: conference.schedule_state }
+  end
+
+  member_action :schedule_probe, method: :get do
+    conference = Conference.find(params[:id])
+    if conference.schedule_url.blank?
+      render json: { error: 'No schedule URL configured.', formats: [] }
+    else
+      render json: ScheduleProbe.new(conference.schedule_url).probe
+    end
+  end
+
+  member_action :download_schedule, method: :post do
+    conference  = Conference.find(params[:id])
+    url         = params[:schedule_url].presence || conference.schedule_url
+    spk_url     = params[:speakers_json_url].presence
+    if url.present?
+      attrs = {}
+      attrs[:schedule_url]     = url     if url     != conference.schedule_url
+      attrs[:speakers_json_url] = spk_url if spk_url != conference.speakers_json_url
+      conference.update!(attrs) if attrs.any?
       conference.url_changed!
     end
     redirect_to action: :show
@@ -131,8 +215,18 @@ ActiveAdmin.register Conference do
     link_to 'View', conference_path(acronym: conference.acronym), method: :get
   end
 
+  action_item(:schedule_import_preview, only: :show) do
+    link_to 'Preview Import', schedule_import_preview_admin_conference_path(conference) if conference.downloaded?
+  end
+
   action_item(:download_schedule, only: :show) do
-    link_to 'Download Schedule', download_schedule_admin_conference_path(conference), method: :post
+    link_to 'Download Schedule', '#',
+            data: {
+              schedule_dialog: true,
+              probe_url:  schedule_probe_admin_conference_path(conference),
+              action_url: download_schedule_admin_conference_path(conference),
+              acronym:    conference.acronym
+            }
   end
 
   action_item(:duplicate, only: [:show, :edit]) do

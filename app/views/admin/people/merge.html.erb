@@ -1,0 +1,21 @@
+<div class="flash flash_notice">
+  <strong><%= @person.name %></strong> will be destroyed. All its identifiers and event participations
+  will be moved to the selected target person.
+</div>
+
+<%= form_tag do_merge_admin_person_path(@person), method: :post do %>
+  <fieldset>
+    <legend>Merge "<%= @person.name %>" into…</legend>
+    <ol>
+      <li>
+        <%= label_tag :target_person_id, 'Target person (will be kept)' %>
+        <%= select_tag :target_person_id,
+              options_from_collection_for_select(@candidates, :id, :name),
+              include_blank: '— select —',
+              required: true %>
+      </li>
+    </ol>
+  </fieldset>
+  <%= submit_tag 'Merge', data: { confirm: "This will delete \"#{@person.name}\" permanently. Continue?" } %>
+  <%= link_to 'Cancel', admin_person_path(@person) %>
+<% end %>

@@ -1,4 +1,6 @@
 ActiveAdmin.register Event do
+  menu priority: 3
+  reorderable
   filter :guid
   filter :title
   filter :link
@@ -49,9 +51,6 @@ ActiveAdmin.register Event do
       row :promoted
       row :link
       row :description
-      row :persons do
-        e.persons_raw
-      end
       row :tags_raw
       row :date
       row :release_date
@@ -59,20 +58,19 @@ ActiveAdmin.register Event do
         link_to e.doi, e.doi_url unless e.doi.nil?
       end
       row :notes
-      row :thumb_filename do
-        div show_event_folder e, :thumb_filename unless e.thumb_filename.nil?
+      row :persons do
+        e.persons_raw
       end
-      row :poster_filename do
-        div show_event_folder e, :poster_filename unless e.poster_filename.nil?
-      end
-      row :timeline_filename do
-        div show_event_folder e, :timeline_filename unless e.timeline_filename.nil?
-      end
-      row :thumbnails_filename do
-        div show_event_folder e, :thumbnails_filename unless e.thumbnails_filename.nil?
-      end
-      row :metadata
     end
+
+    table_for e.participations.includes(:person), as: 'Participants' do
+      column :role
+      column 'Person' do |p|
+        link_to p.person.name, [:admin, p.person]
+      end
+      column :url
+    end
+
     table_for e.recordings.video.order('filename ASC') do
       column 'Video recordings' do |recording|
         link_to recording.filename, [:admin, recording]
@@ -102,34 +100,60 @@ ActiveAdmin.register Event do
       column 'folder', &:folder
       column 'language', &:language
     end
+
+    attributes_table as: 'Images & Metadata' do
+      row :metadata
+
+      row :thumb_filename do
+        div show_event_folder e, :thumb_filename unless e.thumb_filename.nil?
+      end
+      row :poster_filename do
+        div show_event_folder e, :poster_filename unless e.poster_filename.nil?
+      end
+      row :timeline_filename do
+        div show_event_folder e, :timeline_filename unless e.timeline_filename.nil?
+      end
+      row :thumbnails_filename do
+        div show_event_folder e, :thumbnails_filename unless e.thumbnails_filename.nil?
+      end
+    end
   end
 
   form do |f|
     f.inputs 'Event Details' do
       f.input :guid
+      f.input :slug
       f.input :conference, collection: Conference.order(:acronym)
       f.input :title
       f.input :subtitle
       f.input :description #, input_html: { class: 'tinymce' }
-      f.input :link
       f.input :original_language, hint: 'ISO-639-2 codes', collection: Languages.all
-      f.input :persons_raw, as: :text
-      f.input :tags_raw, as: :text
+      f.input :link
+    end
+    f.inputs 'Participants' do
+      f.input :persons_raw, as: :text,
+              input_html: { rows: [f.object.persons_raw.to_s.lines.count, 3].max },
+              hint: 'Legacy field — we are in the process of moving to the structured participants below'
+      f.has_many :participations, allow_destroy: true, new_record: 'Add participant' do |pf|
+        pf.input :role, as: :select, collection: Participation.roles.keys, include_blank: false
+        pf.input :person, collection: Person.order(:name), include_blank: 'Select person'
+        pf.input :order, as: :hidden
+      end
+    end
+    f.inputs 'Meta' do
+      f.input :tags_raw, as: :text, input_html: { rows: [f.object.tags_raw.to_s.lines.count, 3].max }
       f.input :date, hint: 'Actual date of the event'
       f.input :release_date, hint: 'Release date for the video recordings'
       f.input :doi, hint: 'Digital Object Identifier (DOI) e.g. 10.5446/19566 – prefixes are stripped automatically'
       f.input :notes, hint: 'Notes to be shown as a notice on the event page'
+      f.input :promoted
+      f.input :promotion_disabled, :as => :boolean, label: 'Disable promotion', hint: 'blacklist event, so it does not get promoted to the start page'
     end
-    f.inputs 'Files' do
-      f.input :slug
+    f.inputs 'Images' do
       f.input :thumb_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :poster_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :timeline_filename, hint: event.try(:conference).try(:get_images_path)
       f.input :thumbnails_filename, hint: event.try(:conference).try(:get_images_path)
-    end
-    f.inputs 'Meta' do
-      f.input :promoted
-      f.input :promotion_disabled, :as => :boolean, label: 'Disable promotion', hint: 'blacklist event, so it does not get promoted to the start page'
     end
     f.actions
   end
@@ -170,7 +194,10 @@ ActiveAdmin.register Event do
       params.permit event: [:guid, :thumb_filename, :poster_filename, :timeline_filename, :thumbnails_filename,
                             :conference_id, :title, :subtitle, :link, :slug,
                             :original_language, :doi, :notes, :promoted, :promotion_disabled,
-                            :description, :persons_raw, :tags_raw, :date, :release_date, :event_id]
+                            :description, :persons_raw, :tags_raw, :date, :release_date, :event_id,
+                            {
+                              participations_attributes: [:id, :person_id, :role, :url, :order, :_destroy]
+                            }]
     end
   end
 end
