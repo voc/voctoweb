@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "esbuild app/javascript/application.js app/javascript/oembed-player.js app/javascript/active_admin.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
-    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/embed.scss:./app/assets/builds/embed.css ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=node_modules --load-path=vendor/assets/icomoon-font --load-path=vendor/assets/stylesheets --load-path=vendor/assets/mediaelement/plugins"
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/embed.scss:./app/assets/builds/embed.css ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=node_modules --load-path=vendor/assets/icomoon-font --load-path=vendor/assets/stylesheets --load-path=vendor/assets/player-plugins"
   },
   "keywords": [],
   "author": "",
