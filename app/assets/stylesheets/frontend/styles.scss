@@ -1,7 +1,11 @@
 // library setup
 @import "lib/fonts";
 @import "lib/variables";
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+// NB: do not import "bootstrap-sprockets" here. It sets
+// $bootstrap-sass-asset-helper: true and aliases twbs-font-path() to Sprockets'
+// font-path() helper, which dart-sass does not know and emits verbatim, e.g.
+// url(font-path("../fonts/...")) - invalid CSS. Propshaft rewrites plain
+// relative url()s instead.
 @import "bootstrap-sass/assets/stylesheets/bootstrap";
 
 // general page layout
