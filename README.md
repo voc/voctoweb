@@ -240,6 +240,14 @@ You can now reach the voctoweb frontend at `http://localhost.c3voc.de/`. The bac
 
 The whole application directory is mounted into the containers, so all changes you make to the files are reflected inside the application automatically. To run commands inside the voctoweb container, run `docker compose run voctoweb $COMMAND`. If you ever need to rebuild the containers (because of new dependencies, for example), run the `docker compose build` command again.
 
+JavaScript and CSS are bundled with esbuild and sass into `app/assets/builds/`, which is not checked in. `bin/docker-dev-up` builds them once; after changing anything under `app/javascript/` or `app/assets/stylesheets/` (or `package.json`), rebuild them with:
+
+```bash
+docker compose run voctoweb sh -c 'pnpm install && pnpm run build && pnpm run build:css'
+```
+
+The container keeps its own `node_modules` in a named Docker volume, so a `node_modules` directory built on the host (macOS, for example) is not used inside the Linux container. Remove it with `docker compose down -v` if you ever need a clean reinstall.
+
 Image and video files in `docker/content` are tried first, if missing live data from media.ccc.de is used.
 
 ## Install for Production
