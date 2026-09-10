@@ -34,17 +34,9 @@ module MediaBackend
 
     config.custom_css = nil
 
-    # Extra asset roots (bare-filename resolution, matching the old Sprockets
-    # config.assets.paths setup). Must be set here, not in config/initializers,
-    # since Propshaft builds its asset assembly from a snapshot of this config
-    # before user initializers run.
-    config.assets.paths << Rails.root.join('app', 'assets', 'images', 'frontend')
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'mediaelement')
-    # NB: cannot be named starting with "mediaelement" - Propshaft::LoadPath#dedup
-    # does a naive string prefix check and would silently drop it as a duplicate
-    # of the vendor/assets/mediaelement path registered above.
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'player-plugins')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'icomoon-font')
+    # No extra config.assets.paths needed: Propshaft already registers every
+    # subdirectory of app/assets and vendor/assets as an asset root, so assets
+    # resolve by the logical path below those roots (e.g. "frontend/voctocat.svg",
+    # "source-chooser/settings.svg").
   end
 end
