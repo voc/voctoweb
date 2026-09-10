@@ -17,7 +17,7 @@
       %style
         = @conference.try(:custom_css).html_safe
 
-  %body{:class => content_for(:body_class)}
+  %body{:class => content_for(:body_class), data: {mejs_controls_svg: asset_path('mejs-controls.svg'), mejs_skip_back_svg: asset_path('mejs-skip-back.svg'), mejs_jump_forward_svg: asset_path('mejs-jump-forward.svg')}}
     = render partial: 'frontend/shared/navbar'
 
     = yield

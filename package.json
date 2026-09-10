@@ -1,0 +1,35 @@
+{
+  "name": "voctoweb-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild app/javascript/application.js app/javascript/oembed-player.js app/javascript/active_admin.js --bundle --minify --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/embed.scss:./app/assets/builds/embed.css ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --style=compressed --quiet-deps --silence-deprecation=import --load-path=node_modules --load-path=vendor/assets/icomoon-font --load-path=vendor/assets/stylesheets --load-path=vendor/assets/player-plugins"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.3.4",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.3.4",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "sass": "^1.104.0"
+  },
+  "dependencies": {
+    "@activeadmin/activeadmin": "3.5.2",
+    "bootstrap-sass": "3.4.1",
+    "jquery": "1.12.4",
+    "jquery-ui": "^1.14.2",
+    "jquery-ujs": "1.2.3",
+    "turbolinks": "^5.2.0"
+  }
+}

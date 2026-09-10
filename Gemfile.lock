@@ -10,49 +10,49 @@ GEM
   specs:
     aasm (6.0.0)
       concurrent-ruby (~> 1.0)
-    actioncable (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    action_text-trix (2.1.19)
+      railties
+    actioncable (8.1.3.1)
+      actionpack (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
       zeitwerk (~> 2.6)
-    actionmailbox (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      activejob (= 7.2.3.2)
-      activerecord (= 7.2.3.2)
-      activestorage (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    actionmailbox (8.1.3.1)
+      actionpack (= 8.1.3.1)
+      activejob (= 8.1.3.1)
+      activerecord (= 8.1.3.1)
+      activestorage (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       mail (>= 2.8.0)
-    actionmailer (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      actionview (= 7.2.3.2)
-      activejob (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    actionmailer (8.1.3.1)
+      actionpack (= 8.1.3.1)
+      actionview (= 8.1.3.1)
+      activejob (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       mail (>= 2.8.0)
       rails-dom-testing (~> 2.2)
-    actionpack (7.2.3.2)
-      actionview (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
-      cgi
+    actionpack (8.1.3.1)
+      actionview (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       nokogiri (>= 1.8.5)
-      racc
-      rack (>= 2.2.4, < 3.3)
+      rack (>= 2.2.4)
       rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
       useragent (~> 0.16)
-    actiontext (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      activerecord (= 7.2.3.2)
-      activestorage (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    actiontext (8.1.3.1)
+      action_text-trix (~> 2.1.15)
+      actionpack (= 8.1.3.1)
+      activerecord (= 8.1.3.1)
+      activestorage (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       globalid (>= 0.6.0)
       nokogiri (>= 1.8.5)
-    actionview (7.2.3.2)
-      activesupport (= 7.2.3.2)
+    actionview (8.1.3.1)
+      activesupport (= 8.1.3.1)
       builder (~> 3.1)
-      cgi
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
@@ -66,33 +66,34 @@ GEM
       kaminari (>= 1.2.1)
       railties (>= 6.1)
       ransack (>= 4.0)
-    activejob (7.2.3.2)
-      activesupport (= 7.2.3.2)
+    activejob (8.1.3.1)
+      activesupport (= 8.1.3.1)
       globalid (>= 0.3.6)
-    activemodel (7.2.3.2)
-      activesupport (= 7.2.3.2)
-    activerecord (7.2.3.2)
-      activemodel (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    activemodel (8.1.3.1)
+      activesupport (= 8.1.3.1)
+    activerecord (8.1.3.1)
+      activemodel (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       timeout (>= 0.4.0)
-    activestorage (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      activejob (= 7.2.3.2)
-      activerecord (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    activestorage (8.1.3.1)
+      actionpack (= 8.1.3.1)
+      activejob (= 8.1.3.1)
+      activerecord (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       marcel (~> 1.0)
-    activesupport (7.2.3.2)
+    activesupport (8.1.3.1)
       base64
-      benchmark (>= 0.3)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.3.1)
       connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
+      json
       logger (>= 1.4.2)
-      minitest (>= 5.1, < 6)
+      minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
+      uri (>= 0.13.1)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     aes_key_wrap (1.1.0)
@@ -107,8 +108,6 @@ GEM
       ruby2_keywords (>= 0.0.2)
     ast (2.4.3)
     attr_required (1.0.2)
-    autoprefixer-rails (10.4.21.0)
-      execjs (~> 2)
     backport (1.2.0)
     base64 (0.3.0)
     bcrypt (3.1.22)
@@ -116,9 +115,6 @@ GEM
     benchmark (0.5.0)
     bigdecimal (4.1.2)
     bindata (2.5.1)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
     builder (3.3.0)
     bullet (8.1.3)
       activesupport (>= 3.0.0)
@@ -142,20 +138,14 @@ GEM
       capistrano (>= 3.9.0)
       capistrano-bundler
       sidekiq (>= 7.0)
-    cgi (0.5.2)
     coderay (1.1.3)
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     commander (5.0.0)
       highline (~> 3.0.0)
     concurrent-ruby (1.3.8)
     connection_pool (2.5.5)
     crass (1.0.7)
+    cssbundling-rails (1.4.3)
+      railties (>= 6.0.0)
     csv (3.3.5)
     date (3.5.1)
     devise (5.0.4)
@@ -190,7 +180,6 @@ GEM
     exception_notification (5.0.1)
       actionmailer (>= 7.1, < 9)
       activesupport (>= 7.1, < 9)
-    execjs (2.10.1)
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -267,6 +256,8 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jsbundling-rails (1.3.1)
+      railties (>= 6.0.0)
     json (2.21.2)
     json-jwt (1.17.1)
       activesupport (>= 4.2)
@@ -384,6 +375,10 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.9.0)
+    propshaft (1.3.2)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
     pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -426,20 +421,20 @@ GEM
       rack (>= 1.3)
     rackup (2.3.1)
       rack (>= 3)
-    rails (7.2.3.2)
-      actioncable (= 7.2.3.2)
-      actionmailbox (= 7.2.3.2)
-      actionmailer (= 7.2.3.2)
-      actionpack (= 7.2.3.2)
-      actiontext (= 7.2.3.2)
-      actionview (= 7.2.3.2)
-      activejob (= 7.2.3.2)
-      activemodel (= 7.2.3.2)
-      activerecord (= 7.2.3.2)
-      activestorage (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
+    rails (8.1.3.1)
+      actioncable (= 8.1.3.1)
+      actionmailbox (= 8.1.3.1)
+      actionmailer (= 8.1.3.1)
+      actionpack (= 8.1.3.1)
+      actiontext (= 8.1.3.1)
+      actionview (= 8.1.3.1)
+      activejob (= 8.1.3.1)
+      activemodel (= 8.1.3.1)
+      activerecord (= 8.1.3.1)
+      activestorage (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       bundler (>= 1.15.0)
-      railties (= 7.2.3.2)
+      railties (= 8.1.3.1)
     rails-controller-testing (1.0.5)
       actionpack (>= 5.0.1.rc1)
       actionview (>= 5.0.1.rc1)
@@ -451,10 +446,9 @@ GEM
     rails-html-sanitizer (1.7.1)
       loofah (~> 2.25, >= 2.25.2)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    railties (7.2.3.2)
-      actionpack (= 7.2.3.2)
-      activesupport (= 7.2.3.2)
-      cgi
+    railties (8.1.3.1)
+      actionpack (= 8.1.3.1)
+      activesupport (= 8.1.3.1)
       irb (~> 1.13)
       rackup (>= 1.0.0)
       rake (>= 12.2)
@@ -512,16 +506,6 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     sawyer (0.9.3)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
@@ -571,14 +555,6 @@ GEM
       rbs (>= 3.0, < 5)
       sorbet-runtime
       yard
-    sprockets (4.2.2)
-      concurrent-ruby (~> 1.0)
-      logger
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sshkit (1.25.0)
       base64
       logger
@@ -597,13 +573,8 @@ GEM
     tilt (2.9.0)
     timeout (0.6.1)
     tsort (0.2.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
@@ -643,15 +614,14 @@ DEPENDENCIES
   api-pagination
   apollo-federation
   bcrypt_pbkdf
-  bootstrap-sass (~> 3.4.1)
   bullet
   capistrano (~> 3.20.0)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
-  coffee-rails
   connection_pool (< 3)
+  cssbundling-rails
   devise
   dotenv-rails
   ed25519
@@ -666,7 +636,7 @@ DEPENDENCIES
   graphql-query-resolver
   haml
   jbuilder
-  jquery-rails
+  jsbundling-rails
   kaminari
   listen
   minitest (~> 5.1)
@@ -676,26 +646,24 @@ DEPENDENCIES
   omniauth_openid_connect
   openssl
   pg
+  propshaft
   pry-byebug
   pry-rails
   puma
   puma_worker_killer
   rack-cors
-  rails (~> 7.2.2)
+  rails (~> 8.0)
   rails-controller-testing
   rbs
   redcarpet
   redis
   rss
   ruby-graphviz
-  sass-rails
   sdoc
   search_object
   search_object_graphql
   sidekiq
   solargraph
-  turbolinks
-  uglifier (>= 1.3.0)
   yajl-ruby
 
 BUNDLED WITH

@@ -2,6 +2,10 @@
 
 docker compose build
 docker compose up -d postgres
+# app/assets/builds/ is gitignored, so the JS/CSS bundles have to be built
+# inside the container (into the bind-mounted working copy) before Propshaft
+# can serve them
+docker compose run --remove-orphans voctoweb sh -c 'pnpm install && pnpm run build && pnpm run build:css'
 docker compose run --remove-orphans voctoweb rake db:setup
 docker compose run --remove-orphans voctoweb bin/update-data
 docker compose up voctoweb

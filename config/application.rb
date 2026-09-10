@@ -33,5 +33,10 @@ module MediaBackend
     config.app_generators.scaffold_controller = :scaffold_controller
 
     config.custom_css = nil
+
+    # No extra config.assets.paths needed: Propshaft already registers every
+    # subdirectory of app/assets and vendor/assets as an asset root, so assets
+    # resolve by the logical path below those roots (e.g. "frontend/voctocat.svg",
+    # "source-chooser/settings.svg").
   end
 end
