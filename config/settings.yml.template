@@ -1,4 +1,17 @@
 defaults: &defaults
+  languages:
+    - de
+    - en
+    - fr
+    - es
+    - it
+    - pt
+    - nl
+    - pl
+    - ru
+    - zh
+    - ja
+    - ar
   frontend_proto: https
   frontend_host: media.ccc.de
   cdn_url: http://cdn.media.ccc.de
