@@ -20,7 +20,11 @@ set :deploy_to,       "/srv/media/#{fetch(:application)}"
 set :ssh_options,     forward_agent: false, user: fetch(:user)
 set :bundle_without,  %w(development test sqlite3).join(' ')
 set :linked_files,    %w(config/settings.yml config/database.yml config/secrets.yml .env.production)
-set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
+# NB: deploy:compile_assets runs `rake assets:precompile`, which jsbundling-rails
+# and cssbundling-rails enhance to shell out to `pnpm install` + `pnpm build` /
+# `pnpm build:css`. The app server therefore needs node and pnpm on PATH.
+# node_modules is shared between releases so each deploy is an incremental install.
+set :linked_dirs,     %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system node_modules)
 
 # puma
 set :puma_pid,        -> { "#{shared_path}/tmp/pids/puma.pid" }
