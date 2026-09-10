@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -11,9 +13,9 @@ $secondary-color: #f0f0f0 !default;
 $text-color: #323537 !default;
 $link-color: #38678b !default;
 $section-header-text-color: $primary-color !default;
-$current-menu-item-background: lighten($primary-color, 12%) !default;
-$hover-menu-item-background: lighten($primary-color, 12%) !default;
-$table-stripe-color: lighten($primary-color, 57%) !default;
+$current-menu-item-background: color.adjust($primary-color, $lightness: 12%) !default;
+$hover-menu-item-background: color.adjust($primary-color, $lightness: 12%) !default;
+$table-stripe-color: color.adjust($primary-color, $lightness: 57%) !default;
 $table-selected-color: #d9e4ec !default;
 $error-color: #932419 !default;
 

@@ -1,12 +1,14 @@
+@use "sass:math";
+
 @mixin video-player-size($w) {
-  $h: $w / 16 * 9;
-  $h_43: $w / 4 * 3;
+  $h: math.div($w, 16) * 9;
+  $h_43: math.div($w, 4) * 3;
 
   @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
     .video.player {
       width: $w !important;
       .mejs__container.video, >video, div[data-player], .video-native {
-        margin-left: -(($w - ($max-width - 30))/2)  !important;
+        margin-left: -(math.div($w - ($max-width - 30), 2))  !important;
 
         &.mejs__container-fullscreen {
           margin-left: 0 !important;
