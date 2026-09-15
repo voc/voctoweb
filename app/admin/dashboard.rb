@@ -25,10 +25,9 @@ ActiveAdmin.register_page 'Dashboard' do
         workers = Sidekiq::Workers.new
         panel 'Workers' do
           table_for workers.to_a.each do |_pid, _tid, _work|
-            column(:klass) { |_pid, _tid, work| status_tag(work['payload']['class']) }
-            column(:args) { |_pid, _tid, work| status_tag(work['payload']['args']) }
-            column(:error_message) { |_pid, _tid, work| work['payload']['error_message'].to_s }
-            column(:created_at) { |_pid, _tid, work| Time.at(work['run_at']).strftime('%H:%M:%S') }
+            column(:klass) { |_pid, _tid, work| status_tag(work.job.klass) }
+            column(:args) { |_pid, _tid, work| status_tag(work.job.args) }
+            column(:created_at) { |_pid, _tid, work| work.run_at.strftime('%H:%M:%S') }
           end
 
           ul do

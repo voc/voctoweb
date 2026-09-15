@@ -1,13 +1,11 @@
 module FahrplanUpdater
   extend ActiveSupport::Concern
-  include FahrplanParser
 
   def fill_event_info
     return unless conference.downloaded?
 
-    fahrplan = FahrplanParser.new(conference.schedule_xml)
-    info = fahrplan.event_info_by_guid[guid]
-    return if info.empty?
+    info = conference.schedule_parser.event_info_by_guid[guid]
+    return if info.blank?
 
     update_event_info(info)
   end

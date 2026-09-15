@@ -41,6 +41,7 @@ class Conference < ApplicationRecord
   validates :acronym, :slug, uniqueness: true
   validates :slug, format: { with: %r{\A\w[\w-]*(?:/[\w-]+)*\z} }
   validate :schedule_url_valid
+  validate :speakers_json_url_valid
   validate :slug_reachable
 
   has_attached_directory :images,
@@ -82,6 +83,30 @@ class Conference < ApplicationRecord
 
   def set_defaults
     self.aspect_ratio ||= '16:9'
+  end
+
+  # True while a ScheduleApplyWorker job for this conference is queued, retrying, or
+  # currently being processed — checked live in Sidekiq instead of a DB flag, so it
+  # can never get stuck out of sync with reality.
+  def schedule_importing?
+    require 'sidekiq/api'
+
+    matches = ->(klass, args) { klass == 'ScheduleApplyWorker' && args.first.to_i == id }
+
+    Sidekiq::Queue.new.any? { |job| matches.call(job.klass, job.args) } ||
+      Sidekiq::RetrySet.new.any? { |job| matches.call(job.klass, job.args) } ||
+      Sidekiq::Workers.new.any? { |_pid, _tid, work| matches.call(work.job.klass, work.job.args) }
+  end
+
+  def schedule_parser
+    content = schedule_xml.to_s
+    if content.lstrip.start_with?('<')
+      FahrplanParser::FahrplanParser.new(content)
+    elsif JSON.parse(content).dig('schedule', 'events')
+      Schedule2JsonParser::Schedule2JsonParser.new(content)
+    else
+      Schedule1JsonParser::Schedule1JsonParser.new(content, speakers_json: speakers_json.presence)
+    end
   end
 
   def download!
@@ -205,9 +230,18 @@ class Conference < ApplicationRecord
     errors.add :schedule_url, 'not a valid url'
   end
 
+  def speakers_json_url_valid
+    return unless speakers_json_url
+
+    URI.parse(speakers_json_url)
+  rescue URI::Exception
+    errors.add :speakers_json_url, 'not a valid url'
+  end
+
   def trim_paths
     logo.strip! unless logo.blank?
     schedule_url.strip! unless schedule_url.blank?
+    speakers_json_url.strip! unless speakers_json_url.blank?
     images_path.strip! unless images_path.blank?
     recordings_path.strip! unless recordings_path.blank?
   end

@@ -27,5 +27,8 @@ $error-color: #932419 !default;
 //
 //   .status_tag { background: #6090DB; }
 
-.scrollable { overflow:auto; width:800px; height:50px; } 
-.scrollable_error { overflow:auto; width:300px; height:50px; } 
+.scrollable { overflow:auto; width:800px; height:50px; }
+.scrollable_error { overflow:auto; width:300px; height:50px; }
+
+@keyframes sched-spin { to { transform: rotate(360deg); } }
+.sched-spinner { display:inline-block;width:11px;height:11px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:sched-spin .8s linear infinite;flex-shrink:0 }
