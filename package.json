@@ -27,7 +27,7 @@
   "dependencies": {
     "@activeadmin/activeadmin": "3.5.2",
     "bootstrap-sass": "3.4.1",
-    "jquery": "1.12.4",
+    "jquery": "3.5.0",
     "jquery-ui": "^1.14.2",
     "jquery-ujs": "1.2.3",
     "turbolinks": "^5.2.0"
