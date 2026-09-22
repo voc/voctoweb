@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'openssl'
 
+# json 3.0 changed JSON.parse's options arg to keyword-only, which breaks
+# ActiveSupport::JSON.decode's positional call in this Rails version.
+gem 'json', '< 3'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 8.0'
 gem 'dotenv-rails'

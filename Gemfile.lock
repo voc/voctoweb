@@ -224,7 +224,7 @@ GEM
       base64
     graphql-query-resolver (0.2.0)
       graphql (~> 1.0, >= 1.0.0)
-    haml (7.5.0)
+    haml (7.5.1)
       prism (>= 1.1.0)
       temple (>= 0.8.2)
       thor
@@ -359,7 +359,7 @@ GEM
     openssl (4.0.2)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    parallel (2.1.0)
+    parallel (2.2.0)
     parlour (9.1.2)
       commander (~> 5.0)
       parser
@@ -477,7 +477,7 @@ GEM
       redis-client (= 0.30.1)
     redis-client (0.30.1)
       connection_pool
-    regexp_parser (2.12.0)
+    regexp_parser (2.13.0)
     reline (0.6.3)
       io-console (~> 0.5)
     responders (3.2.0)
@@ -488,8 +488,8 @@ GEM
     rexml (3.4.4)
     rss (0.3.3)
       rexml
-    rubocop (1.89.0)
-      json (~> 2.3)
+    rubocop (1.91.0)
+      json (>= 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
       parallel (>= 1.10)
@@ -522,7 +522,7 @@ GEM
       logger (>= 1.6.2)
       rack (>= 3.1.0)
       redis-client (>= 0.23.2)
-    solargraph (0.60.3)
+    solargraph (0.60.4)
       ast (~> 2.4.3)
       backport (~> 1.2)
       benchmark (~> 0.4)
@@ -547,7 +547,7 @@ GEM
       yard (~> 0.9, >= 0.9.24)
       yard-activesupport-concern (~> 0.0)
       yard-solargraph (~> 0.1)
-    sorbet-runtime (0.6.13421)
+    sorbet-runtime (0.6.13506)
     sord (7.1.0)
       commander (~> 5.0)
       parlour (~> 9.1)
@@ -575,9 +575,9 @@ GEM
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (3.2.0)
-      unicode-emoji (~> 4.1)
-    unicode-emoji (4.2.0)
+    unicode-display_width (3.3.0)
+      unicode-emoji (~> 4.3)
+    unicode-emoji (4.3.0)
     uniform_notifier (1.18.0)
     uri (1.1.1)
     useragent (0.16.11)
@@ -637,6 +637,7 @@ DEPENDENCIES
   haml
   jbuilder
   jsbundling-rails
+  json (< 3)
   kaminari
   listen
   minitest (~> 5.1)
