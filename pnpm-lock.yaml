@@ -116,14 +116,14 @@ importers:
         specifier: 3.4.1
         version: 3.4.1
       jquery:
-        specifier: 1.12.4
-        version: 1.12.4
+        specifier: 3.5.0
+        version: 3.5.0
       jquery-ui:
         specifier: ^1.14.2
         version: 1.14.2
       jquery-ujs:
         specifier: 1.2.3
-        version: 1.2.3(jquery@1.12.4)
+        version: 1.2.3(jquery@3.5.0)
       turbolinks:
         specifier: ^5.2.0
         version: 5.2.0
@@ -413,9 +413,8 @@ packages:
     peerDependencies:
       jquery: '>=1.8.0'
 
-  jquery@1.12.4:
-    resolution: {integrity: sha512-UEVp7PPK9xXYSk8xqXCJrkXnKZtlgWkd2GsAQbMRFK6S/ePU2JN5G2Zum8hIVjzR3CpdfSqdqAzId/xd4TJHeg==}
-    deprecated: This version is deprecated. Please upgrade to the latest version or find support at https://www.herodevs.com/support/jquery-nes.
+  jquery@3.5.0:
+    resolution: {integrity: sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==}
 
   jquery@4.0.0:
     resolution: {integrity: sha512-TXCHVR3Lb6TZdtw1l3RTLf8RBWVGexdxL6AC8/e0xZKEpBflBsjh9/8LXw+dkNFuOyW9B7iB3O1sP7hS0Kiacg==}
@@ -636,17 +635,17 @@ snapshots:
 
   jquery-ui@1.14.2:
     dependencies:
-      jquery: 1.12.4
+      jquery: 3.5.0
 
-  jquery-ujs@1.2.3(jquery@1.12.4):
+  jquery-ujs@1.2.3(jquery@3.5.0):
     dependencies:
-      jquery: 1.12.4
+      jquery: 3.5.0
 
   jquery-ujs@1.2.3(jquery@4.0.0):
     dependencies:
       jquery: 4.0.0
 
-  jquery@1.12.4: {}
+  jquery@3.5.0: {}
 
   jquery@4.0.0: {}
 
