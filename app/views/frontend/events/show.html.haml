@@ -56,131 +56,138 @@
   %meta{name: 'description', content: @event.short_description}
 
 - cache([@event.conference, @event, @player, current_admin_user]) do
-  %main.container-fluid
-    .player-header
-      .conference
-        - if @conference&.logo_url
-          %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
-            %img{src: @conference.logo_url, alt: 'conference logo'}
-            - if @conference.logo_does_not_contain_title
-              .caption
-                = @conference.title
+  %main
+    %section.container-fluid.section-event-header
+      .player-header
+        .conference
+          - if @conference&.logo_url
+            %a.thumbnail.conference{href: conference_path(acronym: @conference.acronym)}
+              %img{src: @conference.logo_url, alt: 'conference logo'}
+              - if @conference.logo_does_not_contain_title
+                .caption
+                  = @conference.title
+          - else
+            =@conference.title
+        - if not @event.recordings.video.present? and @event.relive_present?
+          %h1
+            = @event.title
+            = '(Relive)'
         - else
-          =@conference.title
+          %h1
+            = @event.title
+        - unless @event.subtitle.blank?
+          %h2
+            = @event.subtitle
+
+      %p.persons
+        = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
+
       - if not @event.recordings.video.present? and @event.relive_present?
-        %h1
-          = @event.title
-          = '(Relive)'
-      - else
-        %h1
-          = @event.title
-      - unless @event.subtitle.blank?
-        %h2
-          = @event.subtitle
-
-    %p.persons
-      = render partial: 'frontend/shared/event_persons', locals: { persons: @event.persons }
-
-    - if not @event.recordings.video.present? and @event.relive_present?
-      .alert.alert-info.relive-notice
-        %h4
-          %span.icon.icon-cog
-          = 'Stream Recording'
-        = 'This is just a preliminary release of the stream recording, the final release of this talk is still being worked on.'
+        .alert.alert-info.relive-notice
+          %h4
+            %span.icon.icon-cog
+            = 'Stream Recording'
+          = 'This is just a preliminary release of the stream recording, the final release of this talk is still being worked on.'
 
     - if @event.recordings.video.present?
-      .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
-        .kiosk
-        = render partial: 'frontend/shared/player_video' + @player, locals: video_player_ivars
-
-      - if !@event.tags.nil? && @event.tags.length > 3
-        - @event.tags[3,2].reverse.each do |tag|
-          != link_for(@conference, tag)
-
-      Playlists:
-      = link_to "'#{@conference.acronym}' videos starting here", playlist_conference_path(slug: @event.slug)
-      - if @conference.audio_recordings?
-        \/
-        = link_to 'audio', audio_playlist_conference_path(slug: @event.slug), method: :get
-      - if @event.metadata['related'].present?
-        \/
-        = link_to 'related events', playlist_related_path(slug: @event.slug)
+      %section.section-event-video-player
+        .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
+          = render partial: 'frontend/shared/player_video' + @player, locals: video_player_ivars
 
     - elsif @event.relive_present?
-      .player.video
-        .kiosk
-        = render partial: 'frontend/shared/player_relive', locals: video_player_ivars
+      %section.section-event-video-player
+        .player.video{'data-aspect-ratio' => @conference.aspect_ratio}
+          = render partial: 'frontend/shared/player_relive', locals: video_player_ivars
 
     - elsif @event.recordings.audio.present?
-      .player.audio
-        = render partial: 'frontend/shared/player_audio', locals: video_player_ivars
-
+      %section.container-fluid.section-event-audio-player
+        .player.audio
+          = render partial: 'frontend/shared/player_audio', locals: video_player_ivars
 
     - else
-      No content found (yet?).
+      %section.container-fluid.section-event-no-video
+        .alert.alert-warning
+          %h4
+            %span.icon.icon-warning
+            = 'No content found (yet?).'
+          = 'This event has no recording. This usually means you are here too early and need to wait a little bit before the recording is made available.'
 
-    %ul.metadata
-      %li.duration.digits
-        %span.icon.icon-clock-o
-        = duration_in_minutes(@event.duration)
-      %li.date.digits
-        %span.icon.icon-calendar-o{title: display_release_date_title(@event)}
-        = @event.display_date
-      - if !@event.release_date.nil? && ! @event.released_on_event_day?
-        %li
-          %span.icon.icon-upload{title: 'release date'}
-          = @event.release_date.to_date
-      %li.view-count.digits
-        %span.icon.icon-eye{title: "#{delimited_views_count(@event.view_count)} views"}
-        = human_readable_views_count(@event.view_count)
-      - if @event.link.present?
-        %li
-          %span.icon.icon-external-link
-          %a{href: @event.link} Fahrplan
-      - if @event.doi.present?
-        %li
-          %span.icon.icon-external-link
-          %a{href: @event.doi_url}
-            = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
-
-    - if @conference.global_event_notes.present?
-      .alert.alert-info.event-notes.conference--global-event-notes
-        %span.icon.icon-info-circle
-        = @conference.global_event_notes
-      
-    - if @event.notes.present?
-      .alert.alert-info.event-notes.event--notes
-        %span.icon.icon-info-circle
-        = @event.notes
-
-    - if @event.description.present?
-      /%h3 About
-      %p.description
-        = simple_format @event.description
-
-    %h3 Download
-    .download
-      = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
-
-      - if !@event.recordings.video.present? && @event.relive_present?
-        Downloads will appear here, once final recordings are released.
-
-
-
-    - if @event.metadata['related'].present?
-      %h3 Related
-      = render partial: 'frontend/shared/related', locals: { events: Event.find(@event.related_event_ids(10)) }
-
-    /%h3 Embed/Share
-    .share
-      = render partial: 'frontend/shared/embedshare', locals: { event: @event }
-
-    - if @event.tags.present?
-      %h3 Tags
-      .tags
-        - @event.tags.each do |tag|
-          - if tag =~ /^[0-9]+/
-            != link_for_global(tag)
-          - else
+    %section.container-fluid.section-event-metadata
+      - if @event.recordings.video.present?
+        - if !@event.tags.nil? && @event.tags.length > 3
+          - @event.tags[3,2].reverse.each do |tag|
             != link_for(@conference, tag)
+
+        Playlists:
+        = link_to "'#{@conference.acronym}' videos starting here", playlist_conference_path(slug: @event.slug)
+        - if @conference.audio_recordings?
+          \/
+          = link_to 'audio', audio_playlist_conference_path(slug: @event.slug), method: :get
+        - if @event.metadata['related'].present?
+          \/
+          = link_to 'related events', playlist_related_path(slug: @event.slug)
+      %ul.metadata
+        %li.duration.digits
+          %span.icon.icon-clock-o
+          = duration_in_minutes(@event.duration)
+        %li.date.digits
+          %span.icon.icon-calendar-o{title: display_release_date_title(@event)}
+          = @event.display_date
+        - if !@event.release_date.nil? && ! @event.released_on_event_day?
+          %li
+            %span.icon.icon-upload{title: 'release date'}
+            = @event.release_date.to_date
+        %li.view-count.digits
+          %span.icon.icon-eye{title: "#{delimited_views_count(@event.view_count)} views"}
+          = human_readable_views_count(@event.view_count)
+        - if @event.link.present?
+          %li
+            %span.icon.icon-external-link
+            %a{href: @event.link} Fahrplan
+        - if @event.doi.present?
+          %li
+            %span.icon.icon-external-link
+            %a{href: @event.doi_url}
+              = truncate(@event.doi, length: 20, separator: ' ', omission: '…')
+
+      - if @conference.global_event_notes.present?
+        .alert.alert-info.event-notes.conference--global-event-notes
+          %span.icon.icon-info-circle
+          = @conference.global_event_notes
+
+      - if @event.notes.present?
+        .alert.alert-info.event-notes.event--notes
+          %span.icon.icon-info-circle
+          = @event.notes
+
+      - if @event.description.present?
+        /%h3 About
+        %p.description
+          = simple_format @event.description
+
+      %h3 Download
+      .download
+        = render partial: 'frontend/shared/download', locals: { conference: @conference, event: @event }
+
+        - if !@event.recordings.video.present? && @event.relive_present?
+          Downloads will appear here, once final recordings are released.
+
+
+
+      - if @event.metadata['related'].present?
+        %h3 Related
+        = render partial: 'frontend/shared/related', locals: { events: Event.find(@event.related_event_ids(10)) }
+
+      /%h3 Embed/Share
+      .share
+        = render partial: 'frontend/shared/embedshare', locals: { event: @event }
+
+      - if @event.tags.present?
+        %h3 Tags
+        .tags
+          - @event.tags.each do |tag|
+            - if tag =~ /^[0-9]+/
+              != link_for_global(tag)
+            - else
+              != link_for(@conference, tag)
 

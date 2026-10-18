@@ -1,5 +1,5 @@
 .clappr-player
-  .video-wrap{ style: "width 100%; height: 56.25vw;" }
+  .video-wrap
 
 
 :javascript
@@ -27,7 +27,7 @@
           ClapprThumbnailsPlugin, PlaybackRatePlugin, Timelens
         ],
         sources:  #{@event.clappr_sources.to_json.html_safe},
-        height: '56.25vw',
+        height: '100%',
         width: '100%',
         poster: "#{@event.poster_url}",
         timelens: {
