@@ -174,15 +174,6 @@ class Conference < ApplicationRecord
     end
   end
 
-  def aspect_ratio_height_vw
-    case aspect_ratio
-    when /16:9/
-      '56.25vw'
-    when /4:3/
-      '75vw'
-    end
-  end
-
   private
 
   def logo_exists?

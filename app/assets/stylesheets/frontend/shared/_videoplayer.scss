@@ -1,88 +1,39 @@
-@use "sass:math";
-
-@mixin video-player-size($w) {
-  $h: math.div($w, 16) * 9;
-  $h_43: math.div($w, 4) * 3;
-
-  @media all and (min-width: $w+40px) { // +40 -> add 20px space on the left and right side video player
-    .video.player {
-      width: $w !important;
-      .mejs__container.video, >video, div[data-player], .video-native {
-        margin-left: -(math.div($w - ($max-width - 30), 2))  !important;
-
-        &.mejs__container-fullscreen {
-          margin-left: 0 !important;
-        }
-      }
-    }
-    .video-native {
-      width: 100% !important;
-      height: auto !important;
-    }
-
-    .kiosk {
-      position: absolute;
-      z-index: -500;
-      left: 0;
-      right: 0;
-
-      background: #000;
-      padding-top: $h;
-    }
-
-    .video.player, div[data-player] {
-      max-height: $h !important;
-    }
-    .video.player[data-aspect-ratio='4:3'] {
-      max-height: $h_43 !important;
-      .kiosk {
-        padding-top: $h_43;
-      }
-    }
-  }
+.section-event-video-player {
+  background: black;
 }
 
-// 1920x1080, 1280x720, 1024x576, 854x480, 670=~640x~360
+.video.player {
+  --ratio: 16 / 9;
+  /* fall back to vh for browser that don't support svh... shouldn't be that many these days */
+  --avail-h: calc(100vh - var(--navbar-offset));
+  @supports (height: 100svh) {
+    --avail-h: calc(100svh - var(--navbar-offset));
+  }
+  --min-w: 640px;
 
-@include video-player-size(1280px);
-@include video-player-size(1920px);
+  width: min(100%, max(var(--min-w), min(1920px, var(--avail-h) * var(--ratio))));
+  aspect-ratio: var(--ratio);
+  max-height: var(--avail-h);
+  margin-inline: auto;
 
-.video.player, div[data-player] {
-  width: 100%;
-  height: 54.5vw;
-  max-height: 576px;
+  /* technically we have more aspect ratios in our data, but we don't actually treat them as such yet...
+     we may at some point need to adjust some stuff to properly handle the portrait videos differently,
+     as awful as they are, but this would require some sort of minimus aspect ratio too so controls or
+     some specialized controls layout so those don't break completely */
+  &[data-aspect-ratio='4:3'] {
+    --ratio: 4 / 3;
+  }
 
+  /* player sizes itself based on the available space in the container stretching the thumbnail image and
+     controls based on available space, that's why we are sizing this container separately so it doesn't
+     stretch the thumbnail and the controls don't always stick to the far edges of the screen */
   .mejs__container,
-  video {
+  video,
+  .clappr-player,
+  .relive-player,
+  .video-wrap,
+  div[data-player] {
     width: 100% !important;
     height: 100% !important;
   }
 }
-.video.player[data-aspect-ratio='4:3'] {
-  height: 72vw;
-  max-height: 730px;
-}
-
-/* from https://css-tricks.com/rundown-of-handling-flexible-media/#article-header-id-5 */
-/*
-.mejs__overlay, .mejs__poster {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.mejs__mediaelement video {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.mejs__mediaelement .me-cannotplay {
-  width: 100% !important;
-  height: auto !important;
-
-  > span {
-    display: none;
-  }
-}
-*/
