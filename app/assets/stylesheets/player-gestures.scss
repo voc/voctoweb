@@ -65,3 +65,9 @@
 .mejs-gesture-seek.is-active {
   opacity: 1;
 }
+
+/* hide the cursor while the controls are auto-hidden (see MejsPlayer.hideIdleCursor) */
+.mejs__container.mejs-cursor-idle,
+.mejs__container.mejs-cursor-idle * {
+  cursor: none !important;
+}
