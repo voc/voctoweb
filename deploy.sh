@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export CAP_REPO=https://github.com/voc/voctoweb.git
+export CAP_REPO=git@github.com:voc/voctoweb.git
 export CAP_BRANCH=main
 export CAP_USER=media
 

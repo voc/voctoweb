@@ -1,10 +1,24 @@
 # Disabled on freifunk/voctoweb — Capistrano deploy targets VOC staging
 # (app.media.test.c3voc.de) and secrets we do not have.
 # Keep this file so upstream sync conflicts are obvious; resolve by keeping ours.
+# The workflow_call trigger (with the `ref` input) must stay: upstream's ci.yml
+# calls this file as a reusable workflow, and without it the Tests workflow
+# becomes invalid.
 name: Deploy staging (disabled)
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch to deploy
+        required: false
+        type: string
+  workflow_call:
+    inputs:
+      ref:
+        description: Branch to deploy
+        required: true
+        type: string
 
 jobs:
   deploy:

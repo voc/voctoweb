@@ -5,13 +5,20 @@ ARG RUBY_VERSION=3.4
 FROM ruby:${RUBY_VERSION}-alpine
 
 # Install runtime dependencies
-# Node.js is used for JavaScript compression via the uglifier gem
+# Node.js and pnpm are used to bundle JavaScript (esbuild) and CSS (sass)
+# via jsbundling-rails / cssbundling-rails.
+# Keep PNPM_VERSION in sync with "packageManager" in package.json.
+ARG PNPM_VERSION=12.3.4
 RUN set -eux; \
 	apk add --no-cache \
 		dumb-init \
 		nodejs \
+		npm \
 		tzdata \
-	;
+	; \
+	npm install -g "pnpm@${PNPM_VERSION}"; \
+	npm cache clean --force; \
+	pnpm --version
 
 WORKDIR /voctoweb
 
@@ -30,7 +37,7 @@ RUN set -eux; \
 		gcc \
 		libffi-dev \
 		libxml2-dev \
-		libxslt-dev \  
+		libxslt-dev \
 		make \
 		musl-dev \
 		patch \

@@ -4,6 +4,10 @@ services:
     command: dumb-init bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - ".:/voctoweb"
+      # keep the container's node_modules separate from the host's: esbuild
+      # ships a platform-specific native binary, so a macOS node_modules must
+      # not leak into the Linux container through the bind mount above
+      - "node_modules:/voctoweb/node_modules"
       - "./docker/database.yml:/voctoweb/config/database.yml"
       - "./docker/settings.yml:/voctoweb/config/settings.yml"
     ports:
@@ -22,6 +26,8 @@ services:
     command: dumb-init bundle exec sidekiq
     volumes:
       - ".:/voctoweb"
+      # see the voctoweb service above
+      - "node_modules:/voctoweb/node_modules"
       - "./docker/database.yml:/voctoweb/config/database.yml"
       - "./docker/settings.yml:/voctoweb/config/settings.yml"
     environment:
@@ -91,3 +97,6 @@ services:
       - "80:80"
     depends_on:
       - voctoweb
+
+volumes:
+  node_modules:

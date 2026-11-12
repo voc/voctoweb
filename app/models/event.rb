@@ -161,9 +161,9 @@ class Event < ApplicationRecord
   end
 
   def related_events
-    unless metadata['related'].nil?
-      ids = metadata['related'].keys
-      Event.includes([:conference]).find(ids)
+    related = (metadata || {})['related']
+    unless related.nil?
+      Event.includes([:conference]).find(related.keys)
     end
   end
 
@@ -182,7 +182,7 @@ class Event < ApplicationRecord
 
   # for elastic search
   def remote_id
-    metadata['remote_id']
+    (metadata || {})['remote_id']
   end
 
   # used by player and graphql
@@ -211,7 +211,7 @@ class Event < ApplicationRecord
 
   def video_master
     recordings.video_without_slides
-              .select { |x| x.filetype == 'video/mp4' && x.high_quality == true }
+              .select { |x| x.mime_type == 'video/mp4' && x.high_quality == true }
               .min_by { |x| x.html5 ? 1 : 0 }
   end
 

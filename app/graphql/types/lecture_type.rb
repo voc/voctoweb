@@ -13,10 +13,11 @@ module Types
     field :subtitle, String, "The event's subtitle that may be displayed below the title", null: true
     field :description, String, "The event's description", null: true
 
-    field :slug, UrlType, "The URL slug of this event", null: false
+    field :slug, SlugType, "The URL slug of this event", null: false
     field :url, UrlType, "A URL pointing to this lecture's page in vocotweb frontend", null: false
 
     field :original_language, String, "The event's original language, encoded as ISO 639-2", null: true
+    field :translations, [String], "The languages this event has been translated into, encoded as ISO 639-2", null: true
     field :duration, Integer, "The lecture recording duration in seconds", null: true
 
     field :persons, [String], "Names of persons that held the event", null: true
@@ -32,11 +33,15 @@ module Types
     field :link, UrlType, "URL pointing to the conference event website", null: true
     field :doi_url, UrlType, "Digital Object Identifier (DOI) e.g. https://doi.org/10.5446/19566", null: true
 
-    field :video_preferred, ResourceType, null: false
-    field :videos, [ResourceType], null: false
-    field :audios, [ResourceType], null: true
-    field :subtitles, [ResourceType], null: true
-    field :slides, [ResourceType], null: true
+    field :video_preferred, ResourceType, "simlified access to single language video in original language", null: false
+    field :video, ResourceType, "main MP4 video, possibly with multiple audio and video tracks", null: false do
+      argument :prefer, [Types::VideoPreferenceEnum], required: false
+      argument :quality, Types::VideoQualityEnum, required: false
+    end
+    field :videos, [ResourceType], "all video recordings assigned to this item", null: false
+    field :audios, [ResourceType], "all audio recordings assigned to this item", null: false
+    field :subtitles, [ResourceType], null: false
+    field :slides, [ResourceType], "PDF slides, if provided", null: false
     field :files, ResourceType.connection_type, null: false
 
     # field :thumbnail, Types::ImageType, null: true
@@ -44,7 +49,7 @@ module Types
       field :poster_url, UrlType, 'URL pointing to a preview/poster image of the event', null: true
       field :thumb_url, UrlType, 'URL pointing to a smaller version of the poster image', null: true
     end
-    field :images, LectureImageType, null: true
+    field :images, LectureImageType, null: false
     def images
       object
     end
@@ -53,7 +58,7 @@ module Types
       field :timeline_url, UrlType, 'URL pointing timelens timline image of the event', null: true
       field :thumbnails_url, UrlType, 'URL pointing to scrubbing thumbnails for timelens/timeline', null: true
     end
-    field :timelens, LectureTimelensType, null: true
+    field :timelens, LectureTimelensType, null: false
     def timelens
       object
     end
@@ -69,8 +74,8 @@ module Types
     end
 
     '''
-    # A list of related events, ordered by decreasing relevance.
-    relatedLectures(
+    # A list of related items, ordered by decreasing relevance.
+    related(
       # Skip the first _n_ related events.
       offset: Integer
 
@@ -94,6 +99,15 @@ module Types
     # is defined in frontend model
     def video_preferred
       object.preferred_recording
+    end
+
+    def video(prefer: nil, quality: nil)
+      if prefer.present?
+        result = object.recordings.video.find_by(mime_type: prefer)
+        return result if result.present?
+      end
+      #object.recording_for_master_feed
+      object.video_master
     end
 
     def audios

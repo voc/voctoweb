@@ -1,0 +1,33 @@
+// cssbundling-rails entry point for the oembed/iframe embed page.
+// Reduced subset mirroring embed.css.scss's old Sprockets manifest.
+//
+// When adding plugins here, also add them to application.scss.
+
+@import "mediaelementplayer";
+
+@import "source-chooser/source-chooser";
+@import "speed/speed";
+
+@import "timelens";
+
+@import "player-fixes";
+@import "player-gestures";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Make the player fill the iframe properly to prevent weirdness with weird aspect
+ * ratios.
+ */
+.player.video {
+  width: 100%;
+  height: 100%;
+
+  .mejs__container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}

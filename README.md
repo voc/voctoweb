@@ -13,12 +13,14 @@ Voctoweb is a rails application that provides a “YouTube like” user interfac
 
 ## APIs
 
- Every talk (alias **event**, in other systems also called lecture or session) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
+ Every talk (alias **event**, in other systems also called lecture, session or generic item) is assigned to exactly one **conference** (e.g. the _congress_ or lecture series like _datengarten_ or _openchaos_) and consists of multiple files alias **recordings**. These files can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
 
 
 ### Public GraphQL API
 
 The newest API endpoint is at https://media.ccc.de/graphql, implementing a GraphQL endpoint with Apollo Federation. This allows clients to only request the attributes they need, while all data needed per screen can be fetched in a single request. We tried to clean up the type names and call talks `lecture` and files `resources` (previously known as recordings). Please create issues if you are missing anything.
+
+#### Query a lecture with video format preference
 
 ``` graphql
 query LectureQueryExample {
@@ -29,10 +31,61 @@ query LectureQueryExample {
     persons
     slug
     originalLanguage
+    video(prefer: [AV1, WEBM]) {
+      label
+      url
+      mimeType
+    }
     videos {
       label
       url
       mimeType
+    }
+  }
+}
+```
+
+#### Query a conference with images
+
+``` graphql
+query ConferenceQueryExample {
+  conference(id: "36c3") {
+    acronym
+    title
+    logo(prefer: SVG) {
+      url
+      mimeType
+      type
+    }
+    images {
+      url
+      mimeType
+      type
+    }
+  }
+}
+```
+
+#### Query promoted items/talks
+
+``` graphql
+query PromotedExample {
+  promoted(first: 10) {
+    nodes {
+      guid
+      title
+      promoted
+      conference {
+        acronym
+        title
+      }
+      video(prefer: MP4) {
+        url
+        mimeType
+      }
+    }
+    pageInfo {
+      hasNextPage
     }
   }
 }
@@ -191,6 +244,14 @@ bin/docker-dev-up
 You can now reach the voctoweb frontend at `http://localhost.c3voc.de/`. The backend is at `http://localhost.c3voc.de/admin`, with the default username `admin@example.org` and the password `media123`. You can stop the running containers using *Ctrl-C*. To start them again, just run `docker compose up`.
 
 The whole application directory is mounted into the containers, so all changes you make to the files are reflected inside the application automatically. To run commands inside the voctoweb container, run `docker compose run voctoweb $COMMAND`. If you ever need to rebuild the containers (because of new dependencies, for example), run the `docker compose build` command again.
+
+JavaScript and CSS are bundled with esbuild and sass into `app/assets/builds/`, which is not checked in. `bin/docker-dev-up` builds them once; after changing anything under `app/javascript/` or `app/assets/stylesheets/` (or `package.json`), rebuild them with:
+
+```bash
+docker compose run voctoweb sh -c 'pnpm install && pnpm run build && pnpm run build:css'
+```
+
+The container keeps its own `node_modules` in a named Docker volume, so a `node_modules` directory built on the host (macOS, for example) is not used inside the Linux container. Remove it with `docker compose down -v` if you ever need a clean reinstall.
 
 Image and video files in `docker/content` are tried first, if missing live data from media.ccc.de is used.
 

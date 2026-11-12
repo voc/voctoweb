@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_20_215000) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "active_admin_comments", id: :serial, force: :cascade do |t|
-    t.string "namespace"
+    t.integer "author_id"
+    t.string "author_type"
     t.text "body"
+    t.datetime "created_at", precision: nil
+    t.string "namespace"
     t.string "resource_id", null: false
     t.string "resource_type", null: false
-    t.string "author_type"
-    t.integer "author_id"
-    t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
@@ -29,20 +29,20 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
   end
 
   create_table "admin_users", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil
+    t.datetime "current_sign_in_at", precision: nil
+    t.string "current_sign_in_ip"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at", precision: nil
     t.datetime "last_sign_in_at", precision: nil
-    t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
     t.string "provider"
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "reset_password_sent_at", precision: nil
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0
     t.string "uid"
+    t.datetime "updated_at", precision: nil
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
@@ -57,25 +57,25 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
 
   create_table "conferences", id: :serial, force: :cascade do |t|
     t.string "acronym"
-    t.string "recordings_path"
-    t.string "images_path"
-    t.string "slug", default: ""
     t.string "aspect_ratio"
     t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "title"
+    t.text "custom_css"
+    t.text "description"
+    t.integer "downloaded_events_count", default: 0, null: false
+    t.datetime "event_last_released_at", precision: nil
+    t.string "global_event_notes"
+    t.string "images_path"
+    t.string "link"
+    t.string "logo"
+    t.jsonb "metadata", default: {}
+    t.string "recordings_path"
+    t.string "schedule_state", default: "not_present", null: false
     t.string "schedule_url"
     t.text "schedule_xml"
-    t.string "schedule_state", default: "not_present", null: false
-    t.string "logo"
-    t.integer "downloaded_events_count", default: 0, null: false
-    t.jsonb "metadata", default: {}
-    t.datetime "event_last_released_at", precision: nil
+    t.string "slug", default: ""
     t.jsonb "streaming", default: {}
-    t.text "description"
-    t.string "link"
-    t.text "custom_css"
-    t.string "global_event_notes"
+    t.string "title"
+    t.datetime "updated_at", precision: nil
     t.index ["acronym"], name: "index_conferences_on_acronym"
     t.index ["streaming"], name: "index_conferences_on_streaming", using: :gin
   end
@@ -85,33 +85,33 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
   end
 
   create_table "events", id: :serial, force: :cascade do |t|
-    t.string "guid"
-    t.string "poster_filename"
     t.integer "conference_id"
     t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "title"
-    t.string "state", default: "new", null: false
-    t.string "thumb_filename"
     t.datetime "date", precision: nil
     t.text "description"
-    t.string "link"
-    t.text "persons"
-    t.string "slug"
-    t.string "subtitle"
-    t.text "tags_yaml"
-    t.datetime "release_date", precision: nil
-    t.boolean "promoted"
-    t.integer "view_count", default: 0
-    t.integer "duration", default: 0
-    t.integer "downloaded_recordings_count", default: 0
-    t.string "original_language"
-    t.jsonb "metadata", default: {}
-    t.string "timeline_filename", default: ""
-    t.string "thumbnails_filename", default: ""
     t.string "doi"
+    t.integer "downloaded_recordings_count", default: 0
+    t.integer "duration", default: 0
+    t.string "guid"
+    t.string "link"
+    t.jsonb "metadata", default: {}
     t.string "notes"
+    t.string "original_language"
+    t.text "persons"
+    t.string "poster_filename"
+    t.boolean "promoted"
+    t.datetime "release_date", precision: nil
+    t.string "slug"
+    t.string "state", default: "new", null: false
+    t.string "subtitle"
     t.string "tags", default: [], null: false, array: true
+    t.text "tags_yaml"
+    t.string "thumb_filename"
+    t.string "thumbnails_filename", default: ""
+    t.string "timeline_filename", default: ""
+    t.string "title"
+    t.datetime "updated_at", precision: nil
+    t.integer "view_count", default: 0
     t.index ["conference_id"], name: "index_events_on_conference_id"
     t.index ["guid"], name: "index_events_on_guid"
     t.index ["metadata"], name: "index_events_on_metadata", using: :gin
@@ -123,49 +123,49 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_20_215000) do
   end
 
   create_table "news", id: :serial, force: :cascade do |t|
-    t.string "title"
     t.text "body"
-    t.date "date"
     t.datetime "created_at", precision: nil
+    t.date "date"
+    t.string "title"
     t.datetime "updated_at", precision: nil
   end
 
   create_table "recording_views", id: :serial, force: :cascade do |t|
-    t.integer "recording_id"
     t.datetime "created_at", precision: nil
+    t.string "identifier", default: ""
+    t.integer "recording_id"
     t.datetime "updated_at", precision: nil
     t.string "user_agent", default: ""
-    t.string "identifier", default: ""
     t.index ["recording_id"], name: "index_recording_views_on_recording_id"
   end
 
   create_table "recordings", id: :serial, force: :cascade do |t|
-    t.bigint "size", comment: "file size in bytes"
-    t.integer "length", comment: "duration in seconds"
-    t.string "mime_type"
-    t.integer "event_id"
     t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
+    t.integer "event_id"
     t.string "filename"
     t.string "folder"
-    t.integer "width"
     t.integer "height"
-    t.string "language", default: "eng"
     t.boolean "high_quality", default: true, null: false
     t.boolean "html5", default: false, null: false
+    t.string "language", default: "eng"
+    t.integer "length", comment: "duration in seconds"
+    t.string "mime_type"
+    t.bigint "size", comment: "file size in bytes"
     t.string "state", limit: 255, default: "new", null: false
     t.boolean "translated", default: false, null: false
+    t.datetime "updated_at", precision: nil
+    t.integer "width"
     t.index ["event_id"], name: "index_recordings_on_event_id"
     t.index ["filename"], name: "index_recordings_on_filename"
     t.index ["mime_type"], name: "index_recordings_on_mime_type"
   end
 
   create_table "site_settings", force: :cascade do |t|
-    t.string "promoted_banner_url"
-    t.string "live_banner_url"
-    t.string "logo_url"
-    t.string "logo_alt"
     t.datetime "created_at", null: false
+    t.string "live_banner_url"
+    t.string "logo_alt"
+    t.string "logo_url"
+    t.string "promoted_banner_url"
     t.datetime "updated_at", null: false
   end
 

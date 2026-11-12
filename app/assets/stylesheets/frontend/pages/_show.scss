@@ -1,3 +1,5 @@
+@use "sass:color";
+
 body.page-show {
   h3 {
     border-bottom: 1px solid var(--border-divider);
@@ -191,7 +193,7 @@ body.page-show {
       color: white;
 
       &:hover {
-        background: lighten($gray-light, 10%);
+        background: color.adjust($gray-light, $lightness: 10%);
       }
     }
 
