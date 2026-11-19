@@ -73,6 +73,24 @@ class MejsPlayer {
     MejsPlayer.wireDeepLinks(player, media, node, node.mejsDefaultLang);
     MejsPlayer.countViews(media, node);
     MejsPlayer.fixFullscreenExitResize();
+    MejsPlayer.hideIdleCursor(player);
+  }
+
+  /**
+   * Hide the cursor when the the mouse is idling over the player.
+   * This usually only triggers when the controls are hidden and behaves
+   * like most video players like YouTube for example.
+   * @param player the MediaElement player object
+   */
+  static hideIdleCursor(player) {
+    if (!player.isVideo) { return; }
+    const container = player.getElement(player.container);
+    container.addEventListener('controlshidden', function () {
+      container.classList.add('mejs-cursor-idle');
+    });
+    container.addEventListener('controlsshown', function () {
+      container.classList.remove('mejs-cursor-idle');
+    });
   }
 
   /**
