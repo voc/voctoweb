@@ -59,7 +59,9 @@
           'duration', 'tracks', 'volume', 'speed',
           'fullscreen'
         ],
-      success: function (mediaElement) {
+      success: function (mediaElement, originalNode, player) {
+        MejsPlayer.hideIdleCursor(player);
+
         mediaElement.addEventListener('play', function () {
           const ev = sourceFor(mediaElement.src);
           if (ev) {
